@@ -217,6 +217,7 @@ private:
     expr visit_app_core(expr fn, buffer<expr> const & args, optional<expr> const & expected_type, expr const & ref);
     expr visit_local(expr const & e, optional<expr> const & expected_type);
     expr visit_constant(expr const & e, optional<expr> const & expected_type);
+    expr visit_elab_quote(expr e);
     expr visit_macro(expr const & e, optional<expr> const & expected_type, bool is_app_fn);
     expr visit_lambda(expr const & e, optional<expr> const & expected_type);
     expr visit_pi(expr const & e);
@@ -321,6 +322,11 @@ public:
 pair<expr, level_param_names> elaborate(environment & env, options const & opts, name const & decl_name,
                                         metavar_context & mctx, local_context const & lctx,
                                         expr const & e, bool check_unassigend);
+
+/** \brief Elaborate the contents of an \c elab_quote macro and return an (unelaborated) expression reflecting the
+    elaborated quotation. If \c in_pattern is \c true, replace implicit arguments, universe levels, and binder infos
+    with placeholders. */
+expr elaborate_elab_quote(expr e, environment const & env, options const & opts, bool in_pattern);
 
 /** \brief Translated local constants (and undefined constants) occurring in \c e into
     local constants provided by \c ctx.

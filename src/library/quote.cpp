@@ -66,11 +66,19 @@ expr const & get_quote_expr(expr const & e) {
 }
 
 static name * g_antiquote = nullptr;
+static name * g_elab_quote = nullptr;
 
 expr mk_antiquote(expr const & e) { return mk_annotation(*g_antiquote, e); }
 bool is_antiquote(expr const & e) { return is_annotation(e, *g_antiquote); }
 expr const & get_antiquote_expr(expr const & e) {
     lean_assert(is_antiquote(e));
+    return get_annotation_arg(e);
+}
+
+expr mk_elab_quote(expr const & e) { return mk_annotation(*g_elab_quote, e); }
+bool is_elab_quote(expr const & e) { return is_annotation(e, *g_elab_quote); }
+expr const & get_elab_quote_expr(expr const & e) {
+    lean_assert(is_elab_quote(e));
     return get_annotation_arg(e);
 }
 
@@ -104,6 +112,9 @@ void initialize_quote() {
 
     g_antiquote  = new name("antiquote");
     register_annotation(*g_antiquote);
+
+    g_elab_quote  = new name("elab_quote");
+    register_annotation(*g_elab_quote);
 
     register_macro_deserializer(*g_quote_opcode,
                                 [](deserializer & d, unsigned num, expr const *) {

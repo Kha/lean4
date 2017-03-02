@@ -2547,7 +2547,7 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                             throw nested_exception(some_expr(e),
                                                    sstream() << "invalid structure update { src with ... }, field '"
                                                    << S_fname << "'"
-                                                   << " was not provided, nor it was found in the source", ex);
+                                                   << " was not provided, nor was it found in the source", ex);
                         }
                         f = copy_tag(e, mk_as_is(f));
                         field2value.insert(S_fname, f);
@@ -2589,6 +2589,117 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
     return visit(c, expected_type);
 }
 
+static expr quote(level const & l) {
+    switch (l.kind()) {
+        case level_kind::Zero:
+            return mk_constant({"level", "zero"});
+        case level_kind::Succ:
+            return mk_app(mk_constant({"level", "succ"}), quote(succ_of(l)));
+        case level_kind::Max:
+            return mk_app(mk_constant({"level", "max"}), quote(max_lhs(l)), quote(max_rhs(l)));
+        case level_kind::IMax:
+            return mk_app(mk_constant({"level", "imax"}), quote(imax_lhs(l)), quote(imax_rhs(l)));
+        case level_kind::Param:
+            return mk_app(mk_constant({"level", "param"}), quote(level_id(l)));
+        case level_kind::Meta:
+            return mk_app(mk_constant({"level", "mvar"}), quote(level_id(l)));
+    }
+    lean_unreachable();
+}
+
+static expr quote(levels const & ls) {
+    if (!ls)
+        return mk_constant(get_list_nil_name());
+    else
+        return mk_app(mk_constant(get_list_cons_name()), quote(head(ls)), quote(tail(ls)));
+}
+
+static expr quote(binder_info const & bi) {
+    lean_assert(!bi.is_rec());
+    if (bi.is_implicit()) {
+        return mk_constant({"binder_info", "implicit"});
+    } else if (bi.is_strict_implicit()) {
+        return mk_constant({"binder_info", "strict_implicit"});
+    } else if (bi.is_inst_implicit()) {
+        return mk_constant({"binder_info", "inst_implicit"});
+    } else {
+        return mk_constant({"binder_info", "default"});
+    }
+}
+
+expr quote(expr const & e, bool in_pattern) {
+    switch (e.kind()) {
+        case expr_kind::Var:
+            // pattern variable
+            return e;
+        case expr_kind::Sort:
+            return mk_app(mk_constant({"expr", "sort"}), in_pattern ? quote(sort_level(e)) : mk_expr_placeholder());
+        case expr_kind::Constant:
+            return mk_app(mk_constant({"expr", "const"}), quote(const_name(e)),
+                          in_pattern ? quote(const_levels(e)) : mk_expr_placeholder());
+        case expr_kind::Meta:
+            return mk_expr_placeholder();
+        case expr_kind::Local:
+            throw elaborator_exception(e, sstream() << "invalid quotation, unexpected local constant '"
+                                                    << local_pp_name(e) << "'");
+        case expr_kind::App:
+            return mk_app(mk_constant({"expr", "app"}), quote(app_fn(e), in_pattern), quote(app_arg(e), in_pattern));
+        case expr_kind::Lambda:
+            return mk_app(mk_constant({"expr", "lam"}), quote(binding_name(e)),
+                          in_pattern ? quote(binding_info(e)) : mk_expr_placeholder(),
+                          quote(binding_domain(e), in_pattern), quote(binding_body(e), in_pattern));
+        case expr_kind::Pi:
+            return mk_app(mk_constant({"expr", "pi"}), quote(binding_name(e)),
+                          in_pattern ? quote(binding_info(e)) : mk_expr_placeholder(),
+                          quote(binding_domain(e), in_pattern), quote(binding_body(e), in_pattern));
+        case expr_kind::Let:
+            return mk_app(mk_constant({"expr", "let"}), quote(let_name(e)), quote(let_type(e), in_pattern),
+                          quote(let_value(e), in_pattern), quote(let_body(e), in_pattern));
+        case expr_kind::Macro:
+            if (is_typed_expr(e))
+                return mk_typed_expr(quote(get_typed_expr_expr(e), in_pattern), quote(get_typed_expr_type(e), in_pattern));
+            if (is_inaccessible(e))
+                return mk_expr_placeholder();
+            throw elaborator_exception(e, sstream() << "invalid quotation, unsupported macro '"
+                                                    << macro_def(e).get_name() << "'");
+    }
+    lean_unreachable();
+}
+
+expr elaborate_elab_quote(expr e, environment const & env, options const & opts, bool in_pattern) {
+    e = mk_quote(get_annotation_arg(e));
+
+    buffer<expr> aqs;
+    while (is_app_of(e, get_pexpr_subst_name())) {
+        expr arg1 = app_arg(app_fn(e));
+        expr arg2 = app_arg(e);
+        lean_assert(is_app_of(arg2, get_to_pexpr_name()));
+        aqs.push_back(app_arg(arg2));
+        e = arg1;
+    }
+
+    e = get_quote_expr(e);
+
+    metavar_context ctx;
+    local_context lctx;
+    elaborator elab(env, opts, "_elab_quote", ctx, lctx, false, in_pattern);
+    e = elab.elaborate(e);
+    e = elab.finalize(e, true, true).first;
+
+    for (unsigned i = 0; i < aqs.size(); i++)
+        e = binding_body(e);
+    e = quote(e, !in_pattern);
+    e = instantiate(e, aqs.size(), aqs.data());
+    return e;
+}
+
+expr elaborator::visit_elab_quote(expr e) {
+    e = elaborate_elab_quote(e, m_env, m_opts, m_in_pattern);
+    if (!m_in_pattern)
+        e = visit(e, some(mk_constant(get_expr_name())));
+    return e;
+}
+
 expr elaborator::visit_macro(expr const & e, optional<expr> const & expected_type, bool is_app_fn) {
     if (is_as_is(e)) {
         return get_as_is_arg(e);
@@ -2628,6 +2739,8 @@ expr elaborator::visit_macro(expr const & e, optional<expr> const & expected_typ
         return mk_sorry(expected_type, e);
     } else if (is_structure_instance(e)) {
         return visit_structure_instance(e, expected_type);
+    } else if (is_elab_quote(e)) {
+        return visit_elab_quote(e);
     } else if (is_annotation(e)) {
         expr r = visit(get_annotation_arg(e), expected_type);
         return update_macro(e, 1, &r);

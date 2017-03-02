@@ -17,6 +17,11 @@ expr mk_antiquote(expr const & e);
 bool is_antiquote(expr const & e);
 expr const & get_antiquote_expr(expr const & e);
 
+/* elaborated `expr` quotations ```(...) */
+expr mk_elab_quote(expr const & e);
+bool is_elab_quote(expr const & e);
+expr const & get_elab_quote_expr(expr const & e);
+
 void initialize_quote();
 void finalize_quote();
 }
