@@ -25,9 +25,6 @@ section
 set_option auto_param.check_exists false
 
 class monad (m : Type u → Type v) extends applicative m, has_bind m : Type (max u+1 v) :=
-(infixr ` <$> `:100 := map)
-(infixl ` <*> `:60 := seq)
-(infixl ` >>= `:55 := bind)
 (map := λ α β f x, x >>= pure ∘ f)
 (seq := λ α β f x, f >>= (<$> x))
 (bind_pure_comp_eq_map : ∀ {α β : Type u} (f : α → β) (x : m α), x >>= pure ∘ f = f <$> x  . control_laws_tac)
@@ -41,7 +38,7 @@ class monad (m : Type u → Type v) extends applicative m, has_bind m : Type (ma
 (map_pure := λ α β g x, eq.trans (eq.symm $ bind_pure_comp_eq_map _ _) (pure_bind _ _))
 (seq_pure := λ α β g x, calc
   g <*> pure x = g >>= (<$> pure x)            : eq.symm $ bind_map_eq_seq _ _
-           ... = g >>= λ g : α → β, pure (g x) : congr_arg _ $ funext $ λ g, map_pure _ _
+           ... = g >>= λ g : α → β, pure (g x) : congr_arg _ $ funext $ λ g, applicative.map_pure _ _ _
            ... = (λ g : α → β, g x) <$> g      : bind_pure_comp_eq_map _ _)
 (seq_assoc := λ α β γ x g h, calc
   h <*> (g <*> x)

@@ -14,15 +14,14 @@ set_option auto_param.check_exists false
 class applicative (f : Type u → Type v) extends functor f :=
 (pure : Π {α : Type u}, α → f α)
 (seq  : Π {α β : Type u}, f (α → β) → f α → f β)
-(infixr ` <$> `:100 := map)
 (infixl ` <*> `:60 := seq)
 (map := λ _ _ x y, pure x <*> y)
 -- ` <* `
-(seq_left : Π {α β : Type u}, f α → f β → f α := λ α β a b, seq (map (const β) a) b)
-(seq_left_eq : ∀ {α β : Type u} (a : f α) (b : f β), seq_left a b = seq (map (const β) a) b . control_laws_tac)
+(seq_left : Π {α β : Type u}, f α → f β → f α := λ α β a b, const β <$> a <*> b)
+(seq_left_eq : ∀ {α β : Type u} (a : f α) (b : f β), seq_left a b = const β <$> a <*> b . control_laws_tac)
 -- ` *> `
-(seq_right : Π {α β : Type u}, f α → f β → f β := λ α β a b, seq (map (const α id) a) b)
-(seq_right_eq : ∀ {α β : Type u} (a : f α) (b : f β), seq_right a b = seq (map (const α id) a) b . control_laws_tac)
+(seq_right : Π {α β : Type u}, f α → f β → f β := λ α β a b, const α id <$> a <*> b)
+(seq_right_eq : ∀ {α β : Type u} (a : f α) (b : f β), seq_right a b = const α id <$> a <*> b . control_laws_tac)
 -- applicative laws
 (pure_seq_eq_map : ∀ {α β : Type u} (g : α → β) (x : f α), pure g <*> x = g <$> x) -- . control_laws_tac)
 (map_pure : ∀ {α β : Type u} (g : α → β) (x : α), g <$> pure x = pure (g x))
