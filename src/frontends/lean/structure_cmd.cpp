@@ -74,40 +74,15 @@ static auto get_structure_info(environment const & env, name const & S)
     return std::make_tuple(idecl.m_level_params, idecl.m_num_params, intro);
 }
 
-optional<name> has_default_value(environment const & env, name const & full_field_name) {
-    name default_name(full_field_name, "_default");
-    if (env.find(default_name))
-        return optional<name>(default_name);
-    else
-        return optional<name>();
-}
-
-expr mk_field_default_value(environment const & env, name const & full_field_name, std::function<optional<expr>(name const &)> const & get_field_value) {
-    optional<name> default_name = has_default_value(env, full_field_name);
-    lean_assert(default_name);
-    declaration decl = env.get(*default_name);
-    expr value = decl.get_value();
-    buffer<expr> args;
-    while (is_lambda(value)) {
-        if (is_explicit(binding_info(value))) {
-            name fname = binding_name(value);
-            optional<expr> fval = get_field_value(fname);
-            if (!fval) {
-                throw exception(sstream() << "failed to construct default value for '" << full_field_name << "', "
-                                << "it depends on field '" << fname << "', but the value for this field is not available");
-            }
-            args.push_back(*fval);
-        } else {
-            args.push_back(mk_expr_placeholder());
-        }
-        value = binding_body(value);
-    }
-    return mk_app(mk_explicit(mk_constant(*default_name)), args);
-}
-
 buffer<name> get_parent_structures(environment const & env, name const & structure_name) {
     buffer<name> parents;
-    expr intro_type = inductive::intro_rule_type(std::get<2>(get_structure_info(env, structure_name)));
+    auto parent_info         = get_structure_info(env, structure_name);
+    unsigned nparams         = std::get<1>(parent_info);
+    inductive::intro_rule intro = std::get<2>(parent_info);
+    expr intro_type = inductive::intro_rule_type(intro);
+    for (unsigned i = 0; i < nparams; i++) {
+        intro_type = binding_body(intro_type);
+    }
     while (is_pi(intro_type)) {
         auto n = binding_name(intro_type).get_string();
         if (strncmp(n, "to_", 3) != 0)
@@ -130,6 +105,40 @@ optional<pair<name, expr>> find_field(environment const & env, name const & fiel
             return n;
     }
     return {};
+}
+
+optional<name> has_default_value(environment const & env, name const & field_name, name const & structure_name) {
+    name default_name(structure_name + field_name, "_default");
+    if (env.find(default_name))
+        return optional<name>(default_name);
+    for (auto const & p : get_parent_structures(env, structure_name)) {
+        if (auto n = has_default_value(env, field_name, p))
+            return n;
+    }
+    return optional<name>();
+}
+
+expr mk_field_default_value(environment const & env, name const & full_field_name, std::function<optional<expr>(name const &)> const & get_field_value) {
+    optional<name> default_name = has_default_value(env, full_field_name.get_string(), full_field_name.get_prefix());
+    lean_assert(default_name);
+    declaration decl = env.get(*default_name);
+    expr value = decl.get_value();
+    buffer<expr> args;
+    while (is_lambda(value)) {
+        if (is_explicit(binding_info(value))) {
+            name fname = binding_name(value);
+            optional<expr> fval = get_field_value(fname);
+            if (!fval) {
+                throw exception(sstream() << "failed to construct default value for '" << full_field_name << "', "
+                                          << "it depends on field '" << fname << "', but the value for this field is not available");
+            }
+            args.push_back(*fval);
+        } else {
+            args.push_back(mk_expr_placeholder());
+        }
+        value = binding_body(value);
+    }
+    return mk_app(mk_explicit(mk_constant(*default_name)), args);
 }
 
 struct structure_cmd_fn {
@@ -559,7 +568,7 @@ struct structure_cmd_fn {
                     field_decl & field = m_fields[fmap[fmap_start]];
                     name fname = local_pp_name(field.local);
                     name full_fname = parent_name + fname;
-                    if (optional<name> fdefault_name = has_default_value(m_env, full_fname)) {
+                    if (optional<name> fdefault_name = has_default_value(m_env, fname, parent_name)) {
                         expr fdefault = mk_field_default_value(full_fname);
                         if (!field.default_val) {
                             field.default_val = fdefault;

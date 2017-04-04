@@ -18,6 +18,6 @@ environment private_structure_cmd(parser & p);
 bool is_structure(environment const & env, name const & S);
 
 /* Default value support */
-optional<name> has_default_value(environment const & env, name const & full_field_name);
+optional<name> has_default_value(environment const & env, name const & field_name, name const & structure_name);
 expr mk_field_default_value(environment const & env, name const & full_field_name, std::function<optional<expr>(name const &)> const & get_field_value);
 }
