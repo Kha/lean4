@@ -22,10 +22,10 @@ class functor (f : Type u → Type v) : Type (max u+1 v) :=
 (map_comp : Π {α β γ : Type u} (g : α → β) (h : β → γ) (x : f α), (h ∘ g) <$> x = h <$> g <$> x)
 end
 
-@[inline] def fmap {f : Type u → Type v} [functor f] {α β : Type u} : (α → β) → f α → f β :=
+@[reducible,inline] def fmap {f : Type u → Type v} [functor f] {α β : Type u} : (α → β) → f α → f β :=
 functor.map
 
-@[inline] def fmap_const {f : Type u → Type v} [functor f] {α : Type u} : Π (β : Type u), α → f β → f α :=
+@[reducible,inline] def fmap_const {f : Type u → Type v} [functor f] {α : Type u} : Π (β : Type u), α → f β → f α :=
 functor.map_const
 
 infixr ` <$> `:100 := fmap

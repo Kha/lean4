@@ -9,6 +9,7 @@ Author: Leonardo de Moura
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <library/replace_visitor.h>
 #include "util/sstream.h"
 #include "util/fresh_name.h"
 #include "util/sexpr/option_declarations.h"
@@ -74,6 +75,21 @@ static auto get_structure_info(environment const & env, name const & S)
     return std::make_tuple(idecl.m_level_params, idecl.m_num_params, intro);
 }
 
+bool is_parent_field(name const & field_name) {
+    return strncmp(field_name.get_string(), "to_", 3) == 0;
+}
+
+optional<name> is_parent_field(environment const & env, name const & structure_name, name const & field_name) {
+    if (is_parent_field(field_name)) {
+        auto type = env.find(structure_name + field_name)->get_type();
+        while (is_pi(type))
+            type = binding_body(type);
+        return some(const_name(get_app_fn(type)));
+    } else {
+        return {};
+    }
+}
+
 buffer<name> get_parent_structures(environment const & env, name const & structure_name) {
     buffer<name> parents;
     auto parent_info         = get_structure_info(env, structure_name);
@@ -84,13 +100,29 @@ buffer<name> get_parent_structures(environment const & env, name const & structu
         intro_type = binding_body(intro_type);
     }
     while (is_pi(intro_type)) {
-        auto n = binding_name(intro_type).get_string();
-        if (strncmp(n, "to_", 3) != 0)
+        auto n = binding_name(intro_type);
+        if (auto p = is_parent_field(env, structure_name, n)) {
+            parents.push_back(*p);
+            intro_type = binding_body(intro_type);
+        } else {
             break;
-        parents.push_back(const_name(get_app_fn(binding_domain(intro_type))));
-        intro_type = binding_body(intro_type);
+        }
     }
     return parents;
+}
+
+name_set get_ancestor_structures(environment const & env, name const & structure_name) {
+    name_set ns;
+    std::function<void(name const &)> go = [&](name const & n) {
+        for (auto const & p : get_parent_structures(env, n)) {
+            if (!ns.contains(p)) {
+                ns.insert(p);
+                go(p);
+            }
+        }
+    };
+    go(structure_name);
+    return ns;
 }
 
 optional<pair<name, expr>> find_field(environment const & env, name const & field_name, name const & structure_name) {
@@ -150,6 +182,8 @@ struct structure_cmd_fn {
         optional<expr> default_val;
         bool from_parent;
         bool explicit_type;
+
+        name const & get_name() const { return mlocal_name(local); }
     };
 
     parser &                    m_p;
@@ -915,7 +949,10 @@ struct structure_cmd_fn {
         levels ls = param_names_to_levels(to_list(m_level_names.begin(), m_level_names.end()));
         expr r    = mk_app(mk_constant(m_name, ls), m_params);
         buffer<expr> field_wo_defaults;
-        for (field_decl const & decl : m_fields) field_wo_defaults.push_back(decl.local);
+        for (field_decl const & decl : m_fields) {
+            if (!decl.from_parent || !m_subobjects)
+                field_wo_defaults.push_back(decl.local);
+        }
         r         = Pi(m_params, Pi(field_wo_defaults, r, m_p), m_p);
         r         = infer_implicit_params(r, m_params.size(), m_mk_infer);
         return unfold_untrusted_macros(m_env, r);
@@ -925,7 +962,10 @@ struct structure_cmd_fn {
         levels ls = param_names_to_levels(to_list(m_level_names.begin(), m_level_names.end()));
         expr r    = mk_app(mk_constant(m_name, ls), m_params);
         buffer<expr> field_wo_defaults;
-        for (field_decl const & decl : m_fields) field_wo_defaults.push_back(decl.local);
+        for (field_decl const & decl : m_fields) {
+            if (!decl.from_parent || !m_subobjects)
+                field_wo_defaults.push_back(decl.local);
+        }
         r         = Pi(field_wo_defaults, r, m_p);
         return r;
     }
@@ -976,29 +1016,76 @@ struct structure_cmd_fn {
     void declare_projections() {
         m_env = mk_projections(m_env, m_name, m_mk_infer, m_attrs.has_class());
         for (field_decl const & field : m_fields) {
-            name field_name = m_name + mlocal_name(field.local);
-            add_alias(field_name);
+            if (!field.from_parent || !m_subobjects) {
+                name field_name = m_name + mlocal_name(field.local);
+                add_alias(field_name);
+            }
         }
     }
 
-    bool is_field(expr const & local) {
-        for (field_decl const & field : m_fields) {
-            if (mlocal_name(field.local) == mlocal_name(local))
+    bool is_param(expr const & local) {
+        for (auto const & param : m_params) {
+            if (mlocal_name(param) == mlocal_name(local))
                 return true;
         }
         return false;
     }
 
+    class unfold_parent_fields_visitor : public replace_visitor {
+    private:
+        environment m_env;
+        name        m_S_name;
+        name_set    m_ancestors;
+    protected:
+        bool is_forward_ref(expr const & e) {
+            if (is_local(e)) {
+                auto const & n = mlocal_name(e);
+                return is_parent_field(n) && !m_ancestors.contains(n);
+            } else if (is_app(e)) {
+                expr fn = get_app_fn(e);
+                return is_constant(fn) && is_projection(m_env, const_name(fn)) &&
+                        is_parent_field(const_name(fn).get_string()) && !m_ancestors.contains(const_name(fn).get_string());
+            } else {
+                return false;
+            }
+        }
+
+        expr visit_app(expr const & e) override {
+            if (is_forward_ref(app_arg(e))) {
+                type_context tc(m_env, transparency_mode::All);
+                expr e2 = eta_reduce(tc.whnf(e));
+                expr h = get_app_fn(e2);
+                if (is_constant(h) && is_projection(m_env, const_name(h))) {
+                    return mk_local(const_name(h).get_string(), tc.infer(e));
+                } else {
+                    throw elaborator_exception(e, "Unable to eliminate forward reference to parent field");
+                }
+            }
+            return replace_visitor::visit_app(e);
+        }
+    public:
+        unfold_parent_fields_visitor(const environment & env, const name & S_name):
+                m_env(env), m_S_name(S_name), m_ancestors(get_ancestor_structures(env, S_name)) {}
+    };
+
     void declare_defaults() {
         for (field_decl const & field : m_fields) {
             if (field.default_val) {
+                expr val = *field.default_val;
+                expr type = mlocal_type(field.local);
+                name const & parent = find_field(m_env, field.get_name(), m_name)->first;
+                unfold_parent_fields_visitor vis(m_env, parent);
+                if (m_subobjects) {
+                    val = vis(val);
+                    type = vis(type);
+                }
                 collected_locals used_locals;
-                collect_locals(mlocal_type(field.local), used_locals);
-                collect_locals(*field.default_val, used_locals);
+                collect_locals(type, used_locals);
+                collect_locals(val, used_locals);
                 buffer<expr> args;
                 /* Copy params first */
                 for (expr const & local : used_locals.get_collected()) {
-                    if (!is_field(local)) {
+                    if (is_param(local)) {
                         if (is_explicit(local_info(local)))
                             args.push_back(update_local(local, mk_implicit_binder_info()));
                         else
@@ -1007,14 +1094,18 @@ struct structure_cmd_fn {
                 }
                 /* Copy fields it depends on */
                 for (expr const & local : used_locals.get_collected()) {
-                    if (is_field(local))
-                        args.push_back(local);
+                    if (!is_param(local)) {
+                        if (m_subobjects)
+                            args.push_back(update_local(local, vis(mlocal_type(local)), local_info(local)));
+                        else
+                            args.push_back(local);
+                    }
                 }
                 name decl_name  = name(m_name + local_pp_name(field.local), "_default");
                 /* TODO(Leo): add helper function for adding definition.
                    It should unfold_untrusted_macros */
-                expr decl_type  = unfold_untrusted_macros(m_env, Pi(args, mlocal_type(field.local)));
-                expr val        = mk_app(m_ctx, get_id_name(), *field.default_val);
+                expr decl_type  = unfold_untrusted_macros(m_env, Pi(args, type));
+                val             = mk_app(m_ctx, get_id_name(), val);
                 expr decl_value = unfold_untrusted_macros(m_env, Fun(args, val));
                 name_set used_univs;
                 used_univs = collect_univ_params(decl_value, used_univs);

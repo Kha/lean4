@@ -16,6 +16,7 @@ void register_structure_cmd(cmd_table & r);
 environment private_structure_cmd(parser & p);
 /** \brief Return true iff \c S is a structure created with the structure command */
 bool is_structure(environment const & env, name const & S);
+optional<name> is_parent_field(environment const & env, name const & structure_name, name const & field_name);
 
 /* Default value support */
 optional<name> has_default_value(environment const & env, name const & field_name, name const & structure_name);

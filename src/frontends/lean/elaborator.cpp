@@ -2549,8 +2549,10 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
     // field <-> metavar for each field to be elaborated
     name_map<expr> field2mvar;
     name_map<name> mvar2field;
-    name_map<name> field2struct;
-    name_map<unsigned> struct2remaining;
+    // for subobjects
+    name_map<name> mvar2coercion;
+    name_map<unsigned> coercion2remaining;
+    name_map<expr> coercion2value;
 
     expr const & ref = e;
 
@@ -2576,9 +2578,7 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                 c_arg = mk_metavar(d, ref);
             } else {
                 name S_fname = binding_name(c_type);
-                if (strncmp(S_fname.get_string(), "to_", 3) == 0) {
-                    c_arg = create_field_mvars(S_fname.get_string() + 3);
-                } else if (is_explicit(binding_info(c_type))) {
+                if (is_explicit(binding_info(c_type))) {
                     unsigned j = 0;
                     for (; j < fnames.size(); j++) {
                         if (S_fname == fnames[j]) {
@@ -2622,8 +2622,24 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                             }
                             field2value.insert(S_fname, c_arg);
                         } else {
+                            optional<name> p;
                             // note: S_name instead of nested_S_name
-                            if (has_default_value(m_env, S_fname, S_name) || is_auto_param(d)) {
+                            if (has_default_value(m_env, S_fname, S_name) || is_auto_param(d) ||
+                                    (p = is_parent_field(m_env, nested_S_name, S_fname))) {
+                                if (p) {
+                                    auto nested = create_field_mvars(*p);
+                                    coercion2value.insert(S_fname, nested);
+                                    buffer<expr> nested_args;
+                                    get_app_args(nested, nested_args);
+                                    unsigned remaining = 0;
+                                    for (auto const & nested_arg : nested_args)
+                                        if (mvar2field.find(mlocal_name(nested_arg))) {
+                                            remaining++;
+                                            mvar2coercion.insert(mlocal_name(nested_arg), S_fname);
+                                        }
+                                    coercion2remaining.insert(S_fname, remaining);
+                                }
+
                                 c_arg = mk_metavar(d, ref);
                                 field2mvar.insert(S_fname, c_arg);
                                 mvar2field.insert(mlocal_name(c_arg), S_fname);
@@ -2670,6 +2686,7 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
 
     /* Now repeatedly try to elaborate fields whose dependencies have been elaborated */
     bool last_progress = true;
+    sstream error;
     bool done = false;
     while (!done) {
         done = true;
@@ -2679,13 +2696,20 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                     name full_S_fname = S_name + S_fname;
                     expr expected_type = instantiate_mvars(infer_type(mvar));
 
-                    // check for field dependencies in expected type
-                    if (find(expected_type, [&](expr const & e, unsigned) {
-                        return is_metavar(e) && mvar2field.find(mlocal_name(e));
-                    })) {
-                        return;
-                    }
-                    // note: there cannot be cycles in type dependencies, so progress to here should be guaranteed
+                    auto check_deps = [&](expr const & expected_type) {
+                        // check for field dependencies in expected type
+                        if (auto m = find(expected_type, [&](expr const & e, unsigned) {
+                            return is_metavar(e) && mvar2field.find(mlocal_name(e));
+                        })) {
+                            done = false;
+                            if (!last_progress)
+                                error << "failed to construct default value for '" << full_S_fname << "', "
+                                        << "it depends on field '" << *mvar2field.find(mlocal_name(*m)) << "', but the value for this field is not available\n";
+                            return false;
+                        }
+                        // note: there cannot be cycles in type dependencies, so progress to here should be guaranteed
+                        return true;
+                    };
 
                     unsigned j = 0;
                     for (; j < fnames.size(); j++) {
@@ -2695,6 +2719,8 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                     }
                     if (j < fnames.size()) {
                         /* explicit value */
+                        if (!check_deps(expected_type))
+                            return;
                         expr fval = fvalues[j];
                         expr new_fval;
                         expr new_fval_type;
@@ -2719,19 +2745,40 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                             assign_field_mvar(S_fname, mvar, new_new_fval, new_fval, new_fval_type, expected_type, ref);
                             field2value.insert(S_fname, *new_new_fval);
                             progress = true;
-                        } catch (exception &) {
+                        } catch (exception & e) {
                             done = false;
                             if (!last_progress)
-                                throw;
+                                error << e.what() << "\n";
                         }
                     } else if (auto p = is_auto_param(expected_type)) {
+                        if (!check_deps(expected_type))
+                            return;
                         expr val = mk_auto_param(p->second, p->first, ref);
                         assign_field_mvar(S_fname, mvar, some_expr(val), val, p->first, p->first, ref);
                         field2value.insert(S_fname, val);
                         progress = true;
+                    } else if (auto remaining = coercion2remaining.find(S_fname)) {
+                        if (*remaining == 0) {
+                            coercion2remaining.erase(S_fname);
+                            expr val = coercion2value[S_fname];
+                            assign_field_mvar(S_fname, mvar, some_expr(val), val, expected_type, expected_type, ref);
+                            field2value.insert(S_fname, val);
+                            progress = true;
+                        } else {
+                            done = false;
+                        }
+                    } else {
+                        lean_unreachable();
+                    }
+                    if (field2value.contains(S_fname)) {
+                        if (auto coercion = mvar2coercion.find(mlocal_name(mvar))) {
+                            coercion2remaining[*coercion] = coercion2remaining[*coercion] - 1;
+                        }
                     }
                 }
         });
+        if (!last_progress && !progress)
+            throw exception(error);
         last_progress = progress;
     }
 
