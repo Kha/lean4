@@ -2550,9 +2550,9 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
     name_map<expr> field2mvar;
     name_map<name> mvar2field;
     // for subobjects
-    name_map<name> mvar2coercion;
-    name_map<unsigned> coercion2remaining;
-    name_map<expr> coercion2value;
+    //name_map<name> mvar2coercion;
+    //name_map<unsigned> coercion2remaining;
+    //name_map<expr> coercion2value;
 
     expr const & ref = e;
 
@@ -2628,7 +2628,9 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                                     (p = is_parent_field(m_env, nested_S_name, S_fname))) {
                                 if (p) {
                                     auto nested = create_field_mvars(*p);
-                                    coercion2value.insert(S_fname, nested);
+                                    c_arg = nested;
+                                    field2value.insert(S_fname, nested);
+                                    /*coercion2value.insert(S_fname, nested);
                                     buffer<expr> nested_args;
                                     get_app_args(nested, nested_args);
                                     unsigned remaining = 0;
@@ -2637,12 +2639,12 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                                             remaining++;
                                             mvar2coercion.insert(mlocal_name(nested_arg), S_fname);
                                         }
-                                    coercion2remaining.insert(S_fname, remaining);
+                                    coercion2remaining.insert(S_fname, remaining);*/
+                                } else {
+                                    c_arg = mk_metavar(d, ref);
+                                    field2mvar.insert(S_fname, c_arg);
+                                    mvar2field.insert(mlocal_name(c_arg), S_fname);
                                 }
-
-                                c_arg = mk_metavar(d, ref);
-                                field2mvar.insert(S_fname, c_arg);
-                                mvar2field.insert(mlocal_name(c_arg), S_fname);
                             } else {
                                 throw elaborator_exception(e, sstream() << "invalid structure value { ... }, field '" <<
                                                                         S_fname << "' was not provided");
@@ -2696,14 +2698,23 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                     name full_S_fname = S_name + S_fname;
                     expr expected_type = instantiate_mvars(infer_type(mvar));
 
-                    auto check_deps = [&](expr const & expected_type) {
+                    auto check_deps = [&]() {
+                        name_set to_unfold(get_ancestor_structures(m_env, S_name));
+                        expr t = expected_type;
+                        while (is_pi(t))
+                            t = binding_body(t);
+                        t = unfold_to_projections(m_env, to_unfold, [&](expr const & proj_app) {
+                            auto const & proj_name = const_name(get_app_fn(proj_app));
+                            lean_assert(proj_name.is_string());
+                            return *field2mvar.find(proj_name.get_string());
+                        }, t);
                         // check for field dependencies in expected type
-                        if (auto m = find(expected_type, [&](expr const & e, unsigned) {
+                        if (auto m = find(t, [&](expr const & e, unsigned) {
                             return is_metavar(e) && mvar2field.find(mlocal_name(e));
                         })) {
                             done = false;
                             if (!last_progress)
-                                error << "failed to construct default value for '" << full_S_fname << "', "
+                                error << "failed to insert value for '" << full_S_fname << "', "
                                         << "it depends on field '" << *mvar2field.find(mlocal_name(*m)) << "', but the value for this field is not available\n";
                             return false;
                         }
@@ -2719,7 +2730,7 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                     }
                     if (j < fnames.size()) {
                         /* explicit value */
-                        if (!check_deps(expected_type))
+                        if (!check_deps())
                             return;
                         expr fval = fvalues[j];
                         expr new_fval;
@@ -2751,13 +2762,13 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                                 error << e.what() << "\n";
                         }
                     } else if (auto p = is_auto_param(expected_type)) {
-                        if (!check_deps(expected_type))
+                        if (!check_deps())
                             return;
                         expr val = mk_auto_param(p->second, p->first, ref);
                         assign_field_mvar(S_fname, mvar, some_expr(val), val, p->first, p->first, ref);
                         field2value.insert(S_fname, val);
                         progress = true;
-                    } else if (auto remaining = coercion2remaining.find(S_fname)) {
+                    } /*else if (auto remaining = coercion2remaining.find(S_fname)) {
                         if (*remaining == 0) {
                             coercion2remaining.erase(S_fname);
                             expr val = coercion2value[S_fname];
@@ -2767,14 +2778,14 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                         } else {
                             done = false;
                         }
-                    } else {
+                    }*/ else {
                         lean_unreachable();
                     }
-                    if (field2value.contains(S_fname)) {
+                    /*if (field2value.contains(S_fname)) {
                         if (auto coercion = mvar2coercion.find(mlocal_name(mvar))) {
                             coercion2remaining[*coercion] = coercion2remaining[*coercion] - 1;
                         }
-                    }
+                    }*/
                 }
         });
         if (!last_progress && !progress)

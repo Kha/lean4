@@ -17,8 +17,13 @@ environment private_structure_cmd(parser & p);
 /** \brief Return true iff \c S is a structure created with the structure command */
 bool is_structure(environment const & env, name const & S);
 optional<name> is_parent_field(environment const & env, name const & structure_name, name const & field_name);
+buffer<name> get_parent_structures(environment const & env, name const & structure_name);
+name_set get_ancestor_structures(environment const & env, name const & structure_name);
 
 /* Default value support */
 optional<name> has_default_value(environment const & env, name const & field_name, name const & structure_name);
 expr mk_field_default_value(environment const & env, name const & full_field_name, std::function<optional<expr>(name const &)> const & get_field_value);
+
+expr unfold_to_projections(const environment & env, name_set const & S_names,
+                           std::function<expr(expr const & proj_app)> const & replace, const expr & e);
 }

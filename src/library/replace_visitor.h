@@ -17,7 +17,8 @@ class replace_visitor {
 protected:
     typedef expr_bi_struct_map<expr> cache;
     cache   m_cache;
-    expr save_result(expr const & e, expr && r, bool shared);
+
+    virtual expr save_result(expr const & e, expr && r, bool shared);
     virtual expr visit_sort(expr const &);
     virtual expr visit_macro(expr const &);
     virtual expr visit_constant(expr const &);

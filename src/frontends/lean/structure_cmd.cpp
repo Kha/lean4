@@ -173,6 +173,56 @@ expr mk_field_default_value(environment const & env, name const & full_field_nam
     return mk_app(mk_explicit(mk_constant(*default_name)), args);
 }
 
+class unfold_to_projections_visitor : public replace_visitor {
+public:
+    typedef std::function<expr(expr const & proj_app)> replace_fn;
+private:
+    environment m_env;
+    name_set    m_S_names;
+    replace_fn  m_replace;
+protected:
+    bool is_forward_ref(expr const & e) {
+        if (is_local(e)) {
+            auto const & n = mlocal_name(e);
+            return is_parent_field(n) && m_S_names.contains(n);
+        } else if (is_app(e)) {
+            expr fn = get_app_fn(e);
+            if (is_constant(fn)) {
+                name n = const_name(fn);
+                if (is_projection(m_env, n))
+                    if (auto p = is_parent_field(m_env, n.get_prefix(), n.get_string()))
+                        if (m_S_names.contains(*p) || is_forward_ref(app_arg(e)))
+                            return true;
+                if (n.is_string() && n.get_string() == std::string("mk") && m_S_names.contains(n.get_prefix()))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    expr visit_app(expr const & e) override {
+        if (is_forward_ref(app_arg(e))) {
+            type_context tc(m_env, transparency_mode::All);
+            expr e2 = eta_reduce(tc.whnf(e));
+            expr h = get_app_fn(e2);
+            if (is_constant(h) && is_projection(m_env, const_name(h))) {
+                return m_replace(e2);
+            } else {
+                throw elaborator_exception(e, "Unable to eliminate forward reference to parent field");
+            }
+        }
+        return replace_visitor::visit_app(e);
+    }
+public:
+    unfold_to_projections_visitor(const environment & env, name_set const & S_names, replace_fn const & replace):
+            m_env(env), m_S_names(S_names), m_replace(replace) {}
+};
+
+expr unfold_to_projections(const environment & env, name_set const & S_names,
+                           unfold_to_projections_visitor::replace_fn const & replace, const expr & e) {
+    return unfold_to_projections_visitor(env, S_names, replace)(e);
+}
+
 struct structure_cmd_fn {
     typedef std::vector<pair<name, name>> rename_vector;
     // field_map[i] contains the position of the \c i-th field of a parent structure into this one.
@@ -1031,50 +1081,19 @@ struct structure_cmd_fn {
         return false;
     }
 
-    class unfold_parent_fields_visitor : public replace_visitor {
-    private:
-        environment m_env;
-        name        m_S_name;
-        name_set    m_ancestors;
-    protected:
-        bool is_forward_ref(expr const & e) {
-            if (is_local(e)) {
-                auto const & n = mlocal_name(e);
-                return is_parent_field(n) && !m_ancestors.contains(n);
-            } else if (is_app(e)) {
-                expr fn = get_app_fn(e);
-                return is_constant(fn) && is_projection(m_env, const_name(fn)) &&
-                        is_parent_field(const_name(fn).get_string()) && !m_ancestors.contains(const_name(fn).get_string());
-            } else {
-                return false;
-            }
-        }
-
-        expr visit_app(expr const & e) override {
-            if (is_forward_ref(app_arg(e))) {
-                type_context tc(m_env, transparency_mode::All);
-                expr e2 = eta_reduce(tc.whnf(e));
-                expr h = get_app_fn(e2);
-                if (is_constant(h) && is_projection(m_env, const_name(h))) {
-                    return mk_local(const_name(h).get_string(), tc.infer(e));
-                } else {
-                    throw elaborator_exception(e, "Unable to eliminate forward reference to parent field");
-                }
-            }
-            return replace_visitor::visit_app(e);
-        }
-    public:
-        unfold_parent_fields_visitor(const environment & env, const name & S_name):
-                m_env(env), m_S_name(S_name), m_ancestors(get_ancestor_structures(env, S_name)) {}
-    };
-
     void declare_defaults() {
         for (field_decl const & field : m_fields) {
             if (field.default_val) {
                 expr val = *field.default_val;
                 expr type = mlocal_type(field.local);
                 name const & parent = find_field(m_env, field.get_name(), m_name)->first;
-                unfold_parent_fields_visitor vis(m_env, parent);
+                name_set to_unfold(get_ancestor_structures(m_env, m_name));
+                to_unfold.insert(m_name);
+                to_unfold.remove(get_ancestor_structures(m_env, parent));
+                unfold_to_projections_visitor vis(m_env, to_unfold, [&](expr const & proj_app) {
+                    type_context tc(m_env);
+                    return mk_local(const_name(get_app_fn(proj_app)).get_string(), tc.infer(proj_app));
+                });
                 if (m_subobjects) {
                     val = vis(val);
                     type = vis(type);
