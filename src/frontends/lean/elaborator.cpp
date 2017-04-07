@@ -2591,13 +2591,14 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                         }
                     }
                     if (j == fnames.size()) {
-                        if (src) {
-                            name new_fname = src_S_name + S_fname;
+                        if (src && !is_parent_field(m_env, nested_S_name, S_fname)) {
+                            name base_S_name = find_field(m_env, nested_S_name, S_fname)->first;
+                            name new_fname = base_S_name + S_fname;
                             expr f = copy_tag(e, mk_constant(new_fname));
                             f = copy_tag(e, mk_explicit(f));
                             for (unsigned i = 0; i < src_S_nparams; i++)
                                 f = copy_tag(e, mk_app(f, copy_tag(e, mk_expr_placeholder())));
-                            f = copy_tag(e, mk_app(f, *src));
+                            f = copy_tag(e, mk_app(f, *mk_base_projections(m_env, src_S_name, base_S_name, *src)));
                             try {
                                 c_arg = visit(f, none_expr());
                             } catch (exception & ex) {
@@ -2624,12 +2625,12 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                         } else {
                             optional<name> p;
                             // note: S_name instead of nested_S_name
-                            if (has_default_value(m_env, S_fname, S_name) || is_auto_param(d) ||
-                                    (p = is_parent_field(m_env, nested_S_name, S_fname))) {
+                            if (has_default_value(m_env, S_name, S_fname) || is_auto_param(d) ||
+                                (p = is_parent_field(m_env, nested_S_name, S_fname))) {
                                 if (p) {
                                     auto nested = create_field_mvars(*p);
                                     c_arg = nested;
-                                    field2value.insert(S_fname, nested);
+                                    //field2value.insert(S_fname, nested);
                                     /*coercion2value.insert(S_fname, nested);
                                     buffer<expr> nested_args;
                                     get_app_args(nested, nested_args);
@@ -2697,17 +2698,17 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                 if (!field2value.find(S_fname)) {
                     name full_S_fname = S_name + S_fname;
                     expr expected_type = instantiate_mvars(infer_type(mvar));
+                    name_set to_unfold(get_ancestor_structures(m_env, S_name));
+                    expected_type = unfold_to_projections(m_env, to_unfold, [&](expr const & proj_app) {
+                        auto const & proj_name = const_name(get_app_fn(proj_app));
+                        lean_assert(proj_name.is_string());
+                        return instantiate_mvars(*field2mvar.find(proj_name.get_string()));
+                    }, expected_type);
 
                     auto check_deps = [&]() {
-                        name_set to_unfold(get_ancestor_structures(m_env, S_name));
                         expr t = expected_type;
                         while (is_pi(t))
                             t = binding_body(t);
-                        t = unfold_to_projections(m_env, to_unfold, [&](expr const & proj_app) {
-                            auto const & proj_name = const_name(get_app_fn(proj_app));
-                            lean_assert(proj_name.is_string());
-                            return *field2mvar.find(proj_name.get_string());
-                        }, t);
                         // check for field dependencies in expected type
                         if (auto m = find(t, [&](expr const & e, unsigned) {
                             return is_metavar(e) && mvar2field.find(mlocal_name(e));
@@ -2741,7 +2742,7 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                         assign_field_mvar(S_fname, mvar, new_new_fval, new_fval, new_fval_type, expected_type, ref_fval);
                         field2value.insert(S_fname, *new_new_fval);
                         progress = true;
-                    } else if (optional<name> default_value_fn = has_default_value(m_env, S_fname, S_name)) {
+                    } else if (optional<name> default_value_fn = has_default_value(m_env, S_name, S_fname)) {
                         try {
                             expr fval = mk_field_default_value(m_env, full_S_fname, [&](name const & fname) {
                                 if (auto v = field2value.find(fname))

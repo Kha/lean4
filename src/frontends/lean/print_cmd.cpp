@@ -437,13 +437,16 @@ bool print_token_info(parser const & p, message_builder & out, name const & tk) 
 
 bool print_polymorphic(parser & p, message_builder & out) {
     auto pos = p.pos();
-    try {
-        name id = p.check_id_next("");
+    if (p.curr_is_identifier()) {
+        auto id = p.get_name_val();
         bool show_value = true;
-        if (print_id_info(p, out, id, show_value, pos))
+        if (print_id_info(p, out, id, show_value, pos)) {
+            p.next();
             return true;
-    } catch (exception &) {}
-
+        } else {
+            throw parser_error(sstream() << "unknown identifier " << id, pos);
+        }
+    }
     // notation
     if (p.curr_is_keyword()) {
         name tk = p.get_token_info().token();

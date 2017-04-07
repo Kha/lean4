@@ -75,8 +75,39 @@ static auto get_structure_info(environment const & env, name const & S)
     return std::make_tuple(idecl.m_level_params, idecl.m_num_params, intro);
 }
 
+void get_structure_fields(environment const & env, name const & S, buffer<name> & fields) {
+    lean_assert(is_structure_like(env, S));
+    level_param_names ls; unsigned nparams; inductive::intro_rule intro;
+    std::tie(ls, nparams, intro) = get_structure_info(env, S);
+    expr intro_type = inductive::intro_rule_type(intro);
+    unsigned i = 0;
+    while (is_pi(intro_type)) {
+        if (i >= nparams)
+            fields.push_back(S + binding_name(intro_type));
+        i++;
+        intro_type = binding_body(intro_type);
+    }
+}
+
+bool is_structure(environment const & env, name const & S) {
+    if (!is_structure_like(env, S))
+        return false;
+    level_param_names ls; unsigned nparams; inductive::intro_rule intro;
+    std::tie(ls, nparams, intro) = get_structure_info(env, S);
+    expr intro_type = inductive::intro_rule_type(intro);
+    for (unsigned i = 0; i < nparams; i++) {
+        if (!is_pi(intro_type))
+            return false;
+        intro_type = binding_body(intro_type);
+    }
+    if (!is_pi(intro_type))
+        return false;
+    name field_name = S + binding_name(intro_type);
+    return get_projection_info(env, field_name) != nullptr;
+}
+
 bool is_parent_field(name const & field_name) {
-    return strncmp(field_name.get_string(), "to_", 3) == 0;
+    return field_name.is_string() && strncmp(field_name.get_string(), "to_", 3) == 0;
 }
 
 optional<name> is_parent_field(environment const & env, name const & structure_name, name const & field_name) {
@@ -125,7 +156,7 @@ name_set get_ancestor_structures(environment const & env, name const & structure
     return ns;
 }
 
-optional<pair<name, expr>> find_field(environment const & env, name const & field_name, name const & structure_name) {
+optional<pair<name, expr>> find_field(environment const & env, name const & structure_name, name const & field_name) {
     expr intro_type = inductive::intro_rule_type(std::get<2>(get_structure_info(env, structure_name)));
     while (is_pi(intro_type)) {
         if (binding_name(intro_type) == field_name)
@@ -133,25 +164,40 @@ optional<pair<name, expr>> find_field(environment const & env, name const & fiel
         intro_type = binding_body(intro_type);
     }
     for (auto const & p : get_parent_structures(env, structure_name)) {
-        if (auto n = find_field(env, field_name, p))
+        if (auto n = find_field(env, p, field_name))
             return n;
     }
     return {};
 }
 
-optional<name> has_default_value(environment const & env, name const & field_name, name const & structure_name) {
+optional<expr> mk_base_projections(environment const & env, name const & S_name, name const & base_S_name, expr const & e) {
+    if (S_name == base_S_name)
+        return some_expr(e);
+    auto nparams = std::get<1>(get_structure_info(env, S_name));
+    for (auto const & p : get_parent_structures(env, S_name)) {
+        auto projs = mk_explicit(mk_constant(S_name + name(p.get_string()).append_before("to_")));
+        for (int i = 0; i < nparams; i++)
+            projs = mk_app(projs, mk_expr_placeholder());
+        projs = mk_app(projs, e);
+        if (auto r = mk_base_projections(env, p, base_S_name, projs))
+            return r;
+    }
+    return {};
+}
+
+optional<name> has_default_value(environment const & env, name const & structure_name, name const & field_name) {
     name default_name(structure_name + field_name, "_default");
     if (env.find(default_name))
         return optional<name>(default_name);
     for (auto const & p : get_parent_structures(env, structure_name)) {
-        if (auto n = has_default_value(env, field_name, p))
+        if (auto n = has_default_value(env, p, field_name))
             return n;
     }
     return optional<name>();
 }
 
 expr mk_field_default_value(environment const & env, name const & full_field_name, std::function<optional<expr>(name const &)> const & get_field_value) {
-    optional<name> default_name = has_default_value(env, full_field_name.get_string(), full_field_name.get_prefix());
+    optional<name> default_name = has_default_value(env, full_field_name.get_prefix(), full_field_name.get_string());
     lean_assert(default_name);
     declaration decl = env.get(*default_name);
     expr value = decl.get_value();
@@ -184,7 +230,8 @@ protected:
     bool is_forward_ref(expr const & e) {
         if (is_local(e)) {
             auto const & n = mlocal_name(e);
-            return is_parent_field(n) && m_S_names.contains(n);
+            if (n.is_string() && m_S_names.contains(n.get_string() + 3))
+                return true;
         } else if (is_app(e)) {
             expr fn = get_app_fn(e);
             if (is_constant(fn)) {
@@ -206,7 +253,7 @@ protected:
             expr e2 = eta_reduce(tc.whnf(e));
             expr h = get_app_fn(e2);
             if (is_constant(h) && is_projection(m_env, const_name(h))) {
-                return m_replace(e2);
+                return visit(m_replace(e2));
             } else {
                 throw elaborator_exception(e, "Unable to eliminate forward reference to parent field");
             }
@@ -652,7 +699,7 @@ struct structure_cmd_fn {
                     field_decl & field = m_fields[fmap[fmap_start]];
                     name fname = local_pp_name(field.local);
                     name full_fname = parent_name + fname;
-                    if (optional<name> fdefault_name = has_default_value(m_env, fname, parent_name)) {
+                    if (optional<name> fdefault_name = has_default_value(m_env, parent_name, fname)) {
                         expr fdefault = mk_field_default_value(full_fname);
                         if (!field.default_val) {
                             field.default_val = fdefault;
@@ -793,7 +840,7 @@ struct structure_cmd_fn {
                     for (unsigned i = 0; i < m_parents.size(); i++) {
                         expr const & parent = m_parents[i];
                         auto parent_name = const_name(get_app_fn(parent));
-                        if (auto p2 = find_field(m_p.env(), p.second, parent_name)) {
+                        if (auto p2 = find_field(m_p.env(), parent_name, p.second)) {
                             type = m_p.env().get(p2->first + p.second).get_type();
                             buffer<expr> args;
                             get_app_args(parent, args);
@@ -1086,10 +1133,10 @@ struct structure_cmd_fn {
             if (field.default_val) {
                 expr val = *field.default_val;
                 expr type = mlocal_type(field.local);
-                name const & parent = find_field(m_env, field.get_name(), m_name)->first;
+                name const & parent = find_field(m_env, m_name, field.get_name())->first;
                 name_set to_unfold(get_ancestor_structures(m_env, m_name));
                 to_unfold.insert(m_name);
-                to_unfold.remove(get_ancestor_structures(m_env, parent));
+                //to_unfold.remove(get_ancestor_structures(m_env, parent));
                 unfold_to_projections_visitor vis(m_env, to_unfold, [&](expr const & proj_app) {
                     type_context tc(m_env);
                     return mk_local(const_name(get_app_fn(proj_app)).get_string(), tc.infer(proj_app));
@@ -1344,37 +1391,6 @@ environment class_cmd_ex(parser & p, decl_modifiers const & modifiers) {
 
 environment class_cmd(parser & p) {
     return class_cmd_ex(p, {});
-}
-
-void get_structure_fields(environment const & env, name const & S, buffer<name> & fields) {
-    lean_assert(is_structure_like(env, S));
-    level_param_names ls; unsigned nparams; inductive::intro_rule intro;
-    std::tie(ls, nparams, intro) = get_structure_info(env, S);
-    expr intro_type = inductive::intro_rule_type(intro);
-    unsigned i = 0;
-    while (is_pi(intro_type)) {
-        if (i >= nparams)
-            fields.push_back(S + binding_name(intro_type));
-        i++;
-        intro_type = binding_body(intro_type);
-    }
-}
-
-bool is_structure(environment const & env, name const & S) {
-    if (!is_structure_like(env, S))
-        return false;
-    level_param_names ls; unsigned nparams; inductive::intro_rule intro;
-    std::tie(ls, nparams, intro) = get_structure_info(env, S);
-    expr intro_type = inductive::intro_rule_type(intro);
-    for (unsigned i = 0; i < nparams; i++) {
-        if (!is_pi(intro_type))
-            return false;
-        intro_type = binding_body(intro_type);
-    }
-    if (!is_pi(intro_type))
-        return false;
-    name field_name = S + binding_name(intro_type);
-    return get_projection_info(env, field_name) != nullptr;
 }
 
 void register_structure_cmd(cmd_table & r) {

@@ -19,9 +19,11 @@ bool is_structure(environment const & env, name const & S);
 optional<name> is_parent_field(environment const & env, name const & structure_name, name const & field_name);
 buffer<name> get_parent_structures(environment const & env, name const & structure_name);
 name_set get_ancestor_structures(environment const & env, name const & structure_name);
+optional<pair<name, expr>> find_field(environment const & env, name const & structure_name, name const & field_name);
+optional<expr> mk_base_projections(environment const & env, name const & S_name, name const & base_S_name, expr const & e);
 
 /* Default value support */
-optional<name> has_default_value(environment const & env, name const & field_name, name const & structure_name);
+optional<name> has_default_value(environment const & env, name const & structure_name, name const & field_name);
 expr mk_field_default_value(environment const & env, name const & full_field_name, std::function<optional<expr>(name const &)> const & get_field_value);
 
 expr unfold_to_projections(const environment & env, name_set const & S_names,

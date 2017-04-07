@@ -86,7 +86,8 @@ meta def interaction_monad.failed {α : Type u} : m α :=
 interaction_monad.fail "failed"
 
 meta instance interaction_monad.monad_fail : monad_fail m :=
-{ interaction_monad.monad with fail := λ α s, interaction_monad.fail (to_fmt s) }
+monad_fail.mk interaction_monad.monad (λ α s, interaction_monad.fail (to_fmt s))
+--{ interaction_monad.monad with fail := λ α s, interaction_monad.fail (to_fmt s) }
 
 -- TODO: unify `parser` and `tactic` behavior?
 -- meta instance interaction_monad.alternative : alternative m :=

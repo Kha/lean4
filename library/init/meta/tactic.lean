@@ -51,9 +51,10 @@ infixl ` >>=[tactic] `:2 := interaction_monad_bind
 infixl ` >>[tactic] `:2  := interaction_monad_seq
 
 meta instance : alternative tactic :=
-{ interaction_monad.monad with
-  failure := @interaction_monad.failed _,
-  orelse  := @interaction_monad_orelse _ }
+alternative.mk (monad.to_applicative tactic) (@interaction_monad.failed _) (@interaction_monad_orelse _)
+-- { interaction_monad.monad with
+--   failure := @interaction_monad.failed _,
+--   orelse  := @interaction_monad_orelse _ }
 
 meta def {u₁ u₂} tactic.up {α : Type u₂} (t : tactic α) : tactic (ulift.{u₁} α) :=
 λ s, match t s with
