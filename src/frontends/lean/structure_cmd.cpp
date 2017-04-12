@@ -248,14 +248,18 @@ protected:
     }
 
     expr visit_app(expr const & e) override {
-        if (is_forward_ref(app_arg(e))) {
-            type_context tc(m_env, transparency_mode::All);
-            expr e2 = eta_reduce(tc.whnf(e));
-            expr h = get_app_fn(e2);
-            if (is_constant(h) && is_projection(m_env, const_name(h))) {
-                return visit(m_replace(e2));
-            } else {
-                throw elaborator_exception(e, "Unable to eliminate forward reference to parent field");
+        if (is_app(e)) {
+            expr fn = get_app_fn(e);
+            if (is_constant(fn)) {
+                name n = const_name(fn);
+                if (is_projection(m_env, n)) {
+                    if (is_forward_ref(app_arg(e)))
+                        return m_replace(e);
+                    if (auto p = is_parent_field(m_env, n.get_prefix(), n.get_string()))
+                        if (m_S_names.contains(*p)) {
+                            return m_replace(e);
+                        }
+                }
             }
         }
         return replace_visitor::visit_app(e);

@@ -24,6 +24,7 @@ infixl ` >> `:55  := has_bind.and_then
 section
 set_option auto_param.check_exists false
 
+set_option pp.all true
 class monad (m : Type u → Type v) extends applicative m, has_bind m : Type (max u+1 v) :=
 (map := λ α β f x, x >>= pure ∘ f)
 (seq := λ α β f x, f >>= (<$> x))
