@@ -2498,6 +2498,7 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
         if (is_metavar(*expected_type))
             expected_type = none_expr();
     }
+    bool use_subobjects = !m_opts.get_bool("old_structure_cmd", false);
     get_structure_instance_info(e, S_name, src, fnames, fvalues);
     if (!S_name.is_anonymous() && !is_structure(env(), S_name))
         throw elaborator_exception(e, sstream() << "invalid structure instance, '" <<
@@ -2539,7 +2540,6 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                                        "(solution: use qualified structure instance { struct_id . ... }");
         }
     }
-    unsigned nparams = *inductive::get_num_params(m_env, S_name);
     buffer<bool> used;
     used.resize(fnames.size(), false);
     if (src) src = copy_tag(*src, mk_as_is(*src));
@@ -2563,6 +2563,7 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
         expr c = visit_const_core(copy_tag(e, mk_constant(c_names[0])));
         buffer<expr> c_args;
         expr c_type      = infer_type(c);
+        unsigned nparams = *inductive::get_num_params(m_env, nested_S_name);
 
         /* Create metavariables for fields and parameters */
         for (unsigned i = 0; is_pi(c_type); i++) {
@@ -2592,13 +2593,16 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                     }
                     if (j == fnames.size()) {
                         if (src && !is_parent_field(m_env, nested_S_name, S_fname)) {
-                            name base_S_name = find_field(m_env, nested_S_name, S_fname)->first;
+                            name base_S_name = find_field(m_env, src_S_name, S_fname)->first;
                             name new_fname = base_S_name + S_fname;
                             expr f = copy_tag(e, mk_constant(new_fname));
                             f = copy_tag(e, mk_explicit(f));
                             for (unsigned i = 0; i < src_S_nparams; i++)
                                 f = copy_tag(e, mk_app(f, copy_tag(e, mk_expr_placeholder())));
-                            f = copy_tag(e, mk_app(f, *mk_base_projections(m_env, src_S_name, base_S_name, *src)));
+                            expr base_src = *src;
+                            if (use_subobjects)
+                                base_src = *mk_base_projections(m_env, src_S_name, base_S_name, *src);
+                            f = copy_tag(e, mk_app(f, base_src));
                             try {
                                 c_arg = visit(f, none_expr());
                             } catch (exception & ex) {
@@ -2640,7 +2644,7 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                                     get_app_args(nested, nested_args);
                                     unsigned remaining = 0;
                                     for (auto const & nested_arg : nested_args)
-                                        if (mvar2field.find(mlocal_name(nested_arg))) {
+                                        if (is_meta(nested_arg) && mvar2field.find(mlocal_name(nested_arg))) {
                                             remaining++;
                                             mvar2coercion.insert(mlocal_name(nested_arg), S_fname);
                                         }
@@ -2700,20 +2704,25 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                 if (!field2value.find(S_fname)) {
                     name full_S_fname = S_name + S_fname;
                     expr expected_type = infer_type(mvar);
+                    expected_type = instantiate_mvars(expected_type);
                     name_set to_unfold(get_ancestor_structures(m_env, S_name));
+                    if (use_subobjects) {
+                        expected_type = unfold_to_projections(m_env, to_unfold, [&](expr const & proj_app) {
+                            auto const & proj_name = const_name(get_app_fn(proj_app));
+                            lean_assert(proj_name.is_string());
+                            auto mvar = field2mvar.find(proj_name.get_string());
+                            lean_assert(mvar);
+                            return *mvar;
+                        }, expected_type);
+                    }
 
                     auto check_deps = [&](expr const & e) {
                         expr t = e;
                         while (is_pi(t))
                             t = binding_body(t);
-                        expr unf = unfold_to_projections(m_env, to_unfold, [&](expr const & proj_app) {
-                            auto const & proj_name = const_name(get_app_fn(proj_app));
-                            lean_assert(proj_name.is_string());
-                            return *field2mvar.find(proj_name.get_string());
-                        }, t);
                         // check for field dependencies in expected type
                         buffer<name> deps;
-                        expr pretty = replace(unf, [&](expr const & e) {
+                        expr pretty = replace(t, [&](expr const & e) {
                             name const * n;
                             if (is_metavar(e) && (n = mvar2field.find(mlocal_name(e))) && !field2value.find(*n)) {
                                 deps.push_back(*n);
@@ -2739,11 +2748,10 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                             }
                             return none_expr();
                         }
-                        return some_expr(unf);
+                        return some_expr(t);
                     };
 
                     if (!check_deps(expected_type)) return;
-                    expected_type = instantiate_mvars(expected_type);
 
                     unsigned j = 0;
                     for (; j < fnames.size(); j++) {
@@ -2763,31 +2771,27 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                         field2value.insert(S_fname, *new_new_fval);
                         progress = true;
                     } else if (optional<name> default_value_fn = has_default_value(m_env, S_name, S_fname)) {
-                            optional<name> default_name = has_default_value(m_env, full_S_fname.get_prefix(), full_S_fname.get_string());
-                            lean_assert(default_name);
-                            declaration decl = m_env.get(*default_name);
-                            expr value = decl.get_value();
-                            while (is_lambda(value)) {
-                                if (is_explicit(binding_info(value))) {
-                                    name fname = binding_name(value);
-                                    value = binding_body(value);
-                                    value = instantiate(value, *field2mvar.find(fname));
+                        try {
+                            expr fval = mk_field_default_value(m_env, full_S_fname, [&](name const & fname) {
+                                if (auto v = field2value.find(fname)) {
+                                    expr e = instantiate_mvars(*v);
+                                    return some_expr(mk_as_is(e));
                                 } else {
-                                    value = instantiate(binding_body(value),
-                                                        lean::mk_metavar(binding_name(value), binding_domain(value)));
+                                    return none_expr();
                                 }
-                            }
-                            if (auto d = check_deps(value))
-                                value = *d;
-                            else
-                                return;
+                            });
                             expr new_fval;
                             expr new_fval_type;
                             optional<expr> new_new_fval;
-                            std::tie(new_fval, new_fval_type, new_new_fval) = elaborate_arg(value, expected_type, ref);
+                            std::tie(new_fval, new_fval_type, new_new_fval) = elaborate_arg(fval, expected_type, ref);
                             assign_field_mvar(S_fname, mvar, new_new_fval, new_fval, new_fval_type, expected_type, ref);
                             field2value.insert(S_fname, *new_new_fval);
                             progress = true;
+                        } catch (exception & e) {
+                            done = false;
+                            if (!last_progress)
+                                error += format(e.what()) + line();
+                        }
                     } else if (auto p = is_auto_param(expected_type)) {
                         expr val = mk_auto_param(p->second, p->first, ref);
                         assign_field_mvar(S_fname, mvar, some_expr(val), val, p->first, p->first, ref);
@@ -2796,7 +2800,7 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                     } else if (auto remaining = coercion2remaining.find(S_fname)) {
                         if (*remaining == 0) {
                             coercion2remaining.erase(S_fname);
-                            expr val = coercion2value[S_fname];
+                            expr val = instantiate_mvars(coercion2value[S_fname]);
                             assign_field_mvar(S_fname, mvar, some_expr(val), val, expected_type, expected_type, ref);
                             field2value.insert(S_fname, val);
                             progress = true;

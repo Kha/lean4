@@ -176,7 +176,7 @@ optional<expr> mk_base_projections(environment const & env, name const & S_name,
     auto nparams = std::get<1>(get_structure_info(env, S_name));
     for (auto const & p : get_parent_structures(env, S_name)) {
         auto projs = mk_explicit(mk_constant(S_name + name(p.get_string()).append_before("to_")));
-        for (int i = 0; i < nparams; i++)
+        for (unsigned i = 0; i < nparams; i++)
             projs = mk_app(projs, mk_expr_placeholder());
         projs = mk_app(projs, e);
         if (auto r = mk_base_projections(env, p, base_S_name, projs))
@@ -254,10 +254,10 @@ protected:
                 name n = const_name(fn);
                 if (is_projection(m_env, n)) {
                     if (is_forward_ref(app_arg(e)))
-                        return m_replace(e);
+                        return visit(m_replace(e));
                     if (auto p = is_parent_field(m_env, n.get_prefix(), n.get_string()))
                         if (m_S_names.contains(*p)) {
-                            return m_replace(e);
+                            return visit(m_replace(e));
                         }
                 }
             }
@@ -1137,9 +1137,9 @@ struct structure_cmd_fn {
             if (field.default_val) {
                 expr val = *field.default_val;
                 expr type = mlocal_type(field.local);
-                name const & parent = find_field(m_env, m_name, field.get_name())->first;
                 name_set to_unfold(get_ancestor_structures(m_env, m_name));
                 to_unfold.insert(m_name);
+                //name const & parent = find_field(m_env, m_name, field.get_name())->first;
                 //to_unfold.remove(get_ancestor_structures(m_env, parent));
                 unfold_to_projections_visitor vis(m_env, to_unfold, [&](expr const & proj_app) {
                     type_context tc(m_env);

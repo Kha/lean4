@@ -49,9 +49,6 @@ success a
 exception α (λ u, f)
 end exceptional
 
-#print applicative.seq_left_eq
-#print monad.pure_seq_eq_map._default
---set_option trace.type_context.is_def_eq_detail true
 meta instance : monad exceptional :=
 {pure := @exceptional.return, bind := @exceptional.bind,
  map_const_eq := undefined, seq_left_eq := undefined, seq_right_eq := undefined,

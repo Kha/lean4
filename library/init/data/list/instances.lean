@@ -38,7 +38,7 @@ instance : monad list :=
    { refl },
    { dsimp at ih, dsimp, simph }
  end,
- pure_bind := by simp_intros,
+ pure_bind := by dsimp; simp_intros,
  bind_assoc := begin
    intros _ _ _ xs _ _, induction xs,
    { refl },

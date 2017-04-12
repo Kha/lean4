@@ -336,7 +336,7 @@ do e_type ← infer_type e >>= whnf,
    (const I ls) ← return $ get_app_fn e_type,
    return I
 
-meta def induction (p : parse texpr) (rec_name : parse using_ident) (ids : parse with_ident_list) (reverts : parse $ tk "arbitrary" *> ident*) : tactic unit :=
+meta def induction (p : parse texpr) (rec_name : parse using_ident) (ids : parse with_ident_list)  : tactic unit :=
 do e ← i_to_expr p, tactic.induction e ids rec_name, return ()
 
 meta def cases (p : parse texpr) (ids : parse with_ident_list) : tactic unit :=
