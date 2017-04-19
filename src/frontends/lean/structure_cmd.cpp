@@ -200,11 +200,11 @@ expr mk_field_default_value(environment const & env, name const & full_field_nam
     optional<name> default_name = has_default_value(env, full_field_name.get_prefix(), full_field_name.get_string());
     lean_assert(default_name);
     declaration decl = env.get(*default_name);
-    expr value = decl.get_value();
+    expr type = decl.get_type();
     buffer<expr> args;
-    while (is_lambda(value)) {
-        if (is_explicit(binding_info(value))) {
-            name fname = binding_name(value);
+    while (is_pi(type)) {
+        if (is_explicit(binding_info(type))) {
+            name fname = binding_name(type);
             optional<expr> fval = get_field_value(fname);
             if (!fval) {
                 throw exception(sstream() << "failed to construct default value for '" << full_field_name << "', "
@@ -214,7 +214,7 @@ expr mk_field_default_value(environment const & env, name const & full_field_nam
         } else {
             args.push_back(mk_expr_placeholder());
         }
-        value = binding_body(value);
+        type = binding_body(type);
     }
     return mk_app(mk_explicit(mk_constant(*default_name)), args);
 }
@@ -224,6 +224,7 @@ public:
     typedef std::function<expr(expr const & proj_app)> replace_fn;
 private:
     environment m_env;
+    type_context m_ctx;
     name_set    m_S_names;
     replace_fn  m_replace;
 protected:
@@ -248,6 +249,12 @@ protected:
     }
 
     expr visit_app(expr const & e) override {
+        expr e2 = replace_visitor::visit_app(e);
+        if (auto e3 = m_ctx.reduce_projection(e2))
+            return *e3;
+        else
+            return e2;
+
         if (is_app(e)) {
             expr fn = get_app_fn(e);
             if (is_constant(fn)) {
@@ -262,11 +269,10 @@ protected:
                 }
             }
         }
-        return replace_visitor::visit_app(e);
     }
 public:
     unfold_to_projections_visitor(const environment & env, name_set const & S_names, replace_fn const & replace):
-            m_env(env), m_S_names(S_names), m_replace(replace) {}
+            m_env(env), m_ctx(env), m_S_names(S_names), m_replace(replace) {}
 };
 
 expr unfold_to_projections(const environment & env, name_set const & S_names,
@@ -1139,16 +1145,6 @@ struct structure_cmd_fn {
                 expr type = mlocal_type(field.local);
                 name_set to_unfold(get_ancestor_structures(m_env, m_name));
                 to_unfold.insert(m_name);
-                //name const & parent = find_field(m_env, m_name, field.get_name())->first;
-                //to_unfold.remove(get_ancestor_structures(m_env, parent));
-                unfold_to_projections_visitor vis(m_env, to_unfold, [&](expr const & proj_app) {
-                    type_context tc(m_env);
-                    return mk_local(const_name(get_app_fn(proj_app)).get_string(), tc.infer(proj_app));
-                });
-                if (m_subobjects) {
-                    val = vis(val);
-                    type = vis(type);
-                }
                 collected_locals used_locals;
                 collect_locals(type, used_locals);
                 collect_locals(val, used_locals);
@@ -1165,17 +1161,14 @@ struct structure_cmd_fn {
                 /* Copy fields it depends on */
                 for (expr const & local : used_locals.get_collected()) {
                     if (!is_param(local)) {
-                        if (m_subobjects)
-                            args.push_back(update_local(local, vis(mlocal_type(local)), local_info(local)));
-                        else
-                            args.push_back(local);
+                        args.push_back(local);
                     }
                 }
                 name decl_name  = name(m_name + local_pp_name(field.local), "_default");
                 /* TODO(Leo): add helper function for adding definition.
                    It should unfold_untrusted_macros */
-                expr decl_type  = unfold_untrusted_macros(m_env, Pi(args, type));
-                val             = mk_app(m_ctx, get_id_name(), val);
+                type            = Pi(args, mk_app(m_ctx, get_id_name(), type));
+                expr decl_type  = unfold_untrusted_macros(m_env, type);
                 expr decl_value = unfold_untrusted_macros(m_env, Fun(args, val));
                 name_set used_univs;
                 used_univs = collect_univ_params(decl_value, used_univs);
