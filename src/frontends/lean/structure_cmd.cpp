@@ -289,14 +289,13 @@ struct structure_cmd_fn {
         expr m_local; // name, type, and pos as an expr::local
         optional<expr> m_default_val;
         field_kind m_kind;
-        bool m_explicit_type;
 
         field_decl(const expr & local, const optional<expr> & default_val, field_kind kind):
-                m_local(local), m_default_val(default_val), m_kind(kind),
-                m_explicit_type(!is_placeholder(mlocal_type(local))) {}
+                m_local(local), m_default_val(default_val), m_kind(kind) {}
 
         name const & get_name() const { return mlocal_name(m_local); }
         expr const & get_type() const { return mlocal_type(m_local); }
+        bool has_explicit_type() const { return !is_placeholder(get_type()); }
     };
 
     parser &                    m_p;
@@ -329,6 +328,7 @@ struct structure_cmd_fn {
     levels                      m_ctx_levels; // context levels for creating aliases
     buffer<expr>                m_ctx_locals; // context local constants for creating aliases
     unsigned                    m_prio;
+    expr                        m_elaborated_fields; // telescope expression from `elaborate_new_fields`
 
     structure_cmd_fn(parser & p, decl_attributes const & attrs, decl_modifiers const & modifiers):
         m_p(p),
@@ -508,59 +508,37 @@ struct structure_cmd_fn {
         parse_result_type();
     }
 
-    /** \brief Update the local constants in \c locals using the content of the Pi expression \c new_tmp.
-        This method assumes that new_tmp contains at least locals.size() nested Pi's.
-    */
-    expr update_locals(expr new_tmp, buffer<expr> & locals) {
-        for (unsigned i = 0; i < locals.size(); i++) {
-            if (!is_binding(new_tmp))
-                throw exception("structure command elaboration was interrupted due to nested errors");
-            expr new_local = mk_local(mlocal_name(locals[i]), binding_name(new_tmp), binding_domain(new_tmp),
-                                      binding_info(new_tmp));
-            locals[i]      = new_local;
-            new_tmp        = instantiate(binding_body(new_tmp), new_local);
-        }
-        return new_tmp;
+    using tele_elab = std::function<expr(expr)>;
+    template <class T>
+    expr elaborate_for_each(buffer<T> & buf, expr const & tmp, std::function<expr(T &, expr const &, tele_elab)> f,
+                            tele_elab elab, unsigned i = 0) {
+        if (i == buf.size())
+            return elab(tmp);
+        elab = [&, elab](expr const & tmp) {
+            return elaborate_for_each(buf, tmp, f, elab, i + 1);
+        };
+        return f(buf[buf.size() - 1 - i], tmp, elab);
     }
 
-    expr update_default_values(expr new_tmp, buffer<field_decl> & decls) {
-        for (auto & decl : decls) {
-            if (decl.m_default_val && decl.m_explicit_type) {
-                lean_assert(is_let(new_tmp));
-                decl.m_default_val = let_value(new_tmp);
-                new_tmp          = let_body(new_tmp);
-            }
+    expr elaborate_parent(bool in_header, expr & parent, expr const & tmp, tele_elab elab) {
+        if (!in_header && m_subobjects) {
+            return elab(tmp);
+        } else {
+            expr new_tmp = elab(mk_arrow(in_header ? parent : mk_as_is(parent), tmp));
+            *(&parent) = copy_tag(parent, expr(binding_domain(new_tmp)));
+            new_tmp    = binding_body(new_tmp);
+            if (!in_header)
+                new_tmp    = instantiate(new_tmp, mk_parent_expr(static_cast<unsigned>(&parent - &m_parents[0])));
+            return new_tmp;
         }
-        return new_tmp;
     }
 
-    expr update_fields(expr new_tmp, buffer<field_decl> & decls) {
-        for (auto & decl : decls) {
-            if (decl.m_default_val && !decl.m_explicit_type) {
-                    lean_assert(is_let(new_tmp));
-                    expr new_local   = mk_local(mlocal_name(decl.m_local), let_name(new_tmp), let_type(new_tmp), {});
-                    decl.m_local       = new_local;
-                    decl.m_default_val = let_value(new_tmp);
-                    new_tmp          = instantiate(let_body(new_tmp), new_local);
-            } else {
-                lean_assert(is_pi(new_tmp));
-                expr new_local = mk_local(mlocal_name(decl.m_local), binding_name(new_tmp), binding_domain(new_tmp),
-                                          binding_info(new_tmp));
-                decl.m_local     = new_local;
-                new_tmp        = instantiate(binding_body(new_tmp), new_local);
-            }
-        }
-        return new_tmp;
-    }
-
-    expr update_parents(expr new_tmp, bool inst) {
-        for (unsigned i = 0; i < m_parents.size(); i++) {
-            m_parents[i]   = copy_tag(m_parents[i], expr(binding_domain(new_tmp)));
-            new_tmp        = binding_body(new_tmp);
-            if (inst)
-                new_tmp = instantiate(new_tmp, mk_parent_expr(i));
-        }
-        return new_tmp;
+    expr elaborate_local(bool as_is, expr & local, expr const & tmp, tele_elab elab) {
+        expr new_tmp = elab(as_is ? Pi_as_is(local, tmp) : Pi(local, tmp));
+        expr new_local = mk_local(mlocal_name(local), binding_name(new_tmp), binding_domain(new_tmp),
+                                  binding_info(new_tmp));
+        *(&local)      = new_local;
+        return instantiate(binding_body(new_tmp), new_local);
     }
 
     /** \brief elaborate parameters and "parent" types */
@@ -590,21 +568,24 @@ struct structure_cmd_fn {
         buffer<expr> ctx;
         sort_locals(dep_set_minus_params, m_p, ctx);
 
-        expr tmp       = Pi_as_is(ctx, Pi(tmp_locals, m_type, m_p), m_p);
-        level_param_names new_ls;
-        expr new_tmp;
-        std::tie(new_tmp, new_ls) = m_p.elaborate_type(m_name, list<expr>(), tmp);
-        levels new_meta_ls = map2<level>(new_ls, [&](name const &) { return m_ctx.mk_univ_metavar_decl(); });
-        new_tmp = instantiate_univ_params(new_tmp, new_ls, new_meta_ls);
-        new_tmp = update_locals(new_tmp, ctx);
-        new_tmp = update_locals(new_tmp, m_params);
+        using namespace std::placeholders;
+        expr tmp = m_type;
+        m_type = elaborate_for_each<expr>(m_parents, tmp, std::bind(&structure_cmd_fn::elaborate_parent, this, true, _1, _2, _3), [&](expr tmp) {
+            return elaborate_for_each<expr>(m_params, tmp, std::bind(&structure_cmd_fn::elaborate_local, this, false, _1, _2, _3), [&](expr tmp) {
+                return elaborate_for_each<expr>(ctx, tmp, std::bind(&structure_cmd_fn::elaborate_local, this, true, _1, _2, _3), [&](expr tmp) {
+                    level_param_names new_ls;
+                    expr new_tmp;
+                    std::tie(new_tmp, new_ls) = m_p.elaborate_type(m_name, list<expr>(), tmp);
+                    levels new_meta_ls = map2<level>(new_ls, [&](name const &) { return m_ctx.mk_univ_metavar_decl(); });
+                    return instantiate_univ_params(new_tmp, new_ls, new_meta_ls);
+                });
+            });
+        });
         buffer<expr> explicit_params;
         explicit_params.append(m_params);
         m_params.clear();
         m_params.append(ctx);
         m_params.append(explicit_params);
-        new_tmp = update_parents(new_tmp, false);
-        m_type = new_tmp;
     }
 
     void throw_ill_formed_parent(name const & parent_name) {
@@ -901,59 +882,60 @@ struct structure_cmd_fn {
         }
     }
 
-    expr mk_field_binder(buffer<field_decl> const & decls, expr const & type,
-                         bool typed_defaults_only = false) {
-        expr r = type;
-        unsigned i = decls.size();
-        while (i > 0) {
-            --i;
-            field_decl const & decl = decls[i];
-            if (decl.m_default_val && (typed_defaults_only == decl.m_explicit_type)) {
-                expr type  = decl.get_type();
-                expr value = *decl.m_default_val;
-                if (decl.m_kind != field_kind::new_field) {
-                    type  = mk_as_is(type);
-                }
-                if (typed_defaults_only)
-                    r = mk_let(mk_fresh_name(), type, value, r);
-                else
-                    r = mk_let(decl.get_name(), type, value, abstract_local(r, decl.m_local));
-            } else if (!typed_defaults_only) {
-                if (decl.m_kind == field_kind::new_field) {
-                    r = Pi(decl.m_local, r);
-                } else {
-                    r = Pi_as_is(decl.m_local, r);
-                }
-            }
+    expr elaborate_field(field_decl & decl, expr const & tmp, tele_elab elab) {
+        expr new_tmp;
+        expr type  = decl.get_type();
+        if (decl.m_kind != field_kind::new_field) {
+            type  = mk_as_is(type);
         }
-        return r;
+        if (auto const & value = decl.m_default_val) {
+            new_tmp = elab(mk_let(decl.get_name(), type, *value, abstract_local(tmp, decl.m_local)));
+            decl.m_local = mk_local(decl.get_name(), let_name(new_tmp), let_type(new_tmp), {});
+            decl.m_default_val = let_value(new_tmp);
+            new_tmp = instantiate(let_body(new_tmp), decl.m_local);
+        } else {
+            new_tmp = elab(Pi(decl.get_name(), type, abstract_local(tmp, decl.m_local), local_info(decl.m_local)));
+            decl.m_local = mk_local(decl.get_name(), binding_name(new_tmp), binding_domain(new_tmp),
+                                    binding_info(new_tmp));
+            new_tmp = instantiate(binding_body(new_tmp), decl.m_local);
+        }
+        return new_tmp;
+    }
+
+    expr elaborate_typed_default_val(field_decl const & decl, expr const & tmp, tele_elab elab) {
+        if (!(decl.m_default_val && decl.has_explicit_type()))
+            return elab(tmp);
+        expr type  = decl.get_type();
+        if (decl.m_kind != field_kind::new_field) {
+            type  = mk_as_is(type);
+        }
+        expr value = *decl.m_default_val;
+        expr new_tmp = elab(mk_let(mk_fresh_name(), type, value, tmp));
+        return let_body(new_tmp);
     }
 
     /** \brief Elaborate new fields */
     void elaborate_new_fields() {
+        expr tmp = mk_Prop();
         // start with typed default values so that they can depend on any field
-        expr tmp = mk_field_binder(m_fields, mk_Prop(), true);
-        tmp = mk_field_binder(m_fields, tmp, false);
-        if (!m_subobjects) {
-            unsigned j = m_parents.size();
-            while (j > 0) {
-                --j;
-                tmp = mk_arrow(mk_as_is(m_parents[j]), tmp);
-            }
-        }
-        tmp = Pi_as_is(m_params, tmp, m_p);
-        level_param_names new_ls;
-        expr new_tmp;
-        metavar_context mctx      = m_ctx.mctx();
-        std::tie(new_tmp, new_ls) = m_p.elaborate_type(m_name, mctx, tmp);
-        m_ctx.set_mctx(mctx);
-        for (auto new_l : new_ls)
-            m_level_names.push_back(new_l);
-        new_tmp = update_locals(new_tmp, m_params);
-        if (!m_subobjects)
-            new_tmp = update_parents(new_tmp, true);
-        new_tmp = update_fields(new_tmp, m_fields);
-        new_tmp = update_default_values(new_tmp, m_fields);
+        using namespace std::placeholders;
+        expr new_tmp = elaborate_for_each<field_decl>(m_fields, tmp, std::bind(&structure_cmd_fn::elaborate_typed_default_val, this, _1, _2, _3), [&](expr tmp) {
+            return elaborate_for_each<field_decl>(m_fields, tmp, std::bind(&structure_cmd_fn::elaborate_field, this, _1, _2, _3), [&](expr tmp) {
+                return elaborate_for_each<expr>(m_parents, tmp, std::bind(&structure_cmd_fn::elaborate_parent, this, false, _1, _2, _3), [&](expr tmp) {
+                    return elaborate_for_each<expr>(m_params, tmp, std::bind(&structure_cmd_fn::elaborate_local, this, true, _1, _2, _3), [&](expr tmp) {
+                        level_param_names new_ls;
+                        expr new_tmp;
+                        metavar_context mctx = m_ctx.mctx();
+                        std::tie(new_tmp, new_ls) = m_p.elaborate_type(m_name, mctx, tmp);
+                        m_elaborated_fields = new_tmp;
+                        m_ctx.set_mctx(mctx);
+                        for (auto new_l : new_ls)
+                            m_level_names.push_back(new_l);
+                        return new_tmp;
+                    });
+                });
+            });
+        });
         lean_assert(new_tmp == mk_Prop());
     }
 
@@ -1003,10 +985,8 @@ struct structure_cmd_fn {
     void collect_ctx_locals(buffer<expr> & locals) {
         if (!m_p.has_locals())
             return;
-        expr dummy = mk_Prop();
-        expr tmp   = Pi(m_params, mk_field_binder(m_fields, dummy));
         collected_locals local_set;
-        ::lean::collect_locals(tmp, local_set);
+        ::lean::collect_locals(m_elaborated_fields, local_set);
         collect_annonymous_inst_implicit(m_p, local_set);
         sort_locals(local_set.get_collected(), m_p, locals);
     }
