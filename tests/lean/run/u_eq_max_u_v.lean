@@ -70,6 +70,7 @@ namespace ProductCategory
   notation C `×` D := ProductCategory C D
 end ProductCategory
 
+set_option old_structure_cmd true
 structure PreMonoidalCategory
   extends carrier : Category :=
   (tensor : Functor (carrier × carrier) carrier)

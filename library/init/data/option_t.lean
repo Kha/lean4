@@ -36,12 +36,12 @@ instance {m : Type u → Type v} [monad m] : monad (option_t m) :=
  pure_bind := begin
    intros,
    dsimp [option_t_bind, option_t_return],
-   dsimp [return, pure, bind], -- TODO: fix signature of `pure_bind`
+   dsimp [return, pure], -- TODO: fix signature of `pure_bind`
    rw [monad.pure_bind], apply rfl
  end,
  bind_assoc := begin
    intros,
-   dsimp [option_t_bind, option_t_return, bind],
+   dsimp [option_t_bind, option_t_return],
    rw [monad.bind_assoc],
    apply congr_arg, apply funext, intro x,
    cases x,

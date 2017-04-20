@@ -12,8 +12,7 @@ open function
 class has_bind (m : Type u → Type v) :=
 (bind : Π {α β : Type u}, m α → (α → m β) → m β)
 
-@[reducible, inline] def bind {m : Type u → Type v} [has_bind m] {α β : Type u} : m α → (α → m β) → m β :=
-has_bind.bind
+export has_bind (bind)
 
 @[inline] def has_bind.and_then {α β : Type u} {m : Type u → Type v} [has_bind m] (x : m α) (y : m β) : m β :=
 do x, y

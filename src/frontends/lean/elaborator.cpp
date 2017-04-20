@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 */
 #include <string>
+#include <utility>
 #include "util/flet.h"
 #include "util/thread.h"
 #include "kernel/find_fn.h"
@@ -2418,6 +2419,10 @@ name elaborator::field_to_decl(expr const & e, expr const & s, expr const & s_ty
         return fnames[fidx-1];
     } else {
         name fname  = get_field_notation_field_name(e);
+        // search for "true" fields first, including in parent structures
+        if (is_structure_like(m_env, const_name(I)))
+            if (auto p = find_field(m_env, const_name(I), fname))
+                return p->first + fname;
         name full_fname = const_name(I) + fname;
         if (!m_env.find(full_fname)) {
             auto pp_fn = mk_pp_ctx();
@@ -2479,9 +2484,9 @@ void elaborator::assign_field_mvar(name const & S_fname, expr const & mvar,
         auto pp_fn   = std::get<0>(pp_data);
         format msg = format("unexpected field '") + format(S_fname) + format("'");
         msg += line() + format("given field value");
-        msg += std::get<1>(pp_data);
-        msg += line() + format("expected field value");
         msg += std::get<2>(pp_data);
+        msg += line() + format("expected field value");
+        msg += std::get<1>(pp_data);
         throw elaborator_exception(ref, msg);
     }
 }
@@ -2637,7 +2642,6 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                                 if (p) {
                                     auto nested = create_field_mvars(*p).first;
                                     lean_assert(is_def_eq(c_arg, nested));
-                                    //c_arg = nested;
                                     field2value.insert(S_fname, nested);
                                     coercion2value.insert(S_fname, nested);
                                     buffer<expr> nested_args;
@@ -2718,8 +2722,8 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                             }, e);
                         }
                         expr t = e;
-                        while (is_pi(t))
-                            t = binding_body(t);
+                        //while (is_pi(t))
+                        //    t = binding_body(t);
                         // check for field dependencies in expected type
                         name_set deps;
                         expr pretty = replace(t, [&](expr const & e) {
@@ -2745,7 +2749,6 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                                 error += format("', but the value for these fields is not available.") + line() +
                                          format("Unfolded type/default value:") + line() +
                                          std::get<2>(pp_until_different(t, pretty)) +
-                                         //format((sstream() << unf).str()) +
                                          line() + line();
                             }
                             return none_expr();

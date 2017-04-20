@@ -57,13 +57,13 @@ section resultT
    end,
    pure_bind := begin
      intros,
-     dsimp [resultT.pure, resultT.and_then, return, pure, bind],
+     dsimp [resultT.pure, resultT.and_then, return, pure],
      rw [monad.pure_bind], dsimp [resultT.and_then._match_1],
      cases f x, dsimp [resultT.and_then._match_2], apply rfl,
    end,
    bind_assoc := begin
      intros,
-     cases x, dsimp [resultT.and_then, bind],
+     cases x, dsimp [resultT.and_then],
      apply congr_arg, rw [monad.bind_assoc],
      apply congr_arg, apply funext, intro,
      cases x with e a; dsimp [resultT.and_then._match_1, pure],

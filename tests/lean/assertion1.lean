@@ -22,6 +22,7 @@ end ProductCategory
 
 @[reducible] definition TensorProduct ( C: Category ) := Functor ( C × C ) C
 
+set_option old_structure_cmd true
 structure MonoidalCategory
   extends carrier : Category :=
   (tensor : TensorProduct carrier)

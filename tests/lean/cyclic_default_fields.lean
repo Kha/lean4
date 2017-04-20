@@ -3,5 +3,6 @@ class Eq (α : Type) :=
 (ne : α → α → Prop := λ a b, ¬eq a b)
 (eq := λ a b, ¬ne a b)
 
+set_option pp.all true
 #check ({eq := (=)} : Eq ℕ)
 #check ({ne := (≠)} : Eq ℕ)

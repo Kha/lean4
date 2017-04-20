@@ -29,7 +29,7 @@ rfl
 
 variables cc : color
 
-example : color_point.x (color_point.mk a b cc) = a :=
+example : {color_point . x := a, y := b, c := cc}.x = a :=
 rfl
 
 example : color_point.y (color_point.mk a b cc) = b :=
