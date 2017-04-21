@@ -1,7 +1,6 @@
 class Eq (α : Type) :=
-(eq : α → α → Prop)
+(eq : α → α → Prop := λ a b, ¬ne a b)
 (ne : α → α → Prop := λ a b, ¬eq a b)
-(eq := λ a b, ¬ne a b)
 
 set_option pp.all true
 #check ({eq := (=)} : Eq ℕ)

@@ -11,7 +11,7 @@ Author: Leonardo de Moura
 namespace lean {
 environment structure_cmd_ex(parser & p, decl_attributes const & attrs, decl_modifiers const & modifiers);
 environment class_cmd_ex(parser & p, decl_modifiers const & modifiers);
-void get_structure_fields(environment const & env, name const & S, buffer<name> & fields);
+buffer<name> get_structure_fields(environment const & env, name const & S);
 void register_structure_cmd(cmd_table & r);
 environment private_structure_cmd(parser & p);
 /** \brief Return true iff \c S is a structure created with the structure command */

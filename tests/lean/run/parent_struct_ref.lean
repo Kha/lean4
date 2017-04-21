@@ -3,7 +3,7 @@ open nat
 structure point (A B : Type) :=
 (x : A) (y : B)
 
-structure foo extends p1 : point nat nat, p2 : point bool bool renaming x→a y→b :=
+structure foo extends p1 : point nat nat, p2 : point bool bool :=
 (H1 : point.x p2 = point.y p2) (H2 : point.x p1 + point.y p1 > 10)
 
 example (s : foo) : foo.a s = foo.b s :=

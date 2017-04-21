@@ -30,7 +30,7 @@ class applicative (f : Type u → Type v) extends functor f, has_pure f :=
 (seq_right_eq : ∀ {α β : Type u} (a : f α) (b : f β), seq_right a b = const α id <$> a <*> b . control_laws_tac)
 -- applicative laws
 (pure_seq_eq_map : ∀ {α β : Type u} (g : α → β) (x : f α), pure g <*> x = g <$> x) -- . control_laws_tac)
-(map_pure : ∀ {α β : Type u} (g : α → β) (x : α), g <$> @pure f _ _ x = pure (g x))
+(map_pure : ∀ {α β : Type u} (g : α → β) (x : α), g <$> pure x = pure (g x))
 (seq_pure : ∀ {α β : Type u} (g : f (α → β)) (x : α),
   g <*> pure x = (λ g : α → β, g x) <$> g)
 (seq_assoc : ∀ {α β γ : Type u} (x : f α) (g : f (α → β)) (h : f (β → γ)),

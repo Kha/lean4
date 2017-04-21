@@ -1887,17 +1887,17 @@ expr elaborator::visit_app_core(expr fn, buffer<expr> const & args, optional<exp
     } else if (is_field_notation(fn) && amask == arg_mask::Default) {
         expr s           = visit(macro_arg(fn, 0), none_expr());
         expr s_type      = head_beta_reduce(instantiate_mvars(infer_type(s)));
-        name full_fname  = find_field_fn(fn, s, s_type);
-        expr proj        = copy_tag(fn, mk_constant(full_fname));
-        name struct_name = full_fname.get_prefix();
-        expr proj_type   = m_env.get(full_fname).get_type();
+        auto field_res   = find_field_fn(fn, s, s_type);
+        expr proj        = copy_tag(fn, mk_constant(field_res.get_full_fname()));
+        expr proj_type   = m_env.get(field_res.get_full_fname()).get_type();
         buffer<expr> new_args;
         unsigned i       = 0;
         while (is_pi(proj_type)) {
             if (is_explicit(binding_info(proj_type))) {
-                if (is_app_of(binding_domain(proj_type), struct_name)) {
+                if (is_app_of(binding_domain(proj_type), field_res.m_base_S_name)) {
                     /* found s location */
-                    new_args.push_back(copy_tag(fn, mk_as_is(s)));
+                    expr coerced_s = *mk_base_projections(m_env, field_res.m_S_name, field_res.m_base_S_name, mk_as_is(s));
+                    new_args.push_back(copy_tag(fn, std::move(coerced_s)));
                     for (; i < args.size(); i++)
                         new_args.push_back(args[i]);
                     expr new_proj = visit(proj, none_expr());
@@ -1905,7 +1905,7 @@ expr elaborator::visit_app_core(expr fn, buffer<expr> const & args, optional<exp
                 } else {
                     if (i >= args.size()) {
                         throw elaborator_exception(ref, sstream() << "invalid field notation, insufficient number of arguments for '"
-                                                   << full_fname << "'");
+                                                   << field_res.get_full_fname() << "'");
                     }
                     new_args.push_back(args[i]);
                     i++;
@@ -1913,8 +1913,9 @@ expr elaborator::visit_app_core(expr fn, buffer<expr> const & args, optional<exp
             }
             proj_type = binding_body(proj_type);
         }
-        throw elaborator_exception(ref, sstream() << "invalid field notation, function '" << full_fname << "' does not have explicit argument with type ("
-                                   << struct_name << " ...)");
+        throw elaborator_exception(ref, sstream() << "invalid field notation, function '"
+                                                  << field_res.get_full_fname() << "' does not have explicit argument with type ("
+                                   << field_res.m_base_S_name << " ...)");
     } else {
         expr new_fn = visit_function(fn, has_args, ref);
         /* Check if we should use a custom elaboration procedure for this application. */
@@ -2372,7 +2373,7 @@ expr elaborator::visit_inaccessible(expr const & e, optional<expr> const & expec
     return copy_tag(e, mk_inaccessible(m));
 }
 
-name elaborator::field_to_decl(expr const & e, expr const & s, expr const & s_type) {
+elaborator::field_resolution elaborator::field_to_decl(expr const & e, expr const & s, expr const & s_type) {
     // prefer 'unknown identifier' error when lhs is a constant of non-value type
     if (is_field_notation(e)) {
         auto lhs = macro_arg(e, 0);
@@ -2404,8 +2405,7 @@ name elaborator::field_to_decl(expr const & e, expr const & s, expr const & s_ty
                                        line() + format("has type") +
                                        pp_indent(pp_fn, s_type));
         }
-        buffer<name> fnames;
-        get_structure_fields(m_env, const_name(I), fnames);
+        auto fnames = get_structure_fields(m_env, const_name(I));
         unsigned fidx = get_field_notation_field_idx(e);
         lean_assert(fidx > 0);
         if (fidx > fnames.size()) {
@@ -2416,13 +2416,13 @@ name elaborator::field_to_decl(expr const & e, expr const & s, expr const & s_ty
                                        line() + format("which has type") +
                                        pp_indent(pp_fn, s_type));
         }
-        return fnames[fidx-1];
+        return const_name(I) + fnames[fidx-1];
     } else {
         name fname  = get_field_notation_field_name(e);
         // search for "true" fields first, including in parent structures
         if (is_structure_like(m_env, const_name(I)))
             if (auto p = find_field(m_env, const_name(I), fname))
-                return p->first + fname;
+                return {const_name(I), p->first, fname};
         name full_fname = const_name(I) + fname;
         if (!m_env.find(full_fname)) {
             auto pp_fn = mk_pp_ctx();
@@ -2437,7 +2437,7 @@ name elaborator::field_to_decl(expr const & e, expr const & s, expr const & s_ty
     }
 }
 
-name elaborator::find_field_fn(expr const & e, expr const & s, expr const & s_type) {
+elaborator::field_resolution elaborator::find_field_fn(expr const & e, expr const & s, expr const & s_type) {
     try {
         return field_to_decl(e, s, s_type);
     } catch (elaborator_exception & ex1) {
@@ -2459,10 +2459,11 @@ expr elaborator::visit_field(expr const & e, optional<expr> const & expected_typ
     lean_assert(is_field_notation(e));
     expr s      = visit(macro_arg(e, 0), none_expr());
     expr s_type = head_beta_reduce(instantiate_mvars(infer_type(s)));
-    name full_fname = find_field_fn(e, s, s_type);
-    expr proj  = copy_tag(e, mk_constant(full_fname));
-    expr new_e = copy_tag(e, mk_app(proj, copy_tag(e, mk_as_is(s))));
-    return visit(new_e, expected_type);
+    auto field_res = find_field_fn(e, s, s_type);
+    expr new_e = *mk_base_projections(m_env, field_res.m_S_name, field_res.m_base_S_name, copy_tag(e, mk_as_is(s)));
+    expr proj  = copy_tag(e, mk_constant(field_res.get_full_fname()));
+    proj = copy_tag(e, mk_app(proj, new_e));
+    return visit(proj, expected_type);
 }
 
 void elaborator::assign_field_mvar(name const & S_fname, expr const & mvar,
