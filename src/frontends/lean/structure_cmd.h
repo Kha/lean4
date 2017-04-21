@@ -16,10 +16,11 @@ void register_structure_cmd(cmd_table & r);
 environment private_structure_cmd(parser & p);
 /** \brief Return true iff \c S is a structure created with the structure command */
 bool is_structure(environment const & env, name const & S);
-optional<name> is_parent_field(environment const & env, name const & structure_name, name const & field_name);
+name deinternalize_field_name(name const & fname);
+optional<name> is_subobject_field(environment const & env, name const & structure_name, name const & field_name);
 buffer<name> get_parent_structures(environment const & env, name const & structure_name);
 name_set get_ancestor_structures(environment const & env, name const & structure_name);
-optional<pair<name, expr>> find_field(environment const & env, name const & structure_name, name const & field_name);
+optional<name> find_field(environment const & env, name const & structure_name, name const & field_name);
 optional<expr> mk_base_projections(environment const & env, name const & S_name, name const & base_S_name, expr const & e);
 
 /* Default value support */

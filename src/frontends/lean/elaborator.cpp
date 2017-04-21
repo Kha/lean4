@@ -2422,7 +2422,7 @@ elaborator::field_resolution elaborator::field_to_decl(expr const & e, expr cons
         // search for "true" fields first, including in parent structures
         if (is_structure_like(m_env, const_name(I)))
             if (auto p = find_field(m_env, const_name(I), fname))
-                return {const_name(I), p->first, fname};
+                return {const_name(I), *p, fname};
         name full_fname = const_name(I) + fname;
         if (!m_env.find(full_fname)) {
             auto pp_fn = mk_pp_ctx();
@@ -2584,7 +2584,7 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                 }
                 c_arg = mk_metavar(d, ref);
             } else {
-                name S_fname = binding_name(c_type);
+                name S_fname = deinternalize_field_name(binding_name(c_type));
                 if (is_explicit(binding_info(c_type))) {
                     unsigned j = 0;
                     for (; j < fnames.size(); j++) {
@@ -2598,8 +2598,8 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                         }
                     }
                     if (j == fnames.size()) {
-                        if (src && !is_parent_field(m_env, nested_S_name, S_fname)) {
-                            name base_S_name = find_field(m_env, src_S_name, S_fname)->first;
+                        if (src && !is_subobject_field(m_env, nested_S_name, S_fname)) {
+                            name base_S_name = *find_field(m_env, src_S_name, S_fname);
                             name new_fname = base_S_name + S_fname;
                             expr f = copy_tag(e, mk_constant(new_fname));
                             f = copy_tag(e, mk_explicit(f));
@@ -2636,7 +2636,7 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                             optional<name> p;
                             // note: S_name instead of nested_S_name
                             if (has_default_value(m_env, S_name, S_fname) || is_auto_param(d) ||
-                                (p = is_parent_field(m_env, nested_S_name, S_fname))) {
+                                (p = is_subobject_field(m_env, nested_S_name, S_fname))) {
                                 c_arg = mk_metavar(d, ref);
                                 field2mvar.insert(S_fname, c_arg);
                                 mvar2field.insert(mlocal_name(c_arg), S_fname);
@@ -2723,8 +2723,6 @@ expr elaborator::visit_structure_instance(expr const & e, optional<expr> const &
                             }, e);
                         }
                         expr t = e;
-                        //while (is_pi(t))
-                        //    t = binding_body(t);
                         // check for field dependencies in expected type
                         name_set deps;
                         expr pretty = replace(t, [&](expr const & e) {
