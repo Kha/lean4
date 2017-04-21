@@ -230,52 +230,6 @@ expr mk_field_default_value(environment const & env, name const & full_field_nam
     return mk_app(mk_explicit(mk_constant(*default_name)), args);
 }
 
-class unfold_to_projections_visitor : public replace_visitor {
-public:
-    typedef std::function<expr(expr const & proj_app)> replace_fn;
-private:
-    environment m_env;
-    type_context m_ctx;
-    name_set    m_S_names;
-    replace_fn  m_replace;
-protected:
-    bool is_forward_ref(expr const & e) {
-        if (is_local(e)) {
-            auto const & n = mlocal_name(e);
-            if (n.is_string() && m_S_names.contains(n.get_string() + 3))
-                return true;
-        } else if (is_app(e)) {
-            expr fn = get_app_fn(e);
-            if (is_constant(fn)) {
-                name n = const_name(fn);
-                if (is_projection(m_env, n))
-                    if (auto p = is_subobject_field(m_env, n.get_prefix(), n.get_string()))
-                        if (m_S_names.contains(*p) || is_forward_ref(app_arg(e)))
-                            return true;
-                if (n.is_string() && n.get_string() == std::string("mk") && m_S_names.contains(n.get_prefix()))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    expr visit_app(expr const & e) override {
-        expr e2 = replace_visitor::visit_app(e);
-        if (auto e3 = m_ctx.reduce_projection(e2))
-            return *e3;
-        else
-            return e2;
-    }
-public:
-    unfold_to_projections_visitor(const environment & env, name_set const & S_names, replace_fn const & replace):
-            m_env(env), m_ctx(env), m_S_names(S_names), m_replace(replace) {}
-};
-
-expr unfold_to_projections(const environment & env, name_set const & S_names,
-                           unfold_to_projections_visitor::replace_fn const & replace, const expr & e) {
-    return unfold_to_projections_visitor(env, S_names, replace)(e);
-}
-
 struct structure_cmd_fn {
     typedef std::vector<pair<name, name>> rename_vector;
     // field_map[i] contains the position of the \c i-th field of a parent structure into this one.

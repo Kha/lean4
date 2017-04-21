@@ -26,7 +26,4 @@ optional<expr> mk_base_projections(environment const & env, name const & S_name,
 /* Default value support */
 optional<name> has_default_value(environment const & env, name const & structure_name, name const & field_name);
 expr mk_field_default_value(environment const & env, name const & full_field_name, std::function<optional<expr>(name const &)> const & get_field_value);
-
-expr unfold_to_projections(const environment & env, name_set const & S_names,
-                           std::function<expr(expr const & proj_app)> const & replace, const expr & e);
 }

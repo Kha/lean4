@@ -49,6 +49,7 @@ success a
 exception α (λ u, f)
 end exceptional
 
+set_option trace.elaborator_detail true
 meta instance : monad exceptional :=
 {pure := @exceptional.return, bind := @exceptional.bind,
  map_const_eq := undefined, seq_left_eq := undefined, seq_right_eq := undefined,
