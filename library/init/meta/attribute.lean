@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich
 -/
 prelude
-import init.meta.tactic init.meta.rb_map init.meta.has_reflect
+import init.meta.tactic init.meta.rb_map init.meta.has_reflect init.meta.lean.parser
 
 meta constant attribute.get_instances : name → tactic (list name)
 meta constant attribute.fingerprint : name → tactic nat
@@ -31,6 +31,17 @@ meta structure caching_user_attribute (α : Type) extends user_attribute :=
 (dependencies : list _root_.name)
 
 meta constant caching_user_attribute.get_cache : Π {α : Type}, caching_user_attribute α → tactic α
+
+meta class user_attribute.parameterized (attr : user_attribute) :=
+{param_ty : Type}
+[reflect : has_reflect param_ty]
+(parser : lean.parser param_ty)
+
+meta def user_attribute.parse_reflect (attr) [user_attribute.parameterized attr] : lean.parser expr :=
+(λ a, user_attribute.parameterized.reflect attr a) <$> user_attribute.parameterized.parser attr
+
+meta constant user_attribute.get_param (attr : user_attribute) [user_attribute.parameterized attr]
+  : name → tactic (user_attribute.parameterized.param_ty attr)
 
 open tactic
 

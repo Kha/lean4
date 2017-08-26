@@ -1,0 +1,5 @@
+{"seq_num": 0, "command": "sync", "file_name": "f", "content": "variables (α : Type) (p q : α → Prop)\n\nexample (h : ∀ x : α, p x ∧ q x) : ∀ y : α, p y  :=\nλ y : α, (h y)^.l\n               --^ \"command\": \"complete\"\n\nexample (h : ∀ x : α, p x ∧ q x) : ∀ y : α, p y  :=\nλ y : α, (h y)^.le\n                --^ \"command\": \"complete\"\n\nexample (h : ∀ x : α, p x ∧ q x) : ∀ y : α, q y  :=\nλ y : α, (h y)^.r\n               --^ \"command\": \"complete\"\n\nexample (h : ∀ x : α, p x ∧ q x) : ∀ y : α, q y  :=\nλ y : α, (h y)^.\n              --^ \"command\": \"complete\""}
+{"seq_num": 5, "command": "complete", "file_name": "f", "line": 4, "column": 17}
+{"seq_num": 9, "command": "complete", "file_name": "f", "line": 8, "column": 18}
+{"seq_num": 13, "command": "complete", "file_name": "f", "line": 12, "column": 17}
+{"seq_num": 17, "command": "complete", "file_name": "f", "line": 16, "column": 16}

@@ -367,6 +367,8 @@ name const * g_unit_cases_on = nullptr;
 name const * g_unit_star = nullptr;
 name const * g_unsafe_monad_from_pure_bind = nullptr;
 name const * g_user_attribute = nullptr;
+name const * g_user_attribute_parameterized = nullptr;
+name const * g_user_attribute_parse_reflect = nullptr;
 name const * g_vm_monitor = nullptr;
 name const * g_partial_order = nullptr;
 name const * g_well_founded_fix = nullptr;
@@ -744,6 +746,8 @@ void initialize_constants() {
     g_unit_star = new name{"unit", "star"};
     g_unsafe_monad_from_pure_bind = new name{"unsafe_monad_from_pure_bind"};
     g_user_attribute = new name{"user_attribute"};
+    g_user_attribute_parameterized = new name{"user_attribute", "parameterized"};
+    g_user_attribute_parse_reflect = new name{"user_attribute", "parse_reflect"};
     g_vm_monitor = new name{"vm_monitor"};
     g_partial_order = new name{"partial_order"};
     g_well_founded_fix = new name{"well_founded", "fix"};
@@ -1122,6 +1126,8 @@ void finalize_constants() {
     delete g_unit_star;
     delete g_unsafe_monad_from_pure_bind;
     delete g_user_attribute;
+    delete g_user_attribute_parameterized;
+    delete g_user_attribute_parse_reflect;
     delete g_vm_monitor;
     delete g_partial_order;
     delete g_well_founded_fix;
@@ -1499,6 +1505,8 @@ name const & get_unit_cases_on_name() { return *g_unit_cases_on; }
 name const & get_unit_star_name() { return *g_unit_star; }
 name const & get_unsafe_monad_from_pure_bind_name() { return *g_unsafe_monad_from_pure_bind; }
 name const & get_user_attribute_name() { return *g_user_attribute; }
+name const & get_user_attribute_parameterized_name() { return *g_user_attribute_parameterized; }
+name const & get_user_attribute_parse_reflect_name() { return *g_user_attribute_parse_reflect; }
 name const & get_vm_monitor_name() { return *g_vm_monitor; }
 name const & get_partial_order_name() { return *g_partial_order; }
 name const & get_well_founded_fix_name() { return *g_well_founded_fix; }

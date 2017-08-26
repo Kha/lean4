@@ -33,3 +33,13 @@ section
   @[user_attribute]
   meta def baz_attr : user_attribute := { name := `baz, descr := x }
 end
+
+-- parameterized attributes
+
+meta instance foo_attr_p : foo_attr.parameterized := ⟨_, lean.parser.ident⟩
+
+@[foo me]
+def foo := 1
+
+#print foo
+run_cmd foo_attr.get_param `foo >>= tactic.trace
