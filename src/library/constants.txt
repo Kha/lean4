@@ -362,6 +362,8 @@ unit.cases_on
 unit.star
 unsafe_monad_from_pure_bind
 user_attribute
+user_attribute.after_set
+user_attribute.before_unset
 user_attribute.parameterized
 user_attribute.parse_reflect
 vm_monitor

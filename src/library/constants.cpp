@@ -367,6 +367,8 @@ name const * g_unit_cases_on = nullptr;
 name const * g_unit_star = nullptr;
 name const * g_unsafe_monad_from_pure_bind = nullptr;
 name const * g_user_attribute = nullptr;
+name const * g_user_attribute_after_set = nullptr;
+name const * g_user_attribute_before_unset = nullptr;
 name const * g_user_attribute_parameterized = nullptr;
 name const * g_user_attribute_parse_reflect = nullptr;
 name const * g_vm_monitor = nullptr;
@@ -746,6 +748,8 @@ void initialize_constants() {
     g_unit_star = new name{"unit", "star"};
     g_unsafe_monad_from_pure_bind = new name{"unsafe_monad_from_pure_bind"};
     g_user_attribute = new name{"user_attribute"};
+    g_user_attribute_after_set = new name{"user_attribute", "after_set"};
+    g_user_attribute_before_unset = new name{"user_attribute", "before_unset"};
     g_user_attribute_parameterized = new name{"user_attribute", "parameterized"};
     g_user_attribute_parse_reflect = new name{"user_attribute", "parse_reflect"};
     g_vm_monitor = new name{"vm_monitor"};
@@ -1126,6 +1130,8 @@ void finalize_constants() {
     delete g_unit_star;
     delete g_unsafe_monad_from_pure_bind;
     delete g_user_attribute;
+    delete g_user_attribute_after_set;
+    delete g_user_attribute_before_unset;
     delete g_user_attribute_parameterized;
     delete g_user_attribute_parse_reflect;
     delete g_vm_monitor;
@@ -1505,6 +1511,8 @@ name const & get_unit_cases_on_name() { return *g_unit_cases_on; }
 name const & get_unit_star_name() { return *g_unit_star; }
 name const & get_unsafe_monad_from_pure_bind_name() { return *g_unsafe_monad_from_pure_bind; }
 name const & get_user_attribute_name() { return *g_user_attribute; }
+name const & get_user_attribute_after_set_name() { return *g_user_attribute_after_set; }
+name const & get_user_attribute_before_unset_name() { return *g_user_attribute_before_unset; }
 name const & get_user_attribute_parameterized_name() { return *g_user_attribute_parameterized; }
 name const & get_user_attribute_parse_reflect_name() { return *g_user_attribute_parse_reflect; }
 name const & get_vm_monitor_name() { return *g_vm_monitor; }

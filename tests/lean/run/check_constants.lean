@@ -367,6 +367,8 @@ run_cmd script_check_id `unit.cases_on
 run_cmd script_check_id `unit.star
 run_cmd script_check_id `unsafe_monad_from_pure_bind
 run_cmd script_check_id `user_attribute
+run_cmd script_check_id `user_attribute.after_set
+run_cmd script_check_id `user_attribute.before_unset
 run_cmd script_check_id `user_attribute.parameterized
 run_cmd script_check_id `user_attribute.parse_reflect
 run_cmd script_check_id `vm_monitor

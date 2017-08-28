@@ -112,43 +112,49 @@ static environment add_user_attr(environment const & env, name const & d) {
     vm_obj o = vm.invoke(d, {});
     if (is_constant(get_app_fn(ty), get_caching_user_attribute_name()))
         o = cfield(o, 0);
-    name const & n = to_name(cfield(o, 0));
-    if (n.is_anonymous())
+    name const & attr_name = to_name(cfield(o, 0));
+    if (attr_name.is_anonymous())
         throw exception(sstream() << "invalid user_attribute, anonymous attribute names are not allowed");
-    if (is_attribute(env, n))
-        throw exception(sstream() << "an attribute named [" << n << "] has already been registered");
+    if (is_attribute(env, attr_name))
+        throw exception(sstream() << "an attribute named [" << attr_name << "] has already been registered");
     std::string descr = to_string(cfield(o, 1));
-    after_set_proc after_set;
-    if (!is_none(cfield(o, 2))) {
-        after_set = [=](environment const & env, io_state const & ios, name const & n, unsigned prio, bool persistent) {
-            vm_state vm(env, ios.get_options());
-            scope_vm_state scope(vm);
-            vm_obj o = vm.invoke(d, {});
-            if (is_constant(get_app_fn(ty), get_caching_user_attribute_name()))
-                o = cfield(o, 0);
-            tactic_state s = mk_tactic_state_for(env, options(), {}, local_context(), mk_true());
-            auto vm_r = vm.invoke(get_some_value(cfield(o, 2)), to_obj(n), mk_vm_nat(prio), mk_vm_bool(persistent), to_obj(s));
-            tactic::report_exception(vm, vm_r);
+    after_set_proc after_set = [=](environment const & env, io_state const & ios, name const & n, unsigned prio, bool persistent) {
+        type_context ctx(env);
+        auto class_expr = mk_app(mk_constant(get_user_attribute_after_set_name()), mk_constant(d));
+        if (auto inst = ctx.mk_class_instance(class_expr)) {
+            tactic_state s = mk_tactic_state_for(env, ios.get_options(), {}, local_context(), mk_true());
+            tactic::evaluator eval(ctx, ios.get_options());
+            buffer<vm_obj> vm_args;
+            vm_args.push_back(to_obj(attr_name));
+            vm_args.push_back(mk_vm_nat(prio));
+            vm_args.push_back(mk_vm_bool(persistent));
+            auto vm_r = eval(*inst, vm_args, s);
             return tactic::to_state(tactic::get_result_state(vm_r)).env();
-        };
-    }
-    before_unset_proc before_unset;
-    if (!is_none(cfield(o, 3))) {
-        before_unset = [=](environment const & env, io_state const & ios, name const & n, bool persistent) {
-            vm_state vm(env, ios.get_options());
-            scope_vm_state scope(vm);
-            vm_obj o = vm.invoke(d, {});
-            if (is_constant(get_app_fn(ty), get_caching_user_attribute_name()))
-                o = cfield(o, 0);
-            tactic_state s = mk_tactic_state_for(env, options(), {}, local_context(), mk_true());
-            auto vm_r = vm.invoke(get_some_value(cfield(o, 3)), to_obj(n), mk_vm_bool(persistent), to_obj(s));
-            tactic::report_exception(vm, vm_r);
+        } else {
+            return env;
+        }
+    };
+    before_unset_proc before_unset = [=](environment const & env, io_state const & ios, name const & n, bool persistent) {
+        type_context ctx(env);
+        auto class_expr = mk_app(mk_constant(get_user_attribute_before_unset_name()), mk_constant(d));
+        if (auto inst = ctx.mk_class_instance(class_expr)) {
+            if (!ctx.mk_class_instance(mk_app(mk_constant(get_user_attribute_after_set_name()), mk_constant(d)))) {
+                throw exception(sstream() << "cannot remove attribute [" << attr_name << "]");
+            }
+            tactic_state s = mk_tactic_state_for(env, ios.get_options(), {}, local_context(), mk_true());
+            tactic::evaluator eval(ctx, ios.get_options());
+            buffer<vm_obj> vm_args;
+            vm_args.push_back(to_obj(attr_name));
+            vm_args.push_back(mk_vm_bool(persistent));
+            auto vm_r = eval(*inst, vm_args, s);
             return tactic::to_state(tactic::get_result_state(vm_r)).env();
-        };
-    }
+        } else {
+            return env;
+        }
+    };
 
     user_attr_ext ext = get_extension(env);
-    ext.m_attrs.insert(n, attribute_ptr(new user_attribute(n, d, descr.c_str(), after_set, before_unset)));
+    ext.m_attrs.insert(attr_name, attribute_ptr(new user_attribute(attr_name, d, descr.c_str(), after_set, before_unset)));
     return update(env, ext);
 }
 
