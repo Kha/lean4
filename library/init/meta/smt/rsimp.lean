@@ -29,21 +29,18 @@ private meta def to_hinst_lemmas (m : transparency) (ex : name_set) : list name 
     We say `ex_attr_name` is the "exception set". It is useful for excluding lemmas in `simp_attr_name`
     which are not good or redundant for ematching. -/
 meta def mk_hinst_lemma_attr_from_simp_attr (attr_decl_name attr_name : name) (simp_attr_name : name) (ex_attr_name : name) : command :=
-do let t := `(caching_user_attribute hinst_lemmas),
-   let v := `({name     := attr_name,
-                 descr    := sformat!"hinst_lemma attribute derived from '{simp_attr_name}'",
-                 mk_cache := λ ns,
-                 let aux := simp_attr_name in
-                 let ex_attr := ex_attr_name in
-                 do {
-                   hs   ← to_hinst_lemmas reducible mk_name_set ns hinst_lemmas.mk,
-                   ss   ← attribute.get_instances aux,
-                   ex   ← get_name_set_for_attr ex_attr,
-                   to_hinst_lemmas reducible ex ss hs
-                 },
-                 dependencies := [`reducibility, simp_attr_name]} : caching_user_attribute hinst_lemmas),
-   add_decl (declaration.defn attr_decl_name [] t v reducibility_hints.abbrev ff),
-   attribute.register attr_decl_name
+mk_attribute_dyn attr_name sformat!"hinst_lemma attribute derived from '{simp_attr_name}'"
+  (some `({cache_ty := hinst_lemmas,
+           mk_cache := λ ns,
+           let aux := %%(reflect simp_attr_name) in
+           let ex_attr := %%(reflect ex_attr_name) in
+           do {
+             hs   ← to_hinst_lemmas reducible mk_name_set ns hinst_lemmas.mk,
+             ss   ← attribute.get_instances aux,
+             ex   ← get_name_set_for_attr ex_attr,
+             to_hinst_lemmas reducible ex ss hs
+           },
+           dependencies := [`reducibility, %%(reflect simp_attr_name)]} : user_attribute.caching %%(expr.const attr_name [])))
 
 run_cmd mk_name_set_attr `no_rsimp
 run_cmd mk_hinst_lemma_attr_from_simp_attr `rsimp_attr `rsimp `simp `no_rsimp

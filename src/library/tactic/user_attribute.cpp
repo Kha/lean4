@@ -105,13 +105,11 @@ vm_obj user_attribute_get_param(vm_obj const & vm_attr, vm_obj const & /* vm_ins
 
 static environment add_user_attr(environment const & env, name const & d) {
     auto const & ty = env.get(d).get_type();
-    if (!is_constant(ty, get_user_attribute_name()) && !is_constant(get_app_fn(ty), get_caching_user_attribute_name()))
-        throw exception("invalid [user_attribute], must be applied to definition of type user_attribute");
+    if (!is_constant(ty, get_user_attribute_name()))
+        throw exception("invalid [user_attribute] usage, must be applied to definition of type `user_attribute`");
 
     vm_state vm(env, options());
     vm_obj o = vm.invoke(d, {});
-    if (is_constant(get_app_fn(ty), get_caching_user_attribute_name()))
-        o = cfield(o, 0);
     name const & attr_name = to_name(cfield(o, 0));
     if (attr_name.is_anonymous())
         throw exception(sstream() << "invalid user_attribute, anonymous attribute names are not allowed");
@@ -233,11 +231,11 @@ static bool check_dep_fingerprints(environment const & env, list<name> const & d
     }
 }
 
-vm_obj caching_user_attribute_get_cache(vm_obj const &, vm_obj const & vm_attr, vm_obj const & vm_s) {
+vm_obj user_attribute_get_cache_core(vm_obj const &, vm_obj const & vm_attr, vm_obj const & vm_caching_inst, vm_obj const & vm_s) {
     tactic_state const & s       = tactic::to_state(vm_s);
-    name const & n               = to_name(cfield(cfield(vm_attr, 0), 0));
-    vm_obj const & cache_handler = cfield(vm_attr, 1);
-    list<name> const & deps      = to_list_name(cfield(vm_attr, 2));
+    name const & n               = to_name(cfield(vm_attr, 0));
+    vm_obj const & cache_handler = cfield(vm_caching_inst, 1);
+    list<name> const & deps      = to_list_name(cfield(vm_caching_inst, 2));
     LEAN_TACTIC_TRY;
     environment const & env = s.env();
     attribute const & attr  = get_attribute(env, n);
@@ -287,6 +285,17 @@ vm_obj caching_user_attribute_get_cache(vm_obj const &, vm_obj const & vm_attr, 
         return result;
     }
     LEAN_TACTIC_CATCH(s);
+}
+
+vm_obj user_attribute_get_cache(vm_state & S, tactic_state const & s, name const & attr_name) {
+    vm_obj attr   = S.get_constant(attr_name);
+    type_context ctx(s.env());
+    auto class_expr = mk_app(mk_constant(get_user_attribute_after_set_name()), mk_constant(attr_name));
+    auto inst = ctx.mk_class_instance(class_expr);
+    lean_always_assert(inst);
+    tactic::evaluator eval(ctx, s.get_options());
+    auto vm_inst = eval(*inst, s);
+    return user_attribute_get_cache_core(mk_vm_unit(), attr, vm_inst, to_obj(s));
 }
 
 vm_obj set_basic_attribute(vm_obj const & vm_attr_n, vm_obj const & vm_n, vm_obj const & p, vm_obj const & vm_prio, vm_obj const & vm_s) {
@@ -340,7 +349,7 @@ vm_obj has_attribute(vm_obj const & vm_attr_n, vm_obj const & vm_n, vm_obj const
 void initialize_user_attribute() {
     DECLARE_VM_BUILTIN(name({"attribute", "get_instances"}),            attribute_get_instances);
     DECLARE_VM_BUILTIN(name({"attribute", "fingerprint"}),              attribute_fingerprint);
-    DECLARE_VM_BUILTIN(name({"caching_user_attribute", "get_cache"}),   caching_user_attribute_get_cache);
+    DECLARE_VM_BUILTIN(name({"user_attribute", "get_cache"}),           user_attribute_get_cache_core);
     DECLARE_VM_BUILTIN(name({"user_attribute", "get_param"}),           user_attribute_get_param);
     DECLARE_VM_BUILTIN(name({"tactic",    "set_basic_attribute"}),      set_basic_attribute);
     DECLARE_VM_BUILTIN(name({"tactic",    "unset_attribute"}),          unset_attribute);
