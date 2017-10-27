@@ -6,6 +6,7 @@ Author: Leonardo de Moura
 */
 #include <string>
 #include <algorithm>
+#include <iomanip>
 #include "util/utf8.h"
 #include "kernel/type_checker.h"
 #include "library/kernel_serializer.h"
@@ -29,7 +30,7 @@ static expr * g_fin_mk               = nullptr;
 
 expr from_string_core(std::string const & s);
 
-static void display_char_literal_core(std::ostream & out, unsigned char c, bool in_string) {
+static void display_char_literal_core(std::ostream & out, unsigned c, bool in_string) {
     if (c == '\n') {
         out << "\\n";
     } else if (c == '\t') {
@@ -38,25 +39,28 @@ static void display_char_literal_core(std::ostream & out, unsigned char c, bool 
         out << "\\\"";
     } else if (!in_string && c == '\'') {
         out << "\\'";
+    } else if (c == '\\') {
+        out << "\\\\";
     } else if (32 <= c && c <= 126) {
-        out << c;
+        out << static_cast<unsigned char>(c);
     } else {
-        out << "\\x";
-        if (c < 16) out << "0";
-        out << std::hex << static_cast<unsigned>(c);
+        out << "\\u";
+        out << std::hex << std::setw(4) << std::setfill('0') << c;
     }
 }
 
-static void display_char_literal(std::ostream & out, char c) {
+static void display_char_literal(std::ostream & out, unsigned c) {
     out << "'";
     display_char_literal_core(out, c, false);
     out << "'";
 }
 
 static void display_string_literal(std::ostream & out, std::string const & s) {
+    buffer<unsigned> buf;
+    utf8_decode(s, buf);
     out << "\"";
-    for (unsigned i = 0; i < s.size(); i++) {
-        display_char_literal_core(out, s[i], true);
+    for (unsigned i = 0; i < buf.size(); i++) {
+        display_char_literal_core(out, buf[i], true);
     }
     out << "\"";
 }
@@ -67,7 +71,7 @@ format pp_string_literal(std::string const & s) {
     return format(out.str());
 }
 
-format pp_char_literal(char c) {
+format pp_char_literal(unsigned c) {
     std::ostringstream out;
     display_char_literal(out, c);
     return format(out.str());

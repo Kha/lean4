@@ -4,12 +4,14 @@
 to_string 'a' : string
 "a"
 'a'
-'\x01'
-'\x01'
-'\x14'
-'\x01' : char
-'\x14' : char
-'\x0f' : char
-'\x10' : char
-'\x0f'
-'\x10'
+'\u0001'
+'\u0001'
+'\u0010'
+'\u1000'
+'\u10ffff'
+'\u0001' : char
+'\u0014' : char
+'\u000f' : char
+'\u0010' : char
+'\u000f'
+'\u0010'

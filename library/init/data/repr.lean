@@ -74,42 +74,33 @@ if n = 0xe then 'e' else
 if n = 0xf then 'f' else
 '*'
 
-def digit_succ (base : ℕ) : list ℕ → list ℕ
-| [] := [1]
-| (d::ds) :=
-    if d+1 = base then
-        0 :: digit_succ ds
-    else
-        (d+1) :: ds
+private def to_string_aux (base : ℕ) : ℕ → ℕ → string
+| _         0 := ""
+| 0         _ := ""
+| (steps+1) n := (to_string_aux steps (n / base)).push $ digit_char (n % base)
 
-def to_digits (base : ℕ) : ℕ → list ℕ
-| 0 := [0]
-| (n+1) := digit_succ base (to_digits n)
+protected def to_string : Π (n : ℕ) (base : opt_param ℕ 10), string
+| 0 _ := "0"
+| n base := to_string_aux base n n
 
-protected def repr (n : ℕ) : string :=
-((to_digits 10 n).map digit_char).reverse.as_string
+protected def repr (n : ℕ) : string := n.to_string
 
 end nat
 
 instance : has_repr nat :=
 ⟨nat.repr⟩
 
-def hex_digit_repr (n : nat) : string :=
-string.singleton $ nat.digit_char n
-
 def char_to_hex (c : char) : string :=
-let n  := char.to_nat c,
-    d2 := n / 16,
-    d1 := n % 16
-in hex_digit_repr d2 ++ hex_digit_repr d1
+let hex := c.to_nat.to_string 16 in
+(list.repeat '0' (4 - hex.length)).as_string ++ hex
 
 def char.quote_core (c : char) : string :=
 if       c = '\n' then "\\n"
 else if  c = '\t' then "\\t"
 else if  c = '\\' then "\\\\"
 else if  c = '\"' then "\\\""
-else if  char.to_nat c <= 31 then "\\x" ++ char_to_hex c
-else string.singleton c
+else if  32 <= c.to_nat ∧ c.to_nat <= 126 then string.singleton c
+else "\\u" ++ char_to_hex c
 
 instance : has_repr char :=
 ⟨λ c, "'" ++ char.quote_core c ++ "'"⟩

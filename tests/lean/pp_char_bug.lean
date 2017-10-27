@@ -7,7 +7,9 @@
 
 #eval char.of_nat 1
 #eval char.of_nat 1
-#eval char.of_nat 20
+#eval char.of_nat 0x10
+#eval char.of_nat 0x1000
+#eval char.of_nat 0x10ffff
 
 #check char.of_nat 1
 #check char.of_nat 20

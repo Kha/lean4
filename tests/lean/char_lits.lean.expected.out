@@ -6,7 +6,7 @@ aaa\
 '\n'
 
 aaa'
-['\x7f', '\x00', '\x11', '\xff'] : list char
+['\u007f', '\u0000', '\u0011', '\u00ff'] : list char
 'α'
 'β'
 'α'
