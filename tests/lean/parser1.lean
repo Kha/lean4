@@ -89,7 +89,7 @@ universes u v
 
 def run_frontend (input : string) : except_t string io unit := do
   parser_cfg ← monad_except.lift_except $ mk_config,
-  let parser_k := parser.run parser_cfg input (λ _, module.parser),
+  let parser_k := parser.run parser_cfg input (λ _, module.parser) ff,
   let elab_k := elaborator.run {filename := "foo", initial_parser_cfg := parser_cfg},
   outs ← io.prim.iterate_eio (parser_k, elab_k, parser_cfg, ([] : list module_parser_output)) $ λ ⟨parser_k, elab_k, parser_cfg, outs⟩, match parser_k.resume parser_cfg with
     | coroutine_result_core.done p := do {

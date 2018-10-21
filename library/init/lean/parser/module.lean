@@ -40,9 +40,9 @@ end
 
 instance module_parser_m.lift_parser_t (ρ : Type) [has_lift_t module_parser_config ρ] :
   has_monad_lift (parser_t ρ id) module_parser_m :=
-{ monad_lift := λ α x st it nb_st, do
+{ monad_lift := λ α x st it e nb_st, do
     cfg ← read,
-    pure ((((x.run ↑cfg).run st) it).run nb_st) }
+    pure ((((x.run ↑cfg).run st) it e).run nb_st) }
 
 section
 local attribute [reducible] basic_parser_m
