@@ -96,11 +96,14 @@ protected def failure : parsec_t μ m α :=
 def merge (msg₁ msg₂ : pre_message μ) : pre_message μ :=
 { expected := msg₁.expected ++ msg₂.expected, ..msg₁ }
 
+@[inline] def merge_expected (msgs_enabled : bool) (ex₁ ex₂ : dlist string) : dlist string :=
+if msgs_enabled then ex₁ ++ ex₂ else ex₁
+
 @[inline_if_reduce] def bind_mk_res (msgs_enabled : bool) (ex₁ : option (dlist string)) (r : result μ β) : result μ β :=
 match ex₁, r with
 | none,     ok b it _          := ok b it none
 | none,     error it msg _     := error it msg tt
-| some ex₁, ok b it (some ex₂) := ok b it (some $ ex₁ ++ ex₂)
+| some ex₁, ok b it (some ex₂) := ok b it (some $ merge_expected msgs_enabled ex₁ ex₂)
 | some ex₁, error it msg₂ ff   := error it (mk_if msgs_enabled { expected := ex₁ ++ msg₂.expected, .. msg₂ }) ff
 | some ex₁, other              := other
 
@@ -179,7 +182,7 @@ Without the `try` combinator we will not be able to backtrack on the `let` keywo
 
 @[inline_if_reduce] def orelse_mk_res (msgs_enabled : bool) (it₁ : iterator) (msg₁ : pre_message μ) (r : result μ α) : result μ α :=
 match r with
-| ok a it' (some ex₂) := ok a it' (some (msg₁.expected ++ ex₂))
+| ok a it' (some ex₂) := ok a it' (some (merge_expected msgs_enabled msg₁.expected ex₂))
 | error _ msg₂ ff     := error it₁ (mk_if msgs_enabled (merge msg₁ msg₂)) ff
 | other               := other
 
