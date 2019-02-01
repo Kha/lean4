@@ -19,7 +19,6 @@ Author: Leonardo de Moura
 #ifdef __linux__
 #include <linux/limits.h>
 #endif
-#include <util/unit.h>
 #include "runtime/sstream.h"
 #include "library/handle.h"
 #include "library/io_state.h"
