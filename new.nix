@@ -85,5 +85,5 @@ let
   stage1 = stage "stage1" ./src/stage0;
   stage2 = stage "stage2" stage1.stdlib;
   stage3 = stage "stage3" stage2.stdlib;
-in stage3.leanBin
+in stage2.leanBin  # stage3.leanBin
 ) { stdenv = pkgs.ccacheStdenv; }
