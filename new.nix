@@ -1,4 +1,5 @@
-let drv = { stdenv, lib, runCommand, cmake, coreutils, python, gmp }:
+{ pkgs ? import <nixpkgs> {}, debug ? false }:
+pkgs.callPackage ({ stdenv, lib, runCommand, cmake, coreutils, python, gmp }:
 
 with builtins;
 let
@@ -13,12 +14,14 @@ let
       nativeBuildInputs = [ cmake python ];
       buildInputs = [ gmp ];
       enableParallelBuilding = true;
+      dontStrip = debug;
 
       preConfigure = ''
         cd src
         #cp -r --reflink=auto --no-preserve=mode ${prevStdlibExp} stage0
         ln -s ${prevStdlibExp} stage0
       '';
+      cmakeFlags = lib.optional debug [ "-DCMAKE_BUILD_TYPE=Debug" ];
       postConfigure = ''
         patchShebangs ../../bin
       '';
@@ -83,6 +86,4 @@ let
   stage2 = stage "stage2" stage1.stdlib;
   stage3 = stage "stage3" stage2.stdlib;
 in stage3.leanBin
-
-;
-in with import <nixpkgs> {}; callPackage drv { stdenv = ccacheStdenv; }
+) { stdenv = pkgs.ccacheStdenv; }
