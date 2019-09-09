@@ -18,7 +18,6 @@ namespace ExplicitRC
 
 structure VarInfo :=
 (ref        : Bool := true)  -- true if the variable may be a reference (aka pointer) at runtime
-(persistent : Bool := false) -- true if the variable is statically known to be marked a Persistent at runtime
 (consume    : Bool := false) -- true if the variable RC must be "consumed"
 
 abbrev VarMap := RBMap VarId VarInfo (fun x y => x.idx < y.idx)
@@ -52,7 +51,7 @@ match ctx.jpLiveVarMap.find j with
 
 def mustConsume (ctx : Context) (x : VarId) : Bool :=
 let info := getVarInfo ctx x;
-info.ref && !info.persistent && info.consume
+info.ref && info.consume
 
 @[inline] def addInc (x : VarId) (b : FnBody) (n := 1) : FnBody :=
 if n == 0 then b else FnBody.inc x n true b
@@ -115,7 +114,7 @@ xs.size.fold
     | Arg.irrelevant => b
     | Arg.var x =>
       let info := getVarInfo ctx x;
-      if !info.ref || info.persistent || !isFirstOcc xs i then b
+      if !info.ref || !isFirstOcc xs i then b
       else
         let numConsuptions := getNumConsumptions x xs consumeParamPred; -- number of times the argument is
         let numIncs :=
@@ -159,12 +158,10 @@ ps.foldl
   (fun b p => if !p.borrow && p.ty.isObj && !bLiveVars.contains p.x then addDec p.x b else b)
   b
 
-private def isPersistent : Expr → Bool
-| Expr.fap c xs => xs.isEmpty -- all global constants are persistent objects
-| _             => false
-
-/- We do not need to consume the projection of a variable that is not consumed -/
 private def consumeExpr (m : VarMap) : Expr → Bool
+-- global constants are cached values that do not need to be consumed
+| Expr.fap c xs => !xs.isEmpty
+-- we do not need to consume the projection of a variable that is not consumed
 | Expr.proj i x   => match m.find x with
   | some info => info.consume
   | none      => true
@@ -181,7 +178,6 @@ match v with
 private def updateVarInfo (ctx : Context) (x : VarId) (t : IRType) (v : Expr) : Context :=
 { varMap := ctx.varMap.insert x {
       ref := t.isObj && !isScalarBoxedInTaggedPtr v,
-      persistent := isPersistent v,
       consume := consumeExpr ctx.varMap v },
   .. ctx }
 
@@ -260,7 +256,7 @@ partial def visitFnBody : FnBody → Context → (FnBody × LiveVarSet)
   match x with
   | Arg.var x =>
     let info := getVarInfo ctx x;
-    if info.ref && !info.persistent && !info.consume then (addInc x b, mkLiveVarSet x) else (b, mkLiveVarSet x)
+    if info.ref && !info.consume then (addInc x b, mkLiveVarSet x) else (b, mkLiveVarSet x)
   | _         => (b, {})
 | b@(FnBody.jmp j xs), ctx =>
   let jLiveVars := getJPLiveVars ctx j;
