@@ -96,21 +96,21 @@ namespace LiveVars
 abbrev Collector := LiveVarSet → LiveVarSet
 
 @[inline] private def skip : Collector := fun s => s
-@[inline] private def collectVar (x : VarId) : Collector := fun s => s.insert x
-private def collectArg : Arg → Collector
+@[inline] def collectVar (x : VarId) : Collector := fun s => s.insert x
+def collectArg : Arg → Collector
 | Arg.var x  => collectVar x
 | irrelevant => skip
 @[specialize] private def collectArray {α : Type} (as : Array α) (f : α → Collector) : Collector :=
 fun s => as.foldl (fun s a => f a s) s
 private def collectArgs (as : Array Arg) : Collector :=
 collectArray as collectArg
-private def accumulate (s' : LiveVarSet) : Collector :=
+def accumulate (s' : LiveVarSet) : Collector :=
 fun s => s'.fold (fun s x => s.insert x) s
 private def collectJP (m : JPLiveVarMap) (j : JoinPointId) : Collector :=
 match m.find j with
 | some xs => accumulate xs
 | none    => skip -- unreachable for well-formed code
-private def bindVar (x : VarId) : Collector :=
+def bindVar (x : VarId) : Collector :=
 fun s => s.erase x
 private def bindParams (ps : Array Param) : Collector :=
 fun s => ps.foldl (fun s p => s.erase p.x) s
@@ -132,9 +132,9 @@ def collectExpr : Expr → Collector
 | Expr.isTaggedPtr x  => collectVar x
 
 partial def collectFnBody : FnBody → JPLiveVarMap → Collector
-| FnBody.vdecl x _ v b,    m => collectExpr v ∘ bindVar x ∘ collectFnBody b m
+| FnBody.vdecl x _ v b,    m => collectExpr v ∘ collectFnBody b m ∘ bindVar x
 | FnBody.jdecl j ys v b,   m =>
-  let jLiveVars := (bindParams ys ∘ collectFnBody v m) {};
+  let jLiveVars := (collectFnBody v m ∘ bindParams ys) {};
   let m         := m.insert j jLiveVars;
   collectFnBody b m
 | FnBody.set x _ y b,      m => collectVar x ∘ collectArg y ∘ collectFnBody b m
@@ -151,7 +151,7 @@ partial def collectFnBody : FnBody → JPLiveVarMap → Collector
 | FnBody.jmp j xs,         m => collectJP m j ∘ collectArgs xs
 
 def updateJPLiveVarMap (j : JoinPointId) (ys : Array Param) (v : FnBody) (m : JPLiveVarMap) : JPLiveVarMap :=
-let jLiveVars := (bindParams ys ∘ collectFnBody v m) {};
+let jLiveVars := (collectFnBody v m ∘ bindParams ys) {};
 m.insert j jLiveVars
 
 end LiveVars
@@ -163,6 +163,95 @@ def collectLiveVars (b : FnBody) (m : JPLiveVarMap) (v : LiveVarSet := {}) : Liv
 LiveVars.collectFnBody b m v
 
 export LiveVars (updateJPLiveVarMap)
+
+namespace AnnotateKill
+open LiveVars
+
+def annotateDiff (before now : LiveVarSet) (b : FnBody) : FnBody :=
+before.fold (fun b x => if now.contains x then b else FnBody.mdata (MData.empty.setNat `kill x.idx) b) b
+
+partial def visitFnBody : FnBody → JPLiveVarMap → FnBody × LiveVarSet
+| FnBody.vdecl x t v b, m =>
+  let (b, bLiveVars) := visitFnBody b m;
+  let vLiveVars := LiveVars.collectExpr v ∅;
+  let b := annotateDiff vLiveVars bLiveVars b;
+  (FnBody.vdecl x t v b, bindVar x (accumulate bLiveVars vLiveVars))
+-- jdecls do not kill any variables in the main body, but some jp params may be dead on arrival
+| FnBody.jdecl j xs v b, m =>
+  let (v, vLiveVars) := visitFnBody v m;
+  let v := annotateDiff (xs.foldl (fun s p => s.insert p.x) ∅) vLiveVars v;
+  let m := updateJPLiveVarMap j xs v m;
+  let (b, bLiveVars) := visitFnBody b m;
+  (FnBody.jdecl j xs v b, bLiveVars)
+| FnBody.set x i y b, m =>
+  let (b, s) := visitFnBody b m;
+  let b := annotateDiff ((collectVar x ∘ collectArg y) ∅) s b;
+  let s := s.insert x;
+  (FnBody.set x i y b, s)
+| FnBody.uset x i y b, m =>
+  let (b, s) := visitFnBody b m;
+  let b := annotateDiff (RBTree.ofList [x]) s b;
+  let s := s.insert x;
+  (FnBody.uset x i y b, s)
+| FnBody.sset x i o y t b, m =>
+  let (b, s) := visitFnBody b m;
+  let b := annotateDiff (RBTree.ofList [x]) s b;
+  let s := s.insert x;
+  (FnBody.sset x i o y t b, s)
+| FnBody.setTag x i b, m =>
+  let (b, s) := visitFnBody b m;
+  let b := annotateDiff (RBTree.ofList [x]) s b;
+  let s := s.insert x;
+  (FnBody.setTag x i b, s)
+| FnBody.inc x n c p b, m =>
+  let (b, s) := visitFnBody b m;
+  let b := annotateDiff (RBTree.ofList [x]) s b;
+  let s := s.insert x;
+  (FnBody.inc x n c p b, s)
+| FnBody.dec x n c p b, m =>
+  let (b, s) := visitFnBody b m;
+  let b := annotateDiff (RBTree.ofList [x]) s b;
+  let s := s.insert x;
+  (FnBody.dec x n c p b, s)
+| FnBody.del x b, m =>
+  let (b, s) := visitFnBody b m;
+  let b := annotateDiff (RBTree.ofList [x]) s b;
+  let s := s.insert x;
+  (FnBody.del x b, s)
+| FnBody.mdata d b, m =>
+  let (b, s) := visitFnBody b m;
+  (FnBody.mdata d b, s)
+| b@(FnBody.case tid x xType alts), m =>
+  let alts := alts.map $ fun alt => match alt with
+    | Alt.ctor c b  =>
+      let (b, s) := visitFnBody b m;
+      (Alt.ctor c b, s)
+    | Alt.default b =>
+      let (b, s) := visitFnBody b m;
+      (Alt.default b, s);
+  let caseLiveVars := alts.foldl (fun s alt => accumulate s alt.2) ∅;
+  let alts := alts.map $ fun alt => match alt with
+    | (Alt.ctor c b, s)  =>
+      let b := annotateDiff caseLiveVars s b;
+      Alt.ctor c b
+    | (Alt.default b, s) =>
+      let b := annotateDiff caseLiveVars s b;
+      Alt.default b;
+  (FnBody.case tid x xType alts, caseLiveVars)
+-- killing the returned variable is implicit since there is nothing to annotate after `ret`
+| b@(FnBody.ret x), m => (b, collectArg x ∅)
+| b@(FnBody.jmp j xs), m =>
+  let jLiveVars := (m.find j).getOrElse ∅;
+  (b, jLiveVars)
+| FnBody.unreachable, _ => (FnBody.unreachable, {})
+
+end AnnotateKill
+
+partial def annotateKill : Decl → Decl
+| Decl.fdecl f xs t b   =>
+  let (b, bLiveVars) := AnnotateKill.visitFnBody b ∅;
+  Decl.fdecl f xs t b
+| other => other
 
 end IR
 end Lean
