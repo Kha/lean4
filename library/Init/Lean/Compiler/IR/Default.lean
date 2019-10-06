@@ -19,6 +19,7 @@ import Init.Lean.Compiler.IR.RC
 import Init.Lean.Compiler.IR.ExpandResetReuse
 import Init.Lean.Compiler.IR.UnboxResult
 import Init.Lean.Compiler.IR.EmitC
+import Init.Lean.Compiler.IR.SlotAlloc
 
 namespace Lean
 namespace IR

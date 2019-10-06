@@ -179,6 +179,16 @@ format format_fn_body_head(fn_body const & b) {
     return format(lean_ir_format_fn_body_head(b.to_obj_arg()));
 }
 
+extern "C" object * lean_ir_allocate_slots(object * b);
+pair_ref<decl, nat> allocate_slots(decl const & d) {
+    return pair_ref<fn_body, nat>(lean_ir_allocate_slots(d.to_obj_arg()));
+}
+
+extern "C" object * lean_ir_decl_max_index(object * b);
+nat decl_max_index(decl const & d) {
+    return nat(lean_ir_decl_max_index(d.to_obj_arg()));
+}
+
 static bool type_is_scalar(type t) {
     return t != type::Object && t != type::TObject && t != type::Irrelevant;
 }
@@ -642,6 +652,13 @@ class interpreter {
             } else if (void *p = lookup_symbol_in_cur_exe(mangled.data())) {
                 // if there is no boxed version, there are no unboxed parameters, so use default version
                 e_new.m_addr = p;
+            } else {
+                pair_ref<decl, nat> alloc = allocate_slots(e_new.m_decl);
+                DEBUG_CODE(lean_trace("interpreter",
+                                      tout() << "allocating slots for " << fn << ": "
+                                             << decl_max_index(e_new.m_decl).get_small_value() << " ~> "
+                                             << alloc.snd().get_small_value() << "\n";);)
+                e_new.m_decl = alloc.fst();
             }
             m_symbol_cache.insert(fn, e_new);
             return e_new;

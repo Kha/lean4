@@ -98,7 +98,7 @@ uint8_t l_Lean_IR_FnBody_hasFreeVar(lean_object*, lean_object*);
 lean_object* l___private_Init_Lean_Compiler_IR_FreeVars_23__collectArray___rarg___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l___private_Init_Lean_Compiler_IR_FreeVars_7__collectArray___at___private_Init_Lean_Compiler_IR_FreeVars_12__collectAlts___spec__1___boxed(lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_IR_HasIndex_visitExpr___boxed(lean_object*, lean_object*);
-lean_object* l_Lean_IR_Decl_maxIndex(lean_object*);
+lean_object* lean_ir_decl_max_index(lean_object*);
 lean_object* l___private_Init_Lean_Compiler_IR_FreeVars_23__collectArray___at___private_Init_Lean_Compiler_IR_FreeVars_24__collectArgs___spec__1___boxed(lean_object*, lean_object*, lean_object*);
 lean_object* l___private_Init_Lean_Compiler_IR_FreeVars_7__collectArray___at___private_Init_Lean_Compiler_IR_FreeVars_8__collectArgs___spec__1(lean_object*, lean_object*);
 lean_object* l___private_Init_Lean_Compiler_IR_FreeVars_8__collectArgs___boxed(lean_object*, lean_object*);
@@ -1175,7 +1175,7 @@ x_3 = l_Lean_IR_MaxIndex_collectFnBody___main(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_IR_Decl_maxIndex(lean_object* x_1) {
+lean_object* lean_ir_decl_max_index(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; 

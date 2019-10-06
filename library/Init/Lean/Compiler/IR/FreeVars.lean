@@ -82,6 +82,7 @@ end MaxIndex
 def FnBody.maxIndex (b : FnBody) : Index :=
 MaxIndex.collectFnBody b 0
 
+@[export lean_ir_decl_max_index]
 def Decl.maxIndex (d : Decl) : Index :=
 MaxIndex.collectDecl d 0
 

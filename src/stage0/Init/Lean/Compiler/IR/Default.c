@@ -1,6 +1,6 @@
 // Lean compiler output
 // Module: Init.Lean.Compiler.IR.Default
-// Imports: Init.Lean.Compiler.IR.Basic Init.Lean.Compiler.IR.Format Init.Lean.Compiler.IR.CompilerM Init.Lean.Compiler.IR.PushProj Init.Lean.Compiler.IR.ElimDead Init.Lean.Compiler.IR.SimpCase Init.Lean.Compiler.IR.ResetReuse Init.Lean.Compiler.IR.NormIds Init.Lean.Compiler.IR.Checker Init.Lean.Compiler.IR.Borrow Init.Lean.Compiler.IR.Boxing Init.Lean.Compiler.IR.RC Init.Lean.Compiler.IR.ExpandResetReuse Init.Lean.Compiler.IR.UnboxResult Init.Lean.Compiler.IR.EmitC
+// Imports: Init.Lean.Compiler.IR.Basic Init.Lean.Compiler.IR.Format Init.Lean.Compiler.IR.CompilerM Init.Lean.Compiler.IR.PushProj Init.Lean.Compiler.IR.ElimDead Init.Lean.Compiler.IR.SimpCase Init.Lean.Compiler.IR.ResetReuse Init.Lean.Compiler.IR.NormIds Init.Lean.Compiler.IR.Checker Init.Lean.Compiler.IR.Borrow Init.Lean.Compiler.IR.Boxing Init.Lean.Compiler.IR.RC Init.Lean.Compiler.IR.ExpandResetReuse Init.Lean.Compiler.IR.UnboxResult Init.Lean.Compiler.IR.EmitC Init.Lean.Compiler.IR.SlotAlloc
 #include "runtime/lean.h"
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wunused-parameter"
@@ -8662,6 +8662,7 @@ lean_object* initialize_Init_Lean_Compiler_IR_RC(lean_object*);
 lean_object* initialize_Init_Lean_Compiler_IR_ExpandResetReuse(lean_object*);
 lean_object* initialize_Init_Lean_Compiler_IR_UnboxResult(lean_object*);
 lean_object* initialize_Init_Lean_Compiler_IR_EmitC(lean_object*);
+lean_object* initialize_Init_Lean_Compiler_IR_SlotAlloc(lean_object*);
 static bool _G_initialized = false;
 lean_object* initialize_Init_Lean_Compiler_IR_Default(lean_object* w) {
 if (_G_initialized) return w;
@@ -8696,6 +8697,8 @@ if (lean_io_result_is_error(w)) return w;
 w = initialize_Init_Lean_Compiler_IR_UnboxResult(w);
 if (lean_io_result_is_error(w)) return w;
 w = initialize_Init_Lean_Compiler_IR_EmitC(w);
+if (lean_io_result_is_error(w)) return w;
+w = initialize_Init_Lean_Compiler_IR_SlotAlloc(w);
 if (lean_io_result_is_error(w)) return w;
 l___private_Init_Lean_Compiler_IR_Default_1__compileAux___closed__1 = _init_l___private_Init_Lean_Compiler_IR_Default_1__compileAux___closed__1();
 lean_mark_persistent(l___private_Init_Lean_Compiler_IR_Default_1__compileAux___closed__1);

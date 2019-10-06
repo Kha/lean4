@@ -185,19 +185,19 @@ partial def visitFnBody : FnBody → JPLiveVarMap → FnBody × LiveVarSet
   (FnBody.jdecl j xs v b, bLiveVars)
 | FnBody.set x i y b, m =>
   let (b, s) := visitFnBody b m;
-  let b := annotateDiff ((collectVar x ∘ collectArg y) ∅) s b;
-  let s := s.insert x;
-  (FnBody.set x i y b, s)
+  let c := collectVar x ∘ collectArg y;
+  let b := annotateDiff (c ∅) s b;
+  (FnBody.set x i y b, c s)
 | FnBody.uset x i y b, m =>
   let (b, s) := visitFnBody b m;
-  let b := annotateDiff (RBTree.ofList [x]) s b;
-  let s := s.insert x;
-  (FnBody.uset x i y b, s)
+  let c := collectVar x ∘ collectVar y;
+  let b := annotateDiff (c ∅) s b;
+  (FnBody.uset x i y b, c s)
 | FnBody.sset x i o y t b, m =>
   let (b, s) := visitFnBody b m;
-  let b := annotateDiff (RBTree.ofList [x]) s b;
-  let s := s.insert x;
-  (FnBody.sset x i o y t b, s)
+  let c := collectVar x ∘ collectVar y;
+  let b := annotateDiff (c ∅) s b;
+  (FnBody.sset x i o y t b, c s)
 | FnBody.setTag x i b, m =>
   let (b, s) := visitFnBody b m;
   let b := annotateDiff (RBTree.ofList [x]) s b;
@@ -241,7 +241,7 @@ partial def visitFnBody : FnBody → JPLiveVarMap → FnBody × LiveVarSet
 -- killing the returned variable is implicit since there is nothing to annotate after `ret`
 | b@(FnBody.ret x), m => (b, collectArg x ∅)
 | b@(FnBody.jmp j xs), m =>
-  let jLiveVars := (m.find j).getOrElse ∅;
+  let jLiveVars := (m.find j).getD ∅;
   (b, jLiveVars)
 | FnBody.unreachable, _ => (FnBody.unreachable, {})
 
