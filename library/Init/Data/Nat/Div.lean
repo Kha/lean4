@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import private Init.WF
-import private Init.Data.Nat.Basic
+import Init.WF
+import Init.Data.Nat.Basic
 namespace Nat
 
 private def divRecLemma {x y : Nat} : 0 < y ∧ y ≤ x → x - y < x :=

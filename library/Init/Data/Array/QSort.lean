@@ -4,6 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
+import private Init.Core
+import private Init.Coe
+import private Init.Data.Nat
 import private Init.Data.Array.Basic
 
 namespace Array

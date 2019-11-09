@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
-import private Init.Data.String.Basic
+import Init.Data.String.Basic
 import private Init.Coe
 import private Init.Data.UInt
+import private Init.Data.Repr
 import private Init.Data.ToString
 import private Init.Data.Hashable
 import private Init.Data.RBMap

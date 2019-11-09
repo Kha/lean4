@@ -6,7 +6,7 @@ Authors: Jeremy Avigad, Leonardo de Moura
 The integers, with addition, multiplication, and subtraction.
 -/
 prelude
-import private Init.Data.Nat.Basic
+import private Init.Data.Nat.Div
 import private Init.Data.List
 import private Init.Coe
 import private Init.Data.Repr

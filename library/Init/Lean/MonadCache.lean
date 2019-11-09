@@ -5,7 +5,10 @@ Authors: Leonardo de Moura
 -/
 prelude
 import private Init.Control.Reader
+import private Init.Control.Except
 import private Init.Control.EState
+import private Init.Control.State
+import private Init.Data.Option
 import private Init.Data.HashMap
 
 namespace Lean

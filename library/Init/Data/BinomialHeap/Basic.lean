@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
+import private Init.Data.Nat
 import private Init.Data.List
 import private Init.Coe
 universes u

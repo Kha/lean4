@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import private Init.Data.String.Basic
+import Init.Data.String.Basic
+import Init.Data.Repr -- TODO: inlining
 import private Init.Data.ToString
 
 universes u v

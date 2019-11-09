@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
+import private Init.Core
+import private Init.Coe
 import private Init.System.IO
+import private Init.Data.Nat
 import private Init.Data.Int
+import private Init.Data.Repr
 universes u
 
 /-
@@ -35,7 +39,7 @@ structure StdGen :=
 def stdRange := (1, 2147483562)
 
 instance : HasRepr StdGen :=
-{ repr := fun ⟨s1, s2⟩ => "⟨" ++ toString s1 ++ ", " ++ toString s2 ++ "⟩" }
+{ repr := fun ⟨s1, s2⟩ => "⟨" ++ repr s1 ++ ", " ++ repr s2 ++ "⟩" }
 
 def stdNext : StdGen → Nat × StdGen
 | ⟨s1, s2⟩ =>

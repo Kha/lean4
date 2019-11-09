@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
+import private Init.Coe
+import private Init.Control.Monad
 import private Init.Data.Repr
 import private Init.Data.Option.Basic
+import private Init.Data.String.Basic
 
 universes u v w w'
 

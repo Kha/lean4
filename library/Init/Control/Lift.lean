@@ -10,7 +10,7 @@ Please see https://hackage.haskell.org/package/layers-0.1/docs/Documentation-Lay
 -/
 prelude
 import private Init.Coe
-import private Init.Control.Monad
+import Init.Control.Monad
 
 universes u v w
 

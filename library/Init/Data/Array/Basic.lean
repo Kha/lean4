@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import private Init.Data.Nat.Basic
-import private Init.Data.Fin.Basic
-import private Init.Data.UInt
+import private Init.Coe
+import Init.Data.Fin
+import Init.Data.Nat
 import private Init.Data.Repr
 import private Init.Data.ToString
-import private Init.Control.Id
+import Init.Control.Id -- inlining
 import private Init.Util
 universes u v w
 

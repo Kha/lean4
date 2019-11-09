@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
+import private Init.Coe
+import Init.Control.Monad
 import private Init.Control.State
 import private Init.Control.Except
+import private Init.Data.Repr
+import private Init.Data.ToString
 universes u v
 
 namespace EStateM

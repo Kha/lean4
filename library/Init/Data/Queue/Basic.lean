@@ -9,6 +9,7 @@ Note: this is only a temporary placeholder.
 prelude
 import private Init.Data.Array
 import private Init.Data.Int
+import private Init.Data.List
 universes u v w
 
 structure Queue (α : Type u) :=

@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Luke Nelson, Jared Roesch, Leonardo de Moura, Sebastian Ullrich
 -/
 prelude
-import private Init.Control.EState
-import private Init.Data.String.Basic
+import private Init.Coe
+import Init.Control.Lift
+import Init.Control.Except
+import Init.Control.EState -- TODO: inlining
+import private Init.Data.Repr
+import private Init.Data.ToString
 import private Init.System.FilePath
 
 /-- Like https://hackage.haskell.org/package/ghc-Prim-0.5.2.0/docs/GHC-Prim.html#t:RealWorld.

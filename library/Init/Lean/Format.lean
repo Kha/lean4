@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
-import private Init.Lean.Options
+import private Init.Coe
 import private Init.Data.Array
+import private Init.Data.ToString
+import private Init.Lean.Options
+import private Init.System.IO
 universes u v
 
 namespace Lean

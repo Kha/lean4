@@ -4,8 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
+import private Init.Coe
+import private Init.Control.Id -- TODO: inlining
 import private Init.Data.Array
+import private Init.Data.Option
+import private Init.Data.UInt
 import private Init.Data.Hashable
+import private Init.Data.ToString
+import private Init.Util
 universes u v w w'
 
 namespace PersistentHashMap

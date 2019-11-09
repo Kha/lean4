@@ -7,7 +7,7 @@ The Reader monad transformer for passing immutable State.
 -/
 
 prelude
-import private Init.Control.Lift
+import Init.Control.Lift
 import private Init.Control.Id
 import private Init.Control.Alternative
 import private Init.Control.Except

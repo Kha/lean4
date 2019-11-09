@@ -4,6 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Gabriel Ebner
 -/
 prelude
-import private Init.Data.Array.Basic
-import private Init.Data.Array.QSort
-import private Init.Data.Array.BinSearch
+import Init.Data.Array.Basic
+import Init.Data.Array.QSort
+import Init.Data.Array.BinSearch

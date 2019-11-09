@@ -4,6 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
+import private Init.Core
+import private Init.Control.Id
+import private Init.Data.Array -- TODO: inlining
+import private Init.Data.AssocList -- TODO: inlining
 import private Init.Data.HashMap
 
 universes u v

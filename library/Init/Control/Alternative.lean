@@ -5,7 +5,7 @@ Author: Leonardo de Moura
 -/
 prelude
 import Init.Core
-import private Init.Control.Applicative
+import Init.Control.Applicative
 universes u v
 
 class Alternative (f : Type u → Type v) extends Applicative f : Type (max (u+1) v) :=

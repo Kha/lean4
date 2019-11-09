@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
-import private Init.Data.UInt
+import Init.Data.UInt
 @[inline, reducible] def isValidChar (n : UInt32) : Prop :=
 n < 0xd800 ∨ (0xdfff < n ∧ n < 0x110000)
 
@@ -36,6 +36,7 @@ instance : HasLessEq Char := ⟨Char.LessEq⟩
 
 protected def lt (a b : Char) : Bool := a.val < b.val
 
+set_option pp.all true
 instance decLt (a b : Char) :  Decidable (a < b) :=
 UInt32.decLt _ _
 

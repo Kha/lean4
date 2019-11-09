@@ -4,8 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
+import private Init.Coe
 import private Init.Control.Conditional
+import private Init.Control.Id
 import private Init.Data.Array
+import private Init.Data.List
+import private Init.Data.UInt
+import private Init.Data.Option
+import private Init.Data.ToString
+import private Init.Util -- TODO: inlining
 universes u v w
 
 inductive PersistentArrayNode (α : Type u)

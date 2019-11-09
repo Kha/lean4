@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich and Leonardo de Moura
 -/
 prelude
+import private Init.Coe
 import private Init.System.IO
+import private Init.Data.Int
+import private Init.Data.RBMap -- TODO: inling
 import private Init.Data.ToString
-import private Init.Lean.KVMap
+import Init.Lean.Name
+import Init.Lean.KVMap
 
 namespace Lean
 

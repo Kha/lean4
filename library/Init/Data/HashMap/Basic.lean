@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
+import private Init.Coe
+import private Init.Control.Id
 import private Init.Data.Array.Basic
 import private Init.Data.AssocList
+import private Init.Data.UInt
 import private Init.Data.Option.Basic
-import private Init.Data.Hashable
+import Init.Data.Hashable
+import private Init.Util
 universes u v w
 
 def HashMapBucket (α : Type u) (β : Type v) :=

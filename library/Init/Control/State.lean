@@ -8,7 +8,7 @@ The State monad transformer.
 prelude
 import private Init.Control.Alternative
 import private Init.Control.Lift
-import private Init.Control.Id
+import Init.Control.Id
 import private Init.Control.Except
 universes u v w
 

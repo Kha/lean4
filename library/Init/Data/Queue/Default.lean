@@ -4,4 +4,4 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Daniel Selsam
 -/
 prelude
-import private Init.Data.Queue.Basic
+import Init.Data.Queue.Basic
