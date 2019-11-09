@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Lean.Compiler.InlineAttrs
-import Init.Lean.Compiler.Specialize
-import Init.Lean.Compiler.ConstFolding
-import Init.Lean.Compiler.ClosedTermCache
-import Init.Lean.Compiler.ExternAttr
-import Init.Lean.Compiler.ImplementedByAttr
-import Init.Lean.Compiler.NeverExtractAttr
-import Init.Lean.Compiler.IR
+import private Init.Lean.Compiler.InlineAttrs
+import private Init.Lean.Compiler.Specialize
+import private Init.Lean.Compiler.ConstFolding
+import private Init.Lean.Compiler.ClosedTermCache
+import private Init.Lean.Compiler.ExternAttr
+import private Init.Lean.Compiler.ImplementedByAttr
+import private Init.Lean.Compiler.NeverExtractAttr
+import private Init.Lean.Compiler.IR

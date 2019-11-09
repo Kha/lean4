@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Data.List.Basic
-import Init.Data.List.BasicAux
-import Init.Data.List.Instances
-import Init.Data.List.Control
+import private Init.Data.List.Basic
+import private Init.Data.List.BasicAux
+import private Init.Data.List.Instances
+import private Init.Data.List.Control

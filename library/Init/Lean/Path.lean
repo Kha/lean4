@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.System.IO
-import Init.System.FilePath
-import Init.Data.Array
-import Init.Data.List.Control
-import Init.Lean.Name
+import private Init.System.IO
+import private Init.System.FilePath
+import private Init.Data.Array
+import private Init.Data.List.Control
+import private Init.Lean.Name
 
 namespace Lean
 open System.FilePath (pathSeparator splitSearchPath extSeparator)

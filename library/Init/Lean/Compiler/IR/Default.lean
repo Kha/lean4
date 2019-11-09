@@ -4,22 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Lean.Compiler.IR.Basic
-import Init.Lean.Compiler.IR.Format
-import Init.Lean.Compiler.IR.CompilerM
-import Init.Lean.Compiler.IR.PushProj
-import Init.Lean.Compiler.IR.ElimDeadVars
-import Init.Lean.Compiler.IR.SimpCase
-import Init.Lean.Compiler.IR.ResetReuse
-import Init.Lean.Compiler.IR.NormIds
-import Init.Lean.Compiler.IR.Checker
-import Init.Lean.Compiler.IR.Borrow
-import Init.Lean.Compiler.IR.Boxing
-import Init.Lean.Compiler.IR.RC
-import Init.Lean.Compiler.IR.ExpandResetReuse
-import Init.Lean.Compiler.IR.UnboxResult
-import Init.Lean.Compiler.IR.ElimDeadBranches
-import Init.Lean.Compiler.IR.EmitC
+import private Init.Lean.Compiler.IR.Basic
+import private Init.Lean.Compiler.IR.Format
+import private Init.Lean.Compiler.IR.CompilerM
+import private Init.Lean.Compiler.IR.PushProj
+import private Init.Lean.Compiler.IR.ElimDeadVars
+import private Init.Lean.Compiler.IR.SimpCase
+import private Init.Lean.Compiler.IR.ResetReuse
+import private Init.Lean.Compiler.IR.NormIds
+import private Init.Lean.Compiler.IR.Checker
+import private Init.Lean.Compiler.IR.Borrow
+import private Init.Lean.Compiler.IR.Boxing
+import private Init.Lean.Compiler.IR.RC
+import private Init.Lean.Compiler.IR.ExpandResetReuse
+import private Init.Lean.Compiler.IR.UnboxResult
+import private Init.Lean.Compiler.IR.ElimDeadBranches
+import private Init.Lean.Compiler.IR.EmitC
 
 namespace Lean
 namespace IR

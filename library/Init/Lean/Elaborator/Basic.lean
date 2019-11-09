@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura, Sebastian Ullrich
 -/
 prelude
-import Init.Control.Reader
-import Init.Lean.MetavarContext
-import Init.Lean.NameGenerator
-import Init.Lean.Scopes
-import Init.Lean.Parser.Module
+import private Init.Control.Reader
+import private Init.Lean.MetavarContext
+import private Init.Lean.NameGenerator
+import private Init.Lean.Scopes
+import private Init.Lean.Parser.Module
 
 namespace Lean
 

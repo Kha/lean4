@@ -4,13 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Control.Reader
-import Init.Lean.NameGenerator
-import Init.Lean.Environment
-import Init.Lean.Trace
-import Init.Lean.AuxRecursor
-import Init.Lean.WHNF
-import Init.Lean.ReducibilityAttrs
+import private Init.Control.Reader
+import private Init.Lean.NameGenerator
+import private Init.Lean.Environment
+import private Init.Lean.Trace
+import private Init.Lean.AuxRecursor
+import private Init.Lean.WHNF
+import private Init.Lean.ReducibilityAttrs
 
 /-
 This module provides four (mutually dependent) goodies that are needed for building the elaborator and tactic frameworks.

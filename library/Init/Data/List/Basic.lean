@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
-import Init.Core
-import Init.Data.Nat.Basic
+import private Init.Core
+import private Init.Data.Nat.Basic
 open Decidable List
 
 universes u v w

@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Lean.Environment
-import Init.Lean.Attributes
+import private Init.Lean.Environment
+import private Init.Lean.Attributes
 
 namespace Lean
 

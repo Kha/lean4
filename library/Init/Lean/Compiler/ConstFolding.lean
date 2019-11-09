@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.System.Platform
-import Init.Lean.Expr
-import Init.Lean.Compiler.Util
+import private Init.System.Platform
+import private Init.Lean.Expr
+import private Init.Lean.Compiler.Util
 
 /- Constant folding for primitives that have special runtime support. -/
 

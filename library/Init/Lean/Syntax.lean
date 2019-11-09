@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Sebastian Ullrich, Leonardo de Moura
 -/
 prelude
-import Init.Lean.Name
-import Init.Lean.Format
-import Init.Data.Array
+import private Init.Lean.Name
+import private Init.Lean.Format
+import private Init.Data.Array
 
 namespace Lean
 structure SourceInfo :=

@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Data.Nat
-import Init.Data.Option
-import Init.Control.Reader
-import Init.Lean.LocalContext
-import Init.Lean.MonadCache
-import Init.Lean.NameGenerator
+import private Init.Data.Nat
+import private Init.Data.Option
+import private Init.Control.Reader
+import private Init.Lean.LocalContext
+import private Init.Lean.MonadCache
+import private Init.Lean.NameGenerator
 
 namespace Lean
 

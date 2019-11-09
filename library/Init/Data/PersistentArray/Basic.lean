@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Control.Conditional
-import Init.Data.Array
+import private Init.Control.Conditional
+import private Init.Data.Array
 universes u v w
 
 inductive PersistentArrayNode (α : Type u)

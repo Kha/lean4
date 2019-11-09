@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.System.Platform
-import Init.Data.String.Basic
+import private Init.System.Platform
+import private Init.Data.String.Basic
 
 namespace System
 namespace FilePath

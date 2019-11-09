@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Control.Reader
-import Init.Data.Option
-import Init.Data.Nat
-import Init.Lean.Compiler.IR.Format
-import Init.Lean.Compiler.IR.Basic
-import Init.Lean.Compiler.IR.CompilerM
+import private Init.Control.Reader
+import private Init.Data.Option
+import private Init.Data.Nat
+import private Init.Lean.Compiler.IR.Format
+import private Init.Lean.Compiler.IR.Basic
+import private Init.Lean.Compiler.IR.CompilerM
 
 namespace Lean
 namespace IR

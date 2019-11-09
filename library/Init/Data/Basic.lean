@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Data.Nat.Basic
-import Init.Data.Fin.Basic
-import Init.Data.List.Basic
-import Init.Data.Char.Basic
-import Init.Data.String.Basic
-import Init.Data.Option.Basic
-import Init.Data.UInt
-import Init.Data.Repr
-import Init.Data.ToString
+import private Init.Data.Nat.Basic
+import private Init.Data.Fin.Basic
+import private Init.Data.List.Basic
+import private Init.Data.Char.Basic
+import private Init.Data.String.Basic
+import private Init.Data.Option.Basic
+import private Init.Data.UInt
+import private Init.Data.Repr
+import private Init.Data.ToString

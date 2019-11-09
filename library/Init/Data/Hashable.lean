@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Data.UInt
-import Init.Data.String
+import private Init.Data.UInt
+import private Init.Data.String
 universes u
 
 class Hashable (α : Type u) :=

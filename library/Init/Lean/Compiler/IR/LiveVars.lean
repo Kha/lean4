@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Lean.Compiler.IR.Basic
-import Init.Lean.Compiler.IR.FreeVars
-import Init.Control.Reader
-import Init.Control.Conditional
+import private Init.Lean.Compiler.IR.Basic
+import private Init.Lean.Compiler.IR.FreeVars
+import private Init.Control.Reader
+import private Init.Control.Conditional
 
 namespace Lean
 namespace IR

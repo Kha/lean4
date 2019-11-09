@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Data.Option.Basic
-import Init.Data.HashMap
-import Init.Data.PersistentHashMap
-import Init.Lean.Name
-import Init.Lean.Format
+import private Init.Data.Option.Basic
+import private Init.Data.HashMap
+import private Init.Data.PersistentHashMap
+import private Init.Lean.Name
+import private Init.Lean.Format
 
 def Nat.imax (n m : Nat) : Nat :=
 if m = 0 then 0 else Nat.max n m

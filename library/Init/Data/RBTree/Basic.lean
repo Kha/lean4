@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Data.RBMap.Basic
+import private Init.Data.RBMap.Basic
 universes u v w
 
 def RBTree (α : Type u) (lt : α → α → Bool) : Type u :=

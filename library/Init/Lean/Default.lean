@@ -4,20 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Lean.Path
-import Init.Lean.Compiler
-import Init.Lean.Environment
-import Init.Lean.Modifiers
-import Init.Lean.ProjFns
-import Init.Lean.Runtime
-import Init.Lean.Attributes
-import Init.Lean.Parser
-import Init.Lean.ReducibilityAttrs
-import Init.Lean.Elaborator
-import Init.Lean.EqnCompiler
-import Init.Lean.Class
-import Init.Lean.LocalContext
-import Init.Lean.MetavarContext
-import Init.Lean.TypeClass
-import Init.Lean.Trace
-import Init.Lean.AuxRecursor
+import private Init.Lean.Path
+import private Init.Lean.Compiler
+import private Init.Lean.Environment
+import private Init.Lean.Modifiers
+import private Init.Lean.ProjFns
+import private Init.Lean.Runtime
+import private Init.Lean.Attributes
+import private Init.Lean.Parser
+import private Init.Lean.ReducibilityAttrs
+import private Init.Lean.Elaborator
+import private Init.Lean.EqnCompiler
+import private Init.Lean.Class
+import private Init.Lean.LocalContext
+import private Init.Lean.MetavarContext
+import private Init.Lean.TypeClass
+import private Init.Lean.Trace
+import private Init.Lean.AuxRecursor

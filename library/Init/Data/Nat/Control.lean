@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
-import Init.Control.Monad
-import Init.Control.Alternative
-import Init.Data.Nat.Basic
+import private Init.Control.Monad
+import private Init.Control.Alternative
+import private Init.Data.Nat.Basic
 
 namespace Nat
 universes u v

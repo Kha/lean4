@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Data.RBMap.Basic
-import Init.Util
+import private Init.Data.RBMap.Basic
+import private Init.Util
 
 universes u v w w'
 

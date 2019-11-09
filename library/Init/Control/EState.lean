@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Control.State
-import Init.Control.Except
+import private Init.Control.State
+import private Init.Control.Except
 universes u v
 
 namespace EStateM

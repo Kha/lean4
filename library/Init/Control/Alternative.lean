@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
-import Init.Core
-import Init.Control.Applicative
+import private Init.Core
+import private Init.Control.Applicative
 universes u v
 
 class Alternative (f : Type u → Type v) extends Applicative f : Type (max (u+1) v) :=

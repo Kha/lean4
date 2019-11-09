@@ -24,7 +24,7 @@ We use the HasCoeToSort type class for encoding coercions from
 a Type to a sort.
 -/
 prelude
-import Init.Data.List.Basic
+import private Init.Data.List.Basic
 universes u v
 
 class HasLift (a : Sort u) (b : Sort v) :=

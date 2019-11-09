@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Data.Nat
-import Init.Lean.Compiler.ExportAttr
-import Init.Lean.Compiler.IR.CompilerM
-import Init.Lean.Compiler.IR.NormIds
+import private Init.Data.Nat
+import private Init.Lean.Compiler.ExportAttr
+import private Init.Lean.Compiler.IR.CompilerM
+import private Init.Lean.Compiler.IR.NormIds
 
 namespace Lean
 namespace IR

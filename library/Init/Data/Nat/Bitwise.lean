@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Data.Nat.Basic
-import Init.Data.Nat.Div
-import Init.Coe
+import private Init.Data.Nat.Basic
+import private Init.Data.Nat.Div
+import private Init.Coe
 
 namespace Nat
 

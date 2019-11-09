@@ -6,11 +6,11 @@ Author: Sebastian Ullrich, Leonardo de Moura
 Message Type used by the Lean frontend
 -/
 prelude
-import Init.Data.ToString
-import Init.Lean.Position
-import Init.Lean.Syntax
-import Init.Lean.MetavarContext
-import Init.Lean.Environment
+import private Init.Data.ToString
+import private Init.Lean.Position
+import private Init.Lean.Syntax
+import private Init.Lean.MetavarContext
+import private Init.Lean.Environment
 
 namespace Lean
 def mkErrorStringWithPos (fileName : String) (line col : Nat) (msg : String) : String :=

@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Lean.Declaration
-import Init.Lean.LocalContext
+import private Init.Lean.Declaration
+import private Init.Lean.LocalContext
 
 namespace Lean
 /- ===========================

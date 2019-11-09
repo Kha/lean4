@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 prelude
-import Init.Control.Conditional
-import Init.Lean.Compiler.InitAttr
-import Init.Lean.Compiler.IR.CompilerM
+import private Init.Control.Conditional
+import private Init.Lean.Compiler.InitAttr
+import private Init.Lean.Compiler.IR.CompilerM
 
 /- Helper functions for backend code generators -/
 

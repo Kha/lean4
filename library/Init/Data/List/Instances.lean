@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
-import Init.Data.List.Basic
-import Init.Control.Alternative
-import Init.Control.Monad
+import private Init.Data.List.Basic
+import private Init.Control.Alternative
+import private Init.Control.Monad
 open List
 
 universes u v

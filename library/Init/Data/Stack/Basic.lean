@@ -6,8 +6,8 @@ Authors: Daniel Selsam
 Simple stack API implemented using an array.
 -/
 prelude
-import Init.Data.Array
-import Init.Data.Int
+import private Init.Data.Array
+import private Init.Data.Int
 universes u v w
 
 structure Stack (α : Type u) :=
