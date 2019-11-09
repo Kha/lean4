@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
-import private Init.Core
+import Init.Core
 import private Init.Control.Applicative
 universes u v
 
