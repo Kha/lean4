@@ -349,7 +349,7 @@ match k, baseDir with
 
 def processHeaderAux (baseDir : Option String) (header : Syntax) (trustLevel : UInt32) : IO Environment :=
 do let header     := header.asNode;
-   let imports    := if (header.getArg 0).isNone then [`init.default] else [];
+   let imports    := if (header.getArg 0).isNone then [(true,`init.default)] else [];
    let modImports := (header.getArg 1).getArgs;
    imports ← modImports.foldlM (fun imports stx =>
      -- `stx` is of the form `(Module.import "import" (null ...))
@@ -361,7 +361,7 @@ do let header     := header.asNode;
        let k   := if rel.isNone then none else some (rel.getNumArgs - 1);
        let id  := stx.getIdAt 1;
        m ← absolutizeModuleName baseDir id k;
-       pure (m::imports))
+       pure ((false,m)::imports))
        imports)
      imports;
    let imports := imports.reverse;

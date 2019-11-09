@@ -684,7 +684,7 @@ do env ← getEnv;
 def emitInitFn : M Unit :=
 do env ← getEnv;
    modName ← getModName;
-   env.imports.forM $ fun m => emitLn ("lean_object* initialize_" ++ m.mangle "" ++ "(lean_object*);");
+   env.imports.forM $ fun m => emitLn ("lean_object* initialize_" ++ m.2.mangle "" ++ "(lean_object*);");
    emitLns [
      "static bool _G_initialized = false;",
      "lean_object* initialize_" ++ modName.mangle "" ++ "(lean_object* w) {",
@@ -693,7 +693,7 @@ do env ← getEnv;
      "_G_initialized = true;"
    ];
    env.imports.forM $ fun m => emitLns [
-     "res = initialize_" ++ m.mangle "" ++ "(lean_io_mk_world());",
+     "res = initialize_" ++ m.2.mangle "" ++ "(lean_io_mk_world());",
      "if (lean_io_result_is_error(res)) return res;",
      "lean_dec_ref(res);"];
    let decls := getDecls env;

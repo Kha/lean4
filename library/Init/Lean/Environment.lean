@@ -31,7 +31,7 @@ structure EnvironmentHeader :=
 (trustLevel   : UInt32     := 0)
 (quotInit     : Bool       := false)
 (mainModule   : Name       := arbitrary _)
-(imports      : Array Name := #[])
+(imports      : Array (Bool × Name) := #[])
 
 /- TODO: mark opaque. -/
 structure Environment :=
@@ -56,7 +56,7 @@ env.constants.find' n
 def contains (env : Environment) (n : Name) : Bool :=
 env.constants.contains n
 
-def imports (env : Environment) : Array Name :=
+def imports (env : Environment) : Array (Bool × Name) :=
 env.header.imports
 
 @[export lean_environment_set_main_module]
@@ -413,7 +413,7 @@ constant performModifications : Environment → ByteArray → IO Environment := 
 /- Content of a .olean file.
    We use `compact.cpp` to generate the image of this object in disk. -/
 structure ModuleData :=
-(imports    : Array Name)
+(imports    : Array (Bool × Name))
 (constants  : Array ConstantInfo)
 (entries    : Array (Name × Array EnvExtensionEntry))
 (serialized : ByteArray) -- Legacy support: serialized modification objects
@@ -447,18 +447,19 @@ do pExts ← persistentEnvExtensionsRef.get;
 def writeModule (env : Environment) (fname : String) : IO Unit :=
 do modData ← mkModuleData env; saveModuleData fname modData
 
-partial def importModulesAux : List Name → (NameSet × Array ModuleData) → IO (NameSet × Array ModuleData)
-| [],    r         => pure r
-| m::ms, (s, mods) =>
-  if s.contains m then
-    importModulesAux ms (s, mods)
+partial def importModulesAux : List (Bool × Name) → Bool → (NameSet × Array ModuleData) → IO (NameSet × Array ModuleData)
+| [],           _,      r         => pure r
+-- ignore indirect private imports
+| (priv,m)::ms, direct, (s, mods) =>
+  if s.contains m || (priv && !direct) then
+    importModulesAux ms direct (s, mods)
   else do
     let s := s.insert m;
     mFile ← findOLean m;
     mod ← readModuleData mFile;
-    (s, mods) ← importModulesAux mod.imports.toList (s, mods);
+    (s, mods) ← importModulesAux mod.imports.toList false (s, mods);
     let mods := mods.push mod;
-    importModulesAux ms (s, mods)
+    importModulesAux ms direct (s, mods)
 
 private partial def getEntriesFor (mod : ModuleData) (extId : Name) : Nat → Array EnvExtensionState
 | i =>
@@ -485,8 +486,8 @@ do pExtDescrs ← persistentEnvExtensionsRef.get;
      pure $ extDescr.toEnvExtension.setState env { state := newState, .. s }
 
 @[export lean_import_modules]
-def importModules (modNames : List Name) (trustLevel : UInt32 := 0) : IO Environment :=
-do (_, mods) ← importModulesAux modNames ({}, #[]);
+def importModules (modNames : List (Bool × Name)) (trustLevel : UInt32 := 0) : IO Environment :=
+do (_, mods) ← importModulesAux modNames true ({}, #[]);
    let const2ModIdx := mods.iterate {} $ fun (modIdx) (mod : ModuleData) (m : HashMap Name ModuleIdx) =>
      mod.constants.iterate m $ fun _ cinfo m =>
        m.insert cinfo.name modIdx.val;
