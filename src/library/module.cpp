@@ -212,8 +212,13 @@ def importModules (modNames : List Name) (trustLevel : UInt32 := 0) : IO Environ
 */
 extern "C" object * lean_import_modules(object * mod_names, uint32 trust_level, object * w);
 
-environment import_modules(unsigned trust_lvl, std::vector<module_name> const & imports) {
-    names mods(imports.begin(), imports.end());
+environment import_modules(unsigned trust_lvl, std::vector<module_import> const & imports) {
+    list_ref<object_ref> mods;
+    auto it = imports.end();
+    while (it != imports.begin()) {
+        --it;
+        mods = list_ref<object_ref>(mk_cnstr(0, object_ref(box(it->m_is_private)), it->m_mod), mods);
+    }
     return get_io_result<environment>(lean_import_modules(mods.steal(), trust_lvl, io_mk_world()));
 }
 

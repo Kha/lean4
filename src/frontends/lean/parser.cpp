@@ -2096,12 +2096,16 @@ void parser::parse_imports(std::vector<rel_module_name> & imports) {
         prelude = true;
     }
     if (!prelude) {
-        rel_module_name m("Init");
+        rel_module_name m(true, "Init");
         imports.push_back(m);
     }
     while (curr_is_token(get_import_tk())) {
         m_last_cmd_pos = pos();
         next();
+        bool priv = curr_is_token(get_private_tk());
+        if (priv) {
+            next();
+        }
         bool k_init = false;
         unsigned k  = 0;
         while (true) {
@@ -2121,10 +2125,10 @@ void parser::parse_imports(std::vector<rel_module_name> & imports) {
         }
         name f = get_name_val();
         if (k_init) {
-            rel_module_name m(k, f);
+            rel_module_name m(priv, k, f);
             imports.push_back(m);
         } else {
-            rel_module_name m(f);
+            rel_module_name m(priv, f);
             imports.push_back(m);
         }
         next();

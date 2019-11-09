@@ -527,14 +527,15 @@ int main(int argc, char ** argv) {
             parser p(env, ios, in, mod_fn);
             p.parse_imports(rel_imports);
 
-            std::vector<module_name> imports;
+            std::vector<module_import> imports;
             auto dir = dirname(mod_fn);
             for (auto const & rel : rel_imports)
-                imports.push_back(absolutize_module_name(path, dir, rel));
+                imports.push_back(module_import { rel.m_is_private, absolutize_module_name(path, dir, rel) });
 
             if (only_deps) {
                 for (auto const & import : imports) {
-                    std::string m_name = find_lean_file(import);
+                    // if (import.m_is_private) ...
+                    std::string m_name = find_lean_file(import.m_mod);
                     auto last_idx = m_name.find_last_of(".");
                     std::string rawname = m_name.substr(0, last_idx);
                     std::string ext = m_name.substr(last_idx);

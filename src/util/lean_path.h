@@ -31,13 +31,19 @@ std::string get_exe_location();
  * because we store module names in .olean files, which should not be completely system-specific.
  */
 using module_name = name;
+struct module_import {
+    bool m_is_private;
+    module_name m_mod;
+};
 
 struct rel_module_name {
+    bool m_is_private;
     optional<unsigned> m_updirs;
     module_name m_name;
 
-    rel_module_name(unsigned int const & updirs, module_name const & name) : m_updirs(some(updirs)), m_name(name) {}
-    explicit rel_module_name(module_name const & name) : m_name(name) {}
+    rel_module_name(bool is_private, unsigned int const & updirs, module_name const & name) :
+      m_is_private(is_private), m_updirs(some(updirs)), m_name(name) {}
+    explicit rel_module_name(bool is_private, module_name const & name) : m_is_private(is_private), m_name(name) {}
 };
 
 /** \brief Hierarchical names are converted into paths using the path separator. Example: foo.bar is converted into 'foo/bar.lean' */
