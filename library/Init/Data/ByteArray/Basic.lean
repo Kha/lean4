@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
+import private Init.Data.List.Basic
 import private Init.Data.Array.Basic
 import private Init.Data.UInt
 import private Init.Data.Option.Basic
+import private Init.Data.ToString
 universes u
 
 structure ByteArray :=

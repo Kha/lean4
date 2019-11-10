@@ -8,6 +8,7 @@ Author: Leonardo de Moura
 #include "runtime/flet.h"
 #include "kernel/instantiate.h"
 #include "kernel/for_each_fn.h"
+#include "kernel/find_fn.h"
 #include "kernel/abstract.h"
 #include "library/class.h"
 #include "library/trace.h"
@@ -735,6 +736,11 @@ class specialize_fn {
         }
         optional<constant_info> info = env().find(mk_cstage1_name(const_name(fn)));
         if (!info || !info->is_definition()) return optional<name>(); // failed
+        if (!static_cast<bool>(::lean::find(info->get_value(), [&](expr const & e, unsigned) {
+            return is_constant(e) && !env().find(const_name(e));
+        }))) {
+            return optional<name>();
+        }
         name new_name = mk_spec_name(const_name(fn));
         ctx.m_cache.insert(key, new_name);
         expr new_code = instantiate_value_lparams(*info, const_levels(fn));

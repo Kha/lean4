@@ -5,9 +5,9 @@ Authors: Luke Nelson, Jared Roesch, Leonardo de Moura, Sebastian Ullrich
 -/
 prelude
 import private Init.Coe
-import Init.Control.Lift
+import Init.Control.Monad
 import Init.Control.Except
-import Init.Control.EState -- TODO: inlining
+import Init.Control.EState
 import private Init.Data.Repr
 import private Init.Data.ToString
 import private Init.System.FilePath

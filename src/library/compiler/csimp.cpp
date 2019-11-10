@@ -1246,7 +1246,7 @@ class csimp_fn {
 
     bool should_inline_instance(name const & n) const {
         if (is_instance(env(), n))
-            return !has_noinline_attribute(env(), n) && !has_init_attribute(env(), n);
+            return !has_noinline_attribute(env(), n) && !has_init_attribute(env(), n) && !uses_undefined_constants(n);
         else
             return false;
     }
@@ -1401,7 +1401,7 @@ class csimp_fn {
         expr const & s_fn = get_app_rev_args(s, s_args);
         if (!is_constant(s_fn)) return none_expr();
         if (has_init_attribute(env(), const_name(s_fn))) return none_expr();
-        if (has_noinline_attribute(env(), const_name(s_fn))) return none_expr();
+        if (has_noinline_attribute(env(), const_name(s_fn)) || uses_undefined_constants(const_name(s_fn))) return none_expr();
         optional<constant_info> info = env().find(mk_cstage1_name(const_name(s_fn)));
         if (!info || !info->is_definition()) return none_expr();
         if (s_args.size()  < get_num_nested_lambdas(info->get_value())) return none_expr();
@@ -1580,6 +1580,13 @@ class csimp_fn {
                 }));
     }
 
+    bool uses_undefined_constants(name const & c) const {
+        constant_info info = env().get(c);
+        return static_cast<bool>(::lean::find(info.get_value(), [&](expr const & e, unsigned) {
+            return is_constant(e) && !env().find(const_name(e));
+        }));
+    }
+
     bool uses_unsafe_inductive(name const & c) {
         constant_info info = env().get(c);
         return static_cast<bool>(::lean::find(info.get_value(), [&](expr const & e, unsigned) {
@@ -1655,7 +1662,7 @@ class csimp_fn {
                 return none_expr();
             }
             if (!inline_if_reduce_attr && is_recursive(c)) return none_expr();
-            if (uses_unsafe_inductive(c)) return none_expr();
+            if (uses_undefined_constants(c) || uses_unsafe_inductive(c)) return none_expr();
             expr new_fn = instantiate_value_lparams(*info, const_levels(fn));
             if (inline_if_reduce_attr && !inline_attr) {
                 return beta_reduce_if_not_cases(new_fn, e, is_let_val);
@@ -1672,7 +1679,7 @@ class csimp_fn {
             if (get_app_num_args(e) < arity || arity == 0) return none_expr();
             if (get_lcnf_size(env(), info->get_value()) > m_cfg.m_inline_threshold) return none_expr();
             if (is_recursive(c)) return none_expr();
-            if (uses_unsafe_inductive(c)) return none_expr();
+            if (uses_undefined_constants(c) || uses_unsafe_inductive(c)) return none_expr();
             return some_expr(beta_reduce(info->get_value(), e, is_let_val));
         }
     }

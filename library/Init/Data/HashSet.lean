@@ -4,10 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
 prelude
-import private Init.Core
 import private Init.Control.Id
-import private Init.Data.Array -- TODO: inlining
-import private Init.Data.AssocList -- TODO: inlining
 import private Init.Data.HashMap
 
 universes u v
@@ -46,6 +43,8 @@ s.set.isEmpty
 @[inline] def empty : HashSet α :=
 mkHashSet
 
+set_option pp.all true
+set_option trace.compiler true
 @[inline] def foldM {β : Type v} {m : Type v → Type v} [Monad m] (f : β → α → m β) (d : β) (s : HashSet α) : m β :=
 s.set.foldM (fun d a _ => f d a) d
 
