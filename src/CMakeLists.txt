@@ -604,8 +604,7 @@ endif()
 
 add_custom_target(clean-stdlib
   WORKING_DIRECTORY "${LEAN_SOURCE_DIR}/../library"
-  COMMAND make clean STAGE1_OUT="${CMAKE_BINARY_DIR}/stage1"
-  )
+  VERBATIM COMMAND bash -c "find . -name *.olean -delete; find . -name *.depend -delete; rm -r '../src/stage1' '${CMAKE_BINARY_DIR}/stage1'; true")
 
 add_custom_target(clean-leanpkg
   WORKING_DIRECTORY "${LEAN_SOURCE_DIR}/../leanpkg"
