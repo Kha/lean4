@@ -119,6 +119,10 @@ match stx with
 | Syntax.node k args => if k == kind then hyes ⟨Syntax.node k args, IsNode.mk k args⟩ else hno ()
 | _                  => hno ()
 
+def isAtom : Syntax → Bool
+| atom _ _ => true
+| _        => false
+
 def isIdent : Syntax → Bool
 | ident _ _ _ _ => true
 | _             => false
@@ -295,7 +299,8 @@ protected partial def formatStx : Syntax → Format
 | atom info val     => format $ repr val
 | ident _ _ val pre => format "`" ++ format val
 | node kind args    =>
-  if kind == `Lean.Parser.noKind then
+  if kind == `expr then "<expr>"
+  else if kind == `Lean.Parser.noKind then
     sbracket $ joinSep (args.toList.map formatStx) line
   else
     let shorterName := kind.replacePrefix `Lean.Parser Name.anonymous;

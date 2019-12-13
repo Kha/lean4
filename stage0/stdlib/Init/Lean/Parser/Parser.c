@@ -383,6 +383,7 @@ lean_object* l_Lean_Parser_trailingLoop___main___boxed(lean_object*, lean_object
 uint8_t l_Lean_Parser_Error_beq(lean_object*, lean_object*);
 lean_object* l_Lean_Parser_runParser(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_ParserState_keepNewError(lean_object*, lean_object*);
+extern lean_object* l_Lean_Syntax_formatStx___main___closed__7;
 lean_object* l_Lean_Parser_symbol(uint8_t, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_anyOfFn___main___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_takeWhileFn___at_Lean_Parser_octalNumberFn___spec__2(lean_object*, lean_object*);
@@ -475,7 +476,6 @@ lean_object* l_Lean_Parser_takeUntilFn___main___at_Lean_Parser_quotedSymbolFn___
 uint8_t l_Array_anyRangeMAux___main___at_Lean_Parser_mkTokenTableAttribute___spec__3(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_declareTrailingBuiltinParser(lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_hashAndthen(uint8_t);
-extern lean_object* l_Lean_Syntax_formatStx___main___closed__5;
 lean_object* l_Lean_Parser_takeUntilFn___main___at_Lean_Parser_octalNumberFn___spec__3___boxed(lean_object*, lean_object*);
 lean_object* l___private_Init_Lean_Parser_Parser_3__rawAux___boxed(lean_object*);
 uint32_t lean_string_utf8_get(lean_object*, lean_object*);
@@ -26837,7 +26837,7 @@ _start:
 {
 lean_object* x_1; lean_object* x_2; lean_object* x_3; 
 x_1 = l_Lean_nameToExprAux___main___closed__4;
-x_2 = l_Lean_Syntax_formatStx___main___closed__5;
+x_2 = l_Lean_Syntax_formatStx___main___closed__7;
 x_3 = lean_name_mk_string(x_1, x_2);
 return x_3;
 }
@@ -27057,7 +27057,7 @@ goto block_31;
 else
 {
 lean_object* x_47; uint8_t x_48; 
-x_47 = l_Lean_Syntax_formatStx___main___closed__5;
+x_47 = l_Lean_Syntax_formatStx___main___closed__7;
 x_48 = lean_string_dec_eq(x_42, x_47);
 lean_dec(x_42);
 if (x_48 == 0)
@@ -27203,7 +27203,7 @@ goto block_31;
 else
 {
 lean_object* x_70; uint8_t x_71; 
-x_70 = l_Lean_Syntax_formatStx___main___closed__5;
+x_70 = l_Lean_Syntax_formatStx___main___closed__7;
 x_71 = lean_string_dec_eq(x_65, x_70);
 lean_dec(x_65);
 if (x_71 == 0)

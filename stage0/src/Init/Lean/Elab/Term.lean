@@ -7,10 +7,10 @@ prelude
 import Init.Lean.Util.Sorry
 import Init.Lean.Structure
 import Init.Lean.Meta
+import Init.Lean.Hygiene
 import Init.Lean.Elab.Log
 import Init.Lean.Elab.Alias
 import Init.Lean.Elab.ResolveName
-import Init.Lean.Elab.Quotation
 
 namespace Lean
 namespace Elab
@@ -24,6 +24,7 @@ structure Context extends Meta.Context :=
 (univNames     : List Name := [])
 (openDecls     : List OpenDecl := [])
 (macroStack    : List Syntax := [])
+(macroScopeStack : List MacroScope := [0])
 (mayPostpone   : Bool := true)
 
 inductive SyntheticMVarKind
@@ -39,6 +40,7 @@ structure State extends Meta.State :=
 (messages        : MessageLog := {})
 (instImplicitIdx : Nat := 1)
 (anonymousIdx    : Nat := 1)
+(nextMacroScope  : Nat := 1)
 
 instance State.inhabited : Inhabited State := ⟨{ env := arbitrary _ }⟩
 
@@ -51,6 +53,15 @@ instance TermElabM.inhabited {α} : Inhabited (TermElabM α) :=
 ⟨throw $ arbitrary _⟩
 
 instance TermElabResult.inhabited : Inhabited TermElabResult := ⟨EStateM.Result.ok (arbitrary _) (arbitrary _)⟩
+
+instance TermElabM.MonadQuotation : MonadQuotation TermElabM := {
+  getCurrMacroScope := do
+    ctx ← read;
+    pure ctx.macroScopeStack.head!,
+  withFreshMacroScope := fun α x => do
+    fresh ← modifyGet (fun st => (st.nextMacroScope, { st with nextMacroScope := st.nextMacroScope + 1 }));
+    adaptReader (fun (ctx : Context) => { ctx with macroScopeStack := fresh::ctx.macroScopeStack }) x
+}
 
 inductive Field
 | num (fieldIdx  : Nat)
@@ -213,7 +224,7 @@ unless ex.data.hasSyntheticSorry $ logMessage ex;
 pure syntheticSorry
 
 def elabTerm (stx : Syntax) (expectedType? : Option Expr) : TermElabM Expr :=
-withNode stx $ fun node => do
+withFreshMacroScope $ withNode stx $ fun node => do
   trace! `Elab.step (toString stx);
   s ← get;
   let tables := termElabAttribute.ext.getState s.env;
@@ -253,11 +264,6 @@ fun _ _ => pure $ mkSort levelOne
 
 @[builtinTermElab «hole»] def elabHole : TermElab :=
 fun stx expectedType? => mkFreshExprMVar stx.val expectedType?
-
-@[builtinTermElab stxQuot] def elabStxQuot : TermElab :=
-fun stx expectedType? => do
-  env ← getEnv;
-  elabTerm (stxQuot.expand env (stx.getArg 1)) expectedType?
 
 private def mkFreshAnonymousName : TermElabM Name := do
 s ← get;
