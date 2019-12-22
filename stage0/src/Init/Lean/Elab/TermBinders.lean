@@ -64,21 +64,6 @@ withNode stx $ fun node => do
   else
     throwError stx "term elaborator failed, unexpected binder syntax"
 
-@[inline] def withLCtx {α} (lctx : LocalContext) (localInsts : LocalInstances) (x : TermElabM α) : TermElabM α :=
-adaptReader (fun (ctx : Context) => { lctx := lctx, localInstances := localInsts, .. ctx }) x
-
-def resetSynthInstanceCache : TermElabM Unit :=
-modify $ fun s => { cache := { synthInstance := {}, .. s.cache }, .. s }
-
-@[inline] def resettingSynthInstanceCache {α} (x : TermElabM α) : TermElabM α := do
-s ← get;
-let savedSythInstance := s.cache.synthInstance;
-resetSynthInstanceCache;
-finally x (modify $ fun s => { cache := { synthInstance := savedSythInstance, .. s.cache }, .. s })
-
-@[inline] def resettingSynthInstanceCacheWhen {α} (b : Bool) (x : TermElabM α) : TermElabM α :=
-if b then resettingSynthInstanceCache x else x
-
 private partial def elabBinderViews (binderViews : Array BinderView)
     : Nat → Array Expr → LocalContext → LocalInstances → TermElabM (Array Expr × LocalContext × LocalInstances)
 | i, fvars, lctx, localInsts =>
@@ -115,12 +100,14 @@ private partial def elabBindersAux (binders : Array Syntax)
   Elaborate the given binders (i.e., `Syntax` objects for `simpleBinder <|> bracktedBinder`),
   update the local context, set of local instances, reset instance chache (if needed), and then
   execute `x` with the updated context. -/
-def elabBinders {α} (binders : Array Syntax) (x : Array Expr → TermElabM α) : TermElabM α := do
-lctx ← getLCtx;
-localInsts ← getLocalInsts;
-(fvars, lctx, newLocalInsts) ← elabBindersAux binders 0 #[] lctx localInsts;
-resettingSynthInstanceCacheWhen (newLocalInsts.size > localInsts.size) $
-  adaptReader (fun (ctx : Context) => { lctx := lctx, localInstances := newLocalInsts, .. ctx }) (x fvars)
+def elabBinders {α} (binders : Array Syntax) (x : Array Expr → TermElabM α) : TermElabM α :=
+if binders.isEmpty then x #[]
+else do
+  lctx ← getLCtx;
+  localInsts ← getLocalInsts;
+  (fvars, lctx, newLocalInsts) ← elabBindersAux binders 0 #[] lctx localInsts;
+  resettingSynthInstanceCacheWhen (newLocalInsts.size > localInsts.size) $
+    adaptReader (fun (ctx : Context) => { lctx := lctx, localInstances := newLocalInsts, .. ctx }) (x fvars)
 
 @[inline] def elabBinder {α} (binder : Syntax) (x : Expr → TermElabM α) : TermElabM α :=
 elabBinders #[binder] (fun fvars => x (fvars.get! 1))
@@ -244,6 +231,71 @@ fun stx expectedType? => do
     -- TODO: expected type
     e ← elabTerm body none;
     mkLambda stx.val xs e
+
+def withLetDecl {α} (ref : Syntax) (n : Name) (type : Expr) (val : Expr) (k : Expr → TermElabM α) : TermElabM α := do
+fvarId ← mkFreshId;
+ctx ← read;
+let lctx       := ctx.lctx.mkLetDecl fvarId n type val;
+let localInsts := ctx.localInstances;
+let fvar       := mkFVar fvarId;
+c? ← isClass ref type;
+match c? with
+| some c => adaptReader (fun (ctx : Context) => { lctx := lctx, localInstances := localInsts.push { className := c, fvar := fvar }, .. ctx }) $ k fvar
+| none   => adaptReader (fun (ctx : Context) => { lctx := lctx, .. ctx }) $ k fvar
+
+def expandOptType (optType : Syntax) : Syntax :=
+if optType.isNone then
+  mkHole
+else
+  optType.getArg 1
+
+def elabLetIdDecl (ref : Syntax) (decl body : Syntax) (expectedType? : Option Expr) : TermElabM Expr := do
+-- `decl` is of the form: ident bracktedBinder+ (`:` term)? `:=` term
+let n        := decl.getIdAt 0;
+let binders  := (decl.getArg 1).getArgs;
+let type     := expandOptType (decl.getArg 2);
+let val      := decl.getArg 4;
+(type, val) ← elabBinders binders $ fun xs => do {
+  type ← elabType type;
+  val  ← elabTerm val type;
+  type ← mkForall ref xs type;
+  val  ← mkLambda ref xs val;
+  pure (type, val)
+};
+trace! `Elab.let.decl (n ++ " : " ++ type ++ " := " ++ val);
+withLetDecl ref n type val $ fun x => do
+  body ← elabTerm body expectedType?;
+  body ← instantiateMVars ref body;
+  trace! `Elab.let.body body;
+  result ← mkLet ref x body;
+  trace! `Elab.let.result result;
+  pure result
+
+def elabLetEqnsDecl (ref : Syntax) (decl body : Syntax) (expectedType? : Option Expr) : TermElabM Expr :=
+throwError decl "not implemented yet"
+
+def elabLetPatDecl (ref : Syntax) (decl body : Syntax) (expectedType? : Option Expr) : TermElabM Expr :=
+throwError decl "not implemented yet"
+
+@[builtinTermElab «let»] def elabLet : TermElab :=
+fun stx expectedType? => do
+  -- `let` decl `;` body
+  let ref      := stx.val;
+  let decl     := stx.getArg 1;
+  let body     := stx.getArg 3;
+  let declKind := decl.getKind;
+  if declKind == `Lean.Parser.Term.letIdDecl then
+    elabLetIdDecl ref decl body expectedType?
+  else if declKind == `Lean.Parser.Term.letEqns then
+    elabLetEqnsDecl ref decl body expectedType?
+  else if declKind == `Lean.Parser.Term.letPatDecl then
+    elabLetPatDecl ref decl body expectedType?
+  else
+    throwError ref "unknown let-declaration kind"
+
+@[init] private def regTraceClasses : IO Unit := do
+registerTraceClass `Elab.let;
+pure ()
 
 end Term
 end Elab

@@ -36,6 +36,7 @@ lean_object* l_Lean_Meta_forallTelescope___rarg(lean_object*, lean_object*, lean
 lean_object* l___private_Init_Lean_Meta_InferType_5__inferLambdaType___closed__1;
 lean_object* l_Lean_Expr_getAppFn___main(lean_object*);
 extern lean_object* l_Lean_Expr_getAppArgs___closed__1;
+lean_object* l___private_Init_Lean_Meta_InferType_1__inferAppType___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l___private_Init_Lean_Meta_InferType_8__inferFVarType(lean_object*, lean_object*, lean_object*);
 size_t l_USize_shiftRight(size_t, size_t);
 lean_object* l___private_Init_Lean_Meta_InferType_9__checkInferTypeCache(lean_object*, lean_object*, lean_object*, lean_object*);
@@ -221,7 +222,6 @@ else
 uint8_t x_16; 
 lean_dec(x_11);
 lean_dec(x_6);
-lean_dec(x_2);
 lean_dec(x_1);
 x_16 = !lean_is_exclusive(x_12);
 if (x_16 == 0)
@@ -247,7 +247,6 @@ block_51:
 {
 lean_object* x_27; lean_object* x_28; 
 lean_dec(x_26);
-lean_inc(x_2);
 x_27 = lean_expr_instantiate_rev_range(x_24, x_23, x_22, x_2);
 lean_dec(x_23);
 lean_dec(x_24);
@@ -365,7 +364,6 @@ else
 lean_object* x_56; 
 lean_dec(x_6);
 lean_dec(x_4);
-lean_dec(x_2);
 lean_dec(x_1);
 x_56 = lean_alloc_ctor(0, 2, 0);
 lean_ctor_set(x_56, 0, x_5);
@@ -395,7 +393,6 @@ lean_ctor_set(x_9, 0, x_8);
 lean_ctor_set(x_9, 1, x_6);
 x_10 = lean_array_get_size(x_2);
 lean_inc(x_10);
-lean_inc(x_2);
 x_11 = l_Nat_foldMAux___main___at___private_Init_Lean_Meta_InferType_1__inferAppType___spec__1(x_1, x_2, x_10, x_10, x_9, x_3, x_7);
 if (lean_obj_tag(x_11) == 0)
 {
@@ -444,7 +441,6 @@ else
 {
 uint8_t x_23; 
 lean_dec(x_10);
-lean_dec(x_2);
 x_23 = !lean_is_exclusive(x_11);
 if (x_23 == 0)
 {
@@ -469,7 +465,6 @@ else
 {
 uint8_t x_27; 
 lean_dec(x_3);
-lean_dec(x_2);
 lean_dec(x_1);
 x_27 = !lean_is_exclusive(x_5);
 if (x_27 == 0)
@@ -498,7 +493,17 @@ _start:
 lean_object* x_8; 
 x_8 = l_Nat_foldMAux___main___at___private_Init_Lean_Meta_InferType_1__inferAppType___spec__1(x_1, x_2, x_3, x_4, x_5, x_6, x_7);
 lean_dec(x_3);
+lean_dec(x_2);
 return x_8;
+}
+}
+lean_object* l___private_Init_Lean_Meta_InferType_1__inferAppType___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+_start:
+{
+lean_object* x_5; 
+x_5 = l___private_Init_Lean_Meta_InferType_1__inferAppType(x_1, x_2, x_3, x_4);
+lean_dec(x_2);
+return x_5;
 }
 }
 lean_object* l___private_Init_Lean_Meta_InferType_2__inferConstType(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
@@ -570,6 +575,8 @@ lean_dec(x_6);
 lean_dec(x_5);
 lean_dec(x_1);
 x_22 = lean_instantiate_type_lparams(x_12, x_2);
+lean_dec(x_2);
+lean_dec(x_12);
 x_23 = lean_alloc_ctor(0, 2, 0);
 lean_ctor_set(x_23, 0, x_22);
 lean_ctor_set(x_23, 1, x_4);
@@ -933,6 +940,7 @@ lean_free_object(x_9);
 x_47 = l_Lean_mkConst(x_30, x_17);
 lean_inc(x_4);
 x_48 = l___private_Init_Lean_Meta_InferType_1__inferAppType(x_47, x_37, x_4, x_11);
+lean_dec(x_37);
 if (lean_obj_tag(x_48) == 0)
 {
 lean_object* x_49; lean_object* x_50; lean_object* x_51; 
@@ -1380,6 +1388,7 @@ lean_dec(x_100);
 x_138 = l_Lean_mkConst(x_119, x_104);
 lean_inc(x_4);
 x_139 = l___private_Init_Lean_Meta_InferType_1__inferAppType(x_138, x_126, x_4, x_98);
+lean_dec(x_126);
 if (lean_obj_tag(x_139) == 0)
 {
 lean_object* x_140; lean_object* x_141; lean_object* x_142; 
@@ -3767,6 +3776,7 @@ if (lean_obj_tag(x_29) == 0)
 {
 lean_object* x_30; 
 x_30 = l___private_Init_Lean_Meta_InferType_1__inferAppType(x_19, x_26, x_2, x_3);
+lean_dec(x_26);
 if (lean_obj_tag(x_30) == 0)
 {
 lean_object* x_31; lean_object* x_32; uint8_t x_33; 

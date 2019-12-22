@@ -16385,7 +16385,6 @@ lean_object* l_Lean_Meta_withNewLocalInstances___main___at___private_Init_Lean_M
 _start:
 {
 lean_object* x_15; lean_object* x_16; lean_object* x_17; lean_object* x_18; lean_object* x_19; uint8_t x_20; 
-lean_inc(x_7);
 x_15 = lean_expr_instantiate_rev_range(x_9, x_8, x_10, x_7);
 x_16 = lean_alloc_closure((void*)(l_Lean_Meta_whnf), 3, 1);
 lean_closure_set(x_16, 0, x_15);
@@ -20729,7 +20728,6 @@ lean_inc(x_26);
 x_27 = lean_ctor_get_uint64(x_9, sizeof(void*)*3);
 lean_dec(x_9);
 x_28 = lean_array_get_size(x_7);
-lean_inc(x_7);
 x_29 = lean_expr_instantiate_rev_range(x_25, x_8, x_28, x_7);
 lean_dec(x_28);
 lean_dec(x_25);
@@ -20808,7 +20806,6 @@ return x_51;
 else
 {
 lean_object* x_52; lean_object* x_53; lean_object* x_54; lean_object* x_55; uint8_t x_56; lean_object* x_57; lean_object* x_58; lean_object* x_59; 
-lean_inc(x_7);
 x_52 = lean_expr_instantiate_rev_range(x_39, x_8, x_43, x_7);
 lean_dec(x_43);
 lean_dec(x_39);

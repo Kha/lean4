@@ -1789,7 +1789,6 @@ else
 lean_object* x_8; lean_object* x_9; lean_object* x_10; lean_object* x_11; lean_object* x_12; lean_object* x_13; lean_object* x_14; lean_object* x_15; lean_object* x_16; 
 x_8 = lean_array_fget(x_3, x_2);
 x_9 = lean_box(0);
-lean_inc(x_8);
 x_10 = x_9;
 x_11 = lean_array_fset(x_3, x_2, x_10);
 lean_inc(x_8);
@@ -1798,6 +1797,7 @@ x_12 = l_Lean_Syntax_mrewriteBottomUp___main___at_Lean_Syntax_rewriteBottomUp___
 x_13 = lean_unsigned_to_nat(1u);
 x_14 = lean_nat_add(x_2, x_13);
 x_15 = x_12;
+lean_dec(x_8);
 x_16 = lean_array_fset(x_11, x_2, x_15);
 lean_dec(x_2);
 x_2 = x_14;
@@ -2191,7 +2191,6 @@ else
 lean_object* x_9; lean_object* x_10; lean_object* x_11; lean_object* x_12; lean_object* x_13; lean_object* x_14; lean_object* x_15; lean_object* x_16; lean_object* x_17; lean_object* x_18; lean_object* x_19; 
 x_9 = lean_array_fget(x_2, x_1);
 x_10 = lean_box(0);
-lean_inc(x_9);
 x_11 = x_10;
 x_12 = lean_array_fset(x_2, x_1, x_11);
 lean_inc(x_9);
@@ -2204,6 +2203,7 @@ lean_dec(x_13);
 x_16 = lean_unsigned_to_nat(1u);
 x_17 = lean_nat_add(x_1, x_16);
 x_18 = x_14;
+lean_dec(x_9);
 x_19 = lean_array_fset(x_12, x_1, x_18);
 lean_dec(x_1);
 x_1 = x_17;

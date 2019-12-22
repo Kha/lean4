@@ -24,7 +24,7 @@ structure Context extends Meta.Context :=
 (univNames       : List Name       := [])
 (openDecls       : List OpenDecl   := [])
 (macroStack      : List Syntax     := [])
-(macroScopeStack : List MacroScope := [0])
+(currMacroScope  : MacroScope := 0)
 /- When `mayPostpone == true`, an elaboration function may interrupt its execution by throwing `Exception.postpone`.
    The function `elabTerm` catches this exception and creates fresh synthetic metavariable `?m`, stores `?m` in
    the list of pending synthetic metavariables, and returns `?m`. -/
@@ -109,11 +109,11 @@ throw (Exception.error msg)
 
 protected def getCurrMacroScope : TermElabM Nat := do
 ctx ← read;
-pure ctx.macroScopeStack.head!
+pure ctx.currMacroScope
 
 @[inline] protected def withFreshMacroScope {α} (x : TermElabM α) : TermElabM α := do
 fresh ← modifyGet (fun st => (st.nextMacroScope, { st with nextMacroScope := st.nextMacroScope + 1 }));
-adaptReader (fun (ctx : Context) => { ctx with macroScopeStack := fresh::ctx.macroScopeStack }) x
+adaptReader (fun (ctx : Context) => { ctx with currMacroScope := fresh }) x
 
 instance TermElabM.MonadQuotation : MonadQuotation TermElabM := {
   getCurrMacroScope   := Term.getCurrMacroScope,
@@ -246,6 +246,7 @@ liftMetaM ref $ do u ← Meta.mkFreshLevelMVar; Meta.mkFreshExprMVar (mkSort u) 
 def getLevel (ref : Syntax) (type : Expr) : TermElabM Level := liftMetaM ref $ Meta.getLevel type
 def mkForall (ref : Syntax) (xs : Array Expr) (e : Expr) : TermElabM Expr := liftMetaM ref $ Meta.mkForall xs e
 def mkLambda (ref : Syntax) (xs : Array Expr) (e : Expr) : TermElabM Expr := liftMetaM ref $ Meta.mkLambda xs e
+def mkLet (ref : Syntax) (x : Expr) (e : Expr) : TermElabM Expr := mkLambda ref #[x] e
 def trySynthInstance (ref : Syntax) (type : Expr) : TermElabM (LOption Expr) := liftMetaM ref $ Meta.trySynthInstance type
 def mkAppM (ref : Syntax) (constName : Name) (args : Array Expr) : TermElabM Expr := liftMetaM ref $ Meta.mkAppM constName args
 def decLevel? (ref : Syntax) (u : Level) : TermElabM (Option Level) := liftMetaM ref $ Meta.decLevel? u
@@ -273,7 +274,7 @@ modify $ fun s => { syntheticMVars := { mvarId := mvarId, ref := ref, kind := ki
 adaptReader (fun (ctx : Context) => { mayPostpone := false, .. ctx }) x
 
 @[inline] def withNode {α} (stx : Syntax) (x : SyntaxNode → TermElabM α) : TermElabM α :=
-stx.ifNode x (fun _ => throwError stx "term elaborator failed, unexpected syntax")
+stx.ifNode x (fun _ => throwError stx ("term elaborator failed, unexpected syntax: " ++ toString stx))
 
 /-- Execute `x` and logs all unlogged trace messages produced by `x` using position `pos`. -/
 @[inline] def tracingAtPos {α} (pos : String.Pos) (x : TermElabM α) : TermElabM α := do
@@ -490,19 +491,30 @@ u ← mkFreshLevelMVar stx;
 type ← elabTerm stx (mkSort u);
 ensureType stx type
 
+@[inline] def withLCtx {α} (lctx : LocalContext) (localInsts : LocalInstances) (x : TermElabM α) : TermElabM α :=
+adaptReader (fun (ctx : Context) => { lctx := lctx, localInstances := localInsts, .. ctx }) x
+
+def resetSynthInstanceCache : TermElabM Unit :=
+modify $ fun s => { cache := { synthInstance := {}, .. s.cache }, .. s }
+
+@[inline] def resettingSynthInstanceCache {α} (x : TermElabM α) : TermElabM α := do
+s ← get;
+let savedSythInstance := s.cache.synthInstance;
+resetSynthInstanceCache;
+finally x (modify $ fun s => { cache := { synthInstance := savedSythInstance, .. s.cache }, .. s })
+
+@[inline] def resettingSynthInstanceCacheWhen {α} (b : Bool) (x : TermElabM α) : TermElabM α :=
+if b then resettingSynthInstanceCache x else x
+
 /--
   Execute `x` using the given metavariable `LocalContext` and `LocalInstances`.
   The type class resolution cache is flushed when executing `x` if its `LocalInstances` are
   different from the current ones. -/
-@[inline] def withMVarContext {α} (mvarId : MVarId) (x : TermElabM α) : TermElabM α := do
+def withMVarContext {α} (mvarId : MVarId) (x : TermElabM α) : TermElabM α := do
 mvarDecl  ← getMVarDecl mvarId;
 ctx       ← read;
-let reset := ctx.localInstances == mvarDecl.localInstances;
-adaptReader (fun (ctx : Context) => { lctx := mvarDecl.lctx, localInstances := mvarDecl.localInstances, .. ctx }) $ do
-  s : State ← get;
-  let savedSythInstance := s.cache.synthInstance;
-  when reset (modify $ fun (s : State) => { cache := { synthInstance := {}, .. s.cache }, .. s });
-  finally x (when reset $ modify $ fun (s : State) => { cache := { synthInstance := savedSythInstance, .. s.cache }, .. s })
+let needReset := ctx.localInstances == mvarDecl.localInstances;
+withLCtx mvarDecl.lctx mvarDecl.localInstances $ resettingSynthInstanceCacheWhen needReset x
 
 /--
   Try to elaborate `stx` that was postponed by an elaboration method using `Expection.postpone`.
@@ -572,14 +584,6 @@ match mvarSyntheticDecl.kind with
 | SyntheticMVarKind.postponed macroStack   => resumePostponed macroStack mvarSyntheticDecl.ref mvarSyntheticDecl.mvarId
 | SyntheticMVarKind.tactic tacticCode      => throwError tacticCode "not implemented yet"
 
-/-- Auxiliary function for `synthesizeSyntheticMVarsStep`. -/
-private def synthesizeSyntheticMVarsStepAux : List SyntheticMVarDecl → List SyntheticMVarDecl → TermElabM (List SyntheticMVarDecl)
-| [],                    remaining => pure remaining
-| mvarDecl :: mvarDecls, remaining =>
-  condM (synthesizeSyntheticMVar mvarDecl)
-    (synthesizeSyntheticMVarsStepAux mvarDecls remaining)
-    (synthesizeSyntheticMVarsStepAux mvarDecls (mvarDecl :: remaining))
-
 /--
   Try to synthesize the current list of pending synthetic metavariables.
   Return `true` if it managed to synthesize at least one of them. -/
@@ -588,26 +592,25 @@ s ← get;
 let syntheticMVars    := s.syntheticMVars.reverse;
 let numSyntheticMVars := syntheticMVars.length;
 modify $ fun s => { syntheticMVars := [], .. s };
-remainingSyntheticMVars ← synthesizeSyntheticMVarsStepAux syntheticMVars [];
+remainingSyntheticMVars ← syntheticMVars.filterRevM $ fun mvarDecl => not <$> synthesizeSyntheticMVar mvarDecl;
 modify $ fun s => { syntheticMVars := s.syntheticMVars ++ remainingSyntheticMVars, .. s };
 pure $ numSyntheticMVars != remainingSyntheticMVars.length
 
 /-- Apply default value to any pending synthetic metavariable of kinf `SyntheticMVarKind.withDefault` -/
 def synthesizeUsingDefault : TermElabM Bool := do
 s ← get;
-let syntheticMVars := s.syntheticMVars.reverse;
-newSyntheticMVars ← syntheticMVars.foldlM
-  (fun newSyntheticMVars mvarDecl => match mvarDecl.kind with
-    | SyntheticMVarKind.withDefault defaultVal => do
+let len := s.syntheticMVars.length;
+newSyntheticMVars ← s.syntheticMVars.filterM $ fun mvarDecl =>
+  match mvarDecl.kind with
+  | SyntheticMVarKind.withDefault defaultVal => do
       val ← instantiateMVars mvarDecl.ref (mkMVar mvarDecl.mvarId);
       when val.getAppFn.isMVar $
         unlessM (isDefEq mvarDecl.ref val defaultVal) $
           throwError mvarDecl.ref "failed to assign default value to metavariable"; -- TODO: better error message
-      pure newSyntheticMVars
-    | _ => pure $ mvarDecl :: newSyntheticMVars)
-  [];
+      pure false
+  | _ => pure true;
 modify $ fun s => { syntheticMVars := newSyntheticMVars, .. s };
-pure $ newSyntheticMVars.length != syntheticMVars.length
+pure $ newSyntheticMVars.length != len
 
 /-- Report an error for each synthetic metavariable that could not be resolved. -/
 private def reportStuckSyntheticMVars : TermElabM Unit := do
