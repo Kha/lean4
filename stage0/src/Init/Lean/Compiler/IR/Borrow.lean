@@ -58,7 +58,7 @@ namespace InitParamMap
 def initBorrow (ps : Array Param) : Array Param :=
 ps.map $ fun p => { borrow := p.ty.isObj, .. p }
 
-/- We do perform borrow inference for constants marked as `export`.
+/- We do not perform borrow inference for constants marked as `export`.
    Reason: we current write wrappers in C++ for using exported functions.
    These wrappers use smart pointers such as `object_ref`.
    When writing a new wrapper we need to know whether an argument is a borrow
@@ -227,13 +227,17 @@ def collectExpr (z : VarId) : Expr → M Unit
 | Expr.reset _ x      => ownVar z *> ownVar x
 | Expr.reuse x _ _ ys => ownVar z *> ownVar x *> ownArgsIfParam ys
 | Expr.ctor _ xs      => ownVar z *> ownArgsIfParam xs
-| Expr.proj _ x       => whenM (isOwned z) $ ownVar x
+| Expr.proj _ x       => whenM (isOwned x) $ ownVar z
 | Expr.fap g xs       => do ps ← getParamInfo (Key.decl g);
   -- dbgTrace ("collectExpr: " ++ toString g ++ " " ++ toString (formatParams ps)) $ fun _ =>
   ownVar z *> ownArgsUsingParams xs ps
 | Expr.ap x ys        => ownVar z *> ownVar x *> ownArgs ys
 | Expr.pap _ xs       => ownVar z *> ownArgs xs
 | other               => pure ()
+
+def backpropagateProj (z : VarId) : Expr → M Unit
+| Expr.proj _ x       => whenM (isOwned z) $ ownVar x
+| _                   => pure ()
 
 def preserveTailCall (x : VarId) (v : Expr) (b : FnBody) : M Unit := do
 ctx ← read;
@@ -254,7 +258,7 @@ partial def collectFnBody : FnBody → M Unit
   ctx ← read;
   updateParamMap (Key.jp ctx.currFn j);
   collectFnBody b
-| FnBody.vdecl x _ v b => collectFnBody b *> collectExpr x v *> preserveTailCall x v b
+| FnBody.vdecl x _ v b => collectExpr x v *> collectFnBody b *> backpropagateProj x v *> preserveTailCall x v b
 | FnBody.jmp j ys      => do
   ctx ← read;
   ps ← getParamInfo (Key.jp ctx.currFn j);
