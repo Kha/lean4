@@ -1670,10 +1670,12 @@ x_19 = lean_ctor_get(x_13, 0);
 lean_inc(x_19);
 x_20 = lean_ctor_get(x_13, 1);
 lean_inc(x_20);
+lean_inc(x_20);
 x_346 = l_Lean_MetavarContext_hasAssignableLevelMVar___main(x_20, x_1);
 if (x_346 == 0)
 {
 uint8_t x_347; 
+lean_inc(x_20);
 x_347 = l_Lean_MetavarContext_hasAssignableLevelMVar___main(x_20, x_2);
 if (x_347 == 0)
 {
@@ -3283,10 +3285,12 @@ x_371 = lean_ctor_get(x_365, 0);
 lean_inc(x_371);
 x_372 = lean_ctor_get(x_365, 1);
 lean_inc(x_372);
+lean_inc(x_372);
 x_533 = l_Lean_MetavarContext_hasAssignableLevelMVar___main(x_372, x_1);
 if (x_533 == 0)
 {
 uint8_t x_534; 
+lean_inc(x_372);
 x_534 = l_Lean_MetavarContext_hasAssignableLevelMVar___main(x_372, x_2);
 if (x_534 == 0)
 {
