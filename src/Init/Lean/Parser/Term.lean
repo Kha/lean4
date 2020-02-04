@@ -119,8 +119,8 @@ def bracketedDoSeq := parser! "{" >> doSeq >> "}"
 @[builtinTermParser] def liftMethod := parser! leftArrow >> termParser
 @[builtinTermParser] def «do»  := parser! "do " >> (bracketedDoSeq <|> doSeq)
 
-@[builtinTermParser] def not    := parser! symbol "¬" 40 >> termParser 40
-@[builtinTermParser] def bnot   := parser! symbol "!" 40 >> termParser 40
+@[builtinTermParser] def not    := parser! symbol "¬" appPrec >> termParser 40
+@[builtinTermParser] def bnot   := parser! symbol "!" appPrec >> termParser 40
 @[builtinTermParser] def uminus := parser! "-" >> termParser 100
 
 def namedArgument  := parser! try ("(" >> ident >> " := ") >> termParser >> ")"
