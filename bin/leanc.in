@@ -11,6 +11,10 @@
 set -e
 bindir=$(dirname $0)
 
+common_flags=(-D LEAN_MULTI_THREAD "-I$bindir/../src" "-I$bindir/../include" "$@" "-L$bindir" "-L$bindir/../lib" -lgmp
+              # remove dead symbols
+              -fdata-sections -ffunction-sections -Wl,--gc-sections
+              -Wno-unused-command-line-argument)
 # As an optimization, we use a C compiler for compiling object files without linking.
 # C files produced by Lean are also valid C++ files, but C compilers tend to be faster.
 # Final linking still has to be done by a C++ compiler because we need to link against the
@@ -34,7 +38,7 @@ if [[ $use_c == yes ]]; then
     done
     [ -f $LEAN_CC ] || command -v $LEAN_CC || error "no suitable C compiler found!"
 
-    @CMAKE_C_COMPILER_LAUNCHER@ $LEAN_CC -D LEAN_MULTI_THREAD "-I$bindir/../src" "-I$bindir/../include" "$@" "-L$bindir" "-L$bindir/../lib" $linker_flags -lgmp @LEANC_EXTRA_FLAGS@ -Wno-unused-command-line-argument
+    @CMAKE_C_COMPILER_LAUNCHER@ $LEAN_CC ${common_flags[@]} $linker_flags @LEANC_EXTRA_FLAGS@
 else
     # Check C++ compiler
     for cxx in $LEAN_CXX @CMAKE_CXX_COMPILER@ /usr/bin/g++; do
@@ -44,5 +48,5 @@ else
     done
     [ -f $LEAN_CXX ] || command -v $LEAN_CXX || error "no suitable C++ compiler found!"
 
-    @CMAKE_CXX_COMPILER_LAUNCHER@ $LEAN_CXX -std=c++14 -D LEAN_MULTI_THREAD "-I$bindir/../src" "-I$bindir/../include" "$@" "-L$bindir" "-L$bindir/../lib" $linker_flags -lgmp @LEANC_EXTRA_FLAGS@ -Wno-unused-command-line-argument
+    @CMAKE_CXX_COMPILER_LAUNCHER@ $LEAN_CXX -std=c++14  ${common_flags[@]} $linker_flags @LEANC_EXTRA_FLAGS@
 fi

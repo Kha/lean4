@@ -335,7 +335,7 @@ else()
 endif ()
 
 if (NOT MSVC)
-    set(CMAKE_CXX_FLAGS                "-Wall -Wextra -std=c++14 ${CMAKE_CXX_FLAGS}")
+    set(CMAKE_CXX_FLAGS                "-Wall -Wextra -std=c++14 -fdata-sections -ffunction-sections ${CMAKE_CXX_FLAGS}")
     set(CMAKE_CXX_FLAGS_DEBUG          "-g3 ${CMAKE_CXX_FLAGS_DEBUG}")
     set(CMAKE_CXX_FLAGS_MINSIZEREL     "-Os ${CMAKE_CXX_FLAGS_MINSIZEREL}")
     set(CMAKE_CXX_FLAGS_RELEASE        "-O3 ${CMAKE_CXX_FLAGS_RELEASE}")
@@ -554,7 +554,7 @@ if(NOT STAGE0)
      COMMAND "${CMAKE_COMMAND}" -E copy ${COPY_LIBS} "$<TARGET_FILE:leanstdlib>" "$<TARGET_FILE:leanstatic>" "${LEAN_SOURCE_DIR}/../bin"
   )
   # Configure leanc
-  configure_file("${LEAN_SOURCE_DIR}/../bin/leanc.in" "${CMAKE_CURRENT_BINARY_DIR}/tmp/leanc")
+  configure_file("${LEAN_SOURCE_DIR}/../bin/leanc.in" "${CMAKE_CURRENT_BINARY_DIR}/tmp/leanc" @ONLY)
   file(COPY "${CMAKE_CURRENT_BINARY_DIR}/tmp/leanc"
     DESTINATION "${LEAN_SOURCE_DIR}/../bin"
     FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
