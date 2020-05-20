@@ -262,11 +262,15 @@ structure ParserInfo :=
 (collectKinds  : SyntaxNodeKindSet → SyntaxNodeKindSet := id)
 (firstTokens   : FirstTokens                           := FirstTokens.unknown)
 
-structure Parser :=
+structure BasicParser :=
 (info : ParserInfo := {})
 (fn   : ParserFn)
 
-instance Parser.inhabited : Inhabited Parser :=
+structure Parser (arity : Nat := 1) extends BasicParser
+
+variable {a : Nat}
+
+instance Parser.inhabited : Inhabited (Parser a) :=
 ⟨{ fn := fun _ s => s }⟩
 
 abbrev TrailingParser := Parser
@@ -279,7 +283,7 @@ fun c s =>
   if p s.stxStack.back then s
   else s.mkUnexpectedError "invalid leading token"
 
-@[inline] def checkStackTop (p : Syntax → Bool) : Parser :=
+@[inline] def checkStackTop (p : Syntax → Bool) : Parser 0 :=
 { info := epsilonInfo,
   fn   := checkStackTopFn p }
 
@@ -293,12 +297,14 @@ fun c s =>
   collectKinds  := p.collectKinds ∘ q.collectKinds,
   firstTokens   := p.firstTokens.seq q.firstTokens }
 
-@[inline] def andthen (p q : Parser) : Parser :=
+@[inline] def andthenCore (p : BasicParser) (q : BasicParser) : BasicParser :=
 { info := andthenInfo p.info q.info,
   fn   := andthenFn p.fn q.fn }
 
-instance hasAndthen : HasAndthen Parser :=
-⟨andthen⟩
+@[inline] def andthen {a₁ a₂ : Nat} (p : Parser a₁) (q : Parser a₂) : Parser (a₁ + a₂) :=
+{ .. andthenCore p.toBasicParser q.toBasicParser }
+
+infixr >> := andthen
 
 @[inline] def nodeFn (n : SyntaxNodeKind) (p : ParserFn) : ParserFn
 | c, s =>
@@ -317,18 +323,18 @@ instance hasAndthen : HasAndthen Parser :=
   collectKinds  := fun s => (p.collectKinds s).insert n,
   firstTokens   := p.firstTokens }
 
-@[inline] def node (n : SyntaxNodeKind) (p : Parser) : Parser :=
+@[inline] def node (n : SyntaxNodeKind) (p : Parser a) : Parser :=
 { info := nodeInfo n p.info,
   fn   := nodeFn n p.fn }
 
-@[inline] def leadingNode (n : SyntaxNodeKind) (p : Parser) : Parser :=
+@[inline] def leadingNode (n : SyntaxNodeKind) (p : Parser a) : Parser :=
 node n p
 
-@[inline] def trailingNode (n : SyntaxNodeKind) (p : Parser) : TrailingParser :=
+@[inline] def trailingNode (n : SyntaxNodeKind) (p : Parser a) : TrailingParser :=
 { info := nodeInfo n p.info,
   fn   := trailingNodeFn n p.fn }
 
-@[inline] def group (p : Parser) : Parser :=
+@[inline] def group (p : Parser a) : Parser :=
 node nullKind p
 
 def mergeOrElseErrors (s : ParserState) (error1 : Error) (iniPos : Nat) : ParserState :=
@@ -356,11 +362,11 @@ match s with
   collectKinds  := p.collectKinds ∘ q.collectKinds,
   firstTokens   := p.firstTokens.merge q.firstTokens }
 
-@[inline] def orelse (p q : Parser) : Parser :=
+@[inline] def orelse (p q : Parser a) : Parser a :=
 { info := orelseInfo p.info q.info,
   fn   := orelseFn p.fn q.fn }
 
-instance hashOrelse : HasOrelse Parser :=
+instance hashOrelse : HasOrelse (Parser a) :=
 ⟨orelse⟩
 
 @[noinline] def noFirstTokenInfo (info : ParserInfo) : ParserInfo :=
@@ -375,7 +381,7 @@ instance hashOrelse : HasOrelse Parser :=
   | ⟨stack, _, cache, some msg⟩ => ⟨stack.shrink iniSz, iniPos, cache, some msg⟩
   | other                       => other
 
-@[inline] def try (p : Parser) : Parser :=
+@[inline] def try (p : Parser a) : Parser a :=
 { info := p.info,
   fn   := tryFn p.fn }
 
@@ -392,7 +398,7 @@ fun c s =>
   collectKinds  := p.collectKinds,
   firstTokens   := p.firstTokens.toOptional }
 
-@[inline] def optional (p : Parser) : Parser :=
+@[inline] def optional (p : Parser a) : Parser :=
 { info := optionaInfo p.info,
   fn   := optionalFn p.fn }
 
@@ -981,7 +987,7 @@ fun c s =>
   let prev := s.stxStack.back;
   if checkTailWs prev then s else s.mkError errorMsg
 
-def checkWsBefore (errorMsg : String) : Parser :=
+def checkWsBefore (errorMsg : String) : Parser 0 :=
 { info := epsilonInfo,
   fn   := checkWsBeforeFn errorMsg }
 
@@ -1000,7 +1006,7 @@ fun c s =>
   let prev := pickNonNone s.stxStack;
   if checkTailNoWs prev then s else s.mkError errorMsg
 
-def checkNoWsBefore (errorMsg : String) : Parser :=
+def checkNoWsBefore (errorMsg : String) : Parser 0 :=
 { info := epsilonInfo,
   fn   := checkNoWsBeforeFn errorMsg }
 
@@ -1059,7 +1065,7 @@ fun c s =>
   if c.rbp > lower then s.mkUnexpectedError errorMsg
   else s
 
-def checkRBPGreater (lower : Nat) (errorMsg : String) : Parser :=
+def checkRBPGreater (lower : Nat) (errorMsg : String) : Parser 0 :=
 { info := epsilonInfo,
   fn   := checkRBPGreaterFn lower errorMsg }
 
@@ -1261,7 +1267,7 @@ fun c s =>
   if pos.column ≥ col then s
   else s.mkError errorMsg
 
-@[inline] def checkColGe (col : Nat) (errorMsg : String) : Parser :=
+@[inline] def checkColGe (col : Nat) (errorMsg : String) : Parser 0 :=
 { fn := checkColGeFn col errorMsg }
 
 @[inline] def withPosition (p : Position → Parser) : Parser :=
@@ -1271,7 +1277,7 @@ fun c s =>
    (p pos).fn c s }
 
 @[inline] def many1Indent (p : Parser) (errorMsg : String) : Parser :=
-withPosition $ fun pos => many1 (checkColGe pos.column errorMsg >> p)
+withPosition $ fun pos => many1 (andthen (checkColGe pos.column errorMsg) p)
 
 /-- A multimap indexed by tokens. Used for indexing parsers by their leading token. -/
 def TokenMap (α : Type) := RBMap Name (List α) Name.quickLt
@@ -1396,7 +1402,7 @@ categoryParser `term rbp
 def dollarSymbol : Parser := symbol "$" 1
 
 /-- Fail if previous token is immediately followed by ':'. -/
-private def noImmediateColon : Parser :=
+private def noImmediateColon : Parser 0 :=
 { fn := fun c s =>
   let prev := s.stxStack.back;
   if checkTailNoWs prev then
@@ -1423,7 +1429,7 @@ def pushNone : Parser :=
 { fn := fun c s => s.pushSyntax mkNullNode }
 
 -- We support two kinds of antiquotations: `$id` and `$(t)`, where `id` is a term identifier and `t` is a term.
-private def antiquotNestedExpr : Parser := node `antiquotNestedExpr ("(" >> termParser >> ")")
+private def antiquotNestedExpr : Parser := node `antiquotNestedExpr (symbolAux "(" >> termParser >> symbolAux ")")
 private def antiquotExpr : Parser       := identNoAntiquot <|> antiquotNestedExpr
 
 /--
@@ -1441,10 +1447,10 @@ let nameP := if anonymous then nameP <|> noImmediateColon >> pushNone >> pushNon
 -- antiquotations are not part of the "standard" syntax, so hide "expected '$'" on error
 node kind $ try $
   setExpected [] dollarSymbol >>
-  many (checkNoWsBefore "" >> dollarSymbol) >>
+  many (andthen (checkNoWsBefore "") dollarSymbol) >>
   checkNoWsBefore "no space before spliced term" >> antiquotExpr >>
   nameP >>
-  optional (checkNoWsBefore "" >> "*")
+  optional (checkNoWsBefore "" >> symbolAux "*")
 
 def tryAnti (c : ParserContext) (s : ParserState) : Bool :=
 let (s, stx?) := peekToken c s;
@@ -1713,7 +1719,7 @@ match e with
   | _ => unreachable!
 
 def compileParserDescr (categories : ParserCategories) : ParserDescr → Except String (Parser)
-| ParserDescr.andthen d₁ d₂                       => andthen <$> compileParserDescr d₁ <*> compileParserDescr d₂
+| ParserDescr.andthen d₁ d₂                       => (fun (p q : Parser) => { .. andthen p q }) <$> compileParserDescr d₁ <*> compileParserDescr d₂
 | ParserDescr.orelse d₁ d₂                        => orelse <$> compileParserDescr d₁ <*> compileParserDescr d₂
 | ParserDescr.optional d                          => optional <$> compileParserDescr d
 | ParserDescr.lookahead d                         => lookahead <$> compileParserDescr d

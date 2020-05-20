@@ -29,16 +29,16 @@ namespace Term
 
 /- Helper functions for defining simple parsers -/
 
-def unicodeInfixR (sym : String) (asciiSym : String) (lbp : Nat) : TrailingParser :=
+def unicodeInfixR (sym : String) (asciiSym : String) (lbp : Nat) : Parser 2 :=
 unicodeSymbol sym asciiSym lbp >> termParser (lbp - 1)
 
-def infixR (sym : String) (lbp : Nat) : TrailingParser :=
+def infixR (sym : String) (lbp : Nat) : Parser 2 :=
 symbol sym lbp >> termParser (lbp - 1)
 
-def unicodeInfixL (sym : String) (asciiSym : String) (lbp : Nat) : TrailingParser :=
+def unicodeInfixL (sym : String) (asciiSym : String) (lbp : Nat) : Parser 2 :=
 unicodeSymbol sym asciiSym lbp >> termParser lbp
 
-def infixL (sym : String) (lbp : Nat) : TrailingParser :=
+def infixL (sym : String) (lbp : Nat) : Parser 2 :=
 symbol sym lbp >> termParser lbp
 
 def leadPrec := appPrec - 1
@@ -46,8 +46,8 @@ def leadPrec := appPrec - 1
 /- Built-in parsers -/
 -- NOTE: `checkNoWsBefore` should be used *before* `parser!` so that it is also applied to the generated
 -- antiquotation.
-def explicitUniv := checkNoWsBefore "no space before '.{'" >> parser! ".{" >> sepBy1 levelParser ", " >> "}"
-def namedPattern := checkNoWsBefore "no space before '@'" >> parser! "@" >> termParser appPrec
+def explicitUniv := checkNoWsBefore "no space before '.{'" >> parser! symbolAux ".{" >> sepBy1 levelParser ", " >> symbolAux "}"
+def namedPattern := checkNoWsBefore "no space before '@'" >> parser! symbolAux "@" >> termParser appPrec
 @[builtinTermParser] def id := parser! ident >> optional (explicitUniv <|> namedPattern)
 @[builtinTermParser] def num : Parser := parser! numLit
 @[builtinTermParser] def str : Parser := parser! strLit
@@ -60,16 +60,16 @@ def namedPattern := checkNoWsBefore "no space before '@'" >> parser! "@" >> term
 @[builtinTermParser] def «sorry» := parser! symbol "sorry" appPrec
 @[builtinTermParser] def cdot   := parser! symbol "·" appPrec
 @[builtinTermParser] def emptyC := parser! symbol "∅" appPrec
-def typeAscription := parser! " : " >> termParser
-def tupleTail      := parser! ", " >> sepBy1 termParser ", "
+def typeAscription := parser! symbolAux " : " >> termParser
+def tupleTail      := parser! symbolAux ", " >> sepBy1 termParser ", "
 def parenSpecial : Parser := optional (tupleTail <|> typeAscription)
-@[builtinTermParser] def paren := parser! symbol "(" appPrec >> optional (termParser >> parenSpecial) >> ")"
-@[builtinTermParser] def anonymousCtor := parser! symbol "⟨" appPrec >> sepBy termParser ", " >> "⟩"
-def optIdent : Parser := optional (try (ident >> " : "))
-@[builtinTermParser] def «if»  := parser! symbol "if " leadPrec >> optIdent >> termParser >> " then " >> termParser >> " else " >> termParser
-def fromTerm   := parser! " from " >> termParser
-def haveAssign := parser! " := " >> termParser
-@[builtinTermParser] def «have» := parser! symbol "have " leadPrec >> optIdent >> termParser >> (haveAssign <|> fromTerm) >> "; " >> termParser
+@[builtinTermParser] def paren := parser! symbol "(" appPrec >> optional (termParser >> parenSpecial) >> symbolAux ")"
+@[builtinTermParser] def anonymousCtor := parser! symbol "⟨" appPrec >> sepBy termParser ", " >> symbolAux "⟩"
+def optIdent : Parser := optional (try (ident >> symbolAux " : "))
+@[builtinTermParser] def «if»  := parser! symbol "if " leadPrec >> optIdent >> termParser >> symbolAux " then " >> termParser >> symbolAux " else " >> termParser
+def fromTerm   := parser! symbolAux " from " >> termParser
+def haveAssign := parser! symbolAux " := " >> termParser
+@[builtinTermParser] def «have» := parser! symbol "have " leadPrec >> optIdent >> termParser >> (haveAssign <|> fromTerm) >> symbolAux "; " >> termParser
 @[builtinTermParser] def «suffices» := parser! symbol "suffices " leadPrec >> optIdent >> termParser >> fromTerm >> "; " >> termParser
 @[builtinTermParser] def «show»     := parser! symbol "show " leadPrec >> termParser >> fromTerm
 def structInstArrayRef := parser! "[" >> termParser >>"]"

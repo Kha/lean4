@@ -17,7 +17,7 @@ categoryParser `level rbp
 
 namespace Level
 
-@[builtinLevelParser] def paren  := parser! symbol "(" appPrec >> levelParser >> ")"
+@[builtinLevelParser] def paren  := parser! symbol "(" appPrec >> levelParser >> symbolAux ")"
 @[builtinLevelParser] def max    := parser! nonReservedSymbol "max " true  >> many1 (levelParser appPrec)
 @[builtinLevelParser] def imax   := parser! nonReservedSymbol "imax " true >> many1 (levelParser appPrec)
 @[builtinLevelParser] def hole   := parser! symbol "_" appPrec
