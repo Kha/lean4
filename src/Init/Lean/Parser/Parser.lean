@@ -1907,7 +1907,7 @@ unless persistent $ throw (IO.userError ("invalid attribute '" ++ toString attrN
 match env.find? declName with
 | none  => throw $ IO.userError "unknown declaration"
 | some decl =>
-  match decl.type with
+  match decl.type.getAppFn with
  | Expr.const `Lean.Parser.TrailingParser _ _ =>
    declareTrailingBuiltinParser env catName declName
  | Expr.const `Lean.Parser.Parser _ _ =>
