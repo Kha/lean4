@@ -619,7 +619,7 @@ def quotedCharFn : ParserFn
   if input.atEnd i then s.mkEOIError
   else
     let curr := input.get i;
-    if curr == '\\' || curr == '\"' || curr == '\'' || curr == 'n' || curr == 't' then
+    if curr == '\\' || curr == '\"' || curr == '\'' || curr == 'r' || curr == 'n' || curr == 't' then
       s.next input i
     else if curr == 'x' then
       andthenFn hexDigitFn hexDigitFn c (s.next input i)
@@ -1907,7 +1907,7 @@ unless persistent $ throw (IO.userError ("invalid attribute '" ++ toString attrN
 match env.find? declName with
 | none  => throw $ IO.userError "unknown declaration"
 | some decl =>
-  match decl.type with
+  match decl.type.getAppFn with
  | Expr.const `Lean.Parser.TrailingParser _ _ =>
    declareTrailingBuiltinParser env catName declName
  | Expr.const `Lean.Parser.Parser _ _ =>
