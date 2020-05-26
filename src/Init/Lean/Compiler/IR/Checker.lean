@@ -54,7 +54,7 @@ def checkArgs (as : Array Arg) : M Unit :=
 as.forM checkArg
 
 @[inline] def checkEqTypes (ty₁ ty₂ : IRType) : M Unit :=
-unless (ty₁ == ty₂) $ throw ("unexpected type")
+unless (ty₁ == ty₂) $ throw "unexpected type"
 
 @[inline] def checkType (ty : IRType) (p : IRType → Bool) : M Unit :=
 unless (p ty) $ throw ("unexpected type '" ++ toString ty ++ "'")
@@ -80,7 +80,7 @@ checkVarType x IRType.isScalar
 
 def checkFullApp (c : FunId) (ys : Array Arg) : M Unit := do
 when (c == `hugeFuel) $
-  throw ("the auxiliary constant `hugeFuel` cannot be used in code, it is used internally for compiling `partial` definitions");
+  throw "the auxiliary constant `hugeFuel` cannot be used in code, it is used internally for compiling `partial` definitions";
 decl ← getDecl c;
 unless (ys.size == decl.params.size) $
   throw ("incorrect number of arguments to '" ++ toString c ++ "', " ++ toString ys.size ++ " provided, " ++ toString decl.params.size ++ " expected");

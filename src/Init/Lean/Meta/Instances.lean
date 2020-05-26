@@ -22,7 +22,7 @@ def mkInstanceExtension : IO (SimplePersistentEnvExtension InstanceEntry Instanc
 registerSimplePersistentEnvExtension {
   name          := `instanceExt,
   addEntryFn    := addInstanceEntry,
-  addImportedFn := fun es => (mkStateFromImportedEntries addInstanceEntry DiscrTree.empty es)
+  addImportedFn := fun es => mkStateFromImportedEntries addInstanceEntry DiscrTree.empty es
 }
 
 @[init mkInstanceExtension]
@@ -48,8 +48,8 @@ registerBuiltinAttribute {
   name  := `instance,
   descr := "type class instance",
   add   := fun env declName args persistent => do
-    when args.hasArgs $ throw (IO.userError ("invalid attribute 'instance', unexpected argument"));
-    unless persistent $ throw (IO.userError ("invalid attribute 'instance', must be persistent"));
+    when args.hasArgs $ throw (IO.userError "invalid attribute 'instance', unexpected argument");
+    unless persistent $ throw (IO.userError "invalid attribute 'instance', must be persistent");
     env ← IO.ofExcept (addGlobalInstanceOld env declName); -- TODO: delete
     addGlobalInstance env declName
 }

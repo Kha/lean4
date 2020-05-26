@@ -175,7 +175,7 @@ instance EnvExtension.Inhabited (σ : Type) [Inhabited σ] : Inhabited (EnvExten
 
 unsafe def registerEnvExtensionUnsafe {σ : Type} [Inhabited σ] (mkInitial : IO σ) : IO (EnvExtension σ) := do
 initializing ← IO.initializing;
-unless initializing $ throw (IO.userError ("failed to register environment, extensions can only be registered during initialization"));
+unless initializing $ throw (IO.userError "failed to register environment, extensions can only be registered during initialization");
 exts ← envExtensionsRef.get;
 let idx := exts.size;
 let ext : EnvExtension σ := {
@@ -269,7 +269,7 @@ def setState {α β σ : Type} (ext : PersistentEnvExtension α β σ) (env : En
 ext.toEnvExtension.modifyState env $ fun ps => { ps with  state := s }
 
 def modifyState {α β σ : Type} (ext : PersistentEnvExtension α β σ) (env : Environment) (f : σ → σ) : Environment :=
-ext.toEnvExtension.modifyState env $ fun ps => { ps with state := f (ps.state) }
+ext.toEnvExtension.modifyState env $ fun ps => { ps with state := f ps.state }
 
 end PersistentEnvExtension
 
@@ -475,7 +475,7 @@ pure {
 def writeModule (env : Environment) (fname : String) : IO Unit := do
 modData ← mkModuleData env; saveModuleData fname modData
 
-partial def importModulesAux : List Import → (NameSet × Array ModuleData) → IO (NameSet × Array ModuleData)
+partial def importModulesAux : List Import → NameSet × Array ModuleData → IO (NameSet × Array ModuleData)
 | [],    r         => pure r
 | i::is, (s, mods) =>
   if i.runtimeOnly || s.contains i.module then
@@ -516,7 +516,7 @@ pExtDescrs.iterateM env $ fun _ extDescr env => do
 @[export lean_import_modules]
 def importModules (imports : List Import) (trustLevel : UInt32 := 0) : IO Environment := do
 (moduleNames, mods) ← importModulesAux imports ({}, #[]);
-let const2ModIdx := mods.iterate {} $ fun (modIdx) (mod : ModuleData) (m : HashMap Name ModuleIdx) =>
+let const2ModIdx := mods.iterate {} $ fun modIdx (mod : ModuleData) (m : HashMap Name ModuleIdx) =>
   mod.constants.iterate m $ fun _ cinfo m =>
     m.insert cinfo.name modIdx.val;
 constants ← mods.iterateM SMap.empty $ fun _ (mod : ModuleData) (cs : ConstMap) =>

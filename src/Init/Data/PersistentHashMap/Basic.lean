@@ -17,7 +17,7 @@ inductive Entry (α : Type u) (β : Type v) (σ : Type w)
 
 instance Entry.inhabited {α β σ} : Inhabited (Entry α β σ) := ⟨Entry.null⟩
 
-inductive Node (α : Type u) (β : Type v) : Type (max u v)
+inductive Node (α : Type u) (β : Type v) : Type max u v
 | entries   (es : Array (Entry α β Node)) : Node
 | collision (ks : Array α) (vs : Array β) (h : ks.size = vs.size) : Node
 
@@ -29,7 +29,7 @@ abbrev maxDepth      : USize  := 7
 abbrev maxCollisions : Nat    := 4
 
 def mkEmptyEntriesArray {α β} : Array (Entry α β (Node α β)) :=
-(Array.mkArray PersistentHashMap.branching.toNat PersistentHashMap.Entry.null)
+Array.mkArray PersistentHashMap.branching.toNat PersistentHashMap.Entry.null
 
 end PersistentHashMap
 
@@ -56,7 +56,7 @@ Node.entries mkEmptyEntriesArray
 
 abbrev mul2Shift (i : USize) (shift : USize) : USize := i.shiftLeft shift
 abbrev div2Shift (i : USize) (shift : USize) : USize := i.shiftRight shift
-abbrev mod2Shift (i : USize) (shift : USize) : USize := USize.land i ((USize.shiftLeft 1 shift) - 1)
+abbrev mod2Shift (i : USize) (shift : USize) : USize := USize.land i (USize.shiftLeft 1 shift - 1)
 
 inductive IsCollisionNode : Node α β → Prop
 | mk (keys : Array α) (vals : Array β) (h : keys.size = vals.size) : IsCollisionNode (Node.collision keys vals h)
@@ -222,7 +222,7 @@ def isUnaryNode : Node α β → Option (α × β)
 | Node.entries entries         => isUnaryEntries entries 0 none
 | Node.collision keys vals heq =>
   if h : 1 = keys.size then
-    have 0 < keys.size from h ▸ (Nat.zeroLtSucc _);
+    have 0 < keys.size from h ▸ Nat.zeroLtSucc _;
     some (keys.get ⟨0, this⟩, vals.get ⟨0, heq ▸ this⟩)
   else
     none

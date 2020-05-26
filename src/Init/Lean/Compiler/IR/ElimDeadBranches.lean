@@ -217,7 +217,7 @@ partial def interpFnBody : FnBody → M Unit
   updated ← updateJPParamsAssignment ys xs;
   when updated $
     interpFnBody $ (ctx.lctx.getJPBody j).get!
-| e => unless (e.isTerminal) $ interpFnBody e.body
+| e => unless e.isTerminal $ interpFnBody e.body
 
 def inferStep : M Bool := do
 ctx ← read;

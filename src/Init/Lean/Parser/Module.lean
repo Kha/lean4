@@ -92,7 +92,7 @@ private partial def testModuleParserAux (env : Environment) (inputCtx : InputCon
   | (stx, s, messages) =>
     if isEOI stx || isExitCommand stx then do
       messages.forM $ fun msg => IO.println msg;
-      pure (!messages.hasErrors)
+      pure !messages.hasErrors
     else do
       when displayStx (IO.println stx);
       testModuleParserAux s messages

@@ -99,7 +99,7 @@ let ps := decl.params;
 env ← getEnv;
 when (ps.isEmpty && addExternForConsts) (emit "extern ");
 emit (toCType decl.resultType ++ " " ++ cppBaseName);
-unless (ps.isEmpty) $ do {
+unless ps.isEmpty $ do {
   emit "(";
   -- We omit irrelevant parameters for extern constants
   let ps := if isExternC env decl.name then ps.filter (fun p => !p.ty.isIrrelevant) else ps;
@@ -122,7 +122,7 @@ def emitExternDeclAux (decl : Decl) (cNameStr : String) : M Unit := do
 let cName := mkNameSimple cNameStr;
 env ← getEnv;
 let extC := isExternC env decl.name;
-emitFnDeclAux decl cNameStr (!extC)
+emitFnDeclAux decl cNameStr !extC
 
 def emitFnDecls : M Unit := do
 env ← getEnv;
@@ -134,7 +134,7 @@ usedDecls.forM $ fun n => do
   decl ← getDecl n;
   match getExternNameFor env `c decl.name with
   | some cName => emitExternDeclAux decl cName
-  | none       => emitFnDecl decl (!modDecls.contains n)
+  | none       => emitFnDecl decl !modDecls.contains n
 
 def emitMainFn : M Unit := do
 d ← getDecl `main;
@@ -162,7 +162,7 @@ lean_object* in; lean_object* res;";
   else
     emitLn "lean_initialize_runtime_module();";
   modName ← getModName;
-  emitLn ("res = initialize_" ++ (modName.mangle "") ++ "(lean_io_mk_world());");
+  emitLn ("res = initialize_" ++ modName.mangle "" ++ "(lean_io_mk_world());");
   emitLns ["lean_io_mark_end_initialization();",
            "if (lean_io_result_is_ok(res)) {",
            "lean_dec_ref(res);",
@@ -287,8 +287,8 @@ match isIf alts with
 
 def emitInc (x : VarId) (n : Nat) (checkRef : Bool) : M Unit := do
 emit $
-  if checkRef then (if n == 1 then "lean_inc" else "lean_inc_n")
-  else (if n == 1 then "lean_inc_ref" else "lean_inc_ref_n");
+  if checkRef then if n == 1 then "lean_inc" else "lean_inc_n"
+  else if n == 1 then "lean_inc_ref" else "lean_inc_ref_n";
 emit "(" *> emit x;
 when (n != 1) (emit ", " *> emit n);
 emitLn ");"

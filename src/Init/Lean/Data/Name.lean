@@ -77,17 +77,17 @@ def isSuffixOf : Name → Name → Bool
 def lt : Name → Name → Bool
 | anonymous,   anonymous   => false
 | anonymous,   _           => true
-| num p₁ i₁ _, num p₂ i₂ _ => lt p₁ p₂ || (p₁ == p₂ && i₁ < i₂)
+| num p₁ i₁ _, num p₂ i₂ _ => lt p₁ p₂ || p₁ == p₂ && i₁ < i₂
 | num _ _ _,   str _ _ _   => true
-| str p₁ n₁ _, str p₂ n₂ _ => lt p₁ p₂ || (p₁ == p₂ && n₁ < n₂)
+| str p₁ n₁ _, str p₂ n₂ _ => lt p₁ p₂ || p₁ == p₂ && n₁ < n₂
 | _,           _           => false
 
 def quickLtAux : Name → Name → Bool
 | anonymous, anonymous   => false
 | anonymous, _           => true
-| num n v _, num n' v' _ => v < v' || (v = v' && n.quickLtAux n')
+| num n v _, num n' v' _ => v < v' || v = v' && n.quickLtAux n'
 | num _ _ _, str _ _ _   => true
-| str n s _, str n' s' _ => s < s' || (s = s' && n.quickLtAux n')
+| str n s _, str n' s' _ => s < s' || s = s' && n.quickLtAux n'
 | _,         _           => false
 
 def quickLt (n₁ n₂ : Name) : Bool :=

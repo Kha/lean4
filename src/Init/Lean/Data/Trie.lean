@@ -69,7 +69,7 @@ match v, acc with
 | some v, (j, w) => (i, some v)  -- we pattern match on `acc` to enable memory reuse
 | none,   acc    => acc
 
-private partial def matchPrefixAux (s : String) : Trie α → String.Pos → (String.Pos × Option α) → String.Pos × Option α
+private partial def matchPrefixAux (s : String) : Trie α → String.Pos → String.Pos × Option α → String.Pos × Option α
 | Trie.Node v m, i, acc =>
   match s.atEnd i with
   | true  => updtAcc v i acc

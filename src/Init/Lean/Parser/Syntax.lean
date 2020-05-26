@@ -65,13 +65,13 @@ def optKind : Parser := optional ("[" >> ident >> "]")
 @[builtinCommandParser] def «macro_rules» := parser! "macro_rules" >> optKind >> Term.matchAlts
 @[builtinCommandParser] def «syntax»      := parser! "syntax " >> optKind >> many1 syntaxParser >> " : " >> ident
 @[builtinCommandParser] def syntaxCat     := parser! "declare_syntax_cat " >> ident
-def macroArgType   := nonReservedSymbol "ident" <|> nonReservedSymbol "num" <|> nonReservedSymbol "str" <|> nonReservedSymbol "char" <|> (ident >> optPrecedence)
+def macroArgType   := nonReservedSymbol "ident" <|> nonReservedSymbol "num" <|> nonReservedSymbol "str" <|> nonReservedSymbol "char" <|> ident >> optPrecedence
 def macroArgSimple := parser! ident >> checkNoWsBefore "no space before ':'" >> ":" >> macroArgType
 def macroArg  := try strLitPrec <|> try macroArgSimple
 def macroHead := macroArg <|> try identPrec
 def macroTailTactic   : Parser := try (" : " >> identEq "tactic") >> darrow >>  "`(" >> sepBy1 tacticParser "; " true true >> ")"
 def macroTailCommand  : Parser := try (" : " >> identEq "command") >> darrow >> "`(" >> many1 commandParser true >> ")"
-def macroTailDefault  : Parser := try (" : " >> ident) >> darrow >> (("`(" >> categoryParserOfStack 2 >> ")") <|> termParser)
+def macroTailDefault  : Parser := try (" : " >> ident) >> darrow >> ("`(" >> categoryParserOfStack 2 >> ")" <|> termParser)
 def macroTail := macroTailTactic <|> macroTailCommand <|> macroTailDefault
 @[builtinCommandParser] def «macro»       := parser! "macro " >> macroHead >> many macroArg >> macroTail
 

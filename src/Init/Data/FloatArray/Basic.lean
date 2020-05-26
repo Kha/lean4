@@ -31,7 +31,7 @@ def push : FloatArray → Float → FloatArray
 | ⟨ds⟩, b => ⟨ds.push b⟩
 
 @[extern "lean_float_array_size"]
-def size : (@& FloatArray) → Nat
+def size : @& FloatArray → Nat
 | ⟨ds⟩ => ds.size
 
 @[extern "lean_float_array_fget"]
@@ -40,7 +40,7 @@ match ds, i with
 | ⟨ds⟩, i => ds.get i
 
 @[extern "lean_float_array_get"]
-def get! : (@& FloatArray) → (@& Nat) → Float
+def get! : @& FloatArray → @& Nat → Float
 | ⟨ds⟩, i => ds.get! i
 
 def get? (ds : FloatArray) (i : Nat) : Option Float :=
@@ -55,7 +55,7 @@ match ds, i with
 | ⟨ds⟩, i=> ⟨ds.set i d⟩
 
 @[extern "lean_float_array_set"]
-def set! : FloatArray → (@& Nat) → Float → FloatArray
+def set! : FloatArray → @& Nat → Float → FloatArray
 | ⟨ds⟩, i, d => ⟨ds.set! i d⟩
 
 def isEmpty (s : FloatArray) : Bool :=

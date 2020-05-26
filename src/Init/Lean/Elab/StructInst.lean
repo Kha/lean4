@@ -787,7 +787,7 @@ fun stx expectedType? => do
       modifyOp?  ← isModifyOp? stx;
       match modifyOp?, sourceView with
       | some modifyOp, Source.explicit source _ => elabModifyOp stx modifyOp source expectedType?
-      | some _,        _                        => throwError stx ("invalid {...} notation, explicit source is required when using '[<index>] := <value>'")
+      | some _,        _                        => throwError stx "invalid {...} notation, explicit source is required when using '[<index>] := <value>'"
       | _,             _                        => elabStructInstAux stx expectedType? sourceView
 
 @[init] private def regTraceClasses : IO Unit := do

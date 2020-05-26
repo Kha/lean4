@@ -41,10 +41,10 @@ class HasCoe (a : Sort u) (b : Sort v) :=
 class HasCoeT (a : Sort u) (b : Sort v) :=
 (coe : a → b)
 
-class HasCoeToFun (a : Sort u) : Sort (max u (v+1)) :=
+class HasCoeToFun (a : Sort u) : Sort max u (v+1) :=
 (F : a → Sort v) (coe : ∀ x, F x)
 
-class HasCoeToSort (a : Sort u) : Type (max u (v+1)) :=
+class HasCoeToSort (a : Sort u) : Type max u (v+1) :=
 (S : Sort v) (coe : a → S)
 
 @[inline] def lift {a : Sort u} {b : Sort v} [HasLift a b] : a → b :=

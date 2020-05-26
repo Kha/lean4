@@ -193,7 +193,7 @@ def rprodSubLex : ∀ a b, Rprod ra rb a b → Lex ra rb a b :=
 
 -- The relational product of well founded relations is well-founded
 def rprodWf (ha : WellFounded ra) (hb : WellFounded rb) : WellFounded (Rprod ra rb) :=
-Subrelation.wf (rprodSubLex) (lexWf ha hb)
+Subrelation.wf rprodSubLex (lexWf ha hb)
 end
 
 instance HasWellFounded {α : Type u} {β : Type v} [s₁ : HasWellFounded α] [s₂ : HasWellFounded β] : HasWellFounded (α × β) :=
@@ -220,7 +220,7 @@ variables {r  : α → α → Prop} {s : ∀ (a : α), β a → β a → Prop}
 def lexAccessible {a} (aca : Acc r a) (acb : ∀ a, WellFounded (s a)) : ∀ (b : β a), Acc (Lex r s) ⟨a, b⟩ :=
 Acc.ndrecOn aca $ fun (xa aca) (iha : ∀ y, r y xa → ∀ (b : β y), Acc (Lex r s) ⟨y, b⟩) (b : β xa) =>
   Acc.ndrecOn (WellFounded.apply (acb xa) b) $ fun xb acb (ihb : ∀ (y : β xa), s xa y xb → Acc (Lex r s) ⟨xa, y⟩) =>
-     Acc.intro ⟨xa, xb⟩ $ fun (p) (lt : Lex r s p ⟨xa, xb⟩) =>
+     Acc.intro ⟨xa, xb⟩ $ fun p (lt : Lex r s p ⟨xa, xb⟩) =>
         have aux : xa = xa → xb ≅ xb → Acc (Lex r s) p from
           @PSigma.Lex.recOn α β r s (fun p₁ p₂ _ => p₂.1 = xa → p₂.2 ≅ xb → Acc (Lex r s) p₁)
                             p ⟨xa, xb⟩ lt
@@ -272,9 +272,9 @@ variables {α : Sort u} {β : Sort v}
 variables {r  : α → α → Prop} {s : β → β → Prop}
 
 def revLexAccessible {b} (acb : Acc s b) (aca : ∀ a, Acc r a): ∀ a, Acc (RevLex r s) ⟨a, b⟩ :=
-Acc.recOn acb $ fun (xb acb) (ihb : ∀ y, s y xb → ∀ a, Acc (RevLex r s) ⟨a, y⟩) (a) =>
+Acc.recOn acb $ fun (xb acb) (ihb : ∀ y, s y xb → ∀ a, Acc (RevLex r s) ⟨a, y⟩) a =>
   Acc.recOn (aca a) $ fun (xa aca) (iha : ∀ y, r y xa → Acc (RevLex r s) (mk y xb)) =>
-    Acc.intro ⟨xa, xb⟩ $ fun (p) (lt : RevLex r s p ⟨xa, xb⟩) =>
+    Acc.intro ⟨xa, xb⟩ $ fun p (lt : RevLex r s p ⟨xa, xb⟩) =>
       have aux : xa = xa → xb = xb → Acc (RevLex r s) p from
         @RevLex.recOn α β r s (fun p₁ p₂ _ => fst p₂ = xa → snd p₂ = xb → Acc (RevLex r s) p₁)
                             p ⟨xa, xb⟩ lt

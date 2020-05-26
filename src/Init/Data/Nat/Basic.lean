@@ -67,14 +67,14 @@ def pred : Nat → Nat
 | a+1 => a
 
 @[extern "lean_nat_sub"]
-protected def sub : (@& Nat) → (@& Nat) → Nat
+protected def sub : @& Nat → @& Nat → Nat
 | a, 0   => a
 | a, b+1 => pred (sub a b)
 
 @[extern "lean_nat_mul"]
-protected def mul : (@& Nat) → (@& Nat) → Nat
+protected def mul : @& Nat → @& Nat → Nat
 | a, 0   => 0
-| a, b+1 => (mul a b) + a
+| a, b+1 => mul a b + a
 
 instance : HasSub Nat :=
 ⟨Nat.sub⟩
@@ -84,7 +84,7 @@ instance : HasMul Nat :=
 
 @[specialize] def foldAux {α : Type u} (f : Nat → α → α) (s : Nat) : Nat → α → α
 | 0,      a => a
-| succ n, a => foldAux n (f (s - (succ n)) a)
+| succ n, a => foldAux n (f (s - succ n) a)
 
 @[inline] def fold {α : Type u} (f : Nat → α → α) (n : Nat) (a : α) : α :=
 foldAux f n n a
@@ -98,7 +98,7 @@ foldRevAux f n a
 
 @[specialize] def anyAux (f : Nat → Bool) (s : Nat) : Nat → Bool
 | 0      => false
-| succ n => f (s - (succ n)) || anyAux n
+| succ n => f (s - succ n) || anyAux n
 
 /- `any f n = true` iff there is `i in [0, n-1]` s.t. `f i = true` -/
 @[inline] def any (f : Nat → Bool) (n : Nat) : Bool :=
@@ -115,7 +115,7 @@ anyAux f n n
 repeatAux f n a
 
 @[extern "lean_nat_pow"]
-protected def pow (m : @& Nat) : (@& Nat) → Nat
+protected def pow (m : @& Nat) : @& Nat → Nat
 | 0      => 1
 | succ n => pow n * m
 
@@ -128,7 +128,7 @@ protected theorem zeroAdd : ∀ (n : Nat), 0 + n = n
 | 0   => rfl
 | n+1 => congrArg succ (zeroAdd n)
 
-theorem succAdd : ∀ (n m : Nat), (succ n) + m = succ (n + m)
+theorem succAdd : ∀ (n m : Nat), succ n + m = succ (n + m)
 | n, 0   => rfl
 | n, m+1 => congrArg succ (succAdd n m)
 
@@ -150,14 +150,14 @@ protected theorem addComm : ∀ (n m : Nat), n + m = m + n
   suffices succ (n + m) = succ (m + n) from Eq.symm (succAdd m n) ▸ this;
   congrArg succ (addComm n m)
 
-protected theorem addAssoc : ∀ (n m k : Nat), (n + m) + k = n + (m + k)
+protected theorem addAssoc : ∀ (n m k : Nat), n + m + k = n + (m + k)
 | n, m, 0      => rfl
 | n, m, succ k => congrArg succ (addAssoc n m k)
 
 protected theorem addLeftComm : ∀ (n m k : Nat), n + (m + k) = m + (n + k) :=
 leftComm Nat.add Nat.addComm Nat.addAssoc
 
-protected theorem addRightComm : ∀ (n m k : Nat), (n + m) + k = (n + k) + m :=
+protected theorem addRightComm : ∀ (n m k : Nat), n + m + k = n + k + m :=
 rightComm Nat.add Nat.addComm Nat.addAssoc
 
 protected theorem addLeftCancel : ∀ {n m k : Nat}, n + m = n + k → m = k
@@ -184,7 +184,7 @@ protected theorem zeroMul : ∀ (n : Nat), 0 * n = 0
 | 0      => rfl
 | succ n => (mulSucc 0 n).symm ▸ (zeroMul n).symm ▸ rfl
 
-theorem succMul : ∀ (n m : Nat), (succ n) * m = (n * m) + m
+theorem succMul : ∀ (n m : Nat), succ n * m = n * m + m
 | n, 0      => rfl
 | n, succ m =>
   have succ (n * m + m + n) = succ (n * m + n + m) from
@@ -205,12 +205,12 @@ protected theorem leftDistrib : ∀ (n m k : Nat), n * (m + k) = n * m + n * k
 | 0,      m, k => (Nat.zeroMul (m + k)).symm ▸ (Nat.zeroMul m).symm ▸ (Nat.zeroMul k).symm ▸ rfl
 | succ n, m, k =>
   have h₁ : succ n * (m + k) = n * (m + k) + (m + k)              from succMul _ _;
-  have h₂ : n * (m + k) + (m + k) = (n * m + n * k) + (m + k)     from leftDistrib n m k ▸ rfl;
-  have h₃ : (n * m + n * k) + (m + k) = n * m + (n * k + (m + k)) from Nat.addAssoc _ _ _;
+  have h₂ : n * (m + k) + (m + k) = n * m + n * k + (m + k)     from leftDistrib n m k ▸ rfl;
+  have h₃ : n * m + n * k + (m + k) = n * m + (n * k + (m + k)) from Nat.addAssoc _ _ _;
   have h₄ : n * m + (n * k + (m + k)) = n * m + (m + (n * k + k)) from congrArg (fun x => n*m + x) (Nat.addLeftComm _ _ _);
-  have h₅ : n * m + (m + (n * k + k)) = (n * m + m) + (n * k + k) from (Nat.addAssoc _ _ _).symm;
-  have h₆ : (n * m + m) + (n * k + k) = (n * m + m) + succ n * k  from succMul n k ▸ rfl;
-  have h₇ : (n * m + m) + succ n * k = succ n * m + succ n * k    from succMul n m ▸ rfl;
+  have h₅ : n * m + (m + (n * k + k)) = n * m + m + (n * k + k) from (Nat.addAssoc _ _ _).symm;
+  have h₆ : n * m + m + (n * k + k) = n * m + m + succ n * k  from succMul n k ▸ rfl;
+  have h₇ : n * m + m + succ n * k = succ n * m + succ n * k    from succMul n m ▸ rfl;
   (((((h₁.trans h₂).trans h₃).trans h₄).trans h₅).trans h₆).trans h₇
 
 protected theorem rightDistrib (n m k : Nat) : (n + m) * k = n * k + m * k :=
@@ -220,14 +220,14 @@ have h₃ : k * n + k * m = n * k + k * m from Nat.mulComm n k ▸ rfl;
 have h₄ : n * k + k * m = n * k + m * k from Nat.mulComm m k ▸ rfl;
 ((h₁.trans h₂).trans h₃).trans h₄
 
-protected theorem mulAssoc : ∀ (n m k : Nat), (n * m) * k = n * (m * k)
+protected theorem mulAssoc : ∀ (n m k : Nat), n * m * k = n * (m * k)
 | n, m, 0      => rfl
 | n, m, succ k =>
   have h₁ : n * m * succ k = n * m * (k + 1)              from rfl;
-  have h₂ : n * m * (k + 1) = (n * m * k) + n * m * 1     from Nat.leftDistrib _ _ _;
-  have h₃ : (n * m * k) + n * m * 1 = (n * m * k) + n * m from (Nat.mulOne (n*m)).symm ▸ rfl;
-  have h₄ : (n * m * k) + n * m = (n * (m * k)) + n * m   from (mulAssoc n m k).symm ▸ rfl;
-  have h₅ : (n * (m * k)) + n * m = n * (m * k + m)       from (Nat.leftDistrib n (m*k) m).symm;
+  have h₂ : n * m * (k + 1) = n * m * k + n * m * 1     from Nat.leftDistrib _ _ _;
+  have h₃ : n * m * k + n * m * 1 = n * m * k + n * m from (Nat.mulOne (n*m)).symm ▸ rfl;
+  have h₄ : n * m * k + n * m = n * (m * k) + n * m   from (mulAssoc n m k).symm ▸ rfl;
+  have h₅ : n * (m * k) + n * m = n * (m * k + m)       from (Nat.leftDistrib n (m*k) m).symm;
   have h₆ : n * (m * k + m) = n * (m * succ k)            from Nat.mulSucc m k ▸ rfl;
 ((((h₁.trans h₂).trans h₃).trans h₄).trans h₅).trans h₆
 
@@ -308,7 +308,7 @@ rfl
 
 theorem succSubSuccEqSub (n m : Nat) : succ n - succ m = n - m :=
 Nat.recOn m
-  (show succ n - succ zero = n - zero from (Eq.refl (succ n - succ zero)))
+  (show succ n - succ zero = n - zero from Eq.refl (succ n - succ zero))
   (fun m => congrArg pred)
 
 theorem notSuccLeSelf : ∀ (n : Nat), ¬succ n ≤ n :=
@@ -446,7 +446,7 @@ theorem le.dest : ∀ {n m : Nat}, n ≤ m → Exists (fun k => n + k = m)
   have n ≤ m from h;
   have Exists (fun k => n + k = m) from le.dest this;
   match this with
-  | ⟨k, h⟩ => ⟨k, show succ n + k = succ m from ((succAdd n k).symm ▸ h ▸ rfl)⟩
+  | ⟨k, h⟩ => ⟨k, show succ n + k = succ m from (succAdd n k).symm ▸ h ▸ rfl⟩
 
 theorem le.intro {n m k : Nat} (h : n + k = m) : n ≤ m :=
 h ▸ leAddRight n k
@@ -530,8 +530,8 @@ zeroLtSucc _
 protected theorem bit0NeZero : ∀ {n : Nat}, n ≠ 0 → bit0 n ≠ 0
 | 0,   h => absurd rfl h
 | n+1, h =>
-  suffices (n+1) + (n+1) ≠ 0 from this;
-  suffices succ ((n+1) + n) ≠ 0 from this;
+  suffices n+1 + (n+1) ≠ 0 from this;
+  suffices succ (n+1 + n) ≠ 0 from this;
   fun h => Nat.noConfusion h
 
 protected theorem bit1NeZero (n : Nat) : bit1 n ≠ 0 :=
@@ -581,7 +581,7 @@ protected theorem bit0Inj : ∀ {n m : Nat}, bit0 n = bit0 m → n = m
 | 0,   m+1, h => absurd h.symm (succNeZero _)
 | n+1, 0,   h => absurd h (succNeZero _)
 | n+1, m+1, h =>
-  have (n+1) + n = (m+1) + m from Nat.noConfusion h id;
+  have n+1 + n = m+1 + m from Nat.noConfusion h id;
   have n + (n+1) = m + (m+1) from Nat.addComm (m+1) m ▸ Nat.addComm (n+1) n ▸ this;
   have succ (n + n) = succ (m + m) from this;
   have n + n = m + m from Nat.noConfusion this id;
@@ -677,7 +677,7 @@ Nat.zeroMul m ▸ h
 
 /- power -/
 
-theorem powSucc (n m : Nat) : n^(succ m) = n^m * n :=
+theorem powSucc (n m : Nat) : n^succ m = n^m * n :=
 rfl
 
 theorem powZero (n : Nat) : n^0 = 1 := rfl

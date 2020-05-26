@@ -104,7 +104,7 @@ s ← get;
 pure $ (declMapExt.getState s.env).contains n
 
 def getDecl (n : Name) : CompilerM Decl := do
-(some decl) ← findDecl n | throw ("unknown declaration '" ++ toString n ++ "'");
+some decl ← findDecl n | throw ("unknown declaration '" ++ toString n ++ "'");
 pure decl
 
 @[export lean_ir_add_decl]
@@ -138,7 +138,7 @@ else do
   pure $ (declMapExt.getState s.env).contains n
 
 def getDecl' (n : Name) (decls : Array Decl) : CompilerM Decl := do
-(some decl) ← findDecl' n decls | throw ("unknown declaration '" ++ toString n ++ "'");
+some decl ← findDecl' n decls | throw ("unknown declaration '" ++ toString n ++ "'");
 pure decl
 
 end IR

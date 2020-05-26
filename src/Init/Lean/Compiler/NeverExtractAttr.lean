@@ -19,7 +19,7 @@ private partial def hasNeverExtractAttributeAux (env : Environment) : Name → B
 | n =>
   neverExtractAttr.hasTag env n
   ||
-  (n.isInternal && hasNeverExtractAttributeAux n.getPrefix)
+  n.isInternal && hasNeverExtractAttributeAux n.getPrefix
 
 @[export lean_has_never_extract_attribute]
 def hasNeverExtractAttribute (env : Environment) (n : Name) : Bool :=

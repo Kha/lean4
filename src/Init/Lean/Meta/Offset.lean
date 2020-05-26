@@ -83,7 +83,7 @@ private partial def isOffset : Expr → Option (Expr × Nat)
   match fn with
   | Expr.const c _ _ =>
     let nargs := e.getAppNumArgs;
-    if (c == `Nat.succ && nargs == 1) || (c == `Nat.add && nargs == 2) || (c == `HasAdd.add && nargs == 4) then
+    if c == `Nat.succ && nargs == 1 || c == `Nat.add && nargs == 2 || c == `HasAdd.add && nargs == 4 then
       getOffset e
     else none
   | _ => none

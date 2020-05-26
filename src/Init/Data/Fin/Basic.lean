@@ -48,7 +48,7 @@ protected def add : Fin n → Fin n → Fin n
 | ⟨a, h⟩, ⟨b, _⟩ => ⟨(a + b) % n, mlt h⟩
 
 protected def mul : Fin n → Fin n → Fin n
-| ⟨a, h⟩, ⟨b, _⟩ => ⟨(a * b) % n, mlt h⟩
+| ⟨a, h⟩, ⟨b, _⟩ => ⟨a * b % n, mlt h⟩
 
 protected def sub : Fin n → Fin n → Fin n
 | ⟨a, h⟩, ⟨b, _⟩ => ⟨(a + (n - b)) % n, mlt h⟩
@@ -60,19 +60,19 @@ needed to boostrap Lean.
 -/
 
 protected def mod : Fin n → Fin n → Fin n
-| ⟨a, h⟩, ⟨b, _⟩ => ⟨(a % b) % n, mlt h⟩
+| ⟨a, h⟩, ⟨b, _⟩ => ⟨a % b % n, mlt h⟩
 
 protected def div : Fin n → Fin n → Fin n
-| ⟨a, h⟩, ⟨b, _⟩ => ⟨(a / b) % n, mlt h⟩
+| ⟨a, h⟩, ⟨b, _⟩ => ⟨a / b % n, mlt h⟩
 
 protected def modn : Fin n → Nat → Fin n
-| ⟨a, h⟩, m => ⟨(a % m) % n, mlt h⟩
+| ⟨a, h⟩, m => ⟨a % m % n, mlt h⟩
 
 def land : Fin n → Fin n → Fin n
-| ⟨a, h⟩, ⟨b, _⟩ => ⟨(Nat.land a b) % n, mlt h⟩
+| ⟨a, h⟩, ⟨b, _⟩ => ⟨Nat.land a b % n, mlt h⟩
 
 def lor : Fin n → Fin n → Fin n
-| ⟨a, h⟩, ⟨b, _⟩ => ⟨(Nat.lor a b) % n, mlt h⟩
+| ⟨a, h⟩, ⟨b, _⟩ => ⟨Nat.lor a b % n, mlt h⟩
 
 instance : HasZero (Fin (succ n)) := ⟨⟨0, succPos n⟩⟩
 instance : HasOne (Fin (succ n))  := ⟨ofNat 1⟩
@@ -83,10 +83,10 @@ instance : HasMod (Fin n)         := ⟨Fin.mod⟩
 instance : HasDiv (Fin n)         := ⟨Fin.div⟩
 instance : HasModN (Fin n)        := ⟨Fin.modn⟩
 
-theorem eqOfVeq : ∀ {i j : Fin n}, (val i) = (val j) → i = j
+theorem eqOfVeq : ∀ {i j : Fin n}, val i = val j → i = j
 | ⟨iv, ilt₁⟩, ⟨.(iv), ilt₂⟩, rfl => rfl
 
-theorem veqOfEq : ∀ {i j : Fin n}, i = j → (val i) = (val j)
+theorem veqOfEq : ∀ {i j : Fin n}, i = j → val i = val j
 | ⟨iv, ilt⟩, .(_), rfl => rfl
 
 theorem neOfVne {i j : Fin n} (h : val i ≠ val j) : i ≠ j :=

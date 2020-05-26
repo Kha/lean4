@@ -76,7 +76,7 @@ Generate random values until we exceed the target magnitude.
 `genLo` and `genMag` are the generator lower bound and magnitude.
 The parameter `r` is the "remaining" magnitude.
 -/
-private partial def randNatAux {gen : Type u} [RandomGen gen] (genLo genMag : Nat) : Nat → (Nat × gen) → Nat × gen
+private partial def randNatAux {gen : Type u} [RandomGen gen] (genLo genMag : Nat) : Nat → Nat × gen → Nat × gen
 | 0,        (v, g) => (v, g)
 | r'@(r+1), (v, g) =>
   let (x, g') := RandomGen.next g;
@@ -98,7 +98,7 @@ let q       := 1000;
 let k       := hi' - lo' + 1;
 let tgtMag  := k * q;
 let (v, g') := randNatAux genLo genMag tgtMag (0, g);
-let v'      := lo' + (v % k);
+let v'      := lo' + v % k;
 (v', g')
 
 /-- Generate a random Boolean. -/

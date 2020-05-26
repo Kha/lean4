@@ -56,7 +56,7 @@ def mkEmptyArray : Array α := Array.mkEmpty branching.toNat
 
 abbrev mul2Shift (i : USize) (shift : USize) : USize := i.shiftLeft shift
 abbrev div2Shift (i : USize) (shift : USize) : USize := i.shiftRight shift
-abbrev mod2Shift (i : USize) (shift : USize) : USize := USize.land i ((USize.shiftLeft 1 shift) - 1)
+abbrev mod2Shift (i : USize) (shift : USize) : USize := USize.land i (USize.shiftLeft 1 shift - 1)
 
 partial def getAux [Inhabited α] : PersistentArrayNode α → USize → USize → α
 | node cs, i, shift => getAux (cs.get! (div2Shift i shift).toNat) (mod2Shift i shift) (shift - initShift)
@@ -252,10 +252,10 @@ else t₂.foldl PersistentArray.push t₁
 
 instance : HasAppend (PersistentArray α) := ⟨append⟩
 
-@[inline] def findSome? {β} (t : PersistentArray α) (f : α → (Option β)) : Option β :=
+@[inline] def findSome? {β} (t : PersistentArray α) (f : α → Option β) : Option β :=
 Id.run (t.findSomeM? f)
 
-@[inline] def findSomeRev? {β} (t : PersistentArray α) (f : α → (Option β)) : Option β :=
+@[inline] def findSomeRev? {β} (t : PersistentArray α) (f : α → Option β) : Option β :=
 Id.run (t.findSomeRevM? f)
 
 @[inline] def foldlFrom {β} (t : PersistentArray α) (f : β → α → β) (b : β) (ini : Nat) : β :=

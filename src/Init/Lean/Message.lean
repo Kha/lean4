@@ -125,11 +125,11 @@ namespace Message
 
 protected def toString (msg : Message) : String :=
 mkErrorStringWithPos msg.fileName msg.pos.line msg.pos.column
- ((match msg.severity with
+ (((match msg.severity with
    | MessageSeverity.information => ""
    | MessageSeverity.warning => "warning: "
    | MessageSeverity.error => "error: ") ++
-  (if msg.caption == "" then "" else msg.caption ++ ":\n") ++ toString (fmt msg.data))
+  if msg.caption == "" then "" else msg.caption ++ ":\n") ++ toString (fmt msg.data))
 
 instance : Inhabited Message :=
 ⟨{ fileName := "", pos := ⟨0, 1⟩, data := arbitrary _}⟩

@@ -167,7 +167,7 @@ s₂.mapM $ fun s => do
       let indexFVarId' := s.subst.get indexFVarId;
       (do mvarId ← clear s.mvarId indexFVarId'; pure { s with mvarId := mvarId, subst := s.subst.erase indexFVarId })
       <|>
-      (pure s))
+      pure s)
     s
 
 private def toCasesSubgoals (s : Array InductionSubgoal) (ctorNames : Array Name) : Array CasesSubgoal :=

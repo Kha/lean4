@@ -60,7 +60,7 @@ namespace OptionT
   ⟨fun α => OptionT.monadMap⟩
 
   @[inline] protected def catch (ma : OptionT m α) (handle : Unit → OptionT m α) : OptionT m α :=
-  (do { some a ← ma | (handle ());
+  (do { some a ← ma | handle ();
         pure a } : m (Option α))
 
   instance : MonadExcept Unit (OptionT m) :=

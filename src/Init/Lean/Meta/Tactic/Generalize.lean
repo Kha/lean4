@@ -18,11 +18,11 @@ withMVarContext mvarId $ do
   target ← instantiateMVars target;
   targetAbst ← kabstract target e;
   unless targetAbst.hasLooseBVars $
-    throwTacticEx `generalize mvarId ("failed to find expression in the target");
+    throwTacticEx `generalize mvarId "failed to find expression in the target";
   eType ← inferType e;
   let targetNew := Lean.mkForall x BinderInfo.default eType targetAbst;
   unlessM (isTypeCorrect targetNew) $
-    throwTacticEx `generalize mvarId ("result is not type correct");
+    throwTacticEx `generalize mvarId "result is not type correct";
   mvarNew ← mkFreshExprSyntheticOpaqueMVar targetNew tag;
   assignExprMVar mvarId (mkApp mvarNew e);
   pure mvarNew.mvarId!

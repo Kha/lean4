@@ -79,8 +79,8 @@ def spaceUptoLine' : List (Nat × Format) → Nat → SpaceResult
 partial def be : Nat → Nat → String → List (Nat × Format) → String
 | w, k, out, []                        => out
 | w, k, out, (i, nil)::z               => be w k out z
-| w, k, out, (i, (compose _ f₁ f₂))::z => be w k out ((i, f₁)::(i, f₂)::z)
-| w, k, out, (i, (nest n f))::z        => be w k out ((i+n, f)::z)
+| w, k, out, (i, compose _ f₁ f₂)::z => be w k out ((i, f₁)::(i, f₂)::z)
+| w, k, out, (i, nest n f)::z        => be w k out ((i+n, f)::z)
 | w, k, out, (i, text s)::z            => be w (k + s.length) (out ++ s) z
 | w, k, out, (i, line)::z              => be w i ((out ++ "\n").pushn ' ' i) z
 | w, k, out, (i, choice f₁ f₂)::z      =>

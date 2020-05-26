@@ -83,10 +83,10 @@ else if !s.any Char.isWhitespace then s
 else "(" ++ s ++ ")"
 
 instance {α : Type u} [HasToString α] : HasToString (Option α) :=
-⟨fun o => match o with | none => "none" | (some a) => "(some " ++ addParenHeuristic (toString a) ++ ")"⟩
+⟨fun o => match o with | none => "none" | some a => "(some " ++ addParenHeuristic (toString a) ++ ")"⟩
 
 instance {α : Type u} {β : Type v} [HasToString α] [HasToString β] : HasToString (Sum α β) :=
-⟨fun s => match s with | (inl a) => "(inl " ++ addParenHeuristic (toString a) ++ ")" | (inr b) => "(inr " ++ addParenHeuristic (toString b) ++ ")"⟩
+⟨fun s => match s with | inl a => "(inl " ++ addParenHeuristic (toString a) ++ ")" | inr b => "(inr " ++ addParenHeuristic (toString b) ++ ")"⟩
 
 instance {α : Type u} {β : Type v} [HasToString α] [HasToString β] : HasToString (α × β) :=
 ⟨fun ⟨a, b⟩ => "(" ++ toString a ++ ", " ++ toString b ++ ")"⟩

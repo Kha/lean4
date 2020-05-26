@@ -193,25 +193,25 @@ if mustConsume ctx x && !bLiveVars.contains x then addDec ctx x b else b
 private def processVDecl (ctx : Context) (z : VarId) (t : IRType) (v : Expr) (b : FnBody) (bLiveVars : LiveVarSet) : FnBody × LiveVarSet :=
 -- dbgTrace ("processVDecl " ++ toString z ++ " " ++ toString (format v)) $ fun _ =>
 let b := match v with
-  | (Expr.ctor _ ys)       => addIncBeforeConsumeAll ctx ys (FnBody.vdecl z t v b) bLiveVars
-  | (Expr.reuse _ _ _ ys)  => addIncBeforeConsumeAll ctx ys (FnBody.vdecl z t v b) bLiveVars
-  | (Expr.proj _ x)        =>
+  | Expr.ctor _ ys       => addIncBeforeConsumeAll ctx ys (FnBody.vdecl z t v b) bLiveVars
+  | Expr.reuse _ _ _ ys  => addIncBeforeConsumeAll ctx ys (FnBody.vdecl z t v b) bLiveVars
+  | Expr.proj _ x        =>
     let b := addDecIfNeeded ctx x b bLiveVars;
     let b := if (getVarInfo ctx x).consume then addInc ctx z b else b;
-    (FnBody.vdecl z t v b)
-  | (Expr.uproj _ x)       => FnBody.vdecl z t v (addDecIfNeeded ctx x b bLiveVars)
-  | (Expr.sproj _ _ x)     => FnBody.vdecl z t v (addDecIfNeeded ctx x b bLiveVars)
-  | (Expr.fap f ys)        =>
+    FnBody.vdecl z t v b
+  | Expr.uproj _ x       => FnBody.vdecl z t v (addDecIfNeeded ctx x b bLiveVars)
+  | Expr.sproj _ _ x     => FnBody.vdecl z t v (addDecIfNeeded ctx x b bLiveVars)
+  | Expr.fap f ys        =>
     -- dbgTrace ("processVDecl " ++ toString v) $ fun _ =>
     let ps := (getDecl ctx f).params;
     let b  := addDecAfterFullApp ctx ys ps b bLiveVars;
     let b  := FnBody.vdecl z t v b;
     addIncBefore ctx ys ps b bLiveVars
-  | (Expr.pap _ ys)        => addIncBeforeConsumeAll ctx ys (FnBody.vdecl z t v b) bLiveVars
-  | (Expr.ap x ys)         =>
+  | Expr.pap _ ys        => addIncBeforeConsumeAll ctx ys (FnBody.vdecl z t v b) bLiveVars
+  | Expr.ap x ys         =>
     let ysx := ys.push (Arg.var x); -- TODO: avoid temporary array allocation
     addIncBeforeConsumeAll ctx ysx (FnBody.vdecl z t v b) bLiveVars
-  | (Expr.unbox x)         => FnBody.vdecl z t v (addDecIfNeeded ctx x b bLiveVars)
+  | Expr.unbox x         => FnBody.vdecl z t v (addDecIfNeeded ctx x b bLiveVars)
   | other                  => FnBody.vdecl z t v b;  -- Expr.reset, Expr.box, Expr.lit are handled here
 let liveVars := updateLiveVars v bLiveVars;
 let liveVars := liveVars.erase z;
@@ -221,7 +221,7 @@ def updateVarInfoWithParams (ctx : Context) (ps : Array Param) : Context :=
 let m := ps.foldl (fun (m : VarMap) p => m.insert p.x { ref := p.ty.isObj, consume := !p.borrow }) ctx.varMap;
 { ctx with varMap := m }
 
-partial def visitFnBody : FnBody → Context → (FnBody × LiveVarSet)
+partial def visitFnBody : FnBody → Context → FnBody × LiveVarSet
 | FnBody.vdecl x t v b,      ctx =>
   let ctx := updateVarInfo ctx x t v;
   let (b, bLiveVars) := visitFnBody b ctx;

@@ -270,7 +270,7 @@ else if c = '{' then do
   c ← peek!;
   if c = '}' then do
     skip; ws;
-    pure (Json.obj (RBNode.leaf))
+    pure (Json.obj RBNode.leaf)
   else do
     kvs ← objectCore anyCore;
     pure (Json.obj kvs)
@@ -287,7 +287,7 @@ else if c = 't' then do
 else if c = 'n' then do
   expect "null"; ws;
   pure Json.null
-else if c = '-' ∨ ('0' ≤ c ∧ c ≤ '9') then do
+else if c = '-' ∨ '0' ≤ c ∧ c ≤ '9' then do
   n ← num; ws;
   pure (Json.num n)
 else

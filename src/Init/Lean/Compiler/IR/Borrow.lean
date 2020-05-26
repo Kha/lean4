@@ -62,7 +62,7 @@ let fmts := map.fold (fun fmt k ps =>
     | ParamMap.Key.jp n id => format n ++ ":" ++ format id;
   fmt ++ Format.line ++ k ++ " -> " ++ formatParams ps)
  Format.nil;
-"{" ++ (Format.nest 1 fmts) ++ "}"
+"{" ++ Format.nest 1 fmts ++ "}"
 
 instance : HasFormat ParamMap := ⟨ParamMap.fmt⟩
 instance : HasToString ParamMap := ⟨fun m => Format.pretty (format m)⟩
@@ -89,7 +89,7 @@ partial def visitFnBody (fnid : FunId) : FnBody → StateM ParamMap Unit
   visitFnBody b
 | FnBody.case _ _ _ alts => alts.forM $ fun alt => visitFnBody alt.body
 | e =>
-  unless (e.isTerminal) $ do
+  unless e.isTerminal $ do
     let (instr, b) := e.split;
     visitFnBody b
 
@@ -260,7 +260,7 @@ def collectExpr (z : VarId) : Expr → M Unit
 def preserveTailCall (x : VarId) (v : Expr) (b : FnBody) : M Unit := do
 ctx ← read;
 match v, b with
-| (Expr.fap g ys), (FnBody.ret (Arg.var z)) =>
+| Expr.fap g ys, FnBody.ret (Arg.var z) =>
   when (ctx.currFn == g && x == z) $ do
     -- dbgTrace ("preserveTailCall " ++ toString b) $ fun _ => do
     ps ← getParamInfo (ParamMap.Key.decl g);
@@ -283,7 +283,7 @@ partial def collectFnBody : FnBody → M Unit
   ownArgsUsingParams ys ps; -- for making sure the join point can reuse
   ownParamsUsingArgs ys ps  -- for making sure the tail call is preserved
 | FnBody.case _ _ _ alts => alts.forM $ fun alt => collectFnBody alt.body
-| e                      => unless (e.isTerminal) $ collectFnBody e.body
+| e                      => unless e.isTerminal $ collectFnBody e.body
 
 partial def collectDecl : Decl → M Unit
 | Decl.fdecl f ys _ b   =>

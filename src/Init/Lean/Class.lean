@@ -141,8 +141,8 @@ registerBuiltinAttribute {
   name  := `class,
   descr := "type class",
   add   := fun env decl args persistent => do
-    when args.hasArgs $ throw (IO.userError ("invalid attribute 'class', unexpected argument"));
-    unless persistent $ throw (IO.userError ("invalid attribute 'class', must be persistent"));
+    when args.hasArgs $ throw (IO.userError "invalid attribute 'class', unexpected argument");
+    unless persistent $ throw (IO.userError "invalid attribute 'class', must be persistent");
     IO.ofExcept (addClass env decl)
 }
 

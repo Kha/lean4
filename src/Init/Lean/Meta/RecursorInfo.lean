@@ -117,7 +117,7 @@ else do
     else do
       recInfo ← getConstInfo (mkRecFor p);
       match recInfo with
-      | ConstantInfo.recInfo val => pure (some (val.nparams + val.nindices + (if s == casesOnSuffix then 1 else val.nmotives)))
+      | ConstantInfo.recInfo val => pure (some (val.nparams + val.nindices + if s == casesOnSuffix then 1 else val.nmotives))
       | _                        => throw $ Exception.other "unexpected recursor information"
   | _ => pure none
 

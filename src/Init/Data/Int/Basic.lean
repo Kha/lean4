@@ -44,7 +44,7 @@ match n with
 def subNatNat (m n : Nat) : Int :=
 match (n - m : Nat) with
 | 0        => ofNat (m - n)  -- m ≥ n
-| (succ k) => negSucc k
+| succ k => negSucc k
 
 @[extern "lean_int_add"]
 protected def add (m n : @& Int) : Int :=
@@ -79,7 +79,7 @@ protected def LessEq (a b : Int) : Prop := NonNeg (b - a)
 
 instance : HasLessEq Int := ⟨Int.LessEq⟩
 
-protected def Less (a b : Int) : Prop := (a + 1) ≤ b
+protected def Less (a b : Int) : Prop := a + 1 ≤ b
 
 instance : HasLess Int := ⟨Int.Less⟩
 
@@ -132,14 +132,14 @@ instance : HasOfNat Int :=
 ⟨Int.ofNat⟩
 
 @[extern "lean_int_div"]
-def div : (@& Int) → (@& Int) → Int
+def div : @& Int → @& Int → Int
 | ofNat m,   ofNat n   => ofNat (m / n)
 | ofNat m,   negSucc n => -ofNat (m / succ n)
 | negSucc m, ofNat n   => -ofNat (succ m / n)
 | negSucc m, negSucc n => ofNat (succ m / succ n)
 
 @[extern "lean_int_mod"]
-def mod : (@& Int) → (@& Int) → Int
+def mod : @& Int → @& Int → Int
 | ofNat m,   ofNat n   => ofNat (m % n)
 | ofNat m,   negSucc n => ofNat (m % succ n)
 | negSucc m, ofNat n   => -ofNat (succ m % n)

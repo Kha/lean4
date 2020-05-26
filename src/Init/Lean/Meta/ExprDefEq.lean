@@ -154,8 +154,8 @@ match mvarId? with
 private def isDefEqArgs (f : Expr) (args₁ args₂ : Array Expr) : MetaM Bool :=
 if h : args₁.size = args₂.size then do
   finfo ← getFunInfoNArgs f args₁.size;
-  (some postponed) ← isDefEqArgsFirstPass finfo.paramInfo args₁ args₂ 0 #[] | pure false;
-  (isDefEqArgsAux args₁ args₂ h finfo.paramInfo.size)
+  some postponed ← isDefEqArgsFirstPass finfo.paramInfo args₁ args₂ 0 #[] | pure false;
+  isDefEqArgsAux args₁ args₂ h finfo.paramInfo.size
   <&&>
   (postponed.allM $ fun i => do
    /- Second pass: unify implicit arguments.
@@ -900,7 +900,7 @@ private def isSynthetic : Expr → MetaM Bool
 | _                  => pure false
 
 private def isAssignable : Expr → MetaM Bool
-| Expr.mvar mvarId _ => do b ← isReadOnlyOrSyntheticOpaqueExprMVar mvarId; pure (!b)
+| Expr.mvar mvarId _ => do b ← isReadOnlyOrSyntheticOpaqueExprMVar mvarId; pure !b
 | _                  => pure false
 
 private def etaEq (t s : Expr) : Bool :=
@@ -938,7 +938,7 @@ private partial def isDefEqQuick : Expr → Expr → MetaM LBool
   tAssign? ← isAssignable tFn;
   sAssign? ← isAssignable sFn;
   trace! `Meta.isDefEq
-    (t ++ (if tAssign? then " [assignable]" else " [nonassignable]") ++ " =?= " ++ s ++ (if sAssign? then " [assignable]" else " [nonassignable]"));
+    ((t ++ if tAssign? then " [assignable]" else " [nonassignable]") ++ " =?= " ++ s ++ if sAssign? then " [assignable]" else " [nonassignable]");
   let assign (t s : Expr) : MetaM LBool := toLBoolM $ processAssignment t s;
   cond (tAssign? && !sAssign?)  (assign t s) $
   cond (!tAssign? && sAssign?)  (assign s t) $

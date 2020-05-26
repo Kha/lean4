@@ -26,7 +26,7 @@ private def addRecParams (mvarId : MVarId) (majorTypeArgs : Array Expr) : List (
   if h : pos < majorTypeArgs.size then
     addRecParams rest (mkApp rec (majorTypeArgs.get ⟨pos, h⟩))
   else
-    throwTacticEx `induction mvarId ("ill-formed recursor")
+    throwTacticEx `induction mvarId "ill-formed recursor"
 | none :: rest, rec => do
   recType ← inferType rec;
   recType ← whnfForall recType;
@@ -35,7 +35,7 @@ private def addRecParams (mvarId : MVarId) (majorTypeArgs : Array Expr) : List (
     param ← catch (synthInstance d) (fun _ => throwTacticEx `induction mvarId "failed to generate type class instance parameter");
     addRecParams rest (mkApp rec param)
   | _ =>
-    throwTacticEx `induction mvarId ("ill-formed recursor")
+    throwTacticEx `induction mvarId "ill-formed recursor"
 
 structure InductionSubgoal :=
 (mvarId : MVarId)
@@ -194,7 +194,7 @@ withMVarContext mvarId $ do
               | RecursorUnivLevelPos.motive => pure (recLevels.push targetLevel, true)
               | RecursorUnivLevelPos.majorType idx => do
                 when (idx ≥ majorTypeFnLevels.size) $
-                  throwTacticEx `induction mvarId ("ill-formed recursor");
+                  throwTacticEx `induction mvarId "ill-formed recursor";
                 pure (recLevels.push (majorTypeFnLevels.get! idx), foundTargetLevel))
             (#[], false);
           when (!foundTargetLevel && !targetLevel.isZero) $

@@ -34,8 +34,8 @@ else
   -- (but we keep it for completeness)
   "\\u" ++
   [ Nat.digitChar (n / 4096),
-    Nat.digitChar ((n % 4096) / 256),
-    Nat.digitChar ((n % 256) / 16),
+    Nat.digitChar (n % 4096 / 256),
+    Nat.digitChar (n % 256 / 16),
     Nat.digitChar (n % 16) ].asString ++
   acc
 

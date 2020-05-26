@@ -363,9 +363,9 @@ instance tracer : SimpleMonadTracerAdapter MetaM :=
 def getConstAux (constName : Name) (exception? : Bool) : MetaM (Option ConstantInfo) := do
 env ← getEnv;
 match env.find? constName with
-| some (info@(ConstantInfo.thmInfo _)) =>
+| some info@(ConstantInfo.thmInfo _) =>
   condM shouldReduceAll (pure (some info)) (pure none)
-| some (info@(ConstantInfo.defnInfo _)) =>
+| some info@(ConstantInfo.defnInfo _) =>
   condM shouldReduceReducibleOnly
     (condM (isReducible constName) (pure (some info)) (pure none))
     (pure (some info))

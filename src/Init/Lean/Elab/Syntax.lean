@@ -55,7 +55,7 @@ if ctx.first && stx.getKind == `Lean.Parser.Syntax.cat then do
   let cat := (stx.getIdAt 0).eraseMacroScopes;
   if cat == ctx.catName then do
     let rbp? : Option Nat  := expandOptPrecedence (stx.getArg 1);
-    unless rbp?.isNone $ liftM $ throwError (stx.getArg 1) ("invalid occurrence of ':<num>' modifier in head");
+    unless rbp?.isNone $ liftM $ throwError (stx.getArg 1) "invalid occurrence of ':<num>' modifier in head";
     unless ctx.leftRec $ liftM $
       throwError (stx.getArg 3) ("invalid occurrence of '" ++ cat ++ "', parser algorithm does not allow this form of left recursion");
     markAsTrailingParser; -- mark as trailing par
@@ -366,7 +366,7 @@ fun stx => do
   let head := stx.getArg 1;
   let args := (stx.getArg 2).getArgs;
   let cat  := stx.getArg 4;
-  kind ← Macro.mkFreshKind (cat.getId).eraseMacroScopes;
+  kind ← Macro.mkFreshKind cat.getId.eraseMacroScopes;
   -- build parser
   stxPart  ← expandMacroHeadIntoSyntaxItem head;
   stxParts ← args.mapM expandMacroArgIntoSyntaxItem;

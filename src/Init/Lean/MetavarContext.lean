@@ -410,8 +410,8 @@ def incDepth (mctx : MetavarContext) : MetavarContext :=
 /-- Return true iff the given level contains an assigned metavariable. -/
 def hasAssignedLevelMVar (mctx : MetavarContext) : Level → Bool
 | Level.succ lvl _       => lvl.hasMVar && hasAssignedLevelMVar lvl
-| Level.max lvl₁ lvl₂ _  => (lvl₁.hasMVar && hasAssignedLevelMVar lvl₁) || (lvl₂.hasMVar && hasAssignedLevelMVar lvl₂)
-| Level.imax lvl₁ lvl₂ _ => (lvl₁.hasMVar && hasAssignedLevelMVar lvl₁) || (lvl₂.hasMVar && hasAssignedLevelMVar lvl₂)
+| Level.max lvl₁ lvl₂ _  => lvl₁.hasMVar && hasAssignedLevelMVar lvl₁ || lvl₂.hasMVar && hasAssignedLevelMVar lvl₂
+| Level.imax lvl₁ lvl₂ _ => lvl₁.hasMVar && hasAssignedLevelMVar lvl₁ || lvl₂.hasMVar && hasAssignedLevelMVar lvl₂
 | Level.mvar mvarId _    => mctx.isLevelAssigned mvarId
 | Level.zero _           => false
 | Level.param _ _        => false
@@ -420,10 +420,10 @@ def hasAssignedLevelMVar (mctx : MetavarContext) : Level → Bool
 def hasAssignedMVar (mctx : MetavarContext) : Expr → Bool
 | Expr.const _ lvls _  => lvls.any (hasAssignedLevelMVar mctx)
 | Expr.sort lvl _      => hasAssignedLevelMVar mctx lvl
-| Expr.app f a _       => (f.hasMVar && hasAssignedMVar f) || (a.hasMVar && hasAssignedMVar a)
-| Expr.letE _ t v b _  => (t.hasMVar && hasAssignedMVar t) || (v.hasMVar && hasAssignedMVar v) || (b.hasMVar && hasAssignedMVar b)
-| Expr.forallE _ d b _ => (d.hasMVar && hasAssignedMVar d) || (b.hasMVar && hasAssignedMVar b)
-| Expr.lam _ d b _     => (d.hasMVar && hasAssignedMVar d) || (b.hasMVar && hasAssignedMVar b)
+| Expr.app f a _       => f.hasMVar && hasAssignedMVar f || a.hasMVar && hasAssignedMVar a
+| Expr.letE _ t v b _  => t.hasMVar && hasAssignedMVar t || v.hasMVar && hasAssignedMVar v || b.hasMVar && hasAssignedMVar b
+| Expr.forallE _ d b _ => d.hasMVar && hasAssignedMVar d || b.hasMVar && hasAssignedMVar b
+| Expr.lam _ d b _     => d.hasMVar && hasAssignedMVar d || b.hasMVar && hasAssignedMVar b
 | Expr.fvar _ _        => false
 | Expr.bvar _ _        => false
 | Expr.lit _ _         => false
@@ -435,8 +435,8 @@ def hasAssignedMVar (mctx : MetavarContext) : Expr → Bool
 /-- Return true iff the given level contains a metavariable that can be assigned. -/
 def hasAssignableLevelMVar (mctx : MetavarContext) : Level → Bool
 | Level.succ lvl _       => lvl.hasMVar && hasAssignableLevelMVar lvl
-| Level.max lvl₁ lvl₂ _  => (lvl₁.hasMVar && hasAssignableLevelMVar lvl₁) || (lvl₂.hasMVar && hasAssignableLevelMVar lvl₂)
-| Level.imax lvl₁ lvl₂ _ => (lvl₁.hasMVar && hasAssignableLevelMVar lvl₁) || (lvl₂.hasMVar && hasAssignableLevelMVar lvl₂)
+| Level.max lvl₁ lvl₂ _  => lvl₁.hasMVar && hasAssignableLevelMVar lvl₁ || lvl₂.hasMVar && hasAssignableLevelMVar lvl₂
+| Level.imax lvl₁ lvl₂ _ => lvl₁.hasMVar && hasAssignableLevelMVar lvl₁ || lvl₂.hasMVar && hasAssignableLevelMVar lvl₂
 | Level.mvar mvarId _    => mctx.isLevelAssignable mvarId
 | Level.zero _           => false
 | Level.param _ _        => false
@@ -445,10 +445,10 @@ def hasAssignableLevelMVar (mctx : MetavarContext) : Level → Bool
 def hasAssignableMVar (mctx : MetavarContext) : Expr → Bool
 | Expr.const _ lvls _  => lvls.any (hasAssignableLevelMVar mctx)
 | Expr.sort lvl _      => hasAssignableLevelMVar mctx lvl
-| Expr.app f a _       => (f.hasMVar && hasAssignableMVar f) || (a.hasMVar && hasAssignableMVar a)
-| Expr.letE _ t v b _  => (t.hasMVar && hasAssignableMVar t) || (v.hasMVar && hasAssignableMVar v) || (b.hasMVar && hasAssignableMVar b)
-| Expr.forallE _ d b _ => (d.hasMVar && hasAssignableMVar d) || (b.hasMVar && hasAssignableMVar b)
-| Expr.lam _ d b _     => (d.hasMVar && hasAssignableMVar d) || (b.hasMVar && hasAssignableMVar b)
+| Expr.app f a _       => f.hasMVar && hasAssignableMVar f || a.hasMVar && hasAssignableMVar a
+| Expr.letE _ t v b _  => t.hasMVar && hasAssignableMVar t || v.hasMVar && hasAssignableMVar v || b.hasMVar && hasAssignableMVar b
+| Expr.forallE _ d b _ => d.hasMVar && hasAssignableMVar d || b.hasMVar && hasAssignableMVar b
+| Expr.lam _ d b _     => d.hasMVar && hasAssignableMVar d || b.hasMVar && hasAssignableMVar b
 | Expr.fvar _ _        => false
 | Expr.bvar _ _        => false
 | Expr.lit _ _         => false

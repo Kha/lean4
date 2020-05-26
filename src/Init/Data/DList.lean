@@ -48,7 +48,7 @@ def cons : α → DList α → DList α
 def append : DList α → DList α → DList α
 | ⟨f, h₁⟩, ⟨g, h₂⟩ =>
   ⟨f ∘ g, fun t =>
-    show f (g t) = (f (g [])) ++ t from
+    show f (g t) = f (g []) ++ t from
    (h₁ (g [])).symm ▸ (appendAssoc (f []) (g []) t).symm ▸ h₂ t ▸ h₁ (g t) ▸ rfl⟩
 
 def push : DList α → α → DList α

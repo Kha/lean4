@@ -27,7 +27,7 @@ constant ppExprExt : EnvExtension PPExprFn := arbitrary _
 def ppExpr (env : Environment) (mctx : MetavarContext) (lctx : LocalContext) (opts : Options) (e : Expr) : Format :=
 let e := (mctx.instantiateMVars e).1;
 if opts.getBool `ppOld true then
-  (ppExprExt.getState env) env mctx lctx opts e
+  ppExprExt.getState env env mctx lctx opts e
 else
   format (toString e)
 

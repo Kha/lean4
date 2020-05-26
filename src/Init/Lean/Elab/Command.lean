@@ -142,7 +142,7 @@ private def elabCommandUsing (s : State) (stx : Syntax) : List CommandElab → C
 | []                => do
   let refFmt := stx.prettyPrint;
   throwError stx ("unexpected syntax" ++ MessageData.nest 2 (Format.line ++ refFmt))
-| (elabFn::elabFns) => catch (elabFn stx)
+| elabFn::elabFns => catch (elabFn stx)
   (fun ex => match ex with
     | Exception.error _           => throw ex
     | Exception.unsupportedSyntax => do set s; elabCommandUsing elabFns)
@@ -453,7 +453,7 @@ addOpenDecl (OpenDecl.simple ns ids)
 def elabOpenRenaming (n : SyntaxNode) : CommandElabM Unit := do
 let ns := n.getIdAt 0;
 ns ← resolveNamespace ns;
-let rs := (n.getArg 2);
+let rs := n.getArg 2;
 rs.forSepArgsM $ fun stx => do
   let fromId   := stx.getIdAt 0;
   let toId     := stx.getIdAt 2;

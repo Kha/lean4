@@ -22,9 +22,9 @@ fun a => f a >>= g
 
 infixr `>=>` := mcomp
 
-class Monad (m : Type u → Type v) extends Applicative m, HasBind m : Type (max (u+1) v) :=
+class Monad (m : Type u → Type v) extends Applicative m, HasBind m : Type max (u+1) v :=
 (map      := fun α β f x => x >>= pure ∘ f)
-(seq      := fun α β f x => f >>= (fun y => y <$> x))
+(seq      := fun α β f x => f >>= fun y => y <$> x)
 (seqLeft  := fun α x y => x >>= fun a => y >>= fun _ => pure a)
 (seqRight := fun β x y => x >>= fun _ => y)
 

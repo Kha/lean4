@@ -35,7 +35,7 @@ newMVars.size.forM $ fun i =>
     mvarType ← inferType mvar;
     mvarVal  ← synthInstance mvarType;
     unlessM (isDefEq mvar mvarVal) $
-      throwTacticEx tacticName mvarId ("failed to assign synthesized instance")
+      throwTacticEx tacticName mvarId "failed to assign synthesized instance"
 
 def appendParentTag (mvarId : MVarId) (newMVars : Array Expr) (binderInfos : Array BinderInfo) : MetaM Unit := do
 parentTag ← getMVarTag mvarId;

@@ -7,7 +7,7 @@ prelude
 import Init.Data.UInt
 
 @[inline, reducible] def isValidChar (n : UInt32) : Prop :=
-n < 0xd800 ∨ (0xdfff < n ∧ n < 0x110000)
+n < 0xd800 ∨ 0xdfff < n ∧ n < 0x110000
 
 /-- The `Char` Type represents an unicode scalar value.
     See http://www.unicode.org/glossary/#unicode_scalar_value). -/
@@ -40,7 +40,7 @@ instance decLe (a b : Char) : Decidable (a ≤ b) :=
 UInt32.decLe _ _
 
 abbrev isValidCharNat (n : Nat) : Prop :=
-n < 0xd800 ∨ (0xdfff < n ∧ n < 0x110000)
+n < 0xd800 ∨ 0xdfff < n ∧ n < 0x110000
 
 theorem isValidUInt32 (n : Nat) (h : isValidCharNat n) : n < uint32Sz :=
 sorry -- TODO: waiting for new frontend

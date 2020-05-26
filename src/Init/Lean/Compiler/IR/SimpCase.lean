@@ -34,7 +34,7 @@ else
   let (max, noccs) := maxOccs alts;
   if noccs == 1 then alts
   else
-    let alts := alts.filter $ (fun alt => alt.body != max.body);
+    let alts := alts.filter $ fun alt => alt.body != max.body;
     alts.push (Alt.default max.body)
 
 private def mkSimpCase (tid : Name) (x : VarId) (xType : IRType) (alts : Array Alt) : FnBody :=

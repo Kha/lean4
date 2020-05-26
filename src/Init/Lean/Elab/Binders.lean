@@ -205,7 +205,7 @@ private partial def getFunBinderIdsAux? : Bool → Syntax → Array Syntax → T
   | `($f $a) =>
      if idOnly then pure none
      else do
-       (some acc) ← getFunBinderIdsAux? false f acc | pure none;
+       some acc ← getFunBinderIdsAux? false f acc | pure none;
        getFunBinderIdsAux? true a acc
   | `(_) => do ident ← mkFreshAnonymousIdent stx; pure (some (acc.push ident))
   | stx  =>
@@ -250,7 +250,7 @@ private partial def expandFunBindersAux (binders : Array Syntax) : Syntax → Na
         else if (special.getArg 0).getKind != `Lean.Parser.Term.typeAscription then processAsPattern ()
         else do
           -- typeAscription := `:` term
-          let type := ((special.getArg 0).getArg 1);
+          let type := (special.getArg 0).getArg 1;
           idents? ← getFunBinderIds? idents;
           match idents? with
           | some idents => expandFunBindersAux body (i+1) (newBinders ++ idents.map (fun ident => mkExplicitBinder ident type))

@@ -363,12 +363,12 @@ def push (bs : Array FnBody) (b : FnBody) : Array FnBody :=
 let b := b.resetBody;
 bs.push b
 
-partial def flattenAux : FnBody → Array FnBody → (Array FnBody) × FnBody
+partial def flattenAux : FnBody → Array FnBody → Array FnBody × FnBody
 | b, r =>
   if b.isTerminal then (r, b)
   else flattenAux b.body (push r b)
 
-def FnBody.flatten (b : FnBody) : (Array FnBody) × FnBody :=
+def FnBody.flatten (b : FnBody) : Array FnBody × FnBody :=
 flattenAux b #[]
 
 partial def reshapeAux : Array FnBody → Nat → FnBody → FnBody

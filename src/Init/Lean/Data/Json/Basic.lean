@@ -64,7 +64,7 @@ protected def toString : JsonNumber → String
   (if s then "" else "-") ++
   left.repr ++ "." ++
   (rightUntrimmed.toSubstring.dropRightWhile (fun c => c = '0')).toString ++
-  (if exp = 0 then "" else "e" ++ exp.repr)
+  if exp = 0 then "" else "e" ++ exp.repr
 
 -- shift a JsonNumber by a specified amount of places to the left
 protected def shiftl : JsonNumber → Nat → JsonNumber

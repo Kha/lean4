@@ -89,7 +89,7 @@ pure fname
 def moduleNameOfFileName (fname : String) : IO Name := do
 fname ← realPathNormalized fname;
 root ← IO.currentDir >>= realPathNormalized;
-when (!root.isPrefixOf fname) $
+when !root.isPrefixOf fname $
   throw $ IO.userError $ "input file '" ++ fname ++ "' must be contained in current directory (" ++ root ++ ")";
 let fnameSuffix := fname.drop root.length;
 let fnameSuffix := if fnameSuffix.get 0 == pathSeparator then fnameSuffix.drop 1 else fnameSuffix;

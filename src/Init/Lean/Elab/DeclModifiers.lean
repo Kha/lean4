@@ -14,7 +14,7 @@ structure Attribute :=
 (name : Name) (args : Syntax := Syntax.missing)
 
 instance Attribute.hasFormat : HasFormat Attribute :=
-⟨fun attr => Format.bracket "@[" (toString attr.name ++ (if attr.args.isMissing then "" else toString attr.args)) "]"⟩
+⟨fun attr => Format.bracket "@[" (toString attr.name ++ if attr.args.isMissing then "" else toString attr.args) "]"⟩
 
 inductive Visibility
 | regular | «protected» | «private»
@@ -39,16 +39,16 @@ def Modifiers.addAttribute (modifiers : Modifiers) (attr : Attribute) : Modifier
 instance Modifiers.hasFormat : HasFormat Modifiers :=
 ⟨fun m =>
   let components : List Format :=
-    (match m.docString with
+    (((((match m.docString with
      | some str => ["/--" ++ str ++ "-/"]
      | none     => [])
-    ++ (match m.visibility with
+    ++ match m.visibility with
      | Visibility.regular   => []
      | Visibility.protected => ["protected"]
      | Visibility.private   => ["private"])
-    ++ (if m.isNoncomputable then ["noncomputable"] else [])
-    ++ (if m.isPartial then ["partial"] else [])
-    ++ (if m.isUnsafe then ["unsafe"] else [])
+    ++ if m.isNoncomputable then ["noncomputable"] else [])
+    ++ if m.isPartial then ["partial"] else [])
+    ++ if m.isUnsafe then ["unsafe"] else [])
     ++ m.attrs.toList.map (fun attr => fmt attr);
   Format.bracket "{" (Format.joinSep components ("," ++ Format.line)) "}"⟩
 

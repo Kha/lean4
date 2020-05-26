@@ -68,7 +68,7 @@ end SyntaxNode
 namespace Syntax
 
 def setAtomVal : Syntax → String → Syntax
-| atom info _, v => (atom info v)
+| atom info _, v => atom info v
 | stx,         _ => stx
 
 @[inline] def ifNode {β} (stx : Syntax) (hyes : SyntaxNode → β) (hno : Unit → β) : β :=
@@ -111,7 +111,7 @@ match stx with
 def getIdAt (stx : Syntax) (i : Nat) : Name :=
 (stx.getArg i).getId
 
-@[specialize] partial def mreplace {m : Type → Type} [Monad m] (fn : Syntax → m (Option Syntax)) : Syntax → m (Syntax)
+@[specialize] partial def mreplace {m : Type → Type} [Monad m] (fn : Syntax → m (Option Syntax)) : Syntax → m Syntax
 | stx@(node kind args) => do
   o ← fn stx;
   match o with
@@ -119,7 +119,7 @@ def getIdAt (stx : Syntax) (i : Nat) : Name :=
   | none     => do args ← args.mapM mreplace; pure (node kind args)
 | stx => do o ← fn stx; pure $ o.getD stx
 
-@[specialize] partial def mrewriteBottomUp {m : Type → Type} [Monad m] (fn : Syntax → m (Syntax)) : Syntax → m (Syntax)
+@[specialize] partial def mrewriteBottomUp {m : Type → Type} [Monad m] (fn : Syntax → m Syntax) : Syntax → m Syntax
 | node kind args   => do
   args ← args.mapM mrewriteBottomUp;
   fn (node kind args)
@@ -275,10 +275,10 @@ open Lean.Format
 
 private def formatInfo (showInfo : Bool) (info : SourceInfo) (f : Format) : Format :=
 if showInfo then
-  (match info.leading with some ss => repr ss.toString ++ ":" | _ => "") ++
+  ((match info.leading with some ss => repr ss.toString ++ ":" | _ => "") ++
   f ++
-  (match info.pos with some pos => ":" ++ toString info.pos | _ => "") ++
-  (match info.trailing with some ss => ":" ++ repr ss.toString | _ => "")
+  match info.pos with some pos => ":" ++ toString info.pos | _ => "") ++
+  match info.trailing with some ss => ":" ++ repr ss.toString | _ => ""
 else f
 
 partial def formatStxAux (maxDepth : Option Nat) (showInfo : Bool) : Nat → Syntax → Format
@@ -303,8 +303,8 @@ partial def formatStxAux (maxDepth : Option Nat) (showInfo : Bool) : Nat → Syn
 def formatStx (stx : Syntax) (maxDepth : Option Nat := none) (showInfo := false) : Format :=
 formatStxAux maxDepth showInfo 0 stx
 
-instance : HasFormat (Syntax)   := ⟨formatStx⟩
-instance : HasToString (Syntax) := ⟨toString ∘ format⟩
+instance : HasFormat Syntax   := ⟨formatStx⟩
+instance : HasToString Syntax := ⟨toString ∘ format⟩
 
 end Syntax
 
@@ -363,7 +363,7 @@ instance Prod.hasQuote {α β : Type} [HasQuote α] [HasQuote β] : HasQuote (α
 
 private def quoteList {α : Type} [HasQuote α] : List α → Syntax
 | []      => mkCTermId `List.nil
-| (x::xs) => mkCAppStx `List.cons #[quote x, quoteList xs]
+| x::xs => mkCAppStx `List.cons #[quote x, quoteList xs]
 
 instance List.hasQuote {α : Type} [HasQuote α] : HasQuote (List α) := ⟨quoteList⟩
 
@@ -372,7 +372,7 @@ instance Array.hasQuote {α : Type} [HasQuote α] : HasQuote (Array α) :=
 
 private def quoteOption {α : Type} [HasQuote α] : Option α → Syntax
 | none     => mkTermId `Option.none
-| (some x) => mkCAppStx `Option.some #[quote x]
+| some x => mkCAppStx `Option.some #[quote x]
 
 instance Option.hasQuote {α : Type} [HasQuote α] : HasQuote (Option α) := ⟨quoteOption⟩
 

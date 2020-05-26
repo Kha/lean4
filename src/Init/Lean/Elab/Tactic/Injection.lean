@@ -26,7 +26,7 @@ fun stx => do
   fvarId ← elabAsFVar (stx.getArg 1);
   let ids := getInjectionNewIds (stx.getArg 2);
   liftMetaTactic stx $ fun mvarId => do
-    r ← Meta.injection mvarId fvarId ids (!ids.isEmpty);
+    r ← Meta.injection mvarId fvarId ids !ids.isEmpty;
     match r with
     | Meta.InjectionResult.solved                      => do checkUnusedIds mvarId ids; pure []
     | Meta.InjectionResult.subgoal mvarId' _ unusedIds => do checkUnusedIds mvarId unusedIds; pure [mvarId']

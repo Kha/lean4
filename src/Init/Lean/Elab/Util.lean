@@ -69,7 +69,7 @@ match attrParamSyntaxToIdentifier arg with
   checkSyntaxNodeKind env (defaultParserNamespace ++ k)
   <|>
   throw ("invalid syntax node kind '" ++ toString k ++ "'")
-| none   => throw ("syntax node kind is missing")
+| none   => throw "syntax node kind is missing"
 
 private unsafe def evalSyntaxConstantUnsafe (env : Environment) (constName : Name) : ExceptT String Id Syntax :=
 env.evalConstCheck Syntax `Lean.Syntax constName

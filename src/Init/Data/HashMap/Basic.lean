@@ -15,7 +15,7 @@ def HashMapBucket (α : Type u) (β : Type v) :=
 
 def HashMapBucket.update {α : Type u} {β : Type v} (data : HashMapBucket α β) (i : USize) (d : AssocList α β) (h : i.toNat < data.val.size) : HashMapBucket α β :=
 ⟨ data.val.uset i d h,
-  transRelRight Greater (Array.szFSetEq (data.val) ⟨USize.toNat i, h⟩ d) data.property ⟩
+  transRelRight Greater (Array.szFSetEq data.val ⟨USize.toNat i, h⟩ d) data.property ⟩
 
 structure HashMapImp (α : Type u) (β : Type v) :=
 (size       : Nat)
@@ -27,11 +27,11 @@ let n := if nbuckets = 0 then 8 else nbuckets;
   buckets    :=
   ⟨ mkArray n AssocList.nil,
     have p₁ : (mkArray n (@AssocList.nil α β)).size = n from Array.szMkArrayEq _ _;
-    have p₂ : n = (if nbuckets = 0 then 8 else nbuckets) from rfl;
+    have p₂ : n = if nbuckets = 0 then 8 else nbuckets from rfl;
     have p₃ : (if nbuckets = 0 then 8 else nbuckets) > 0 from
       match nbuckets with
       | 0            => Nat.zeroLtSucc _
-      | (Nat.succ x) => Nat.zeroLtSucc _;
+      | Nat.succ x => Nat.zeroLtSucc _;
     transRelRight Greater (Eq.trans p₁ p₂) p₃ ⟩ }
 
 namespace HashMapImp

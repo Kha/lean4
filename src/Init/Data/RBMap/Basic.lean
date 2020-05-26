@@ -130,7 +130,7 @@ def balLeft : RBNode α β → ∀ k, β k → RBNode α β → RBNode α β
 
 def balRight (l : RBNode α β) (k : α) (v : β k) (r : RBNode α β) : RBNode α β :=
 match r with
-| (node red b ky vy c) => node red l k v (node black b ky vy c)
+| node red b ky vy c => node red l k v (node black b ky vy c)
 | _ => match l with
   | node black a kx vx b                    => balance₃ (node red a kx vx b) k v r
   | node red a kx vx (node black b ky vy c) => node red (balance₃ (setRed a) kx vx b) ky vy (node black c k v r)
@@ -209,7 +209,7 @@ open RBNode
 
 /- TODO(Leo): define dRBMap -/
 
-def RBMap (α : Type u) (β : Type v) (lt : α → α → Bool) : Type (max u v) :=
+def RBMap (α : Type u) (β : Type v) (lt : α → α → Bool) : Type max u v :=
 {t : RBNode α (fun _ => β) // t.WellFormed lt }
 
 @[inline] def mkRBMap (α : Type u) (β : Type v) (lt : α → α → Bool) : RBMap α β lt :=

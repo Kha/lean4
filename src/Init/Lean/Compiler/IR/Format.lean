@@ -37,7 +37,7 @@ instance ctorInfoHasFormat : HasFormat CtorInfo := ⟨formatCtorInfo⟩
 private def formatExpr : Expr → Format
 | Expr.ctor i ys      => format i ++ formatArray ys
 | Expr.reset n x      => "reset[" ++ format n ++ "] " ++ format x
-| Expr.reuse x i u ys => "reuse" ++ (if u then "!" else "") ++ " " ++ format x ++ " in " ++ format i ++ formatArray ys
+| Expr.reuse x i u ys => ("reuse" ++ if u then "!" else "") ++ " " ++ format x ++ " in " ++ format i ++ formatArray ys
 | Expr.proj i x       => "proj[" ++ format i ++ "] " ++ format x
 | Expr.uproj i x      => "uproj[" ++ format i ++ "] " ++ format x
 | Expr.sproj n o x    => "sproj[" ++ format n ++ ", " ++ format o ++ "] " ++ format x
@@ -70,7 +70,7 @@ instance typeHasFormat : HasFormat IRType := ⟨formatIRType⟩
 instance typeHasToString : HasToString IRType := ⟨toString ∘ format⟩
 
 private def formatParam : Param → Format
-| { x := name, borrow := b, ty := ty } => "(" ++ format name ++ " : " ++ (if b then "@& " else "") ++ format ty ++ ")"
+| { x := name, borrow := b, ty := ty } => ("(" ++ format name ++ " : " ++ if b then "@& " else "") ++ format ty ++ ")"
 
 instance paramHasFormat : HasFormat Param := ⟨formatParam⟩
 
@@ -89,8 +89,8 @@ def formatFnBodyHead : FnBody → Format
 | FnBody.uset x i y b        => "uset " ++ format x ++ "[" ++ format i ++ "] := " ++ format y
 | FnBody.sset x i o y ty b   => "sset " ++ format x ++ "[" ++ format i ++ ", " ++ format o ++ "] : " ++ format ty ++ " := " ++ format y
 | FnBody.setTag x cidx b     => "setTag " ++ format x ++ " := " ++ format cidx
-| FnBody.inc x n c _ b       => "inc" ++ (if n != 1 then Format.sbracket (format n) else "") ++ " " ++ format x
-| FnBody.dec x n c _ b       => "dec" ++ (if n != 1 then Format.sbracket (format n) else "") ++ " " ++ format x
+| FnBody.inc x n c _ b       => ("inc" ++ if n != 1 then Format.sbracket (format n) else "") ++ " " ++ format x
+| FnBody.dec x n c _ b       => ("dec" ++ if n != 1 then Format.sbracket (format n) else "") ++ " " ++ format x
 | FnBody.del x b             => "del " ++ format x
 | FnBody.mdata d b           => "mdata " ++ format d
 | FnBody.case tid x xType cs => "case " ++ format x ++ " of ..."
@@ -105,8 +105,8 @@ partial def formatFnBody (indent : Nat := 2) : FnBody → Format
 | FnBody.uset x i y b        => "uset " ++ format x ++ "[" ++ format i ++ "] := " ++ format y ++ ";" ++ Format.line ++ formatFnBody b
 | FnBody.sset x i o y ty b   => "sset " ++ format x ++ "[" ++ format i ++ ", " ++ format o ++ "] : " ++ format ty ++ " := " ++ format y ++ ";" ++ Format.line ++ formatFnBody b
 | FnBody.setTag x cidx b     => "setTag " ++ format x ++ " := " ++ format cidx ++ ";" ++ Format.line ++ formatFnBody b
-| FnBody.inc x n c _ b       => "inc" ++ (if n != 1 then Format.sbracket (format n) else "") ++ " " ++ format x ++ ";" ++ Format.line ++ formatFnBody b
-| FnBody.dec x n c _ b       => "dec" ++ (if n != 1 then Format.sbracket (format n) else "") ++ " " ++ format x ++ ";" ++ Format.line ++ formatFnBody b
+| FnBody.inc x n c _ b       => ("inc" ++ if n != 1 then Format.sbracket (format n) else "") ++ " " ++ format x ++ ";" ++ Format.line ++ formatFnBody b
+| FnBody.dec x n c _ b       => ("dec" ++ if n != 1 then Format.sbracket (format n) else "") ++ " " ++ format x ++ ";" ++ Format.line ++ formatFnBody b
 | FnBody.del x b             => "del " ++ format x ++ ";" ++ Format.line ++ formatFnBody b
 | FnBody.mdata d b           => "mdata " ++ format d ++ ";" ++ Format.line ++ formatFnBody b
 | FnBody.case tid x xType cs => "case " ++ format x ++ " : " ++ format xType ++ " of" ++ cs.foldl (fun r c => r ++ Format.line ++ formatAlt formatFnBody indent c) Format.nil

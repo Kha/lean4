@@ -25,15 +25,15 @@ withMVarContext mvarId $ do
   let heq := mkAppN heq newMVars;
   let continue (heq heqType : Expr) : MetaM RewriteResult :=
     match heqType.eq? with
-    | none => throwTacticEx `rewrite mvarId ("equality of iff proof expected")
+    | none => throwTacticEx `rewrite mvarId "equality of iff proof expected"
     | some (α, lhs, rhs) =>
       let continue (heq heqType lhs rhs : Expr) : MetaM RewriteResult := do {
         when lhs.getAppFn.isMVar $
-          throwTacticEx `rewrite mvarId ("pattern is a metavariable");
+          throwTacticEx `rewrite mvarId "pattern is a metavariable";
         e ← instantiateMVars e;
         eAbst ← kabstract e lhs occs;
         unless eAbst.hasLooseBVars $
-          throwTacticEx `rewrite mvarId ("did not find instance of the pattern in the target expression");
+          throwTacticEx `rewrite mvarId "did not find instance of the pattern in the target expression";
         -- construct rewrite proof
         let eNew := eAbst.instantiate1 rhs;
         eNew ← instantiateMVars eNew;
@@ -41,7 +41,7 @@ withMVarContext mvarId $ do
         let eEqEAbst := mkApp eEqE.appFn! eAbst;
         let motive := Lean.mkLambda `_a BinderInfo.default α eEqEAbst;
         unlessM (isTypeCorrect motive) $
-          throwTacticEx `rewrite mvarId ("motive is not type correct");
+          throwTacticEx `rewrite mvarId "motive is not type correct";
         eqRefl ← mkEqRefl e;
         eqPrf ← mkEqNDRec motive eqRefl heq;
         postprocessAppMVars `rewrite mvarId newMVars binderInfos;

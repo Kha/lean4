@@ -57,7 +57,7 @@ abbrev VarTypeMap  := HashMap VarId IRType
 abbrev JPParamsMap := HashMap JoinPointId (Array Param)
 
 namespace CollectMaps
-abbrev Collector := (VarTypeMap × JPParamsMap) → (VarTypeMap × JPParamsMap)
+abbrev Collector := VarTypeMap × JPParamsMap → VarTypeMap × JPParamsMap
 @[inline] def collectVar (x : VarId) (t : IRType) : Collector
 | (vs, js) => (vs.insert x t, js)
 def collectParams (ps : Array Param) : Collector :=

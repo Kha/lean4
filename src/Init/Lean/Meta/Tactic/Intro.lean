@@ -23,7 +23,7 @@ def introNCoreAux {σ} (mvarId : MVarId) (mkName : LocalContext → Name → σ 
       newVal  ← mkLambda fvars newMVar;
       assignExprMVar mvarId newVal;
       pure $ (fvars, newMVar.mvarId!)
-| (i+1), lctx, fvars, j, s, Expr.letE n type val body _ => do
+| i+1, lctx, fvars, j, s, Expr.letE n type val body _ => do
   let type   := type.instantiateRevRange j fvars.size fvars;
   let type   := type.headBeta;
   let val    := val.instantiateRevRange j fvars.size fvars;
@@ -33,7 +33,7 @@ def introNCoreAux {σ} (mvarId : MVarId) (mkName : LocalContext → Name → σ 
   let fvar   := mkFVar fvarId;
   let fvars  := fvars.push fvar;
   introNCoreAux i lctx fvars j s body
-| (i+1), lctx, fvars, j, s, Expr.forallE n type body c => do
+| i+1, lctx, fvars, j, s, Expr.forallE n type body c => do
   let type   := type.instantiateRevRange j fvars.size fvars;
   let type   := type.headBeta;
   fvarId ← mkFreshId;
@@ -42,7 +42,7 @@ def introNCoreAux {σ} (mvarId : MVarId) (mkName : LocalContext → Name → σ 
   let fvar   := mkFVar fvarId;
   let fvars  := fvars.push fvar;
   introNCoreAux i lctx fvars j s body
-| (i+1), lctx, fvars, j, s, type =>
+| i+1, lctx, fvars, j, s, type =>
   let type := type.instantiateRevRange j fvars.size fvars;
   adaptReader (fun (ctx : Context) => { ctx with lctx := lctx }) $
     withNewLocalInstances isClassExpensive fvars j $ do

@@ -57,7 +57,7 @@ env.getNamespaceSet.contains n
 @[export lean_in_section]
 def inSection (env : Environment) : Bool :=
 match (scopeManagerExt.getState env).isNamespace with
-| (b::_) => !b
+| b::_ => !b
 | _      => false
 
 @[export lean_has_open_scopes]
@@ -67,13 +67,13 @@ def hasOpenScopes (env : Environment) : Bool :=
 @[export lean_get_namespace]
 def getNamespace (env : Environment) : Name :=
 match env.getNamespaces with
-| (n::_) => n
+| n::_ => n
 | _      => Name.anonymous
 
 @[export lean_get_scope_header]
 def getScopeHeader (env : Environment) : Name :=
 match (scopeManagerExt.getState env).headers with
-| (n::_) => n
+| n::_ => n
 | _      => Name.anonymous
 
 @[export lean_to_valid_namespace]

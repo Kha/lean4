@@ -338,7 +338,7 @@ def mkFreshAnonymousName : TermElabM Name := do
 s ← get;
 let anonymousIdx := s.anonymousIdx;
 modify $ fun s => { s with anonymousIdx := s.anonymousIdx + 1 };
-pure $ (`_a).appendIndexAfter anonymousIdx
+pure $ `_a.appendIndexAfter anonymousIdx
 
 /--
   Auxiliary method for creating a `Syntax.ident` containing
@@ -355,7 +355,7 @@ def mkFreshInstanceName : TermElabM Name := do
 s ← get;
 let instIdx := s.instImplicitIdx;
 modify $ fun s => { s with instImplicitIdx := s.instImplicitIdx + 1 };
-pure $ (`_inst).appendIndexAfter instIdx
+pure $ `_inst.appendIndexAfter instIdx
 
 private partial def hasCDot : Syntax → Bool
 | Syntax.node k args =>
@@ -724,7 +724,7 @@ private def elabUsingElabFnsAux (s : State) (stx : Syntax) (expectedType? : Opti
 | []                => do
   let refFmt := stx.prettyPrint;
   throwError stx ("unexpected syntax" ++ MessageData.nest 2 (Format.line ++ refFmt))
-| (elabFn::elabFns) => catch (elabFn stx expectedType?)
+| elabFn::elabFns => catch (elabFn stx expectedType?)
   (fun ex => match ex with
     | Exception.ex (Elab.Exception.error errMsg)    => do ctx ← read; if ctx.errToSorry then exceptionToSorry stx errMsg expectedType? else throw ex
     | Exception.ex Elab.Exception.unsupportedSyntax => do set s; elabUsingElabFnsAux elabFns
@@ -998,13 +998,13 @@ pure mvar
 fun stx expectedType? =>
   match expectedType? with
   | some expectedType => mkTacticMVar stx expectedType (stx.getArg 1)
-  | none => throwError stx ("invalid tactic block, expected type has not been provided")
+  | none => throwError stx "invalid tactic block, expected type has not been provided"
 
 @[builtinTermElab byTactic] def elabByTactic : TermElab :=
 fun stx expectedType? =>
   match expectedType? with
   | some expectedType => mkTacticMVar stx expectedType (stx.getArg 1)
-  | none => throwError stx ("invalid 'by' tactic, expected type has not been provided")
+  | none => throwError stx "invalid 'by' tactic, expected type has not been provided"
 
 /-- Main loop for `mkPairs`. -/
 private partial def mkPairsAux (elems : Array Syntax) : Nat → Syntax → MacroM Syntax
@@ -1104,7 +1104,7 @@ match env.find? constName with
 | none       => throwError ref ("unknown constant '" ++ constName ++ "'")
 | some cinfo =>
   if explicitLevels.length > cinfo.lparams.length then
-    throwError ref ("too many explicit universe levels")
+    throwError ref "too many explicit universe levels"
   else do
     let numMissingLevels := cinfo.lparams.length - explicitLevels.length;
     us ← mkFreshLevelMVars ref numMissingLevels;

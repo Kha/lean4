@@ -79,7 +79,7 @@ ys.any $ fun arg => match arg with
 
 private def isCtorUsing (b : FnBody) (x : VarId) : Bool :=
 match b with
-| (FnBody.vdecl _ _ (Expr.ctor _ ys) _) => argsContainsVar ys x
+| FnBody.vdecl _ _ (Expr.ctor _ ys) _ => argsContainsVar ys x
 | _ => false
 
 /- Given `Dmain b`, the resulting pair `(new_b, flag)` contains the new body `new_b`,

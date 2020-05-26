@@ -42,7 +42,7 @@ instance decLt (s₁ s₂ : @& String) : Decidable (s₁ < s₂) :=
 List.hasDecidableLt s₁.data s₂.data
 
 @[extern "lean_string_length"]
-def length : (@& String) → Nat
+def length : @& String → Nat
 | ⟨s⟩ => s.length
 
 /- The internal implementation uses dynamic arrays and will perform destructive updates
@@ -54,7 +54,7 @@ def push : String → Char → String
 /- The internal implementation uses dynamic arrays and will perform destructive updates
    if the String is not shared. -/
 @[extern "lean_string_append"]
-def append : String → (@& String) → String
+def append : String → @& String → String
 | ⟨a⟩, ⟨b⟩ => ⟨a ++ b⟩
 
 /- O(n) in the runtime, where n is the length of the String -/
@@ -69,7 +69,7 @@ private def utf8ByteSizeAux : List Char → Nat → Nat
 | c::cs, r => utf8ByteSizeAux cs (r + csize c)
 
 @[extern "lean_string_utf8_byte_size"]
-def utf8ByteSize : (@& String) → Nat
+def utf8ByteSize : @& String → Nat
 | ⟨s⟩ => utf8ByteSizeAux s 0
 
 @[inline] def bsize (s : String) : Nat :=
@@ -83,16 +83,16 @@ private def utf8GetAux : List Char → Pos → Pos → Char
 | c::cs, i, p => if i = p then c else utf8GetAux cs (i + csize c) p
 
 @[extern "lean_string_utf8_get"]
-def get : (@& String) → (@& Pos) → Char
+def get : @& String → @& Pos → Char
 | ⟨s⟩, p => utf8GetAux s 0 p
 
 private def utf8SetAux (c' : Char) : List Char → Pos → Pos → List Char
 | [],    i, p => []
 | c::cs, i, p =>
-  if i = p then (c'::cs) else c::(utf8SetAux cs (i + csize c) p)
+  if i = p then c'::cs else c::utf8SetAux cs (i + csize c) p
 
 @[extern "lean_string_utf8_set"]
-def set : String → (@& Pos) → Char → String
+def set : String → @& Pos → Char → String
 | ⟨s⟩, i, c => ⟨utf8SetAux c s 0 i⟩
 
 def modify (s : String) (i : Pos) (f : Char → Char) : String :=
@@ -111,7 +111,7 @@ private def utf8PrevAux : List Char → Pos → Pos → Pos
   if i' = p then i else utf8PrevAux cs i' p
 
 @[extern "lean_string_utf8_prev"]
-def prev : (@& String) → (@& Pos) → Pos
+def prev : @& String → @& Pos → Pos
 | ⟨s⟩, p => if p = 0 then 0 else utf8PrevAux s 0 p
 
 def front (s : String) : Char :=
@@ -121,7 +121,7 @@ def back (s : String) : Char :=
 get s (prev s (bsize s))
 
 @[extern "lean_string_utf8_at_end"]
-def atEnd : (@& String) → (@& Pos) → Bool
+def atEnd : @& String → @& Pos → Bool
 | s, p => p ≥ utf8ByteSize s
 
 /- TODO: remove `partial` keywords after we restore the tactic
@@ -155,13 +155,13 @@ private def utf8ExtractAux₁ : List Char → Pos → Pos → Pos → List Char
 | s@(c::cs), i, b, e => if i = b then utf8ExtractAux₂ s i e else utf8ExtractAux₁ cs (i + csize c) b e
 
 @[extern "lean_string_utf8_extract"]
-def extract : (@& String) → (@& Pos) → (@& Pos) → String
+def extract : @& String → @& Pos → @& Pos → String
 | ⟨s⟩, b, e => if b ≥ e then ⟨[]⟩ else ⟨utf8ExtractAux₁ s 0 b e⟩
 
 @[specialize] partial def splitAux (s : String) (p : Char → Bool) : Pos → Pos → List String → List String
 | b, i, r =>
   if s.atEnd i then
-    let r := if p (s.get i) then ""::(s.extract b (i-1))::r else (s.extract b i)::r;
+    let r := if p (s.get i) then ""::s.extract b (i-1)::r else s.extract b i::r;
     r.reverse
   else if p (s.get i) then
     let i := s.next i;
@@ -174,7 +174,7 @@ splitAux s p 0 0 []
 partial def splitOnAux (s sep : String) : Pos → Pos → Pos → List String → List String
 | b, i, j, r =>
   if s.atEnd i then
-    let r := if sep.atEnd j then ""::(s.extract b (i-j))::r else (s.extract b i)::r;
+    let r := if sep.atEnd j then ""::s.extract b (i-j)::r else s.extract b i::r;
     r.reverse
   else if s.get i == sep.get j then
     let i := s.next i;
@@ -373,7 +373,7 @@ s.get 0
 
 @[inline] def posOf (s : Substring) (c : Char) : String.Pos :=
 match s with
-| ⟨s, b, e⟩ => (String.posOfAux s c e b) - b
+| ⟨s, b, e⟩ => String.posOfAux s c e b - b
 
 @[inline] def drop : Substring → Nat → Substring
 | ⟨s, b, e⟩, n =>

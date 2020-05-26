@@ -64,13 +64,13 @@ partial def eraseProjIncForAux (y : VarId) : Array FnBody → Mask → Array FnB
   else
     let b := bs.back;
     match b with
-    | (FnBody.vdecl _ _ (Expr.sproj _ _ _) _) => keepInstr b
-    | (FnBody.vdecl _ _ (Expr.uproj _ _) _)   => keepInstr b
-    | (FnBody.inc z n c p _) =>
+    | FnBody.vdecl _ _ (Expr.sproj _ _ _) _ => keepInstr b
+    | FnBody.vdecl _ _ (Expr.uproj _ _) _   => keepInstr b
+    | FnBody.inc z n c p _ =>
       if n == 0 then done () else
       let b' := bs.get! (bs.size - 2);
       match b' with
-      | (FnBody.vdecl w _ (Expr.proj i x) _) =>
+      | FnBody.vdecl w _ (Expr.proj i x) _ =>
         if w == z && y == x then
           /- Found
              ```
@@ -277,7 +277,7 @@ partial def searchAndExpand : FnBody → Array FnBody → M FnBody
 
 def main (d : Decl) : Decl :=
 match d with
-| (Decl.fdecl f xs t b) =>
+| Decl.fdecl f xs t b =>
   let m := mkProjMap d;
   let nextIdx := d.maxIndex + 1;
   let b := (searchAndExpand b #[] { projMap := m }).run' nextIdx;

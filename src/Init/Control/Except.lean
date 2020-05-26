@@ -54,8 +54,8 @@ Except.ok a
 
 @[inline] protected def bind {α β : Type v} (ma : Except ε α) (f : α → Except ε β) : Except ε β :=
 match ma with
-| (Except.error err) => Except.error err
-| (Except.ok v)      => f v
+| Except.error err => Except.error err
+| Except.ok v      => f v
 
 @[inline] protected def toBool {α : Type v} : Except ε α → Bool
 | Except.ok _    => true
@@ -98,8 +98,8 @@ ExceptT.mk $ ma >>= ExceptT.bindCont f
 
 @[inline] protected def map {α β : Type u} (f : α → β) (x : ExceptT ε m α) : ExceptT ε m β :=
 ExceptT.mk $ x >>= fun a => match a with
-  | (Except.ok a)    => pure $ Except.ok (f a)
-  | (Except.error e) => pure $ Except.error e
+  | Except.ok a    => pure $ Except.ok (f a)
+  | Except.error e => pure $ Except.error e
 
 @[inline] protected def lift {α : Type u} (t : m α) : ExceptT ε m α :=
 ExceptT.mk $ Except.ok <$> t
@@ -113,7 +113,7 @@ instance : HasMonadLift m (ExceptT ε m) :=
 @[inline] protected def catch {α : Type u} (ma : ExceptT ε m α) (handle : ε → ExceptT ε m α) : ExceptT ε m α :=
 ExceptT.mk $ ma >>= fun res => match res with
  | Except.ok a    => pure (Except.ok a)
- | Except.error e => (handle e)
+ | Except.error e => handle e
 
 instance (m') [Monad m'] : MonadFunctor m m' (ExceptT ε m) (ExceptT ε m') :=
 ⟨fun _ f x => f x⟩

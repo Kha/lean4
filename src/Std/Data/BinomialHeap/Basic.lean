@@ -81,7 +81,7 @@ def tail (lt : α → α → Bool) : Heap α → Heap α
 | Heap.heap [h]     =>
   match h.children with
   | []      => Heap.empty
-  | (h::hs) => hs.foldl (merge lt) h
+  | h::hs => hs.foldl (merge lt) h
 | Heap.heap hhs@(h::hs) =>
   let (min, minIdx) := findMin lt hs 1 (h, 0);
   let rest          := hhs.eraseIdx minIdx;

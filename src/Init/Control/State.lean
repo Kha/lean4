@@ -12,7 +12,7 @@ import Init.Control.Id
 import Init.Control.Except
 universes u v w
 
-def StateT (σ : Type u) (m : Type u → Type v) (α : Type u) : Type (max u v) :=
+def StateT (σ : Type u) (m : Type u → Type v) (α : Type u) : Type max u v :=
 σ → m (α × σ)
 
 @[inline] def StateT.run {σ : Type u} {m : Type u → Type v} {α : Type u} (x : StateT σ m α) (s : σ) : m (α × σ) :=
@@ -187,7 +187,7 @@ section
 variables {σ σ' : Type u} {m m' : Type u → Type u}
 
 instance monadStateRunnerTrans {n n' : Type u → Type u} [MonadStateRunner σ m m'] [MonadFunctor m m' n n'] : MonadStateRunner σ n n' :=
-⟨fun α x s => monadMap (fun (α) (y : m α) => (runState y s : m' α)) x⟩
+⟨fun α x s => monadMap (fun α (y : m α) => (runState y s : m' α)) x⟩
 
 instance StateT.MonadStateRunner [Monad m] : MonadStateRunner σ (StateT σ m) m :=
 ⟨fun α x s => Prod.fst <$> x s⟩

@@ -93,8 +93,8 @@ withMVarContext mvarId $ do
             continue motive newType
     | _ =>
       throwTacticEx `subst mvarId $
-        "invalid equality proof, it is not of the form "
-        ++ (if symm then "(t = x)" else "(x = t)")
+        ("invalid equality proof, it is not of the form "
+        ++ if symm then "(t = x)" else "(x = t)")
         ++ indentExpr hLocalDecl.type
 
 def subst (mvarId : MVarId) (hFVarId : FVarId) : MetaM MVarId :=

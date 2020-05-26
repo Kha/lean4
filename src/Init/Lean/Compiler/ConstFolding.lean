@@ -68,14 +68,14 @@ def foldUIntAdd := foldBinUInt $ fun _ _ => HasAdd.add
 def foldUIntMul := foldBinUInt $ fun _ _ => HasMul.mul
 def foldUIntDiv := foldBinUInt $ fun _ _ => HasDiv.div
 def foldUIntMod := foldBinUInt $ fun _ _ => HasMod.mod
-def foldUIntSub := foldBinUInt $ fun info _ a b => (a + (info.size - b))
+def foldUIntSub := foldBinUInt $ fun info _ a b => a + (info.size - b)
 
 def preUIntBinFoldFns : List (Name × BinFoldFn) :=
 [(`add, foldUIntAdd), (`mul, foldUIntMul), (`div, foldUIntDiv),
  (`mod, foldUIntMod), (`sub, foldUIntSub)]
 
 def uintBinFoldFns : List (Name × BinFoldFn) :=
-numScalarTypes.foldl (fun r info => r ++ (preUIntBinFoldFns.map (fun ⟨suffix, fn⟩ => (info.id ++ suffix, fn)))) []
+numScalarTypes.foldl (fun r info => r ++ preUIntBinFoldFns.map (fun ⟨suffix, fn⟩ => (info.id ++ suffix, fn))) []
 
 def foldNatBinOp (fn : Nat → Nat → Nat) (a₁ a₂ : Expr) : Option Expr := do
 n₁   ← getNumLit a₁;
@@ -96,7 +96,7 @@ n₂   ← getNumLit a₂;
 if n₂ < natPowThreshold then pure $ mkNatLit (n₁ ^ n₂) else none
 
 def mkNatEq (a b : Expr) : Expr :=
-mkAppN (mkConst `Eq [levelOne]) #[(mkConst `Nat), a, b]
+mkAppN (mkConst `Eq [levelOne]) #[mkConst `Nat, a, b]
 
 def mkNatLt (a b : Expr) : Expr :=
 mkAppN (mkConst `HasLt.lt [levelZero]) #[mkConst `Nat, mkConst `Nat.HasLt, a, b]
@@ -168,7 +168,7 @@ n ← getNumLit a;
 pure $ mkNatLit (n+1)
 
 def foldCharOfNat (beforeErasure : Bool) (a : Expr) : Option Expr := do
-guard (!beforeErasure);
+guard !beforeErasure;
 n ← getNumLit a;
 pure $
   if isValidChar n.toUInt32 then mkUInt32Lit n

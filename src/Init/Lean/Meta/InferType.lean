@@ -48,7 +48,7 @@ matchConst env structType.getAppFn failed $ fun structInfo structLvls => do
     if n != structParams.size then failed ()
     else match env.find? ctor with
       | none            => failed ()
-      | some (ctorInfo) => do
+      | some ctorInfo => do
         ctorType ← inferAppType (mkConst ctor structLvls) structParams;
         ctorType ← idx.foldM
           (fun i ctorType => do

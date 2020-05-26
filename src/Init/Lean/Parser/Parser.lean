@@ -609,7 +609,7 @@ def hexDigitFn : ParserFn
   else
     let curr := input.get i;
     let i    := input.next i;
-    if curr.isDigit || ('a' <= curr && curr <= 'f') || ('A' <= curr && curr <= 'F') then s.setPos i
+    if curr.isDigit || 'a' <= curr && curr <= 'f' || 'A' <= curr && curr <= 'F' then s.setPos i
     else s.mkUnexpectedError "invalid hexadecimal numeral"
 
 def quotedCharFn : ParserFn
@@ -700,7 +700,7 @@ fun c s =>
 
 def hexNumberFn (startPos : Nat) : ParserFn :=
 fun c s =>
-  let s := takeWhile1Fn (fun c => ('0' ≤ c && c ≤ '9') || ('a' ≤ c && c ≤ 'f') || ('A' ≤ c && c ≤ 'F')) "hexadecimal number" c s;
+  let s := takeWhile1Fn (fun c => '0' ≤ c && c ≤ '9' || 'a' ≤ c && c ≤ 'f' || 'A' ≤ c && c ≤ 'F') "hexadecimal number" c s;
   mkNodeToken numLitKind startPos c s
 
 def numberFnAux : ParserFn :=
@@ -1070,7 +1070,7 @@ def numLitFn : ParserFn :=
 fun c s =>
   let iniPos := s.pos;
   let s      := tokenFn c s;
-  if s.hasError || !(s.stxStack.back.isOfKind numLitKind) then s.mkErrorAt "numeral" iniPos else s
+  if s.hasError || !s.stxStack.back.isOfKind numLitKind then s.mkErrorAt "numeral" iniPos else s
 
 @[inline] def numLitNoAntiquot : Parser :=
 { fn   := numLitFn,
@@ -1080,7 +1080,7 @@ def strLitFn : ParserFn :=
 fun c s =>
   let iniPos := s.pos;
   let s := tokenFn c s;
-  if s.hasError || !(s.stxStack.back.isOfKind strLitKind) then s.mkErrorAt "string literal" iniPos else s
+  if s.hasError || !s.stxStack.back.isOfKind strLitKind then s.mkErrorAt "string literal" iniPos else s
 
 @[inline] def strLitNoAntiquot : Parser :=
 { fn   := strLitFn,
@@ -1090,7 +1090,7 @@ def charLitFn : ParserFn :=
 fun c s =>
   let iniPos := s.pos;
   let s := tokenFn c s;
-  if s.hasError || !(s.stxStack.back.isOfKind charLitKind) then s.mkErrorAt "character literal" iniPos else s
+  if s.hasError || !s.stxStack.back.isOfKind charLitKind then s.mkErrorAt "character literal" iniPos else s
 
 @[inline] def charLitNoAntiquot : Parser :=
 { fn   := charLitFn,
@@ -1100,7 +1100,7 @@ def nameLitFn : ParserFn :=
 fun c s =>
   let iniPos := s.pos;
   let s := tokenFn c s;
-  if s.hasError || !(s.stxStack.back.isOfKind nameLitKind) then s.mkErrorAt "Name literal" iniPos else s
+  if s.hasError || !s.stxStack.back.isOfKind nameLitKind then s.mkErrorAt "Name literal" iniPos else s
 
 @[inline] def nameLitNoAntiquot : Parser :=
 { fn   := nameLitFn,
@@ -1110,7 +1110,7 @@ def identFn : ParserFn :=
 fun c s =>
   let iniPos := s.pos;
   let s      := tokenFn c s;
-  if s.hasError || !(s.stxStack.back.isIdent) then s.mkErrorAt "identifier" iniPos else s
+  if s.hasError || !s.stxStack.back.isIdent then s.mkErrorAt "identifier" iniPos else s
 
 @[inline] def identNoAntiquot : Parser :=
 { fn   := identFn,
@@ -1433,7 +1433,7 @@ def antiquotExpr : Parser       := identNoAntiquot <|> antiquotNestedExpr
   when evaluating `match_syntax`. Antiquotations can be escaped as in `$$e`, which
   produces the syntax tree for `$e`. -/
 def mkAntiquot (name : String) (kind : Option SyntaxNodeKind) (anonymous := true) : Parser :=
-let kind := (kind.getD Name.anonymous) ++ `antiquot;
+let kind := kind.getD Name.anonymous ++ `antiquot;
 let nameP := checkNoWsBefore ("no space before ':" ++ name ++ "'") >> symbolAux ":" >> nonReservedSymbol name;
 -- if parsing the kind fails and `anonymous` is true, check that we're not ignoring a different
 -- antiquotation kind via `noImmediateColon`
@@ -1490,11 +1490,11 @@ def categoryParserOfStackFn (offset : Nat) : ParserFn :=
 fun ctx s =>
   let stack := s.stxStack;
   if stack.size < offset + 1 then
-    s.mkUnexpectedError ("failed to determine parser category using syntax stack, stack is too small")
+    s.mkUnexpectedError "failed to determine parser category using syntax stack, stack is too small"
   else
     match stack.get! (stack.size - offset - 1) with
     | Syntax.ident _ _ catName _ => categoryParserFn catName ctx s
-    | _ => s.mkUnexpectedError ("failed to determine parser category using syntax stack, the specified element on the stack is not an identifier")
+    | _ => s.mkUnexpectedError "failed to determine parser category using syntax stack, the specified element on the stack is not an identifier"
 
 def categoryParserOfStack (offset : Nat) (rbp : Nat := 0) : Parser :=
 { fn := fun c s => categoryParserOfStackFn offset { c with rbp := rbp } s }
@@ -1713,7 +1713,7 @@ match e with
   | Except.ok categories => { s with categories := categories, newEntries := ParserExtensionOleanEntry.parser catName declName :: s.newEntries }
   | _ => unreachable!
 
-def compileParserDescr (categories : ParserCategories) : ParserDescr → Except String (Parser)
+def compileParserDescr (categories : ParserCategories) : ParserDescr → Except String Parser
 | ParserDescr.andthen d₁ d₂                       => andthen <$> compileParserDescr d₁ <*> compileParserDescr d₂
 | ParserDescr.orelse d₁ d₂                        => orelse <$> compileParserDescr d₁ <*> compileParserDescr d₂
 | ParserDescr.optional d                          => optional <$> compileParserDescr d
@@ -1958,7 +1958,7 @@ registerBuiltinAttribute (mkParserAttributeImpl attrName catName)
 registerAttributeImplBuilder `parserAttr $ fun args =>
   match args with
   | [DataValue.ofName attrName, DataValue.ofName catName] => pure $ mkParserAttributeImpl attrName catName
-  | _ => throw ("invalid parser attribute implementation builder arguments")
+  | _ => throw "invalid parser attribute implementation builder arguments"
 
 def registerParserCategory (env : Environment) (attrName : Name) (catName : Name) (leadingIdentAsSymbol := false) : IO Environment := do
 env ← IO.ofExcept $ addParserCategory env catName leadingIdentAsSymbol;

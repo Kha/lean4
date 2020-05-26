@@ -60,8 +60,8 @@ def Key.ctorIdx : Key → Nat
 
 def Key.lt : Key → Key → Bool
 | Key.lit v₁,      Key.lit v₂      => v₁ < v₂
-| Key.fvar n₁ a₁,  Key.fvar n₂ a₂  => Name.quickLt n₁ n₂ || (n₁ == n₂ && a₁ < a₂)
-| Key.const n₁ a₁, Key.const n₂ a₂ => Name.quickLt n₁ n₂ || (n₁ == n₂ && a₁ < a₂)
+| Key.fvar n₁ a₁,  Key.fvar n₂ a₂  => Name.quickLt n₁ n₂ || n₁ == n₂ && a₁ < a₂
+| Key.const n₁ a₁, Key.const n₂ a₂ => Name.quickLt n₁ n₂ || n₁ == n₂ && a₁ < a₂
 | k₁,              k₂              => k₁.ctorIdx < k₂.ctorIdx
 
 instance Key.hasLess : HasLess Key := ⟨fun a b => Key.lt a b⟩
@@ -242,7 +242,7 @@ pure $ d.insertCore keys v
 
 partial def Trie.format {α} [HasFormat α] : Trie α → Format
 | Trie.node vs cs => Format.group $ Format.paren $
-  "node" ++ (if vs.isEmpty then Format.nil else " " ++ fmt vs)
+  ("node" ++ if vs.isEmpty then Format.nil else " " ++ fmt vs)
   ++ Format.join (cs.toList.map $ fun ⟨k, c⟩ => Format.line ++ Format.paren (fmt k ++ " => " ++ Trie.format c))
 
 instance Trie.hasFormat {α} [HasFormat α] : HasFormat (Trie α) := ⟨Trie.format⟩
@@ -250,7 +250,7 @@ instance Trie.hasFormat {α} [HasFormat α] : HasFormat (Trie α) := ⟨Trie.for
 partial def format {α} [HasFormat α] (d : DiscrTree α) : Format :=
 let (_, r) := d.root.foldl
   (fun (p : Bool × Format) k c =>
-    (false, p.2 ++ (if p.1 then Format.nil else Format.line) ++ Format.paren (fmt k ++ " => " ++ fmt c)))
+    (false, (p.2 ++ if p.1 then Format.nil else Format.line) ++ Format.paren (fmt k ++ " => " ++ fmt c)))
   (true, Format.nil);
 Format.group r
 
@@ -331,7 +331,7 @@ withReducible $ do
     | none   => pure result
     | some c => getMatchAux args c result
 
-private partial def getUnifyAux {α} : Nat → Array Expr → Trie α → (Array α) → MetaM (Array α)
+private partial def getUnifyAux {α} : Nat → Array Expr → Trie α → Array α → MetaM (Array α)
 | skip+1, todo, Trie.node vs cs, result =>
   if cs.isEmpty then pure result
   else cs.foldlM (fun result ⟨k, c⟩ => getUnifyAux (skip + k.arity) todo c result) result

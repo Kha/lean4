@@ -14,7 +14,7 @@ import Init.Control.Except
 universes u v w
 
 /-- An implementation of [ReaderT](https://hackage.haskell.org/package/transformers-0.5.5.0/docs/Control-Monad-Trans-Reader.html#t:ReaderT) -/
-def ReaderT (ρ : Type u) (m : Type u → Type v) (α : Type u) : Type (max u v) :=
+def ReaderT (ρ : Type u) (m : Type u → Type v) (α : Type u) : Type max u v :=
 ρ → m α
 
 @[inline] def ReaderT.run {ρ : Type u} {m : Type u → Type v} {α : Type u} (x : ReaderT ρ m α) (r : ρ) : m α :=
@@ -67,7 +67,7 @@ instance [Alternative m] : Alternative (ReaderT ρ m) :=
 
 instance (ε) [Monad m] [MonadExcept ε m] : MonadExcept ε (ReaderT ρ m) :=
 { throw := fun α => ReaderT.lift ∘ throw,
-  catch := fun α x c r => catch (x r) (fun e => (c e) r) }
+  catch := fun α x c r => catch (x r) (fun e => c e r) }
 end
 end ReaderT
 
@@ -129,7 +129,7 @@ section
 variables {ρ ρ' : Type u} {m m' : Type u → Type u}
 
 instance monadReaderRunnerTrans {n n' : Type u → Type u} [MonadReaderRunner ρ m m'] [MonadFunctor m m' n n'] : MonadReaderRunner ρ n n' :=
-⟨fun α x r => monadMap (fun (α) (y : m α) => (runReader y r : m' α)) x⟩
+⟨fun α x r => monadMap (fun α (y : m α) => (runReader y r : m' α)) x⟩
 
 instance ReaderT.MonadStateRunner [Monad m] : MonadReaderRunner ρ (ReaderT ρ m) m :=
 ⟨fun α x r => x r⟩

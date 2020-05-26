@@ -52,7 +52,7 @@ def registerBuiltinAttribute (attr : AttributeImpl) : IO Unit := do
 m ← attributeMapRef.get;
 when (m.contains attr.name) $ throw (IO.userError ("invalid builtin attribute declaration, '" ++ toString attr.name ++ "' has already been used"));
 initializing ← IO.initializing;
-unless initializing $ throw (IO.userError ("failed to register attribute, attributes can only be registered during initialization"));
+unless initializing $ throw (IO.userError "failed to register attribute, attributes can only be registered during initialization");
 attributeMapRef.modify (fun m => m.insert attr.name attr)
 
 abbrev AttributeImplBuilder := List DataValue → Except String AttributeImpl
@@ -387,13 +387,13 @@ let attrs := attrDescrs.map $ fun ⟨name, descr, val⟩ => {
   name            := name,
   descr           := descr,
   applicationTime := applicationTime,
-  add             := (fun env decl args persistent => do
+  add             := fun env decl args persistent => do
     unless persistent $ throw (IO.userError ("invalid attribute '" ++ toString name ++ "', must be persistent"));
     unless (env.getModuleIdxFor? decl).isNone $
       throw (IO.userError ("invalid attribute '" ++ toString name ++ "', declaration is in an imported module"));
     match validate env decl val with
     | Except.error msg => throw (IO.userError ("invalid attribute '" ++ toString name ++ "', " ++ msg))
-    | _                => pure $ ext.addEntry env (decl, val))
+    | _                => pure $ ext.addEntry env (decl, val)
   : AttributeImpl
 };
 attrs.forM registerBuiltinAttribute;

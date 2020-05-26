@@ -132,7 +132,7 @@ private def evalTacticUsing (s : State) (stx : Syntax) : List Tactic → TacticM
 | []                => do
   let refFmt := stx.prettyPrint;
   throwError stx ("unexpected syntax" ++ MessageData.nest 2 (Format.line ++ refFmt))
-| (evalFn::evalFns) => catch (evalFn stx)
+| evalFn::evalFns => catch (evalFn stx)
   (fun ex => match ex with
     | Exception.error _           =>
       match evalFns with
@@ -220,7 +220,7 @@ gs ← getGoals;
 gs ← gs.filterM $ fun g => not <$> isExprMVarAssigned g;
 setGoals gs
 def getUnsolvedGoals : TacticM (List MVarId) := do pruneSolvedGoals; getGoals
-def getMainGoal (ref : Syntax) : TacticM (MVarId × List MVarId) := do (g::gs) ← getUnsolvedGoals | throwError ref "no goals to be solved"; pure (g, gs)
+def getMainGoal (ref : Syntax) : TacticM (MVarId × List MVarId) := do g::gs ← getUnsolvedGoals | throwError ref "no goals to be solved"; pure (g, gs)
 def ensureHasNoMVars (ref : Syntax) (e : Expr) : TacticM Unit := do
 e ← instantiateMVars ref e;
 when e.hasMVar $ throwError ref ("tactic failed, resulting expression contains metavariables" ++ indentExpr e)
@@ -305,7 +305,7 @@ fun stx =>
     (catch
       (do evalTactic tactic; pure true)
       (fun _ => pure false))
-    (throwError stx ("tactic succeeded"))
+    (throwError stx "tactic succeeded")
 
 @[builtinTactic traceState] def evalTraceState : Tactic :=
 fun stx => do

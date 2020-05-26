@@ -31,15 +31,15 @@ def push : ByteArray → UInt8 → ByteArray
 | ⟨bs⟩, b => ⟨bs.push b⟩
 
 @[extern "lean_byte_array_size"]
-def size : (@& ByteArray) → Nat
+def size : @& ByteArray → Nat
 | ⟨bs⟩ => bs.size
 
 @[extern "lean_byte_array_get"]
-def get! : (@& ByteArray) → (@& Nat) → UInt8
+def get! : @& ByteArray → @& Nat → UInt8
 | ⟨bs⟩, i => bs.get! i
 
 @[extern "lean_byte_array_set"]
-def set! : ByteArray → (@& Nat) → UInt8 → ByteArray
+def set! : ByteArray → @& Nat → UInt8 → ByteArray
 | ⟨bs⟩, i, b => ⟨bs.set! i b⟩
 
 def isEmpty (s : ByteArray) : Bool :=

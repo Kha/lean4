@@ -48,7 +48,7 @@ modifyGet $ fun n => ({ idx := n }, n + 1)
 
 def requiresBoxedVersion (env : Environment) (decl : Decl) : Bool :=
 let ps := decl.params;
-(ps.size > 0 && (decl.resultType.isScalar || ps.any (fun p => p.ty.isScalar || p.borrow) || isExtern env decl.name))
+ps.size > 0 && (decl.resultType.isScalar || ps.any (fun p => p.ty.isScalar || p.borrow) || isExtern env decl.name)
 || ps.size > closureMaxArgs
 
 def mkBoxedVersionAux (decl : Decl) : N Decl := do
@@ -103,7 +103,7 @@ match isScalar with
   else IRType.object -- in practice this should be unreachable
 
 def eqvTypes (t₁ t₂ : IRType) : Bool :=
-(t₁.isScalar == t₂.isScalar) && (!t₁.isScalar || t₁ == t₂)
+t₁.isScalar == t₂.isScalar && (!t₁.isScalar || t₁ == t₂)
 
 structure BoxingContext :=
 (f : FunId := arbitrary _) (localCtx : LocalContext := {}) (resultType : IRType := IRType.irrelevant) (decls : Array Decl) (env : Environment)
@@ -202,7 +202,7 @@ match opt? with
   match s.auxDeclCache.find? body with
   | some v => pure v
   | none   => do
-    let auxName  := ctx.f ++ ((`_boxed_const).appendIndexAfter s.nextAuxId);
+    let auxName  := ctx.f ++ `_boxed_const.appendIndexAfter s.nextAuxId;
     let auxConst := Expr.fap auxName #[];
     let auxDecl  := Decl.fdecl auxName #[] expectedType body;
     modify $ fun s => {

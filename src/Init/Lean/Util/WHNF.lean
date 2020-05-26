@@ -29,7 +29,7 @@ def matchConstAux {α : Type} {m : Type → Type} [Monad m]
     (e : Expr) (failK : Unit → m α) (k : ConstantInfo → List Level → m α) : m α :=
 match e with
 | Expr.const name lvls _ => do
-  (some cinfo) ← getConst name | failK ();
+  some cinfo ← getConst name | failK ();
   k cinfo lvls
 | _ => failK ()
 
@@ -48,7 +48,7 @@ private def mkNullaryCtor {m : Type → Type} [Monad m]
    (type : Expr) (nparams : Nat) : m (Option Expr) :=
 match type.getAppFn with
 | Expr.const d lvls _ => do
-  (some ctor) ← getFirstCtor getConst d | pure none;
+  some ctor ← getFirstCtor getConst d | pure none;
   pure $ mkAppN (mkConst ctor lvls) (type.getAppArgs.shrink nparams)
 | _ => pure none
 
@@ -79,7 +79,7 @@ if !majorTypeI.isConstOf rec.getInduct then
 else if majorType.hasExprMVar && majorType.getAppArgs.anyFrom rec.nparams Expr.hasExprMVar then
   pure none
 else do
-  (some newCtorApp) ← mkNullaryCtor getConst majorType rec.nparams | pure none;
+  some newCtorApp ← mkNullaryCtor getConst majorType rec.nparams | pure none;
   newType ← inferType newCtorApp;
   defeq ← isDefEq majorType newType;
   pure $ if defeq then newCtorApp else none
@@ -329,7 +329,7 @@ else
     : Expr → m Expr
 | e => do
   e ← whnfCore getConst isAuxDef? whnf inferType isDefEq getLocalDecl getMVarAssignment e;
-  (some mvarId) ← getStuckMVar? getConst whnf e | pure e;
+  some mvarId ← getStuckMVar? getConst whnf e | pure e;
   succeeded     ← synthesizePending mvarId;
   if succeeded then whnfCoreUnstuck e else pure e
 
@@ -364,7 +364,7 @@ match e with
         else
           pure none
 | Expr.const name lvls _ => do
-  (some (cinfo@(ConstantInfo.defnInfo _))) ← getConst name | pure none;
+  some cinfo@(ConstantInfo.defnInfo _) ← getConst name | pure none;
   deltaDefinition cinfo lvls (fun _ => pure none) (fun e => pure (some e))
 | _ => pure none
 

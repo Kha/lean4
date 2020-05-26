@@ -107,19 +107,19 @@ def Expr.Data.looseBVarRange (c : Expr.Data) : UInt32 :=
 (c.shiftRight 40).toUInt32
 
 def Expr.Data.hasFVar (c : Expr.Data) : Bool :=
-((c.shiftRight 32).land 1) == 1
+(c.shiftRight 32).land 1 == 1
 
 def Expr.Data.hasExprMVar (c : Expr.Data) : Bool :=
-((c.shiftRight 33).land 1) == 1
+(c.shiftRight 33).land 1 == 1
 
 def Expr.Data.hasLevelMVar (c : Expr.Data) : Bool :=
-((c.shiftRight 34).land 1) == 1
+(c.shiftRight 34).land 1 == 1
 
 def Expr.Data.hasLevelParam (c : Expr.Data) : Bool :=
-((c.shiftRight 35).land 1) == 1
+(c.shiftRight 35).land 1 == 1
 
 def Expr.Data.nonDepLet (c : Expr.Data) : Bool :=
-((c.shiftRight 36).land 1) == 1
+(c.shiftRight 36).land 1 == 1
 
 @[extern c inline "(uint8_t)((#1 << 24) >> 61)"]
 def Expr.Data.binderInfo (c : Expr.Data) : BinderInfo :=

@@ -38,10 +38,10 @@ def Level.Data.depth (c : Level.Data) : UInt32 :=
 (c.shiftRight 40).toUInt32
 
 def Level.Data.hasMVar (c : Level.Data) : Bool :=
-((c.shiftRight 32).land 1) == 1
+(c.shiftRight 32).land 1 == 1
 
 def Level.Data.hasParam (c : Level.Data) : Bool :=
-((c.shiftRight 33).land 1) == 1
+(c.shiftRight 33).land 1 == 1
 
 def Level.mkData (h : USize) (depth : Nat) (hasMVar hasParam : Bool) : Level.Data :=
 if depth > Nat.pow 2 24 - 1 then panic! "universe level depth is too big"
@@ -174,7 +174,7 @@ def ofNat : Nat → Level
 
 def addOffsetAux : Nat → Level → Level
 | 0,     u => u
-| (n+1), u => addOffsetAux n (mkLevelSucc u)
+| n+1, u => addOffsetAux n (mkLevelSucc u)
 
 def addOffset (u : Level) (n : Nat) : Level :=
 u.addOffsetAux n

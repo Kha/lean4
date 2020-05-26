@@ -11,8 +11,8 @@ import Init.Coe
 namespace Nat
 
 partial def bitwise (f : Bool → Bool → Bool) : Nat → Nat → Nat | n, m =>
-if n = 0 then      (if f false true then m else 0)
-else if m = 0 then (if f true false then n else 0)
+if n = 0 then      if f false true then m else 0
+else if m = 0 then if f true false then n else 0
 else
   let n' := n / 2;
   let m' := m / 2;

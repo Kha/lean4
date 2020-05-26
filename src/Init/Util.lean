@@ -24,7 +24,7 @@ f ()
 
 @[extern c inline "#3"]
 unsafe def unsafeCast {α : Type u} {β : Type v} (a : α) : β :=
-cast lcProof (PUnit.{v})
+cast lcProof PUnit.{v}
 
 @[neverExtract, extern "lean_panic_fn"]
 constant panic {α : Type u} [Inhabited α] (msg : String) : α := arbitrary _

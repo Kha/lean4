@@ -22,7 +22,7 @@ class MonadTracerAdapter (m : Type → Type) :=
 (modifyTraces        : (PersistentArray MessageData → PersistentArray MessageData) → m Unit)
 
 private def checkTraceOptionAux (opts : Options) : Name → Bool
-| n@(Name.str p _ _) => opts.getBool n || (!opts.contains n && checkTraceOptionAux p)
+| n@(Name.str p _ _) => opts.getBool n || !opts.contains n && checkTraceOptionAux p
 | _                  => false
 
 def checkTraceOption (opts : Options) (cls : Name) : Bool :=
