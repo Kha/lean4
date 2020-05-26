@@ -92,7 +92,7 @@ partial def abstractExprMVars : Expr → M Expr
       type   ← visitExpr abstractExprMVars decl.type;
       fvarId ← mkFreshId;
       let fvar := mkFVar fvarId;
-      let userName := if decl.userName.isAnonymous then `x.appendIndexAfter s.fvars.size else decl.userName;
+      let userName := if decl.userName.isAnonymous then (`x).appendIndexAfter s.fvars.size else decl.userName;
       modify $ fun s => {
         s with
         emap  := s.emap.insert mvarId fvar,

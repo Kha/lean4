@@ -44,7 +44,7 @@ else do
 
 def mkNewLevelParam (u : Level) : ClosureM Level := do
 s ← get;
-let p := `u.appendIndexAfter s.nextLevelIdx;
+let p := (`u).appendIndexAfter s.nextLevelIdx;
 modify $ fun s => { s with levelParams := s.levelParams.push p, nextLevelIdx := s.nextLevelIdx + 1, levelClosure := s.levelClosure.push u };
 pure $ mkLevelParam p
 
@@ -71,7 +71,7 @@ pure id
   Recall that the pretty printer takes care of unintended collisions. -/
 def mkNextUserName : ClosureM Name := do
 s ← get;
-let n := `_x.appendIndexAfter s.nextExprIdx;
+let n := (`_x).appendIndexAfter s.nextExprIdx;
 modify $ fun s => { s with nextExprIdx := s.nextExprIdx + 1 };
 pure n
 

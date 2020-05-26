@@ -387,13 +387,13 @@ let attrs := attrDescrs.map $ fun ⟨name, descr, val⟩ => {
   name            := name,
   descr           := descr,
   applicationTime := applicationTime,
-  add             := fun env decl args persistent => do
+  add             := (fun env decl args persistent => do
     unless persistent $ throw (IO.userError ("invalid attribute '" ++ toString name ++ "', must be persistent"));
     unless (env.getModuleIdxFor? decl).isNone $
       throw (IO.userError ("invalid attribute '" ++ toString name ++ "', declaration is in an imported module"));
     match validate env decl val with
     | Except.error msg => throw (IO.userError ("invalid attribute '" ++ toString name ++ "', " ++ msg))
-    | _                => pure $ ext.addEntry env (decl, val)
+    | _                => pure $ ext.addEntry env (decl, val))
   : AttributeImpl
 };
 attrs.forM registerBuiltinAttribute;

@@ -202,7 +202,7 @@ match opt? with
   match s.auxDeclCache.find? body with
   | some v => pure v
   | none   => do
-    let auxName  := ctx.f ++ `_boxed_const.appendIndexAfter s.nextAuxId;
+    let auxName  := ctx.f ++ (`_boxed_const).appendIndexAfter s.nextAuxId;
     let auxConst := Expr.fap auxName #[];
     let auxDecl  := Decl.fdecl auxName #[] expectedType body;
     modify $ fun s => {

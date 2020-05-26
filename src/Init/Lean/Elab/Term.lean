@@ -338,7 +338,7 @@ def mkFreshAnonymousName : TermElabM Name := do
 s ← get;
 let anonymousIdx := s.anonymousIdx;
 modify $ fun s => { s with anonymousIdx := s.anonymousIdx + 1 };
-pure $ `_a.appendIndexAfter anonymousIdx
+pure $ (`_a).appendIndexAfter anonymousIdx
 
 /--
   Auxiliary method for creating a `Syntax.ident` containing
@@ -355,7 +355,7 @@ def mkFreshInstanceName : TermElabM Name := do
 s ← get;
 let instIdx := s.instImplicitIdx;
 modify $ fun s => { s with instImplicitIdx := s.instImplicitIdx + 1 };
-pure $ `_inst.appendIndexAfter instIdx
+pure $ (`_inst).appendIndexAfter instIdx
 
 private partial def hasCDot : Syntax → Bool
 | Syntax.node k args =>
