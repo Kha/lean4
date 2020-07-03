@@ -45,6 +45,17 @@ def set! : ByteArray → (@& Nat) → UInt8 → ByteArray
 def isEmpty (s : ByteArray) : Bool :=
 s.size == 0
 
+-- TODO: justify termination using wf-rec
+partial def extractAux (a : ByteArray) : Nat → Nat → ByteArray → ByteArray
+| i, e, r =>
+  if i < e then
+    extractAux (i+1) e (r.push (a.get! i))
+  else r
+
+def extract (a : ByteArray) (b e : Nat) : ByteArray :=
+let r : ByteArray := mkEmpty (e - b);
+extractAux a b (Nat.min e a.size) r
+
 partial def toListAux (bs : ByteArray) : Nat → List UInt8 → List UInt8
 | i, r =>
   if i < bs.size then

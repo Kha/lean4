@@ -6,7 +6,7 @@ Authors: Luke Nelson, Jared Roesch, Leonardo de Moura, Sebastian Ullrich
 prelude
 import Init.Control.EState
 import Init.Control.Reader
-import Init.Data.String.Basic
+import Init.Data.String
 import Init.Data.ByteArray
 import Init.System.IOError
 import Init.System.FilePath
@@ -93,22 +93,30 @@ inductive FS.Mode
 
 constant FS.Handle : Type := Unit
 
+structure FS.Stream :=
+(isEof   : IO Bool)
+(flush   : IO Unit)
+(read    : forall (bytes : USize), IO ByteArray)
+(write   : ByteArray → IO Unit)
+(getLine : IO String)
+(putStr  : String → IO Unit)
+
 namespace Prim
 open FS
 
 @[extern "lean_get_stdin"]
-constant getStdin  : IO FS.Handle := arbitrary _
+constant getStdin  : IO FS.Stream := arbitrary _
 @[extern "lean_get_stdout"]
-constant getStdout : IO FS.Handle := arbitrary _
+constant getStdout : IO FS.Stream := arbitrary _
 @[extern "lean_get_stderr"]
-constant getStderr : IO FS.Handle := arbitrary _
+constant getStderr : IO FS.Stream := arbitrary _
 
 @[extern "lean_get_set_stdin"]
-constant setStdin  : FS.Handle → IO FS.Handle := arbitrary _
+constant setStdin  : FS.Stream → IO FS.Stream := arbitrary _
 @[extern "lean_get_set_stdout"]
-constant setStdout : FS.Handle → IO FS.Handle := arbitrary _
+constant setStdout : FS.Stream → IO FS.Stream := arbitrary _
 @[extern "lean_get_set_stderr"]
-constant setStderr : FS.Handle → IO FS.Handle := arbitrary _
+constant setStderr : FS.Stream → IO FS.Stream := arbitrary _
 
 @[specialize] partial def iterate {α β : Type} : α → (α → IO (Sum α β)) → IO β
 | a, f => do
@@ -226,42 +234,42 @@ end FS
 section
 variables {m : Type → Type} [Monad m] [MonadIO m]
 
-def getStdin : m FS.Handle :=
+def getStdin : m FS.Stream :=
 Prim.liftIO Prim.getStdin
 
-def getStdout : m FS.Handle :=
+def getStdout : m FS.Stream :=
 Prim.liftIO Prim.getStdout
 
-def getStderr : m FS.Handle :=
+def getStderr : m FS.Stream :=
 Prim.liftIO Prim.getStderr
 
 /-- Replaces the stdin handle and returns its previous value. -/
-def setStdin : FS.Handle → m FS.Handle :=
+def setStdin : FS.Stream → m FS.Stream :=
 Prim.liftIO ∘ Prim.setStdin
 
 /-- Replaces the stdout handle and returns its previous value. -/
-def setStdout : FS.Handle → m FS.Handle :=
+def setStdout : FS.Stream → m FS.Stream :=
 Prim.liftIO ∘ Prim.setStdout
 
 /-- Replaces the stderr handle and returns its previous value. -/
-def setStderr : FS.Handle → m FS.Handle :=
+def setStderr : FS.Stream → m FS.Stream :=
 Prim.liftIO ∘ Prim.setStderr
 
-def withStdin {α} (h : FS.Handle) (x : m α) : m α := do
+def withStdin {α} (h : FS.Stream) (x : m α) : m α := do
 prev ← setStdin h;
 finally x (discard $ setStdin prev)
 
-def withStdout {α} (h : FS.Handle) (x : m α) : m α := do
+def withStdout {α} (h : FS.Stream) (x : m α) : m α := do
 prev ← setStdout h;
 finally x (discard $ setStdout prev)
 
-def withStderr {α} (h : FS.Handle) (x : m α) : m α := do
+def withStderr {α} (h : FS.Stream) (x : m α) : m α := do
 prev ← setStderr h;
 finally x (discard $ setStderr prev)
 
 private def putStr (s : String) : m Unit := do
 out ← getStdout;
-out.putStr s
+Prim.liftIO $ out.putStr s
 
 def print {α} [HasToString α] (s : α) : m Unit := putStr ∘ toString $ s
 def println {α} [HasToString α] (s : α) : m Unit := print s *> putStr "\n"
@@ -360,6 +368,33 @@ v ← r.get;
 r.reset;
 r.set (f v)
 end
+
+namespace FS
+namespace Stream
+
+@[export lean_stream_of_handle]
+def ofHandle (h : Handle) : Stream :=
+{ isEof := Prim.Handle.isEof h,
+  flush := Prim.Handle.flush h,
+  read  := Prim.Handle.read h,
+  write := Prim.Handle.write h,
+  getLine := Prim.Handle.getLine h,
+  putStr  := Prim.Handle.putStr h }
+
+structure Buffer :=
+(data : ByteArray := ByteArray.empty)
+(pos : USize := 0)
+
+def ofBuffer (r : Ref Buffer) : Stream :=
+{ isEof := do b ← r.get; b.pos + 1 < b.data.size,
+  flush := pure (),
+  read  := fun n => do
+    b ← r.get;
+    b.data.
+
+}
+end Stream
+end FS
 end IO
 
 universe u
