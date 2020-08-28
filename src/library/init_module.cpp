@@ -37,6 +37,7 @@ Author: Leonardo de Moura
 #include "library/formatter.h"
 #include "library/pos_info_provider.h"
 #include "library/aux_match.h"
+#include "library/process.h"
 
 namespace lean {
 void initialize_library_core_module() {
@@ -86,9 +87,11 @@ void initialize_library_module() {
     initialize_type_context();
     initialize_check();
     initialize_time_task();
+    initialize_process();
 }
 
 void finalize_library_module() {
+    finalize_process();
     finalize_time_task();
     finalize_check();
     finalize_type_context();

@@ -40,83 +40,30 @@ enum stdio {
 
 #if defined(LEAN_WINDOWS)
 
-    ~windows_child() {
-        CloseHandle(m_process);
-    }
+static lean_external_class * g_win_handle_external_class = nullptr;
 
-    unsigned wait() override {
-        DWORD exit_code;
-        WaitForSingleObject(m_process, INFINITE);
-        GetExitCodeProcess(m_process, &exit_code);
-        return static_cast<unsigned>(exit_code);
-    }
+static void win_handle_finalizer(void * h) {
+    CloseHandle(static_cast<HANDLE>(h));
+}
+
+static void win_handle_foreach(void * /* mod */, b_obj_arg /* fn */) {
+}
+
+lean_object * wrap_win_handle(HANDLE h) {
+    return lean_alloc_external(g_win_handle_external_class, static_cast<void *>(h));
+}
+
+extern "C" obj_res lean_io_process_child_wait(obj_arg child, obj_arg) {
+    HANDLE h = static_cast<HANDLE>(cnstr_get(child, 3 * sizeof(object *)));
+    DWORD exit_code;
+    WaitForSingleObject(h, INFINITE);
+    GetExitCodeProcess(h, &exit_code);
+    return lean_mk_io_result(box(exit_code));
+}
 
 static FILE * from_win_handle(HANDLE handle, char const * mode) {
     int fd = _open_osfhandle(reinterpret_cast<intptr_t>(handle), _O_APPEND);
     return fdopen(fd, mode);
-}
-
-static HANDLE create_child_process(std::string command, optional<std::string> const & cwd,
-        std::unordered_map<std::string, optional<std::string>> const & env,
-        HANDLE hstdin, HANDLE hstdout, HANDLE hstderr) {
-    PROCESS_INFORMATION piProcInfo;
-    STARTUPINFO siStartInfo;
-    BOOL bSuccess = FALSE;
-
-    // Set up members of the PROCESS_INFORMATION structure.
-    ZeroMemory(&piProcInfo, sizeof(PROCESS_INFORMATION));
-
-    // Set up members of the STARTUPINFO structure.
-    // This structure specifies the STDIN and STDOUT handles for redirection.
-
-    ZeroMemory(&siStartInfo, sizeof(STARTUPINFO));
-    siStartInfo.cb = sizeof(STARTUPINFO);
-    siStartInfo.hStdError = hstderr;
-    siStartInfo.hStdOutput = hstdout;
-    siStartInfo.hStdInput = hstdin;
-    siStartInfo.dwFlags |= STARTF_USESTDHANDLES;
-
-    // TODO(gabriel): this is thread-unsafe
-    std::unordered_map<std::string, optional<std::string>> old_env_vars;
-    for (auto & entry : env) {
-        optional<std::string> old;
-        if (auto old_val = getenv(entry.first.c_str()))
-            old = std::string(old_val);
-        old_env_vars[entry.first] = old;
-
-        set_env(entry.first, entry.second);
-    }
-
-    // Create the child process.
-    // std::cout << command << std::endl;
-    bSuccess = CreateProcess(
-        NULL,
-        const_cast<char *>(command.c_str()), // command line
-        NULL,                                // process security attributes
-        NULL,                                // primary thread security attributes
-        TRUE,                                // handles are inherited
-        0,                                   // creation flags
-        NULL,                                // use parent's environment
-        cwd ? cwd->c_str() : NULL,           // current directory
-        &siStartInfo,                        // STARTUPINFO pointer
-        &piProcInfo);                        // receives PROCESS_INFORMATION
-
-    for (auto & entry : old_env_vars) {
-        set_env(entry.first, entry.second);
-    }
-
-    // If an error occurs, exit the application.
-    if (!bSuccess) {
-        throw exception("failed to start child process");
-    } else {
-        // Close handles to the child process and its primary thread.
-        // Some applications might keep these handles to monitor the status
-        // of the child process, for example.
-
-        CloseHandle(piProcInfo.hThread);
-
-        return piProcInfo.hProcess;
-    }
 }
 
 static void setup_stdio(SECURITY_ATTRIBUTES * saAttr, HANDLE * theirs, FILE ** ours, bool in, stdio cfg) {
@@ -145,7 +92,8 @@ static void setup_stdio(SECURITY_ATTRIBUTES * saAttr, HANDLE * theirs, FILE ** o
 }
 
 // This code is adapted from: https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx
-static obj_res spawn(stdio stdin_mode, stdio stdout_mode, stdio stderr_mode) {
+static obj_res spawn(string_ref const & proc_name, array_ref<string_ref> const & args, stdio stdin_mode, stdio stdout_mode,
+                     stdio stderr_mode, option_ref<string_ref> const & cwd, array_ref<pair_ref<string_ref, option_ref<string_ref>>> const & env) {
     HANDLE child_stdin = GetStdHandle(STD_INPUT_HANDLE);
     HANDLE child_stdout = GetStdHandle(STD_OUTPUT_HANDLE);
     HANDLE child_stderr = GetStdHandle(STD_ERROR_HANDLE);
@@ -173,7 +121,7 @@ static obj_res spawn(stdio stdin_mode, stdio stdout_mode, stdio stderr_mode) {
         if (once_through) {
             command += " \"";
         }
-        command += arg;
+        command += arg.data();
         if (once_through) {
             command += "\"";
         }
@@ -181,21 +129,76 @@ static obj_res spawn(stdio stdin_mode, stdio stdout_mode, stdio stderr_mode) {
     }
 
     // Create the child process.
-    auto proc_handle =
-        create_child_process(command, m_cwd, m_env, child_stdin, child_stdout, child_stderr);
+    PROCESS_INFORMATION piProcInfo;
+    STARTUPINFO siStartInfo;
+    BOOL bSuccess = FALSE;
 
-    FILE * parent_stdin = nullptr, *parent_stdout = nullptr, *parent_stderr = nullptr;
+    // Set up members of the PROCESS_INFORMATION structure.
+    ZeroMemory(&piProcInfo, sizeof(PROCESS_INFORMATION));
+
+    // Set up members of the STARTUPINFO structure.
+    // This structure specifies the STDIN and STDOUT handles for redirection.
+
+    ZeroMemory(&siStartInfo, sizeof(STARTUPINFO));
+    siStartInfo.cb = sizeof(STARTUPINFO);
+    siStartInfo.hStdInput = child_stdin;
+    siStartInfo.hStdOutput = child_stdout;
+    siStartInfo.hStdError = child_stderr;
+    siStartInfo.dwFlags |= STARTF_USESTDHANDLES;
+
+    // TODO(gabriel): this is thread-unsafe
+    std::unordered_map<std::string, optional<std::string>> old_env_vars;
+    for (auto & entry : env) {
+        optional<std::string> old;
+        if (auto old_val = getenv(entry.first.c_str()))
+            old = std::string(old_val);
+        old_env_vars[entry.first] = old;
+
+        if (entry.snd()) {
+            SetEnvironmentVariable(entry.fst.data(), entry.snd().get()->data());
+        } else {
+            SetEnvironmentVariable(entry.fst.data(), nullptr);
+        }
+    }
+
+    // Create the child process.
+    bSuccess = CreateProcess(
+        NULL,
+        command.data(),                      // command line
+        NULL,                                // process security attributes
+        NULL,                                // primary thread security attributes
+        TRUE,                                // handles are inherited
+        0,                                   // creation flags
+        NULL,                                // use parent's environment
+        cwd ? cwd->c_str() : NULL,           // current directory
+        &siStartInfo,                        // STARTUPINFO pointer
+        &piProcInfo);                        // receives PROCESS_INFORMATION
+
+    for (auto & entry : old_env_vars) {
+        SetEnvironmentVariable(entry.first.c_str(), entry.second.c_str());
+    }
+
+    // If an error occurs, exit the application.
+    if (!bSuccess) {
+        throw errno;
+    }
+
+    // Close handle to primary thread, we don't need it.
+    CloseHandle(piProcInfo.hThread);
 
     if (stdin_mode  == stdio::PIPED) CloseHandle(child_stdin);
     if (stdout_mode == stdio::PIPED) CloseHandle(child_stdout);
     if (stderr_mode == stdio::PIPED) CloseHandle(child_stderr);
 
-    return ;
+    object_ref r = mk_cnstr(0, io_wrap_handle(parent_stdin), io_wrap_handle(parent_stdout), io_wrap_handle(parent_stderr),
+                            wrap_win_handle(piProcInfo.hProcess));
+    return lean_mk_io_result(r.steal());
 }
 
-static void set_env(std::string const & var, optional<std::string> const & val) {
-    SetEnvironmentVariable(var.c_str(), val ? val->c_str() : NULL);
+void initialize_process() {
+    g_win_handle_external_class = lean_register_external_class(win_handle_finalizer, win_handle_foreach);
 }
+void finalize_process() {}
 
 #else
 
@@ -312,6 +315,9 @@ static obj_res spawn(string_ref const & proc_name, array_ref<string_ref> const &
     cnstr_set_uint32(r.raw(), 3 * sizeof(object *), pid);
     return lean_mk_io_result(r.steal());
 }
+
+void initialize_process() {}
+void finalize_process() {}
 
 #endif
 
