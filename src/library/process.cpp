@@ -22,50 +22,27 @@ Author: Jared Roesch
 #include <sys/wait.h>
 #endif
 
-#include "library/process.h"
+#include <lean/object.h>
+#include <lean/io.h>
+#include "util/array_ref.h"
+#include "util/string_ref.h"
+#include "util/option_ref.h"
+#include "util/pair_ref.h"
 #include "util/buffer.h"
-#include "library/pipe.h"
 
 namespace lean {
 
-process::process(std::string n, stdio io_stdin, stdio io_stdout, stdio io_stderr):
-    m_proc_name(n), m_stdout(io_stdout), m_stdin(io_stdin), m_stderr(io_stderr) {
-    m_args.push_back(m_proc_name);
-}
-
-process & process::arg(std::string a) {
-    m_args.push_back(a);
-    return *this;
-}
-
-process & process::set_cwd(std::string const &cwd) {
-    m_cwd = cwd;
-    return *this;
-}
-
-process & process::set_env(std::string const & var, optional<std::string> const & val) {
-    m_env[var] = val;
-    return *this;
-}
+enum stdio {
+    PIPED,
+    INHERIT,
+    NUL,
+};
 
 #if defined(LEAN_WINDOWS)
-
-struct windows_child : public child {
-    handle_ref m_stdin;
-    handle_ref m_stdout;
-    handle_ref m_stderr;
-    HANDLE m_process;
-
-    windows_child(HANDLE p, handle_ref hstdin, handle_ref hstdout, handle_ref hstderr) :
-            m_stdin(hstdin), m_stdout(hstdout), m_stderr(hstderr), m_process(p) {}
 
     ~windows_child() {
         CloseHandle(m_process);
     }
-
-    handle_ref get_stdin() override { return m_stdin; }
-    handle_ref get_stdout() override { return m_stdout; }
-    handle_ref get_stderr() override { return m_stderr; }
 
     unsigned wait() override {
         DWORD exit_code;
@@ -73,118 +50,12 @@ struct windows_child : public child {
         GetExitCodeProcess(m_process, &exit_code);
         return static_cast<unsigned>(exit_code);
     }
-};
-
-// static HANDLE to_win_handle(FILE * file) {
-//     intptr_t handle = _get_osfhandle(fileno(file));
-//     return reinterpret_cast<HANDLE>(handle);
-// }
 
 static FILE * from_win_handle(HANDLE handle, char const * mode) {
     int fd = _open_osfhandle(reinterpret_cast<intptr_t>(handle), _O_APPEND);
     return fdopen(fd, mode);
 }
 
-static HANDLE create_child_process(std::string cmd_name, optional<std::string> const & cwd,
-    std::unordered_map<std::string, optional<std::string>> const & env,
-    HANDLE hstdin, HANDLE hstdout, HANDLE hstderr);
-
-// TODO(@jroesch): unify this code between platforms better.
-static optional<pipe> setup_stdio(SECURITY_ATTRIBUTES * saAttr, HANDLE * handle, bool in, stdio cfg) {
-    /* Setup stdio based on process configuration. */
-    switch (cfg) {
-    case stdio::INHERIT:
-        lean_always_assert(DuplicateHandle(GetCurrentProcess(), *handle,
-                                           GetCurrentProcess(), handle,
-                                           0, TRUE, DUPLICATE_SAME_ACCESS));
-        return optional<pipe>();
-    case stdio::PIPED: {
-        HANDLE readh;
-        HANDLE writeh;
-        if (!CreatePipe(&readh, &writeh, saAttr, 0))
-            throw new exception("unable to create pipe");
-        auto pipe = lean::pipe(readh, writeh);
-        auto ours = in ? pipe.m_write_fd : pipe.m_read_fd;
-        auto theirs = in ? pipe.m_read_fd : pipe.m_write_fd;
-        lean_always_assert(SetHandleInformation(ours, HANDLE_FLAG_INHERIT, 0));
-        *handle = theirs;
-        return optional<lean::pipe>(pipe);
-    }
-    case stdio::NUL:
-        /* We should map /dev/null. */
-        return optional<pipe>();
-    }
-    lean_unreachable();
-}
-
-// This code is adapted from: https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx
-std::shared_ptr<child> process::spawn_core() {
-    HANDLE child_stdin = GetStdHandle(STD_INPUT_HANDLE);
-    HANDLE child_stdout = GetStdHandle(STD_OUTPUT_HANDLE);
-    HANDLE child_stderr = GetStdHandle(STD_ERROR_HANDLE);
-
-    SECURITY_ATTRIBUTES saAttr;
-
-    // Set the bInheritHandle flag so pipe handles are inherited.
-    saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
-    saAttr.bInheritHandle = TRUE;
-    saAttr.lpSecurityDescriptor = NULL;
-
-    auto stdin_pipe = setup_stdio(&saAttr, &child_stdin, true, m_stdin);
-    auto stdout_pipe = setup_stdio(&saAttr, &child_stdout, false, m_stdout);
-    auto stderr_pipe = setup_stdio(&saAttr, &child_stderr, false, m_stderr);
-
-    std::string command;
-
-    // This needs some thought, on Windows we must pass a command string
-    // which is a valid command, that is a fully assembled command to be executed.
-    //
-    // We must escape the arguments to preseving spacing and other characters,
-    // we might need to revisit escaping here.
-    bool once_through = false;
-    for (auto arg : m_args) {
-        if (once_through) {
-            command += " \"";
-        }
-        command += arg;
-        if (once_through) {
-            command += "\"";
-        }
-        once_through = true;
-    }
-
-    // Create the child process.
-    auto proc_handle =
-        create_child_process(command, m_cwd, m_env, child_stdin, child_stdout, child_stderr);
-
-    FILE * parent_stdin = nullptr, *parent_stdout = nullptr, *parent_stderr = nullptr;
-
-    if (stdin_pipe) {
-        CloseHandle(stdin_pipe->m_read_fd);
-        parent_stdin = from_win_handle(stdin_pipe->m_write_fd, "w");
-    }
-
-    if (stdout_pipe) {
-        CloseHandle(stdout_pipe->m_write_fd);
-        parent_stdout = from_win_handle(stdout_pipe->m_read_fd, "r");
-    }
-
-    if (stderr_pipe) {
-        CloseHandle(stderr_pipe->m_write_fd);
-        parent_stderr = from_win_handle(stderr_pipe->m_read_fd, "r");
-    }
-
-    return std::make_shared<windows_child>(proc_handle,
-        std::make_shared<handle>(parent_stdin),
-        std::make_shared<handle>(parent_stdout),
-        std::make_shared<handle>(parent_stderr));
-}
-
-static void set_env(std::string const & var, optional<std::string> const & val) {
-    SetEnvironmentVariable(var.c_str(), val ? val->c_str() : NULL);
-}
-
-// Create a child process that uses the previously created pipes for STDIN and STDOUT.
 static HANDLE create_child_process(std::string command, optional<std::string> const & cwd,
         std::unordered_map<std::string, optional<std::string>> const & env,
         HANDLE hstdin, HANDLE hstdout, HANDLE hstderr) {
@@ -248,7 +119,101 @@ static HANDLE create_child_process(std::string command, optional<std::string> co
     }
 }
 
+static void setup_stdio(SECURITY_ATTRIBUTES * saAttr, HANDLE * theirs, FILE ** ours, bool in, stdio cfg) {
+    /* Setup stdio based on process configuration. */
+    switch (cfg) {
+    case stdio::INHERIT:
+        lean_always_assert(DuplicateHandle(GetCurrentProcess(), *theirs,
+                                           GetCurrentProcess(), theirs,
+                                           0, TRUE, DUPLICATE_SAME_ACCESS));
+        return;
+    case stdio::PIPED: {
+        HANDLE readh;
+        HANDLE writeh;
+        if (!CreatePipe(&readh, &writeh, saAttr, 0))
+            throw new exception("unable to create pipe");
+        *ours = in ? from_win_handle(writeh, "w") : from_win_handle(readh, "r");
+        *theirs = in ? readh : writeh;
+        lean_always_assert(SetHandleInformation(ours, HANDLE_FLAG_INHERIT, 0));
+        return;
+    }
+    case stdio::NUL:
+        /* We should map /dev/null. */
+        return;
+    }
+    lean_unreachable();
+}
+
+// This code is adapted from: https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx
+static obj_res spawn(stdio stdin_mode, stdio stdout_mode, stdio stderr_mode) {
+    HANDLE child_stdin = GetStdHandle(STD_INPUT_HANDLE);
+    HANDLE child_stdout = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE child_stderr = GetStdHandle(STD_ERROR_HANDLE);
+
+    SECURITY_ATTRIBUTES saAttr;
+
+    // Set the bInheritHandle flag so pipe handles are inherited.
+    saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
+    saAttr.bInheritHandle = TRUE;
+    saAttr.lpSecurityDescriptor = NULL;
+
+    FILE * parent_stdin  = nullptr; setup_stdio(&saAttr, &child_stdin,  &parent_stdin,  true, stdin_mode);
+    FILE * parent_stdout = nullptr; setup_stdio(&saAttr, &child_stdout, &parent_stdout, false, stdout_mode);
+    FILE * parent_stderr = nullptr; setup_stdio(&saAttr, &child_stderr, &parent_stderr, false, stderr_mode);
+
+    std::string command;
+
+    // This needs some thought, on Windows we must pass a command string
+    // which is a valid command, that is a fully assembled command to be executed.
+    //
+    // We must escape the arguments to preseving spacing and other characters,
+    // we might need to revisit escaping here.
+    bool once_through = false;
+    for (auto arg : m_args) {
+        if (once_through) {
+            command += " \"";
+        }
+        command += arg;
+        if (once_through) {
+            command += "\"";
+        }
+        once_through = true;
+    }
+
+    // Create the child process.
+    auto proc_handle =
+        create_child_process(command, m_cwd, m_env, child_stdin, child_stdout, child_stderr);
+
+    FILE * parent_stdin = nullptr, *parent_stdout = nullptr, *parent_stderr = nullptr;
+
+    if (stdin_mode  == stdio::PIPED) CloseHandle(child_stdin);
+    if (stdout_mode == stdio::PIPED) CloseHandle(child_stdout);
+    if (stderr_mode == stdio::PIPED) CloseHandle(child_stderr);
+
+    return ;
+}
+
+static void set_env(std::string const & var, optional<std::string> const & val) {
+    SetEnvironmentVariable(var.c_str(), val ? val->c_str() : NULL);
+}
+
 #else
+
+extern "C" obj_res lean_io_process_child_wait(obj_arg child, obj_arg) {
+    static_assert(sizeof(pid_t) == sizeof(uint32), "pid_t is expected to be a 32-bit type"); // NOLINT
+    pid_t pid = cnstr_get_uint32(child, 3 * sizeof(object *));
+    int status;
+    waitpid(pid, &status, 0);
+    if (WIFEXITED(status)) {
+        return lean_mk_io_result(box(static_cast<unsigned>(WEXITSTATUS(status))));
+    } else {
+        lean_assert(WIFSIGNALED(status));
+        // use bash's convention
+        return lean_mk_io_result(box(128 + static_cast<unsigned>(WTERMSIG(status))));
+    }
+}
+
+struct pipe { int m_read_fd; int m_write_fd; };
 
 static optional<pipe> setup_stdio(stdio cfg) {
     /* Setup stdio based on process configuration. */
@@ -257,7 +222,12 @@ static optional<pipe> setup_stdio(stdio cfg) {
         /* We should need to do nothing in this case */
         return optional<pipe>();
     case stdio::PIPED:
-        return optional<pipe>(lean::pipe());
+        int fds[2];
+        if (::pipe(fds) == -1) {
+            throw errno;
+        } else {
+            return optional<pipe>(pipe { fds[0], fds[1] });
+        }
     case stdio::NUL:
         /* We should map /dev/null. */
         return optional<pipe>();
@@ -265,46 +235,21 @@ static optional<pipe> setup_stdio(stdio cfg) {
     lean_unreachable();
 }
 
-struct unix_child : public child {
-    handle_ref m_stdin;
-    handle_ref m_stdout;
-    handle_ref m_stderr;
-    int m_pid;
-
-    unix_child(int pid, handle_ref hstdin, handle_ref hstdout, handle_ref hstderr) :
-            m_stdin(hstdin), m_stdout(hstdout), m_stderr(hstderr), m_pid(pid) {}
-
-    handle_ref get_stdin() override { return m_stdin; }
-    handle_ref get_stdout() override { return m_stdout; }
-    handle_ref get_stderr() override { return m_stderr; }
-
-    unsigned wait() override {
-        int status;
-        waitpid(m_pid, &status, 0);
-        if (WIFEXITED(status)) {
-            return static_cast<unsigned>(WEXITSTATUS(status));
-        } else {
-            lean_assert(WIFSIGNALED(status));
-            // use bash's convention
-            return 128 + static_cast<unsigned>(WTERMSIG(status));
-        }
-    }
-};
-
-std::shared_ptr<child> process::spawn_core() {
+static obj_res spawn(string_ref const & proc_name, array_ref<string_ref> const & args, stdio stdin_mode, stdio stdout_mode,
+  stdio stderr_mode, option_ref<string_ref> const & cwd, array_ref<pair_ref<string_ref, option_ref<string_ref>>> const & env) {
     /* Setup stdio based on process configuration. */
-    auto stdin_pipe = setup_stdio(m_stdin);
-    auto stdout_pipe = setup_stdio(m_stdout);
-    auto stderr_pipe = setup_stdio(m_stderr);
+    auto stdin_pipe  = setup_stdio(stdin_mode);
+    auto stdout_pipe = setup_stdio(stdout_mode);
+    auto stderr_pipe = setup_stdio(stderr_mode);
 
     int pid = fork();
 
     if (pid == 0) {
-        for (auto & entry : m_env) {
-            if (auto val = entry.second) {
-                setenv(entry.first.c_str(), val->c_str(), true);
+        for (auto & entry : env) {
+            if (entry.snd()) {
+                setenv(entry.fst().data(), entry.snd().get()->data(), true);
             } else {
-                unsetenv(entry.first.c_str());
+                unsetenv(entry.fst().data());
             }
         }
 
@@ -323,16 +268,17 @@ std::shared_ptr<child> process::spawn_core() {
             close(stderr_pipe->m_read_fd);
         }
 
-        if (m_cwd) {
-            if (chdir(m_cwd->c_str()) < 0) {
-                std::cerr << "could not change directory to " << *m_cwd << std::endl;
+        if (cwd) {
+            if (chdir(cwd.get()->data()) < 0) {
+                std::cerr << "could not change directory to " << cwd.get()->data() << std::endl;
                 exit(-1);
             }
         }
 
         buffer<char *> pargs;
-        for (auto & arg : m_args)
-            pargs.push_back(strdup(arg.c_str()));
+        pargs.push_back(strdup(proc_name.data()));
+        for (auto & arg : args)
+            pargs.push_back(strdup(arg.data()));
         pargs.push_back(NULL);
 
         if (execvp(pargs[0], pargs.data()) < 0) {
@@ -340,7 +286,7 @@ std::shared_ptr<child> process::spawn_core() {
             exit(-1);
         }
     } else if (pid == -1) {
-        throw std::runtime_error("forking process failed: ...");
+        throw errno;
     }
 
     /* We want to setup the parent's view of the file descriptors. */
@@ -361,19 +307,36 @@ std::shared_ptr<child> process::spawn_core() {
         parent_stderr = fdopen(stderr_pipe->m_read_fd, "r");
     }
 
-    return std::make_shared<unix_child>(pid,
-         std::make_shared<handle>(parent_stdin),
-         std::make_shared<handle>(parent_stdout),
-         std::make_shared<handle>(parent_stderr));
+    object_ref r = mk_cnstr(0, io_wrap_handle(parent_stdin), io_wrap_handle(parent_stdout), io_wrap_handle(parent_stderr), sizeof(pid_t));
+    static_assert(sizeof(pid_t) == sizeof(uint32), "pid_t is expected to be a 32-bit type"); // NOLINT
+    cnstr_set_uint32(r.raw(), 3 * sizeof(object *), pid);
+    return lean_mk_io_result(r.steal());
 }
 
 #endif
 
-std::shared_ptr<child> process::spawn() {
-    if (m_stdout == stdio::INHERIT) {
+extern "C" obj_res lean_io_process_spawn(obj_arg args, obj_arg) {
+    stdio stdin_mode  = static_cast<stdio>(cnstr_get_uint8(args, 4 * sizeof(object *) + 0));
+    stdio stdout_mode = static_cast<stdio>(cnstr_get_uint8(args, 4 * sizeof(object *) + 1));
+    stdio stderr_mode = static_cast<stdio>(cnstr_get_uint8(args, 4 * sizeof(object *) + 2));
+    if (stdin_mode == stdio::INHERIT) {
         std::cout.flush();
     }
-    return spawn_core();
+    try {
+        object * r = spawn(
+                string_ref(cnstr_get(args, 0)),
+                array_ref<string_ref>(cnstr_get(args, 1)),
+                stdin_mode,
+                stdout_mode,
+                stderr_mode,
+                option_ref<string_ref>(cnstr_get(args, 2)),
+                array_ref<pair_ref<string_ref, option_ref<string_ref>>>(cnstr_get(args, 3)));
+        dec(args);
+        return r;
+    } catch (int err) {
+        dec(args);
+        return lean_mk_io_error(decode_io_error(err, nullptr));
+    }
 }
 
 }
