@@ -463,6 +463,8 @@ add_library(leanshared SHARED shared/init.cpp)
 target_link_libraries(leanshared leancpp)
 set_target_properties(leanshared PROPERTIES
   ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   OUTPUT_NAME leanshared
   IMPORT_SUFFIX .dll.a)
 install(TARGETS leanshared DESTINATION bin)
