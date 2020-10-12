@@ -1,13 +1,7 @@
 add_executable(lean lean.cpp)
 set_target_properties(lean PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
-target_link_libraries(lean leancpp)
+target_link_libraries(lean leanshared)
 
-# create import library on Windows to link plugins against
-set_target_properties(lean PROPERTIES ENABLE_EXPORTS ON)
-if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-  # https://github.com/msys2/MINGW-packages/issues/5952
-  target_link_options(lean PRIVATE "-Wl,--out-implib,${CMAKE_BINARY_DIR}/bin/lean.exe.a")
-endif()
 install(TARGETS lean DESTINATION bin)
 
 # use executable of current stage for tests
