@@ -263,7 +263,7 @@ void print_value(io_state_stream const & ios, value const & v, type t) {
 
 void * lookup_symbol_in_cur_exe(char const * sym) {
 #ifdef LEAN_WINDOWS
-    return reinterpret_cast<void *>(GetProcAddress(GetModuleHandle(nullptr), sym));
+    return reinterpret_cast<void *>(GetProcAddress(GetModuleHandle("libleanshared"), sym));
 #else
     return dlsym(RTLD_DEFAULT, sym);
 #endif
