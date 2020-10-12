@@ -297,15 +297,8 @@ find_package(PythonInterp)
 include_directories(${CMAKE_BINARY_DIR}/include)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-  set(LEANC_SHARED_LINKER_FLAGS "${LEANC_SHARED_LINKER_FLAGS} -fPIC")
-endif()
-
-# export all symbols for the interpreter
-if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LEAN_EXTRA_LINKER_FLAGS} -Wl,--export-all")
-  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--export-all")
-  set(LEANC_SHARED_LINKER_FLAGS "${LEANC_SHARED_LINKER_FLAGS} -Wl,--export-all")
-else()
+  set(LEANC_EXTRA_FLAGS "${LEANC_EXTRA_FLAGS} -fPIC")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LEAN_EXTRA_LINKER_FLAGS} -rdynamic")
   set(LEANC_EXTRA_FLAGS "${LEANC_EXTRA_FLAGS} -ldl")
 endif()
@@ -314,10 +307,9 @@ endif()
 # executable or `leanshared`, plugins would try to look them up at load time (even though they
 # are already loaded) and probably fail unless we set up LD_LIBRARY_PATH.
 if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-  # import library created by the `lean` target
-  set(LEANC_SHARED_LINKER_FLAGS "$bindir/lean.exe.a")
+  set(LEANC_SHARED_LINKER_FLAGS "$bindir/libleanshared.dll.a")
 elseif("${CMAKE_SYSTEM_NAME}" MATCHES "Darwin")
-  set(LEANC_SHARED_LINKER_FLAGS "${LEANC_EXTRA_FLAGS} -Wl,-undefined,dynamic_lookup")
+  set(LEANC_SHARED_LINKER_FLAGS "${LEANC_SHARED_LINKER_FLAGS} -Wl,-undefined,dynamic_lookup")
 endif()
 # Linux ignores undefined symbols in shared libraries by default
 
@@ -466,18 +458,14 @@ install(FILES ${LEAN_SOURCE_DIR}/bin/leanmake
   DESTINATION bin
   PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
-# shared library deactivated until we figure out the leancpp/Init story
-# # The DLL (shared library) is not being generated correctly when we use cross-compilation (i.e., generate the Windows DLL using Linux).
-# # For some strange reason, it contains a copy of pthread_equal.
-# # Remark: this problem does not happen when we generate the DLL using msys2 on Windows.
-# if (NOT("${CROSS_COMPILE}" MATCHES "ON"))
-#   if ("${STATIC}" MATCHES "OFF")
-#     add_library(leanshared SHARED shared/init.cpp)
-#     # see `target_link_libraries(lean ...)`
-#     target_link_libraries(leanshared leancpp Init leancpp Init)
-#     install(TARGETS leanshared DESTINATION lib)
-#   endif()
-# endif()
+add_library(leanshared SHARED shared/init.cpp)
+# will also pull in the stdlib
+target_link_libraries(leanshared leancpp)
+set_target_properties(leanshared PROPERTIES
+  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/lean
+  OUTPUT_NAME leanshared
+  IMPORT_SUFFIX .dll.a)
+install(TARGETS leanshared DESTINATION lib/lean)
 
 add_subdirectory(shell)
 
