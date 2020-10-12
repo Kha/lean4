@@ -30,7 +30,6 @@ enable_testing()
 
 option(MULTI_THREAD       "MULTI_THREAD"       ON)
 option(CCACHE             "use ccache"         ON)
-option(STATIC             "STATIC"             OFF)
 option(SPLIT_STACK        "SPLIT_STACK"        OFF)
 # When OFF we disable JSON support to support older compilers
 option(JSON               "JSON"               ON)
@@ -191,19 +190,6 @@ else()
   #message(WARNING "Disabling LLVM support.  JIT compilation will not be available")
 endif()
 
-if(STATIC)
-  # Creating a fully static executable is a bad idea in general when linking against libc and specifically
-  # with our dlopen shenanigans
-  message(STATUS "Linking libraries statically where possible")
-  if(NOT "${CMAKE_SYSTEM_NAME}" MATCHES "Darwin")
-    set(LEAN_EXTRA_LINKER_FLAGS "${LEAN_EXTRA_LINKER_FLAGS} -static-libgcc -static-libstdc++")
-  endif()
-  set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
-  if (MULTI_THREAD AND ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-    set(LEAN_EXTRA_LINKER_FLAGS "${LEAN_EXTRA_LINKER_FLAGS} -Wl,-Bstatic,--whole-archive -lwinpthread -Wl,--no-whole-archive,-Bdynamic")
-  endif()
-endif()
-
 # Set Module Path
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules")
 
@@ -240,7 +226,6 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
   endif ()
 elseif (MSVC)
     # All good. Maybe enforce a recent version?
-    set(STATIC ON) # FIXME: not working yet
     set(CMAKE_CXX_FLAGS                "/GL /EHsc /W2 /Zc:implicitNoexcept- -D_SCL_SECURE_NO_WARNINGS ${CMAKE_CXX_FLAGS}")
     set(CMAKE_CXX_FLAGS_DEBUG          "/Od /Zi ${CMAKE_CXX_FLAGS_DEBUG}")
     set(CMAKE_CXX_FLAGS_MINSIZEREL     "/Os /Zc:inline ${CMAKE_CXX_FLAGS_MINSIZEREL}")
@@ -376,12 +361,6 @@ install(DIRECTORY ${LEAN_BINARY_DIR}/include/lean DESTINATION include)
 configure_file(${LEAN_SOURCE_DIR}/lean.mk.in ${LEAN_BINARY_DIR}/share/lean/lean.mk)
 install(DIRECTORY ${LEAN_BINARY_DIR}/share/lean DESTINATION share)
 
-if(EMSCRIPTEN)
-    set(LEAN_LIBRARY_TYPE SHARED)
-else()
-   set(LEAN_LIBRARY_TYPE STATIC)
-endif()
-
 include_directories(${LEAN_SOURCE_DIR})
 include_directories(${CMAKE_BINARY_DIR})  # version.h etc., "private" headers
 include_directories(${CMAKE_BINARY_DIR}/include)  # config.h etc., "public" headers
@@ -419,7 +398,7 @@ else()
     set(LEAN_OBJS ${LEAN_OBJS} $<TARGET_OBJECTS:stage0>)
   endif()
 
-  add_library(leancpp ${LEAN_LIBRARY_TYPE} ${LEAN_OBJS})
+  add_library(leancpp STATIC ${LEAN_OBJS})
   set_target_properties(leancpp PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/lean"
     OUTPUT_NAME leancpp)
