@@ -1,6 +1,15 @@
 add_executable(lean lean.cpp)
 set_target_properties(lean PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 target_link_libraries(lean leanshared)
+if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+  set_target_properties(lean PROPERTIES
+    BUILD_WITH_INSTALL_RPATH TRUE
+    INSTALL_RPATH "$ORIGIN")
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  set_target_properties(lean PROPERTIES
+    BUILD_WITH_INSTALL_RPATH TRUE
+    INSTALL_RPATH "@executable_path")
+endif()
 
 install(TARGETS lean DESTINATION bin)
 
