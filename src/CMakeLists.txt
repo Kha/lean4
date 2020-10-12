@@ -462,10 +462,10 @@ add_library(leanshared SHARED shared/init.cpp)
 # will also pull in the stdlib
 target_link_libraries(leanshared leancpp)
 set_target_properties(leanshared PROPERTIES
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/lean
+  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   OUTPUT_NAME leanshared
   IMPORT_SUFFIX .dll.a)
-install(TARGETS leanshared DESTINATION lib/lean)
+install(TARGETS leanshared DESTINATION bin)
 
 add_subdirectory(shell)
 
