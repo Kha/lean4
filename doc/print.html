@@ -1,0 +1,672 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Lean Manual</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">1.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Significant Changes from Lean 3</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> The do Notation</div></li><li class="chapter-item expanded affix "><li class="part-title">Tools</li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">4.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">5.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">6.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">6.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">6.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">6.3.</strong> Windows Setup</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">7.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">8.</strong> Fixing Tests</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Lean Manual</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/leanprover/lean4" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#frequently-asked-questions" id="frequently-asked-questions">Frequently Asked Questions</a></h1>
+<ul>
+<li>What is Lean?</li>
+</ul>
+<p>Lean is a new open source theorem prover being developed at Microsoft Research.
+It is a research project that aims to bridge the gap between interactive and automated theorem proving.
+Lean can be also used as a programming language. Actually, some Lean features are implemented in Lean itself.</p>
+<ul>
+<li>Are pull requests welcome?</li>
+</ul>
+<p>In the past, we accepted most pull requests. This practice produced hard to maintain code, performance problems, and bugs.
+It takes time to review a pull request and make sure it is correct, useful and is not in conflict with our plans.
+Small bug fixes (few lines of code) are always welcome. Any other kind of unrequested pull request is not.
+Thus, before implementing a feature or modifying the system, please ask whether the change is welcome or not.</p>
+<ul>
+<li>Should I use Lean?</li>
+</ul>
+<p>Lean is under heavy development, and we are constantly trying new
+ideas and tweaking the system.  It is a research project and not a product.
+Things change rapidly, and we constantly break backward compatibility.
+Lean comes &quot;as is&quot;, you should not expect we will fix bugs and/or add new features for your project.
+We have our own priorities, and will not change them to accommodate your needs.
+Even if you implement a new feature or fix a bug, we may not want to merge it because
+it may conflict with our plans for Lean, it may not be performant, we may not want to maintain it,
+we may be busy, etc. If you really need this new feature or bug fix, we suggest you create your own fork and maintain it yourself.</p>
+<ul>
+<li>Where is the documentation?</li>
+</ul>
+<p>The <a href="https://leanprover.github.io/theorem_proving_in_lean">Lean tutorial</a> is a good introduction to the system.
+It may contain a few inconsistencies due to recent changes, but we try to keep it in sync.
+The reference manual is work in progress, and we don't know when it will be ready.
+The core and math libraries contain many definitions and proofs, they demonstrate how we expect the system to be used.
+If the lack of documentation is an issue, then Lean is not a good match for you.
+Documentation is not the main priority right now. Recall that Lean is a research project and not a product.
+A public and very active chat room dedicated to Lean is open on <a href="https://leanprover.zulipchat.com">Zulip</a>.
+It is a good place to interact with other Lean users.
+You may also join the <a href="https://groups.google.com/forum/#!forum/lean-user">Lean user forum</a> on Google Groups.</p>
+<ul>
+<li>Should I use Lean to teach a course?</li>
+</ul>
+<p>Lean has been used to teach courses on logic, type theory and programming languages at CMU and the University of Washington.
+The lecture notes for the CMU course <a href="https://leanprover.github.io/logic_and_proof">Logic and Proof</a> are available online.
+If you decide to teach a course using Lean, we suggest you prepare all material before the beginning of the course, and
+make sure that Lean attends all your needs. You should not expect we will fix bugs and/or add features needed for your course.</p>
+<ul>
+<li>Are there IDEs for Lean?</li>
+</ul>
+<p>Yes, the two main ones are for <a href="https://github.com/leanprover/lean-mode">Emacs</a> and <a href="https://github.com/leanprover/vscode-lean">VS Code</a>.
+The Emacs Lean mode is available via <a href="https://melpa.org/">MELPA</a>. The VS Code Lean extension is available on its marketplace.</p>
+<ul>
+<li>Is Lean sound? How big is the kernel? Should I trust it?</li>
+</ul>
+<p>Lean has a relatively small kernel. The <a href="https://github.com/leanprover/lean/tree/master/src/checker">leanchecker</a> is a bare-bones version of the Lean kernel.
+There are also two independent checkers: <a href="https://github.com/leanprover/tc">tc</a> and <a href="https://github.com/gebner/trepplein">trepplein</a>.
+We have implemented several kernel extensions to improve performance and make sure the system is reasonably responsive for interactive use.
+We strongly recommend you frequently check your project without these extensions. The command line option <code>-t0</code> disables all of them.
+As far as we know, no proof of <code>false</code> has ever been accepted by Lean when using <code>-t0</code>.
+If you are really concerned about soundness, we recommend you often export your project and recheck it using the independent checkers above.</p>
+<ul>
+<li>Should I open a new issue?</li>
+</ul>
+<p>We use <a href="https://github.com/leanprover/lean/issues">github</a> to track bugs and new features.
+Bug reports are always welcome, but nitpicking issues are not (e.g., the error message is confusing).
+RFC issues are created by developers only.</p>
+<p>We provide a way to syntax-highlight Lean code in LaTeX documents.
+It requires a Python package <code>Pygments</code> and a LaTeX package <code>minted</code>.</p>
+<h2><a class="header" href="#python-package-pygments" id="python-package-pygments">Python Package: <code>Pygments</code></a></h2>
+<p>Checkout <a href="https://bitbucket.org/leanprover/pygments-main">Leanprover's Pygments repository</a> and build Pygments:</p>
+<pre><code class="language-bash">hg clone https://bitbucket.org/leanprover/pygments-main
+cd pygments-main
+make mapfiles
+sudo ./setup.py install
+</code></pre>
+<h2><a class="header" href="#latex-package-minted" id="latex-package-minted">LaTeX package: <code>minted</code></a></h2>
+<p>Save the latest version of <a href="https://raw.githubusercontent.com/gpoore/minted/master/source/minted.sty">minted.sty</a> at the working directory.</p>
+<h2><a class="header" href="#how-to-use-them-example" id="how-to-use-them-example">How to use them (example)</a></h2>
+<p>Please save the following sample LaTeX file as <code>test.tex</code>:</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage{minted}
+\setminted{encoding=utf-8}
+\usepackage{fontspec}
+\setmainfont{FreeSerif}
+\setmonofont{FreeMono}
+\usepackage{fullpage}
+\begin{document}
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{Lean}
+theorem mul_cancel_left_or {a b c : ℤ} (H : a * b = a * c) : a = 0 ∨ b = c :=
+have H2 : a * (b - c) = 0, by simp,
+have H3 : a = 0 ∨ b - c = 0, from mul_eq_zero H2,
+or.imp_or_right H3 (assume H4 : b - c = 0, sub_eq_zero H4)
+\end{minted}
+\end{document}
+</code></pre>
+<p>You can compile <code>test.tex</code> by executing the following command:</p>
+<pre><code class="language-bash">xelatex --shell-escape test
+</code></pre>
+<p>Some remarks:</p>
+<ul>
+<li><code>xelatex</code> is required to handle unicode in LaTeX.</li>
+<li><code>--shell-escape</code> option is needed to allow <code>xelatex</code> to execute <code>pygmentize</code> in a shell.</li>
+</ul>
+<h2><a class="header" href="#contribute" id="contribute">Contribute</a></h2>
+<p>Please fork <a href="https://bitbucket.org/leanprover/pygments-main">Leanprover's Pygments repository</a>, improve it, and make a pull-request.</p>
+<h1><a class="header" href="#git-commit-convention" id="git-commit-convention">Git Commit Convention</a></h1>
+<p>We are using the following convention for writing git-commit messages.
+It is based on the one from AngularJS project(<a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#">doc</a>,
+<a href="https://github.com/angular/angular.js/commits/master">commits</a>).</p>
+<h2><a class="header" href="#format-of-the-commit-message" id="format-of-the-commit-message">Format of the commit message</a></h2>
+<pre><code>&lt;type&gt;: &lt;subject&gt;
+&lt;NEWLINE&gt;
+&lt;body&gt;
+&lt;NEWLINE&gt;
+&lt;footer&gt;
+</code></pre>
+<p><code>&lt;type&gt;</code> is:</p>
+<ul>
+<li>feat (feature)</li>
+<li>fix (bug fix)</li>
+<li>doc (documentation)</li>
+<li>style (formatting, missing semicolons, ...)</li>
+<li>refactor</li>
+<li>test (when adding missing tests)</li>
+<li>chore (maintain, ex: travis-ci)</li>
+<li>perf (performance improvement, optimization, ...)</li>
+</ul>
+<p><code>&lt;subject&gt;</code> has the following constraints:</p>
+<ul>
+<li>use imperative, present tense: &quot;change&quot; not &quot;changed&quot; nor &quot;changes&quot;</li>
+<li>do not capitalize the first letter</li>
+<li>no dot(.) at the end</li>
+</ul>
+<p><code>&lt;body&gt;</code> has the following constraints:</p>
+<ul>
+<li>just as in <code>&lt;subject&gt;</code>, use imperative, present tense</li>
+<li>includes motivation for the change and contrasts with previous
+behavior</li>
+</ul>
+<p><code>&lt;footer&gt;</code> is optional and may contain two items:</p>
+<ul>
+<li>
+<p>Breaking changes: All breaking changes have to be mentioned in
+footer with the description of the change, justification and
+migration notes</p>
+</li>
+<li>
+<p>Referencing issues: Closed bugs should be listed on a separate line
+in the footer prefixed with &quot;Closes&quot; keyword like this:</p>
+<p>Closes #123, #456</p>
+</li>
+</ul>
+<h2><a class="header" href="#examples" id="examples">Examples</a></h2>
+<p>fix: add declarations for operator&lt;&lt;(std::ostream&amp;, expr const&amp;) and operator&lt;&lt;(std::ostream&amp;, context const&amp;) in the kernel</p>
+<p>The actual implementation of these two operators is outside of the
+kernel. They are implemented in the file 'library/printer.cpp'. We
+declare them in the kernel to prevent the following problem. Suppose
+there is a file 'foo.cpp' that does not include 'library/printer.h',
+but contains</p>
+<pre><code>expr a;
+...
+std::cout &lt;&lt; a &lt;&lt; &quot;\n&quot;;
+...
+</code></pre>
+<p>The compiler does not generate an error message. It silently uses the
+operator bool() to coerce the expression into a Boolean. This produces
+counter-intuitive behavior, and may confuse developers.</p>
+<h2><a class="header" href="#requirements" id="requirements">Requirements</a></h2>
+<ul>
+<li>C++14 compatible compiler</li>
+<li><a href="http://www.cmake.org">CMake</a></li>
+<li><a href="http://gmplib.org/">GMP (GNU multiprecision library)</a></li>
+</ul>
+<h2><a class="header" href="#platform-specific-setup" id="platform-specific-setup">Platform-Specific Setup</a></h2>
+<ul>
+<li><a href="make/ubuntu.html">Linux (Ubuntu)</a></li>
+<li><a href="make/msys2.html">Windows (msys2)</a></li>
+<li><a href="make/msvc.html">Windows (Visual Studio)</a></li>
+<li><a href="make/osx-10.9.html">macOS (homebrew)</a></li>
+<li>Linux/macOS/WSL via <a href="https://nixos.org/nix/">Nix</a>: Call <code>nix-shell</code> in the project root. That's it.</li>
+</ul>
+<h2><a class="header" href="#generic-build-instructions" id="generic-build-instructions">Generic Build Instructions</a></h2>
+<p>Setting up a basic release build:</p>
+<pre><code class="language-bash">git clone https://github.com/leanprover/lean4
+cd lean4
+mkdir -p build/release
+cd build/release
+cmake ../..
+make
+</code></pre>
+<p>Setting up a basic debug build:</p>
+<pre><code class="language-bash">git clone https://github.com/leanprover/lean4
+cd lean4
+mkdir -p build/debug
+cd build/debug
+cmake -D CMAKE_BUILD_TYPE=DEBUG ../..
+make
+</code></pre>
+<p>This will compile the Lean library and binary into the <code>stage1</code> subfolder; see
+below for details. Add <code>-jN</code> for an appropriate <code>N</code> to <code>make</code> for a parallel
+build.</p>
+<h2><a class="header" href="#useful-cmake-configuration-settings" id="useful-cmake-configuration-settings">Useful CMake Configuration Settings</a></h2>
+<p>Pass these along with the <code>cmake ../..</code> command.</p>
+<ul>
+<li>
+<p><code>-D CMAKE_BUILD_TYPE=</code><br />
+Select the build type. Valid values are <code>RELEASE</code> (default), <code>DEBUG</code>,
+<code>RELWITHDEBINFO</code>, and <code>MINSIZEREL</code>.</p>
+</li>
+<li>
+<p><code>-D CMAKE_C_COMPILER=</code><br />
+<code>-D CMAKE_CXX_COMPILER=</code><br />
+Select the C/C++ compilers to use. Official Lean releases currently use Clang;
+see also <code>.github/workflows/ci.yml</code> for the CI config.</p>
+</li>
+<li>
+<p><code>-D CHECK_OLEAN_VERSION=OFF</code><br />
+The <code>.olean</code> files are tagged with the Lean version they were produced with.
+This means that by default, the core library has to be recompiled after e.g.
+every <code>git commit</code>. Use this option to avoid the version check. The <code>.olean</code>
+files can be removed manually by invoking <code>make clean-olean</code>.</p>
+</li>
+</ul>
+<p>Lean will automatically use <a href="https://ccache.dev/">CCache</a> if available to avoid
+redundant builds, especially after stage 0 has been updated (see below).</p>
+<h2><a class="header" href="#lean-build-pipeline" id="lean-build-pipeline">Lean Build Pipeline</a></h2>
+<p>Since version 4, Lean is a partially bootstrapped program: most parts of the
+frontend and compiler are written in Lean itself and thus need to be built before
+building Lean itself - which is needed to again build those parts. This cycle is
+broken by using pre-built C files checked into the repository (which ultimately
+go back to a point where the Lean compiler was not written in Lean) in place of
+these Lean inputs and then compiling everything in multiple stages up to a fixed
+point. The build directory is organized in these stages:</p>
+<pre><code class="language-bash">stage0/
+  # Bootstrap binary built from stage0/src/.
+  # We do not use any other files from this directory in further stages.
+  bin/lean
+stage1/
+  include/
+    config.h  # config variables used to build `lean` such as use allocator
+    runtime/lean.h  # runtime headers, used by extracted C code, uses `config.h`
+  share/lean/
+    Makefile  # used by `leanmake`
+  lib/
+    lean/**/*.olean  # the Lean library (incl. the compiler) compiled by the previous stage's `lean`
+    temp/**/*.{c,o}  # the library extracted to C and compiled by `leanc`
+    libInit.a libStd.a libLean.a  # static libraries of the Lean library
+    libleancpp.a  # a static library of the C++ sources of Lean
+  bin/
+    lean  # the Lean compiler &amp; server linked together from the above libraries
+    leanc  # a wrapper around a C compiler supplying search paths etc
+    leanmake  # a wrapper around `make` supplying the Makefile above
+stage2/...
+stage3/...
+</code></pre>
+<p>Stage 0 can be viewed as a blackbox since it does not depend on any local
+changes and is equivalent to downloading a bootstrapping binary as done in other
+compilers. The build for any other stage starts by building the runtime and
+standard library from <code>src/</code>, using the <code>lean</code> binary from the previous stage in
+the latter case, which are then assembled into a new <code>bin/lean</code> binary.</p>
+<p>Each stage can be built by calling <code>make stageN</code> in the root build folder.
+Running just <code>make</code> will default to stage 1, which is usually sufficient for
+testing changes on the test suite or other files outside of the stdlib. However,
+it might happen that the stage 1 compiler is not able to load its own stdlib,
+e.g. when changing the .olean format: the stage 1 stdlib will use the format
+generated by the stage 0 compiler, but the stage 1 compiler will expect the new
+format. In this case, we should continue with building and testing stage 2
+instead, which will both build and expect the new format. Note that this is only
+possible because when building a stage's stdlib, we use the previous compiler
+but never load the previous stdlib (since everything is <code>prelude</code>). We can also
+use stage 2 to test changes in the compiler or other &quot;meta&quot; parts, i.e. changes
+that affect the produced (.olean or .c) code, on the stdlib and compiler itself.
+We are not aware of any &quot;meta-meta&quot; parts that influence more than two stages of
+compilation, so stage 3 should always be identical to stage 2 and only exists as
+a sanity check.</p>
+<p>In summary, doing a standard build via <code>make</code> involves these steps:</p>
+<ol>
+<li>compile the <code>stage0/src</code> archived sources into <code>stage0/bin/lean</code></li>
+<li>use it to compile the current library (<em>including</em> your changes) into <code>stage1/lib</code></li>
+<li>link that and the current C++ code from <code>src/</code> into <code>stage1/bin/lean</code></li>
+</ol>
+<p>You now have a Lean binary and library that include your changes, though their
+own compilation was not influenced by them, that you can use to test your
+changes on test programs whose compilation <em>will</em> be influenced by the changes.</p>
+<p>Finally, when we want to use new language features in the library, we need to
+update the stage 0 compiler, which can be done via <code>make -C stageN update-stage0</code>.
+<code>make update-stage0</code> without <code>-C</code> defaults to stage1.</p>
+<h2><a class="header" href="#development-setup" id="development-setup">Development Setup</a></h2>
+<p>After building a stage, you can invoke <code>make -C stageN test</code> (or, even better,
+<code>make -C stageN ARGS=-j</code> to make <code>ctest</code> parallel) to run the Lean test suite.
+<code>make test</code> without <code>-C</code> defaults to stage1. While the Lean tests will
+automatically use that stage's corresponding Lean executables, for running tests
+or compiling Lean programs manually, you need to put them into your <code>PATH</code>
+yourself. A simple option for doing that is to use
+<a href="https://github.com/Kha/elan"><code>elan</code></a>, see the next section.</p>
+<p>The only currently supported editor is Emacs, see <code>lean4-mode/README.md</code> for
+basic setup. You can set <code>lean4-rootdir</code> manually to tell it what stage to use:</p>
+<pre><code># while editing the Lean library
+M-x set-variable lean4-rootdir RET &quot;.../build/release/stage0&quot; RET
+# while testing, using a Lean that includes your changes
+M-x set-variable lean4-rootdir RET &quot;.../build/release/stage1&quot; RET
+</code></pre>
+<p>but <code>elan</code> again makes it simple to do that automatically, see below.</p>
+<h2><a class="header" href="#dev-setup-using-elan" id="dev-setup-using-elan">Dev setup using elan</a></h2>
+<p>You can use <a href="https://github.com/Kha/elan"><code>elan</code></a> to easily switch between
+stages and build configurations based on the current directory, both for the
+<code>lean/leanc/leanmake</code> binaries in your shell's PATH and inside Emacs.</p>
+<p>If you haven't already installed elan, you can do so, without installing a
+default version of Lean, using</p>
+<pre><code class="language-bash">curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh -s -- --default-toolchain none
+</code></pre>
+<p>You can use <code>elan toolchain link</code> to give a specific stage build directory a
+reference name, then use <code>elan override set</code> to associate such a name to the
+current directory. We usually want to use <code>stage0</code> for editing files in <code>src</code>
+and <code>stage1</code> for everything else (e.g. tests).</p>
+<pre><code># in the Lean rootdir
+elan toolchain link lean4 build/release/stage1
+elan toolchain link lean4-stage0 build/release/stage0
+# make `lean` etc. point to stage1 in the rootdir and subdirs
+elan override set lean4
+cd src
+# make `lean` etc. point to stage0 anywhere inside `src`
+elan override set lean4-stage0
+</code></pre>
+<p>You can also use the <code>+toolchain</code> shorthand (e.g. <code>lean +lean4-debug</code>) to switch
+toolchains on the spot. <code>lean4-mode</code> will automatically use the <code>lean</code> executable
+associated with the directory of the current file as long as <code>lean4-rootdir</code> is
+unset and <code>~/.elan/bin</code> is in your <code>exec-path</code>. Where Emacs sources the
+<code>exec-path</code> from can be a bit unclear depending on your configuration, so
+alternatively you can also set <code>lean4-rootdir</code> to <code>&quot;~/.elan&quot;</code> explicitly.</p>
+<p>You might find that debugging through elan, e.g. via <code>gdb lean</code>, disables some
+things like symbol autocompletion because at first only the elan proxy binary
+is loaded. You can instead pass the explicit path to <code>bin/lean</code> in your build
+folder to gdb, or use <code>gdb $(elan which lean)</code>.</p>
+<h2><a class="header" href="#troubleshooting" id="troubleshooting">Troubleshooting</a></h2>
+<ul>
+<li>Call <code>make</code> with an additional <code>VERBOSE=1</code> argument to print executed commands.</li>
+</ul>
+<h2><a class="header" href="#installing-lean-on-ubuntu-1604" id="installing-lean-on-ubuntu-1604">Installing Lean on Ubuntu 16.04</a></h2>
+<h3><a class="header" href="#basic-packages" id="basic-packages">Basic packages</a></h3>
+<pre><code>sudo apt-get install git libgmp-dev cmake ccache
+</code></pre>
+<h2><a class="header" href="#install-packages-on-os-x-109" id="install-packages-on-os-x-109">Install Packages on OS X 10.9</a></h2>
+<p>We assume that you are using <a href="http://brew.sh">homebrew</a> as a package manager.</p>
+<h2><a class="header" href="#compilers" id="compilers">Compilers</a></h2>
+<p>You need a C++11-compatible compiler to build Lean. As of November
+2014, you have three options:</p>
+<ul>
+<li>clang++-3.5 (shipped with OSX, Apple LLVM version 6.0)</li>
+<li>gcc-4.9.1 (homebrew)</li>
+<li>clang++-3.5 (homebrew)</li>
+</ul>
+<p>We recommend to use Apple's clang++ because it is pre-shipped with OS
+X and requires no further installation.</p>
+<p>To install gcc-4.9.1 via homebrew, please execute:</p>
+<pre><code>brew install gcc
+</code></pre>
+<p>To install clang++-3.5 via homebrew, please execute:</p>
+<pre><code>brew install llvm --with-clang --with-asan
+</code></pre>
+<p>To use compilers other than the default one (Apple's clang++), you
+need to use <code>-DCMAKE_CXX_COMPILER</code> option to specify the compiler
+that you want to use when you run <code>cmake</code>. For example, do the
+following to use <code>g++</code>.</p>
+<pre><code>cmake -DCMAKE_CXX_COMPILER=g++ ...
+</code></pre>
+<h2><a class="header" href="#required-packages-cmake-gmp" id="required-packages-cmake-gmp">Required Packages: CMake, GMP</a></h2>
+<pre><code>brew install cmake
+brew install gmp
+</code></pre>
+<h2><a class="header" href="#recommended-packages-ccache" id="recommended-packages-ccache">Recommended Packages: CCache</a></h2>
+<pre><code>brew install ccache
+</code></pre>
+<h2><a class="header" href="#lean-for-windows" id="lean-for-windows">Lean for Windows</a></h2>
+<p>A native Lean binary for Windows can be generated using <a href="http://msys2.github.io">MSYS2</a>.
+It is easy to install all dependencies, it produces native
+64/32-binaries, and supports a C++14 compiler.</p>
+<h2><a class="header" href="#installing-dependencies" id="installing-dependencies">Installing dependencies</a></h2>
+<p><a href="http://msys2.github.io">The official webpage of MSYS2</a> provides one-click installers.
+Once installed, you should run the &quot;MSYS2 MinGW 64-bit shell&quot; from the start menu.
+Do not run &quot;MSYS2 MSYS&quot; instead!
+MSYS2 has a package management system, <a href="https://wiki.archlinux.org/index.php/pacman">pacman</a>, which is used in Arch Linux.</p>
+<p>Here are the commands to install all dependencies needed to compile Lean on your machine.</p>
+<pre><code class="language-bash">pacman -S make mingw-w64-x86_64-cmake mingw-w64-x86_64-ccache mingw-w64-x86_64-clang git
+</code></pre>
+<p>Then follow the <a href="make/index.html">generic build instructions</a> in the MSYS2 MinGW shell, using
+<code>cmake ../.. -G &quot;Unix Makefiles&quot;</code> instead of <code>cmake ../..</code>. This ensures that cmake will call <code>sh</code> instead
+of <code>cmd.exe</code> for script tasks.</p>
+<h2><a class="header" href="#install-lean" id="install-lean">Install lean</a></h2>
+<p>You can use the <code>install</code> ninja/make target to install Lean into, by default,
+<code>C:\\User Programs (x86)\\LEAN</code>. To change this, add <code>-DCMAKE_INSTALL_PREFIX=path/you/want</code>
+to your cmake invocation.</p>
+<p>This manual is generated by <a href="https://github.com/rust-lang/mdBook">mdBook</a>. We are currently using a
+<a href="https://github.com/leanprover/mdBook">fork</a> of it for the following additional features:</p>
+<ul>
+<li>Add support for hiding lines in other languages <a href="https://github.com/rust-lang/mdBook/pull/1339">#1339</a></li>
+<li>Replace calling <code>rustdoc --test</code> from <code>mdbook test</code> with <code>./test</code></li>
+</ul>
+<p>To build this manual, first install the fork via</p>
+<pre><code>cargo install --git https://github.com/leanprover/mdBook mdbook
+</code></pre>
+<p>Then use e.g. <a href="https://rust-lang.github.io/mdBook/cli/watch.html"><code>mdbook watch</code></a> in the <code>doc/</code> folder:</p>
+<pre><code>cd doc
+mdbook watch --open  # opens the output in `out/` in your default browser
+</code></pre>
+<p>Run <code>mdbook test</code> to test all <code>lean</code> code blocks.</p>
+<h1><a class="header" href="#fixing-tests" id="fixing-tests">Fixing Tests</a></h1>
+<p>The test suite contains some tests that compare the produced output
+with the expected output. For example, the directory <code>tests/lean</code>
+contains files such as <a href="../tests/lean/bad_class.lean"><code>bad_class.lean</code></a> and
+<a href="../tests/lean/bad_class.lean.expected.out"><code>bad_class.lean.expected.out</code></a>.
+The later contains the expected output for the test file <code>bad_class.lean</code>.</p>
+<p>When the Lean source code or the standard library are modified, some of these
+tests break because the produced output is slightly different, and we have
+to reflect the changes int the <code>.lean.expected.out</code> files.
+We should not blindly copy the new produced output since we may accidentally
+miss a bug introduced by recent changes.
+The test suite contains commands that allow us to see what changed in a convenient way.
+First, we must install <a href="http://meldmerge.org/">meld</a>. On Ubuntu, we can do it by simply executing</p>
+<pre><code>sudo apt-get install meld
+</code></pre>
+<p>Now, suppose <code>bad_class.lean</code> test is broken. We can see the problem by going to <code>test/lean</code> directory and
+executing</p>
+<pre><code>./test_single.sh -i bad_class.lean
+</code></pre>
+<p>When the <code>-i</code> option is provided, <code>meld</code> is automatically invoked
+whenever there is discrepancy between the produced and expected
+outputs. <code>meld</code> can also be used to repair the problems.</p>
+<p>In Emacs, we can also execute <code>M-x lean-diff-test-file</code> to check/diff the file of the current buffer.</p>
+<p>Here is the list of directories where produced output is compared with
+the expected output (stored in a <code>*.expected.out</code> file).</p>
+<ul>
+<li><a href="../tests/lean"><code>tests/lean</code></a></li>
+<li><a href="../tests/lean/interactive"><code>tests/lean/interactive</code></a></li>
+</ul>
+<p>Remark: in the directory <code>tests/lean/interactive</code>, the input test files have extension <code>.input</code>.
+They simulate commands sent from editors to Lean.
+The <code>.lean</code> files in this directory are used to simulate files opened by the user.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
