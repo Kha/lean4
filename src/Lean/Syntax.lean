@@ -169,9 +169,9 @@ private def updateLeadingAux : Syntax → StateM String.Pos (Option Syntax)
 
     Remark: after parsing all `SourceInfo.leading` fields are Empty.
     The Syntax argument is the output produced by the Parser for `source`.
-    This Function "fixes" the `source.leanding` field.
+    This function "fixes" the `source.leading` field.
 
-    Note that, the `SourceInfo.trailing` fields are correct.
+    Note that, the `SourceInfo.trailing` fields must be correct.
     The implementation of this Function relies on this property. -/
 def updateLeading : Syntax → Syntax :=
   fun stx => (replaceM updateLeadingAux stx).run' 0

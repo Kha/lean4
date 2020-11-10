@@ -240,7 +240,19 @@ def pushTokenCore (tk : String) : FormatterM Unit := do
     pushLine
     push tk.trimRight
 
-def pushToken (tk : String) : FormatterM Unit := do
+def pushToken (info : SourceInfo) (tk : String) : FormatterM Unit := do
+  match info.trailing with
+  | some ss =>
+    let ss' := ss.trim
+    if !ss'.isEmpty then
+      let ws := { ss with startPos := ss'.stopPos }
+      if ws.contains '\n' then
+        push s!"\n{ss'}"
+      else
+        push s!"  {ss'}"
+      modify fun st => { st with leadWord := "" }
+  | none    => pure ()
+
   let st ← get
   -- If there is no space between `tk` and the next word, see if we would parse more than `tk` as a single token
   if st.leadWord != "" && tk.trimRight == tk then
@@ -259,13 +271,26 @@ def pushToken (tk : String) : FormatterM Unit := do
     pushTokenCore tk
     modify fun st => { st with leadWord := if tk.trimLeft == tk then tk else "" }
 
+  match info.leading with
+  | some ss =>
+    let ss' := ss.trim
+    if !ss'.isEmpty then
+      let ws := { ss with startPos := ss'.stopPos }
+      if ws.contains '\n' then
+        push s!"{ss'}\n"
+      else
+        push s!"{ss'} "
+      modify fun st => { st with leadWord := "" }
+  | none    => pure ()
+
 @[combinatorFormatter Lean.Parser.symbol]
 def symbol.formatter (sym : String) : Formatter := do
   let stx ← getCur
-  if stx.isToken sym then do
-    pushToken sym;
+  match stx with
+  | Syntax.atom info _ =>
+    pushToken info sym
     goLeft
-  else do
+  | _                  =>
     trace[PrettyPrinter.format.backtrack]! "unexpected syntax '{stx}', expected symbol '{sym}'"
     throwBacktrack
 
@@ -273,45 +298,44 @@ def symbol.formatter (sym : String) : Formatter := do
 
 @[combinatorFormatter Lean.Parser.unicodeSymbol]
 def unicodeSymbol.formatter (sym asciiSym : String) : Formatter := do
-  let stx ← getCur
-  let Syntax.atom _ val ← pure stx
-    | throwError $ "not an atom: " ++ toString stx
+  let Syntax.atom info val ← getCur
+    | throwError msg!"not an atom: {← getCur}"
   if val == sym.trim then
-    pushToken sym
+    pushToken info sym
   else
-    pushToken asciiSym;
+    pushToken info asciiSym;
   goLeft
 
 @[combinatorFormatter Lean.Parser.identNoAntiquot]
 def identNoAntiquot.formatter : Formatter := do
   checkKind identKind;
-  let stx ← getCur
-  let id := stx.getId
+  let Syntax.ident info _ id _ ← getCur
+    | throwError msg!"not an ident: {← getCur}"
   let id := id.simpMacroScopes
   let s := id.toString;
   if id.isAnonymous then
-    pushToken "[anonymous]"
+    pushToken info "[anonymous]"
   else if isInaccessibleUserName id || id.components.any Name.isNum ||
     -- loose bvar
     "#".isPrefixOf s then
     -- not parsable anyway, output as-is
-    pushToken s
+    pushToken info s
   else
     -- try to parse `s` as-is; if it fails, escape
     let pst ← parseToken s
-    if pst.stxStack == #[stx] then
-      pushToken s
+    if pst.pos == s.bsize then
+      pushToken info s
     else
-      let n := stx.getId
       -- TODO: do something better than escaping all parts
-      let n := (n.components.map fun c => "«" ++ toString c ++ "»").foldl mkNameStr Name.anonymous
-      pushToken n.toString
+      let id := (id.components.map fun c => "«" ++ toString c ++ "»").foldl mkNameStr Name.anonymous
+      pushToken info id.toString
   goLeft
 
 @[combinatorFormatter Lean.Parser.rawIdent] def rawIdent.formatter : Formatter := do
   checkKind identKind
-  let stx ← getCur
-  pushToken stx.getId.toString;
+  let Syntax.ident info _ id _ ← getCur
+    | throwError msg!"not an ident: {← getCur}"
+  pushToken info id.toString
   goLeft
 
 @[combinatorFormatter Lean.Parser.identEq] def identEq.formatter (id : Name) := rawIdent.formatter
@@ -320,9 +344,9 @@ def visitAtom (k : SyntaxNodeKind) : Formatter := do
   let stx ← getCur
   if k != Name.anonymous then
     checkKind k
-  let Syntax.atom _ val ← pure $ stx.ifNode (fun n => n.getArg 0) (fun _ => stx)
-    | throwError $ "not an atom: " ++ toString stx
-  pushToken val
+  let Syntax.atom info val ← pure $ stx.ifNode (fun n => n.getArg 0) (fun _ => stx)
+    | throwError msg!"not an atom: {stx}"
+  pushToken info val
   goLeft
 
 @[combinatorFormatter Lean.Parser.charLitNoAntiquot] def charLitNoAntiquot.formatter := visitAtom charLitKind
