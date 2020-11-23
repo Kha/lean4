@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Frequently Asked Questions - Lean Manual</title>
+        <title>What is Lean - Lean Manual</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">1.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Significant Changes from Lean 3</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> The do Notation</div></li><li class="chapter-item expanded affix "><li class="part-title">Tools</li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">4.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">5.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">6.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">6.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">6.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">6.3.</strong> Windows Setup</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">7.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">8.</strong> Fixing Tests</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">6.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">7.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">8.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Tools</li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">9.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">10.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">11.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">11.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">11.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">11.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">11.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">12.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">13.</strong> Fixing Tests</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">14.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">15.</strong> Significant Changes from Lean 3</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,70 +167,39 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#frequently-asked-questions" id="frequently-asked-questions">Frequently Asked Questions</a></h1>
+                        <h1><a class="header" href="#what-is-lean" id="what-is-lean">What is Lean</a></h1>
+<p>Lean is a functional programming language that makes it easy to
+write correct and maintainable code.</p>
+<p>Lean programming primarily involves defining types and functions.
+This allows your focus to remain on the problem domain and manipulating its data,
+rather than the details of programming.</p>
+<pre><code class="language-lean">-- Defines a function that takes a name and produces a greeting.
+def getGreeting (name : String) := &quot;Hello, {name}! Isn't Lean great?&quot;
+
+-- The `main` function is the entry point of your program.
+-- Its type is `IO Unit` because it can perform `IO` operations.
+def main : IO Unit :=
+  -- Defines a list of names
+  let names := [&quot;Sebastian&quot;, &quot;Leo&quot;, &quot;Daniel&quot;]
+
+  -- Print the list of greetings `names.map getGreeting`
+  for greeting in names.map getGreeting do
+    IO.println greeting
+</code></pre>
+<p>Lean has numerous features, including:</p>
 <ul>
-<li>What is Lean?</li>
+<li>Type inference</li>
+<li>First-class functions</li>
+<li>Powerful data types</li>
+<li>Pattern matching</li>
+<li>Type classes</li>
+<li>Extensible syntax</li>
+<li>Hygienic macros</li>
+<li>Dependent types</li>
+<li>Metaprogramming framework</li>
+<li>Async programming</li>
+<li>Verification, you can prove properties of your functions using Lean itself</li>
 </ul>
-<p>Lean is a new open source theorem prover being developed at Microsoft Research.
-It is a research project that aims to bridge the gap between interactive and automated theorem proving.
-Lean can be also used as a programming language. Actually, some Lean features are implemented in Lean itself.</p>
-<ul>
-<li>Are pull requests welcome?</li>
-</ul>
-<p>In the past, we accepted most pull requests. This practice produced hard to maintain code, performance problems, and bugs.
-It takes time to review a pull request and make sure it is correct, useful and is not in conflict with our plans.
-Small bug fixes (few lines of code) are always welcome. Any other kind of unrequested pull request is not.
-Thus, before implementing a feature or modifying the system, please ask whether the change is welcome or not.</p>
-<ul>
-<li>Should I use Lean?</li>
-</ul>
-<p>Lean is under heavy development, and we are constantly trying new
-ideas and tweaking the system.  It is a research project and not a product.
-Things change rapidly, and we constantly break backward compatibility.
-Lean comes &quot;as is&quot;, you should not expect we will fix bugs and/or add new features for your project.
-We have our own priorities, and will not change them to accommodate your needs.
-Even if you implement a new feature or fix a bug, we may not want to merge it because
-it may conflict with our plans for Lean, it may not be performant, we may not want to maintain it,
-we may be busy, etc. If you really need this new feature or bug fix, we suggest you create your own fork and maintain it yourself.</p>
-<ul>
-<li>Where is the documentation?</li>
-</ul>
-<p>The <a href="https://leanprover.github.io/theorem_proving_in_lean">Lean tutorial</a> is a good introduction to the system.
-It may contain a few inconsistencies due to recent changes, but we try to keep it in sync.
-The reference manual is work in progress, and we don't know when it will be ready.
-The core and math libraries contain many definitions and proofs, they demonstrate how we expect the system to be used.
-If the lack of documentation is an issue, then Lean is not a good match for you.
-Documentation is not the main priority right now. Recall that Lean is a research project and not a product.
-A public and very active chat room dedicated to Lean is open on <a href="https://leanprover.zulipchat.com">Zulip</a>.
-It is a good place to interact with other Lean users.
-You may also join the <a href="https://groups.google.com/forum/#!forum/lean-user">Lean user forum</a> on Google Groups.</p>
-<ul>
-<li>Should I use Lean to teach a course?</li>
-</ul>
-<p>Lean has been used to teach courses on logic, type theory and programming languages at CMU and the University of Washington.
-The lecture notes for the CMU course <a href="https://leanprover.github.io/logic_and_proof">Logic and Proof</a> are available online.
-If you decide to teach a course using Lean, we suggest you prepare all material before the beginning of the course, and
-make sure that Lean attends all your needs. You should not expect we will fix bugs and/or add features needed for your course.</p>
-<ul>
-<li>Are there IDEs for Lean?</li>
-</ul>
-<p>Yes, the two main ones are for <a href="https://github.com/leanprover/lean-mode">Emacs</a> and <a href="https://github.com/leanprover/vscode-lean">VS Code</a>.
-The Emacs Lean mode is available via <a href="https://melpa.org/">MELPA</a>. The VS Code Lean extension is available on its marketplace.</p>
-<ul>
-<li>Is Lean sound? How big is the kernel? Should I trust it?</li>
-</ul>
-<p>Lean has a relatively small kernel. The <a href="https://github.com/leanprover/lean/tree/master/src/checker">leanchecker</a> is a bare-bones version of the Lean kernel.
-There are also two independent checkers: <a href="https://github.com/leanprover/tc">tc</a> and <a href="https://github.com/gebner/trepplein">trepplein</a>.
-We have implemented several kernel extensions to improve performance and make sure the system is reasonably responsive for interactive use.
-We strongly recommend you frequently check your project without these extensions. The command line option <code>-t0</code> disables all of them.
-As far as we know, no proof of <code>false</code> has ever been accepted by Lean when using <code>-t0</code>.
-If you are really concerned about soundness, we recommend you often export your project and recheck it using the independent checkers above.</p>
-<ul>
-<li>Should I open a new issue?</li>
-</ul>
-<p>We use <a href="https://github.com/leanprover/lean/issues">github</a> to track bugs and new features.
-Bug reports are always welcome, but nitpicking issues are not (e.g., the error message is confusing).
-RFC issues are created by developers only.</p>
 
                     </main>
 
@@ -239,7 +208,7 @@ RFC issues are created by developers only.</p>
                         
 
                         
-                            <a rel="next" href="syntax_highlight_in_latex.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="tour.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -253,7 +222,7 @@ RFC issues are created by developers only.</p>
                 
 
                 
-                    <a rel="next" href="syntax_highlight_in_latex.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="tour.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

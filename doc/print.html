@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">1.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Significant Changes from Lean 3</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> The do Notation</div></li><li class="chapter-item expanded affix "><li class="part-title">Tools</li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">4.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">5.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">6.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">6.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">6.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">6.3.</strong> Windows Setup</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">7.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">8.</strong> Fixing Tests</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">6.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">7.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">8.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Tools</li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">9.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">10.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">11.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">11.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">11.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">11.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">11.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">12.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">13.</strong> Fixing Tests</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">14.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">15.</strong> Significant Changes from Lean 3</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,70 +169,1106 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#frequently-asked-questions" id="frequently-asked-questions">Frequently Asked Questions</a></h1>
+                        <h1><a class="header" href="#what-is-lean" id="what-is-lean">What is Lean</a></h1>
+<p>Lean is a functional programming language that makes it easy to
+write correct and maintainable code.</p>
+<p>Lean programming primarily involves defining types and functions.
+This allows your focus to remain on the problem domain and manipulating its data,
+rather than the details of programming.</p>
+<pre><code class="language-lean">-- Defines a function that takes a name and produces a greeting.
+def getGreeting (name : String) := &quot;Hello, {name}! Isn't Lean great?&quot;
+
+-- The `main` function is the entry point of your program.
+-- Its type is `IO Unit` because it can perform `IO` operations.
+def main : IO Unit :=
+  -- Defines a list of names
+  let names := [&quot;Sebastian&quot;, &quot;Leo&quot;, &quot;Daniel&quot;]
+
+  -- Print the list of greetings `names.map getGreeting`
+  for greeting in names.map getGreeting do
+    IO.println greeting
+</code></pre>
+<p>Lean has numerous features, including:</p>
 <ul>
-<li>What is Lean?</li>
+<li>Type inference</li>
+<li>First-class functions</li>
+<li>Powerful data types</li>
+<li>Pattern matching</li>
+<li>Type classes</li>
+<li>Extensible syntax</li>
+<li>Hygienic macros</li>
+<li>Dependent types</li>
+<li>Metaprogramming framework</li>
+<li>Async programming</li>
+<li>Verification, you can prove properties of your functions using Lean itself</li>
 </ul>
-<p>Lean is a new open source theorem prover being developed at Microsoft Research.
-It is a research project that aims to bridge the gap between interactive and automated theorem proving.
-Lean can be also used as a programming language. Actually, some Lean features are implemented in Lean itself.</p>
-<ul>
-<li>Are pull requests welcome?</li>
-</ul>
-<p>In the past, we accepted most pull requests. This practice produced hard to maintain code, performance problems, and bugs.
-It takes time to review a pull request and make sure it is correct, useful and is not in conflict with our plans.
-Small bug fixes (few lines of code) are always welcome. Any other kind of unrequested pull request is not.
-Thus, before implementing a feature or modifying the system, please ask whether the change is welcome or not.</p>
-<ul>
-<li>Should I use Lean?</li>
-</ul>
-<p>Lean is under heavy development, and we are constantly trying new
-ideas and tweaking the system.  It is a research project and not a product.
-Things change rapidly, and we constantly break backward compatibility.
-Lean comes &quot;as is&quot;, you should not expect we will fix bugs and/or add new features for your project.
-We have our own priorities, and will not change them to accommodate your needs.
-Even if you implement a new feature or fix a bug, we may not want to merge it because
-it may conflict with our plans for Lean, it may not be performant, we may not want to maintain it,
-we may be busy, etc. If you really need this new feature or bug fix, we suggest you create your own fork and maintain it yourself.</p>
-<ul>
-<li>Where is the documentation?</li>
-</ul>
-<p>The <a href="https://leanprover.github.io/theorem_proving_in_lean">Lean tutorial</a> is a good introduction to the system.
-It may contain a few inconsistencies due to recent changes, but we try to keep it in sync.
-The reference manual is work in progress, and we don't know when it will be ready.
-The core and math libraries contain many definitions and proofs, they demonstrate how we expect the system to be used.
-If the lack of documentation is an issue, then Lean is not a good match for you.
-Documentation is not the main priority right now. Recall that Lean is a research project and not a product.
-A public and very active chat room dedicated to Lean is open on <a href="https://leanprover.zulipchat.com">Zulip</a>.
-It is a good place to interact with other Lean users.
-You may also join the <a href="https://groups.google.com/forum/#!forum/lean-user">Lean user forum</a> on Google Groups.</p>
-<ul>
-<li>Should I use Lean to teach a course?</li>
-</ul>
-<p>Lean has been used to teach courses on logic, type theory and programming languages at CMU and the University of Washington.
-The lecture notes for the CMU course <a href="https://leanprover.github.io/logic_and_proof">Logic and Proof</a> are available online.
-If you decide to teach a course using Lean, we suggest you prepare all material before the beginning of the course, and
-make sure that Lean attends all your needs. You should not expect we will fix bugs and/or add features needed for your course.</p>
-<ul>
-<li>Are there IDEs for Lean?</li>
-</ul>
-<p>Yes, the two main ones are for <a href="https://github.com/leanprover/lean-mode">Emacs</a> and <a href="https://github.com/leanprover/vscode-lean">VS Code</a>.
-The Emacs Lean mode is available via <a href="https://melpa.org/">MELPA</a>. The VS Code Lean extension is available on its marketplace.</p>
-<ul>
-<li>Is Lean sound? How big is the kernel? Should I trust it?</li>
-</ul>
-<p>Lean has a relatively small kernel. The <a href="https://github.com/leanprover/lean/tree/master/src/checker">leanchecker</a> is a bare-bones version of the Lean kernel.
-There are also two independent checkers: <a href="https://github.com/leanprover/tc">tc</a> and <a href="https://github.com/gebner/trepplein">trepplein</a>.
-We have implemented several kernel extensions to improve performance and make sure the system is reasonably responsive for interactive use.
-We strongly recommend you frequently check your project without these extensions. The command line option <code>-t0</code> disables all of them.
-As far as we know, no proof of <code>false</code> has ever been accepted by Lean when using <code>-t0</code>.
-If you are really concerned about soundness, we recommend you often export your project and recheck it using the independent checkers above.</p>
-<ul>
-<li>Should I open a new issue?</li>
-</ul>
-<p>We use <a href="https://github.com/leanprover/lean/issues">github</a> to track bugs and new features.
-Bug reports are always welcome, but nitpicking issues are not (e.g., the error message is confusing).
-RFC issues are created by developers only.</p>
+<h1><a class="header" href="#tour-of-lean" id="tour-of-lean">Tour of Lean</a></h1>
+<p>The best way to learn about Lean is to read and write Lean code.
+This article will act as a tour through some of the key features of the Lean
+language and give you some code snippets that you can execute on your machine.
+To learn about setting up a development environment, check out <a href="./gettingStarted.html">Getting Started</a>.</p>
+<p>There are two primary concepts in Lean: functions and types.
+This tour will emphasize features of the language which fall into
+these two concepts.</p>
+<h1><a class="header" href="#functions-and-namespaces" id="functions-and-namespaces">Functions and Namespaces</a></h1>
+<p>The most fundamental pieces of any Lean program are functions organized into namespaces.
+<a href="./functions.html">Functions</a> perform work on inputs to produce outputs,
+and they are organized under <a href="./namespaces.html">namespaces</a>,
+which are the primary way you group things in Lean.
+They are defined using the <a href="./definitions.html"><code>def</code></a> command,
+which give the function a name and define its arguments.</p>
+<pre><code class="language-lean">namespace BasicFunctions
+
+-- The `#eval` command is used to evaluate expressions
+#eval 2+2
+
+-- You use 'def' to define a function. This one accepts a natural number
+-- and returns a natural number.
+-- Parentheses are optional for function arguments, except for when
+-- you use an explicit type annotation.
+-- Lean can often infer the type of the functions arguments
+def sampleFunction1 x := x*x + 3
+
+-- Apply the function, naming the function return result using 'def'.
+-- The variable type is inferred from the function return type.
+def result1 := sampleFunction1 4573
+
+-- This line uses an interpolated string to print the result. Expressions inside
+-- braces `{}` are converted into string using the polymorphic method `toString`
+#eval println! &quot;The result of squaring the integer 4573 and adding 3 is {result1}&quot;
+
+-- When needed, annotate the type of a parameter name using '(argument:type)'.
+-- Parentheses are required.
+def sampleFunction2 (x : Nat) := 2*x*x - x + 3
+
+def result2 := sampleFunction2 (7 + 4)
+
+#eval println! &quot;The result of applying the 2nd sample function to (7 + 4) is {result2}&quot;
+
+-- Conditionals use if/then/else
+def sampleFunction3 (x : Int) :=
+  if x &gt; 100 then
+    2*x*x - x + 3
+  else
+    2*x*x + x - 37
+
+#eval println! &quot;The result of applying sampleFunction3 to 2 is {sampleFunction3 2}&quot;
+
+end BasicFunctions
+</code></pre>
+<pre><code class="language-lean">-- Lean has first class functions
+-- `twice` takes two argumes `f` and `a` where
+-- `f` is a function from natural numbers to natural numbers, and
+-- `a` is a natural number
+def twice (f : Nat → Nat) (a : Nat) :=
+  f (f a)
+
+-- `fun` is to declare anonymous functions
+#eval twice (fun x =&gt; x + 2) 10
+
+-- You prove theorems about your functions.
+-- The following theorem states that for any natural number `a`,
+-- adding 2 twice produces a value equal to `a + 4`.
+theorem twiceAdd2 (a : Nat) : twice (fun x =&gt; x + 2) a = a + 4 :=
+  -- The proof is by reflexivity. Lean &quot;symbolic&quot; reduces both sides of the equality
+  -- and obtain the same result
+  rfl
+
+-- `(. + 2)` is syntax sugar for `(fun x =&gt; x + 2)`. The parentheses + `.` notation
+-- is useful for defining simple functions
+#eval twice (. + 2) 10
+
+-- An enumerated type is a special case of inductive type in Lean
+-- The following command creates a new type `Weekday`
+inductive Weekday :=
+  | sunday    : Weekday
+  | monday    : Weekday
+  | tuesday   : Weekday
+  | wednesday : Weekday
+  | thursday  : Weekday
+  | friday    : Weekday
+  | saturday  : Weekday
+
+-- `Weekday` has 7 constructors/elements.
+-- The constructors live in the `Weekday` namespace
+-- Think of `sunday`, `monday`, …, saturday as being distinct elements of `Weekday`,
+-- with no other distinguishing properties.
+-- The command `#check` return the type of a term in Lean
+#check Weekday.sunday
+#check Weekday.monday
+
+-- The `open` command opens a namespace
+open Weekday
+#check sunday
+#check tuesday
+
+-- You can define functions by pattern matching.
+-- The following function converts a `Weekday` into a natural number.
+def natOfWeekday (d : Weekday) : Nat :=
+  match d with
+  | sunday    =&gt; 1
+  | monday    =&gt; 2
+  | tuesday   =&gt; 3
+  | wednesday =&gt; 4
+  | thursday  =&gt; 5
+  | friday    =&gt; 6
+  | saturday  =&gt; 7
+
+-- The `#eval` command evaluates an expression and prints the result.
+#eval natOfWeekday tuesday
+
+def isMonday : Weekday → Bool :=
+  -- `fun` + `match`  is a common idiom.
+  -- The the following expression is syntax sugar for
+  -- fun d =&gt; match d with | monday =&gt; true | _ =&gt; false
+  fun | monday =&gt; true | _ =&gt; false
+
+#eval isMonday monday
+#eval isMonday sunday
+
+-- Lean has support for type classes and polymorphic methods.
+-- The `toString` method converts a value into a `String`.
+#eval toString 10
+#eval toString (10, 20)
+
+-- The method `toString` converts values of any type that implements
+-- the class `ToString`.
+-- You can implement instances of `ToString` for your own types.
+instance : ToString Weekday := {
+  toString := fun
+    | sunday    =&gt; &quot;Sunday&quot;
+    | monday    =&gt; &quot;Monday&quot;
+    | tuesday   =&gt; &quot;Tuesday&quot;
+    | wednesday =&gt; &quot;Wednesday&quot;
+    | thursday  =&gt; &quot;Thursday&quot;
+    | friday    =&gt; &quot;Friday&quot;
+    | saturday  =&gt; &quot;Saturday&quot;
+}
+
+#eval toString (sunday, 10)
+
+def Weekday.next : Weekday -&gt; Weekday :=
+  fun d =&gt; match d with
+    | sunday    =&gt; monday
+    | monday    =&gt; tuesday
+    | tuesday   =&gt; wednesday
+    | wednesday =&gt; thursday
+    | thursday  =&gt; friday
+    | friday    =&gt; saturday
+    | saturday  =&gt; sunday
+
+#eval Weekday.next Weekday.wednesday
+-- Since `Weekday` namespace has already been opened, you can write.
+#eval next wednesday
+
+-- The idiom `fun d =&gt; match d with ...` used in the previous definition
+-- is so common that Lean provides a syntax sugar for it. The foolowing
+-- function uses it.
+def Weekday.previous : Weekday -&gt; Weekday
+  | sunday    =&gt; saturday
+  | monday    =&gt; sunday
+  | tuesday   =&gt; monday
+  | wednesday =&gt; tuesday
+  | thursday  =&gt; wednesday
+  | friday    =&gt; thursday
+  | saturday  =&gt; friday
+
+#eval next (previous wednesday)
+
+-- We can prove that for any `Weekday` `d`, `next (previous d) = d`
+theorem Weekday.nextOfPrevious (d : Weekday) : next (previous d) = d :=
+  match d with
+  | sunday    =&gt; rfl
+  | monday    =&gt; rfl
+  | tuesday   =&gt; rfl
+  | wednesday =&gt; rfl
+  | thursday  =&gt; rfl
+  | friday    =&gt; rfl
+  | saturday  =&gt; rfl
+
+-- You can automate definitions such  as `Weekday.nextOfPrevious`
+-- using metaprogramming
+theorem Weekday.nextOfPrevious' (d : Weekday) : next (previous d) = d := by
+  cases d -- A proof by cases
+  repeat rfl -- Each case is solved using `rfl`
+</code></pre>
+<h1><a class="header" href="#functions" id="functions">Functions</a></h1>
+<p>Functions are the fundamental unit of program execution in any programming language.
+As in other languages, a Lean function has a name, can have parameters and take arguments, and has a body.
+Lean also supports functional programming constructs such as treating functions as values,
+using unnamed functions in expressions, composition of functions to form new functions,
+curried functions, and the implicit definition of functions by way of
+the partial application of function arguments.</p>
+<p>You define functions by using the <code>def</code> keyword followed by its name, a parameter list, return type and its body.
+The parameter list consists of successive parameters that are separated by spaces.
+You can specify an explicit type for each parameter.
+If you do not specify a specific argument type, the compiler tries to infer the type from the function body.
+An error is returned when it cannot be inferred.
+The expression that makes up the function body is typically a compound expression consisting of a number of expressions
+that culminate in a final expression that is the return value.
+The return type is a colon followed by a type and is optional.
+If you do not specify the type of the return value explicitly,
+the compiler tries to determine the return type from the final expression.</p>
+<pre><code class="language-lean">def f x := x + 1
+</code></pre>
+<p>In the previous example, the function name is <code>f</code>, the argument is <code>x</code>, which has type <code>Nat</code>,
+the function body is <code>x + 1</code>, and the return value is of type <code>Nat</code>.
+The following example defines the factorial recursive function using pattern matching.</p>
+<pre><code class="language-lean">def fact x :=
+ match x with
+ | 0   =&gt; 1
+ | n+1 =&gt; (n+1) * fact n
+
+#eval fact 100
+</code></pre>
+<p>By default, Lean only accepts total functions. The <code>partial</code> keyword should be used when Lean cannot
+establish that a function always terminates.</p>
+<pre><code class="language-lean">partial def g (x : Nat) (p : Nat -&gt; Bool) : Nat :=
+  if p x then
+    x
+  else
+    g (x+1) p
+
+#eval g 0 (fun x =&gt; x &gt; 10)
+</code></pre>
+<p>In the previous example, <code>g x p</code> only terminates if there is a <code>y &gt;= x</code> such that <code>p y</code> returns <code>true</code>.
+Of course, <code>g 0 (fun x =&gt; false)</code> never terminates.</p>
+<h1><a class="header" href="#lambda-expressions" id="lambda-expressions">Lambda expressions</a></h1>
+<p>A lambda expression is an unnamed function.
+You define lambda expressions by using the <code>fun</code> keyword. A lambda expression resembles a function definition, except that instead of the <code>:=</code> token,
+the <code>=&gt;</code> token is used to separate the argument list from the function body. As in a regular function definition,
+the argument types can be inferred or specified explicitly, and the return type of the lambda expression is inferred from the type of the
+last expression in the body.</p>
+<pre><code class="language-lean">def twice (f : Nat -&gt; Nat) (x : Nat) : Nat :=
+  f (f x)
+
+#eval twice (fun x =&gt; x + 1) 3
+#eval twice (fun (x : Nat) =&gt; x * 2) 3
+
+#eval List.map (fun x =&gt; x + 1) [1, 2, 3]
+-- [2, 3, 4]
+
+#eval List.map (fun (x, y) =&gt; x + y) [(1, 2), (3, 4)]
+-- [3, 7]
+</code></pre>
+<h1><a class="header" href="#syntax-sugar-for-simple-lambda-expressions" id="syntax-sugar-for-simple-lambda-expressions">Syntax sugar for simple lambda expressions</a></h1>
+<p>Simple functions can be defined using parentheses and <code>.</code> (or <code>·</code>) as a placeholder.</p>
+<pre><code class="language-lean">#check (. + 1)
+-- fun a =&gt; a + 1
+#check (· + 1)
+-- fun a =&gt; a + 1
+#check (2 - .)
+-- fun a =&gt; 2 - a
+#eval [1, 2, 3, 4, 5].foldl (. * .) 1
+-- 120
+
+def h (x y z : Nat) :=
+  x + y + z
+
+#check (h . 1 .)
+-- fun a b =&gt; h a 1 b
+
+#eval [(1, 2), (3, 4), (5, 6)].map (·.1)
+-- [1, 3, 5]
+</code></pre>
+<p>In the previous example, the term <code>(·.1)</code> is syntax sugar for <code>fun x =&gt; x.1</code>. Note that, the ASCII version <code>(..1)</code>
+is not supported because <code>..</code> is a reserved symbol.</p>
+<h1><a class="header" href="#pipelining" id="pipelining">Pipelining</a></h1>
+<p>Pipelining enables function calls to be chained together as successive operations. Pipelining works as follows:</p>
+<pre><code class="language-lean">def add1 x := x + 1
+def times2 x := x * 2
+
+#eval times2 (add1 100)
+#eval 100 |&gt; add1 |&gt; times2
+#eval times2 &lt;| add1 &lt;| 100
+</code></pre>
+<p>The result of the previous <code>#eval</code> commands is 202.
+The forward pipeline <code>|&gt;</code> operatior takes a function and an argument and return a value.
+In constrat, the backward pipeline <code>&lt;|</code> operator takes an argument and a function and returns a value.
+These operators are useful for minimizing the number of parentheses.</p>
+<pre><code class="language-lean">def add1Times3FilterEven (xs : List Nat) :=
+  List.filter (. % 2 == 0) (List.map (. * 3) (List.map (. + 1) xs))
+
+#eval add1Times3FilterEven [1, 2, 3, 4]
+-- [6, 12]
+
+-- Define the same function using pipes
+def add1Times3FilterEven' (xs : List Nat) :=
+  xs |&gt; List.map (. + 1) |&gt; List.map (. * 3) |&gt; List.filter (. % 2 == 0)
+
+#eval add1Times3FilterEven' [1, 2, 3, 4]
+-- [6, 12]
+</code></pre>
+<p>Lean also supports the operator <code>|&gt;.</code> which combines forward pipeline <code>|&gt;</code> operator with the <code>.</code> field notation.</p>
+<pre><code class="language-lean">-- Define the same function using pipes
+def add1Times3FilterEven'' (xs : List Nat) :=
+  xs.map (. + 1) |&gt;.map (. * 3) |&gt;.filter (. % 2 == 0)
+
+#eval add1Times3FilterEven'' [1, 2, 3, 4]
+-- [6, 12]
+</code></pre>
+<p>For users familiar with the Haskell programming language,
+Lean also supports the notation <code>f $ a</code> for the backward pipeline <code>f &lt;| a</code>.</p>
+<h1><a class="header" href="#variables-and-sections" id="variables-and-sections">Variables and Sections</a></h1>
+<p>Consider the following three function definitions:</p>
+<pre><code class="language-lean">def compose (α β γ : Type) (g : β → γ) (f : α → β) (x : α) : γ :=
+  g (f x)
+
+def doTwice (α : Type) (h : α → α) (x : α) : α :=
+  h (h x)
+
+def doThrice (α : Type) (h : α → α) (x : α) : α :=
+  h (h (h x))
+</code></pre>
+<p>Lean provides us with the <code>variable</code> and <code>variables</code> commands to make such declarations look more compact:</p>
+<pre><code class="language-lean">variables (α β γ : Type)
+
+def compose (g : β → γ) (f : α → β) (x : α) : γ :=
+  g (f x)
+
+def doTwice (h : α → α) (x : α) : α :=
+  h (h x)
+
+def doThrice (h : α → α) (x : α) : α :=
+  h (h (h x))
+</code></pre>
+<p>We can declare variables of any type, not just <code>Type</code> itself:</p>
+<pre><code class="language-lean">variables (α β γ : Type)
+variables (g : β → γ) (f : α → β) (h : α → α)
+variable (x : α)
+
+def compose := g (f x)
+def do_twice := h (h x)
+def do_thrice := h (h (h x))
+
+#print compose
+#print do_twice
+#print do_thrice
+</code></pre>
+<p>Printing them out shows that all three groups of definitions have exactly the same effect.</p>
+<p>The <code>variable</code> and <code>variables</code> commands instruct Lean to insert the declared variables as bound variables in definitions that refer to them.
+Lean is smart enough to figure out which variables are used explicitly or implicitly in a definition. We can therefore proceed as
+though <code>α</code>, <code>β</code>, <code>γ</code>, <code>g</code>, <code>f</code>, <code>h</code>, and <code>x</code> are fixed objects when we write our definitions, and let Lean abstract
+the definitions for us automatically.</p>
+<p>When declared in this way, a variable stays in scope until the end of the file we are working on.
+Sometimes, however, it is useful to limit the scope of a variable. For that purpose, Lean provides the notion of a <code>section</code>:</p>
+<pre><code class="language-lean">section useful
+  variables (α β γ : Type)
+  variables (g : β → γ) (f : α → β) (h : α → α)
+  variable (x : α)
+
+  def compose := g (f x)
+  def do_twice := h (h x)
+  def do_thrice := h (h (h x))
+end useful
+</code></pre>
+<p>When the section is closed, the variables go out of scope, and become nothing more than a distant memory.</p>
+<p>You do not have to indent the lines within a section. Nor do you have to name a section, which is to say,
+you can use an anonymous <code>section</code> / <code>end</code> pair.
+If you do name a section, however, you have to close it using the same name.
+Sections can also be nested, which allows you to declare new variables incrementally.</p>
+<h1><a class="header" href="#namespaces" id="namespaces">Namespaces</a></h1>
+<p>Lean provides us with the ability to group definitions into nested, hierarchical <em>namespaces</em>:</p>
+<pre><code class="language-lean">namespace Foo
+  def a : Nat := 5
+  def f (x : Nat) : Nat := x + 7
+
+  def fa : Nat := f a
+  def ffa : Nat := f (f a)
+
+  #check a
+  #check f
+  #check fa
+  #check ffa
+  #check Foo.fa
+end Foo
+
+-- #check a  -- error
+-- #check f  -- error
+#check Foo.a
+#check Foo.f
+#check Foo.fa
+#check Foo.ffa
+
+open Foo
+
+#check a
+#check f
+#check fa
+#check Foo.fa
+</code></pre>
+<p>When we declare that we are working in the namespace <code>Foo</code>, every identifier we declare has
+a full name with prefix &quot;<code>Foo.</code>&quot; Within the namespace, we can refer to identifiers
+by their shorter names, but once we end the namespace, we have to use the longer names.</p>
+<p>The <code>open</code> command brings the shorter names into the current context. Often, when we import a
+module, we will want to open one or more of the namespaces it contains, to have access to the short identifiers.
+But sometimes we will want to leave this information hidden, for example, when they conflict with
+identifiers in another namespace we want to use. Thus namespaces give us a way to manage our working environment.</p>
+<p>For example, Lean groups definitions and theorems involving lists into a namespace <code>List</code>.</p>
+<pre><code class="language-lean">#check List.nil
+#check List.cons
+#check List.map
+</code></pre>
+<p>We will discuss their types, below. The command <code>open List</code> allows us to use the shorter names:</p>
+<pre><code class="language-lean">open List
+
+#check nil
+#check cons
+#check map
+</code></pre>
+<p>Like sections, namespaces can be nested:</p>
+<pre><code class="language-lean">namespace Foo
+  def a : Nat := 5
+  def f (x : Nat) : Nat := x + 7
+
+  def fa : Nat := f a
+
+  namespace Bar
+    def ffa : Nat := f (f a)
+
+    #check fa
+    #check ffa
+  end Bar
+
+  #check fa
+  #check Bar.ffa
+end Foo
+
+#check Foo.fa
+#check Foo.Bar.ffa
+
+open Foo
+
+#check fa
+#check Bar.ffa
+</code></pre>
+<p>Namespaces that have been closed can later be reopened, even in another file:</p>
+<pre><code class="language-lean">namespace Foo
+  def a : Nat := 5
+  def f (x : Nat) : Nat := x + 7
+
+  def fa : Nat := f a
+end Foo
+
+#check Foo.a
+#check Foo.f
+
+namespace Foo
+  def ffa : Nat := f (f a)
+end Foo
+</code></pre>
+<p>Like sections, nested namespaces have to be closed in the order they are opened.
+Namespaces and sections serve different purposes: namespaces organize data and sections declare variables for insertion in definitions.
+Sections are also useful for delimiting the scope of commands such as <code>set_option</code> and <code>open</code>.</p>
+<p>In many respects, however, a <code>namespace ... end</code> block behaves the same as a <code>section ... end</code> block.
+In particular, if you use the <code>variable</code> command within a namespace, its scope is limited to the namespace.
+Similarly, if you use an <code>open</code> command within a namespace, its effects disappear when the namespace is closed.</p>
+<h1><a class="header" href="#the-do-notation" id="the-do-notation">The <code>do</code> notation</a></h1>
+<p>Lean is a pure functional programming language, but you can write effectful code using the <code>do</code> embedded domain specific language (DSL). The following simple program prints two strings &quot;hello&quot; and &quot;world&quot; in the standard output and terminates with exit code 0. Note that the type of the program is <code>IO UInt32</code>. You can read this type as the type of values that perform input-output effects and produce a value of type <code>UInt32</code>.</p>
+<pre><code class="language-lean">def main : IO UInt32 := do
+  IO.println &quot;hello&quot;
+  IO.println &quot;world&quot;
+  return 0
+</code></pre>
+<p>The type of <code>IO.println</code> is <code>String → IO Unit</code>. That is, it is a function from <code>String</code> to <code>IO Unit</code> which indicates it may perform input-output effects and produce a value of type <code>Unit</code>. We often say that functions that may perform effects are <em>methods</em>.
+We also say a method application, such as <code>IO.println &quot;hello&quot;</code> is an <em>action</em>.
+Note that the examples above also demonstrates that braceless <code>do</code> blocks are whitespace sensitive.
+If you like <code>;</code>s and curly braces, you can write the example above as</p>
+<pre><code class="language-lean">def main : IO UInt32 := do {
+  IO.println &quot;hello&quot;;
+  IO.println &quot;world&quot;;
+  return 0;
+}
+</code></pre>
+<p>Semicolons can be used even when curly braces are not used. They are particularly useful when you want to &quot;pack&quot; more than one action in a single line.</p>
+<pre><code class="language-lean">def main : IO UInt32 := do
+  IO.println &quot;hello&quot;; IO.println &quot;world&quot;
+  return 0
+</code></pre>
+<p>Whitespace sensitivity in programming languages is a controversial topic
+among programmers. You should use your own style. We, the Lean developers, <strong>love</strong> the
+braceless and semicolon-free style.
+We believe it is clean and beautiful.</p>
+<p>The <code>do</code> DSL expands into the core Lean language. Let's inspect the different components using the commands <code>#print</code> and <code>#check</code>.</p>
+<pre><code class="language-lean"><span class="boring">def main : IO UInt32 := do
+</span><span class="boring"> IO.println &quot;hello&quot;
+</span><span class="boring"> IO.println &quot;world&quot;
+</span><span class="boring"> return 0
+</span>
+#check IO.println
+-- String -&gt; IO Unit
+#print main
+-- Output contains the infix operator `&gt;&gt;=` and `pure`
+-- The following `set_option` disables notation such as `&gt;&gt;=` in the output
+set_option pp.notation false in
+#print main
+-- Output contains `bind` and `pure`
+#print bind
+-- bind : {m : Type u → Type v} → [self : Bind m] → {α β : Type u} →
+--        m α → (α → m β) → m β
+#print pure
+-- pure : {m : Type u → Type v} → [self : Pure m] → {α : Type u} →
+--        α → m α
+
+-- IO implements the type classes `Bind` and `Pure`.
+#check (inferInstance : Bind IO)
+#check (inferInstance : Pure IO)
+</code></pre>
+<p>The types of <code>bind</code> and <code>pure</code> may look daunting at first sight.
+They both have many implicit arguments. Let's focus first on the explicit arguments.
+<code>bind</code> has two explicit arguments <code>m α</code> and <code>α → m β</code>. The first one should
+be viewed as an action with effects <code>m</code> and producing a value of type <code>α</code>.
+The second is a function that takes a value of type <code>α</code> and produces an action
+with effects <code>m</code> and a value of type <code>β</code>. The result is <code>m β</code>. The method <code>bind</code> is composing
+these two actions. We often say <code>bind</code> is an abstract semicolon. The method <code>pure</code> converts
+a value <code>α</code> into an action that produces an action <code>m α</code>.</p>
+<p>Here is the same function being defined using <code>bind</code> and <code>pure</code> without the <code>do</code> DSL.</p>
+<pre><code class="language-lean">def main : IO UInt32 :=
+  bind (IO.println &quot;hello&quot;) fun _ =&gt;
+  bind (IO.println &quot;world&quot;) fun _ =&gt;
+  pure 0
+</code></pre>
+<p>The notations <code>let x &lt;- action1; action2</code> and <code>let x ← action1; action2</code> are just syntax sugar for <code>bind action1 fun x =&gt; action2</code>.
+Here is a small example using it.</p>
+<pre><code class="language-lean">def isGreaterThan0 (x : Nat) : IO Bool := do
+  IO.println s!&quot;value: {x}&quot;
+  return x &gt; 0
+
+def f (x : Nat) : IO Unit := do
+  let c &lt;- isGreaterThan0 x
+  if c then
+    IO.println s!&quot;{x} is greater than 0&quot;
+  else
+    pure ()
+
+#eval f 10
+-- value: 10
+-- 10 is greater than 0
+</code></pre>
+<h2><a class="header" href="#nested-actions" id="nested-actions">Nested actions</a></h2>
+<p>Note that we cannot write <code>if isGreaterThan0 x then ... else ...</code> because the condition in a <code>if-then-else</code> is a <strong>pure</strong> value without effects, but <code>isGreaterThan0 x</code> has type <code>IO Bool</code>. You can use the nested action notation to avoid this annoyance. Here is an equivalent definition for <code>f</code> using a nested action.</p>
+<pre><code class="language-lean"><span class="boring">def isGreaterThan0 (x : Nat) : IO Bool := do
+</span><span class="boring"> IO.println s!&quot;x: {x}&quot;
+</span><span class="boring"> return x &gt; 0
+</span>
+def f (x : Nat) : IO Unit := do
+  if (&lt;- isGreaterThan0 x) then
+    IO.println s!&quot;{x} is greater than 0&quot;
+  else
+    pure ()
+
+#print f
+</code></pre>
+<p>Lean &quot;lifts&quot; the nested actions and introduces the <code>bind</code> for us.
+Here is an example with two nested actions. Note that both actions are executed
+even if <code>x = 0</code>.</p>
+<pre><code class="language-lean"><span class="boring">def isGreaterThan0 (x : Nat) : IO Bool := do
+</span><span class="boring"> IO.println s!&quot;x: {x}&quot;
+</span><span class="boring"> return x &gt; 0
+</span>
+def f (x y : Nat) : IO Unit := do
+  if (&lt;- isGreaterThan0 x) &amp;&amp; (&lt;- isGreaterThan0 y) then
+    IO.println s!&quot;{x} and {y} are greater than 0&quot;
+  else
+    pure ()
+
+#eval f 0 10
+-- value: 0
+-- value: 10
+
+-- The function `f` above is equivalent to
+def g (x y : Nat) : IO Unit := do
+  let c1 &lt;- isGreaterThan0 x
+  let c2 &lt;- isGreaterThan0 y
+  if c1 &amp;&amp; c2 then
+    IO.println s!&quot;{x} and {y} are greater than 0&quot;
+  else
+    pure ()
+
+theorem fgEqual : f = g :=
+  rfl -- proof by reflexivity
+</code></pre>
+<p>Here are two ways to achieve the short-circuit semantics in the example above</p>
+<pre><code class="language-lean"><span class="boring">def isGreaterThan0 (x : Nat) : IO Bool := do
+</span><span class="boring"> IO.println s!&quot;x: {x}&quot;
+</span><span class="boring"> return x &gt; 0
+</span>
+def f1 (x y : Nat) : IO Unit := do
+  if (&lt;- isGreaterThan0 x &lt;&amp;&amp;&gt; isGreaterThan0 y) then
+    IO.println s!&quot;{x} and {y} are greater than 0&quot;
+  else
+    pure ()
+
+-- `&lt;&amp;&amp;&gt;` is the effectful version of `&amp;&amp;`
+-- Given `x y : IO Bool`, `x &lt;&amp;&amp;&gt; y` : m Bool`
+-- It only executes `y` if `x` returns `true`.
+
+#eval f1 0 10
+-- value: 0
+#eval f1 1 10
+-- value: 1
+-- value: 10
+-- 1 and 10 are greater than 0
+
+def f2 (x y : Nat) : IO Unit := do
+  if (&lt;- isGreaterThan0 x) then
+    if (&lt;- isGreaterThan0 y) then
+      IO.println s!&quot;{x} and {y} are greater than 0&quot;
+    else
+      pure ()
+  else
+    pure ()
+</code></pre>
+<h2><a class="header" href="#if-then-notation" id="if-then-notation"><code>if-then</code> notation</a></h2>
+<p>In the <code>do</code> DSL, we can write <code>if c then action</code> as a shorthand for <code>if c then action else pure ()</code>. Here is the method <code>f2</code> using this shorthand.</p>
+<pre><code class="language-lean"><span class="boring">def isGreaterThan0 (x : Nat) : IO Bool := do
+</span><span class="boring"> IO.println s!&quot;x: {x}&quot;
+</span><span class="boring"> return x &gt; 0
+</span>
+def f2 (x y : Nat) : IO Unit := do
+  if (&lt;- isGreaterThan0 x) then
+    if (&lt;- isGreaterThan0 y) then
+      IO.println s!&quot;{x} and {y} are greater than 0&quot;
+</code></pre>
+<h2><a class="header" href="#reassignments" id="reassignments">Reassignments</a></h2>
+<p>When writing effectful code, it is natural to think imperatively.
+For example, suppose we want to create an empty array <code>xs</code>,
+add <code>0</code> if some condition holds, add <code>1</code> if another condition holds,
+and then print it. In the following example, we use variable
+&quot;shadowing&quot; to simulate this kind of &quot;update&quot;.</p>
+<pre><code class="language-lean">def f (b1 b2 : Bool) : IO Unit := do
+  let xs := #[]
+  let xs := if b1 then xs.push 0 else xs
+  let xs := if b2 then xs.push 1 else xs
+  IO.println xs
+
+#eval f true true
+-- #[0, 1]
+#eval f false true
+-- #[1]
+#eval f true false
+-- #[0]
+#eval f false false
+-- #[]
+</code></pre>
+<p>We can use tuples to simulate updates on multiple variables.</p>
+<pre><code class="language-lean">def f (b1 b2 : Bool) : IO Unit := do
+  let xs := #[]
+  let ys := #[]
+  let (xs, ys) := if b1 then (xs.push 0, ys) else (xs, ys.push 0)
+  let (xs, ys) := if b2 then (xs.push 1, ys) else (xs, ys.push 1)
+  IO.println s!&quot;xs: {xs}, ys: {ys}&quot;
+
+#eval f true false
+-- xs: #[0], ys: #[1]
+</code></pre>
+<p>We can also simulate the control-flow above using <em>join-points</em>.
+A join-point is a <code>let</code> that is always tail called and fully applied.
+The Lean compiler implements them using <code>goto</code>s.
+Here is the same example using join-points.</p>
+<pre><code class="language-lean">def f (b1 b2 : Bool) : IO Unit := do
+  let jp1 xs ys := IO.println s!&quot;xs: {xs}, ys: {ys}&quot;
+  let jp2 xs ys := if b2 then jp1 (xs.push 1) ys else jp1 xs (ys.push 1)
+  let xs := #[]
+  let ys := #[]
+  if b1 then jp2 (xs.push 0) ys else jp2 xs (ys.push 0)
+
+#eval f true false
+-- xs: #[0], ys: #[1]
+</code></pre>
+<p>You can capture complex control-flow using join-points.
+The <code>do</code> DSL offers the variable reassignment feature to make this kind of code more comfortable to write. In the following example, the <code>mut</code> modifier at <code>let mut xs := #[]</code> indicates that variable <code>xs</code> can be reassigned. The example contains two reassignments <code>xs := xs.push 0</code> and <code>xs := xs.push 1</code>. The reassignments are compiled using join-points. There is no hidden state being updated.</p>
+<pre><code class="language-lean">def f (b1 b2 : Bool) : IO Unit := do
+  let mut xs := #[]
+  if b1 then xs := xs.push 0
+  if b2 then xs := xs.push 1
+  IO.println xs
+
+#eval f true true
+-- #[0, 1]
+</code></pre>
+<p>The notation <code>x &lt;- action</code> reassigns <code>x</code> with the value produced by the action. It is equivalent to <code>x := (&lt;- action)</code></p>
+<h2><a class="header" href="#iteration" id="iteration">Iteration</a></h2>
+<p>The <code>do</code> DSL provides a unified notation for iterating over datastructures. Here are a few examples.</p>
+<pre><code class="language-lean">def sum (xs : Array Nat) : IO Nat := do
+  let mut s := 0
+  for x in xs do
+    IO.println s!&quot;x: {x}&quot;
+    s := s + x
+  return s
+
+#eval sum #[1, 2, 3]
+-- x: 1
+-- x: 2
+-- x: 3
+-- 6
+
+-- We can write pure code using the `do` DSL too.
+def sum' (xs : Array Nat) : Nat := do
+  let mut s := 0
+  for x in xs do
+    s := s + x
+  return s
+
+#eval sum' #[1, 2, 3]
+-- 6
+
+def sumEven (xs : Array Nat) : IO Nat := do
+  let mut s := 0
+  for x in xs do
+    if x % 2 == 0 then
+      IO.println s!&quot;x: {x}&quot;
+      s := s + x
+  return s
+
+#eval sumEven #[1, 2, 3, 6]
+-- x: 2
+-- x: 6
+-- 8
+
+def splitEvenOdd (xs : List Nat) : IO Unit := do
+  let mut evens := #[]
+  let mut odds  := #[]
+  for x in xs do
+    if x % 2 == 0 then
+      evens := evens.push x
+    else
+      odds := odds.push x
+  IO.println s!&quot;evens: {evens}, odds: {odds}&quot;
+
+#eval splitEvenOdd [1, 2, 3, 4]
+-- evens: #[2, 4], odds: #[1, 3]
+
+def findNatLessThan (x : Nat) (p : Nat → Bool) : IO Nat := do
+  -- [:x] is notation for the range [0, x)
+  for i in [:x] do
+    if p i then
+      return i -- `return` from the `do` block
+  throw (IO.userError &quot;value not found&quot;)
+
+#eval findNatLessThan 10 (fun x =&gt; x &gt; 5 &amp;&amp; x % 4 == 0)
+-- 8
+
+def sumOddUpTo (xs : List Nat) (threshold : Nat) : IO Nat := do
+  let mut s := 0
+  for x in xs do
+    if x % 2 == 0 then
+      continue -- it behaves like the `continue` statement in imperative languages
+    IO.println s!&quot;x: {x}&quot;
+    s := s + x
+    if s &gt; threshold then
+      break -- it behave like the `continue` statement in imperative languages
+  IO.println s!&quot;result: {s}&quot;
+  return s
+
+#eval sumOddUpTo [2, 3, 4, 11, 20, 31, 41, 51, 107] 40
+-- x: 3
+-- x: 11
+-- x: 31
+-- result: 45
+-- 45
+</code></pre>
+<p>TODO: describe <code>forIn</code></p>
+<h2><a class="header" href="#try-catch" id="try-catch">Try-catch</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#pattern-matching" id="pattern-matching">Pattern matching</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#monads" id="monads">Monads</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#readert" id="readert">ReaderT</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#statet" id="statet">StateT</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#statereft" id="statereft">StateRefT</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#exceptt" id="exceptt">ExceptT</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#monadlift-and-automatic-lifting" id="monadlift-and-automatic-lifting">MonadLift and automatic lifting</a></h2>
+<p>TODO</p>
+<h1><a class="header" href="#tactics" id="tactics">Tactics</a></h1>
+<p>Tactics are metaprograms, that is, programs that create programs.
+Lean is implemented in Lean, you can import its implementation using <code>import Lean</code>.
+The <code>Lean</code> package is part of the Lean distribution.
+You can use the functions in the <code>Lean</code> package to write your own metaprograms
+that automate repetitive tasks when writing programs and proofs.</p>
+<p>We provide the <strong>tactic</strong> domain specific language (DSL) for using the tactic framework.
+The tactic DSL provides commands for creating terms (and proofs). You
+don't need to import the <code>Lean</code> package for using the tactic DSL.
+Simple extensions can be implemented using macros. More complex extensions require
+the <code>Lean</code> package. Notation used to write Lean terms can be easily lifted to the tactic DSL.</p>
+<p>Tactics are instructions that tell Lean how to construct a term or proof.
+Tactics operate on holes also known as goals. Each hole represents a missing
+part of the term you are trying to build. Internally these holes are represented
+as metavariables. They have a type and a local context. The local context contains
+all local variables in scope.</p>
+<p>In the following example, we prove the same simple theorem using different tactics.
+The keyword <code>by</code> instructs Lean to use the tactic DSL to construct a term.
+Our initial goal is a hole with type <code>p ∨ q → q ∨ p</code>. We tactic <code>intro h</code>
+fills this hole using the term <code>fun h =&gt; ?m</code> where <code>?m</code> is a new hole we need to solve.
+This hole has type <code>q ∨ p</code>, and the local context contains <code>h : p ∨ q</code>.
+The tactic <code>cases</code> fills the hole using <code>Or.casesOn h (fun h1 =&gt; ?m1) (fun h2 =&gt; ?m2)</code>
+where <code>?m1</code> and <code>?m2</code> are new holes. The tactic <code>apply Or.inr</code> fills the hole <code>?m1</code>
+with the application <code>Or.inr ?m3</code>, and <code>exact h1</code> fills <code>?m3</code> with <code>h1</code>.
+The tactic <code>assumption</code> tries to fill a hole by searching the local context for a term with the same type.</p>
+<pre><code class="language-lean">theorem ex1 : p ∨ q → q ∨ p := by
+  intro h
+  cases h
+  | inl h1 =&gt;
+    apply Or.inr
+    exact h1
+  | inr h2 =&gt;
+    apply Or.inl
+    assumption
+
+#print ex1
+/-
+theorem ex1 : {p q : Prop} → p ∨ q → q ∨ p :=
+fun {p q : Prop} (h : p ∨ q) =&gt;
+  Or.casesOn h (fun (h1 : p) =&gt; Or.inr h1) fun (h2 : q) =&gt; Or.inl h2
+-/
+
+-- You can use `match-with` in tactics.
+theorem ex2 : p ∨ q → q ∨ p := by
+  intro h
+  match h with
+  | Or.inl _  =&gt; apply Or.inr; assumption
+  | Or.inr h2 =&gt; apply Or.inl; exact h2
+
+-- As we have the `fun+match` syntax sugar for terms,
+-- we have the `intro+match` syntax sugar
+theorem ex3 : p ∨ q → q ∨ p := by
+  intro
+  | Or.inl h1 =&gt;
+    apply Or.inr
+    exact h1
+  | Or.inr h2 =&gt;
+    apply Or.inl
+    assumption
+</code></pre>
+<p>The examples above are all structured, but Lean 4 still supports unstructured
+proofs. Unstructured proofs are useful when creating reusable scripts that may
+discharge different goals.
+Here is an unstructured version of the example above.</p>
+<pre><code class="language-lean">theorem ex1 : p ∨ q → q ∨ p := by
+  intro h
+  cases h
+  apply Or.inr
+  assumption
+  apply Or.inl
+  assumption
+  done -- fails with an error here if there are unsolvable goals
+
+theorem ex2 : p ∨ q → q ∨ p := by
+  intro h
+  cases h
+  focus -- instructs Lean to `focus` on the first goal,
+    apply Or.inr
+    assumption
+    -- it will fail if there are still unsolvable goals here
+  focus
+    apply Or.inl
+    assumption
+
+theorem ex3 : p ∨ q → q ∨ p := by
+  intro h
+  cases h
+  -- You can still use curly braces and semicolons instead of
+  -- whitespace sensitive notation as in the previous example
+  { apply Or.inr;
+    assumption
+    -- It will fail if there are unsolved goals
+  }
+  { apply Or.inl;
+    assumption
+  }
+
+-- Many tactics tag subgoals. The tactic `cases` tag goals using constructor names.
+-- The tactic `case tag =&gt; tactics` instructs Lean to solve the goal
+-- with the matching tag.
+theorem ex4 : p ∨ q → q ∨ p := by
+  intro h
+  cases h
+  case inr =&gt;
+    apply Or.inl
+    assumption
+  case inl =&gt;
+    apply Or.inr
+    assumption
+
+-- Same example for curly braces and semicolons aficionados
+theorem ex5 : p ∨ q → q ∨ p := by {
+  intro h;
+  cases h;
+  case inr =&gt; {
+    apply Or.inl;
+    assumption
+  }
+  case inl =&gt; {
+    apply Or.inr;
+    assumption
+  }
+}
+</code></pre>
+<h2><a class="header" href="#rewrite" id="rewrite">Rewrite</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#pattern-matching-1" id="pattern-matching-1">Pattern matching</a></h2>
+<p>As a convenience, pattern-matching has been integrated into tactics such as <code>intro</code> and <code>funext</code>.</p>
+<pre><code class="language-lean">theorem ex1 : s ∧ q ∧ r → p ∧ r → q ∧ p := by
+  intro ⟨_, ⟨hq, _⟩⟩ ⟨hp, _⟩
+  exact ⟨hq, hp⟩
+
+theorem ex2 :
+    (fun (x : Nat × Nat) (y : Nat × Nat) =&gt; x.1 + y.2)
+    =
+    (fun (x : Nat × Nat) (z : Nat × Nat) =&gt; z.2 + x.1) := by
+  funext (a, b) (c, d)
+  show a + d = d + a
+  rw [Nat.addComm]
+  rfl
+</code></pre>
+<h2><a class="header" href="#induction" id="induction">Induction</a></h2>
+<p>The <code>induction</code> tactic now supports user-defined induction principles with
+multiple targets (aka major premises).</p>
+<pre><code class="language-lean">/-
+theorem Nat.mod.inductionOn
+      {motive : Nat → Nat → Sort u}
+      (x y  : Nat)
+      (ind  : ∀ x y, 0 &lt; y ∧ y ≤ x → motive (x - y) y → motive x y)
+      (base : ∀ x y, ¬(0 &lt; y ∧ y ≤ x) → motive x y)
+      : motive x y :=
+-/
+
+theorem ex (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
+  induction x, y using Nat.mod.inductionOn generalizing h
+  | ind x y h₁ ih =&gt;
+    rw [Nat.modEqSubMod h₁.2]
+    exact ih h
+  | base x y h₁ =&gt;
+     have ¬ 0 &lt; y ∨ ¬ y ≤ x from Iff.mp (Decidable.notAndIffOrNot ..) h₁
+     match this with
+     | Or.inl h₁ =&gt; exact absurd h h₁
+     | Or.inr h₁ =&gt;
+       have hgt : y &gt; x from Nat.gtOfNotLe h₁
+       rw [← Nat.modEqOfLt hgt] at hgt
+       assumption
+</code></pre>
+<h2><a class="header" href="#cases" id="cases">Cases</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#injection" id="injection">Injection</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#extensible-tactics" id="extensible-tactics">Extensible tactics</a></h2>
+<p>In the following example, we define the notation <code>trivial</code> for the tactic DSL using
+the command <code>syntax</code>. Then, we use the command <code>macro_rules</code> to specify what should
+be done when <code>trivial</code> is used. You can provide different expansions, and the tactic DSL
+interpreter will try all of them until one succeeds.</p>
+<pre><code class="language-lean">-- Define a new notation for the tactic DSL
+syntax &quot;trivial&quot; : tactic
+
+macro_rules
+  | `(tactic| trivial) =&gt; `(tactic| assumption)
+
+theorem ex1 (h : p) : p := by
+  trivial
+
+-- You cannot prove the following theorem using `trivial`
+-- theorem ex2 (x : α) : x = x := by
+--  trivial
+
+-- Let's extend `trivial`. The `by` DSL interpreter
+-- tries all possible macro extensions for `trivial` until one succeeds
+macro_rules
+  | `(tactic| trivial) =&gt; `(tactic| rfl)
+
+theorem ex2 (x : α) : x = x := by
+  trivial
+
+theorem ex3 (x : α) (h : p) : x = x ∧ p := by
+  apply And.intro
+  repeat trivial
+</code></pre>
+<h1><a class="header" href="#let-rec" id="let-rec"><code>let-rec</code></a></h1>
+<p>You can use <code>let rec</code> to write local recursive functions. We lifted it to the tactic DSL,
+and you can use it to create proofs by induction.</p>
+<pre><code class="language-lean">def lengthReplicateEq {α} (n : Nat) (a : α) : (List.replicate n a).length = n := by
+  let rec aux (n : Nat) (as : List α)
+      : (List.replicate.loop a n as).length = n + as.length := by
+    match n with
+    | 0   =&gt; rw [Nat.zeroAdd]; rfl
+    | n+1 =&gt;
+      show List.length (List.replicate.loop a n (a::as)) = Nat.succ n + as.length
+      rw [aux n, List.lengthConsEq, Nat.addSucc, Nat.succAdd]
+      rfl
+  exact aux n []
+</code></pre>
+<h1><a class="header" href="#begin-end-lovers" id="begin-end-lovers"><code>begin-end</code> lovers</a></h1>
+<p>If you love Lean 3 <code>begin ... end</code> tactic blocks and commas, you can define this notation
+in Lean 4 using macros in a few lines of code.</p>
+<pre><code class="language-lean">syntax[beginEndKind] &quot;begin &quot; sepByT(tactic, &quot;, &quot;) &quot;end&quot; : term
+
+open Lean in
+@[macro beginEndKind] def expandBeginEnd : Macro := fun stx =&gt;
+  match_syntax stx with
+  | `(begin $ts* end) =&gt; do
+     let ts   := ts.getSepElems.map fun t =&gt; mkNullNode #[t, mkNullNode]
+     let tseq := mkNode `Lean.Parser.Tactic.tacticSeqBracketed #[
+       mkAtomFrom stx &quot;{&quot;, mkNullNode ts, mkAtomFrom stx[2] &quot;}&quot;
+     ]
+     `(by $tseq:tacticSeqBracketed)
+  | _ =&gt; Macro.throwUnsupported
+
+theorem ex (x : Nat) : x + 0 = 0 + x :=
+  begin
+    rw Nat.zeroAdd,
+    rw Nat.addZero,
+    rfl
+  end
+</code></pre>
+<h1><a class="header" href="#string-interpolation" id="string-interpolation">String interpolation</a></h1>
+<p>The <code>s!</code> prefix identifies a string literal as an interpolated string.
+An interpolated string is a string literal that might contain interpolation expressions.
+When an interpolated string is resolved to a result string, items with interpolation expressions are
+replaced by the string representations of the expression results. The polymorphic method <code>toString</code> is used
+to convert the value into a string.</p>
+<p>String interpolation provides a more readable and convenient syntax to create formatted strings than
+a string composite formatting feature. The following example uses both features to produce the same output:</p>
+<pre><code class="language-lean">def name := &quot;John&quot;
+def age  := 28
+
+#eval IO.println s!&quot;Hello, {name}! Are you {age} years old?&quot;
+
+#eval IO.println (&quot;Hello, &quot; ++ name ++ &quot;! Are you &quot; ++ toString age ++ &quot; years old?&quot;)
+
+-- `println! &lt;interpolated-string&gt;` is a macro for `IO.println s!&lt;interpolated-string&gt;`
+#eval println! &quot;Hello, {name}! Are you {age} years old?&quot;
+</code></pre>
+<h1><a class="header" href="#structure-of-an-interpolated-string" id="structure-of-an-interpolated-string">Structure of an interpolated string</a></h1>
+<p>To identify a string literal as an interpolated string, prepend it with the <code>s!</code>.
+Terms inside braces <code>{}</code> are regular expressions whose type implements the type class <code>ToString</code>.
+To include a curly brace <code>{</code> in your interpolated string, you must escape it using <code>\{</code>.
+You nest interpolated strings inside interpolated strings</p>
+<pre><code class="language-lean">def vals := [1, 2, 3]
+
+#eval IO.println s!&quot;\{ vals := {vals} }&quot;
+
+#eval IO.println s!&quot;variables: {vals.map (fun i =&gt; s!&quot;x_{i}&quot;)}&quot;
+</code></pre>
+<h1><a class="header" href="#tostring-instances" id="tostring-instances"><code>ToString</code> instances</a></h1>
+<p>You can define a <code>ToString</code> instance for your own datatypes.</p>
+<pre><code class="language-lean">structure Person :=
+  (name : String)
+  (age  : Nat)
+
+instance : ToString Person := {
+  toString := fun { name := n, age := v } =&gt; s!&quot;\{ name := {n}, age := {v} }&quot;
+}
+
+def person1 : Person := {
+  name := &quot;John&quot;,
+  age  := 28
+}
+
+#eval println! &quot;person1: {person1}&quot;
+</code></pre>
 <p>We provide a way to syntax-highlight Lean code in LaTeX documents.
 It requires a Python package <code>Pygments</code> and a LaTeX package <code>minted</code>.</p>
 <h2><a class="header" href="#python-package-pygments" id="python-package-pygments">Python Package: <code>Pygments</code></a></h2>
@@ -351,6 +1387,8 @@ counter-intuitive behavior, and may confuse developers.</p>
 <li><a href="make/msvc.html">Windows (Visual Studio)</a></li>
 <li><a href="make/osx-10.9.html">macOS (homebrew)</a></li>
 <li>Linux/macOS/WSL via <a href="https://nixos.org/nix/">Nix</a>: Call <code>nix-shell</code> in the project root. That's it.</li>
+<li>There is also an <a href="make/nix.html"><strong>experimental</strong> setup based purely on Nix</a> that works fundamentally differently from the
+make/CMake setup described on this page.</li>
 </ul>
 <h2><a class="header" href="#generic-build-instructions" id="generic-build-instructions">Generic Build Instructions</a></h2>
 <p>Setting up a basic release build:</p>
@@ -385,13 +1423,6 @@ Select the build type. Valid values are <code>RELEASE</code> (default), <code>DE
 <code>-D CMAKE_CXX_COMPILER=</code><br />
 Select the C/C++ compilers to use. Official Lean releases currently use Clang;
 see also <code>.github/workflows/ci.yml</code> for the CI config.</p>
-</li>
-<li>
-<p><code>-D CHECK_OLEAN_VERSION=OFF</code><br />
-The <code>.olean</code> files are tagged with the Lean version they were produced with.
-This means that by default, the core library has to be recompiled after e.g.
-every <code>git commit</code>. Use this option to avoid the version check. The <code>.olean</code>
-files can be removed manually by invoking <code>make clean-olean</code>.</p>
 </li>
 </ul>
 <p>Lean will automatically use <a href="https://ccache.dev/">CCache</a> if available to avoid
@@ -563,6 +1594,80 @@ of <code>cmd.exe</code> for script tasks.</p>
 <p>You can use the <code>install</code> ninja/make target to install Lean into, by default,
 <code>C:\\User Programs (x86)\\LEAN</code>. To change this, add <code>-DCMAKE_INSTALL_PREFIX=path/you/want</code>
 to your cmake invocation.</p>
+<p>While <a href="https://nixos.org/nix/">Nix</a> can be used to quickly open a shell with all dependencies for the <a href="make/index.html">standard setup</a> installed, we also support a setup based purely on Nix, though it is still experimental; in particular, it is heavily based on an unreleased version of Nix enabling <a href="https://www.tweag.io/blog/2020-05-25-flakes/">Nix Flakes</a>. The setup has been tested on NixOS and other Linux distributions.</p>
+<h1><a class="header" href="#setup" id="setup">Setup</a></h1>
+<p>After installing (any version of) Nix ([https://nixos.org/download.html]), you can easily open a shell with the particular pre-release version of Nix needed by and tested with our setup (called the &quot;Lean shell&quot; from here on):</p>
+<pre><code class="language-bash"># in the Lean root directory
+$ nix-shell -A nix
+</code></pre>
+<p>While this shell is sufficient for executing the steps below, it is recommended to also set the following options in <code>/etc/nix/nix.conf</code> (<code>nix.extraOptions</code> in NixOS):</p>
+<pre><code>max-jobs = auto  # Allow building multiple derivations in parallel
+keep-outputs = true  # Do not garbage-collect build time-only dependencies (e.g. clang)
+extra-sandbox-paths = /nix/var/cache/ccache  # Extra local cache for C/C++ code
+# Allow fetching build results from the Lean Cachix cache
+extra-trusted-substituters = https://lean4.cachix.org/
+extra-trusted-public-keys = lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk=
+</code></pre>
+<p>The <a href="https://cachix.org/">Cachix</a> integration will magically beam any build steps already executed by the CI right onto your machine when calling Nix commands in the shell opened above.
+On top of the local and remote Nix cache, we do still rely on CCache as well to make C/C++ build steps incremental, which are atomic steps from Nix's point of view.
+If you add the <code>extra-sandbox-paths</code> line above, you <strong>must</strong> also set up that directory as follows:</p>
+<pre><code>sudo mkdir -m0770 -p /nix/var/cache/ccache
+# macOS standard chown doesn't support --reference
+nix shell .#nixpkgs.coreutils -c sudo chown --reference=/nix/store /nix/var/cache/ccache
+</code></pre>
+<h1><a class="header" href="#basic-build-commands" id="basic-build-commands">Basic Build Commands</a></h1>
+<p>From the Lean root directory inside the Lean shell:</p>
+<pre><code class="language-bash">nix build .#stage1  # build this stage's stdlib &amp; executable
+nix build .#stage1.test  # run all tests
+nix run .#stage1.update-stage0  # update ./stage0 from this stage
+nix run .#stage1.update-stage0-commit  # ...and commit the results
+</code></pre>
+<p>The <code>stage1.</code> part in each command is optional:</p>
+<pre><code class="language-bash">nix build .#test  # run tests for stage 1
+nix build .  # build stage 1
+nix build  # dito
+</code></pre>
+<p>On a build error, Nix will show the last 10 lines of the output by default. You can pass <code>-L</code> to <code>nix build</code> to show all lines, or pass the shown <code>*.drv</code> path to <code>nix log</code> to show the full log after the fact.</p>
+<p>Keeping all outputs ever built on a machine alive can accumulate to quite impressive amounts of disk space, so you might want to trigger the Nix GC when /nix/store/ has grown too large:</p>
+<pre><code class="language-bash">nix-collect-garbage
+</code></pre>
+<p>This will remove everything not reachable from &quot;GC roots&quot; such as the <code>./result</code> symlink created by <code>nix build</code>, so you might want to call that first to keep your current stage 1 alive.</p>
+<h1><a class="header" href="#build-process-description" id="build-process-description">Build Process Description</a></h1>
+<p>The Nix build process conceptually works the same as described in <a href="make/index.html#lean-build-pipeline">Lean Build Pipeline</a>.
+However, there are two important differences in practice apart from the standard Nix properties (hermeneutic, reproducible builds stored in a global hash-indexed store etc.):</p>
+<ul>
+<li>Only files tracked by git (using <code>git add</code> or at least <code>git add --intent-to-add</code>) are compiled.
+This is actually a general property of Nix flakes, and has the benefit of making it basically impossible to forget to commit a file (at least in <code>src/</code>).</li>
+<li>Only files reachable from <code>src/Lean.lean</code> are compiled.
+This is because modules are discovered not from a directory listing anymore but by recursively compiling all dependencies of that top module.</li>
+</ul>
+<h1><a class="header" href="#emacs-integration" id="emacs-integration">Emacs Integration</a></h1>
+<p>Starting a known-good (pinned) version of Emacs from the Lean shell with <code>lean4-mode</code> fully set up for development on Lean is as easy as:</p>
+<pre><code class="language-bash">nix run .#emacs-dev
+</code></pre>
+<p>Arguments can be passed as well:</p>
+<pre><code class="language-bash">nix run .#emacs-dev src/Lean.lean
+</code></pre>
+<p>Note that the UX of <code>emacs-dev</code> is quite different from the Make-based setup regarding the compilation of dependencies:
+there is no mutable directory incrementally filled by the build that we could point the editor at for .olean files.
+Instead, <code>emacs-dev</code> will gather the individual dependency outputs from the Nix store when checking a file -- and build them on the fly when necessary.
+However, it will only ever load changes saved to disk, not ones opened in other buffers.</p>
+<p>Because of technical limitations, there are currently two further restrictions for files in <code>src/</code>:</p>
+<ul>
+<li>They must be reachable from <code>src/Lean.lean</code> to be editable. Note that they have to be so anyway to be included in the full stage compilation, but it might initially be confusing when creating a new file.</li>
+<li>New imports, even when already compiled, will only be accessible after saving the file.</li>
+</ul>
+<h1><a class="header" href="#other-fun-stuff-to-do-with-nix" id="other-fun-stuff-to-do-with-nix">Other Fun Stuff to Do with Nix</a></h1>
+<p>Open Emacs with Lean set up from an arbitrary commit (without even cloning Lean beforehand... if your Nix is new enough):</p>
+<pre><code class="language-bash">nix run github:leanprover/lean4/7e4edeb#emacs-package
+</code></pre>
+<p>Open a shell with <code>lean</code> and <code>LEAN_PATH</code> set up for compiling a specific module (this is exactly what <code>emacs-dev</code> is doing internally):</p>
+<pre><code class="language-bash">nix develop .#mods.&quot;Lean.Parser.Basic&quot;
+</code></pre>
+<p>Not sure what you just broke? Run Lean from (e.g.) the previous commit on a file:</p>
+<pre><code class="language-bash">nix run .\?rev=$(git rev-parse @^) scratch.lean
+</code></pre>
+<p>...more surely to come...</p>
 <p>This manual is generated by <a href="https://github.com/rust-lang/mdBook">mdBook</a>. We are currently using a
 <a href="https://github.com/leanprover/mdBook">fork</a> of it for the following additional features:</p>
 <ul>
@@ -570,13 +1675,16 @@ to your cmake invocation.</p>
 <li>Replace calling <code>rustdoc --test</code> from <code>mdbook test</code> with <code>./test</code></li>
 </ul>
 <p>To build this manual, first install the fork via</p>
-<pre><code>cargo install --git https://github.com/leanprover/mdBook mdbook
+<pre><code class="language-bash">cargo install --git https://github.com/leanprover/mdBook mdbook
 </code></pre>
 <p>Then use e.g. <a href="https://rust-lang.github.io/mdBook/cli/watch.html"><code>mdbook watch</code></a> in the <code>doc/</code> folder:</p>
-<pre><code>cd doc
+<pre><code class="language-bash">cd doc
 mdbook watch --open  # opens the output in `out/` in your default browser
 </code></pre>
 <p>Run <code>mdbook test</code> to test all <code>lean</code> code blocks.</p>
+<p>Using the <a href="make/nix.html">Nix setup</a>, you can instead open a shell with the mdBook fork downloaded from our binary cache:</p>
+<pre><code class="language-bash">nix develop .#doc
+</code></pre>
 <h1><a class="header" href="#fixing-tests" id="fixing-tests">Fixing Tests</a></h1>
 <p>The test suite contains some tests that compare the produced output
 with the expected output. For example, the directory <code>tests/lean</code>
@@ -609,6 +1717,364 @@ the expected output (stored in a <code>*.expected.out</code> file).</p>
 <p>Remark: in the directory <code>tests/lean/interactive</code>, the input test files have extension <code>.input</code>.
 They simulate commands sent from editors to Lean.
 The <code>.lean</code> files in this directory are used to simulate files opened by the user.</p>
+<h1><a class="header" href="#frequently-asked-questions" id="frequently-asked-questions">Frequently Asked Questions</a></h1>
+<ul>
+<li>What is Lean?</li>
+</ul>
+<p>Lean is a new open source theorem prover being developed at Microsoft Research.
+It is a research project that aims to bridge the gap between interactive and automated theorem proving.
+Lean can be also used as a programming language. Actually, some Lean features are implemented in Lean itself.</p>
+<ul>
+<li>Are pull requests welcome?</li>
+</ul>
+<p>In the past, we accepted most pull requests. This practice produced hard to maintain code, performance problems, and bugs.
+It takes time to review a pull request and make sure it is correct, useful and is not in conflict with our plans.
+Small bug fixes (few lines of code) are always welcome. Any other kind of unrequested pull request is not.
+Thus, before implementing a feature or modifying the system, please ask whether the change is welcome or not.</p>
+<ul>
+<li>Should I use Lean?</li>
+</ul>
+<p>Lean is under heavy development, and we are constantly trying new
+ideas and tweaking the system.  It is a research project and not a product.
+Things change rapidly, and we constantly break backward compatibility.
+Lean comes &quot;as is&quot;, you should not expect we will fix bugs and/or add new features for your project.
+We have our own priorities, and will not change them to accommodate your needs.
+Even if you implement a new feature or fix a bug, we may not want to merge it because
+it may conflict with our plans for Lean, it may not be performant, we may not want to maintain it,
+we may be busy, etc. If you really need this new feature or bug fix, we suggest you create your own fork and maintain it yourself.</p>
+<ul>
+<li>Where is the documentation?</li>
+</ul>
+<p>The <a href="https://leanprover.github.io/theorem_proving_in_lean">Lean tutorial</a> is a good introduction to the system.
+It may contain a few inconsistencies due to recent changes, but we try to keep it in sync.
+The reference manual is work in progress, and we don't know when it will be ready.
+The core and math libraries contain many definitions and proofs, they demonstrate how we expect the system to be used.
+If the lack of documentation is an issue, then Lean is not a good match for you.
+Documentation is not the main priority right now. Recall that Lean is a research project and not a product.
+A public and very active chat room dedicated to Lean is open on <a href="https://leanprover.zulipchat.com">Zulip</a>.
+It is a good place to interact with other Lean users.
+You may also join the <a href="https://groups.google.com/forum/#!forum/lean-user">Lean user forum</a> on Google Groups.</p>
+<ul>
+<li>Should I use Lean to teach a course?</li>
+</ul>
+<p>Lean has been used to teach courses on logic, type theory and programming languages at CMU and the University of Washington.
+The lecture notes for the CMU course <a href="https://leanprover.github.io/logic_and_proof">Logic and Proof</a> are available online.
+If you decide to teach a course using Lean, we suggest you prepare all material before the beginning of the course, and
+make sure that Lean attends all your needs. You should not expect we will fix bugs and/or add features needed for your course.</p>
+<ul>
+<li>Are there IDEs for Lean?</li>
+</ul>
+<p>Yes, the two main ones are for <a href="https://github.com/leanprover/lean-mode">Emacs</a> and <a href="https://github.com/leanprover/vscode-lean">VS Code</a>.
+The Emacs Lean mode is available via <a href="https://melpa.org/">MELPA</a>. The VS Code Lean extension is available on its marketplace.</p>
+<ul>
+<li>Is Lean sound? How big is the kernel? Should I trust it?</li>
+</ul>
+<p>Lean has a relatively small kernel. The <a href="https://github.com/leanprover/lean/tree/master/src/checker">leanchecker</a> is a bare-bones version of the Lean kernel.
+There are also two independent checkers: <a href="https://github.com/leanprover/tc">tc</a> and <a href="https://github.com/gebner/trepplein">trepplein</a>.
+We have implemented several kernel extensions to improve performance and make sure the system is reasonably responsive for interactive use.
+We strongly recommend you frequently check your project without these extensions. The command line option <code>-t0</code> disables all of them.
+As far as we know, no proof of <code>false</code> has ever been accepted by Lean when using <code>-t0</code>.
+If you are really concerned about soundness, we recommend you often export your project and recheck it using the independent checkers above.</p>
+<ul>
+<li>Should I open a new issue?</li>
+</ul>
+<p>We use <a href="https://github.com/leanprover/lean/issues">github</a> to track bugs and new features.
+Bug reports are always welcome, but nitpicking issues are not (e.g., the error message is confusing).
+RFC issues are created by developers only.</p>
+<h1><a class="header" href="#significant-changes-from-lean-3" id="significant-changes-from-lean-3">Significant changes from Lean 3</a></h1>
+<p>Lean 4 is not backward compatible with Lean 3.
+We have rewritten most of the system, and took the opportunity to cleanup the syntax,
+metaprogramming framework, and elaborator. In this section, we go over the most significant
+changes.</p>
+<h2><a class="header" href="#lambda-expressions-1" id="lambda-expressions-1">Lambda expressions</a></h2>
+<p>We do not use <code>,</code> anymore to separate the binders from the lambda expression body.
+The Lean 3 syntax for lambda expressions was unconventional, and <code>,</code> has been overused in Lean 3.
+For example, we believe a list of lambda expressions is quite confusing in Lean 3, since <code>,</code> is used
+to separate the elements of a list, and in the lambda expression itself. We now use <code>=&gt;</code> as the separator,
+as an example, <code>fun x =&gt; x</code> is the identity function. One may still use the symbol <code>λ</code> as a shorthand for <code>fun</code>.
+The lambda expression notation has many new features that are not supported in Lean 3.</p>
+<ul>
+<li>Pattern matching</li>
+</ul>
+<p>In Lean 4, one can easily create new notation that abbreviates commonly used idioms. One of the them is a
+<code>fun</code> followed by a <code>match</code>. In the following examples, we define a few functions using <code>fun</code>+<code>match</code> notation.</p>
+<pre><code class="language-lean"><span class="boring">namespace ex1
+</span>def Prod.str : Nat × Nat → String :=
+  fun (a, b) =&gt; &quot;(&quot; ++ toString a ++ &quot;, &quot; ++ toString b ++ &quot;)&quot;
+
+structure Point :=
+  (x y z : Nat)
+
+def Point.addX : Point → Point → Nat :=
+  fun { x := a, .. } { x := b, .. } =&gt;  a+b
+
+def Sum.str : Option Nat → String :=
+  fun
+    | some a =&gt; &quot;some &quot; ++ toString a
+    | none   =&gt; &quot;none&quot;
+<span class="boring">end ex1
+</span></code></pre>
+<ul>
+<li>Implicit lambdas</li>
+</ul>
+<p>In Lean 3 stdlib, we find many <a href="https://github.com/leanprover/lean/blob/master/library/init/category/reader.lean#L39">instances</a> of the dreadful <code>@</code>+<code>_</code> idiom.
+It is often used when we the expected type is a function type with implicit arguments,
+and we have a constant (<code>reader_t.pure</code> in the example) which also takes implicit arguments. In Lean 4, the elaborator automatically introduces lambda's
+for consuming implicit arguments. We are still exploring this feature and analyzing its impact, but the experience so far has been very positive. As an example,
+here is the example in the link above using Lean 4 implicit lambdas.</p>
+<pre><code class="language-lean"><span class="boring">variables (ρ : Type) (m : Type → Type) [Monad m]
+</span>instance : Monad (ReaderT ρ m) := {
+  pure := ReaderT.pure,
+  bind := ReaderT.bind
+}
+</code></pre>
+<p>Users can disable the implicit lambda feature by using <code>@</code> or writing a lambda expression with <code>{}</code> or <code>[]</code> binder annotations.
+Here are few examples</p>
+<pre><code class="language-lean"><span class="boring">namespace ex2
+</span>def id1 : {α : Type} → α → α :=
+  fun x =&gt; x
+
+def listId : List ({α : Type} → α → α) :=
+  (fun x =&gt; x) :: []
+
+-- In this example, implicit lambda introduction has been disabled because
+-- we use `@` before `fun`
+def id2 : {α : Type} → α → α :=
+  @fun α (x : α) =&gt; id1 x
+
+def id3 : {α : Type} → α → α :=
+  @fun α x =&gt; id1 x
+
+def id4 : {α : Type} → α → α :=
+  fun x =&gt; id1 x
+
+-- In this example, implicit lambda introduction has been disabled
+-- because we used the binder annotation `{...}`
+def id5 : {α : Type} → α → α :=
+  fun {α} x =&gt; id1 x
+<span class="boring">end ex2
+</span></code></pre>
+<ul>
+<li>Sugar for simple functions</li>
+</ul>
+<p>In Lean 3, we can creating simple functions from infix operators by using parentheses. For example, <code>(+1)</code> is sugar for <code>fun x, x + 1</code>. In Lean 4, we generalize this notation using <code>·</code> As a placeholder. Here are a few examples:</p>
+<pre><code class="language-lean"><span class="boring">namespace ex3
+</span>#check (· + 1)
+-- fun a =&gt; a + 1
+#check (2 - ·)
+-- fun a =&gt; 2 - a
+#eval [1, 2, 3, 4, 5].foldl (·*·) 1
+-- 120
+
+def f (x y z : Nat) :=
+  x + y + z
+
+#check (f · 1 ·)
+-- fun a b =&gt; f a 1 b
+
+#eval [(1, 2), (3, 4), (5, 6)].map (·.1)
+-- [1, 3, 5]
+<span class="boring">end ex3
+</span></code></pre>
+<p>As in Lean 3, the notation is activated using parentheses, and the lambda abstraction is created by collecting the nested <code>·</code>s.
+The collection is interrupted by nested parentheses. In the following example, two different lambda expressions are created.</p>
+<pre><code class="language-lean">#check (Prod.mk · (· + 1))
+-- fun a =&gt; (a, fun b =&gt; b + 1)
+</code></pre>
+<h2><a class="header" href="#function-applications" id="function-applications">Function applications</a></h2>
+<p>In Lean 4, we have support for named arguments.
+Named arguments enable you to specify an argument for a parameter by matching the argument with
+its name rather than with its position in the parameter list.
+If you don't remember the order of the parameters but know their names,
+you can send the arguments in any order. You may also provide the value for an implicit parameter when
+Lean failed to infer it. Named arguments also improve the readability of your code by identifying what
+each argument represents.</p>
+<pre><code class="language-lean">def sum (xs : List Nat) :=
+  xs.foldl (init := 0) (·+·)
+
+#eval sum [1, 2, 3, 4]
+-- 10
+
+example {a b : Nat} {p : Nat → Nat → Nat → Prop} (h₁ : p a b b) (h₂ : b = a)
+    : p a a b :=
+  Eq.subst (motive := fun x =&gt; p a x b) h₂ h₁
+</code></pre>
+<p>In the following examples, we illustrate the interaction between named and default arguments.</p>
+<pre><code class="language-lean">def f (x : Nat) (y : Nat := 1) (w : Nat := 2) (z : Nat) :=
+  x + y + w - z
+
+example (x z : Nat) : f (z := z) x = x + 1 + 2 - z := rfl
+
+example (x z : Nat) : f x (z := z) = x + 1 + 2 - z := rfl
+
+example (x y : Nat) : f x y = fun z =&gt; x + y + 2 - z := rfl
+
+example : f = (fun x z =&gt; x + 1 + 2 - z) := rfl
+
+example (x : Nat) : f x = fun z =&gt; x + 1 + 2 - z := rfl
+
+example (y : Nat) : f (y := 5) = fun x z =&gt; x + 5 + 2 - z := rfl
+
+def g {α} [Add α] (a : α) (b? : Option α := none) (c : α) : α :=
+  match b? with
+  | none   =&gt; a + c
+  | some b =&gt; a + b + c
+
+variables {α} [Add α]
+
+example : g = fun (a c : α) =&gt; a + c := rfl
+
+example (x : α) : g (c := x) = fun (a : α) =&gt; a + x := rfl
+
+example (x : α) : g (b? := some x) = fun (a c : α) =&gt; a + x + c := rfl
+
+example (x : α) : g x = fun (c : α) =&gt; x + c := rfl
+
+example (x y : α) : g x y = fun (c : α) =&gt; x + y + c := rfl
+</code></pre>
+<p>In Lean 4, we can use <code>..</code> to provide missing explicit arguments as <code>_</code>.
+This feature combined with named arguments is useful for writing patterns. Here is an example:</p>
+<pre><code class="language-lean">inductive Term
+  | var    (name : String)
+  | num    (val : Nat)
+  | add    (fn : Term) (arg : Term)
+  | lambda (name : String) (type : Term) (body : Term)
+
+def getBinderName : Term → Option String
+  | Term.lambda (name := n) .. =&gt; some n
+  | _ =&gt; none
+
+def getBinderType : Term → Option Term
+  | Term.lambda (type := t) .. =&gt; some t
+  | _ =&gt; none
+</code></pre>
+<p>Ellipsis are also useful when explicit argument can be automatically inferred by Lean, and we want
+to avoid a sequence of <code>_</code>s.</p>
+<pre><code class="language-lean">example (f : Nat → Nat) (a b c : Nat) : f (a + b + c) = f (a + (b + c)) :=
+  congrArg f (Nat.addAssoc ..)
+</code></pre>
+<h2><a class="header" href="#dependent-function-types" id="dependent-function-types">Dependent function types</a></h2>
+<p>Given <code>α : Type</code> and <code>β : α → Type</code>, <code>(x : α) → β x</code> denotes the type of functions <code>f</code> with the property that,
+for each <code>a : α</code>, <code>f a</code> is an element of <code>β a</code>. In other words, the type of the value returned by <code>f</code> depends on its input.
+We say <code>(x : α) → β x</code> is a dependent function type. In Lean 3, we write the dependent function type <code>(x : α) → β x</code> using
+one of the following three equivalent notations:
+<code>forall x : α, β x</code> or <code>∀ x : α, β x</code> or <code>Π x : α, β x</code>.
+The first two were intended to be used for writing propositions, and the latter for writing code.
+Although the notation <code>Π x : α, β x</code> has historical significance, we have removed it from Lean 4 because
+it is awkward to use and often confuses new users. We can still write <code>forall x : α, β x</code> and <code>∀ x : α, β x</code>.</p>
+<pre><code class="language-lean">#check forall (α : Type), α → α
+#check ∀ (α : Type), α → α
+#check ∀ α : Type, α → α
+#check ∀ α, α → α
+#check (α : Type) → α → α
+#check {α : Type} → (a : Array α) → (i : Nat) → i &lt; a.size → α
+#check {α : Type} → [ToString α] → α → String
+#check forall {α : Type} (a : Array α) (i : Nat), i &lt; a.size → α
+#check {α β : Type} → α → β → α × β
+</code></pre>
+<h2><a class="header" href="#the-meta-keyword" id="the-meta-keyword">The <code>meta</code> keyword</a></h2>
+<p>In Lean 3, the keyword <code>meta</code> is used to mark definitions that can use primitives implemented in C/C++.
+These metadefinitions can also call themselves recursively, relaxing the termination
+restriction imposed by ordinary type theory. Metadefinitions may also use unsafe primitives such as
+<code>eval_expr (α : Type u) [reflected α] : expr → tactic α</code>, or primitives that break referential transparency
+<code>tactic.unsafe_run_io</code>.</p>
+<p>The keyword <code>meta</code> has been currently removed from Lean 4. However, we may re-introduce it in the future,
+but with a much more limited purpose: marking meta code that should not be included in the executables produced by Lean.</p>
+<p>The keywords <code>axiom</code> and <code>constant</code> are not equivalent in Lean 4. In Lean 4, <code>constant</code> is used to define
+an opaque definition. Here are two simple examples:</p>
+<pre><code class="language-lean"><span class="boring">namespace meta1
+</span>constant x : Nat := 1
+-- The following example will not type check since `x` is opaque
+-- example : x = 1 := rfl
+
+-- We can evaluate `x`
+#eval x
+-- 1
+
+-- When no value is provided, the elaborator tries to build one automatically for us
+-- using the `Inhabited` type class
+constant y : Nat
+<span class="boring">end meta1
+</span></code></pre>
+<p>We can instruct Lean to use a foreign function as the implementation for any constant or definition
+using the attribute <code>@[extern &quot;foreign_function&quot;]</code>. It is the user's reponsability to ensure the
+foreign implementation is correct.
+However, a user mistake here will only impact the code generated by Lean, and
+it will <strong>not</strong> compromise the logical soundness of the system.
+That is, you cannot prove <code>False</code> using the <code>@[extern]</code> attribute.
+We use <code>@[extern]</code> with definitions when we want to provide a reference implementation in Lean
+that can be used for reasoning. When we write a definition such as</p>
+<pre><code class="language-lean">@[extern &quot;lean_nat_add&quot;]
+def add : Nat → Nat → Nat
+  | a, Nat.zero   =&gt; a
+  | a, Nat.succ b =&gt; Nat.succ (add a b)
+</code></pre>
+<p>Lean assumes that the foreign function <code>lean_nat_add</code> implements the reference implementation above.</p>
+<p>The <code>unsafe</code> keyword allows us to define functions using unsafe features such as general recursion,
+and arbitrary type casting. Regular (safe) functions cannot directly use <code>unsafe</code> ones since it would
+compromise the logical soundness of the system. As in regular programming languages, programs written
+using unsafe features may crash at runtime. Here are a few unsafe examples:</p>
+<pre><code class="language-lean">unsafe def unsound : False :=
+  unsound
+
+#check @unsafeCast
+-- {α : Type _} → {β : Type _} → α → β
+
+unsafe def nat2String (x : Nat) : String :=
+  unsafeCast x
+
+-- The following definition doesn't type check because it is not marked as `unsafe`
+-- def nat2StringSafe (x : Nat) : String :=
+--   unsafeCast x
+</code></pre>
+<p>The <code>unsafe</code> keyword is particularly useful when we want to take advantage of an implementation detail of the
+Lean execution runtime. For example, we cannot prove in Lean that arrays have a maximum size, but
+the runtime used to execute Lean programs guarantees that an array cannot have more than 2^64 (2^32) elements
+in a 64-bit (32-bit) machine. We can take advantage of this fact to provide a more efficient implementation for
+array functions. However, the efficient version would not be very useful if it can only be used in
+unsafe code. Thus, Lean 4 provides the attribute <code>@[implementedBy functionName]</code>. The idea is to provide
+an unsafe (and potentially more efficient) version of a safe definition or constant. The function <code>f</code>
+at the attribute <code>@[implementedBy f]</code> is very similar to an extern/foreign function,
+the key difference is that it is implemented in Lean itself. Again, the logical soundness of the system
+cannot be compromised by using the attribute <code>implementedBy</code>, but if the implementation is incorrect your
+program may crash at runtime. In the following example, we define <code>withPtrUnsafe a k h</code> which
+executes <code>k</code> using the memory address where <code>a</code> is stored in memory. The argument <code>h</code> is proof
+that <code>k</code> is a constant function. Then, we &quot;seal&quot; this unsafe implementation at <code>withPtr</code>. The proof <code>h</code>
+ensures the reference implementation <code>k 0</code> is correct. For more information, see the article
+&quot;Sealing Pointer-Based Optimizations Behind Pure Functions&quot;.</p>
+<pre><code class="language-lean">unsafe
+def withPtrUnsafe {α β : Type} (a : α) (k : USize → β) (h : ∀ u, k u = k 0) : β :=
+  k (ptrAddrUnsafe a)
+
+@[implementedBy withPtrUnsafe]
+def withPtr {α β : Type} (a : α) (k : USize → β) (h : ∀ u, k u = k 0) : β :=
+  k 0
+</code></pre>
+<p>General recursion is very useful in practice, and it would be impossible to implement Lean 4 without it.
+The keyword <code>partial</code> implements a very simple and efficient approach for supporting general recursion.
+Simplicity was key here because of the bootstrapping problem. That is, we had to implement Lean in Lean before
+many of its features were implemented (e.g., the tactic framework or support for wellfounded recursion).
+Another requirement for us was performance. Functions tagged with <code>partial</code> should be as efficient as the ones implemented in mainstream functional programming
+languages such as OCaml. When the <code>partial</code> keyword is used, Lean generates an auxiliary <code>unsafe</code> definition that
+uses general recursion, and then defines an opaque constant that is implemented by this auxiliary definition.
+This is very simple, efficient, and is sufficient for users that want to use Lean as a regular programming language.
+A <code>partial</code> definition cannot use unsafe features such as <code>unsafeCast</code> and <code>ptrAddrUnsafe</code>, and it can only be used to
+implement types we already known to be inhabited. Finally, since we &quot;seal&quot; the auxiliary definition using an opaque
+constant, we cannot reason about <code>partial</code> definitions.</p>
+<p>We are aware that proof assistants such as Isabelle provide a framework for defining partial functions that does not
+prevent users from proving properties about them. This kind of framework can be implemented in Lean 4. Actually,
+it can be implemented by users since Lean 4 is an extensible system. The developers current have no plans to implement
+this kind of support for Lean 4. However, we remark that users can implement it using a function that traverses
+the auxiliary unsafe definition generated by Lean, and produces a safe one using an approach similar to the one used in Isabelle.</p>
+<pre><code class="language-lean"><span class="boring">namespace partial1
+</span>partial def f (x : Nat) : IO Unit := do
+  IO.println x
+  if x &lt; 100 then
+     f (x+1)
+
+#eval f 98
+<span class="boring">end partial1
+</span></code></pre>
 
                     </main>
 

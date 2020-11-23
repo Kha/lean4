@@ -3,10 +3,8 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title></title>
+        <title>Namespaces - Lean Manual</title>
         
-        
-        <base href="/">
         
 
 
@@ -97,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">6.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">7.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">8.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Tools</li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">9.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">10.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">11.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">11.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">11.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">11.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">11.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">12.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">13.</strong> Fixing Tests</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">14.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">15.</strong> Significant Changes from Lean 3</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html" class="active"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">6.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">7.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">8.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Tools</li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">9.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">10.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">11.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">11.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">11.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">11.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">11.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">12.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">13.</strong> Fixing Tests</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">14.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">15.</strong> Significant Changes from Lean 3</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,15 +167,117 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#document-not-found-404" id="document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h1><a class="header" href="#namespaces" id="namespaces">Namespaces</a></h1>
+<p>Lean provides us with the ability to group definitions into nested, hierarchical <em>namespaces</em>:</p>
+<pre><code class="language-lean">namespace Foo
+  def a : Nat := 5
+  def f (x : Nat) : Nat := x + 7
+
+  def fa : Nat := f a
+  def ffa : Nat := f (f a)
+
+  #check a
+  #check f
+  #check fa
+  #check ffa
+  #check Foo.fa
+end Foo
+
+-- #check a  -- error
+-- #check f  -- error
+#check Foo.a
+#check Foo.f
+#check Foo.fa
+#check Foo.ffa
+
+open Foo
+
+#check a
+#check f
+#check fa
+#check Foo.fa
+</code></pre>
+<p>When we declare that we are working in the namespace <code>Foo</code>, every identifier we declare has
+a full name with prefix &quot;<code>Foo.</code>&quot; Within the namespace, we can refer to identifiers
+by their shorter names, but once we end the namespace, we have to use the longer names.</p>
+<p>The <code>open</code> command brings the shorter names into the current context. Often, when we import a
+module, we will want to open one or more of the namespaces it contains, to have access to the short identifiers.
+But sometimes we will want to leave this information hidden, for example, when they conflict with
+identifiers in another namespace we want to use. Thus namespaces give us a way to manage our working environment.</p>
+<p>For example, Lean groups definitions and theorems involving lists into a namespace <code>List</code>.</p>
+<pre><code class="language-lean">#check List.nil
+#check List.cons
+#check List.map
+</code></pre>
+<p>We will discuss their types, below. The command <code>open List</code> allows us to use the shorter names:</p>
+<pre><code class="language-lean">open List
+
+#check nil
+#check cons
+#check map
+</code></pre>
+<p>Like sections, namespaces can be nested:</p>
+<pre><code class="language-lean">namespace Foo
+  def a : Nat := 5
+  def f (x : Nat) : Nat := x + 7
+
+  def fa : Nat := f a
+
+  namespace Bar
+    def ffa : Nat := f (f a)
+
+    #check fa
+    #check ffa
+  end Bar
+
+  #check fa
+  #check Bar.ffa
+end Foo
+
+#check Foo.fa
+#check Foo.Bar.ffa
+
+open Foo
+
+#check fa
+#check Bar.ffa
+</code></pre>
+<p>Namespaces that have been closed can later be reopened, even in another file:</p>
+<pre><code class="language-lean">namespace Foo
+  def a : Nat := 5
+  def f (x : Nat) : Nat := x + 7
+
+  def fa : Nat := f a
+end Foo
+
+#check Foo.a
+#check Foo.f
+
+namespace Foo
+  def ffa : Nat := f (f a)
+end Foo
+</code></pre>
+<p>Like sections, nested namespaces have to be closed in the order they are opened.
+Namespaces and sections serve different purposes: namespaces organize data and sections declare variables for insertion in definitions.
+Sections are also useful for delimiting the scope of commands such as <code>set_option</code> and <code>open</code>.</p>
+<p>In many respects, however, a <code>namespace ... end</code> block behaves the same as a <code>section ... end</code> block.
+In particular, if you use the <code>variable</code> command within a namespace, its scope is limited to the namespace.
+Similarly, if you use an <code>open</code> command within a namespace, its effects disappear when the namespace is closed.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="sections.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
+                        
+                            <a rel="next" href="do.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -187,7 +287,15 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a rel="prev" href="sections.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
+                
+                    <a rel="next" href="do.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 

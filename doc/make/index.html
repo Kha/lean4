@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">1.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Significant Changes from Lean 3</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> The do Notation</div></li><li class="chapter-item expanded affix "><li class="part-title">Tools</li><li class="chapter-item expanded "><a href="../syntax_highlight_in_latex.html"><strong aria-hidden="true">4.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="../commit_convention.html"><strong aria-hidden="true">5.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="../make/index.html" class="active"><strong aria-hidden="true">6.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../make/ubuntu-16.04.html"><strong aria-hidden="true">6.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="../make/osx-10.9.html"><strong aria-hidden="true">6.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="../make/msys2.html"><strong aria-hidden="true">6.3.</strong> Windows Setup</a></li></ol></li><li class="chapter-item expanded "><a href="../mdbook.html"><strong aria-hidden="true">7.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="../fixing_tests.html"><strong aria-hidden="true">8.</strong> Fixing Tests</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="../tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="../functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="../namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="../do.html"><strong aria-hidden="true">6.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="../tactics.html"><strong aria-hidden="true">7.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="../stringinterp.html"><strong aria-hidden="true">8.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Tools</li><li class="chapter-item expanded "><a href="../syntax_highlight_in_latex.html"><strong aria-hidden="true">9.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="../commit_convention.html"><strong aria-hidden="true">10.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="../make/index.html" class="active"><strong aria-hidden="true">11.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../make/ubuntu-16.04.html"><strong aria-hidden="true">11.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="../make/osx-10.9.html"><strong aria-hidden="true">11.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="../make/msys2.html"><strong aria-hidden="true">11.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="../make/nix.html"><strong aria-hidden="true">11.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="../mdbook.html"><strong aria-hidden="true">12.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="../fixing_tests.html"><strong aria-hidden="true">13.</strong> Fixing Tests</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">14.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="../lean3changes.html"><strong aria-hidden="true">15.</strong> Significant Changes from Lean 3</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -180,6 +180,8 @@
 <li><a href="msvc.html">Windows (Visual Studio)</a></li>
 <li><a href="osx-10.9.html">macOS (homebrew)</a></li>
 <li>Linux/macOS/WSL via <a href="https://nixos.org/nix/">Nix</a>: Call <code>nix-shell</code> in the project root. That's it.</li>
+<li>There is also an <a href="nix.html"><strong>experimental</strong> setup based purely on Nix</a> that works fundamentally differently from the
+make/CMake setup described on this page.</li>
 </ul>
 <h2><a class="header" href="#generic-build-instructions" id="generic-build-instructions">Generic Build Instructions</a></h2>
 <p>Setting up a basic release build:</p>
@@ -214,13 +216,6 @@ Select the build type. Valid values are <code>RELEASE</code> (default), <code>DE
 <code>-D CMAKE_CXX_COMPILER=</code><br />
 Select the C/C++ compilers to use. Official Lean releases currently use Clang;
 see also <code>.github/workflows/ci.yml</code> for the CI config.</p>
-</li>
-<li>
-<p><code>-D CHECK_OLEAN_VERSION=OFF</code><br />
-The <code>.olean</code> files are tagged with the Lean version they were produced with.
-This means that by default, the core library has to be recompiled after e.g.
-every <code>git commit</code>. Use this option to avoid the version check. The <code>.olean</code>
-files can be removed manually by invoking <code>make clean-olean</code>.</p>
 </li>
 </ul>
 <p>Lean will automatically use <a href="https://ccache.dev/">CCache</a> if available to avoid
