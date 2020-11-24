@@ -1615,6 +1615,7 @@ If you add the <code>extra-sandbox-paths</code> line above, you <strong>must</st
 # macOS standard chown doesn't support --reference
 nix shell .#nixpkgs.coreutils -c sudo chown --reference=/nix/store /nix/var/cache/ccache
 </code></pre>
+<p>Note: Your system Nix might print warnings about not knowing some of these settings, which can be ignored.</p>
 <h1><a class="header" href="#basic-build-commands" id="basic-build-commands">Basic Build Commands</a></h1>
 <p>From the Lean root directory inside the Lean shell:</p>
 <pre><code class="language-bash">nix build .#stage1  # build this stage's stdlib &amp; executable
@@ -1628,6 +1629,7 @@ nix build .  # build stage 1
 nix build  # dito
 </code></pre>
 <p>On a build error, Nix will show the last 10 lines of the output by default. You can pass <code>-L</code> to <code>nix build</code> to show all lines, or pass the shown <code>*.drv</code> path to <code>nix log</code> to show the full log after the fact.</p>
+<p>Note: Nix will print a warning &quot;Git tree [...] is dirty&quot; when you have uncommitted changes as a reminder that you're not building the &quot;actual repo contents&quot;, but the message is otherwise harmless.</p>
 <p>Keeping all outputs ever built on a machine alive can accumulate to quite impressive amounts of disk space, so you might want to trigger the Nix GC when /nix/store/ has grown too large:</p>
 <pre><code class="language-bash">nix-collect-garbage
 </code></pre>
