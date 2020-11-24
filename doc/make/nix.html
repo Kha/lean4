@@ -181,6 +181,9 @@ extra-sandbox-paths = /nix/var/cache/ccache  # Extra local cache for C/C++ code
 extra-trusted-substituters = https://lean4.cachix.org/
 extra-trusted-public-keys = lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk=
 </code></pre>
+<p>On a multi-user installation of Nix (the default), you need to restart the Nix daemon afterwards:</p>
+<pre><code class="language-bash">sudo pkill nix-daemon
+</code></pre>
 <p>The <a href="https://cachix.org/">Cachix</a> integration will magically beam any build steps already executed by the CI right onto your machine when calling Nix commands in the shell opened above.
 On top of the local and remote Nix cache, we do still rely on CCache as well to make C/C++ build steps incremental, which are atomic steps from Nix's point of view.
 If you add the <code>extra-sandbox-paths</code> line above, you <strong>must</strong> also set up that directory as follows:</p>
@@ -220,6 +223,7 @@ This is because modules are discovered not from a directory listing anymore but 
 <p>Starting a known-good (pinned) version of Emacs from the Lean shell with <code>lean4-mode</code> fully set up for development on Lean is as easy as:</p>
 <pre><code class="language-bash">nix run .#emacs-dev
 </code></pre>
+<p>If you've already installed lean4-mode manually, you might need to first deactivate that. <code>elan</code> can be left as is on the other hand.</p>
 <p>Arguments can be passed as well:</p>
 <pre><code class="language-bash">nix run .#emacs-dev src/Lean.lean
 </code></pre>
