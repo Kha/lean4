@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">6.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html" class="active"><strong aria-hidden="true">7.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">8.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Tools</li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">9.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">10.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">11.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">11.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">11.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">11.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">11.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">12.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">13.</strong> Fixing Tests</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">14.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">15.</strong> Significant Changes from Lean 3</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="typeclass.html"><strong aria-hidden="true">6.</strong> Type classes</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">7.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html" class="active"><strong aria-hidden="true">8.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">9.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">10.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">11.</strong> Significant Changes from Lean 3</a></li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">12.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">13.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">14.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">14.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">14.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">14.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">14.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">15.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">16.</strong> Fixing Tests</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -194,7 +194,7 @@ with the application <code>Or.inr ?m3</code>, and <code>exact h1</code> fills <c
 The tactic <code>assumption</code> tries to fill a hole by searching the local context for a term with the same type.</p>
 <pre><code class="language-lean">theorem ex1 : p ∨ q → q ∨ p := by
   intro h
-  cases h
+  cases h with
   | inl h1 =&gt;
     apply Or.inr
     exact h1
@@ -321,7 +321,7 @@ theorem Nat.mod.inductionOn
 -/
 
 theorem ex (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
-  induction x, y using Nat.mod.inductionOn generalizing h
+  induction x, y using Nat.mod.inductionOn generalizing h with
   | ind x y h₁ ih =&gt;
     rw [Nat.modEqSubMod h₁.2]
     exact ih h
@@ -338,6 +338,74 @@ theorem ex (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
 <p>TODO</p>
 <h2><a class="header" href="#injection" id="injection">Injection</a></h2>
 <p>TODO</p>
+<h2><a class="header" href="#dependent-pattern-matching" id="dependent-pattern-matching">Dependent pattern matching</a></h2>
+<p>The <code>match-with</code> expression implements dependent pattern matching. You can use it to create concise proofs.</p>
+<pre><code class="language-lean">inductive Mem : α → List α → Prop where
+  | head (a : α) (as : List α)   : Mem a (a::as)
+  | tail (a b : α) (bs : List α) : Mem a bs → Mem a (b::bs)
+
+infix:50 &quot;∈&quot; =&gt; Mem
+
+theorem memSplit {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t :=
+  match a, as, h with
+  | _, _, Mem.head a bs     =&gt; ⟨[], ⟨bs, rfl⟩⟩
+  | _, _, Mem.tail a b bs h =&gt;
+    match bs, memSplit h with
+    | _, ⟨s, ⟨t, rfl⟩⟩ =&gt; ⟨b::s, ⟨t, List.consAppend .. ▸ rfl⟩⟩
+</code></pre>
+<p>In the tactic DSL, the right-hand-side of each alternative in a <code>match-with</code> is a sequence of tactics instead of a term.
+Here is a similar proof using the tactic DSL.</p>
+<pre><code class="language-lean"><span class="boring">inductive Mem : α → List α → Prop where
+</span><span class="boring"> | head (a : α) (as : List α)   : Mem a (a::as)
+</span><span class="boring"> | tail (a b : α) (bs : List α) : Mem a bs → Mem a (b::bs)
+</span><span class="boring">infix:50 &quot;∈&quot; =&gt; Mem
+</span>theorem memSplit {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
+  match a, as, h with
+  | _, _, Mem.head a bs     =&gt; exists []; exists bs; rfl
+  | _, _, Mem.tail a b bs h =&gt;
+    match bs, memSplit h with
+    | _, ⟨s, ⟨t, rfl⟩⟩ =&gt;
+      exists b::s; exists t;
+      rw [List.consAppend]; rfl
+</code></pre>
+<p>We can use <code>match-with</code> nested in tactics.
+Here is a similar proof that uses the <code>induction</code> tactic instead of recursion.</p>
+<pre><code class="language-lean"><span class="boring">inductive Mem : α → List α → Prop where
+</span><span class="boring"> | head (a : α) (as : List α)   : Mem a (a::as)
+</span><span class="boring"> | tail (a b : α) (bs : List α) : Mem a bs → Mem a (b::bs)
+</span><span class="boring">infix:50 &quot;∈&quot; =&gt; Mem
+</span>theorem memSplit {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
+  induction as with
+  | nil          =&gt; cases h
+  | cons b bs ih =&gt; cases h with
+    | head a bs =&gt; exact ⟨[], ⟨bs, rfl⟩⟩
+    | tail a b bs h =&gt;
+      match bs, ih h with
+      | _, ⟨s, ⟨t, rfl⟩⟩ =&gt;
+        exists b::s; exists t
+        rw [List.consAppend]; rfl
+</code></pre>
+<p>You can create your own notation using existing tactics. In the following example,
+we define a simple <code>obtain</code> tactic using macros. We say it is simple because it takes only one
+discriminant. Later, we show how to create more complex automation using macros.</p>
+<pre><code class="language-lean"><span class="boring">inductive Mem : α → List α → Prop where
+</span><span class="boring"> | head (a : α) (as : List α)   : Mem a (a::as)
+</span><span class="boring"> | tail (a b : α) (bs : List α) : Mem a bs → Mem a (b::bs)
+</span><span class="boring">infix:50 &quot;∈&quot; =&gt; Mem
+</span>macro &quot;obtain &quot; p:term &quot; from &quot; d:term : tactic =&gt;
+  `(tactic| match $d:term with | $p:term =&gt; ?_)
+
+theorem memSplit {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
+  induction as with
+  | cons b bs ih =&gt; cases h with
+    | tail a b bs h =&gt;
+      obtain ⟨s, ⟨t, h⟩⟩ from ih h
+      exists b::s; exists t
+      rw [h, List.consAppend]; rfl
+    | head a bs =&gt; exact ⟨[], ⟨bs, rfl⟩⟩
+  | nil =&gt; cases h
+
+</code></pre>
 <h2><a class="header" href="#extensible-tactics" id="extensible-tactics">Extensible tactics</a></h2>
 <p>In the following example, we define the notation <code>trivial</code> for the tactic DSL using
 the command <code>syntax</code>. Then, we use the command <code>macro_rules</code> to specify what should
@@ -371,7 +439,7 @@ theorem ex3 (x : α) (h : p) : x = x ∧ p := by
 <h1><a class="header" href="#let-rec" id="let-rec"><code>let-rec</code></a></h1>
 <p>You can use <code>let rec</code> to write local recursive functions. We lifted it to the tactic DSL,
 and you can use it to create proofs by induction.</p>
-<pre><code class="language-lean">def lengthReplicateEq {α} (n : Nat) (a : α) : (List.replicate n a).length = n := by
+<pre><code class="language-lean">theorem lengthReplicateEq {α} (n : Nat) (a : α) : (List.replicate n a).length = n := by
   let rec aux (n : Nat) (as : List α)
       : (List.replicate.loop a n as).length = n + as.length := by
     match n with
@@ -382,21 +450,30 @@ and you can use it to create proofs by induction.</p>
       rfl
   exact aux n []
 </code></pre>
+<p>You can also introduce auxiliary recursive declarations using <code>where</code> clause after your definition.
+Lean converts them into a <code>let rec</code>.</p>
+<pre><code class="language-lean">theorem lengthReplicateEq {α} (n : Nat) (a : α) : (List.replicate n a).length = n :=
+  replicateLoopEq n []
+where
+  replicateLoopEq n as : (List.replicate.loop a n as).length = n + as.length := by
+    match n with
+    | 0   =&gt; rw [Nat.zeroAdd]; rfl
+    | n+1 =&gt;
+      show List.length (List.replicate.loop a n (a::as)) = Nat.succ n + as.length
+      rw [replicateLoopEq n, List.lengthConsEq, Nat.addSucc, Nat.succAdd]
+      rfl
+</code></pre>
 <h1><a class="header" href="#begin-end-lovers" id="begin-end-lovers"><code>begin-end</code> lovers</a></h1>
 <p>If you love Lean 3 <code>begin ... end</code> tactic blocks and commas, you can define this notation
 in Lean 4 using macros in a few lines of code.</p>
-<pre><code class="language-lean">syntax[beginEndKind] &quot;begin &quot; sepByT(tactic, &quot;, &quot;) &quot;end&quot; : term
-
-open Lean in
-@[macro beginEndKind] def expandBeginEnd : Macro := fun stx =&gt;
-  match_syntax stx with
-  | `(begin $ts* end) =&gt; do
-     let ts   := ts.getSepElems.map fun t =&gt; mkNullNode #[t, mkNullNode]
-     let tseq := mkNode `Lean.Parser.Tactic.tacticSeqBracketed #[
-       mkAtomFrom stx &quot;{&quot;, mkNullNode ts, mkAtomFrom stx[2] &quot;}&quot;
-     ]
-     `(by $tseq:tacticSeqBracketed)
-  | _ =&gt; Macro.throwUnsupported
+<pre><code class="language-lean">open Lean in
+macro &quot;begin &quot; ts:sepByT(tactic, &quot;, &quot;) &quot;end&quot; : term =&gt; do
+  let stx  ← getRef
+  let ts   := ts.getSepArgs.map (mkNullNode #[·, mkNullNode])
+  let tseq := mkNode `Lean.Parser.Tactic.tacticSeqBracketed #[
+     mkAtomFrom stx &quot;{&quot;, mkNullNode ts, mkAtomFrom stx[2] &quot;}&quot;
+  ]
+  `(by $tseq:tacticSeqBracketed)
 
 theorem ex (x : Nat) : x + 0 = 0 + x :=
   begin

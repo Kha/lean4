@@ -1112,13 +1112,13 @@ hljs.registerLanguage("lean", function(hljs) {
       'partial unsafe private protected ' +
       'if then else ' +
       'universe universes variable variables ' +
-      'import open theory prelude renaming hiding exposing ' +
+      'import open export theory prelude renaming hiding exposing ' +
       'calc  match with do by let extends ' +
       'for in unless try catch finally mutual mut return continue break where rec ' +
-      'syntax macro_rules ' +
+      'syntax macro_rules macro ' +
       'fun ' +
       '#check #eval #reduce #print ' +
-      'section namespace end',
+      'section namespace end infix prefix ',
     built_in:
       'Type Prop|10 Sort rw|10 rewrite rwa erw subst substs ' +
       'simp dsimp simpa simp_intros finish using generalizing ' +
@@ -1136,14 +1136,14 @@ hljs.registerLanguage("lean", function(hljs) {
       'have replace at suffices show from ' +
       'congr congr_n congr_arg norm_num ring ',
     literal:
-      'tt ff',
+      'true false',
     meta:
       'noncomputable|10 private protected mutual',
     strong:
       'sorry admit',
   };
 
-  var LEAN_IDENT_RE = /[A-Za-z_][\\w\u207F-\u209C\u1D62-\u1D6A\u2079\']*/;
+  var LEAN_IDENT_RE = /[A-Za-z_][\\w\u207F-\u209C\u1D62-\u1D6A\u2079\'0-9]*/;
 
   var DASH_COMMENT = hljs.COMMENT('--', '$');
   var MULTI_LINE_COMMENT = hljs.COMMENT('/-[^-]', '-/');
@@ -1168,7 +1168,7 @@ hljs.registerLanguage("lean", function(hljs) {
   var LEAN_DEFINITION =	{
     className: 'theorem',
     beginKeywords: 'def theorem lemma class instance structure',
-    end: ':=',
+    end: ':= | where',
     excludeEnd: true,
     contains: [
       {
