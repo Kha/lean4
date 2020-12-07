@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="../tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="../functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="../namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="../typeclass.html"><strong aria-hidden="true">6.</strong> Type classes</a></li><li class="chapter-item expanded "><a href="../do.html"><strong aria-hidden="true">7.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="../tactics.html"><strong aria-hidden="true">8.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="../stringinterp.html"><strong aria-hidden="true">9.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">10.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="../lean3changes.html"><strong aria-hidden="true">11.</strong> Significant Changes from Lean 3</a></li><li class="chapter-item expanded "><a href="../syntax_highlight_in_latex.html"><strong aria-hidden="true">12.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="../commit_convention.html"><strong aria-hidden="true">13.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="../make/index.html"><strong aria-hidden="true">14.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../make/ubuntu-16.04.html"><strong aria-hidden="true">14.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="../make/osx-10.9.html"><strong aria-hidden="true">14.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="../make/msys2.html"><strong aria-hidden="true">14.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="../make/nix.html" class="active"><strong aria-hidden="true">14.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="../mdbook.html"><strong aria-hidden="true">15.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="../fixing_tests.html"><strong aria-hidden="true">16.</strong> Fixing Tests</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="../tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="../functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="../namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="../typeclass.html"><strong aria-hidden="true">6.</strong> Type classes</a></li><li class="chapter-item expanded "><a href="../do.html"><strong aria-hidden="true">7.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="../tactics.html"><strong aria-hidden="true">8.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="../thunks.html"><strong aria-hidden="true">9.</strong> Thunks, Tasks and Threads</a></li><li class="chapter-item expanded "><a href="../stringinterp.html"><strong aria-hidden="true">10.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">11.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="../lean3changes.html"><strong aria-hidden="true">12.</strong> Significant Changes from Lean 3</a></li><li class="chapter-item expanded "><a href="../syntax_highlight_in_latex.html"><strong aria-hidden="true">13.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="../commit_convention.html"><strong aria-hidden="true">14.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="../make/index.html"><strong aria-hidden="true">15.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../make/ubuntu-16.04.html"><strong aria-hidden="true">15.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="../make/osx-10.9.html"><strong aria-hidden="true">15.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="../make/msys2.html"><strong aria-hidden="true">15.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="../make/nix.html" class="active"><strong aria-hidden="true">15.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="../mdbook.html"><strong aria-hidden="true">16.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="../fixing_tests.html"><strong aria-hidden="true">17.</strong> Fixing Tests</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -178,8 +178,8 @@ $ nix-shell -A nix
 keep-outputs = true  # Do not garbage-collect build time-only dependencies (e.g. clang)
 extra-sandbox-paths = /nix/var/cache/ccache  # Extra local cache for C/C++ code
 # Allow fetching build results from the Lean Cachix cache
-extra-trusted-substituters = https://lean4.cachix.org/
-extra-trusted-public-keys = lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk=
+trusted-substituters = https://lean4.cachix.org/
+trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk=
 </code></pre>
 <p>On a multi-user installation of Nix (the default), you need to restart the Nix daemon afterwards:</p>
 <pre><code class="language-bash">sudo pkill nix-daemon
@@ -230,22 +230,44 @@ This is because modules are discovered not from a directory listing anymore but 
 there is no mutable directory incrementally filled by the build that we could point the editor at for .olean files.
 Instead, <code>emacs-dev</code> will gather the individual dependency outputs from the Nix store when checking a file -- and build them on the fly when necessary.
 However, it will only ever load changes saved to disk, not ones opened in other buffers.</p>
-<p>Because of technical limitations, there are currently two further restrictions for files in <code>src/</code>:</p>
-<ul>
-<li>They must be reachable from <code>src/Lean.lean</code> to be editable. Note that they have to be so anyway to be included in the full stage compilation, but it might initially be confusing when creating a new file.</li>
-<li>New imports, even when already compiled, will only be accessible after saving the file.</li>
-</ul>
 <h1><a class="header" href="#other-fun-stuff-to-do-with-nix" id="other-fun-stuff-to-do-with-nix">Other Fun Stuff to Do with Nix</a></h1>
 <p>Open Emacs with Lean set up from an arbitrary commit (without even cloning Lean beforehand... if your Nix is new enough):</p>
 <pre><code class="language-bash">nix run github:leanprover/lean4/7e4edeb#emacs-package
 </code></pre>
 <p>Open a shell with <code>lean</code> and <code>LEAN_PATH</code> set up for compiling a specific module (this is exactly what <code>emacs-dev</code> is doing internally):</p>
-<pre><code class="language-bash">nix develop .#mods.&quot;Lean.Parser.Basic&quot;
+<pre><code class="language-bash">nix develop .#mods.\&quot;Lean.Parser.Basic\&quot;
+# alternatively, directly pass a command to execute:
+nix develop .#stage2.mods.\&quot;Init.Control.Basic\&quot; -c bash -c 'lean $src -Dtrace.Elab.command=true'
 </code></pre>
 <p>Not sure what you just broke? Run Lean from (e.g.) the previous commit on a file:</p>
 <pre><code class="language-bash">nix run .\?rev=$(git rev-parse @^) scratch.lean
 </code></pre>
 <p>...more surely to come...</p>
+<h1><a class="header" href="#debugging" id="debugging">Debugging</a></h1>
+<p>Since Nix copies all source files before compilation, you will need to map debug symbols back to the original path using <code>set substitute-path</code> in GDB.
+For example, for a build on Linux with the Nix sandbox activated:</p>
+<pre><code class="language-bash">(gdb) f
+#1  0x0000000000d23a4f in lean_inc (o=0x1) at /build/source/build/include/lean/lean.h:562
+562	/build/source/build/include/lean/lean.h: No such file or directory.
+(gdb) set substitute-path /build/source/build src
+(gdb) f
+#1  0x0000000000d23a4f in lean_inc (o=0x1) at /build/source/build/include/lean/lean.h:562
+562	static inline void lean_inc(lean_object * o) { if (!lean_is_scalar(o)) lean_inc_ref(o); }
+</code></pre>
+<h1><a class="header" href="#building-lean-packages-with-nix" id="building-lean-packages-with-nix">Building Lean Packages with Nix</a></h1>
+<p>From a Lean shell, run</p>
+<pre><code class="language-bash">$ nix flake new mypkg -t github:leanprover/lean4
+</code></pre>
+<p>to create a new Lean package in directory <code>mypkg</code>.
+The Lean package comes with a package root file <code>MyPackage.lean</code> and a <code>flake.nix</code> set up so you can run most command from above on your own package.
+In particular, you can run <code>nix run .#emacs-dev</code> in the package directory to start Emacs configured to automatically build and provide any intra- and extra-package dependencies on the fly.</p>
+<p>Note that if you rename <code>MyPackage.lean</code>, you also have to adjust the <code>name</code> attribute in <code>flake.nix</code> accordingly.</p>
+<p>Package dependencies can be added as further input flakes and passed to the <code>deps</code> list of <code>buildLeanPackage</code>. Example: https://github.com/Kha/testpkg2/blob/master/flake.nix</p>
+<p>For hacking, it can be useful to temporarily override an input with a local checkout/different version of a dependency:</p>
+<pre><code class="language-bash">$ nix build --override-input somedep path/to/somedep
+</code></pre>
+<p>In the future, we would like to introduce a simpler, more generic package description file akin to Lean 3's <code>leanpkg.toml</code> that is not Nix-specific and can be produced and consumed by other package manager implementations.
+It should be possible to consume it with <code>builtins.fromTOML</code> in the Nix setup.</p>
 
                     </main>
 

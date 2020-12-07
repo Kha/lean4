@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="typeclass.html"><strong aria-hidden="true">6.</strong> Type classes</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">7.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html" class="active"><strong aria-hidden="true">8.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">9.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">10.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">11.</strong> Significant Changes from Lean 3</a></li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">12.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">13.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">14.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">14.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">14.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">14.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">14.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">15.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">16.</strong> Fixing Tests</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="typeclass.html"><strong aria-hidden="true">6.</strong> Type classes</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">7.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html" class="active"><strong aria-hidden="true">8.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="thunks.html"><strong aria-hidden="true">9.</strong> Thunks, Tasks and Threads</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">10.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">11.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">12.</strong> Significant Changes from Lean 3</a></li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">13.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">14.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">15.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">15.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">15.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">15.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">15.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">16.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">17.</strong> Fixing Tests</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -306,7 +306,6 @@ theorem ex2 :
   funext (a, b) (c, d)
   show a + d = d + a
   rw [Nat.addComm]
-  rfl
 </code></pre>
 <h2><a class="header" href="#induction" id="induction">Induction</a></h2>
 <p>The <code>induction</code> tactic now supports user-defined induction principles with
@@ -366,7 +365,7 @@ Here is a similar proof using the tactic DSL.</p>
     match bs, memSplit h with
     | _, ⟨s, ⟨t, rfl⟩⟩ =&gt;
       exists b::s; exists t;
-      rw [List.consAppend]; rfl
+      rw [List.consAppend]
 </code></pre>
 <p>We can use <code>match-with</code> nested in tactics.
 Here is a similar proof that uses the <code>induction</code> tactic instead of recursion.</p>
@@ -383,7 +382,7 @@ Here is a similar proof that uses the <code>induction</code> tactic instead of r
       match bs, ih h with
       | _, ⟨s, ⟨t, rfl⟩⟩ =&gt;
         exists b::s; exists t
-        rw [List.consAppend]; rfl
+        rw [List.consAppend]
 </code></pre>
 <p>You can create your own notation using existing tactics. In the following example,
 we define a simple <code>obtain</code> tactic using macros. We say it is simple because it takes only one
@@ -401,7 +400,7 @@ theorem memSplit {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :
     | tail a b bs h =&gt;
       obtain ⟨s, ⟨t, h⟩⟩ from ih h
       exists b::s; exists t
-      rw [h, List.consAppend]; rfl
+      rw [h, List.consAppend]
     | head a bs =&gt; exact ⟨[], ⟨bs, rfl⟩⟩
   | nil =&gt; cases h
 
@@ -447,7 +446,6 @@ and you can use it to create proofs by induction.</p>
     | n+1 =&gt;
       show List.length (List.replicate.loop a n (a::as)) = Nat.succ n + as.length
       rw [aux n, List.lengthConsEq, Nat.addSucc, Nat.succAdd]
-      rfl
   exact aux n []
 </code></pre>
 <p>You can also introduce auxiliary recursive declarations using <code>where</code> clause after your definition.
@@ -461,7 +459,6 @@ where
     | n+1 =&gt;
       show List.length (List.replicate.loop a n (a::as)) = Nat.succ n + as.length
       rw [replicateLoopEq n, List.lengthConsEq, Nat.addSucc, Nat.succAdd]
-      rfl
 </code></pre>
 <h1><a class="header" href="#begin-end-lovers" id="begin-end-lovers"><code>begin-end</code> lovers</a></h1>
 <p>If you love Lean 3 <code>begin ... end</code> tactic blocks and commas, you can define this notation
@@ -478,8 +475,7 @@ macro &quot;begin &quot; ts:sepByT(tactic, &quot;, &quot;) &quot;end&quot; : ter
 theorem ex (x : Nat) : x + 0 = 0 + x :=
   begin
     rw Nat.zeroAdd,
-    rw Nat.addZero,
-    rfl
+    rw Nat.addZero
   end
 </code></pre>
 
@@ -494,7 +490,7 @@ theorem ex (x : Nat) : x + 0 = 0 + x :=
                         
 
                         
-                            <a rel="next" href="stringinterp.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="thunks.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -512,7 +508,7 @@ theorem ex (x : Nat) : x + 0 = 0 + x :=
                 
 
                 
-                    <a rel="next" href="stringinterp.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="thunks.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

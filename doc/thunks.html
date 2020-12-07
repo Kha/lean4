@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Commit Convention - Lean Manual</title>
+        <title>Thunks, Tasks and Threads - Lean Manual</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="typeclass.html"><strong aria-hidden="true">6.</strong> Type classes</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">7.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">8.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="thunks.html"><strong aria-hidden="true">9.</strong> Thunks, Tasks and Threads</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">10.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">11.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">12.</strong> Significant Changes from Lean 3</a></li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">13.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html" class="active"><strong aria-hidden="true">14.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">15.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">15.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">15.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">15.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">15.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">16.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">17.</strong> Fixing Tests</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="typeclass.html"><strong aria-hidden="true">6.</strong> Type classes</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">7.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">8.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="thunks.html" class="active"><strong aria-hidden="true">9.</strong> Thunks, Tasks and Threads</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">10.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">11.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">12.</strong> Significant Changes from Lean 3</a></li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">13.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">14.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">15.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">15.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">15.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">15.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">15.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">16.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">17.</strong> Fixing Tests</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,81 +167,121 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#git-commit-convention" id="git-commit-convention">Git Commit Convention</a></h1>
-<p>We are using the following convention for writing git-commit messages.
-It is based on the one from AngularJS project(<a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#">doc</a>,
-<a href="https://github.com/angular/angular.js/commits/master">commits</a>).</p>
-<h2><a class="header" href="#format-of-the-commit-message" id="format-of-the-commit-message">Format of the commit message</a></h2>
-<pre><code>&lt;type&gt;: &lt;subject&gt;
-&lt;NEWLINE&gt;
-&lt;body&gt;
-&lt;NEWLINE&gt;
-&lt;footer&gt;
+                        <h1><a class="header" href="#thunks-tasks-and-threads" id="thunks-tasks-and-threads">Thunks, Tasks, and Threads</a></h1>
+<p>A <code>Thunk</code> is defined as</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span><span class="boring">universe u
+</span>structure Thunk (α : Type u) : Type u where
+  fn : Unit → α
+<span class="boring">end Ex
+</span></code></pre>
+<p>A <code>Thunk</code> encapsulates a computation without evaluation.
+That is, a <code>Thunk</code> stores the way of how the value would be computed.
+The Lean runtime has special support for <code>Thunk</code>s. It caches their values
+after they are computed for the first time. This feature is useful for implementing
+data structures such as lazy lists.
+Here is a small example using a <code>Thunk</code>.</p>
+<pre><code class="language-lean">def fib : Nat → Nat
+  | 0   =&gt; 0
+  | 1   =&gt; 1
+  | x+2 =&gt; fib (x+1) + fib x
+
+def f (c : Bool) (x : Thunk Nat) : Nat :=
+  if c then
+    x.get
+  else
+    0
+
+def g (c : Bool) (x : Nat) : Nat :=
+  f c (Thunk.mk (fun _ =&gt; fib x))
+
+#eval g false 1000
 </code></pre>
-<p><code>&lt;type&gt;</code> is:</p>
-<ul>
-<li>feat (feature)</li>
-<li>fix (bug fix)</li>
-<li>doc (documentation)</li>
-<li>style (formatting, missing semicolons, ...)</li>
-<li>refactor</li>
-<li>test (when adding missing tests)</li>
-<li>chore (maintain, ex: travis-ci)</li>
-<li>perf (performance improvement, optimization, ...)</li>
-</ul>
-<p><code>&lt;subject&gt;</code> has the following constraints:</p>
-<ul>
-<li>use imperative, present tense: &quot;change&quot; not &quot;changed&quot; nor &quot;changes&quot;</li>
-<li>do not capitalize the first letter</li>
-<li>no dot(.) at the end</li>
-</ul>
-<p><code>&lt;body&gt;</code> has the following constraints:</p>
-<ul>
-<li>just as in <code>&lt;subject&gt;</code>, use imperative, present tense</li>
-<li>includes motivation for the change and contrasts with previous
-behavior</li>
-</ul>
-<p><code>&lt;footer&gt;</code> is optional and may contain two items:</p>
-<ul>
-<li>
-<p>Breaking changes: All breaking changes have to be mentioned in
-footer with the description of the change, justification and
-migration notes</p>
-</li>
-<li>
-<p>Referencing issues: Closed bugs should be listed on a separate line
-in the footer prefixed with &quot;Closes&quot; keyword like this:</p>
-<p>Closes #123, #456</p>
-</li>
-</ul>
-<h2><a class="header" href="#examples" id="examples">Examples</a></h2>
-<p>fix: add declarations for operator&lt;&lt;(std::ostream&amp;, expr const&amp;) and operator&lt;&lt;(std::ostream&amp;, context const&amp;) in the kernel</p>
-<p>The actual implementation of these two operators is outside of the
-kernel. They are implemented in the file 'library/printer.cpp'. We
-declare them in the kernel to prevent the following problem. Suppose
-there is a file 'foo.cpp' that does not include 'library/printer.h',
-but contains</p>
-<pre><code>expr a;
-...
-std::cout &lt;&lt; a &lt;&lt; &quot;\n&quot;;
-...
+<p>The function <code>f</code> above uses <code>x.get</code> to evaluate the <code>Thunk</code> <code>x</code>.
+The expression <code>Thunk.mk (fun _ =&gt; fib x)</code> creates a <code>Thunk</code> for computing <code>fib x</code>.
+Note that <code>fib</code> is a very naive function for computing the Fibonacci numbers,
+and it would an unreasonable amount of time to compute <code>fib 1000</code>. However, our
+test terminates instantaneously because the <code>Thunk</code> is not evaluated when <code>c</code> is <code>false</code>.
+Lean has a builtin coercion from any type <code>a</code> to <code>Thunk a</code>. You write the function <code>g</code> above as</p>
+<pre><code class="language-lean"><span class="boring">def fib : Nat → Nat
+</span><span class="boring"> | 0   =&gt; 0
+</span><span class="boring"> | 1   =&gt; 1
+</span><span class="boring"> | x+2 =&gt; fib (x+1) + fib x
+</span><span class="boring">def f (c : Bool) (x : Thunk Nat) : Nat :=
+</span><span class="boring"> if c then
+</span><span class="boring">   x.get
+</span><span class="boring"> else
+</span><span class="boring">   0
+</span>def g (c : Bool) (x : Nat) : Nat :=
+  f c (fib x)
+
+#eval g false 1000
 </code></pre>
-<p>The compiler does not generate an error message. It silently uses the
-operator bool() to coerce the expression into a Boolean. This produces
-counter-intuitive behavior, and may confuse developers.</p>
+<p>In the following example, we use the macro <code>dbgTrace!</code> to demonstrate
+that the Lean runtime caches the value computed by a <code>Thunk</code>.
+We remark that the macro <code>dbgTrace!</code> should be use for debugging purposes
+only.</p>
+<pre><code class="language-lean">def add1 (x : Nat) : Nat :=
+  dbgTrace! &quot;add1: {x}&quot;
+  x + 1
+
+def double (x : Thunk Nat) : Nat :=
+  x.get + x.get
+
+def triple (x : Thunk Nat) : Nat :=
+  double x + x.get
+
+def test (x : Nat) : Nat :=
+  triple (add1 x)
+
+#eval test 2
+-- add1: 2
+-- 9
+</code></pre>
+<p>Note that the message <code>add1: 2</code> is printed only once.
+Now, consider the same example using <code>Unit -&gt; Nat</code> instead of <code>Thunk Nat</code>.</p>
+<pre><code class="language-lean">def add1 (x : Nat) : Nat :=
+  dbgTrace! &quot;add1: {x}&quot;
+  x + 1
+
+def double (x : Unit -&gt; Nat) : Nat :=
+  x () + x ()
+
+def triple (x : Unit -&gt; Nat) : Nat :=
+  double x + x ()
+
+def test (x : Nat) : Nat :=
+  triple (fun _ =&gt; add1 x)
+
+#eval test 2
+-- add1: 2
+-- add1: 2
+-- 9
+</code></pre>
+<p>Now, the message <code>add1: 2</code> is printed twice.
+It may come as a surprise that it was printed twice instead of three times.
+As we pointed out, <code>dbgTrace!</code> is a macro used for debugging purposes only,
+and <code>add1</code> is still considered to be a pure function.
+The Lean compiler performs common subexpression elimination when compiling <code>double</code>,
+and the produced code for <code>double</code> executes <code>x ()</code> only once instead of twice.
+This transformation is safe because <code>x : Unit -&gt; Nat</code> is pure.</p>
+<h2><a class="header" href="#tasks" id="tasks">Tasks</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#threads" id="threads">Threads</a></h2>
+<p>TODO</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="syntax_highlight_in_latex.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="tactics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="make/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="stringinterp.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -253,13 +293,13 @@ counter-intuitive behavior, and may confuse developers.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="syntax_highlight_in_latex.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="tactics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="make/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="stringinterp.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

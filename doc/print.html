@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="typeclass.html"><strong aria-hidden="true">6.</strong> Type classes</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">7.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">8.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">9.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">10.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">11.</strong> Significant Changes from Lean 3</a></li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">12.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">13.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">14.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">14.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">14.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">14.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">14.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">15.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">16.</strong> Fixing Tests</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="typeclass.html"><strong aria-hidden="true">6.</strong> Type classes</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">7.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">8.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="thunks.html"><strong aria-hidden="true">9.</strong> Thunks, Tasks and Threads</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">10.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">11.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">12.</strong> Significant Changes from Lean 3</a></li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">13.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">14.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">15.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">15.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">15.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">15.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">15.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">16.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">17.</strong> Fixing Tests</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1325,7 +1325,6 @@ theorem ex2 :
   funext (a, b) (c, d)
   show a + d = d + a
   rw [Nat.addComm]
-  rfl
 </code></pre>
 <h2><a class="header" href="#induction" id="induction">Induction</a></h2>
 <p>The <code>induction</code> tactic now supports user-defined induction principles with
@@ -1385,7 +1384,7 @@ Here is a similar proof using the tactic DSL.</p>
     match bs, memSplit h with
     | _, ⟨s, ⟨t, rfl⟩⟩ =&gt;
       exists b::s; exists t;
-      rw [List.consAppend]; rfl
+      rw [List.consAppend]
 </code></pre>
 <p>We can use <code>match-with</code> nested in tactics.
 Here is a similar proof that uses the <code>induction</code> tactic instead of recursion.</p>
@@ -1402,7 +1401,7 @@ Here is a similar proof that uses the <code>induction</code> tactic instead of r
       match bs, ih h with
       | _, ⟨s, ⟨t, rfl⟩⟩ =&gt;
         exists b::s; exists t
-        rw [List.consAppend]; rfl
+        rw [List.consAppend]
 </code></pre>
 <p>You can create your own notation using existing tactics. In the following example,
 we define a simple <code>obtain</code> tactic using macros. We say it is simple because it takes only one
@@ -1420,7 +1419,7 @@ theorem memSplit {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :
     | tail a b bs h =&gt;
       obtain ⟨s, ⟨t, h⟩⟩ from ih h
       exists b::s; exists t
-      rw [h, List.consAppend]; rfl
+      rw [h, List.consAppend]
     | head a bs =&gt; exact ⟨[], ⟨bs, rfl⟩⟩
   | nil =&gt; cases h
 
@@ -1466,7 +1465,6 @@ and you can use it to create proofs by induction.</p>
     | n+1 =&gt;
       show List.length (List.replicate.loop a n (a::as)) = Nat.succ n + as.length
       rw [aux n, List.lengthConsEq, Nat.addSucc, Nat.succAdd]
-      rfl
   exact aux n []
 </code></pre>
 <p>You can also introduce auxiliary recursive declarations using <code>where</code> clause after your definition.
@@ -1480,7 +1478,6 @@ where
     | n+1 =&gt;
       show List.length (List.replicate.loop a n (a::as)) = Nat.succ n + as.length
       rw [replicateLoopEq n, List.lengthConsEq, Nat.addSucc, Nat.succAdd]
-      rfl
 </code></pre>
 <h1><a class="header" href="#begin-end-lovers" id="begin-end-lovers"><code>begin-end</code> lovers</a></h1>
 <p>If you love Lean 3 <code>begin ... end</code> tactic blocks and commas, you can define this notation
@@ -1497,10 +1494,111 @@ macro &quot;begin &quot; ts:sepByT(tactic, &quot;, &quot;) &quot;end&quot; : ter
 theorem ex (x : Nat) : x + 0 = 0 + x :=
   begin
     rw Nat.zeroAdd,
-    rw Nat.addZero,
-    rfl
+    rw Nat.addZero
   end
 </code></pre>
+<h1><a class="header" href="#thunks-tasks-and-threads" id="thunks-tasks-and-threads">Thunks, Tasks, and Threads</a></h1>
+<p>A <code>Thunk</code> is defined as</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span><span class="boring">universe u
+</span>structure Thunk (α : Type u) : Type u where
+  fn : Unit → α
+<span class="boring">end Ex
+</span></code></pre>
+<p>A <code>Thunk</code> encapsulates a computation without evaluation.
+That is, a <code>Thunk</code> stores the way of how the value would be computed.
+The Lean runtime has special support for <code>Thunk</code>s. It caches their values
+after they are computed for the first time. This feature is useful for implementing
+data structures such as lazy lists.
+Here is a small example using a <code>Thunk</code>.</p>
+<pre><code class="language-lean">def fib : Nat → Nat
+  | 0   =&gt; 0
+  | 1   =&gt; 1
+  | x+2 =&gt; fib (x+1) + fib x
+
+def f (c : Bool) (x : Thunk Nat) : Nat :=
+  if c then
+    x.get
+  else
+    0
+
+def g (c : Bool) (x : Nat) : Nat :=
+  f c (Thunk.mk (fun _ =&gt; fib x))
+
+#eval g false 1000
+</code></pre>
+<p>The function <code>f</code> above uses <code>x.get</code> to evaluate the <code>Thunk</code> <code>x</code>.
+The expression <code>Thunk.mk (fun _ =&gt; fib x)</code> creates a <code>Thunk</code> for computing <code>fib x</code>.
+Note that <code>fib</code> is a very naive function for computing the Fibonacci numbers,
+and it would an unreasonable amount of time to compute <code>fib 1000</code>. However, our
+test terminates instantaneously because the <code>Thunk</code> is not evaluated when <code>c</code> is <code>false</code>.
+Lean has a builtin coercion from any type <code>a</code> to <code>Thunk a</code>. You write the function <code>g</code> above as</p>
+<pre><code class="language-lean"><span class="boring">def fib : Nat → Nat
+</span><span class="boring"> | 0   =&gt; 0
+</span><span class="boring"> | 1   =&gt; 1
+</span><span class="boring"> | x+2 =&gt; fib (x+1) + fib x
+</span><span class="boring">def f (c : Bool) (x : Thunk Nat) : Nat :=
+</span><span class="boring"> if c then
+</span><span class="boring">   x.get
+</span><span class="boring"> else
+</span><span class="boring">   0
+</span>def g (c : Bool) (x : Nat) : Nat :=
+  f c (fib x)
+
+#eval g false 1000
+</code></pre>
+<p>In the following example, we use the macro <code>dbgTrace!</code> to demonstrate
+that the Lean runtime caches the value computed by a <code>Thunk</code>.
+We remark that the macro <code>dbgTrace!</code> should be use for debugging purposes
+only.</p>
+<pre><code class="language-lean">def add1 (x : Nat) : Nat :=
+  dbgTrace! &quot;add1: {x}&quot;
+  x + 1
+
+def double (x : Thunk Nat) : Nat :=
+  x.get + x.get
+
+def triple (x : Thunk Nat) : Nat :=
+  double x + x.get
+
+def test (x : Nat) : Nat :=
+  triple (add1 x)
+
+#eval test 2
+-- add1: 2
+-- 9
+</code></pre>
+<p>Note that the message <code>add1: 2</code> is printed only once.
+Now, consider the same example using <code>Unit -&gt; Nat</code> instead of <code>Thunk Nat</code>.</p>
+<pre><code class="language-lean">def add1 (x : Nat) : Nat :=
+  dbgTrace! &quot;add1: {x}&quot;
+  x + 1
+
+def double (x : Unit -&gt; Nat) : Nat :=
+  x () + x ()
+
+def triple (x : Unit -&gt; Nat) : Nat :=
+  double x + x ()
+
+def test (x : Nat) : Nat :=
+  triple (fun _ =&gt; add1 x)
+
+#eval test 2
+-- add1: 2
+-- add1: 2
+-- 9
+</code></pre>
+<p>Now, the message <code>add1: 2</code> is printed twice.
+It may come as a surprise that it was printed twice instead of three times.
+As we pointed out, <code>dbgTrace!</code> is a macro used for debugging purposes only,
+and <code>add1</code> is still considered to be a pure function.
+The Lean compiler performs common subexpression elimination when compiling <code>double</code>,
+and the produced code for <code>double</code> executes <code>x ()</code> only once instead of twice.
+This transformation is safe because <code>x : Unit -&gt; Nat</code> is pure.</p>
+<h2><a class="header" href="#tasks" id="tasks">Tasks</a></h2>
+<p>TODO</p>
+<h2><a class="header" href="#threads" id="threads">Threads</a></h2>
+<p>TODO</p>
 <h1><a class="header" href="#string-interpolation" id="string-interpolation">String interpolation</a></h1>
 <p>The <code>s!</code> prefix identifies a string literal as an interpolated string.
 An interpolated string is a string literal that might contain interpolation expressions.
@@ -2233,8 +2331,8 @@ $ nix-shell -A nix
 keep-outputs = true  # Do not garbage-collect build time-only dependencies (e.g. clang)
 extra-sandbox-paths = /nix/var/cache/ccache  # Extra local cache for C/C++ code
 # Allow fetching build results from the Lean Cachix cache
-extra-trusted-substituters = https://lean4.cachix.org/
-extra-trusted-public-keys = lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk=
+trusted-substituters = https://lean4.cachix.org/
+trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk=
 </code></pre>
 <p>On a multi-user installation of Nix (the default), you need to restart the Nix daemon afterwards:</p>
 <pre><code class="language-bash">sudo pkill nix-daemon
@@ -2285,22 +2383,44 @@ This is because modules are discovered not from a directory listing anymore but 
 there is no mutable directory incrementally filled by the build that we could point the editor at for .olean files.
 Instead, <code>emacs-dev</code> will gather the individual dependency outputs from the Nix store when checking a file -- and build them on the fly when necessary.
 However, it will only ever load changes saved to disk, not ones opened in other buffers.</p>
-<p>Because of technical limitations, there are currently two further restrictions for files in <code>src/</code>:</p>
-<ul>
-<li>They must be reachable from <code>src/Lean.lean</code> to be editable. Note that they have to be so anyway to be included in the full stage compilation, but it might initially be confusing when creating a new file.</li>
-<li>New imports, even when already compiled, will only be accessible after saving the file.</li>
-</ul>
 <h1><a class="header" href="#other-fun-stuff-to-do-with-nix" id="other-fun-stuff-to-do-with-nix">Other Fun Stuff to Do with Nix</a></h1>
 <p>Open Emacs with Lean set up from an arbitrary commit (without even cloning Lean beforehand... if your Nix is new enough):</p>
 <pre><code class="language-bash">nix run github:leanprover/lean4/7e4edeb#emacs-package
 </code></pre>
 <p>Open a shell with <code>lean</code> and <code>LEAN_PATH</code> set up for compiling a specific module (this is exactly what <code>emacs-dev</code> is doing internally):</p>
-<pre><code class="language-bash">nix develop .#mods.&quot;Lean.Parser.Basic&quot;
+<pre><code class="language-bash">nix develop .#mods.\&quot;Lean.Parser.Basic\&quot;
+# alternatively, directly pass a command to execute:
+nix develop .#stage2.mods.\&quot;Init.Control.Basic\&quot; -c bash -c 'lean $src -Dtrace.Elab.command=true'
 </code></pre>
 <p>Not sure what you just broke? Run Lean from (e.g.) the previous commit on a file:</p>
 <pre><code class="language-bash">nix run .\?rev=$(git rev-parse @^) scratch.lean
 </code></pre>
 <p>...more surely to come...</p>
+<h1><a class="header" href="#debugging" id="debugging">Debugging</a></h1>
+<p>Since Nix copies all source files before compilation, you will need to map debug symbols back to the original path using <code>set substitute-path</code> in GDB.
+For example, for a build on Linux with the Nix sandbox activated:</p>
+<pre><code class="language-bash">(gdb) f
+#1  0x0000000000d23a4f in lean_inc (o=0x1) at /build/source/build/include/lean/lean.h:562
+562	/build/source/build/include/lean/lean.h: No such file or directory.
+(gdb) set substitute-path /build/source/build src
+(gdb) f
+#1  0x0000000000d23a4f in lean_inc (o=0x1) at /build/source/build/include/lean/lean.h:562
+562	static inline void lean_inc(lean_object * o) { if (!lean_is_scalar(o)) lean_inc_ref(o); }
+</code></pre>
+<h1><a class="header" href="#building-lean-packages-with-nix" id="building-lean-packages-with-nix">Building Lean Packages with Nix</a></h1>
+<p>From a Lean shell, run</p>
+<pre><code class="language-bash">$ nix flake new mypkg -t github:leanprover/lean4
+</code></pre>
+<p>to create a new Lean package in directory <code>mypkg</code>.
+The Lean package comes with a package root file <code>MyPackage.lean</code> and a <code>flake.nix</code> set up so you can run most command from above on your own package.
+In particular, you can run <code>nix run .#emacs-dev</code> in the package directory to start Emacs configured to automatically build and provide any intra- and extra-package dependencies on the fly.</p>
+<p>Note that if you rename <code>MyPackage.lean</code>, you also have to adjust the <code>name</code> attribute in <code>flake.nix</code> accordingly.</p>
+<p>Package dependencies can be added as further input flakes and passed to the <code>deps</code> list of <code>buildLeanPackage</code>. Example: https://github.com/Kha/testpkg2/blob/master/flake.nix</p>
+<p>For hacking, it can be useful to temporarily override an input with a local checkout/different version of a dependency:</p>
+<pre><code class="language-bash">$ nix build --override-input somedep path/to/somedep
+</code></pre>
+<p>In the future, we would like to introduce a simpler, more generic package description file akin to Lean 3's <code>leanpkg.toml</code> that is not Nix-specific and can be produced and consumed by other package manager implementations.
+It should be possible to consume it with <code>builtins.fromTOML</code> in the Nix setup.</p>
 <p>This manual is generated by <a href="https://github.com/rust-lang/mdBook">mdBook</a>. We are currently using a
 <a href="https://github.com/leanprover/mdBook">fork</a> of it for the following additional features:</p>
 <ul>
