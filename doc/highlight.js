@@ -1106,7 +1106,7 @@ hljs.registerLanguage("lean", function(hljs) {
   var LEAN_KEYWORDS = {
     $pattern: /#?\w+/,
     keyword:
-      'theorem|10 def class structure instance ' +
+      'theorem|10 def class structure instance set_option ' +
       'example inductive coinductive ' +
       'axiom constant ' +
       'partial unsafe private protected ' +
@@ -1117,8 +1117,8 @@ hljs.registerLanguage("lean", function(hljs) {
       'for in unless try catch finally mutual mut return continue break where rec ' +
       'syntax macro_rules macro ' +
       'fun ' +
-      '#check #eval #reduce #print ' +
-      'section namespace end infix prefix ',
+      '#check #check_failure #eval #reduce #print ' +
+      'section namespace end infix infixl infixr postfix prefix ',
     built_in:
       'Type Prop|10 Sort rw|10 rewrite rwa erw subst substs ' +
       'simp dsimp simpa simp_intros finish using generalizing ' +

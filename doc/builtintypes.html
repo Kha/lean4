@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Thunks, Tasks and Threads - Lean Manual</title>
+        <title>Builtin Types - Lean Manual</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">5.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="typeclass.html"><strong aria-hidden="true">6.</strong> Type classes</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">7.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">8.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="thunks.html" class="active"><strong aria-hidden="true">9.</strong> Thunks, Tasks and Threads</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">10.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">11.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">12.</strong> Significant Changes from Lean 3</a></li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">13.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">14.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">15.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">15.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">15.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">15.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">15.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">16.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">17.</strong> Fixing Tests</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="whatIsLean.html"><strong aria-hidden="true">1.</strong> What is Lean</a></li><li class="chapter-item expanded "><a href="tour.html"><strong aria-hidden="true">2.</strong> Tour of Lean</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Manual</li><li class="chapter-item expanded "><a href="deptypes.html"><strong aria-hidden="true">3.</strong> Dependent Types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="simptypes.html"><strong aria-hidden="true">3.1.</strong> Simple Type Theory</a></li><li class="chapter-item expanded "><a href="typeobjs.html"><strong aria-hidden="true">3.2.</strong> Types as objects</a></li><li class="chapter-item expanded "><a href="funabst.html"><strong aria-hidden="true">3.3.</strong> Function Abstraction and Evaluation</a></li><li class="chapter-item expanded "><a href="introdef.html"><strong aria-hidden="true">3.4.</strong> Introducing Definitions</a></li><li class="chapter-item expanded "><a href="dep.html"><strong aria-hidden="true">3.5.</strong> What makes dependent type theory dependent?</a></li></ol></li><li class="chapter-item expanded "><a href="organization.html"><strong aria-hidden="true">4.</strong> Organizational features</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="sections.html"><strong aria-hidden="true">4.1.</strong> Sections</a></li><li class="chapter-item expanded "><a href="namespaces.html"><strong aria-hidden="true">4.2.</strong> Namespaces</a></li><li class="chapter-item expanded "><a href="implicit.html"><strong aria-hidden="true">4.3.</strong> Implicit Arguments</a></li><li class="chapter-item expanded "><a href="autobound.html"><strong aria-hidden="true">4.4.</strong> Auto Bound Implicit Arguments</a></li></ol></li><li class="chapter-item expanded "><a href="decltypes.html"><strong aria-hidden="true">5.</strong> Declaring New Types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="enum.html"><strong aria-hidden="true">5.1.</strong> Enumerated Types</a></li><li class="chapter-item expanded "><a href="inductive.html"><strong aria-hidden="true">5.2.</strong> Inductive Types</a></li><li class="chapter-item expanded "><a href="struct.html"><strong aria-hidden="true">5.3.</strong> Structures</a></li><li class="chapter-item expanded "><a href="typeclass.html"><strong aria-hidden="true">5.4.</strong> Type classes</a></li><li class="chapter-item expanded "><a href="unifhint.html"><strong aria-hidden="true">5.5.</strong> Unification Hints</a></li></ol></li><li class="chapter-item expanded "><a href="builtintypes.html" class="active"><strong aria-hidden="true">6.</strong> Builtin Types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="nat.html"><strong aria-hidden="true">6.1.</strong> Natural number</a></li><li class="chapter-item expanded "><a href="int.html"><strong aria-hidden="true">6.2.</strong> Integer</a></li><li class="chapter-item expanded "><a href="uint.html"><strong aria-hidden="true">6.3.</strong> Fixed precision unsigned integer</a></li><li class="chapter-item expanded "><a href="float.html"><strong aria-hidden="true">6.4.</strong> Float</a></li><li class="chapter-item expanded "><a href="array.html"><strong aria-hidden="true">6.5.</strong> Array</a></li><li class="chapter-item expanded "><a href="list.html"><strong aria-hidden="true">6.6.</strong> List</a></li><li class="chapter-item expanded "><a href="char.html"><strong aria-hidden="true">6.7.</strong> Character</a></li><li class="chapter-item expanded "><a href="string.html"><strong aria-hidden="true">6.8.</strong> String</a></li><li class="chapter-item expanded "><a href="option.html"><strong aria-hidden="true">6.9.</strong> Option</a></li><li class="chapter-item expanded "><a href="thunk.html"><strong aria-hidden="true">6.10.</strong> Thunk</a></li><li class="chapter-item expanded "><a href="task.html"><strong aria-hidden="true">6.11.</strong> Task and Thread</a></li></ol></li><li class="chapter-item expanded "><a href="functions.html"><strong aria-hidden="true">7.</strong> Functions</a></li><li class="chapter-item expanded "><a href="do.html"><strong aria-hidden="true">8.</strong> The do Notation</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">9.</strong> Tactics</a></li><li class="chapter-item expanded "><a href="stringinterp.html"><strong aria-hidden="true">10.</strong> String interpolation</a></li><li class="chapter-item expanded affix "><li class="part-title">Other</li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">11.</strong> Frequently Asked Questions</a></li><li class="chapter-item expanded "><a href="lean3changes.html"><strong aria-hidden="true">12.</strong> Significant Changes from Lean 3</a></li><li class="chapter-item expanded "><a href="syntax_highlight_in_latex.html"><strong aria-hidden="true">13.</strong> Syntax Highlighting Lean in LaTeX</a></li><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><a href="commit_convention.html"><strong aria-hidden="true">14.</strong> Commit Convention</a></li><li class="chapter-item expanded "><a href="make/index.html"><strong aria-hidden="true">15.</strong> Building Lean</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="make/ubuntu-16.04.html"><strong aria-hidden="true">15.1.</strong> Ubuntu Setup</a></li><li class="chapter-item expanded "><a href="make/osx-10.9.html"><strong aria-hidden="true">15.2.</strong> macOS Setup</a></li><li class="chapter-item expanded "><a href="make/msys2.html"><strong aria-hidden="true">15.3.</strong> Windows Setup</a></li><li class="chapter-item expanded "><a href="make/nix.html"><strong aria-hidden="true">15.4.</strong> Nix Setup (Experimental)</a></li></ol></li><li class="chapter-item expanded "><a href="mdbook.html"><strong aria-hidden="true">16.</strong> Building This Manual</a></li><li class="chapter-item expanded "><a href="fixing_tests.html"><strong aria-hidden="true">17.</strong> Fixing Tests</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,121 +167,39 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#thunks-tasks-and-threads" id="thunks-tasks-and-threads">Thunks, Tasks, and Threads</a></h1>
-<p>A <code>Thunk</code> is defined as</p>
-<pre><code class="language-lean"><span class="boring">namespace Ex
-</span><span class="boring">universe u
-</span>structure Thunk (α : Type u) : Type u where
-  fn : Unit → α
-<span class="boring">end Ex
-</span></code></pre>
-<p>A <code>Thunk</code> encapsulates a computation without evaluation.
-That is, a <code>Thunk</code> stores the way of how the value would be computed.
-The Lean runtime has special support for <code>Thunk</code>s. It caches their values
-after they are computed for the first time. This feature is useful for implementing
-data structures such as lazy lists.
-Here is a small example using a <code>Thunk</code>.</p>
-<pre><code class="language-lean">def fib : Nat → Nat
-  | 0   =&gt; 0
-  | 1   =&gt; 1
-  | x+2 =&gt; fib (x+1) + fib x
+                        <h1><a class="header" href="#builtin-types" id="builtin-types">Builtin Types</a></h1>
+<h2><a class="header" href="#numeric-operations" id="numeric-operations">Numeric Operations</a></h2>
+<p>Lean supports the basic mathematical operations you’d expect for all of the number types: addition, subtraction, multiplication, division, and remainder.
+The following code shows how you’d use each one in a <code>def</code> commands:</p>
+<pre><code class="language-lean">-- addition
+def sum := 5 + 10
 
-def f (c : Bool) (x : Thunk Nat) : Nat :=
-  if c then
-    x.get
-  else
-    0
+-- subtraction
+def difference := 95.5 - 4.3
 
-def g (c : Bool) (x : Nat) : Nat :=
-  f c (Thunk.mk (fun _ =&gt; fib x))
+-- multiplication
+def product := 4 * 30
 
-#eval g false 1000
+-- division
+def quotient := 53.7 / 32.2
+
+-- remainder/modulo
+def modulo := 43 % 5
 </code></pre>
-<p>The function <code>f</code> above uses <code>x.get</code> to evaluate the <code>Thunk</code> <code>x</code>.
-The expression <code>Thunk.mk (fun _ =&gt; fib x)</code> creates a <code>Thunk</code> for computing <code>fib x</code>.
-Note that <code>fib</code> is a very naive function for computing the Fibonacci numbers,
-and it would an unreasonable amount of time to compute <code>fib 1000</code>. However, our
-test terminates instantaneously because the <code>Thunk</code> is not evaluated when <code>c</code> is <code>false</code>.
-Lean has a builtin coercion from any type <code>a</code> to <code>Thunk a</code>. You write the function <code>g</code> above as</p>
-<pre><code class="language-lean"><span class="boring">def fib : Nat → Nat
-</span><span class="boring"> | 0   =&gt; 0
-</span><span class="boring"> | 1   =&gt; 1
-</span><span class="boring"> | x+2 =&gt; fib (x+1) + fib x
-</span><span class="boring">def f (c : Bool) (x : Thunk Nat) : Nat :=
-</span><span class="boring"> if c then
-</span><span class="boring">   x.get
-</span><span class="boring"> else
-</span><span class="boring">   0
-</span>def g (c : Bool) (x : Nat) : Nat :=
-  f c (fib x)
-
-#eval g false 1000
-</code></pre>
-<p>In the following example, we use the macro <code>dbgTrace!</code> to demonstrate
-that the Lean runtime caches the value computed by a <code>Thunk</code>.
-We remark that the macro <code>dbgTrace!</code> should be use for debugging purposes
-only.</p>
-<pre><code class="language-lean">def add1 (x : Nat) : Nat :=
-  dbgTrace! &quot;add1: {x}&quot;
-  x + 1
-
-def double (x : Thunk Nat) : Nat :=
-  x.get + x.get
-
-def triple (x : Thunk Nat) : Nat :=
-  double x + x.get
-
-def test (x : Nat) : Nat :=
-  triple (add1 x)
-
-#eval test 2
--- add1: 2
--- 9
-</code></pre>
-<p>Note that the message <code>add1: 2</code> is printed only once.
-Now, consider the same example using <code>Unit -&gt; Nat</code> instead of <code>Thunk Nat</code>.</p>
-<pre><code class="language-lean">def add1 (x : Nat) : Nat :=
-  dbgTrace! &quot;add1: {x}&quot;
-  x + 1
-
-def double (x : Unit -&gt; Nat) : Nat :=
-  x () + x ()
-
-def triple (x : Unit -&gt; Nat) : Nat :=
-  double x + x ()
-
-def test (x : Nat) : Nat :=
-  triple (fun _ =&gt; add1 x)
-
-#eval test 2
--- add1: 2
--- add1: 2
--- 9
-</code></pre>
-<p>Now, the message <code>add1: 2</code> is printed twice.
-It may come as a surprise that it was printed twice instead of three times.
-As we pointed out, <code>dbgTrace!</code> is a macro used for debugging purposes only,
-and <code>add1</code> is still considered to be a pure function.
-The Lean compiler performs common subexpression elimination when compiling <code>double</code>,
-and the produced code for <code>double</code> executes <code>x ()</code> only once instead of twice.
-This transformation is safe because <code>x : Unit -&gt; Nat</code> is pure.</p>
-<h2><a class="header" href="#tasks" id="tasks">Tasks</a></h2>
-<p>TODO</p>
-<h2><a class="header" href="#threads" id="threads">Threads</a></h2>
-<p>TODO</p>
+<p>Each expression in these statements uses a mathematical operator and evaluates to a single value.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="tactics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="unifhint.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="stringinterp.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="nat.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -293,13 +211,13 @@ This transformation is safe because <code>x : Unit -&gt; Nat</code> is pure.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="tactics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="unifhint.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="stringinterp.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="nat.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
