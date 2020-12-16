@@ -242,6 +242,17 @@ nix develop .#stage2.mods.\&quot;Init.Control.Basic\&quot; -c bash -c 'lean $src
 <p>Not sure what you just broke? Run Lean from (e.g.) the previous commit on a file:</p>
 <pre><code class="language-bash">nix run .\?rev=$(git rev-parse @^) scratch.lean
 </code></pre>
+<p>Work on two adjacent stages at the same time without the need for repeatedly updating and reverting <code>stage0/</code>:</p>
+<pre><code class="language-bash"># open an editor that will use only committed changes (so first commit them when changing files)
+nix run .#HEAD-as-stage1.emacs-dev&amp;
+# open a second editor that will use those commited changes as stage 0
+# (so don't commit changes done here until you are done and ran a final `update-stage0-commit`)
+nix run .#HEAD-as-stage0.emacs-dev&amp;
+</code></pre>
+<p>To run <code>nix build</code> on the second stage outside of the second editor, use</p>
+<pre><code class="language-bash">nix build .#stage0-from-input
+</code></pre>
+<p>This setup will inadvertently change your <code>flake.lock</code> file, which you can revert when you are done.</p>
 <p>...more surely to come...</p>
 <h1><a class="header" href="#debugging" id="debugging">Debugging</a></h1>
 <p>Since Nix copies all source files before compilation, you will need to map debug symbols back to the original path using <code>set substitute-path</code> in GDB.
