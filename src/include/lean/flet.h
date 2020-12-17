@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 */
 #pragma once
+#include <utility>
 
 namespace lean {
 /**
@@ -23,11 +24,16 @@ class flet {
 public:
     flet(T & ref, T const & new_value):
         m_ref(ref),
-        m_old_value(ref) {
+        m_old_value(std::move(ref)) {
+        m_ref = new_value;
+    }
+    flet(T & ref, T && new_value):
+        m_ref(ref),
+        m_old_value(std::move(ref)) {
         m_ref = new_value;
     }
     ~flet() {
-        m_ref = m_old_value;
+        m_ref = std::move(m_old_value);
     }
 };
 }
