@@ -2304,8 +2304,8 @@ We believe it is clean and beautiful.</p>
 </span><span class="boring"> IO.println &quot;world&quot;
 </span><span class="boring"> return 0
 </span>
-#check IO.println
--- String -&gt; IO Unit
+#check IO.println &quot;hello&quot;
+-- IO Unit
 #print main
 -- Output contains the infix operator `&gt;&gt;=` and `pure`
 -- The following `set_option` disables notation such as `&gt;&gt;=` in the output
