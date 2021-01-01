@@ -89,8 +89,8 @@ jobs:
           mkdir build
           cd build
           OPTIONS=
-          if [[ -n '${{ matrix.release }}' ]]; then
-            git remote add nightly https://${{ secrets.GITHUB_TOKEN }}@github.com/Kha/lean4-nightly.git
+          if [[ -n '${{ matrix.release }}' && -n '${{ secrets.PUSH_NIGHTLY_TOKEN }}' ]]; then
+            git remote add nightly https://${{ secrets.PUSH_NIGHTLY_TOKEN }}@github.com/Kha/lean4-nightly.git
             git fetch nightly --tags
             LEAN_VERSION_STRING="nightly-$(date -u +%F)"
             # do nothing if commit is already tagged
