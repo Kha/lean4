@@ -56,6 +56,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          # interferes with lean4-nightly authentication
+          persist-credentials: false
       - name: Install Nix
         uses: cachix/install-nix-action@v12
         with:
