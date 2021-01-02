@@ -162,14 +162,11 @@ jobs:
       - name: Prepare Nightly Release
         if: env.LEAN_VERSION_STRING
         run: |
-          if [ -z "$LEAN_VERSION_STRING" ]; then
-            echo "LEAN_VERSION_STRING=" >> $GITHUB_ENV
-            exit 0
-          fi
-
           # technically a race condition...
           git fetch nightly --tags
           if git tag $LEAN_VERSION_STRING; then
+            # can't push shallow checkout
+            git fetch --unshallow
             git push nightly $LEAN_VERSION_STRING
           else
             # make sure every runner is building the same commit
@@ -177,7 +174,7 @@ jobs:
           fi
 
           last_tag=$(git describe @^ --abbrev=0 --tags)
-          #echo -e "Changes since ${last_tag}:\n\n" > diff.md
+          echo -e "Changes since ${last_tag}:\n\n" > diff.md
           #git show $last_tag:doc/changes.md > old.md
           #./script/diff_changelogs.py old.md doc/changes.md >> diff.md
           echo -e "*Full commit log*\n" >> diff.md
