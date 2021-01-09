@@ -205,10 +205,11 @@ The answer is that Lean's parser follows a local <em>longest parse</em> rule in 
 notation:10 Γ &quot; ⊢ &quot; e &quot; : &quot; τ =&gt; Typing Γ e τ
 </code></pre>
 <p>Placeholders without precedence default to <code>0</code>, i.e. they accept notations of any precedence in their place.
-If two notations overlap, we again apply the longest parse rule: given an additional notation</p>
-<pre><code class="language-lean">notation:65 a &quot; + &quot; b &quot; + &quot; c:66 =&gt; (a + b) + c
+If two notations overlap, we again apply the longest parse rule:</p>
+<pre><code class="language-lean">notation:65 a &quot; + &quot; b:66 &quot; + &quot; c:66 =&gt; a + b - c
+#eval 1 + 2 + 3  -- 0
 </code></pre>
-<p>the input <code>1 + 2 + 3</code> will be resolved as this notation in preference to the binary notation since the latter, before chaining, would stop parsing after <code>1 + 2</code>.
+<p>The new notation is preferred to the binary notation since the latter, before chaining, would stop parsing after <code>1 + 2</code>.
 If there are multiple notations accepting the same longest parse, the choice will be delayed until elaboration, which will fail unless exactly one overload is type correct.</p>
 <h2><a class="header" href="#syntax-and-macros" id="syntax-and-macros">Syntax and Macros</a></h2>
 <h2><a class="header" href="#elaborators" id="elaborators">Elaborators</a></h2>

@@ -176,9 +176,10 @@
 <h2><a class="header" href="#basic-setup" id="basic-setup">Basic Setup</a></h2>
 <p>Release builds for all supported platforms are available at <a href="https://github.com/leanprover/lean4/releases">https://github.com/leanprover/lean4/releases</a>.
 Instead of downloading these and setting up the paths manually, however, it is recommended to use the Lean version manager <a href="https://github.com/Kha/elan"><code>elan</code></a> instead:</p>
-<pre><code class="language-sh"># download &amp; activate latest Lean 4 release
+<pre><code class="language-sh">$ elan self update  # in case you haven't updated elan in a while
+# download &amp; activate latest Lean 4 release (https://github.com/leanprover/lean4/releases)
 $ elan default leanprover/lean4:stable
-# alternatively, use the latest nightly build
+# alternatively, use the latest nightly build (https://github.com/leanprover/lean4-nightly/releases)
 $ elan default leanprover/lean4:nightly
 # alternatively, activate Lean 4 in current directory only
 $ elan override leanprover/lean4:stable
@@ -190,7 +191,8 @@ It has been tested on Windows by installing these tools using <a href="https://w
 <p>There is no integration of <code>leanpkg</code> and the language server at the moment, so the <code>LEAN_PATH</code>, which is the last line returned by <code>leanpkg configure</code>, must be set explicitly before starting the editor.
 Changes must be saved and compiled with <code>leanpkg build</code> to be visible in other files, which must then be invalidated using an editor command (see links above).</p>
 <h2><a class="header" href="#nix-setup" id="nix-setup">Nix Setup</a></h2>
-<p>The alternative setup based on Nix provides a perfectly reproducible development environment for your project from the Lean version down to the editor and Lean extension. Howeover, it is still experimental and subject to change; in particular, it is heavily based on an unreleased version of Nix enabling <a href="https://www.tweag.io/blog/2020-05-25-flakes/">Nix Flakes</a>. The setup has been tested on NixOS, other Linux distributions, and macOS.</p>
+<p>The alternative setup based on Nix provides a perfectly reproducible development environment for your project from the Lean version down to the editor and Lean extension.
+However, it is still experimental and subject to change; in particular, it is heavily based on an unreleased version of Nix enabling <a href="https://www.tweag.io/blog/2020-05-25-flakes/">Nix Flakes</a>. The setup has been tested on NixOS, other Linux distributions, and macOS.</p>
 <p>After installing (any version of) Nix (<a href="https://nixos.org/download.html">https://nixos.org/download.html</a>), you can easily open a shell with the particular pre-release version of Nix needed by and tested with our setup (called the &quot;Lean shell&quot; from here on):</p>
 <pre><code class="language-bash">$ nix-shell https://github.com/leanprover/lean4/archive/master.tar.gz -A nix
 </code></pre>
