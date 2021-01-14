@@ -188,8 +188,7 @@ $ elan override leanprover/lean4:stable
 Note however that it currently depends on <code>make</code> (and <code>sh</code>) for recursive compilation.
 It has been tested on Windows by installing these tools using <a href="https://www.msys2.org/">MSYS2</a>, but <a href="http://www.mingw.org/">MinGW</a> or WSL should work, too.</p>
 <p>Lean implements the <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a> that can be used for interactive development in <a href="https://github.com/leanprover/lean4/tree/master/lean4-mode/README.md">Emacs</a>, <a href="https://github.com/mhuisi/vscode-lean4">VS Code</a>, and possibly other editors.</p>
-<p>There is no integration of <code>leanpkg</code> and the language server at the moment, so the <code>LEAN_PATH</code>, which is the last line returned by <code>leanpkg configure</code>, must be set explicitly before starting the editor.
-Changes must be saved and compiled with <code>leanpkg build</code> to be visible in other files, which must then be invalidated using an editor command (see links above).</p>
+<p>Changes must be saved to be visible in other files, which must then be invalidated using an editor command (see links above).</p>
 <h2><a class="header" href="#nix-setup" id="nix-setup">Nix Setup</a></h2>
 <p>The alternative setup based on Nix provides a perfectly reproducible development environment for your project from the Lean version down to the editor and Lean extension.
 However, it is still experimental and subject to change; in particular, it is heavily based on an unreleased version of Nix enabling <a href="https://www.tweag.io/blog/2020-05-25-flakes/">Nix Flakes</a>. The setup has been tested on NixOS, other Linux distributions, and macOS.</p>

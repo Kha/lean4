@@ -363,7 +363,7 @@ This causes class inference to chain through instances recursively, backtracking
 -- (0, true)
 <span class="boring">end Ex
 </span></code></pre>
-<p>Similarly, we can inhabit tyhe function with suitable constant functions:</p>
+<p>Similarly, we can inhabit type function with suitable constant functions:</p>
 <pre><code class="language-lean">instance [Inhabited b] : Inhabited (a -&gt; b) where
   default := fun _ =&gt; arbitrary
 </code></pre>
@@ -443,7 +443,7 @@ contain missing parts. The following command produces the error
 <pre><code class="language-lean">#check_failure (inferInstance : Inhabited (Nat × _))
 </code></pre>
 <p>You can view the parameter of the type class <code>Inhabited</code> as an <em>input</em> value for the type class synthesizer.
-When a type class have multiple parameters, you can mark some of them as output parameters.
+When a type class has multiple parameters, you can mark some of them as output parameters.
 Lean will start type class synthesizer even when these parameters have missing parts.
 In the following example, we use output parameters to define a <em>heterogeneous</em> polymorphic
 multiplication.</p>
