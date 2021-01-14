@@ -1596,6 +1596,13 @@ structure SourceInfo where
 
 instance : Inhabited SourceInfo := ⟨{}⟩
 
+/--
+  Syntax quotations copy source positions without whitespace, so assuming other ways of synthesizing syntax
+  behave the same, we can distinguish synthesized syntax that way. -/
+def SourceInfo.isSynthetic : SourceInfo → Bool
+  | ⟨none, _, none⟩ => true
+  | _               => false
+
 abbrev SyntaxNodeKind := Name
 
 /- Syntax AST -/
