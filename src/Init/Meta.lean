@@ -149,10 +149,11 @@ partial def getTailInfo : Syntax → Option SourceInfo
   | _             => none
 
 partial def getTailPos : Syntax → Option String.Pos
-  | atom { pos := some pos, .. }  val    => some (pos + val.bsize)
-  | ident { pos := some pos, .. } val .. => some (pos + val.toString.bsize)
-  | node _ args                          => args.findSomeRev? getTailPos
-  | _                                    => none
+  -- add textual extent only for non-synthetic tokens, i.e. ones that actually visible in the editor
+  | atom info@{ pos := some pos, .. }  val    => if info.isSynthetic then some pos else some (pos + val.bsize)
+  | ident info@{ pos := some pos, .. } val .. => if info.isSynthetic then some pos else some (pos + val.bsize)
+  | node _ args                               => args.findSomeRev? getTailPos
+  | _                                         => none
 
 @[specialize] private partial def updateLast {α} [Inhabited α] (a : Array α) (f : α → Option α) (i : Nat) : Option (Array α) :=
   if i == 0 then
