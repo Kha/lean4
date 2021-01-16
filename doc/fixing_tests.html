@@ -189,16 +189,12 @@ executing</p>
 <p>When the <code>-i</code> option is provided, <code>meld</code> is automatically invoked
 whenever there is discrepancy between the produced and expected
 outputs. <code>meld</code> can also be used to repair the problems.</p>
-<p>In Emacs, we can also execute <code>M-x lean-diff-test-file</code> to check/diff the file of the current buffer.</p>
-<p>Here is the list of directories where produced output is compared with
-the expected output (stored in a <code>*.expected.out</code> file).</p>
-<ul>
-<li><a href="../tests/lean"><code>tests/lean</code></a></li>
-<li><a href="../tests/lean/interactive"><code>tests/lean/interactive</code></a></li>
-</ul>
-<p>Remark: in the directory <code>tests/lean/interactive</code>, the input test files have extension <code>.input</code>.
-They simulate commands sent from editors to Lean.
-The <code>.lean</code> files in this directory are used to simulate files opened by the user.</p>
+<p>In Emacs, we can also execute <code>M-x lean4-diff-test-file</code> to check/diff the file of the current buffer.
+To mass-copy all <code>.produced.out</code> files to the respective <code>.expected.out</code> file, use <code>tests/lean/copy-produced</code>.
+When using the Nix setup, add <code>--keep-failed</code> to the <code>nix build</code> call and then call</p>
+<pre><code class="language-sh">tests/lean/copy-produced &lt;build-dir&gt;/source/tests/lean
+</code></pre>
+<p>instead where <code>&lt;build-dir&gt;</code> is the path printed out by <code>nix build</code>.</p>
 
                     </main>
 
