@@ -1015,6 +1015,9 @@ structure Substring where
   startPos : String.Pos
   stopPos : String.Pos
 
+@[inline] def Substring.bsize : Substring → Nat
+  | ⟨_, b, e⟩ => e.sub b
+
 def String.csize (c : Char) : Nat :=
   c.utf8Size.toNat
 
@@ -1697,6 +1700,20 @@ def getPos (stx : Syntax) : Option String.Pos :=
   | some info => info.pos
   | _         => none
 
+partial def getTailPos : Syntax → Option String.Pos
+  -- add textual extent only for non-synthetic tokens, i.e. ones that actually visible in the editor
+  | atom info@{ pos := some pos, .. }  val    => ite (Eq info.isSynthetic true) (some pos) (some (pos.add val.bsize))
+  | ident info@{ pos := some pos, .. } val .. => ite (Eq info.isSynthetic true) (some pos) (some (pos.add val.bsize))
+  | node _ args                               =>
+    let rec loop (i : Nat) : Option String.Pos :=
+      match decide (Less i args.size) with
+      | true => match getTailPos (args.get! ((args.size.sub i).sub 1)) with
+         | some info => some info
+         | none      => loop (hAdd i 1)
+      | false => none
+    loop 0
+  | _                                         => none
+
 /--
   An array of syntax elements interspersed with separators. Can be coerced to/from `Array Syntax` to automatically
   remove/insert the separators. -/
@@ -1790,8 +1807,13 @@ class MonadQuotation (m : Type → Type) extends MonadRef m where
 
 export MonadQuotation (getCurrMacroScope getMainModule withFreshMacroScope)
 
+-- TODO: remove
 def MonadRef.mkInfoFromRefPos [Monad m] [MonadRef m] : m SourceInfo := do
   return { pos := (← getRef).getPos }
+
+def MonadRef.withInfosFromRefPos [Monad m] [MonadRef m] (x : SourceInfo → SourceInfo → m α) : m α := do
+  let ref ← getRef
+  x { pos := ref.getPos } { pos := ref.getTailPos }
 
 instance {m n : Type → Type} [MonadFunctor m n] [MonadLift m n] [MonadQuotation m] : MonadQuotation n where
   getCurrMacroScope   := liftM (m := m) getCurrMacroScope

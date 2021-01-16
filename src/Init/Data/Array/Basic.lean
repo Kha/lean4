@@ -332,6 +332,19 @@ def allM {α : Type u} {m : Type → Type w} [Monad m] (p : α → m Bool) (as :
   return !(← as.anyM fun v => return !(← p v))
 
 @[inline]
+def findIdxRevM? [Monad m] (as : Array α) (p : α → Bool) : m (Option Nat) :=
+  let rec @[specialize] find : (i : Nat) → i ≤ as.size → m (Option Nat)
+    | 0,   h => pure none
+    | i+1, h => do
+      have i < as.size from Nat.ltOfLtOfLe (Nat.ltSuccSelf _) h
+      if (← p (as.get ⟨i, this⟩)) then
+        return some i
+      else
+        have i ≤ as.size from Nat.leOfLt this
+        find i this
+  find as.size (Nat.leRefl _)
+
+@[inline]
 def findSomeRevM? {α : Type u} {β : Type v} {m : Type v → Type w} [Monad m] (as : Array α) (f : α → m (Option β)) : m (Option β) :=
   let rec @[specialize] find : (i : Nat) → i ≤ as.size → m (Option β)
     | 0,   h => pure none
@@ -394,6 +407,10 @@ def findSomeRev? {α : Type u} {β : Type v} (as : Array α) (f : α → Option 
 @[inline]
 def findRev? {α : Type} (as : Array α) (p : α → Bool) : Option α :=
   Id.run <| as.findRevM? p
+
+@[inline]
+def findIdxRev? {α : Type} (as : Array α) (p : α → Bool) : Option Nat :=
+  Id.run <| as.findIdxRevM? p
 
 @[inline]
 def findIdx? {α : Type u} (as : Array α) (p : α → Bool) : Option Nat :=

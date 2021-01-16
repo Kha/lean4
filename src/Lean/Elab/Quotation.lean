@@ -41,23 +41,33 @@ partial def mkTuple : Array Syntax → TermElabM Syntax
     let stx ← mkTuple (es.eraseIdx 0)
     `(Prod.mk $(es[0]) $stx)
 
+partial def hasToken : Syntax → Bool
+  | Syntax.atom ..     => true
+  | Syntax.ident ..    => true
+  | Syntax.node _ args => args.any hasToken
+  | _                  => false
+
 -- Elaborate the content of a syntax quotation term
-private partial def quoteSyntax : Syntax → TermElabM Syntax
-  | Syntax.ident info rawVal val preresolved => do
+private partial def quoteSyntax (stx : Syntax) (isFirst isLast : Bool) : TermElabM Syntax := do
+  let info ← if isLast && !isFirst then `(lastInfo) else `(info)
+  match stx with
+  | Syntax.ident _ rawVal val preresolved => do
     -- Add global scopes at compilation time (now), add macro scope at runtime (in the quotation).
     -- See the paper for details.
     let r ← resolveGlobalName val
     let preresolved := r ++ preresolved
     let val := quote val
     -- `scp` is bound in stxQuot.expand
-    `(Syntax.ident info $(quote rawVal) (addMacroScope mainModule $val scp) $(quote preresolved))
+    `(Syntax.ident $info $(quote rawVal) (addMacroScope mainModule $val scp) $(quote preresolved))
+  | Syntax.atom _ val =>
+    `(Syntax.atom $info $(quote val))
   -- if antiquotation, insert contents as-is, else recurse
   | stx@(Syntax.node k _) => do
     if isAntiquot stx && !isEscapedAntiquot stx then
       getAntiquotTerm stx
     else if isTokenAntiquot stx && !isEscapedAntiquot stx then
       match stx[0] with
-      | Syntax.atom _ val => `(Syntax.atom (Option.getD (getHeadInfo $(getAntiquotTerm stx)) info) $(quote val))
+      | Syntax.atom _ val => `(Syntax.atom (Option.getD (getHeadInfo $(getAntiquotTerm stx)) $info) $(quote val))
       | _                 => throwErrorAt stx "expected token"
     else if isAntiquotSuffixSplice stx && !isEscapedAntiquot stx then
       -- splices must occur in a `many` node
@@ -65,23 +75,26 @@ private partial def quoteSyntax : Syntax → TermElabM Syntax
     else if isAntiquotSplice stx && !isEscapedAntiquot stx then
       throwErrorAt stx "unexpected antiquotation splice"
     else
-      let empty ← `(Array.empty);
       -- if escaped antiquotation, decrement by one escape level
       let stx := unescapeAntiquot stx
-      let args ← stx.getArgs.foldlM (fun args arg => do
+      let mut args ← `(Array.empty)
+      let mut isFirst := isFirst
+      let lastArgIdx := if isLast then stx.getArgs.findIdxRev? hasToken |>.getD stx.getNumArgs else 0
+      let mut idx := 0
+      for arg in stx.getArgs do
         if k == nullKind && isAntiquotSuffixSplice arg then
           let antiquot := getAntiquotSuffixSpliceInner arg
-          match antiquotSuffixSplice? arg with
-          | `optional => `(Array.appendCore $args (match $(getAntiquotTerm antiquot):term with
-            | some x => Array.empty.push x
-            | none   => Array.empty))
-          | `many     => `(Array.appendCore $args $(getAntiquotTerm antiquot))
-          | `sepBy    => `(Array.appendCore $args (@SepArray.elemsAndSeps $(getSepFromSplice arg) $(getAntiquotTerm antiquot)))
-          | k         => throwErrorAt! arg "invalid antiquotation suffix splice kind '{k}'"
+          args ← match antiquotSuffixSplice? arg with
+            | `optional => `(Array.appendCore $args (match $(getAntiquotTerm antiquot):term with
+              | some x => Array.empty.push x
+              | none   => Array.empty))
+            | `many     => `(Array.appendCore $args $(getAntiquotTerm antiquot))
+            | `sepBy    => `(Array.appendCore $args (@SepArray.elemsAndSeps $(getSepFromSplice arg) $(getAntiquotTerm antiquot)))
+            | k         => throwErrorAt! arg "invalid antiquotation suffix splice kind '{k}'"
         else if k == nullKind && isAntiquotSplice arg then
           let k := antiquotSpliceKind? arg
           let (arg, bindLets) ← floatOutAntiquotTerms arg |>.run pure
-          let inner ← (getAntiquotSpliceContents arg).mapM quoteSyntax
+          let inner ← (getAntiquotSpliceContents arg).mapM <| quoteSyntax (isFirst := false) (isLast := false)
           let ids ← getAntiquotationIds arg
           if ids.isEmpty then
             throwErrorAt stx "antiquotation splice must contain at least one antiquotation"
@@ -97,13 +110,13 @@ private partial def quoteSyntax : Syntax → TermElabM Syntax
               `(mkSepArray $arr (mkAtom $(getSepFromSplice arg)))
             else arr
           let arr ← bindLets arr
-          `(Array.appendCore $args $arr)
+          args ← `(Array.appendCore $args $arr)
         else do
-          let arg ← quoteSyntax arg;
-          `(Array.push $args $arg)) empty
+          let arg ← quoteSyntax arg (isFirst := isFirst) (isLast := isLast && idx == lastArgIdx)
+          args ← `(Array.push $args $arg)
+        isFirst := isFirst && !hasToken arg
+        idx     := idx + 1
       `(Syntax.node $(quote k) $args)
-  | Syntax.atom _ val =>
-    `(Syntax.atom info $(quote val))
   | Syntax.missing => unreachable!
 
 def stxQuot.expand (stx : Syntax) : TermElabM Syntax := do
@@ -113,8 +126,8 @@ def stxQuot.expand (stx : Syntax) : TermElabM Syntax := do
      we preserve referential transparency), so we can refer to this same `scp` inside `quoteSyntax` by
      including it literally in a syntax quotation. -/
   -- TODO: simplify to `(do scp ← getCurrMacroScope; pure $(quoteSyntax quoted))
-  let stx ← quoteSyntax stx.getQuotContent;
-  `(Bind.bind MonadRef.mkInfoFromRefPos (fun info =>
+  let stx ← quoteSyntax stx.getQuotContent (isFirst := true) (isLast := true)
+  `(MonadRef.withInfosFromRefPos (fun info lastInfo =>
       Bind.bind getCurrMacroScope (fun scp =>
         Bind.bind getMainModule (fun mainModule => Pure.pure $stx))))
   /- NOTE: It may seem like the newly introduced binding `scp` may accidentally
