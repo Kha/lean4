@@ -18,8 +18,8 @@ lean_object* l_Lean_IR_Borrow_updateParamMap___boxed__const__1;
 lean_object* l_Lean_IR_Borrow_ParamMap_fmt___closed__1;
 lean_object* l_Std_AssocList_replace___at_Lean_IR_Borrow_OwnedSet_insert___spec__6(lean_object*, lean_object*, lean_object*);
 size_t l_USize_add(size_t, size_t);
+extern lean_object* l_Lean_Name_getString_x21___closed__3;
 lean_object* l_Lean_IR_Borrow_ParamMap_fmt___closed__2;
-extern lean_object* l_Lean_Syntax_strLitToAtom___closed__3;
 uint8_t l_Lean_IR_Borrow_OwnedSet_beq(lean_object*, lean_object*);
 extern lean_object* l_Lean_IR_Decl_instInhabitedDecl;
 lean_object* l_Lean_IR_Borrow_ownArg_match__1(lean_object*);
@@ -2465,7 +2465,7 @@ x_1 = l_Lean_IR_Borrow_ApplyParamMap_visitFnBody___closed__1;
 x_2 = l_Lean_IR_Borrow_ApplyParamMap_visitFnBody___closed__2;
 x_3 = lean_unsigned_to_nat(113u);
 x_4 = lean_unsigned_to_nat(17u);
-x_5 = l_Lean_Syntax_strLitToAtom___closed__3;
+x_5 = l_Lean_Name_getString_x21___closed__3;
 x_6 = l___private_Init_Util_0__mkPanicMessageWithDecl(x_1, x_2, x_3, x_4, x_5);
 return x_6;
 }
@@ -2759,7 +2759,7 @@ x_1 = l_Lean_IR_Borrow_ApplyParamMap_visitFnBody___closed__1;
 x_2 = l_Array_mapMUnsafe_map___at_Lean_IR_Borrow_ApplyParamMap_visitDecls___spec__1___closed__1;
 x_3 = lean_unsigned_to_nat(129u);
 x_4 = lean_unsigned_to_nat(19u);
-x_5 = l_Lean_Syntax_strLitToAtom___closed__3;
+x_5 = l_Lean_Name_getString_x21___closed__3;
 x_6 = l___private_Init_Util_0__mkPanicMessageWithDecl(x_1, x_2, x_3, x_4, x_5);
 return x_6;
 }
@@ -3935,7 +3935,7 @@ x_1 = l_Lean_IR_Borrow_ApplyParamMap_visitFnBody___closed__1;
 x_2 = l_Lean_IR_Borrow_getParamInfo___closed__3;
 x_3 = lean_unsigned_to_nat(204u);
 x_4 = lean_unsigned_to_nat(21u);
-x_5 = l_Lean_Syntax_strLitToAtom___closed__3;
+x_5 = l_Lean_Name_getString_x21___closed__3;
 x_6 = l___private_Init_Util_0__mkPanicMessageWithDecl(x_1, x_2, x_3, x_4, x_5);
 return x_6;
 }
@@ -3948,7 +3948,7 @@ x_1 = l_Lean_IR_Borrow_ApplyParamMap_visitFnBody___closed__1;
 x_2 = l_Lean_IR_Borrow_getParamInfo___closed__3;
 x_3 = lean_unsigned_to_nat(205u);
 x_4 = lean_unsigned_to_nat(11u);
-x_5 = l_Lean_Syntax_strLitToAtom___closed__3;
+x_5 = l_Lean_Name_getString_x21___closed__3;
 x_6 = l___private_Init_Util_0__mkPanicMessageWithDecl(x_1, x_2, x_3, x_4, x_5);
 return x_6;
 }

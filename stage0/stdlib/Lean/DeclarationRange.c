@@ -17,6 +17,7 @@ lean_object* l_Array_qsort_sort___at_Lean_initFn____x40_Lean_DeclarationRange___
 lean_object* l_Lean_MapDeclarationExtension_find_x3f___at_Lean_findDeclarationRangesCore_x3f___spec__1(lean_object*, lean_object*, lean_object*);
 extern lean_object* l_Lean_Name_toString___closed__1;
 extern lean_object* l_Lean_mkMapDeclarationExtension___rarg___closed__1;
+extern lean_object* l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__25;
 lean_object* l_Lean_addDeclarationRanges___rarg(lean_object*, lean_object*, lean_object*);
 size_t l_USize_add(size_t, size_t);
 extern lean_object* l_Lean_mkMapDeclarationExtension___rarg___closed__2;
@@ -24,7 +25,6 @@ lean_object* lean_mk_empty_array_with_capacity(lean_object*);
 lean_object* lean_nat_div(lean_object*, lean_object*);
 uint8_t l___private_Lean_Data_Position_0__Lean_decEqPosition____x40_Lean_Data_Position___hyg_16_(lean_object*, lean_object*);
 lean_object* l_Lean_PersistentEnvExtension_getModuleEntries___rarg(lean_object*, lean_object*, lean_object*);
-extern lean_object* l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__26;
 lean_object* lean_name_mk_string(lean_object*, lean_object*);
 uint8_t l_USize_decEq(size_t, size_t);
 lean_object* lean_array_uget(lean_object*, size_t);
@@ -53,10 +53,10 @@ extern lean_object* l_Lean_auxRecExt;
 lean_object* l_Lean_declRangeExt___elambda__4(lean_object*, lean_object*);
 lean_object* lean_nat_add(lean_object*, lean_object*);
 lean_object* l_Lean_Name_toStringWithSep(lean_object*, lean_object*);
-extern lean_object* l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__4;
+extern lean_object* l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__4;
+extern lean_object* l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__27;
 lean_object* l_Lean_findDeclarationRanges_x3f___rarg___lambda__1(lean_object*, lean_object*, lean_object*, lean_object*, uint8_t);
 lean_object* l___private_Lean_DeclarationRange_0__Lean_reprDeclarationRange____x40_Lean_DeclarationRange___hyg_115____closed__3;
-extern lean_object* l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__27;
 lean_object* l_Lean_findDeclarationRanges_x3f___rarg(lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_registerSimplePersistentEnvExtension___rarg___lambda__2(lean_object*, lean_object*, lean_object*);
 lean_object* l_Array_binSearchAux___at_Lean_findDeclarationRangesCore_x3f___spec__3___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
@@ -76,6 +76,7 @@ lean_object* l_Array_qsort_sort___at_Lean_initFn____x40_Lean_DeclarationRange___
 uint8_t l_Lean_instDecidableEqDeclarationRange(lean_object*, lean_object*);
 lean_object* l_Lean_declRangeExt___elambda__1(lean_object*);
 lean_object* l_Lean_initFn____x40_Lean_DeclarationRange___hyg_216____closed__1;
+extern lean_object* l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__26;
 extern lean_object* l_IO_instInhabitedError___closed__1;
 lean_object* l_Std_RBNode_find___at_Lean_findDeclarationRangesCore_x3f___spec__2(lean_object*, lean_object*);
 lean_object* l_Lean_findDeclarationRanges_x3f(lean_object*);
@@ -90,7 +91,6 @@ lean_object* l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_Decla
 lean_object* l___private_Lean_DeclarationRange_0__Lean_reprDeclarationRanges____x40_Lean_DeclarationRange___hyg_172____closed__1;
 lean_object* l_Lean_instInhabitedDeclarationRange___closed__1;
 lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DeclarationRange___hyg_216____spec__3___closed__1;
-extern lean_object* l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__25;
 lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DeclarationRange___hyg_216____spec__3___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_registerSimplePersistentEnvExtension___at_Lean_initFn____x40_Lean_DeclarationRange___hyg_216____spec__4(lean_object*, lean_object*);
 lean_object* l_Lean_declRangeExt___closed__1;
@@ -280,7 +280,7 @@ _start:
 {
 lean_object* x_1; lean_object* x_2; lean_object* x_3; 
 x_1 = l___private_Lean_DeclarationRange_0__Lean_reprDeclarationRange____x40_Lean_DeclarationRange___hyg_115____closed__3;
-x_2 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__4;
+x_2 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__4;
 x_3 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_3, 0, x_1);
 lean_ctor_set(x_3, 1, x_2);
@@ -329,7 +329,7 @@ x_12 = l___private_Lean_DeclarationRange_0__Lean_reprDeclarationRange____x40_Lea
 x_13 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_13, 0, x_11);
 lean_ctor_set(x_13, 1, x_12);
-x_14 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__4;
+x_14 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__4;
 x_15 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_15, 0, x_13);
 lean_ctor_set(x_15, 1, x_14);
@@ -340,15 +340,15 @@ x_17 = l___private_Lean_Data_Position_0__Lean_reprPosition____x40_Lean_Data_Posi
 x_18 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_18, 0, x_15);
 lean_ctor_set(x_18, 1, x_17);
-x_19 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__26;
+x_19 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__26;
 x_20 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_20, 0, x_19);
 lean_ctor_set(x_20, 1, x_18);
-x_21 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__27;
+x_21 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__27;
 x_22 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_22, 0, x_20);
 lean_ctor_set(x_22, 1, x_21);
-x_23 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__25;
+x_23 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__25;
 x_24 = lean_alloc_ctor(3, 2, 0);
 lean_ctor_set(x_24, 0, x_23);
 lean_ctor_set(x_24, 1, x_22);
@@ -438,7 +438,7 @@ _start:
 {
 lean_object* x_1; lean_object* x_2; lean_object* x_3; 
 x_1 = l___private_Lean_DeclarationRange_0__Lean_reprDeclarationRanges____x40_Lean_DeclarationRange___hyg_172____closed__3;
-x_2 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__4;
+x_2 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__4;
 x_3 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_3, 0, x_1);
 lean_ctor_set(x_3, 1, x_2);
@@ -487,7 +487,7 @@ x_12 = l___private_Lean_DeclarationRange_0__Lean_reprDeclarationRanges____x40_Le
 x_13 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_13, 0, x_11);
 lean_ctor_set(x_13, 1, x_12);
-x_14 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__4;
+x_14 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__4;
 x_15 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_15, 0, x_13);
 lean_ctor_set(x_15, 1, x_14);
@@ -498,15 +498,15 @@ x_17 = l___private_Lean_DeclarationRange_0__Lean_reprDeclarationRange____x40_Lea
 x_18 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_18, 0, x_15);
 lean_ctor_set(x_18, 1, x_17);
-x_19 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__26;
+x_19 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__26;
 x_20 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_20, 0, x_19);
 lean_ctor_set(x_20, 1, x_18);
-x_21 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__27;
+x_21 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__27;
 x_22 = lean_alloc_ctor(4, 2, 0);
 lean_ctor_set(x_22, 0, x_20);
 lean_ctor_set(x_22, 1, x_21);
-x_23 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6324____closed__25;
+x_23 = l___private_Init_Meta_0__Lean_Meta_Simp_reprConfig____x40_Init_Meta___hyg_6102____closed__25;
 x_24 = lean_alloc_ctor(3, 2, 0);
 lean_ctor_set(x_24, 0, x_23);
 lean_ctor_set(x_24, 1, x_22);

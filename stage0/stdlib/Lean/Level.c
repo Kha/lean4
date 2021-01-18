@@ -22,10 +22,10 @@ lean_object* l_Array_qsort_sort___at_Lean_Level_normalize___spec__2___closed__1;
 lean_object* l_Lean_Level_getOffsetAux_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
 size_t l_USize_add(size_t, size_t);
 uint8_t l_Lean_Level_isNeverZero(lean_object*);
+extern lean_object* l_Lean_Name_getString_x21___closed__3;
 lean_object* l_Array_qsort_sort___at_Lean_Level_normalize___spec__2___boxed(lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Level_isMax___boxed(lean_object*);
 lean_object* l_Lean_Level_isSucc_match__1(lean_object*);
-extern lean_object* l_Lean_Syntax_strLitToAtom___closed__3;
 lean_object* l_Lean_Level_mvarId_x21___closed__2;
 lean_object* l_Lean_Level_dec_match__1(lean_object*);
 lean_object* lean_mk_empty_array_with_capacity(lean_object*);
@@ -48,7 +48,6 @@ lean_object* l_Array_qpartition_loop___at_Lean_Level_normalize___spec__3___boxed
 lean_object* l_Lean_Level_mkData___closed__3;
 extern lean_object* l_Std_Format_defWidth;
 uint8_t l_Lean_Name_quickLt(lean_object*, lean_object*);
-extern lean_object* l_Lean_myMacro____x40_Init_NotationExtra___hyg_1142____closed__30;
 uint64_t l_UInt64_add(uint64_t, uint64_t);
 lean_object* l_Lean_Level_isExplicit_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
 uint64_t l_Bool_toUInt64(uint8_t);
@@ -290,6 +289,7 @@ lean_object* l_Array_mapMUnsafe_map___at_Lean_Level_PP_Result_quote___spec__2___
 lean_object* l_Lean_Level_depthEx___boxed(lean_object*);
 lean_object* l___private_Lean_Level_0__Lean_Level_PP_Result_formatLst_match__1(lean_object*);
 extern lean_object* l_stx___x2b___closed__3;
+extern lean_object* l_Lean_myMacro____x40_Init_NotationExtra___hyg_1128____closed__30;
 lean_object* l_List_toArrayAux___rarg(lean_object*, lean_object*);
 extern lean_object* l_myMacro____x40_Init_Notation___hyg_12262____closed__7;
 lean_object* lean_level_update_succ(lean_object*, lean_object*);
@@ -4410,7 +4410,7 @@ x_1 = l_Lean_Level_mkData___closed__2;
 x_2 = l_Lean_Level_normalize___closed__1;
 x_3 = lean_unsigned_to_nat(341u);
 x_4 = lean_unsigned_to_nat(11u);
-x_5 = l_Lean_Syntax_strLitToAtom___closed__3;
+x_5 = l_Lean_Name_getString_x21___closed__3;
 x_6 = l___private_Init_Util_0__mkPanicMessageWithDecl(x_1, x_2, x_3, x_4, x_5);
 return x_6;
 }
@@ -5960,7 +5960,7 @@ static lean_object* _init_l_Lean_Level_PP_Result_quote___lambda__3___closed__2()
 _start:
 {
 lean_object* x_1; lean_object* x_2; lean_object* x_3; 
-x_1 = l_Lean_myMacro____x40_Init_NotationExtra___hyg_1142____closed__30;
+x_1 = l_Lean_myMacro____x40_Init_NotationExtra___hyg_1128____closed__30;
 x_2 = l_Lean_Level_PP_Result_quote___lambda__3___closed__1;
 x_3 = lean_name_mk_string(x_1, x_2);
 return x_3;
@@ -6000,7 +6000,7 @@ static lean_object* _init_l_Lean_Level_PP_Result_quote___lambda__4___closed__1()
 _start:
 {
 lean_object* x_1; lean_object* x_2; lean_object* x_3; 
-x_1 = l_Lean_myMacro____x40_Init_NotationExtra___hyg_1142____closed__30;
+x_1 = l_Lean_myMacro____x40_Init_NotationExtra___hyg_1128____closed__30;
 x_2 = l_myMacro____x40_Init_Notation___hyg_12262____closed__7;
 x_3 = lean_name_mk_string(x_1, x_2);
 return x_3;
@@ -6037,7 +6037,7 @@ static lean_object* _init_l_Lean_Level_PP_Result_quote___lambda__5___closed__1()
 _start:
 {
 lean_object* x_1; lean_object* x_2; lean_object* x_3; 
-x_1 = l_Lean_myMacro____x40_Init_NotationExtra___hyg_1142____closed__30;
+x_1 = l_Lean_myMacro____x40_Init_NotationExtra___hyg_1128____closed__30;
 x_2 = l_precMax___closed__3;
 x_3 = lean_name_mk_string(x_1, x_2);
 return x_3;
@@ -6085,7 +6085,7 @@ static lean_object* _init_l_Lean_Level_PP_Result_quote___lambda__6___closed__1()
 _start:
 {
 lean_object* x_1; lean_object* x_2; lean_object* x_3; 
-x_1 = l_Lean_myMacro____x40_Init_NotationExtra___hyg_1142____closed__30;
+x_1 = l_Lean_myMacro____x40_Init_NotationExtra___hyg_1128____closed__30;
 x_2 = l_Lean_Level_PP_Result_format___closed__3;
 x_3 = lean_name_mk_string(x_1, x_2);
 return x_3;

@@ -140,6 +140,7 @@ lean_object* l_Lean_Meta_mkSorry(lean_object*, uint8_t, lean_object*, lean_objec
 lean_object* l_Lean_Meta_mkEqFalse___closed__2;
 lean_object* l_Lean_throwError___at___private_Lean_Meta_AppBuilder_0__Lean_Meta_throwAppBuilderException___spec__1(lean_object*);
 lean_object* l_Lean_Meta_mkCongrFun_match__1(lean_object*);
+extern lean_object* l_myMacro____x40_Init_Data_Array_Basic___hyg_3654____closed__5;
 lean_object* l_Lean_Meta_mkCongrArg___closed__1;
 lean_object* lean_st_ref_take(lean_object*, lean_object*);
 lean_object* l_Lean_Meta_mkEqSymm___closed__2;
@@ -264,6 +265,7 @@ lean_object* l_Lean_Meta_assignExprMVar(lean_object*, lean_object*, lean_object*
 lean_object* l___private_Lean_Meta_AppBuilder_0__Lean_Meta_mkAppOptMAux_match__3___rarg(lean_object*, lean_object*, lean_object*);
 extern lean_object* l_Lean_Syntax_mkApp___closed__1;
 lean_object* l_Lean_Meta_mkEqTrans_match__1(lean_object*);
+extern lean_object* l_myMacro____x40_Init_NotationExtra___hyg_2627____closed__4;
 lean_object* l_Lean_Meta_mkForallCongr(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Meta_synthInstance(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Meta_mkAppM_match__1___rarg(lean_object*, lean_object*);
@@ -297,7 +299,6 @@ lean_object* l___private_Lean_Meta_AppBuilder_0__Lean_Meta_mkAppMArgs_loop___clo
 lean_object* l_Lean_Meta_mkAppM___lambda__1___closed__2;
 lean_object* l___private_Lean_Meta_AppBuilder_0__Lean_Meta_mkAppOptMAux_match__1___rarg(uint8_t, lean_object*, lean_object*);
 lean_object* l_Lean_Meta_mkAppM_match__1(lean_object*);
-extern lean_object* l_myMacro____x40_Init_NotationExtra___hyg_2641____closed__4;
 lean_object* l_Lean_Meta_mkHEqTrans(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_mkApp4(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Meta_getLevel(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
@@ -335,7 +336,6 @@ lean_object* l_Lean_Meta_mkExpectedTypeHint(lean_object*, lean_object*, lean_obj
 lean_object* l_Lean_Meta_mkProjection___lambda__1___closed__4;
 lean_object* l___private_Lean_Meta_AppBuilder_0__Lean_Meta_throwAppBuilderException___rarg___closed__4;
 lean_object* l_Lean_Meta_mkFreshLevelMVar___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
-extern lean_object* l_myMacro____x40_Init_Data_Array_Basic___hyg_3528____closed__5;
 extern lean_object* l_Lean_mkOptionalNode___closed__2;
 lean_object* l_Lean_Meta_mkHEq(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Expr_getAppFn(lean_object*);
@@ -11334,7 +11334,7 @@ x_14 = lean_box(0);
 x_15 = lean_alloc_ctor(1, 2, 0);
 lean_ctor_set(x_15, 0, x_9);
 lean_ctor_set(x_15, 1, x_14);
-x_16 = l_myMacro____x40_Init_Data_Array_Basic___hyg_3528____closed__5;
+x_16 = l_myMacro____x40_Init_Data_Array_Basic___hyg_3654____closed__5;
 x_17 = l_Lean_mkConst(x_16, x_15);
 x_18 = l_Lean_mkApp(x_17, x_1);
 x_19 = l_Lean_mkApp(x_18, x_13);
@@ -11353,7 +11353,7 @@ x_22 = lean_box(0);
 x_23 = lean_alloc_ctor(1, 2, 0);
 lean_ctor_set(x_23, 0, x_9);
 lean_ctor_set(x_23, 1, x_22);
-x_24 = l_myMacro____x40_Init_Data_Array_Basic___hyg_3528____closed__5;
+x_24 = l_myMacro____x40_Init_Data_Array_Basic___hyg_3654____closed__5;
 x_25 = l_Lean_mkConst(x_24, x_23);
 x_26 = l_Lean_mkApp(x_25, x_1);
 x_27 = l_Lean_mkApp(x_26, x_20);
@@ -11915,7 +11915,7 @@ _start:
 lean_object* x_7; lean_object* x_8; lean_object* x_9; lean_object* x_10; 
 x_7 = l_Lean_mkOptionalNode___closed__2;
 x_8 = lean_array_push(x_7, x_1);
-x_9 = l_myMacro____x40_Init_NotationExtra___hyg_2641____closed__4;
+x_9 = l_myMacro____x40_Init_NotationExtra___hyg_2627____closed__4;
 x_10 = l_Lean_Meta_mkAppM(x_9, x_8, x_2, x_3, x_4, x_5, x_6);
 return x_10;
 }
