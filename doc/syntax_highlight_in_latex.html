@@ -167,22 +167,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>We provide a way to syntax-highlight Lean code in LaTeX documents.
-It requires a Python package <code>Pygments</code> and a LaTeX package <code>minted</code>.</p>
-<h2><a class="header" href="#python-package-pygments" id="python-package-pygments">Python Package: <code>Pygments</code></a></h2>
-<p>Checkout <a href="https://bitbucket.org/leanprover/pygments-main">Leanprover's Pygments repository</a> and build Pygments:</p>
-<pre><code class="language-bash">hg clone https://bitbucket.org/leanprover/pygments-main
-cd pygments-main
-make mapfiles
-sudo ./setup.py install
-</code></pre>
-<h2><a class="header" href="#latex-package-minted" id="latex-package-minted">LaTeX package: <code>minted</code></a></h2>
-<p>Save the latest version of <a href="https://raw.githubusercontent.com/gpoore/minted/master/source/minted.sty">minted.sty</a> at the working directory.</p>
-<h2><a class="header" href="#how-to-use-them-example" id="how-to-use-them-example">How to use them (example)</a></h2>
-<p>Please save the following sample LaTeX file as <code>test.tex</code>:</p>
+                        <p>The <a href="https://pygments.org/">Pygments</a> syntax highlighting library has official support for Lean (however, Lean 4 keywords have not been added yet), which can be used in LaTeX via the <a href="https://ctan.org/pkg/minted"><code>minted</code></a> package.</p>
+<h1><a class="header" href="#example" id="example">Example</a></h1>
+<p>Save the following sample LaTeX file as <code>test.tex</code>:</p>
 <pre><code class="language-latex">\documentclass{article}
 \usepackage{minted}
-\setminted{encoding=utf-8}
 \usepackage{fontspec}
 \setmainfont{FreeSerif}
 \setmonofont{FreeMono}
@@ -205,11 +194,19 @@ or.imp_or_right H3 (assume H4 : b - c = 0, sub_eq_zero H4)
 </code></pre>
 <p>Some remarks:</p>
 <ul>
-<li><code>xelatex</code> is required to handle unicode in LaTeX.</li>
-<li><code>--shell-escape</code> option is needed to allow <code>xelatex</code> to execute <code>pygmentize</code> in a shell.</li>
+<li>either <code>xelatex</code> or <code>lualatex</code> is required to handle Unicode characters in the code.</li>
+<li><code>--shell-escape</code> is needed to allow <code>xelatex</code> to execute <code>pygmentize</code> in a shell.</li>
+<li>If the chosen monospace font is missing some Unicode symbols, you can direct them to be displayed using a fallback font or other replacement LaTeX code.</li>
 </ul>
-<h2><a class="header" href="#contribute" id="contribute">Contribute</a></h2>
-<p>Please fork <a href="https://bitbucket.org/leanprover/pygments-main">Leanprover's Pygments repository</a>, improve it, and make a pull-request.</p>
+<pre><code class="language-latex">\usepackage{newunicodechar}
+\newfontfamily{\freeserif}{DejaVu Sans}
+\newunicodechar{✝}{\freeserif{✝}}
+\newunicodechar{𝓞}{\ensuremath{\mathcal{O}}}
+</code></pre>
+<ul>
+<li>minted has a &quot;helpful&quot; feature that draws red boxes around characters the chosen lexer doesn't recognize.
+Since the Lean lexer cannot encompass all user-defined syntax, it is advisable to <a href="https://tex.stackexchange.com/a/343506/14563">work around</a> this feature.</li>
+</ul>
 
                     </main>
 

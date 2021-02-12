@@ -290,18 +290,15 @@ automatically use that stage's corresponding Lean executables, for running tests
 or compiling Lean programs manually, you need to put them into your <code>PATH</code>
 yourself. A simple option for doing that is to use
 <a href="https://github.com/Kha/elan"><code>elan</code></a>, see the next section.</p>
-<p>The only currently supported editor is Emacs, see <code>lean4-mode/README.md</code> for
-basic setup. You can set <code>lean4-rootdir</code> manually to tell it what stage to use:</p>
-<pre><code># while editing the Lean library
-M-x set-variable lean4-rootdir RET &quot;.../build/release/stage0&quot; RET
-# while testing, using a Lean that includes your changes
-M-x set-variable lean4-rootdir RET &quot;.../build/release/stage1&quot; RET
-</code></pre>
-<p>but <code>elan</code> again makes it simple to do that automatically, see below.</p>
+<p>You can use any of the <a href="../setup.html">supported editors</a> for editing the Lean source
+code. If you set up <code>elan</code> as below, opening <code>src/</code> as a <em>workspace folder</em> should
+ensure that stage 0 will be used for file in that directory. You should also set the
+<code>LEAN_SRC_PATH</code> environment variable to the path of the <code>src/</code> directory to enable
+go-to-definition in the stdlib (automatically set when using <code>nix-shell</code>).</p>
 <h2><a class="header" href="#dev-setup-using-elan" id="dev-setup-using-elan">Dev setup using elan</a></h2>
 <p>You can use <a href="https://github.com/Kha/elan"><code>elan</code></a> to easily switch between
 stages and build configurations based on the current directory, both for the
-<code>lean/leanc/leanmake</code> binaries in your shell's PATH and inside Emacs.</p>
+<code>lean/leanc/leanmake</code> binaries in your shell's PATH and inside your editor.</p>
 <p>If you haven't already installed elan, you can do so, without installing a
 default version of Lean, using</p>
 <pre><code class="language-bash">curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh -s -- --default-toolchain none

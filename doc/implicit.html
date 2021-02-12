@@ -230,8 +230,8 @@ section
   def ident := x
 end
 
-variables (α β : Type u)
-variables (a : α) (b : β)
+variable (α β : Type u)
+variable (a : α) (b : β)
 
 #check ident
 #check ident a
@@ -259,7 +259,7 @@ So the expressions in the first two <code>#check</code> commands below are elabo
 but now want to provide the argument explicitly. If <code>foo</code> is such a function, the notation <code>@foo</code> denotes the same function with all
 the arguments made explicit.</p>
 <pre><code class="language-lean"><span class="boring">def ident {α : Type u} (a : α) : α := a
-</span>variables (α β : Type)
+</span>variable (α β : Type)
 
 #check @ident           -- {α : Type u} → α → α
 #check @ident α         -- α → α

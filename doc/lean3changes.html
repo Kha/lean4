@@ -210,7 +210,7 @@ It is often used when we the expected type is a function type with implicit argu
 and we have a constant (<code>reader_t.pure</code> in the example) which also takes implicit arguments. In Lean 4, the elaborator automatically introduces lambda's
 for consuming implicit arguments. We are still exploring this feature and analyzing its impact, but the experience so far has been very positive. As an example,
 here is the example in the link above using Lean 4 implicit lambdas.</p>
-<pre><code class="language-lean"><span class="boring">variables (ρ : Type) (m : Type → Type) [Monad m]
+<pre><code class="language-lean"><span class="boring">variable (ρ : Type) (m : Type → Type) [Monad m]
 </span>instance : Monad (ReaderT ρ m) where
   pure := ReaderT.pure
   bind := ReaderT.bind
@@ -307,7 +307,7 @@ def g {α} [Add α] (a : α) (b? : Option α := none) (c : α) : α :=
   | none   =&gt; a + c
   | some b =&gt; a + b + c
 
-variables {α} [Add α]
+variable {α} [Add α]
 
 example : g = fun (a c : α) =&gt; a + c := rfl
 

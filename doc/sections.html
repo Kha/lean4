@@ -178,8 +178,8 @@ def doTwice (α : Type) (h : α → α) (x : α) : α :=
 def doThrice (α : Type) (h : α → α) (x : α) : α :=
   h (h (h x))
 </code></pre>
-<p>Lean provides us with the <code>variable</code> and <code>variables</code> commands to make such declarations look more compact:</p>
-<pre><code class="language-lean">variables (α β γ : Type)
+<p>Lean provides us with the <code>variable</code> command to make such declarations look more compact:</p>
+<pre><code class="language-lean">variable (α β γ : Type)
 
 def compose (g : β → γ) (f : α → β) (x : α) : γ :=
   g (f x)
@@ -191,8 +191,8 @@ def doThrice (h : α → α) (x : α) : α :=
   h (h (h x))
 </code></pre>
 <p>We can declare variables of any type, not just <code>Type</code> itself:</p>
-<pre><code class="language-lean">variables (α β γ : Type)
-variables (g : β → γ) (f : α → β) (h : α → α)
+<pre><code class="language-lean">variable (α β γ : Type)
+variable (g : β → γ) (f : α → β) (h : α → α)
 variable (x : α)
 
 def compose := g (f x)
@@ -204,15 +204,15 @@ def doThrice := h (h (h x))
 #print doThrice
 </code></pre>
 <p>Printing them out shows that all three groups of definitions have exactly the same effect.</p>
-<p>The <code>variable</code> and <code>variables</code> commands instruct Lean to insert the declared variables as bound variables in definitions that refer to them.
+<p>The <code>variable</code> command instruct Lean to insert the declared variables as bound variables in definitions that refer to them.
 Lean is smart enough to figure out which variables are used explicitly or implicitly in a definition. We can therefore proceed as
 though <code>α</code>, <code>β</code>, <code>γ</code>, <code>g</code>, <code>f</code>, <code>h</code>, and <code>x</code> are fixed objects when we write our definitions, and let Lean abstract
 the definitions for us automatically.</p>
 <p>When declared in this way, a variable stays in scope until the end of the file we are working on.
 Sometimes, however, it is useful to limit the scope of a variable. For that purpose, Lean provides the notion of a <code>section</code>:</p>
 <pre><code class="language-lean">section useful
-  variables (α β γ : Type)
-  variables (g : β → γ) (f : α → β) (h : α → α)
+  variable (α β γ : Type)
+  variable (g : β → γ) (f : α → β) (h : α → α)
   variable (x : α)
 
   def compose := g (f x)
