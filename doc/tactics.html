@@ -305,7 +305,7 @@ theorem ex2 :
     (fun (x : Nat × Nat) (z : Nat × Nat) =&gt; z.2 + x.1) := by
   funext (a, b) (c, d)
   show a + d = d + a
-  rw [Nat.addComm]
+  rw [Nat.add_comm]
 </code></pre>
 <h2><a class="header" href="#induction" id="induction">Induction</a></h2>
 <p>The <code>induction</code> tactic now supports user-defined induction principles with
@@ -345,12 +345,12 @@ theorem ex (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
 
 infix:50 &quot;∈&quot; =&gt; Mem
 
-theorem memSplit {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t :=
+theorem mem_split {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t :=
   match a, as, h with
   | _, _, Mem.head a bs     =&gt; ⟨[], ⟨bs, rfl⟩⟩
   | _, _, Mem.tail a b bs h =&gt;
-    match bs, memSplit h with
-    | _, ⟨s, ⟨t, rfl⟩⟩ =&gt; ⟨b::s, ⟨t, List.consAppend .. ▸ rfl⟩⟩
+    match bs, mem_split h with
+    | _, ⟨s, ⟨t, rfl⟩⟩ =&gt; ⟨b::s, ⟨t, List.cons_append .. ▸ rfl⟩⟩
 </code></pre>
 <p>In the tactic DSL, the right-hand-side of each alternative in a <code>match-with</code> is a sequence of tactics instead of a term.
 Here is a similar proof using the tactic DSL.</p>
@@ -358,14 +358,14 @@ Here is a similar proof using the tactic DSL.</p>
 </span><span class="boring"> | head (a : α) (as : List α)   : Mem a (a::as)
 </span><span class="boring"> | tail (a b : α) (bs : List α) : Mem a bs → Mem a (b::bs)
 </span><span class="boring">infix:50 &quot;∈&quot; =&gt; Mem
-</span>theorem memSplit {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
+</span>theorem mem_split {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
   match a, as, h with
   | _, _, Mem.head a bs     =&gt; exists []; exists bs; rfl
   | _, _, Mem.tail a b bs h =&gt;
-    match bs, memSplit h with
+    match bs, mem_split h with
     | _, ⟨s, ⟨t, rfl⟩⟩ =&gt;
       exists b::s; exists t;
-      rw [List.consAppend]
+      rw [List.cons_append]
 </code></pre>
 <p>We can use <code>match-with</code> nested in tactics.
 Here is a similar proof that uses the <code>induction</code> tactic instead of recursion.</p>
@@ -373,7 +373,7 @@ Here is a similar proof that uses the <code>induction</code> tactic instead of r
 </span><span class="boring"> | head (a : α) (as : List α)   : Mem a (a::as)
 </span><span class="boring"> | tail (a b : α) (bs : List α) : Mem a bs → Mem a (b::bs)
 </span><span class="boring">infix:50 &quot;∈&quot; =&gt; Mem
-</span>theorem memSplit {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
+</span>theorem mem_split {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
   induction as with
   | nil          =&gt; cases h
   | cons b bs ih =&gt; cases h with
@@ -382,7 +382,7 @@ Here is a similar proof that uses the <code>induction</code> tactic instead of r
       match bs, ih h with
       | _, ⟨s, ⟨t, rfl⟩⟩ =&gt;
         exists b::s; exists t
-        rw [List.consAppend]
+        rw [List.cons_append]
 </code></pre>
 <p>You can create your own notation using existing tactics. In the following example,
 we define a simple <code>obtain</code> tactic using macros. We say it is simple because it takes only one
@@ -394,13 +394,13 @@ discriminant. Later, we show how to create more complex automation using macros.
 </span>macro &quot;obtain &quot; p:term &quot; from &quot; d:term : tactic =&gt;
   `(tactic| match $d:term with | $p:term =&gt; ?_)
 
-theorem memSplit {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
+theorem mem_split {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
   induction as with
   | cons b bs ih =&gt; cases h with
     | tail a b bs h =&gt;
       obtain ⟨s, ⟨t, h⟩⟩ from ih h
       exists b::s; exists t
-      rw [h, List.consAppend]
+      rw [h, List.cons_append]
     | head a bs =&gt; exact ⟨[], ⟨bs, rfl⟩⟩
   | nil =&gt; cases h
 
@@ -438,27 +438,27 @@ theorem ex3 (x : α) (h : p) : x = x ∧ p := by
 <h1><a class="header" href="#let-rec" id="let-rec"><code>let-rec</code></a></h1>
 <p>You can use <code>let rec</code> to write local recursive functions. We lifted it to the tactic DSL,
 and you can use it to create proofs by induction.</p>
-<pre><code class="language-lean">theorem lengthReplicateEq {α} (n : Nat) (a : α) : (List.replicate n a).length = n := by
+<pre><code class="language-lean">theorem length_replicate {α} (n : Nat) (a : α) : (List.replicate n a).length = n := by
   let rec aux (n : Nat) (as : List α)
       : (List.replicate.loop a n as).length = n + as.length := by
     match n with
-    | 0   =&gt; rw [Nat.zeroAdd]; rfl
+    | 0   =&gt; rw [Nat.zero_add]; rfl
     | n+1 =&gt;
       show List.length (List.replicate.loop a n (a::as)) = Nat.succ n + as.length
-      rw [aux n, List.lengthConsEq, Nat.addSucc, Nat.succAdd]
+      rw [aux n, List.length_cons, Nat.add_succ, Nat.succ_add]
   exact aux n []
 </code></pre>
 <p>You can also introduce auxiliary recursive declarations using <code>where</code> clause after your definition.
 Lean converts them into a <code>let rec</code>.</p>
-<pre><code class="language-lean">theorem lengthReplicateEq {α} (n : Nat) (a : α) : (List.replicate n a).length = n :=
-  replicateLoopEq n []
+<pre><code class="language-lean">theorem length_replicate {α} (n : Nat) (a : α) : (List.replicate n a).length = n :=
+  loop n []
 where
-  replicateLoopEq n as : (List.replicate.loop a n as).length = n + as.length := by
+  loop n as : (List.replicate.loop a n as).length = n + as.length := by
     match n with
-    | 0   =&gt; rw [Nat.zeroAdd]; rfl
+    | 0   =&gt; rw [Nat.zero_add]; rfl
     | n+1 =&gt;
       show List.length (List.replicate.loop a n (a::as)) = Nat.succ n + as.length
-      rw [replicateLoopEq n, List.lengthConsEq, Nat.addSucc, Nat.succAdd]
+      rw [loop n, List.length_cons, Nat.add_succ, Nat.succ_add]
 </code></pre>
 <h1><a class="header" href="#begin-end-lovers" id="begin-end-lovers"><code>begin-end</code> lovers</a></h1>
 <p>If you love Lean 3 <code>begin ... end</code> tactic blocks and commas, you can define this notation
@@ -471,8 +471,8 @@ macro &quot;begin &quot; ts:tactic,*,? &quot;end&quot;%i : term =&gt; do
 
 theorem ex1 (x : Nat) : x + 0 = 0 + x :=
   begin
-    rw Nat.zeroAdd,
-    rw Nat.addZero,
+    rw Nat.zero_add,
+    rw Nat.add_zero,
   end
 </code></pre>
 
