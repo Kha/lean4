@@ -217,12 +217,12 @@ Lean has a builtin coercion from any type <code>a</code> to <code>Thunk a</code>
 
 #eval g false 1000
 </code></pre>
-<p>In the following example, we use the macro <code>dbgTrace!</code> to demonstrate
+<p>In the following example, we use the macro <code>dbg_trace</code> to demonstrate
 that the Lean runtime caches the value computed by a <code>Thunk</code>.
-We remark that the macro <code>dbgTrace!</code> should be use for debugging purposes
+We remark that the macro <code>dbg_trace</code> should be use for debugging purposes
 only.</p>
 <pre><code class="language-lean">def add1 (x : Nat) : Nat :=
-  dbgTrace! &quot;add1: {x}&quot;
+  dbg_trace &quot;add1: {x}&quot;
   x + 1
 
 def double (x : Thunk Nat) : Nat :=
@@ -241,7 +241,7 @@ def test (x : Nat) : Nat :=
 <p>Note that the message <code>add1: 2</code> is printed only once.
 Now, consider the same example using <code>Unit -&gt; Nat</code> instead of <code>Thunk Nat</code>.</p>
 <pre><code class="language-lean">def add1 (x : Nat) : Nat :=
-  dbgTrace! &quot;add1: {x}&quot;
+  dbg_trace &quot;add1: {x}&quot;
   x + 1
 
 def double (x : Unit -&gt; Nat) : Nat :=
@@ -260,7 +260,7 @@ def test (x : Nat) : Nat :=
 </code></pre>
 <p>Now, the message <code>add1: 2</code> is printed twice.
 It may come as a surprise that it was printed twice instead of three times.
-As we pointed out, <code>dbgTrace!</code> is a macro used for debugging purposes only,
+As we pointed out, <code>dbg_trace</code> is a macro used for debugging purposes only,
 and <code>add1</code> is still considered to be a pure function.
 The Lean compiler performs common subexpression elimination when compiling <code>double</code>,
 and the produced code for <code>double</code> executes <code>x ()</code> only once instead of twice.

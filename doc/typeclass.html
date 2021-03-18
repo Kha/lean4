@@ -250,7 +250,7 @@ has addition:</p>
 <p>The example above demonstrates how type classes are used to overload notation.
 Now, we explore another application. We often need an arbitrary element of a given type.
 Recall that types may not have any elements in Lean.
-It often happens that we would like a definition to return an arbitraryt element in a &quot;corner case.&quot;
+It often happens that we would like a definition to return an arbitrary element in a &quot;corner case.&quot;
 For example, we may like the expression <code>head xs</code> to be of type <code>a</code> when <code>xs</code> is of type <code>List a</code>.
 Similarly, many theorems hold under the additional assumption that a type is not empty.
 For example, if <code>a</code> is a type, <code>exists x : a, x = x</code> is true only if <code>a</code> is not empty.
@@ -406,7 +406,7 @@ the type class <code>OfNat</code>.</p>
   inv : den ≠ 0
 
 instance : OfNat Rational n where
-  ofNat := { num := n, den := 1, inv := decide! }
+  ofNat := { num := n, den := 1, inv := by decide }
 
 instance : ToString Rational where
   toString r := s!&quot;{r.num}/{r.den}&quot;
@@ -420,8 +420,8 @@ instance : ToString Rational where
 <code>OfNat.ofNat Nat 2 (instOfNatNat 2)</code> and
 <code>OfNat.ofNat Rational 2 (instOfNatRational 2)</code> respectively.
 We say the numerals <code>2</code> occurring in the elaborated terms are <em>raw</em> natural numbers.
-You can input the raw natural number <code>2</code> using the macro <code>natLit! 2</code>.</p>
-<pre><code class="language-lean">#check natLit! 2  -- Nat
+You can input the raw natural number <code>2</code> using the macro <code>nat_lit 2</code>.</p>
+<pre><code class="language-lean">#check nat_lit 2  -- Nat
 </code></pre>
 <p>Raw natural numbers are <em>not</em> polymorphic.</p>
 <p>The <code>OfNat</code> instance is parametric on the numeral. So, you can define instances for particular numerals.
@@ -430,7 +430,7 @@ The second argument is often a variable as in the example above, or a <em>raw</e
   unit : α
   op   : α → α → α
 
-instance [s : Monoid α] : OfNat α (natLit! 1) where
+instance [s : Monoid α] : OfNat α (nat_lit 1) where
   ofNat := s.unit
 
 def getUnit [Monoid α] : α :=
@@ -544,7 +544,7 @@ priority to override the builtin ones.</p>
 
 @[defaultInstance 1]
 instance : OfNat Rational n where
-  ofNat := { num := n, den := 1, inv := decide! }
+  ofNat := { num := n, den := 1, inv := by decide }
 
 instance : ToString Rational where
   toString r := s!&quot;{r.num}/{r.den}&quot;

@@ -634,7 +634,7 @@ constant α : Type u
 <pre><code class="language-lean">constant α : Type _
 #check α
 </code></pre>
-<p>Several Lean 3 users use the shorhand <code>Type*</code> for <code>Type _</code>. The <code>Type*</code> notation is not builtin in Lean 4, but you can easily define it using a <code>macro</code>.</p>
+<p>Several Lean 3 users use the shorthand <code>Type*</code> for <code>Type _</code>. The <code>Type*</code> notation is not builtin in Lean 4, but you can easily define it using a <code>macro</code>.</p>
 <pre><code class="language-lean">macro &quot;Type*&quot; : term =&gt; `(Type _)
 
 def f (α : Type*) (a : α) := a
@@ -1135,7 +1135,7 @@ each argument represents.</p>
 #check ident (α := Nat)  -- Nat → Nat
 #check ident (α := Bool) -- Bool → Bool
 </code></pre>
-<h2><a class="header" href="#auto-bound-implict-arguments" id="auto-bound-implict-arguments">Auto Bound Implict Arguments</a></h2>
+<h2><a class="header" href="#auto-bound-implicit-arguments" id="auto-bound-implicit-arguments">Auto Bound Implicit Arguments</a></h2>
 <p>In the previous section, we have shown how implicit arguments make functions more convenient to use.
 However, functions such as <code>compose</code> are still quite verbose to define. Note that the universe
 polymorphic <code>compose</code> is even more verbose than the one previously defined.</p>
@@ -1185,7 +1185,7 @@ and inductive types; everything else follows from those.</p>
 The type <code>NewType</code> consists of nothing more than the objects that are constructed in this way.</p>
 <p>We will see below that the arguments to the constructors can include objects of type <code>NewType</code>,
 subject to a certain &quot;positivity&quot; constraint, which guarantees that elements of <code>NewType</code> are built
-from the bottom up. Roughly speaking, each <code>...</code> can be any function type type constructed from <code>NewType</code>
+from the bottom up. Roughly speaking, each <code>...</code> can be any function type constructed from <code>NewType</code>
 and previously defined types, in which <code>NewType</code> appears, if at all, only as the &quot;target&quot; of the function type.</p>
 <p>We will provide a number of examples of inductive types. We will also consider slight generalizations of the scheme above,
 to mutually defined inductive types, and so-called <em>inductive families</em>.</p>
@@ -1330,7 +1330,7 @@ end Weekday
 <span class="boring">end Weekday
 </span></code></pre>
 <p>We can now prove the general theorem that <code>next (previous d) = d</code> for any weekday <code>d</code>.
-The idea is perform a proof by cases using <code>match</code>, and rely on the fact for each constructor both
+The idea is to perform a proof by cases using <code>match</code>, and rely on the fact for each constructor both
 sides of the equality reduce to the same term.</p>
 <pre><code class="language-lean"><span class="boring">inductive Weekday where
 </span><span class="boring"> | sunday    : Weekday
@@ -1480,7 +1480,7 @@ def p : Point Nat :=
 #eval (p.smul 3).y -- 6
 </code></pre>
 <h2><a class="header" href="#inheritance" id="inheritance">Inheritance</a></h2>
-<p>We can <em>extend</em> existing structures by adding new fields. This feature allow us to simulate a form of <em>inheritance</em>.</p>
+<p>We can <em>extend</em> existing structures by adding new fields. This feature allows us to simulate a form of <em>inheritance</em>.</p>
 <pre><code class="language-lean">structure Point (α : Type u) where
   x : α
   y : α
@@ -1648,7 +1648,7 @@ has addition:</p>
 <p>The example above demonstrates how type classes are used to overload notation.
 Now, we explore another application. We often need an arbitrary element of a given type.
 Recall that types may not have any elements in Lean.
-It often happens that we would like a definition to return an arbitraryt element in a &quot;corner case.&quot;
+It often happens that we would like a definition to return an arbitrary element in a &quot;corner case.&quot;
 For example, we may like the expression <code>head xs</code> to be of type <code>a</code> when <code>xs</code> is of type <code>List a</code>.
 Similarly, many theorems hold under the additional assumption that a type is not empty.
 For example, if <code>a</code> is a type, <code>exists x : a, x = x</code> is true only if <code>a</code> is not empty.
@@ -1804,7 +1804,7 @@ the type class <code>OfNat</code>.</p>
   inv : den ≠ 0
 
 instance : OfNat Rational n where
-  ofNat := { num := n, den := 1, inv := decide! }
+  ofNat := { num := n, den := 1, inv := by decide }
 
 instance : ToString Rational where
   toString r := s!&quot;{r.num}/{r.den}&quot;
@@ -1818,8 +1818,8 @@ instance : ToString Rational where
 <code>OfNat.ofNat Nat 2 (instOfNatNat 2)</code> and
 <code>OfNat.ofNat Rational 2 (instOfNatRational 2)</code> respectively.
 We say the numerals <code>2</code> occurring in the elaborated terms are <em>raw</em> natural numbers.
-You can input the raw natural number <code>2</code> using the macro <code>natLit! 2</code>.</p>
-<pre><code class="language-lean">#check natLit! 2  -- Nat
+You can input the raw natural number <code>2</code> using the macro <code>nat_lit 2</code>.</p>
+<pre><code class="language-lean">#check nat_lit 2  -- Nat
 </code></pre>
 <p>Raw natural numbers are <em>not</em> polymorphic.</p>
 <p>The <code>OfNat</code> instance is parametric on the numeral. So, you can define instances for particular numerals.
@@ -1828,7 +1828,7 @@ The second argument is often a variable as in the example above, or a <em>raw</e
   unit : α
   op   : α → α → α
 
-instance [s : Monoid α] : OfNat α (natLit! 1) where
+instance [s : Monoid α] : OfNat α (nat_lit 1) where
   ofNat := s.unit
 
 def getUnit [Monoid α] : α :=
@@ -1942,7 +1942,7 @@ priority to override the builtin ones.</p>
 
 @[defaultInstance 1]
 instance : OfNat Rational n where
-  ofNat := { num := n, den := 1, inv := decide! }
+  ofNat := { num := n, den := 1, inv := by decide }
 
 instance : ToString Rational where
   toString r := s!&quot;{r.num}/{r.den}&quot;
@@ -2189,12 +2189,12 @@ Lean has a builtin coercion from any type <code>a</code> to <code>Thunk a</code>
 
 #eval g false 1000
 </code></pre>
-<p>In the following example, we use the macro <code>dbgTrace!</code> to demonstrate
+<p>In the following example, we use the macro <code>dbg_trace</code> to demonstrate
 that the Lean runtime caches the value computed by a <code>Thunk</code>.
-We remark that the macro <code>dbgTrace!</code> should be use for debugging purposes
+We remark that the macro <code>dbg_trace</code> should be use for debugging purposes
 only.</p>
 <pre><code class="language-lean">def add1 (x : Nat) : Nat :=
-  dbgTrace! &quot;add1: {x}&quot;
+  dbg_trace &quot;add1: {x}&quot;
   x + 1
 
 def double (x : Thunk Nat) : Nat :=
@@ -2213,7 +2213,7 @@ def test (x : Nat) : Nat :=
 <p>Note that the message <code>add1: 2</code> is printed only once.
 Now, consider the same example using <code>Unit -&gt; Nat</code> instead of <code>Thunk Nat</code>.</p>
 <pre><code class="language-lean">def add1 (x : Nat) : Nat :=
-  dbgTrace! &quot;add1: {x}&quot;
+  dbg_trace &quot;add1: {x}&quot;
   x + 1
 
 def double (x : Unit -&gt; Nat) : Nat :=
@@ -2232,7 +2232,7 @@ def test (x : Nat) : Nat :=
 </code></pre>
 <p>Now, the message <code>add1: 2</code> is printed twice.
 It may come as a surprise that it was printed twice instead of three times.
-As we pointed out, <code>dbgTrace!</code> is a macro used for debugging purposes only,
+As we pointed out, <code>dbg_trace</code> is a macro used for debugging purposes only,
 and <code>add1</code> is still considered to be a pure function.
 The Lean compiler performs common subexpression elimination when compiling <code>double</code>,
 and the produced code for <code>double</code> executes <code>x ()</code> only once instead of twice.
@@ -2329,8 +2329,8 @@ def times2 x := x * 2
 #eval times2 &lt;| add1 &lt;| 100
 </code></pre>
 <p>The result of the previous <code>#eval</code> commands is 202.
-The forward pipeline <code>|&gt;</code> operatior takes a function and an argument and return a value.
-In constrat, the backward pipeline <code>&lt;|</code> operator takes an argument and a function and returns a value.
+The forward pipeline <code>|&gt;</code> operator takes a function and an argument and return a value.
+In contrast, the backward pipeline <code>&lt;|</code> operator takes an argument and a function and returns a value.
 These operators are useful for minimizing the number of parentheses.</p>
 <pre><code class="language-lean">def add1Times3FilterEven (xs : List Nat) :=
   List.filter (. % 2 == 0) (List.map (. * 3) (List.map (. + 1) xs))
@@ -2373,7 +2373,7 @@ as metavariables. They have a type and a local context. The local context contai
 all local variables in scope.</p>
 <p>In the following example, we prove the same simple theorem using different tactics.
 The keyword <code>by</code> instructs Lean to use the tactic DSL to construct a term.
-Our initial goal is a hole with type <code>p ∨ q → q ∨ p</code>. We tactic <code>intro h</code>
+Our initial goal is a hole with type <code>p ∨ q → q ∨ p</code>. The tactic <code>intro h</code>
 fills this hole using the term <code>fun h =&gt; ?m</code> where <code>?m</code> is a new hole we need to solve.
 This hole has type <code>q ∨ p</code>, and the local context contains <code>h : p ∨ q</code>.
 The tactic <code>cases</code> fills the hole using <code>Or.casesOn h (fun h1 =&gt; ?m1) (fun h2 =&gt; ?m2)</code>
@@ -2510,7 +2510,7 @@ theorem Nat.mod.inductionOn
 theorem ex (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
   induction x, y using Nat.mod.inductionOn generalizing h with
   | ind x y h₁ ih =&gt;
-    rw [Nat.modEqSubMod h₁.2]
+    rw [Nat.mod_eq_sub_mod h₁.2]
     exact ih h
   | base x y h₁ =&gt;
      have ¬ 0 &lt; y ∨ ¬ y ≤ x from Iff.mp (Decidable.notAndIffOrNot ..) h₁
@@ -2518,7 +2518,7 @@ theorem ex (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
      | Or.inl h₁ =&gt; exact absurd h h₁
      | Or.inr h₁ =&gt;
        have hgt : y &gt; x from Nat.gtOfNotLe h₁
-       rw [← Nat.modEqOfLt hgt] at hgt
+       rw [← Nat.mod_eq_of_lt hgt] at hgt
        assumption
 </code></pre>
 <h2><a class="header" href="#cases" id="cases">Cases</a></h2>
@@ -2562,7 +2562,7 @@ Here is a similar proof that uses the <code>induction</code> tactic instead of r
 </span><span class="boring"> | tail (a b : α) (bs : List α) : Mem a bs → Mem a (b::bs)
 </span><span class="boring">infix:50 &quot;∈&quot; =&gt; Mem
 </span>theorem mem_split {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
-  induction as with
+  induction as generalizing h with
   | nil          =&gt; cases h
   | cons b bs ih =&gt; cases h with
     | head a bs =&gt; exact ⟨[], ⟨bs, rfl⟩⟩
@@ -2583,7 +2583,7 @@ discriminant. Later, we show how to create more complex automation using macros.
   `(tactic| match $d:term with | $p:term =&gt; ?_)
 
 theorem mem_split {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
-  induction as with
+  induction as generalizing h with
   | cons b bs ih =&gt; cases h with
     | tail a b bs h =&gt;
       obtain ⟨s, ⟨t, h⟩⟩ from ih h
@@ -2680,7 +2680,7 @@ postfix:max &quot;⁻¹&quot; =&gt; Inv.inv
 </code></pre>
 <p>After the initial command name describing the operator kind (its &quot;fixity&quot;), we give the <em>parsing precedence</em> of the operator preceded by a colon <code>:</code>, then a new or existing token surrounded by double quotes (the whitespace is used for pretty printing), then the function this operator should be translated to after the arrow <code>=&gt;</code>.</p>
 <p>The precedence is a natural number describing how &quot;tightly&quot; an operator binds to its arguments, encoding the order of operations.
-We can make this more precise by looking at the commands the commands above unfold to:</p>
+We can make this more precise by looking at the commands above unfold to:</p>
 <pre><code class="language-lean">notation:65 lhs &quot; + &quot; rhs:66 =&gt; HAdd.hAdd lhs rhs
 notation:70 lhs &quot; * &quot; rhs:71 =&gt; HMul.hMul lhs rhs
 notation:80 lhs &quot; ^ &quot; rhs:80 =&gt; HPow.hPow lhs rhs
@@ -3148,7 +3148,7 @@ The lambda expression notation has many new features that are not supported in L
 <ul>
 <li>Pattern matching</li>
 </ul>
-<p>In Lean 4, one can easily create new notation that abbreviates commonly used idioms. One of the them is a
+<p>In Lean 4, one can easily create new notation that abbreviates commonly used idioms. One of them is a
 <code>fun</code> followed by a <code>match</code>. In the following examples, we define a few functions using <code>fun</code>+<code>match</code> notation.</p>
 <pre><code class="language-lean"><span class="boring">namespace ex1
 </span>def Prod.str : Nat × Nat → String :=
@@ -3173,7 +3173,7 @@ def Sum.str : Option Nat → String :=
 </ul>
 <p>In Lean 3 stdlib, we find many <a href="https://github.com/leanprover/lean/blob/master/library/init/category/reader.lean#L39">instances</a> of the dreadful <code>@</code>+<code>_</code> idiom.
 It is often used when we the expected type is a function type with implicit arguments,
-and we have a constant (<code>reader_t.pure</code> in the example) which also takes implicit arguments. In Lean 4, the elaborator automatically introduces lambda's
+and we have a constant (<code>reader_t.pure</code> in the example) which also takes implicit arguments. In Lean 4, the elaborator automatically introduces lambdas
 for consuming implicit arguments. We are still exploring this feature and analyzing its impact, but the experience so far has been very positive. As an example,
 here is the example in the link above using Lean 4 implicit lambdas.</p>
 <pre><code class="language-lean"><span class="boring">variable (ρ : Type) (m : Type → Type) [Monad m]
@@ -3210,7 +3210,7 @@ def id5 : {α : Type} → α → α :=
 <ul>
 <li>Sugar for simple functions</li>
 </ul>
-<p>In Lean 3, we can creating simple functions from infix operators by using parentheses. For example, <code>(+1)</code> is sugar for <code>fun x, x + 1</code>. In Lean 4, we generalize this notation using <code>·</code> As a placeholder. Here are a few examples:</p>
+<p>In Lean 3, we can create simple functions from infix operators by using parentheses. For example, <code>(+1)</code> is sugar for <code>fun x, x + 1</code>. In Lean 4, we generalize this notation using <code>·</code> As a placeholder. Here are a few examples:</p>
 <pre><code class="language-lean"><span class="boring">namespace ex3
 </span>#check (· + 1)
 -- fun a =&gt; a + 1
@@ -3350,7 +3350,7 @@ constant y : Nat
 <span class="boring">end meta1
 </span></code></pre>
 <p>We can instruct Lean to use a foreign function as the implementation for any constant or definition
-using the attribute <code>@[extern &quot;foreign_function&quot;]</code>. It is the user's reponsability to ensure the
+using the attribute <code>@[extern &quot;foreign_function&quot;]</code>. It is the user's responsibility to ensure the
 foreign implementation is correct.
 However, a user mistake here will only impact the code generated by Lean, and
 it will <strong>not</strong> compromise the logical soundness of the system.
@@ -3850,7 +3850,7 @@ contains files such as <a href="../tests/lean/bad_class.lean"><code>bad_class.le
 The later contains the expected output for the test file <code>bad_class.lean</code>.</p>
 <p>When the Lean source code or the standard library are modified, some of these
 tests break because the produced output is slightly different, and we have
-to reflect the changes int the <code>.lean.expected.out</code> files.
+to reflect the changes in the <code>.lean.expected.out</code> files.
 We should not blindly copy the new produced output since we may accidentally
 miss a bug introduced by recent changes.
 The test suite contains commands that allow us to see what changed in a convenient way.

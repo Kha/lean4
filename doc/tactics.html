@@ -185,7 +185,7 @@ as metavariables. They have a type and a local context. The local context contai
 all local variables in scope.</p>
 <p>In the following example, we prove the same simple theorem using different tactics.
 The keyword <code>by</code> instructs Lean to use the tactic DSL to construct a term.
-Our initial goal is a hole with type <code>p ∨ q → q ∨ p</code>. We tactic <code>intro h</code>
+Our initial goal is a hole with type <code>p ∨ q → q ∨ p</code>. The tactic <code>intro h</code>
 fills this hole using the term <code>fun h =&gt; ?m</code> where <code>?m</code> is a new hole we need to solve.
 This hole has type <code>q ∨ p</code>, and the local context contains <code>h : p ∨ q</code>.
 The tactic <code>cases</code> fills the hole using <code>Or.casesOn h (fun h1 =&gt; ?m1) (fun h2 =&gt; ?m2)</code>
@@ -322,7 +322,7 @@ theorem Nat.mod.inductionOn
 theorem ex (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
   induction x, y using Nat.mod.inductionOn generalizing h with
   | ind x y h₁ ih =&gt;
-    rw [Nat.modEqSubMod h₁.2]
+    rw [Nat.mod_eq_sub_mod h₁.2]
     exact ih h
   | base x y h₁ =&gt;
      have ¬ 0 &lt; y ∨ ¬ y ≤ x from Iff.mp (Decidable.notAndIffOrNot ..) h₁
@@ -330,7 +330,7 @@ theorem ex (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
      | Or.inl h₁ =&gt; exact absurd h h₁
      | Or.inr h₁ =&gt;
        have hgt : y &gt; x from Nat.gtOfNotLe h₁
-       rw [← Nat.modEqOfLt hgt] at hgt
+       rw [← Nat.mod_eq_of_lt hgt] at hgt
        assumption
 </code></pre>
 <h2><a class="header" href="#cases" id="cases">Cases</a></h2>
@@ -374,7 +374,7 @@ Here is a similar proof that uses the <code>induction</code> tactic instead of r
 </span><span class="boring"> | tail (a b : α) (bs : List α) : Mem a bs → Mem a (b::bs)
 </span><span class="boring">infix:50 &quot;∈&quot; =&gt; Mem
 </span>theorem mem_split {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
-  induction as with
+  induction as generalizing h with
   | nil          =&gt; cases h
   | cons b bs ih =&gt; cases h with
     | head a bs =&gt; exact ⟨[], ⟨bs, rfl⟩⟩
@@ -395,7 +395,7 @@ discriminant. Later, we show how to create more complex automation using macros.
   `(tactic| match $d:term with | $p:term =&gt; ?_)
 
 theorem mem_split {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
-  induction as with
+  induction as generalizing h with
   | cons b bs ih =&gt; cases h with
     | tail a b bs h =&gt;
       obtain ⟨s, ⟨t, h⟩⟩ from ih h

@@ -246,7 +246,7 @@ constant α : Type u
 <pre><code class="language-lean">constant α : Type _
 #check α
 </code></pre>
-<p>Several Lean 3 users use the shorhand <code>Type*</code> for <code>Type _</code>. The <code>Type*</code> notation is not builtin in Lean 4, but you can easily define it using a <code>macro</code>.</p>
+<p>Several Lean 3 users use the shorthand <code>Type*</code> for <code>Type _</code>. The <code>Type*</code> notation is not builtin in Lean 4, but you can easily define it using a <code>macro</code>.</p>
 <pre><code class="language-lean">macro &quot;Type*&quot; : term =&gt; `(Type _)
 
 def f (α : Type*) (a : α) := a

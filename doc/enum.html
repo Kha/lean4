@@ -306,7 +306,7 @@ end Weekday
 <span class="boring">end Weekday
 </span></code></pre>
 <p>We can now prove the general theorem that <code>next (previous d) = d</code> for any weekday <code>d</code>.
-The idea is perform a proof by cases using <code>match</code>, and rely on the fact for each constructor both
+The idea is to perform a proof by cases using <code>match</code>, and rely on the fact for each constructor both
 sides of the equality reduce to the same term.</p>
 <pre><code class="language-lean"><span class="boring">inductive Weekday where
 </span><span class="boring"> | sunday    : Weekday
