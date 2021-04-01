@@ -204,13 +204,15 @@ mutual
       finally
         modify fun s => { s with syntheticMVars := savedSyntheticMVars }
 
-  partial def runTactic (mvarId : MVarId) (tacticCode : Syntax) : TermElabM Unit := do
-    /- Recall, `tacticCode` is the whole `by ...` expression.
-       We store the `by` because in the future we want to save the initial state information at the `by` position. -/
-    let code := tacticCode[1]
-    modifyThe Meta.State fun s => { s with mctx := s.mctx.instantiateMVarDeclMVars mvarId }
-    let remainingGoals ← withInfoHole mvarId do liftTacticElabM mvarId do evalTactic code; getUnsolvedGoals
-    unless remainingGoals.isEmpty do reportUnsolvedGoals remainingGoals
+  partial def runTactic (mvarId : MVarId) : Syntax → TermElabM Unit
+    | `(by%$byTk $t:tacticSeq) => do
+      modifyThe Meta.State fun s => { s with mctx := s.mctx.instantiateMVarDeclMVars mvarId }
+      let remainingGoals ← withInfoHole mvarId do liftTacticElabM mvarId do
+        Tactic.saveTacticInfoForToken (dbgTrace s!"{Syntax.formatStx byTk none true}" fun _ => byTk)
+        evalTactic t
+        getUnsolvedGoals
+      unless remainingGoals.isEmpty do reportUnsolvedGoals remainingGoals
+    | _ => throwUnsupportedSyntax
 
   /-- Try to synthesize the given pending synthetic metavariable. -/
   private partial def synthesizeSyntheticMVar (mvarSyntheticDecl : SyntheticMVarDecl) (postponeOnError : Bool) (runTactics : Bool) : TermElabM Bool :=
