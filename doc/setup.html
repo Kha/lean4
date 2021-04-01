@@ -233,6 +233,11 @@ $ nix run .#vscode-dev MyPackage.lean  # ditto, using VS Code
 </code></pre>
 <p>Note that if you rename <code>MyPackage.lean</code>, you also have to adjust the <code>name</code> attribute in <code>flake.nix</code> accordingly.</p>
 <p>As in the basic setup, changes need to be saved to be visible in other files, which have then to be invalidated via an editor command.</p>
+<p>If you don't want to or cannot start the pinned editor from Nix, e.g. because you're running Lean inside WSL/a container/on a different machine, you can manually point your editor at the <code>lean</code> wrapper script the commands above use internally:</p>
+<pre><code class="language-bash">$ nix build .#lean-dev -o result-lean-dev
+</code></pre>
+<p>The resulting <code>./result-lean-dev/bin/lean</code> script essentially runs <code>nix run .#lean</code> in the current project's root directory when you open a Lean file or use the &quot;refresh dependencies&quot; command such that the correct Lean version for that project is executed.
+This includes selecting the correct stage of Lean (which it will compile on the fly, though without progress output) if you are <a href="../make/nix.html#editor-integration">working on Lean itself</a>.</p>
 <p>Package dependencies can be added as further input flakes and passed to the <code>deps</code> list of <code>buildLeanPackage</code>. Example: <a href="https://github.com/Kha/testpkg2/blob/master/flake.nix#L5">https://github.com/Kha/testpkg2/blob/master/flake.nix#L5</a></p>
 <p>For hacking, it can be useful to temporarily override an input with a local checkout/different version of a dependency:</p>
 <pre><code class="language-bash">$ nix build --override-input somedep path/to/somedep

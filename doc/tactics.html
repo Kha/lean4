@@ -320,7 +320,7 @@ theorem Nat.mod.inductionOn
 -/
 
 theorem ex (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
-  induction x, y using Nat.mod.inductionOn generalizing h with
+  induction x, y using Nat.mod.inductionOn with
   | ind x y h₁ ih =&gt;
     rw [Nat.mod_eq_sub_mod h₁.2]
     exact ih h
@@ -374,7 +374,7 @@ Here is a similar proof that uses the <code>induction</code> tactic instead of r
 </span><span class="boring"> | tail (a b : α) (bs : List α) : Mem a bs → Mem a (b::bs)
 </span><span class="boring">infix:50 &quot;∈&quot; =&gt; Mem
 </span>theorem mem_split {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
-  induction as generalizing h with
+  induction as with
   | nil          =&gt; cases h
   | cons b bs ih =&gt; cases h with
     | head a bs =&gt; exact ⟨[], ⟨bs, rfl⟩⟩
@@ -395,7 +395,7 @@ discriminant. Later, we show how to create more complex automation using macros.
   `(tactic| match $d:term with | $p:term =&gt; ?_)
 
 theorem mem_split {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a :: t := by
-  induction as generalizing h with
+  induction as with
   | cons b bs ih =&gt; cases h with
     | tail a b bs h =&gt;
       obtain ⟨s, ⟨t, h⟩⟩ from ih h
@@ -406,34 +406,33 @@ theorem mem_split {a : α} {as : List α} (h : a ∈ as) : ∃ s t, as = s ++ a 
 
 </code></pre>
 <h2><a class="header" href="#extensible-tactics" id="extensible-tactics">Extensible tactics</a></h2>
-<p>In the following example, we define the notation <code>trivial</code> for the tactic DSL using
+<p>In the following example, we define the notation <code>triv</code> for the tactic DSL using
 the command <code>syntax</code>. Then, we use the command <code>macro_rules</code> to specify what should
-be done when <code>trivial</code> is used. You can provide different expansions, and the tactic DSL
+be done when <code>triv</code> is used. You can provide different expansions, and the tactic DSL
 interpreter will try all of them until one succeeds.</p>
 <pre><code class="language-lean">-- Define a new notation for the tactic DSL
-syntax &quot;trivial&quot; : tactic
+syntax &quot;triv&quot; : tactic
 
 macro_rules
-  | `(tactic| trivial) =&gt; `(tactic| assumption)
+  | `(tactic| triv) =&gt; `(tactic| assumption)
 
 theorem ex1 (h : p) : p := by
-  trivial
+  triv
 
--- You cannot prove the following theorem using `trivial`
+-- You cannot prove the following theorem using `triv`
 -- theorem ex2 (x : α) : x = x := by
---  trivial
+--  triv
 
--- Let's extend `trivial`. The `by` DSL interpreter
--- tries all possible macro extensions for `trivial` until one succeeds
+-- Let's extend `triv`. The `by` DSL interpreter
+-- tries all possible macro extensions for `triv` until one succeeds
 macro_rules
-  | `(tactic| trivial) =&gt; `(tactic| rfl)
+  | `(tactic| triv) =&gt; `(tactic| rfl)
 
 theorem ex2 (x : α) : x = x := by
-  trivial
+  triv
 
 theorem ex3 (x : α) (h : p) : x = x ∧ p := by
-  apply And.intro
-  repeat trivial
+  apply And.intro &lt;;&gt; triv
 </code></pre>
 <h1><a class="header" href="#let-rec" id="let-rec"><code>let-rec</code></a></h1>
 <p>You can use <code>let rec</code> to write local recursive functions. We lifted it to the tactic DSL,

@@ -176,20 +176,20 @@ Significant syntax extensions already builtin into Lean such as the <a href="./d
 Going beyond basic notations, Lean's ability to factor out common boilerplate code into (well-behaved) macros and to embed entire custom domain specific languages (DSLs) to textually encode subproblems efficiently and readably can be of great benefit to both programmers and proof engineers alike.</p>
 <h2><a class="header" href="#notations-and-precedence" id="notations-and-precedence">Notations and Precedence</a></h2>
 <p>The most basic syntax extension commands allow introducing new (or overloading existing) prefix, infix, and postfix operators.</p>
-<pre><code class="language-lean">infixl:65 &quot; + &quot;  =&gt; HAdd.hAdd  -- left-associative
-infix:70  &quot; * &quot;  =&gt; HMul.hMul  -- ditto
-infixr:80 &quot; ^ &quot;  =&gt; HPow.hPow  -- right-associative
-prefix:100 &quot;-&quot;   =&gt; Neg.neg
-postfix:max &quot;⁻¹&quot; =&gt; Inv.inv
+<pre><code class="language-lean">infixl:65   &quot; + &quot; =&gt; HAdd.hAdd  -- left-associative
+infix:50    &quot; = &quot; =&gt; Eq         -- non-associative
+infixr:80   &quot; ^ &quot; =&gt; HPow.hPow  -- right-associative
+prefix:100  &quot;-&quot;   =&gt; Neg.neg
+postfix:max &quot;⁻¹&quot;  =&gt; Inv.inv
 </code></pre>
 <p>After the initial command name describing the operator kind (its &quot;fixity&quot;), we give the <em>parsing precedence</em> of the operator preceded by a colon <code>:</code>, then a new or existing token surrounded by double quotes (the whitespace is used for pretty printing), then the function this operator should be translated to after the arrow <code>=&gt;</code>.</p>
 <p>The precedence is a natural number describing how &quot;tightly&quot; an operator binds to its arguments, encoding the order of operations.
 We can make this more precise by looking at the commands above unfold to:</p>
-<pre><code class="language-lean">notation:65 lhs &quot; + &quot; rhs:66 =&gt; HAdd.hAdd lhs rhs
-notation:70 lhs &quot; * &quot; rhs:71 =&gt; HMul.hMul lhs rhs
-notation:80 lhs &quot; ^ &quot; rhs:80 =&gt; HPow.hPow lhs rhs
+<pre><code class="language-lean">notation:65 lhs:65 &quot; + &quot; rhs:66 =&gt; HAdd.hAdd lhs rhs
+notation:50 lhs:51 &quot; = &quot; rhs:51 =&gt; Eq lhs rhs
+notation:80 lhs:81 &quot; ^ &quot; rhs:80 =&gt; HPow.hPow lhs rhs
 notation:100 &quot;-&quot; arg:100 =&gt; Neg.neg arg
-notation:1000 arg &quot;⁻¹&quot; =&gt; Inv.inv arg  -- `max` is a shorthand for precedence 1000
+notation:1000 arg:1000 &quot;⁻¹&quot; =&gt; Inv.inv arg  -- `max` is a shorthand for precedence 1000
 </code></pre>
 <p>It turns out that all commands from the first code block are in fact command <em>macros</em> translating to the more general <code>notation</code> command.
 We will learn about writing such macros below.
@@ -197,9 +197,12 @@ Instead of a single token, the <code>notation</code> command accepts a mixed seq
 A placeholder with precedence <code>p</code> accepts only notations with precedence at least <code>p</code> in that place.
 Thus the string <code>a + b + c</code> cannot be parsed as the equivalent of <code>a + (b + c)</code> because the right-hand side operand of an <code>infixl</code> notation has precedence one greater than the notation itself.
 In contrast, <code>infixr</code> reuses the notation's precedence for the right-hand side operand, so <code>a ^ b ^ c</code> <em>can</em> be parsed as <code>a ^ (b ^ c)</code>.
-Note that the left-hand side operand as a leading placeholder does not and cannot take a precedence because Lean uses a <em>left-to-right, left-most derivation</em> parser, or <em>LL</em> parser, so when it encounters e.g. the <code>+</code> token, the term <code>lhs</code> has already been parsed and there is nothing left to check.
-You might wonder, then, what prevents Lean from parsing <code>a ^ b ^ c</code> as <code>(a ^ b) ^ c</code> instead when there is no precedence restriction on the first operand.
-The answer is that Lean's parser follows a local <em>longest parse</em> rule in the presence of ambiguous grammars: when parsing the right-hand side of <code>a ^</code>, it will continue parsing as long as possible (as the current precedence allows), not stopping after <code>b</code> but parsing <code>^ c</code> as well.</p>
+Note that if we used <code>notation</code> directly to introduce an infix notation like</p>
+<pre><code class="language-lean">notation:65 lhs:65 &quot; ~ &quot; rhs:65 =&gt; wobble lhs rhs
+</code></pre>
+<p>where the precedences do not sufficiently determine associativity, Lean's parser will default to right associativity.
+More precisely, Lean's parser follows a local <em>longest parse</em> rule in the presence of ambiguous grammars: when parsing the right-hand side of <code>a ~</code> in <code>a ~ b ~ c</code>, it will continue parsing as long as possible (as the current precedence allows), not stopping after <code>b</code> but parsing <code>~ c</code> as well.
+Thus the term is equivalent to <code>a ~ (b ~ c)</code>.</p>
 <p>As mentioned above, the <code>notation</code> command allows us to define arbitrary <em>mixfix</em> syntax freely mixing tokens and placeholders.</p>
 <pre><code class="language-lean">notation:max &quot;(&quot; e &quot;)&quot; =&gt; e
 notation:10 Γ &quot; ⊢ &quot; e &quot; : &quot; τ =&gt; Typing Γ e τ
