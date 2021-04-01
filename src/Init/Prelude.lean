@@ -1685,6 +1685,10 @@ def interpolatedStrKind : SyntaxNodeKind := `interpolatedStrKind
 
 namespace Syntax
 
+def isMissing : Syntax → Bool
+  | missing => true
+  | _       => false
+
 def getKind (stx : Syntax) : SyntaxNodeKind :=
   match stx with
   | Syntax.node k args => k
