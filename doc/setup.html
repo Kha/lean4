@@ -170,13 +170,13 @@
                         <h1><a class="header" href="#setting-up-lean" id="setting-up-lean">Setting Up Lean</a></h1>
 <p>There are currently two ways to set up a Lean 4 development environment:</p>
 <ul>
-<li><a href="./setup.html#basic-setup">basic setup</a> (Linux/macOS/Windows): uses <a href="https://github.com/Kha/elan"><code>elan</code></a> + your preinstalled editor</li>
+<li><a href="./setup.html#basic-setup">basic setup</a> (Linux/macOS/Windows): uses <a href="https://github.com/leanprover/elan"><code>elan</code></a> + your preinstalled editor</li>
 <li><a href="./setup.html#nix-setup">Nix setup</a> (Linux/macOS/WSL): uses the <a href="https://nixos.org/nix/">Nix</a> package manager for installing all dependencies localized to your project</li>
 </ul>
 <p>See also the <a href="./quickstart.html">quickstart</a> instructions for using the basic setup with VS Code as the editor.</p>
 <h2><a class="header" href="#basic-setup" id="basic-setup">Basic Setup</a></h2>
 <p>Release builds for all supported platforms are available at <a href="https://github.com/leanprover/lean4/releases">https://github.com/leanprover/lean4/releases</a>.
-Instead of downloading these and setting up the paths manually, however, it is recommended to use the Lean version manager <a href="https://github.com/Kha/elan"><code>elan</code></a> instead:</p>
+Instead of downloading these and setting up the paths manually, however, it is recommended to use the Lean version manager <a href="https://github.com/leanprover/elan"><code>elan</code></a> instead:</p>
 <pre><code class="language-sh">$ elan self update  # in case you haven't updated elan in a while
 # download &amp; activate latest Lean 4 release (https://github.com/leanprover/lean4/releases)
 $ elan default leanprover/lean4:stable
@@ -223,8 +223,10 @@ It can be set up analogously as a cache for your own project.</p>
 <h3><a class="header" href="#basic-commands" id="basic-commands">Basic Commands</a></h3>
 <p>From a Lean shell, run</p>
 <pre><code class="language-bash">$ nix flake new mypkg -t github:leanprover/lean4
+$ cd mypkg &amp;&amp; git init &amp;&amp; git add flake.nix
 </code></pre>
 <p>to create a new Lean package in directory <code>mypkg</code> using the latest commit of Lean 4.
+Note that Nix Flakes will not recognize your <code>flake.nix</code> file unless it is visible to Git.
 Such packages follow the same directory layout as described in the basic setup above, except for a <code>leanpkg.toml</code> replaced by a <code>flake.nix</code> file set up so you can run Nix commands on it, for example:</p>
 <pre><code class="language-bash">$ nix build  # build package and all dependencies
 $ nix build .#executable  # compile `main` definition into executable (after you've added one)

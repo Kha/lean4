@@ -171,14 +171,11 @@
 <p>These instructions will walk you through setting up Lean using the &quot;basic&quot; setup and VS Code as the editor.
 See <a href="./setup.html">Setup</a> for other ways and more details on setting up Lean.</p>
 <ol>
-<li>Install the latest Lean 4 nightly through <a href="https://github.com/Kha/elan"><code>elan</code></a>: in any bash-compatible shell, run
-<pre><code class="language-sh">$ curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh -s -- --default-toolchain leanprover/lean4:nightly
+<li>Install the latest Lean 4 nightly through <a href="https://github.com/leanprover/elan"><code>elan</code></a>: in any bash-compatible shell, run
+<pre><code class="language-sh">$ curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- --default-toolchain leanprover/lean4:nightly
 </code></pre>
-</li>
-</ol>
-<p>See the <code>elan</code> link above for other installation options and details.
-Note that using Lean with multi-file projects on Windows currently comes with some <a href="./setup.html#leanpkg">additional limitations</a>.</p>
-<ol>
+See the <code>elan</code> link above for other installation options and details.
+Note that using Lean with multi-file projects on Windows currently comes with some <a href="./setup.html#leanpkg">additional limitations</a>.</li>
 <li>Install <a href="https://code.visualstudio.com/">VS Code</a>.</li>
 <li>Open VS Code and install the <code>lean4</code> extension.<br />
 <img src="images/code-ext.png" alt="installing the vscode-lean4 extension" /></li>
@@ -187,11 +184,8 @@ Note that using Lean with multi-file projects on Windows currently comes with so
 
 #eval Leanpkg.leanVersionString
 </code></pre>
-</li>
-</ol>
-<p>You should get a syntax-highlighted file with a &quot;Lean Infoview&quot; on the right that tells you the installed Lean version when placing your cursor on the last line.<br />
-<img src="images/code-success.png" alt="successful setup" /></p>
-<ol>
+You should get a syntax-highlighted file with a &quot;Lean Infoview&quot; on the right that tells you the installed Lean version when placing your cursor on the last line.<br />
+<img src="images/code-success.png" alt="successful setup" /></li>
 <li>You are set up! Try opening a Lean package with a <code>leanpkg.toml</code>. You can create your own packages using <code>leanpkg init</code> on the command line.
 Packages <strong>have</strong> to be opened using &quot;File &gt; Open Folder...&quot; for imports to work.
 Saved changes are visibly in other files after running &quot;Lean 4: Refresh File Dependencies&quot; (<code>Ctrl+Shift+X</code>) in them.</li>

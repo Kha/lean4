@@ -401,13 +401,13 @@ theorem Weekday.nextOfPrevious' (d : Weekday) : next (previous d) = d := by
 <h1><a class="header" href="#setting-up-lean" id="setting-up-lean">Setting Up Lean</a></h1>
 <p>There are currently two ways to set up a Lean 4 development environment:</p>
 <ul>
-<li><a href="./setup.html#basic-setup">basic setup</a> (Linux/macOS/Windows): uses <a href="https://github.com/Kha/elan"><code>elan</code></a> + your preinstalled editor</li>
+<li><a href="./setup.html#basic-setup">basic setup</a> (Linux/macOS/Windows): uses <a href="https://github.com/leanprover/elan"><code>elan</code></a> + your preinstalled editor</li>
 <li><a href="./setup.html#nix-setup">Nix setup</a> (Linux/macOS/WSL): uses the <a href="https://nixos.org/nix/">Nix</a> package manager for installing all dependencies localized to your project</li>
 </ul>
 <p>See also the <a href="./quickstart.html">quickstart</a> instructions for using the basic setup with VS Code as the editor.</p>
 <h2><a class="header" href="#basic-setup" id="basic-setup">Basic Setup</a></h2>
 <p>Release builds for all supported platforms are available at <a href="https://github.com/leanprover/lean4/releases">https://github.com/leanprover/lean4/releases</a>.
-Instead of downloading these and setting up the paths manually, however, it is recommended to use the Lean version manager <a href="https://github.com/Kha/elan"><code>elan</code></a> instead:</p>
+Instead of downloading these and setting up the paths manually, however, it is recommended to use the Lean version manager <a href="https://github.com/leanprover/elan"><code>elan</code></a> instead:</p>
 <pre><code class="language-sh">$ elan self update  # in case you haven't updated elan in a while
 # download &amp; activate latest Lean 4 release (https://github.com/leanprover/lean4/releases)
 $ elan default leanprover/lean4:stable
@@ -454,8 +454,10 @@ It can be set up analogously as a cache for your own project.</p>
 <h3><a class="header" href="#basic-commands" id="basic-commands">Basic Commands</a></h3>
 <p>From a Lean shell, run</p>
 <pre><code class="language-bash">$ nix flake new mypkg -t github:leanprover/lean4
+$ cd mypkg &amp;&amp; git init &amp;&amp; git add flake.nix
 </code></pre>
 <p>to create a new Lean package in directory <code>mypkg</code> using the latest commit of Lean 4.
+Note that Nix Flakes will not recognize your <code>flake.nix</code> file unless it is visible to Git.
 Such packages follow the same directory layout as described in the basic setup above, except for a <code>leanpkg.toml</code> replaced by a <code>flake.nix</code> file set up so you can run Nix commands on it, for example:</p>
 <pre><code class="language-bash">$ nix build  # build package and all dependencies
 $ nix build .#executable  # compile `main` definition into executable (after you've added one)
@@ -485,14 +487,11 @@ Unifying the two formats is TBD.</p>
 <p>These instructions will walk you through setting up Lean using the &quot;basic&quot; setup and VS Code as the editor.
 See <a href="./setup.html">Setup</a> for other ways and more details on setting up Lean.</p>
 <ol>
-<li>Install the latest Lean 4 nightly through <a href="https://github.com/Kha/elan"><code>elan</code></a>: in any bash-compatible shell, run
-<pre><code class="language-sh">$ curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh -s -- --default-toolchain leanprover/lean4:nightly
+<li>Install the latest Lean 4 nightly through <a href="https://github.com/leanprover/elan"><code>elan</code></a>: in any bash-compatible shell, run
+<pre><code class="language-sh">$ curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- --default-toolchain leanprover/lean4:nightly
 </code></pre>
-</li>
-</ol>
-<p>See the <code>elan</code> link above for other installation options and details.
-Note that using Lean with multi-file projects on Windows currently comes with some <a href="./setup.html#leanpkg">additional limitations</a>.</p>
-<ol>
+See the <code>elan</code> link above for other installation options and details.
+Note that using Lean with multi-file projects on Windows currently comes with some <a href="./setup.html#leanpkg">additional limitations</a>.</li>
 <li>Install <a href="https://code.visualstudio.com/">VS Code</a>.</li>
 <li>Open VS Code and install the <code>lean4</code> extension.<br />
 <img src="images/code-ext.png" alt="installing the vscode-lean4 extension" /></li>
@@ -501,11 +500,8 @@ Note that using Lean with multi-file projects on Windows currently comes with so
 
 #eval Leanpkg.leanVersionString
 </code></pre>
-</li>
-</ol>
-<p>You should get a syntax-highlighted file with a &quot;Lean Infoview&quot; on the right that tells you the installed Lean version when placing your cursor on the last line.<br />
-<img src="images/code-success.png" alt="successful setup" /></p>
-<ol>
+You should get a syntax-highlighted file with a &quot;Lean Infoview&quot; on the right that tells you the installed Lean version when placing your cursor on the last line.<br />
+<img src="images/code-success.png" alt="successful setup" /></li>
 <li>You are set up! Try opening a Lean package with a <code>leanpkg.toml</code>. You can create your own packages using <code>leanpkg init</code> on the command line.
 Packages <strong>have</strong> to be opened using &quot;File &gt; Open Folder...&quot; for imports to work.
 Saved changes are visibly in other files after running &quot;Lean 4: Refresh File Dependencies&quot; (<code>Ctrl+Shift+X</code>) in them.</li>
@@ -2602,7 +2598,7 @@ Here is a similar proof that uses the <code>induction</code> tactic instead of r
   | cons b bs ih =&gt; cases h with
     | head a bs =&gt; exact ⟨[], ⟨bs, rfl⟩⟩
     | tail a b bs h =&gt;
-      match bs, ih h with
+      match (generalizing := false) bs, ih h with
       | _, ⟨s, ⟨t, rfl⟩⟩ =&gt;
         exists b::s; exists t
         rw [List.cons_append]
@@ -3127,7 +3123,9 @@ Lean can be also used as a programming language. Actually, some Lean features ar
 <p>In the past, we accepted most pull requests. This practice produced hard to maintain code, performance problems, and bugs.
 It takes time to review a pull request and make sure it is correct, useful and is not in conflict with our plans.
 Small bug fixes (few lines of code) are always welcome. Any other kind of unrequested pull request is not.
-Thus, before implementing a feature or modifying the system, please ask whether the change is welcome or not.</p>
+Thus, before implementing a feature or modifying the system, please ask whether the change is welcome or not.
+We have issues tagged with <a href="https://github.com/leanprover/lean4/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22">&quot;help wanted&quot;</a>, if you want to contribute to the project, please take a look at them.
+If you are interested in one of them, post comments, ask questions, and engage with the core developers there.</p>
 <ul>
 <li>Should I use Lean?</li>
 </ul>
@@ -3689,19 +3687,19 @@ update the stage 0 compiler, which can be done via <code>make -C stageN update-s
 automatically use that stage's corresponding Lean executables, for running tests
 or compiling Lean programs manually, you need to put them into your <code>PATH</code>
 yourself. A simple option for doing that is to use
-<a href="https://github.com/Kha/elan"><code>elan</code></a>, see the next section.</p>
+<a href="https://github.com/leanprover/elan"><code>elan</code></a>, see the next section.</p>
 <p>You can use any of the <a href="make/../setup.html">supported editors</a> for editing the Lean source
 code. If you set up <code>elan</code> as below, opening <code>src/</code> as a <em>workspace folder</em> should
 ensure that stage 0 will be used for file in that directory. You should also set the
 <code>LEAN_SRC_PATH</code> environment variable to the path of the <code>src/</code> directory to enable
 go-to-definition in the stdlib (automatically set when using <code>nix-shell</code>).</p>
 <h2><a class="header" href="#dev-setup-using-elan" id="dev-setup-using-elan">Dev setup using elan</a></h2>
-<p>You can use <a href="https://github.com/Kha/elan"><code>elan</code></a> to easily switch between
+<p>You can use <a href="https://github.com/leanprover/elan"><code>elan</code></a> to easily switch between
 stages and build configurations based on the current directory, both for the
 <code>lean/leanc/leanmake</code> binaries in your shell's PATH and inside your editor.</p>
 <p>If you haven't already installed elan, you can do so, without installing a
 default version of Lean, using</p>
-<pre><code class="language-bash">curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh -s -- --default-toolchain none
+<pre><code class="language-bash">curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- --default-toolchain none
 </code></pre>
 <p>You can use <code>elan toolchain link</code> to give a specific stage build directory a
 reference name, then use <code>elan override set</code> to associate such a name to the
