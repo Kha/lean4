@@ -2598,7 +2598,7 @@ Here is a similar proof that uses the <code>induction</code> tactic instead of r
   | cons b bs ih =&gt; cases h with
     | head a bs =&gt; exact ⟨[], ⟨bs, rfl⟩⟩
     | tail a b bs h =&gt;
-      match (generalizing := false) bs, ih h with
+      match bs, ih h with
       | _, ⟨s, ⟨t, rfl⟩⟩ =&gt;
         exists b::s; exists t
         rw [List.cons_append]
