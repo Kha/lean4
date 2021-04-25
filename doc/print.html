@@ -3929,7 +3929,7 @@ set_option pp.raw.maxDepth 10
 <p><code>interpreter</code>: full execution trace of the interpreter. Only available in debug builds.</p>
 </li>
 </ul>
-<p>In pure contexts, one can instead use <code>dbgTrace! &quot;msg with {interpolations}&quot; val</code>, which will print the message directly to stderr before evaluating val. <code>dbgTraceVal val</code> can be used as a shorthand for <code>dbgTrace! &quot;{val}&quot; val</code>.
+<p>In pure contexts or when execution is aborted before the messages are finally printed, one can instead use the term <code>dbg_trace &quot;msg with {interpolations}&quot;; val</code> (<code>;</code> can also be replaced by a newline), which will print the message directly to stderr before evaluating <code>val</code>. <code>dbgTraceVal val</code> can be used as a shorthand for <code>dbg_trace &quot;{val}&quot;; val</code>.
 Note that if the return value is not actually used, the trace code is silently dropped as well.</p>
 <h2><a class="header" href="#debuggers" id="debuggers">Debuggers</a></h2>
 <p><code>gdb</code>/<code>lldb</code> can be used to inspect stack traces of compiled Lean code, though they cannot print values of Lean variables and terms in any legible way yet.
