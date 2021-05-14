@@ -30,6 +30,12 @@ extern "C" {
 #define LEAN_OBJECT_SIZE_DELTA     8
 #define LEAN_MAX_SMALL_OBJECT_SIZE 4096
 
+#ifdef LEAN_WINDOWS
+#define LEAN_EXPORT __declspec(dllexport)
+#else
+#define LEAN_EXPORT
+#endif
+
 #ifdef _MSC_VER
 #define LEAN_ALLOCA(s) _alloca(s)
 #else

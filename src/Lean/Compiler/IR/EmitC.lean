@@ -94,7 +94,7 @@ def emitFnDeclAux (decl : Decl) (cppBaseName : String) (addExternForConsts : Boo
   let ps := decl.params
   let env ← getEnv
   if ps.isEmpty && addExternForConsts then emit "extern "
-  emit (toCType decl.resultType ++ " " ++ cppBaseName)
+  emit s!"LEAN_EXPORT {toCType decl.resultType} {cppBaseName}"
   unless ps.isEmpty do
     emit "("
     -- We omit irrelevant parameters for extern constants
@@ -633,6 +633,8 @@ def emitDeclAux (d : Decl) : M Unit := do
       let baseName ← toCName f;
       if xs.size == 0 then
         emit "static "
+      else
+        emit "LEAN_EXPORT "
       emit (toCType t); emit " ";
       if xs.size > 0 then
         emit baseName;
