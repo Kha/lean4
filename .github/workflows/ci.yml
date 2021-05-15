@@ -24,26 +24,6 @@ jobs:
       matrix:
         include:
           # portable release build: link most libraries statically and use channel with older glibc (2.27; LLVM 7)
-          - name: Linux release
-            os: ubuntu-latest
-            release: true
-            CMAKE_OPTIONS: -DSTATIC=ON
-            shell: nix-shell --arg pkgs "import (fetchTarball \"channel:nixos-19.03\") {{}}" --argstr llvmPackages latest --run "bash -euxo pipefail {0}"
-          - name: Linux
-            os: ubuntu-latest
-            check-stage3: true
-            test-speedcenter: true
-          - name: Linux Debug
-            os: ubuntu-latest
-            CMAKE_OPTIONS: -DCMAKE_BUILD_TYPE=Debug
-          - name: Linux fsanitize
-            os: ubuntu-latest
-            # turn off custom allocator to make LSAN do its magic
-            CMAKE_OPTIONS: -DLEAN_EXTRA_CXX_FLAGS=-fsanitize=address,undefined -DLEANC_EXTRA_FLAGS=-fsanitize=address,undefined -DSMALL_ALLOCATOR=OFF
-          - name: macOS
-            os: macos-latest
-            release: true
-            CMAKE_OPTIONS: -DSTATIC=ON
           - name: Windows
             os: windows-latest
             release: true
