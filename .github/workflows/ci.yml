@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - LEAN_EXPORT
     tags:
       - '*'
   pull_request:
