@@ -13,16 +13,16 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_Lean_Json_compress(lean_object*);
-lean_object* lean_string_from_utf8_unchecked(lean_object*);
-lean_object* l_IO_FS_Stream_readJson(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Json_parse(lean_object*);
-size_t lean_usize_of_nat(lean_object*);
-lean_object* l_IO_FS_Stream_readJson___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_IO_ofExcept___at_IO_FS_Stream_readJson___spec__1(lean_object*, lean_object*);
-lean_object* l_IO_FS_Stream_writeJson(lean_object*, lean_object*, lean_object*);
-lean_object* l_IO_ofExcept___at_IO_FS_Stream_readJson___spec__1___boxed(lean_object*, lean_object*);
-lean_object* l_IO_ofExcept___at_IO_FS_Stream_readJson___spec__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Json_compress(lean_object*);
+LEAN_EXPORT lean_object* lean_string_from_utf8_unchecked(lean_object*);
+LEAN_EXPORT lean_object* l_IO_FS_Stream_readJson(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Json_parse(lean_object*);
+LEAN_EXPORT size_t lean_usize_of_nat(lean_object*);
+LEAN_EXPORT lean_object* l_IO_FS_Stream_readJson___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_IO_ofExcept___at_IO_FS_Stream_readJson___spec__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_IO_FS_Stream_writeJson(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_IO_ofExcept___at_IO_FS_Stream_readJson___spec__1___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_IO_ofExcept___at_IO_FS_Stream_readJson___spec__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -49,7 +49,7 @@ return x_7;
 }
 }
 }
-lean_object* l_IO_FS_Stream_readJson(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_IO_FS_Stream_readJson(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; size_t x_5; lean_object* x_6; lean_object* x_7; 
@@ -98,7 +98,7 @@ return x_16;
 }
 }
 }
-lean_object* l_IO_ofExcept___at_IO_FS_Stream_readJson___spec__1___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_IO_ofExcept___at_IO_FS_Stream_readJson___spec__1___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -107,7 +107,7 @@ lean_dec(x_1);
 return x_3;
 }
 }
-lean_object* l_IO_FS_Stream_readJson___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_IO_FS_Stream_readJson___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -116,7 +116,7 @@ lean_dec(x_2);
 return x_4;
 }
 }
-lean_object* l_IO_FS_Stream_writeJson(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_IO_FS_Stream_writeJson(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; lean_object* x_5; lean_object* x_6; 

@@ -13,35 +13,35 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_EStateM_instReprResult___rarg___closed__4;
-lean_object* l_EStateM_fromStateM_match__1(lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_fromStateM___rarg(lean_object*, lean_object*);
-lean_object* lean_string_append(lean_object*, lean_object*);
-lean_object* l_EStateM_orElse_x27___rarg(lean_object*, lean_object*, lean_object*, uint8_t, lean_object*);
-lean_object* l_EStateM_instToStringResult___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_fromStateM_match__1___rarg(lean_object*, lean_object*);
-extern lean_object* l_instToStringExcept___rarg___closed__1;
-lean_object* l_EStateM_instReprResult_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_instReprResult___rarg___closed__3;
-lean_object* l_EStateM_orElse_x27___rarg___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_instToStringResult(lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_instToStringResult_match__1(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_instMonadFinallyEStateM(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_instReprResult(lean_object*, lean_object*, lean_object*);
-extern lean_object* l_instToStringExcept___rarg___closed__2;
-lean_object* l_EStateM_instReprResult_match__1(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_fromStateM(lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_instReprResult___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_instReprResult___rarg___closed__2;
-lean_object* l_EStateM_instMonadFinallyEStateM___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_instToStringResult_match__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_orElse_x27_match__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_instReprResult___rarg___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_instReprResult___rarg___closed__1;
-lean_object* l_EStateM_orElse_x27(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_orElse_x27_match__1(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Repr_addAppParen(lean_object*, lean_object*);
-lean_object* l_EStateM_instToStringResult_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_EStateM_instReprResult___rarg___closed__4;
+LEAN_EXPORT lean_object* l_EStateM_fromStateM_match__1(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_fromStateM___rarg(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_string_append(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_orElse_x27___rarg(lean_object*, lean_object*, lean_object*, uint8_t, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instToStringResult___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_fromStateM_match__1___rarg(lean_object*, lean_object*);
+extern LEAN_EXPORT lean_object* l_instToStringExcept___rarg___closed__1;
+LEAN_EXPORT lean_object* l_EStateM_instReprResult_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instReprResult___rarg___closed__3;
+LEAN_EXPORT lean_object* l_EStateM_orElse_x27___rarg___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instToStringResult(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instToStringResult_match__1(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instMonadFinallyEStateM(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instReprResult(lean_object*, lean_object*, lean_object*);
+extern LEAN_EXPORT lean_object* l_instToStringExcept___rarg___closed__2;
+LEAN_EXPORT lean_object* l_EStateM_instReprResult_match__1(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_fromStateM(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instReprResult___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instReprResult___rarg___closed__2;
+LEAN_EXPORT lean_object* l_EStateM_instMonadFinallyEStateM___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instToStringResult_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_orElse_x27_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instReprResult___rarg___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instReprResult___rarg___closed__1;
+LEAN_EXPORT lean_object* l_EStateM_orElse_x27(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_orElse_x27_match__1(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Repr_addAppParen(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_instToStringResult_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -70,7 +70,7 @@ return x_9;
 }
 }
 }
-lean_object* l_EStateM_instToStringResult_match__1(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_EStateM_instToStringResult_match__1(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; 
@@ -78,7 +78,7 @@ x_5 = lean_alloc_closure((void*)(l_EStateM_instToStringResult_match__1___rarg), 
 return x_5;
 }
 }
-lean_object* l_EStateM_instToStringResult___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_EStateM_instToStringResult___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_3) == 0)
@@ -109,7 +109,7 @@ return x_11;
 }
 }
 }
-lean_object* l_EStateM_instToStringResult(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_EStateM_instToStringResult(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -117,7 +117,7 @@ x_4 = lean_alloc_closure((void*)(l_EStateM_instToStringResult___rarg), 3, 0);
 return x_4;
 }
 }
-lean_object* l_EStateM_instReprResult_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_EStateM_instReprResult_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -146,7 +146,7 @@ return x_10;
 }
 }
 }
-lean_object* l_EStateM_instReprResult_match__1(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_EStateM_instReprResult_match__1(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; 
@@ -190,7 +190,7 @@ lean_ctor_set(x_2, 0, x_1);
 return x_2;
 }
 }
-lean_object* l_EStateM_instReprResult___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_EStateM_instReprResult___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 if (lean_obj_tag(x_3) == 0)
@@ -227,7 +227,7 @@ return x_16;
 }
 }
 }
-lean_object* l_EStateM_instReprResult(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_EStateM_instReprResult(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -235,7 +235,7 @@ x_4 = lean_alloc_closure((void*)(l_EStateM_instReprResult___rarg___boxed), 4, 0)
 return x_4;
 }
 }
-lean_object* l_EStateM_instReprResult___rarg___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_EStateM_instReprResult___rarg___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; 
@@ -244,7 +244,7 @@ lean_dec(x_4);
 return x_5;
 }
 }
-lean_object* l_EStateM_orElse_x27_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_EStateM_orElse_x27_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -268,7 +268,7 @@ return x_7;
 }
 }
 }
-lean_object* l_EStateM_orElse_x27_match__1(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_EStateM_orElse_x27_match__1(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; 
@@ -276,7 +276,7 @@ x_5 = lean_alloc_closure((void*)(l_EStateM_orElse_x27_match__1___rarg), 3, 0);
 return x_5;
 }
 }
-lean_object* l_EStateM_orElse_x27___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, uint8_t x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_EStateM_orElse_x27___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, uint8_t x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -363,7 +363,7 @@ return x_21;
 }
 }
 }
-lean_object* l_EStateM_orElse_x27(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_EStateM_orElse_x27(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; 
@@ -371,7 +371,7 @@ x_5 = lean_alloc_closure((void*)(l_EStateM_orElse_x27___rarg___boxed), 5, 0);
 return x_5;
 }
 }
-lean_object* l_EStateM_orElse_x27___rarg___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_EStateM_orElse_x27___rarg___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 uint8_t x_6; lean_object* x_7; 
@@ -381,7 +381,7 @@ x_7 = l_EStateM_orElse_x27___rarg(x_1, x_2, x_3, x_6, x_5);
 return x_7;
 }
 }
-lean_object* l_EStateM_instMonadFinallyEStateM___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_EStateM_instMonadFinallyEStateM___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -514,7 +514,7 @@ return x_31;
 }
 }
 }
-lean_object* l_EStateM_instMonadFinallyEStateM(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_EStateM_instMonadFinallyEStateM(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; 
@@ -522,7 +522,7 @@ x_5 = lean_alloc_closure((void*)(l_EStateM_instMonadFinallyEStateM___rarg), 3, 0
 return x_5;
 }
 }
-lean_object* l_EStateM_fromStateM_match__1___rarg(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_EStateM_fromStateM_match__1___rarg(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; 
@@ -535,7 +535,7 @@ x_5 = lean_apply_2(x_2, x_3, x_4);
 return x_5;
 }
 }
-lean_object* l_EStateM_fromStateM_match__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_EStateM_fromStateM_match__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -543,7 +543,7 @@ x_4 = lean_alloc_closure((void*)(l_EStateM_fromStateM_match__1___rarg), 2, 0);
 return x_4;
 }
 }
-lean_object* l_EStateM_fromStateM___rarg(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_EStateM_fromStateM___rarg(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -559,7 +559,7 @@ lean_ctor_set(x_6, 1, x_5);
 return x_6;
 }
 }
-lean_object* l_EStateM_fromStateM(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_EStateM_fromStateM(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 

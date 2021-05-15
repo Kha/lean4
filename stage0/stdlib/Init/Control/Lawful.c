@@ -13,9 +13,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_ExceptT_run__bind_match__1(lean_object*, lean_object*, lean_object*);
-lean_object* l_ExceptT_run__bind_match__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_ExceptT_run__bind_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_ExceptT_run__bind_match__1(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_ExceptT_run__bind_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_ExceptT_run__bind_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -40,7 +40,7 @@ return x_7;
 }
 }
 }
-lean_object* l_ExceptT_run__bind_match__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_ExceptT_run__bind_match__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 

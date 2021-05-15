@@ -13,28 +13,28 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_MetavarContext_getExprAssignment_x3f(lean_object*, lean_object*);
-uint8_t lean_name_eq(lean_object*, lean_object*);
-lean_object* l_Lean_MetavarContext_getDelayedAssignment_x3f(lean_object*, lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_Std_HashSetImp_insert___at___private_Lean_MetavarContext_0__Lean_MetavarContext_DependsOn_shouldVisit___spec__3(lean_object*, lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck_visit(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck_match__1___rarg(lean_object*, lean_object*, lean_object*);
-uint8_t l_Lean_Expr_hasExprMVar(lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck_visit_match__1(lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck_visit_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck_match__1(lean_object*);
-extern lean_object* l_Std_HashSet_instInhabitedHashSet___closed__1;
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__2___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck_visit___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
-uint8_t l_Lean_MetavarContext_occursCheck(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__1(lean_object*);
-uint8_t l_Std_HashSetImp_contains___at___private_Lean_MetavarContext_0__Lean_MetavarContext_DependsOn_shouldVisit___spec__1(lean_object*, lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__2(lean_object*);
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_getExprAssignment_x3f(lean_object*, lean_object*);
+LEAN_EXPORT uint8_t lean_name_eq(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_getDelayedAssignment_x3f(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_HashSetImp_insert___at___private_Lean_MetavarContext_0__Lean_MetavarContext_DependsOn_shouldVisit___spec__3(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visit(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT uint8_t l_Lean_Expr_hasExprMVar(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visit_match__1(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visit_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_match__1(lean_object*);
+extern LEAN_EXPORT lean_object* l_Std_HashSet_instInhabitedHashSet___closed__1;
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__2___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visit___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT uint8_t l_Lean_MetavarContext_occursCheck(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__1(lean_object*);
+LEAN_EXPORT uint8_t l_Std_HashSetImp_contains___at___private_Lean_MetavarContext_0__Lean_MetavarContext_DependsOn_shouldVisit___spec__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__2(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -57,7 +57,7 @@ return x_7;
 }
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -65,7 +65,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_MetavarContext_occursCheck_visitMVar_mat
 return x_2;
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__2___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__2___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -88,7 +88,7 @@ return x_7;
 }
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__2(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar_match__2(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -96,7 +96,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_MetavarContext_occursCheck_visitMVar_mat
 return x_2;
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck_visit_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visit_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -264,7 +264,7 @@ return x_49;
 }
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck_visit_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visit_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -272,7 +272,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_MetavarContext_occursCheck_visit_match__
 return x_2;
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -301,7 +301,7 @@ return x_9;
 }
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -309,7 +309,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_MetavarContext_occursCheck_match__1___ra
 return x_2;
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 uint8_t x_5; 
@@ -369,7 +369,7 @@ return x_16;
 }
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck_visit(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visit(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 uint8_t x_5; 
@@ -668,7 +668,7 @@ return x_62;
 }
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck_visitMVar___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visitMVar___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; 
@@ -678,7 +678,7 @@ lean_dec(x_2);
 return x_5;
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck_visit___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck_visit___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; 
@@ -687,7 +687,7 @@ lean_dec(x_2);
 return x_5;
 }
 }
-uint8_t l_Lean_MetavarContext_occursCheck(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT uint8_t l_Lean_MetavarContext_occursCheck(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 uint8_t x_4; 
@@ -722,7 +722,7 @@ return x_9;
 }
 }
 }
-lean_object* l_Lean_MetavarContext_occursCheck___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_MetavarContext_occursCheck___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 uint8_t x_4; lean_object* x_5; 

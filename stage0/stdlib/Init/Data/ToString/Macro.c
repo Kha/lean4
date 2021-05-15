@@ -13,41 +13,41 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__10;
-lean_object* lean_name_mk_string(lean_object*, lean_object*);
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23_(lean_object*, lean_object*, lean_object*);
-lean_object* l_termS_x21_____closed__7;
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__5;
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__7;
-lean_object* l_termS_x21_____closed__3;
-lean_object* lean_string_utf8_byte_size(lean_object*);
-lean_object* l_termS_x21_____closed__2;
-extern lean_object* l_Lean_instQuoteSubstring___closed__1;
-lean_object* l_Lean_MonadRef_mkInfoFromRefPos___at_myMacro____x40_Init_Notation___hyg_113____spec__1(lean_object*, lean_object*);
-extern lean_object* l_Lean_instQuoteSubstring___closed__2;
-lean_object* l_Lean_Syntax_expandInterpolatedStr(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__3;
-lean_object* l_termS_x21_____closed__6;
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__6;
-lean_object* l_termS_x21_____closed__5;
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__9;
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__2;
-extern lean_object* l_Lean_Parser_Syntax_addPrec___closed__10;
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__1;
-extern lean_object* l_termDepIfThenElse___closed__14;
-lean_object* l_Lean_addMacroScope(lean_object*, lean_object*, lean_object*);
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__13;
-lean_object* l_termS_x21_____closed__9;
-lean_object* l_termS_x21_____closed__1;
-lean_object* l_termS_x21_____closed__4;
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__8;
-lean_object* l_termS_x21_____closed__8;
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__4;
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__11;
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__12;
-uint8_t l_Lean_Syntax_isOfKind(lean_object*, lean_object*);
-lean_object* l_Lean_Syntax_getArg(lean_object*, lean_object*);
-lean_object* l_termS_x21__;
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__10;
+LEAN_EXPORT lean_object* lean_name_mk_string(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23_(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_termS_x21_____closed__7;
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__5;
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__7;
+LEAN_EXPORT lean_object* l_termS_x21_____closed__3;
+LEAN_EXPORT lean_object* lean_string_utf8_byte_size(lean_object*);
+LEAN_EXPORT lean_object* l_termS_x21_____closed__2;
+extern LEAN_EXPORT lean_object* l_Lean_instQuoteSubstring___closed__1;
+LEAN_EXPORT lean_object* l_Lean_MonadRef_mkInfoFromRefPos___at_myMacro____x40_Init_Notation___hyg_113____spec__1(lean_object*, lean_object*);
+extern LEAN_EXPORT lean_object* l_Lean_instQuoteSubstring___closed__2;
+LEAN_EXPORT lean_object* l_Lean_Syntax_expandInterpolatedStr(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__3;
+LEAN_EXPORT lean_object* l_termS_x21_____closed__6;
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__6;
+LEAN_EXPORT lean_object* l_termS_x21_____closed__5;
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__9;
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__2;
+extern LEAN_EXPORT lean_object* l_Lean_Parser_Syntax_addPrec___closed__10;
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__1;
+extern LEAN_EXPORT lean_object* l_termDepIfThenElse___closed__14;
+LEAN_EXPORT lean_object* l_Lean_addMacroScope(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__13;
+LEAN_EXPORT lean_object* l_termS_x21_____closed__9;
+LEAN_EXPORT lean_object* l_termS_x21_____closed__1;
+LEAN_EXPORT lean_object* l_termS_x21_____closed__4;
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__8;
+LEAN_EXPORT lean_object* l_termS_x21_____closed__8;
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__4;
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__11;
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23____closed__12;
+LEAN_EXPORT uint8_t l_Lean_Syntax_isOfKind(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Syntax_getArg(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_termS_x21__;
 static lean_object* _init_l_termS_x21_____closed__1() {
 _start:
 {
@@ -290,7 +290,7 @@ lean_ctor_set(x_3, 1, x_1);
 return x_3;
 }
 }
-lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23_(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_myMacro____x40_Init_Data_ToString_Macro___hyg_23_(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; uint8_t x_5; 

@@ -13,18 +13,18 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_Option_get_x21___rarg___closed__3;
-lean_object* l_Option_get_x21_match__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Option_get_x21___rarg___boxed(lean_object*, lean_object*);
-lean_object* l_Option_get_x21___rarg___closed__2;
-lean_object* l_Option_get_x21___rarg___closed__1;
-lean_object* l_Option_get_x21___rarg(lean_object*, lean_object*);
-lean_object* l___private_Init_Util_0__mkPanicMessageWithDecl(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Option_get_x21___rarg___closed__4;
-lean_object* lean_panic_fn(lean_object*, lean_object*);
-lean_object* l_Option_get_x21_match__1(lean_object*, lean_object*);
-lean_object* l_Option_get_x21(lean_object*);
-lean_object* l_Option_get_x21_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Option_get_x21___rarg___closed__3;
+LEAN_EXPORT lean_object* l_Option_get_x21_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Option_get_x21___rarg___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Option_get_x21___rarg___closed__2;
+LEAN_EXPORT lean_object* l_Option_get_x21___rarg___closed__1;
+LEAN_EXPORT lean_object* l_Option_get_x21___rarg(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___private_Init_Util_0__mkPanicMessageWithDecl(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Option_get_x21___rarg___closed__4;
+LEAN_EXPORT lean_object* lean_panic_fn(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Option_get_x21_match__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Option_get_x21(lean_object*);
+LEAN_EXPORT lean_object* l_Option_get_x21_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -47,7 +47,7 @@ return x_7;
 }
 }
 }
-lean_object* l_Option_get_x21_match__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Option_get_x21_match__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -92,7 +92,7 @@ x_6 = l___private_Init_Util_0__mkPanicMessageWithDecl(x_1, x_2, x_3, x_4, x_5);
 return x_6;
 }
 }
-lean_object* l_Option_get_x21___rarg(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Option_get_x21___rarg(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 if (lean_obj_tag(x_2) == 0)
@@ -112,7 +112,7 @@ return x_5;
 }
 }
 }
-lean_object* l_Option_get_x21(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Option_get_x21(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -120,7 +120,7 @@ x_2 = lean_alloc_closure((void*)(l_Option_get_x21___rarg___boxed), 2, 0);
 return x_2;
 }
 }
-lean_object* l_Option_get_x21___rarg___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Option_get_x21___rarg___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 

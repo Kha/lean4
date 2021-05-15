@@ -13,27 +13,27 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_List_reverse___rarg(lean_object*);
-lean_object* l_Std_Queue_dList___default(lean_object*);
-lean_object* l_List_append___rarg(lean_object*, lean_object*);
-uint8_t l_Std_Queue_isEmpty___rarg(lean_object*);
-lean_object* l_Std_Queue_dequeue_x3f(lean_object*);
-lean_object* l_Std_Queue_dequeue_x3f_match__2___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Std_Queue_enqueue(lean_object*);
-lean_object* l_Std_Queue_dequeue_x3f___rarg(lean_object*);
-lean_object* l_Std_Queue_empty___closed__1;
-lean_object* l_Std_Queue_enqueue___rarg(lean_object*, lean_object*);
-lean_object* l_Std_Queue_dequeue_x3f_match__2(lean_object*, lean_object*);
-lean_object* l_Std_Queue_eList___default(lean_object*);
-lean_object* l_Std_Queue_empty(lean_object*);
-lean_object* l_Std_Queue_dequeue_x3f_match__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Std_Queue_enqueueAll___rarg(lean_object*, lean_object*);
-lean_object* l_Std_Queue_dequeue_x3f_match__1(lean_object*, lean_object*);
-lean_object* l_Std_Queue_isEmpty___rarg___boxed(lean_object*);
-uint8_t l_List_isEmpty___rarg(lean_object*);
-lean_object* l_Std_Queue_enqueueAll(lean_object*);
-lean_object* l_Std_Queue_isEmpty(lean_object*);
-lean_object* l_Std_Queue_eList___default(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_List_reverse___rarg(lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_dList___default(lean_object*);
+LEAN_EXPORT lean_object* l_List_append___rarg(lean_object*, lean_object*);
+LEAN_EXPORT uint8_t l_Std_Queue_isEmpty___rarg(lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f(lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f_match__2___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_enqueue(lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f___rarg(lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_empty___closed__1;
+LEAN_EXPORT lean_object* l_Std_Queue_enqueue___rarg(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f_match__2(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_eList___default(lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_empty(lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_enqueueAll___rarg(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f_match__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_isEmpty___rarg___boxed(lean_object*);
+LEAN_EXPORT uint8_t l_List_isEmpty___rarg(lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_enqueueAll(lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_isEmpty(lean_object*);
+LEAN_EXPORT lean_object* l_Std_Queue_eList___default(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -41,7 +41,7 @@ x_2 = lean_box(0);
 return x_2;
 }
 }
-lean_object* l_Std_Queue_dList___default(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Std_Queue_dList___default(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -60,7 +60,7 @@ lean_ctor_set(x_2, 1, x_1);
 return x_2;
 }
 }
-lean_object* l_Std_Queue_empty(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Std_Queue_empty(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -68,7 +68,7 @@ x_2 = l_Std_Queue_empty___closed__1;
 return x_2;
 }
 }
-uint8_t l_Std_Queue_isEmpty___rarg(lean_object* x_1) {
+LEAN_EXPORT uint8_t l_Std_Queue_isEmpty___rarg(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; uint8_t x_3; 
@@ -89,7 +89,7 @@ return x_6;
 }
 }
 }
-lean_object* l_Std_Queue_isEmpty(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Std_Queue_isEmpty(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -97,7 +97,7 @@ x_2 = lean_alloc_closure((void*)(l_Std_Queue_isEmpty___rarg___boxed), 1, 0);
 return x_2;
 }
 }
-lean_object* l_Std_Queue_isEmpty___rarg___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Std_Queue_isEmpty___rarg___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
@@ -107,7 +107,7 @@ x_3 = lean_box(x_2);
 return x_3;
 }
 }
-lean_object* l_Std_Queue_enqueue___rarg(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Std_Queue_enqueue___rarg(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 uint8_t x_3; 
@@ -140,7 +140,7 @@ return x_9;
 }
 }
 }
-lean_object* l_Std_Queue_enqueue(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Std_Queue_enqueue(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -148,7 +148,7 @@ x_2 = lean_alloc_closure((void*)(l_Std_Queue_enqueue___rarg), 2, 0);
 return x_2;
 }
 }
-lean_object* l_Std_Queue_enqueueAll___rarg(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Std_Queue_enqueueAll___rarg(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 uint8_t x_3; 
@@ -177,7 +177,7 @@ return x_9;
 }
 }
 }
-lean_object* l_Std_Queue_enqueueAll(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Std_Queue_enqueueAll(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -185,7 +185,7 @@ x_2 = lean_alloc_closure((void*)(l_Std_Queue_enqueueAll___rarg), 2, 0);
 return x_2;
 }
 }
-lean_object* l_Std_Queue_dequeue_x3f_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -210,7 +210,7 @@ return x_8;
 }
 }
 }
-lean_object* l_Std_Queue_dequeue_x3f_match__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f_match__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -218,7 +218,7 @@ x_3 = lean_alloc_closure((void*)(l_Std_Queue_dequeue_x3f_match__1___rarg), 3, 0)
 return x_3;
 }
 }
-lean_object* l_Std_Queue_dequeue_x3f_match__2___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f_match__2___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -243,7 +243,7 @@ return x_8;
 }
 }
 }
-lean_object* l_Std_Queue_dequeue_x3f_match__2(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f_match__2(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -251,7 +251,7 @@ x_3 = lean_alloc_closure((void*)(l_Std_Queue_dequeue_x3f_match__2___rarg), 3, 0)
 return x_3;
 }
 }
-lean_object* l_Std_Queue_dequeue_x3f___rarg(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f___rarg(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -374,7 +374,7 @@ return x_33;
 }
 }
 }
-lean_object* l_Std_Queue_dequeue_x3f(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Std_Queue_dequeue_x3f(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 

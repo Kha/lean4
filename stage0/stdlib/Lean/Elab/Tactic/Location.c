@@ -13,29 +13,29 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-size_t l_USize_add(size_t, size_t);
-lean_object* l_Lean_Elab_Tactic_expandOptLocation___boxed(lean_object*);
-lean_object* lean_array_uget(lean_object*, size_t);
-lean_object* l_Lean_Elab_Tactic_expandOptLocation___closed__1;
-extern lean_object* l_Lean_Parser_Tactic_locationWildcard___closed__2;
-lean_object* lean_array_uset(lean_object*, size_t, lean_object*);
-extern lean_object* l_Array_empty___closed__1;
-uint8_t lean_name_eq(lean_object*, lean_object*);
-lean_object* l_Lean_Elab_Tactic_expandLocation___boxed(lean_object*);
-lean_object* lean_array_get_size(lean_object*);
-uint8_t l_USize_decLt(size_t, size_t);
-lean_object* l_Lean_Elab_Tactic_expandOptLocation(lean_object*);
-lean_object* l_Lean_Elab_Tactic_expandLocation(lean_object*);
-lean_object* l_Lean_Syntax_getId(lean_object*);
-size_t lean_usize_of_nat(lean_object*);
-lean_object* l_Lean_Syntax_getArgs(lean_object*);
-lean_object* l_Array_mapMUnsafe_map___at_Lean_Elab_Tactic_expandLocation___spec__1___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Syntax_getKind(lean_object*);
-uint8_t l_Lean_Syntax_isNone(lean_object*);
-lean_object* l_Lean_Syntax_getArg(lean_object*, lean_object*);
-lean_object* l_unsafeCast(lean_object*, lean_object*, lean_object*);
-lean_object* l_Array_mapMUnsafe_map___at_Lean_Elab_Tactic_expandLocation___spec__1(size_t, size_t, lean_object*);
-lean_object* l_Array_mapMUnsafe_map___at_Lean_Elab_Tactic_expandLocation___spec__1(size_t x_1, size_t x_2, lean_object* x_3) {
+LEAN_EXPORT size_t l_USize_add(size_t, size_t);
+LEAN_EXPORT lean_object* l_Lean_Elab_Tactic_expandOptLocation___boxed(lean_object*);
+LEAN_EXPORT lean_object* lean_array_uget(lean_object*, size_t);
+LEAN_EXPORT lean_object* l_Lean_Elab_Tactic_expandOptLocation___closed__1;
+extern LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_locationWildcard___closed__2;
+LEAN_EXPORT lean_object* lean_array_uset(lean_object*, size_t, lean_object*);
+extern LEAN_EXPORT lean_object* l_Array_empty___closed__1;
+LEAN_EXPORT uint8_t lean_name_eq(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Elab_Tactic_expandLocation___boxed(lean_object*);
+LEAN_EXPORT lean_object* lean_array_get_size(lean_object*);
+LEAN_EXPORT uint8_t l_USize_decLt(size_t, size_t);
+LEAN_EXPORT lean_object* l_Lean_Elab_Tactic_expandOptLocation(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Elab_Tactic_expandLocation(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Syntax_getId(lean_object*);
+LEAN_EXPORT size_t lean_usize_of_nat(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Syntax_getArgs(lean_object*);
+LEAN_EXPORT lean_object* l_Array_mapMUnsafe_map___at_Lean_Elab_Tactic_expandLocation___spec__1___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Syntax_getKind(lean_object*);
+LEAN_EXPORT uint8_t l_Lean_Syntax_isNone(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Syntax_getArg(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_unsafeCast(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Array_mapMUnsafe_map___at_Lean_Elab_Tactic_expandLocation___spec__1(size_t, size_t, lean_object*);
+LEAN_EXPORT lean_object* l_Array_mapMUnsafe_map___at_Lean_Elab_Tactic_expandLocation___spec__1(size_t x_1, size_t x_2, lean_object* x_3) {
 _start:
 {
 uint8_t x_4; 
@@ -65,7 +65,7 @@ goto _start;
 }
 }
 }
-lean_object* l_Lean_Elab_Tactic_expandLocation(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Elab_Tactic_expandLocation(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; uint8_t x_6; 
@@ -122,7 +122,7 @@ return x_22;
 }
 }
 }
-lean_object* l_Array_mapMUnsafe_map___at_Lean_Elab_Tactic_expandLocation___spec__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Array_mapMUnsafe_map___at_Lean_Elab_Tactic_expandLocation___spec__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 size_t x_4; size_t x_5; lean_object* x_6; 
@@ -134,7 +134,7 @@ x_6 = l_Array_mapMUnsafe_map___at_Lean_Elab_Tactic_expandLocation___spec__1(x_4,
 return x_6;
 }
 }
-lean_object* l_Lean_Elab_Tactic_expandLocation___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Elab_Tactic_expandLocation___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -155,7 +155,7 @@ lean_ctor_set_uint8(x_3, sizeof(void*)*1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Elab_Tactic_expandOptLocation(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Elab_Tactic_expandOptLocation(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; 
@@ -177,7 +177,7 @@ return x_6;
 }
 }
 }
-lean_object* l_Lean_Elab_Tactic_expandOptLocation___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Elab_Tactic_expandOptLocation___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 

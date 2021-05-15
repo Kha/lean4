@@ -13,23 +13,23 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern lean_object* l_instInhabitedNat;
-lean_object* lean_string_utf8_byte_size(lean_object*);
-lean_object* lean_string_from_utf8_unchecked(lean_object*);
-uint8_t l_String_isNat(lean_object*);
-lean_object* l___private_Init_Util_0__mkPanicMessageWithDecl(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* lean_string_to_utf8(lean_object*);
-lean_object* lean_panic_fn(lean_object*, lean_object*);
-lean_object* l_String_foldlAux_loop___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_String_toUTF8___boxed(lean_object*);
-lean_object* l_String_toNat_x21___closed__4;
-extern lean_object* l_String_toNat_x3f___closed__1;
-lean_object* l_String_fromUTF8Unchecked___boxed(lean_object*);
-lean_object* l_String_toNat_x21___boxed(lean_object*);
-lean_object* l_String_toNat_x21___closed__1;
-lean_object* l_String_toNat_x21___closed__2;
-lean_object* l_String_toNat_x21(lean_object*);
-lean_object* l_String_toNat_x21___closed__3;
+extern LEAN_EXPORT lean_object* l_instInhabitedNat;
+LEAN_EXPORT lean_object* lean_string_utf8_byte_size(lean_object*);
+LEAN_EXPORT lean_object* lean_string_from_utf8_unchecked(lean_object*);
+LEAN_EXPORT uint8_t l_String_isNat(lean_object*);
+LEAN_EXPORT lean_object* l___private_Init_Util_0__mkPanicMessageWithDecl(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_string_to_utf8(lean_object*);
+LEAN_EXPORT lean_object* lean_panic_fn(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_String_foldlAux_loop___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_String_toUTF8___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_String_toNat_x21___closed__4;
+extern LEAN_EXPORT lean_object* l_String_toNat_x3f___closed__1;
+LEAN_EXPORT lean_object* l_String_fromUTF8Unchecked___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_String_toNat_x21___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_String_toNat_x21___closed__1;
+LEAN_EXPORT lean_object* l_String_toNat_x21___closed__2;
+LEAN_EXPORT lean_object* l_String_toNat_x21(lean_object*);
+LEAN_EXPORT lean_object* l_String_toNat_x21___closed__3;
 static lean_object* _init_l_String_toNat_x21___closed__1() {
 _start:
 {
@@ -67,7 +67,7 @@ x_6 = l___private_Init_Util_0__mkPanicMessageWithDecl(x_1, x_2, x_3, x_4, x_5);
 return x_6;
 }
 }
-lean_object* l_String_toNat_x21(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_String_toNat_x21(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; 
@@ -92,7 +92,7 @@ return x_9;
 }
 }
 }
-lean_object* l_String_toNat_x21___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_String_toNat_x21___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -101,7 +101,7 @@ lean_dec(x_1);
 return x_2;
 }
 }
-lean_object* l_String_fromUTF8Unchecked___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_String_fromUTF8Unchecked___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -110,7 +110,7 @@ lean_dec(x_1);
 return x_2;
 }
 }
-lean_object* l_String_toUTF8___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_String_toUTF8___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 

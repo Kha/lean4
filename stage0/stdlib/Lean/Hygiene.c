@@ -13,105 +13,105 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_Lean_sanitizeSyntax(lean_object*, lean_object*);
-lean_object* l_Lean_isInaccessibleUserName_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
-size_t l_USize_add(size_t, size_t);
-lean_object* lean_erase_macro_scopes(lean_object*);
-lean_object* l_Lean_NameSanitizerState_userName2Sanitized___default;
-lean_object* l_Lean_getSanitizeNames___closed__4;
-lean_object* lean_name_mk_string(lean_object*, lean_object*);
-lean_object* lean_array_uget(lean_object*, size_t);
-lean_object* l_Lean_initFn____x40_Lean_Hygiene___hyg_314____closed__2;
-lean_object* l_ReaderT_read___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__1(lean_object*, lean_object*);
-lean_object* lean_array_uset(lean_object*, size_t, lean_object*);
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName(uint8_t, lean_object*);
-uint8_t l_Lean_getSanitizeNames(lean_object*);
-lean_object* l_Lean_isInaccessibleUserName___boxed(lean_object*);
-lean_object* l_Lean_sanitizeName(lean_object*, lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__11;
-lean_object* l_Lean_initFn____x40_Lean_Hygiene___hyg_314____closed__1;
-lean_object* lean_array_get_size(lean_object*);
-lean_object* l_Lean_Unhygienic_run(lean_object*);
-lean_object* l_Array_mapMUnsafe_map___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__1___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* lean_string_append(lean_object*, lean_object*);
-lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3(lean_object*);
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux(uint8_t, lean_object*, lean_object*);
-lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__1(lean_object*);
-uint8_t l_USize_decLt(size_t, size_t);
-uint8_t l_Lean_NameMap_contains___rarg(lean_object*, lean_object*);
-lean_object* l_Array_mapMUnsafe_map___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__1(size_t, size_t, lean_object*, lean_object*);
-lean_object* lean_nat_add(lean_object*, lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__3___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3___rarg(lean_object*, lean_object*, lean_object*);
-uint8_t l_Std_Format_getUnicode(lean_object*);
-uint8_t l_Lean_Name_hasMacroScopes(lean_object*);
-uint8_t lean_nat_dec_eq(lean_object*, lean_object*);
-uint8_t l_String_contains(lean_object*, uint32_t);
-lean_object* l_ReaderT_bind___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__2___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_ReaderT_bind___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__2(lean_object*, lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__3;
-lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3___rarg___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux___closed__3;
-lean_object* l_Lean_Unhygienic_run___rarg(lean_object*);
-lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__2(lean_object*);
-lean_object* l_Lean_getSanitizeNames___closed__3;
-uint8_t l_Lean_Name_quickCmp(lean_object*, lean_object*);
-lean_object* l_Std_RBNode_find___at_Lean_sanitizeName___spec__1(lean_object*, lean_object*);
-lean_object* l_Std_RBNode_insert___at_Lean_NameMap_insert___spec__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__10;
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__8;
-lean_object* l_Lean_initFn____x40_Lean_Hygiene___hyg_314_(lean_object*);
-lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux(lean_object*, lean_object*);
-lean_object* l_Std_RBNode_find___at_Lean_sanitizeName___spec__1___boxed(lean_object*, lean_object*);
-lean_object* l_Nat_toSuperscriptString(lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__4;
-lean_object* l_Std_RBNode_find___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__2(lean_object*, lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__7;
-extern lean_object* l_Lean_firstFrontendMacroScope;
-lean_object* l_Lean_Unhygienic_run___rarg___closed__2;
-uint8_t lean_is_inaccessible_user_name(lean_object*);
-size_t lean_usize_of_nat(lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__1___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l___private_Lean_Hygiene_0__Lean_mkFreshInaccessibleUserName(lean_object*, lean_object*, lean_object*);
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName___closed__1;
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName___boxed(lean_object*, lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__1(lean_object*, lean_object*, lean_object*);
-lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* lean_name_append_after(lean_object*, lean_object*);
-lean_object* l_Lean_initFn____x40_Lean_Hygiene___hyg_314____closed__3;
-lean_object* l_Lean_getSanitizeNames___boxed(lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__5;
-lean_object* l_Std_RBNode_find___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__2___boxed(lean_object*, lean_object*);
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Name_append(lean_object*, lean_object*);
-lean_object* l_Lean_getSanitizeNames___closed__2;
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux___closed__1;
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_getSanitizeNames___closed__1;
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux___closed__2;
-lean_object* lean_register_option(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__12;
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__6;
-lean_object* lean_name_mk_numeral(lean_object*, lean_object*);
-lean_object* l_Lean_KVMap_findCore(lean_object*, lean_object*);
-lean_object* l_Lean_NameSanitizerState_nameStem2Idx___default;
-uint8_t l_Lean_sanitizeNamesDefault;
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__9;
-lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__2___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName_match__1(lean_object*);
-lean_object* lean_mk_syntax_ident(lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__2(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Unhygienic_run___rarg___closed__1;
-lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___boxed__const__1;
-lean_object* l_unsafeCast(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__3(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_isInaccessibleUserName_match__1(lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__1;
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__2;
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__4(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic;
-uint8_t lean_string_dec_eq(lean_object*, lean_object*);
-lean_object* l_ReaderT_read___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_sanitizeSyntax(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_isInaccessibleUserName_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT size_t l_USize_add(size_t, size_t);
+LEAN_EXPORT lean_object* lean_erase_macro_scopes(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_NameSanitizerState_userName2Sanitized___default;
+LEAN_EXPORT lean_object* l_Lean_getSanitizeNames___closed__4;
+LEAN_EXPORT lean_object* lean_name_mk_string(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_array_uget(lean_object*, size_t);
+LEAN_EXPORT lean_object* l_Lean_initFn____x40_Lean_Hygiene___hyg_314____closed__2;
+LEAN_EXPORT lean_object* l_ReaderT_read___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_array_uset(lean_object*, size_t, lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName(uint8_t, lean_object*);
+LEAN_EXPORT uint8_t l_Lean_getSanitizeNames(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_isInaccessibleUserName___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_sanitizeName(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__11;
+LEAN_EXPORT lean_object* l_Lean_initFn____x40_Lean_Hygiene___hyg_314____closed__1;
+LEAN_EXPORT lean_object* lean_array_get_size(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_run(lean_object*);
+LEAN_EXPORT lean_object* l_Array_mapMUnsafe_map___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__1___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_string_append(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3(lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux(uint8_t, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__1(lean_object*);
+LEAN_EXPORT uint8_t l_USize_decLt(size_t, size_t);
+LEAN_EXPORT uint8_t l_Lean_NameMap_contains___rarg(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Array_mapMUnsafe_map___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__1(size_t, size_t, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_nat_add(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__3___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT uint8_t l_Std_Format_getUnicode(lean_object*);
+LEAN_EXPORT uint8_t l_Lean_Name_hasMacroScopes(lean_object*);
+LEAN_EXPORT uint8_t lean_nat_dec_eq(lean_object*, lean_object*);
+LEAN_EXPORT uint8_t l_String_contains(lean_object*, uint32_t);
+LEAN_EXPORT lean_object* l_ReaderT_bind___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__2___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_ReaderT_bind___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__2(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__3;
+LEAN_EXPORT lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3___rarg___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux___closed__3;
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_run___rarg(lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__2(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_getSanitizeNames___closed__3;
+LEAN_EXPORT uint8_t l_Lean_Name_quickCmp(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at_Lean_sanitizeName___spec__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_RBNode_insert___at_Lean_NameMap_insert___spec__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__10;
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__8;
+LEAN_EXPORT lean_object* l_Lean_initFn____x40_Lean_Hygiene___hyg_314_(lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at_Lean_sanitizeName___spec__1___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_toSuperscriptString(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__4;
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__2(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__7;
+extern LEAN_EXPORT lean_object* l_Lean_firstFrontendMacroScope;
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_run___rarg___closed__2;
+LEAN_EXPORT uint8_t lean_is_inaccessible_user_name(lean_object*);
+LEAN_EXPORT size_t lean_usize_of_nat(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__1___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkFreshInaccessibleUserName(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName___closed__1;
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__1(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_name_append_after(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_initFn____x40_Lean_Hygiene___hyg_314____closed__3;
+LEAN_EXPORT lean_object* l_Lean_getSanitizeNames___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__5;
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__2___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Name_append(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_getSanitizeNames___closed__2;
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux___closed__1;
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_getSanitizeNames___closed__1;
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux___closed__2;
+LEAN_EXPORT lean_object* lean_register_option(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__12;
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__6;
+LEAN_EXPORT lean_object* lean_name_mk_numeral(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_KVMap_findCore(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_NameSanitizerState_nameStem2Idx___default;
+LEAN_EXPORT uint8_t l_Lean_sanitizeNamesDefault;
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__9;
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__2___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName_match__1(lean_object*);
+LEAN_EXPORT lean_object* lean_mk_syntax_ident(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__2(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_run___rarg___closed__1;
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___boxed__const__1;
+LEAN_EXPORT lean_object* l_unsafeCast(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__3(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_isInaccessibleUserName_match__1(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__1;
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__2;
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__4(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic;
+LEAN_EXPORT uint8_t lean_string_dec_eq(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_ReaderT_read___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -121,7 +121,7 @@ lean_ctor_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_ReaderT_bind___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__2___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_ReaderT_bind___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__2___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -136,7 +136,7 @@ x_8 = lean_apply_3(x_2, x_6, x_3, x_7);
 return x_8;
 }
 }
-lean_object* l_ReaderT_bind___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__2(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_ReaderT_bind___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__2(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -144,7 +144,7 @@ x_3 = lean_alloc_closure((void*)(l_ReaderT_bind___at_Lean_Unhygienic_instMonadQu
 return x_3;
 }
 }
-lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -154,7 +154,7 @@ lean_ctor_set(x_4, 1, x_3);
 return x_4;
 }
 }
-lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -162,7 +162,7 @@ x_2 = lean_alloc_closure((void*)(l_ReaderT_pure___at_Lean_Unhygienic_instMonadQu
 return x_2;
 }
 }
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; lean_object* x_5; 
@@ -174,7 +174,7 @@ lean_ctor_set(x_5, 1, x_3);
 return x_5;
 }
 }
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__2(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__2(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 uint8_t x_6; 
@@ -202,7 +202,7 @@ return x_11;
 }
 }
 }
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__3(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__3(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; lean_object* x_5; 
@@ -214,7 +214,7 @@ lean_ctor_set(x_5, 1, x_3);
 return x_5;
 }
 }
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__4(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__4(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -372,7 +372,7 @@ x_1 = l_Lean_Unhygienic_instMonadQuotationUnhygienic___closed__12;
 return x_1;
 }
 }
-lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3___rarg___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_ReaderT_pure___at_Lean_Unhygienic_instMonadQuotationUnhygienic___spec__3___rarg___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -381,7 +381,7 @@ lean_dec(x_2);
 return x_4;
 }
 }
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -391,7 +391,7 @@ lean_dec(x_1);
 return x_4;
 }
 }
-lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__3___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_instMonadQuotationUnhygienic___lambda__3___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -423,7 +423,7 @@ x_3 = lean_nat_add(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Unhygienic_run___rarg(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_run___rarg(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; 
@@ -436,7 +436,7 @@ lean_dec(x_4);
 return x_5;
 }
 }
-lean_object* l_Lean_Unhygienic_run(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Unhygienic_run(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -470,7 +470,7 @@ x_1 = lean_mk_string("✝");
 return x_1;
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux(uint8_t x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux(uint8_t x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (x_1 == 0)
@@ -508,7 +508,7 @@ return x_14;
 }
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 uint8_t x_4; lean_object* x_5; 
@@ -518,7 +518,7 @@ x_5 = l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserNameAux(x_4, x_2, x_3);
 return x_5;
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 if (lean_obj_tag(x_1) == 2)
@@ -586,7 +586,7 @@ return x_23;
 }
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -602,7 +602,7 @@ x_1 = lean_mk_string("⁻");
 return x_1;
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName(uint8_t x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName(uint8_t x_1, lean_object* x_2) {
 _start:
 {
 if (lean_obj_tag(x_2) == 2)
@@ -665,7 +665,7 @@ return x_2;
 }
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 uint8_t x_3; lean_object* x_4; 
@@ -675,7 +675,7 @@ x_4 = l___private_Lean_Hygiene_0__Lean_mkInaccessibleUserName(x_3, x_2);
 return x_4;
 }
 }
-lean_object* l_Lean_isInaccessibleUserName_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Lean_isInaccessibleUserName_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -720,7 +720,7 @@ return x_15;
 }
 }
 }
-lean_object* l_Lean_isInaccessibleUserName_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_isInaccessibleUserName_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -728,7 +728,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_isInaccessibleUserName_match__1___rarg),
 return x_2;
 }
 }
-uint8_t lean_is_inaccessible_user_name(lean_object* x_1) {
+LEAN_EXPORT uint8_t lean_is_inaccessible_user_name(lean_object* x_1) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -774,7 +774,7 @@ goto _start;
 }
 }
 }
-lean_object* l_Lean_isInaccessibleUserName___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_isInaccessibleUserName___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
@@ -827,7 +827,7 @@ x_3 = lean_name_mk_string(x_1, x_2);
 return x_3;
 }
 }
-uint8_t l_Lean_getSanitizeNames(lean_object* x_1) {
+LEAN_EXPORT uint8_t l_Lean_getSanitizeNames(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; 
@@ -862,7 +862,7 @@ return x_7;
 }
 }
 }
-lean_object* l_Lean_getSanitizeNames___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_getSanitizeNames___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
@@ -904,7 +904,7 @@ lean_ctor_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_initFn____x40_Lean_Hygiene___hyg_314_(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_initFn____x40_Lean_Hygiene___hyg_314_(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; 
@@ -930,7 +930,7 @@ x_1 = lean_box(0);
 return x_1;
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_mkFreshInaccessibleUserName(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_mkFreshInaccessibleUserName(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; lean_object* x_8; lean_object* x_9; uint8_t x_10; 
@@ -1002,7 +1002,7 @@ goto _start;
 }
 }
 }
-lean_object* l_Std_RBNode_find___at_Lean_sanitizeName___spec__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at_Lean_sanitizeName___spec__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -1042,7 +1042,7 @@ goto _start;
 }
 }
 }
-lean_object* l_Lean_sanitizeName(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_sanitizeName(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; 
@@ -1218,7 +1218,7 @@ return x_51;
 }
 }
 }
-lean_object* l_Std_RBNode_find___at_Lean_sanitizeName___spec__1___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at_Lean_sanitizeName___spec__1___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -1228,7 +1228,7 @@ lean_dec(x_1);
 return x_3;
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -1251,7 +1251,7 @@ return x_7;
 }
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -1259,7 +1259,7 @@ x_2 = lean_alloc_closure((void*)(l___private_Lean_Hygiene_0__Lean_sanitizeSyntax
 return x_2;
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__2___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__2___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -1304,7 +1304,7 @@ return x_13;
 }
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__2(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux_match__2(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -1312,7 +1312,7 @@ x_2 = lean_alloc_closure((void*)(l___private_Lean_Hygiene_0__Lean_sanitizeSyntax
 return x_2;
 }
 }
-lean_object* l_Array_mapMUnsafe_map___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__1(size_t x_1, size_t x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Array_mapMUnsafe_map___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__1(size_t x_1, size_t x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 uint8_t x_5; 
@@ -1350,7 +1350,7 @@ goto _start;
 }
 }
 }
-lean_object* l_Std_RBNode_find___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__2(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__2(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -1399,7 +1399,7 @@ x_2 = lean_box_usize(x_1);
 return x_2;
 }
 }
-lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -1569,7 +1569,7 @@ return x_50;
 }
 }
 }
-lean_object* l_Array_mapMUnsafe_map___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Array_mapMUnsafe_map___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 size_t x_5; size_t x_6; lean_object* x_7; 
@@ -1581,7 +1581,7 @@ x_7 = l_Array_mapMUnsafe_map___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxA
 return x_7;
 }
 }
-lean_object* l_Std_RBNode_find___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__2___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at___private_Lean_Hygiene_0__Lean_sanitizeSyntaxAux___spec__2___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -1591,7 +1591,7 @@ lean_dec(x_1);
 return x_3;
 }
 }
-lean_object* l_Lean_sanitizeSyntax(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_sanitizeSyntax(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; uint8_t x_4; 

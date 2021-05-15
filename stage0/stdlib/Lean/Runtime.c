@@ -13,15 +13,15 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_Lean_closureMaxArgsFn___boxed(lean_object*);
-lean_object* l_Lean_closureMaxArgs;
-lean_object* l_Lean_maxSmallNat___closed__1;
-lean_object* l_Lean_maxSmallNatFn___boxed(lean_object*);
-lean_object* l_Lean_maxSmallNat;
-lean_object* lean_max_small_nat(lean_object*);
-lean_object* l_Lean_closureMaxArgs___closed__1;
-lean_object* lean_closure_max_args(lean_object*);
-lean_object* l_Lean_closureMaxArgsFn___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_closureMaxArgsFn___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_closureMaxArgs;
+LEAN_EXPORT lean_object* l_Lean_maxSmallNat___closed__1;
+LEAN_EXPORT lean_object* l_Lean_maxSmallNatFn___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_maxSmallNat;
+LEAN_EXPORT lean_object* lean_max_small_nat(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_closureMaxArgs___closed__1;
+LEAN_EXPORT lean_object* lean_closure_max_args(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_closureMaxArgsFn___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -29,7 +29,7 @@ x_2 = lean_closure_max_args(x_1);
 return x_2;
 }
 }
-lean_object* l_Lean_maxSmallNatFn___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_maxSmallNatFn___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 

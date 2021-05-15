@@ -13,99 +13,99 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_Lean_MapDeclarationExtension_find_x3f___at_Lean_findDocString_x3f___spec__1(lean_object*, lean_object*, lean_object*);
-extern lean_object* l_Lean_Name_toString___closed__1;
-extern lean_object* l_Lean_mkMapDeclarationExtension___rarg___closed__1;
-size_t l_USize_add(size_t, size_t);
-extern lean_object* l_String_instInhabitedString;
-extern lean_object* l_Lean_mkMapDeclarationExtension___rarg___closed__2;
-lean_object* lean_mk_empty_array_with_capacity(lean_object*);
-lean_object* lean_nat_div(lean_object*, lean_object*);
-lean_object* l_Lean_PersistentEnvExtension_getModuleEntries___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_addDocString_x27___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__1___closed__1;
-lean_object* lean_name_mk_string(lean_object*, lean_object*);
-uint8_t l_USize_decEq(size_t, size_t);
-lean_object* lean_array_uget(lean_object*, size_t);
-lean_object* l_Lean_registerSimplePersistentEnvExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__4(lean_object*, lean_object*);
-uint8_t l_Lean_Name_quickLt(lean_object*, lean_object*);
-extern lean_object* l_Lean_registerInternalExceptionId___closed__2;
-lean_object* l_Lean_docStringExt___closed__5;
-extern lean_object* l_Array_empty___closed__1;
-lean_object* l_Array_qsort_sort___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__2(lean_object*, lean_object*, lean_object*);
-lean_object* lean_st_ref_get(lean_object*, lean_object*);
-extern lean_object* l_Lean_instInhabitedParserDescr___closed__1;
-uint8_t lean_name_eq(lean_object*, lean_object*);
-lean_object* lean_array_get_size(lean_object*);
-lean_object* l_Lean_docStringExt___closed__2;
-lean_object* lean_string_append(lean_object*, lean_object*);
-lean_object* l_Array_binSearchAux___at_Lean_findDocString_x3f___spec__3___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_addDocString___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_addDocString___rarg___lambda__1(lean_object*, lean_object*, lean_object*);
-lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__3___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* lean_nat_add(lean_object*, lean_object*);
-lean_object* l_Lean_findDocString_x3f___rarg___lambda__1___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Name_toStringWithSep(lean_object*, lean_object*);
-lean_object* l_Lean_addDocString(lean_object*);
-lean_object* l_Lean_registerSimplePersistentEnvExtension___rarg___lambda__2(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_MapDeclarationExtension_insert___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Array_qsort_sort___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__2___boxed(lean_object*, lean_object*, lean_object*);
-uint8_t lean_nat_dec_eq(lean_object*, lean_object*);
-lean_object* lean_nat_sub(lean_object*, lean_object*);
-lean_object* l_Lean_docStringExt___elambda__2___boxed(lean_object*);
-lean_object* lean_array_swap(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_registerSimplePersistentEnvExtension___rarg___lambda__3(lean_object*, lean_object*);
-lean_object* lean_array_get(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_registerPersistentEnvExtensionUnsafe___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__5(lean_object*, lean_object*);
-uint8_t l_Lean_Name_quickCmp(lean_object*, lean_object*);
-lean_object* l_Std_RBNode_find___at_Lean_findDocString_x3f___spec__2(lean_object*, lean_object*);
-extern lean_object* l_IO_instInhabitedError___closed__1;
-lean_object* l_Lean_findDocString_x3f___rarg___lambda__1(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_registerPersistentEnvExtensionUnsafe___rarg___lambda__2(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_docStringExt___closed__3;
-lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__3(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_docStringExt___elambda__2(lean_object*);
-extern lean_object* l_Lean_persistentEnvExtensionsRef;
-lean_object* l_Lean_docStringExt;
-lean_object* l_Lean_docStringExt___elambda__3(lean_object*, lean_object*);
-lean_object* l_Lean_addDocString_x27_match__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_docStringExt___elambda__3___boxed(lean_object*, lean_object*);
-lean_object* l_Lean_docStringExt___elambda__4___boxed(lean_object*, lean_object*);
-size_t lean_usize_of_nat(lean_object*);
-lean_object* l_Lean_initFn____x40_Lean_DocString___hyg_3____closed__2;
-lean_object* l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__1___lambda__1(lean_object*);
-lean_object* l_Lean_SimplePersistentEnvExtension_getState___rarg(lean_object*, lean_object*);
-lean_object* l_Lean_MapDeclarationExtension_find_x3f___at_Lean_findDocString_x3f___spec__1___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_docStringExt___elambda__4___rarg(lean_object*);
-extern lean_object* l_Lean_registerPersistentEnvExtensionUnsafe___rarg___closed__1;
-lean_object* l_List_redLength___rarg(lean_object*);
-lean_object* l_Lean_registerSimplePersistentEnvExtension___rarg___lambda__1___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-uint8_t l_Array_anyMUnsafe_any___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__6(lean_object*, lean_object*, size_t, size_t);
-lean_object* l_Lean_initFn____x40_Lean_DocString___hyg_3____closed__1;
-uint8_t lean_nat_dec_le(lean_object*, lean_object*);
-lean_object* l_Lean_findDocString_x3f(lean_object*);
-lean_object* l_Lean_docStringExt___elambda__1(lean_object*);
-extern lean_object* l_Lean_registerSimplePersistentEnvExtension___rarg___closed__1;
-extern lean_object* l_Lean_EnvExtensionInterfaceUnsafe_instInhabitedExt___closed__2;
-lean_object* l_Lean_addDocString_x27(lean_object*);
-lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__3___closed__1;
-lean_object* l_Lean_docStringExt___closed__1;
-extern lean_object* l_Lean_instInhabitedName;
-lean_object* l_Lean_Environment_getModuleIdxFor_x3f(lean_object*, lean_object*);
-lean_object* l_List_toArrayAux___rarg(lean_object*, lean_object*);
-lean_object* l_Array_binSearchAux___at_Lean_findDocString_x3f___spec__3(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_initFn____x40_Lean_DocString___hyg_3_(lean_object*);
-lean_object* l_Lean_docStringExt___closed__4;
-lean_object* l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__1(lean_object*, lean_object*);
-lean_object* l_Lean_findDocString_x3f___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_EStateM_pure___rarg(lean_object*, lean_object*);
-lean_object* l_Std_RBNode_find___at_Lean_findDocString_x3f___spec__2___boxed(lean_object*, lean_object*);
-lean_object* l_Lean_docStringExt___elambda__4(lean_object*, lean_object*);
-lean_object* l_Array_anyMUnsafe_any___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__6___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_addDocString_x27_match__1(lean_object*);
-lean_object* l_Lean_docStringExt___elambda__1___boxed(lean_object*);
-extern lean_object* l_Array_qsort_sort___at_Lean_mkMapDeclarationExtension___spec__1___rarg___closed__1;
-uint8_t lean_nat_dec_lt(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MapDeclarationExtension_find_x3f___at_Lean_findDocString_x3f___spec__1(lean_object*, lean_object*, lean_object*);
+extern LEAN_EXPORT lean_object* l_Lean_Name_toString___closed__1;
+extern LEAN_EXPORT lean_object* l_Lean_mkMapDeclarationExtension___rarg___closed__1;
+LEAN_EXPORT size_t l_USize_add(size_t, size_t);
+extern LEAN_EXPORT lean_object* l_String_instInhabitedString;
+extern LEAN_EXPORT lean_object* l_Lean_mkMapDeclarationExtension___rarg___closed__2;
+LEAN_EXPORT lean_object* lean_mk_empty_array_with_capacity(lean_object*);
+LEAN_EXPORT lean_object* lean_nat_div(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_PersistentEnvExtension_getModuleEntries___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_addDocString_x27___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__1___closed__1;
+LEAN_EXPORT lean_object* lean_name_mk_string(lean_object*, lean_object*);
+LEAN_EXPORT uint8_t l_USize_decEq(size_t, size_t);
+LEAN_EXPORT lean_object* lean_array_uget(lean_object*, size_t);
+LEAN_EXPORT lean_object* l_Lean_registerSimplePersistentEnvExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__4(lean_object*, lean_object*);
+LEAN_EXPORT uint8_t l_Lean_Name_quickLt(lean_object*, lean_object*);
+extern LEAN_EXPORT lean_object* l_Lean_registerInternalExceptionId___closed__2;
+LEAN_EXPORT lean_object* l_Lean_docStringExt___closed__5;
+extern LEAN_EXPORT lean_object* l_Array_empty___closed__1;
+LEAN_EXPORT lean_object* l_Array_qsort_sort___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__2(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_st_ref_get(lean_object*, lean_object*);
+extern LEAN_EXPORT lean_object* l_Lean_instInhabitedParserDescr___closed__1;
+LEAN_EXPORT uint8_t lean_name_eq(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_array_get_size(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_docStringExt___closed__2;
+LEAN_EXPORT lean_object* lean_string_append(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Array_binSearchAux___at_Lean_findDocString_x3f___spec__3___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_addDocString___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_addDocString___rarg___lambda__1(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__3___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_nat_add(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_findDocString_x3f___rarg___lambda__1___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Name_toStringWithSep(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_addDocString(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_registerSimplePersistentEnvExtension___rarg___lambda__2(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MapDeclarationExtension_insert___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Array_qsort_sort___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__2___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT uint8_t lean_nat_dec_eq(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_nat_sub(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__2___boxed(lean_object*);
+LEAN_EXPORT lean_object* lean_array_swap(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_registerSimplePersistentEnvExtension___rarg___lambda__3(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_array_get(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_registerPersistentEnvExtensionUnsafe___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__5(lean_object*, lean_object*);
+LEAN_EXPORT uint8_t l_Lean_Name_quickCmp(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at_Lean_findDocString_x3f___spec__2(lean_object*, lean_object*);
+extern LEAN_EXPORT lean_object* l_IO_instInhabitedError___closed__1;
+LEAN_EXPORT lean_object* l_Lean_findDocString_x3f___rarg___lambda__1(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_registerPersistentEnvExtensionUnsafe___rarg___lambda__2(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_docStringExt___closed__3;
+LEAN_EXPORT lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__3(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__2(lean_object*);
+extern LEAN_EXPORT lean_object* l_Lean_persistentEnvExtensionsRef;
+LEAN_EXPORT lean_object* l_Lean_docStringExt;
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__3(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_addDocString_x27_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__3___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__4___boxed(lean_object*, lean_object*);
+LEAN_EXPORT size_t lean_usize_of_nat(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_initFn____x40_Lean_DocString___hyg_3____closed__2;
+LEAN_EXPORT lean_object* l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__1___lambda__1(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_SimplePersistentEnvExtension_getState___rarg(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MapDeclarationExtension_find_x3f___at_Lean_findDocString_x3f___spec__1___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__4___rarg(lean_object*);
+extern LEAN_EXPORT lean_object* l_Lean_registerPersistentEnvExtensionUnsafe___rarg___closed__1;
+LEAN_EXPORT lean_object* l_List_redLength___rarg(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_registerSimplePersistentEnvExtension___rarg___lambda__1___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT uint8_t l_Array_anyMUnsafe_any___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__6(lean_object*, lean_object*, size_t, size_t);
+LEAN_EXPORT lean_object* l_Lean_initFn____x40_Lean_DocString___hyg_3____closed__1;
+LEAN_EXPORT uint8_t lean_nat_dec_le(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_findDocString_x3f(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__1(lean_object*);
+extern LEAN_EXPORT lean_object* l_Lean_registerSimplePersistentEnvExtension___rarg___closed__1;
+extern LEAN_EXPORT lean_object* l_Lean_EnvExtensionInterfaceUnsafe_instInhabitedExt___closed__2;
+LEAN_EXPORT lean_object* l_Lean_addDocString_x27(lean_object*);
+LEAN_EXPORT lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__3___closed__1;
+LEAN_EXPORT lean_object* l_Lean_docStringExt___closed__1;
+extern LEAN_EXPORT lean_object* l_Lean_instInhabitedName;
+LEAN_EXPORT lean_object* l_Lean_Environment_getModuleIdxFor_x3f(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_List_toArrayAux___rarg(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Array_binSearchAux___at_Lean_findDocString_x3f___spec__3(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_initFn____x40_Lean_DocString___hyg_3_(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_docStringExt___closed__4;
+LEAN_EXPORT lean_object* l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_findDocString_x3f___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_EStateM_pure___rarg(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at_Lean_findDocString_x3f___spec__2___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__4(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Array_anyMUnsafe_any___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__6___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_addDocString_x27_match__1(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__1___boxed(lean_object*);
+extern LEAN_EXPORT lean_object* l_Array_qsort_sort___at_Lean_mkMapDeclarationExtension___spec__1___rarg___closed__1;
+LEAN_EXPORT uint8_t lean_nat_dec_lt(lean_object*, lean_object*);
 static lean_object* _init_l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__3___closed__1() {
 _start:
 {
@@ -118,7 +118,7 @@ lean_ctor_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__3(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
+LEAN_EXPORT lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__3(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
 _start:
 {
 uint8_t x_7; 
@@ -171,7 +171,7 @@ goto _start;
 }
 }
 }
-lean_object* l_Array_qsort_sort___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__2(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Array_qsort_sort___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__2(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; uint8_t x_13; 
@@ -330,7 +330,7 @@ return x_6;
 }
 }
 }
-uint8_t l_Array_anyMUnsafe_any___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__6(lean_object* x_1, lean_object* x_2, size_t x_3, size_t x_4) {
+LEAN_EXPORT uint8_t l_Array_anyMUnsafe_any___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__6(lean_object* x_1, lean_object* x_2, size_t x_3, size_t x_4) {
 _start:
 {
 uint8_t x_5; 
@@ -368,7 +368,7 @@ return x_14;
 }
 }
 }
-lean_object* l_Lean_registerPersistentEnvExtensionUnsafe___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__5(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_registerPersistentEnvExtensionUnsafe___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__5(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -518,7 +518,7 @@ return x_52;
 }
 }
 }
-lean_object* l_Lean_registerSimplePersistentEnvExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__4(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_registerSimplePersistentEnvExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__4(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; lean_object* x_9; lean_object* x_10; lean_object* x_11; lean_object* x_12; lean_object* x_13; lean_object* x_14; lean_object* x_15; 
@@ -555,7 +555,7 @@ x_15 = l_Lean_registerPersistentEnvExtensionUnsafe___at_Lean_initFn____x40_Lean_
 return x_15;
 }
 }
-lean_object* l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__1___lambda__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__1___lambda__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; lean_object* x_9; 
@@ -581,7 +581,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_mkMapDeclarationExtension___at_Lean_init
 return x_1;
 }
 }
-lean_object* l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -615,7 +615,7 @@ x_3 = lean_name_mk_string(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_initFn____x40_Lean_DocString___hyg_3_(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_initFn____x40_Lean_DocString___hyg_3_(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; 
@@ -624,7 +624,7 @@ x_3 = l_Lean_mkMapDeclarationExtension___at_Lean_initFn____x40_Lean_DocString___
 return x_3;
 }
 }
-lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__3___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
+LEAN_EXPORT lean_object* l_Array_qpartition_loop___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__3___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
 _start:
 {
 lean_object* x_7; 
@@ -633,7 +633,7 @@ lean_dec(x_2);
 return x_7;
 }
 }
-lean_object* l_Array_qsort_sort___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__2___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Array_qsort_sort___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__2___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -642,7 +642,7 @@ lean_dec(x_3);
 return x_4;
 }
 }
-lean_object* l_Array_anyMUnsafe_any___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__6___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Array_anyMUnsafe_any___at_Lean_initFn____x40_Lean_DocString___hyg_3____spec__6___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 size_t x_5; size_t x_6; uint8_t x_7; lean_object* x_8; 
@@ -657,7 +657,7 @@ x_8 = lean_box(x_7);
 return x_8;
 }
 }
-lean_object* l_Lean_docStringExt___elambda__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -665,7 +665,7 @@ x_2 = lean_box(0);
 return x_2;
 }
 }
-lean_object* l_Lean_docStringExt___elambda__2(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__2(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -673,14 +673,14 @@ x_2 = l_Array_empty___closed__1;
 return x_2;
 }
 }
-lean_object* l_Lean_docStringExt___elambda__3(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__3(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_inc(x_1);
 return x_1;
 }
 }
-lean_object* l_Lean_docStringExt___elambda__4___rarg(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__4___rarg(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; 
@@ -691,7 +691,7 @@ lean_ctor_set(x_3, 1, x_1);
 return x_3;
 }
 }
-lean_object* l_Lean_docStringExt___elambda__4(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__4(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -751,7 +751,7 @@ lean_ctor_set(x_7, 5, x_6);
 return x_7;
 }
 }
-lean_object* l_Lean_docStringExt___elambda__1___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__1___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -760,7 +760,7 @@ lean_dec(x_1);
 return x_2;
 }
 }
-lean_object* l_Lean_docStringExt___elambda__2___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__2___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -769,7 +769,7 @@ lean_dec(x_1);
 return x_2;
 }
 }
-lean_object* l_Lean_docStringExt___elambda__3___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__3___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -779,7 +779,7 @@ lean_dec(x_1);
 return x_3;
 }
 }
-lean_object* l_Lean_docStringExt___elambda__4___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_docStringExt___elambda__4___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -789,7 +789,7 @@ lean_dec(x_1);
 return x_3;
 }
 }
-lean_object* l_Lean_addDocString___rarg___lambda__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_addDocString___rarg___lambda__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; lean_object* x_5; 
@@ -798,7 +798,7 @@ x_5 = l_Lean_MapDeclarationExtension_insert___rarg(x_4, x_3, x_1, x_2);
 return x_5;
 }
 }
-lean_object* l_Lean_addDocString___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_addDocString___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -812,7 +812,7 @@ x_6 = lean_apply_1(x_4, x_5);
 return x_6;
 }
 }
-lean_object* l_Lean_addDocString(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_addDocString(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -820,7 +820,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_addDocString___rarg), 3, 0);
 return x_2;
 }
 }
-lean_object* l_Lean_addDocString_x27_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_addDocString_x27_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -843,7 +843,7 @@ return x_7;
 }
 }
 }
-lean_object* l_Lean_addDocString_x27_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_addDocString_x27_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -851,7 +851,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_addDocString_x27_match__1___rarg), 3, 0)
 return x_2;
 }
 }
-lean_object* l_Lean_addDocString_x27___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Lean_addDocString_x27___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 if (lean_obj_tag(x_4) == 0)
@@ -881,7 +881,7 @@ return x_10;
 }
 }
 }
-lean_object* l_Lean_addDocString_x27(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_addDocString_x27(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -889,7 +889,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_addDocString_x27___rarg), 4, 0);
 return x_2;
 }
 }
-lean_object* l_Std_RBNode_find___at_Lean_findDocString_x3f___spec__2(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at_Lean_findDocString_x3f___spec__2(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -929,7 +929,7 @@ goto _start;
 }
 }
 }
-lean_object* l_Array_binSearchAux___at_Lean_findDocString_x3f___spec__3(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Array_binSearchAux___at_Lean_findDocString_x3f___spec__3(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 uint8_t x_5; 
@@ -1010,7 +1010,7 @@ goto _start;
 }
 }
 }
-lean_object* l_Lean_MapDeclarationExtension_find_x3f___at_Lean_findDocString_x3f___spec__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_MapDeclarationExtension_find_x3f___at_Lean_findDocString_x3f___spec__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -1095,7 +1095,7 @@ return x_24;
 }
 }
 }
-lean_object* l_Lean_findDocString_x3f___rarg___lambda__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_findDocString_x3f___rarg___lambda__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -1111,7 +1111,7 @@ x_8 = lean_apply_2(x_5, lean_box(0), x_7);
 return x_8;
 }
 }
-lean_object* l_Lean_findDocString_x3f___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_findDocString_x3f___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -1127,7 +1127,7 @@ x_7 = lean_apply_4(x_4, lean_box(0), lean_box(0), x_5, x_6);
 return x_7;
 }
 }
-lean_object* l_Lean_findDocString_x3f(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_findDocString_x3f(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -1135,7 +1135,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_findDocString_x3f___rarg), 3, 0);
 return x_2;
 }
 }
-lean_object* l_Std_RBNode_find___at_Lean_findDocString_x3f___spec__2___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Std_RBNode_find___at_Lean_findDocString_x3f___spec__2___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -1145,7 +1145,7 @@ lean_dec(x_1);
 return x_3;
 }
 }
-lean_object* l_Array_binSearchAux___at_Lean_findDocString_x3f___spec__3___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Array_binSearchAux___at_Lean_findDocString_x3f___spec__3___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; 
@@ -1155,7 +1155,7 @@ lean_dec(x_1);
 return x_5;
 }
 }
-lean_object* l_Lean_MapDeclarationExtension_find_x3f___at_Lean_findDocString_x3f___spec__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_MapDeclarationExtension_find_x3f___at_Lean_findDocString_x3f___spec__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -1165,7 +1165,7 @@ lean_dec(x_1);
 return x_4;
 }
 }
-lean_object* l_Lean_findDocString_x3f___rarg___lambda__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_findDocString_x3f___rarg___lambda__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 

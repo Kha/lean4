@@ -13,30 +13,30 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_Lean_Meta_DiscrTree_Key_hash_match__1(lean_object*);
-lean_object* l_Lean_Meta_DiscrTree_instBEqKey___closed__1;
-lean_object* l_Lean_Meta_DiscrTree_root___default(lean_object*);
-lean_object* l_Lean_Meta_DiscrTree_instInhabitedKey___closed__1;
-lean_object* l_Lean_Meta_DiscrTree_instHashableKey;
-extern lean_object* l_Std_PersistentHashMap_root___default___closed__2;
-uint8_t lean_name_eq(lean_object*, lean_object*);
-lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35__match__1(lean_object*);
-uint8_t l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35_(lean_object*, lean_object*);
-uint8_t lean_nat_dec_eq(lean_object*, lean_object*);
-lean_object* l_Lean_Meta_DiscrTree_Key_hash_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Meta_DiscrTree_root___default___closed__1;
-size_t l_Lean_Name_hash(lean_object*);
-lean_object* l_Lean_Meta_DiscrTree_instBEqKey;
-lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35__match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-uint8_t l___private_Lean_Expr_0__Lean_beqLiteral____x40_Lean_Expr___hyg_14_(lean_object*, lean_object*);
-size_t lean_usize_of_nat(lean_object*);
-lean_object* l_Lean_Meta_DiscrTree_instHashableKey___closed__1;
-lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35____boxed(lean_object*, lean_object*);
-lean_object* l_Lean_Meta_DiscrTree_instInhabitedKey;
-size_t l_Lean_Literal_hash(lean_object*);
-size_t lean_usize_mix_hash(size_t, size_t);
-lean_object* l_Lean_Meta_DiscrTree_Key_hash___boxed(lean_object*);
-size_t l_Lean_Meta_DiscrTree_Key_hash(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_Key_hash_match__1(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_instBEqKey___closed__1;
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_root___default(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_instInhabitedKey___closed__1;
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_instHashableKey;
+extern LEAN_EXPORT lean_object* l_Std_PersistentHashMap_root___default___closed__2;
+LEAN_EXPORT uint8_t lean_name_eq(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35__match__1(lean_object*);
+LEAN_EXPORT uint8_t l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35_(lean_object*, lean_object*);
+LEAN_EXPORT uint8_t lean_nat_dec_eq(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_Key_hash_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_root___default___closed__1;
+LEAN_EXPORT size_t l_Lean_Name_hash(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_instBEqKey;
+LEAN_EXPORT lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35__match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT uint8_t l___private_Lean_Expr_0__Lean_beqLiteral____x40_Lean_Expr___hyg_14_(lean_object*, lean_object*);
+LEAN_EXPORT size_t lean_usize_of_nat(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_instHashableKey___closed__1;
+LEAN_EXPORT lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35____boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_instInhabitedKey;
+LEAN_EXPORT size_t l_Lean_Literal_hash(lean_object*);
+LEAN_EXPORT size_t lean_usize_mix_hash(size_t, size_t);
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_Key_hash___boxed(lean_object*);
+LEAN_EXPORT size_t l_Lean_Meta_DiscrTree_Key_hash(lean_object*);
 static lean_object* _init_l_Lean_Meta_DiscrTree_instInhabitedKey___closed__1() {
 _start:
 {
@@ -57,7 +57,7 @@ x_1 = l_Lean_Meta_DiscrTree_instInhabitedKey___closed__1;
 return x_1;
 }
 }
-lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35__match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
+LEAN_EXPORT lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35__match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -225,7 +225,7 @@ return x_34;
 }
 }
 }
-lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35__match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35__match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -233,7 +233,7 @@ x_2 = lean_alloc_closure((void*)(l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Me
 return x_2;
 }
 }
-uint8_t l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35_(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT uint8_t l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35_(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -362,7 +362,7 @@ return x_28;
 }
 }
 }
-lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35____boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l___private_Lean_Meta_DiscrTreeTypes_0__Lean_Meta_DiscrTree_beqKey____x40_Lean_Meta_DiscrTreeTypes___hyg_35____boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 uint8_t x_3; lean_object* x_4; 
@@ -389,7 +389,7 @@ x_1 = l_Lean_Meta_DiscrTree_instBEqKey___closed__1;
 return x_1;
 }
 }
-lean_object* l_Lean_Meta_DiscrTree_Key_hash_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7) {
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_Key_hash_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -478,7 +478,7 @@ return x_21;
 }
 }
 }
-lean_object* l_Lean_Meta_DiscrTree_Key_hash_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_Key_hash_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -486,7 +486,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_Meta_DiscrTree_Key_hash_match__1___rarg)
 return x_2;
 }
 }
-size_t l_Lean_Meta_DiscrTree_Key_hash(lean_object* x_1) {
+LEAN_EXPORT size_t l_Lean_Meta_DiscrTree_Key_hash(lean_object* x_1) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -544,7 +544,7 @@ return x_22;
 }
 }
 }
-lean_object* l_Lean_Meta_DiscrTree_Key_hash___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_Key_hash___boxed(lean_object* x_1) {
 _start:
 {
 size_t x_2; lean_object* x_3; 
@@ -582,7 +582,7 @@ lean_ctor_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Meta_DiscrTree_root___default(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Meta_DiscrTree_root___default(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 

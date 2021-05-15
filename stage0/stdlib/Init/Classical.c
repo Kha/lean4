@@ -13,65 +13,65 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__8;
-extern lean_object* l_myMacro____x40_Init_Notation___hyg_15342____closed__13;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__4;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__2;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__1;
-extern lean_object* l_myMacro____x40_Init_Notation___hyg_15342____closed__6;
-lean_object* lean_name_mk_string(lean_object*, lean_object*);
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__13;
-lean_object* l_Classical_tacticByCases_____x3a_____closed__2;
-extern lean_object* l_Array_empty___closed__1;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__15;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957_(lean_object*, lean_object*, lean_object*);
-lean_object* lean_array_push(lean_object*, lean_object*);
-lean_object* l_Classical_tacticByCases_____x3a_____closed__7;
-lean_object* l_Classical_typeDecidable_match__1___rarg___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* lean_string_utf8_byte_size(lean_object*);
-extern lean_object* l_myMacro____x40_Init_Notation___hyg_1481____closed__8;
-extern lean_object* l_Lean_Parser_Tactic_cases___closed__1;
-extern lean_object* l_myMacro____x40_Init_Notation___hyg_15342____closed__5;
-lean_object* l_Lean_MonadRef_mkInfoFromRefPos___at_myMacro____x40_Init_Notation___hyg_113____spec__1(lean_object*, lean_object*);
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__5;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__14;
-extern lean_object* l_Lean_groupKind___closed__2;
-extern lean_object* l_Lean_Parser_Tactic_myMacro____x40_Init_Notation___hyg_18139____closed__2;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__3;
-lean_object* l_Classical_tacticByCases_____x3a_____closed__10;
-extern lean_object* l_Lean_Parser_Tactic_cases___closed__2;
-lean_object* l_Classical_tacticByCases_____x3a__;
-extern lean_object* l_myMacro____x40_Init_Notation___hyg_15342____closed__14;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__6;
-lean_object* l_Classical_typeDecidable_match__1(lean_object*, lean_object*);
-lean_object* l_Classical_tacticByCases_____x3a_____closed__3;
-extern lean_object* l_Lean_Parser_Syntax_addPrec___closed__10;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__10;
-extern lean_object* l_myMacro____x40_Init_Notation___hyg_14734____closed__13;
-extern lean_object* l_termDepIfThenElse___closed__14;
-extern lean_object* l_termDepIfThenElse___closed__9;
-extern lean_object* l_Array_term_____x5b___x3a___x5d___closed__10;
-lean_object* l_Lean_addMacroScope(lean_object*, lean_object*, lean_object*);
-extern lean_object* l_Lean_nullKind___closed__2;
-lean_object* l_Classical_tacticByCases_____x3a_____closed__5;
-extern lean_object* l_Lean_Parser_Tactic_inductionAlts___closed__2;
-lean_object* l_Classical_tacticByCases_____x3a_____closed__4;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__9;
-lean_object* l_Classical_tacticByCases_____x3a_____closed__9;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__7;
-uint8_t l_Lean_Syntax_isOfKind(lean_object*, lean_object*);
-extern lean_object* l_Lean_Parser_Tactic_inductionAlt___closed__2;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__11;
-extern lean_object* l_myMacro____x40_Init_Notation___hyg_2278____closed__4;
-lean_object* l_Lean_Syntax_getArg(lean_object*, lean_object*);
-lean_object* l_Classical_typeDecidable_match__1___rarg(uint8_t, lean_object*, lean_object*);
-lean_object* l_Classical_tacticByCases_____x3a_____closed__1;
-extern lean_object* l_Lean_Parser_Tactic_casesTarget___closed__2;
-lean_object* l_Classical_tacticByCases_____x3a_____closed__8;
-lean_object* l_Classical_tacticByCases_____x3a_____closed__6;
-extern lean_object* l_myMacro____x40_Init_Notation___hyg_15342____closed__11;
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__12;
-lean_object* l_Classical_typeDecidable_match__1___rarg(uint8_t x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__8;
+extern LEAN_EXPORT lean_object* l_myMacro____x40_Init_Notation___hyg_15342____closed__13;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__4;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__2;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__1;
+extern LEAN_EXPORT lean_object* l_myMacro____x40_Init_Notation___hyg_15342____closed__6;
+LEAN_EXPORT lean_object* lean_name_mk_string(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__13;
+LEAN_EXPORT lean_object* l_Classical_tacticByCases_____x3a_____closed__2;
+extern LEAN_EXPORT lean_object* l_Array_empty___closed__1;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__15;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957_(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_array_push(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Classical_tacticByCases_____x3a_____closed__7;
+LEAN_EXPORT lean_object* l_Classical_typeDecidable_match__1___rarg___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_string_utf8_byte_size(lean_object*);
+extern LEAN_EXPORT lean_object* l_myMacro____x40_Init_Notation___hyg_1481____closed__8;
+extern LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_cases___closed__1;
+extern LEAN_EXPORT lean_object* l_myMacro____x40_Init_Notation___hyg_15342____closed__5;
+LEAN_EXPORT lean_object* l_Lean_MonadRef_mkInfoFromRefPos___at_myMacro____x40_Init_Notation___hyg_113____spec__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__5;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__14;
+extern LEAN_EXPORT lean_object* l_Lean_groupKind___closed__2;
+extern LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_myMacro____x40_Init_Notation___hyg_18139____closed__2;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__3;
+LEAN_EXPORT lean_object* l_Classical_tacticByCases_____x3a_____closed__10;
+extern LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_cases___closed__2;
+LEAN_EXPORT lean_object* l_Classical_tacticByCases_____x3a__;
+extern LEAN_EXPORT lean_object* l_myMacro____x40_Init_Notation___hyg_15342____closed__14;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__6;
+LEAN_EXPORT lean_object* l_Classical_typeDecidable_match__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Classical_tacticByCases_____x3a_____closed__3;
+extern LEAN_EXPORT lean_object* l_Lean_Parser_Syntax_addPrec___closed__10;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__10;
+extern LEAN_EXPORT lean_object* l_myMacro____x40_Init_Notation___hyg_14734____closed__13;
+extern LEAN_EXPORT lean_object* l_termDepIfThenElse___closed__14;
+extern LEAN_EXPORT lean_object* l_termDepIfThenElse___closed__9;
+extern LEAN_EXPORT lean_object* l_Array_term_____x5b___x3a___x5d___closed__10;
+LEAN_EXPORT lean_object* l_Lean_addMacroScope(lean_object*, lean_object*, lean_object*);
+extern LEAN_EXPORT lean_object* l_Lean_nullKind___closed__2;
+LEAN_EXPORT lean_object* l_Classical_tacticByCases_____x3a_____closed__5;
+extern LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_inductionAlts___closed__2;
+LEAN_EXPORT lean_object* l_Classical_tacticByCases_____x3a_____closed__4;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__9;
+LEAN_EXPORT lean_object* l_Classical_tacticByCases_____x3a_____closed__9;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__7;
+LEAN_EXPORT uint8_t l_Lean_Syntax_isOfKind(lean_object*, lean_object*);
+extern LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_inductionAlt___closed__2;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__11;
+extern LEAN_EXPORT lean_object* l_myMacro____x40_Init_Notation___hyg_2278____closed__4;
+LEAN_EXPORT lean_object* l_Lean_Syntax_getArg(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Classical_typeDecidable_match__1___rarg(uint8_t, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Classical_tacticByCases_____x3a_____closed__1;
+extern LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_casesTarget___closed__2;
+LEAN_EXPORT lean_object* l_Classical_tacticByCases_____x3a_____closed__8;
+LEAN_EXPORT lean_object* l_Classical_tacticByCases_____x3a_____closed__6;
+extern LEAN_EXPORT lean_object* l_myMacro____x40_Init_Notation___hyg_15342____closed__11;
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957____closed__12;
+LEAN_EXPORT lean_object* l_Classical_typeDecidable_match__1___rarg(uint8_t x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (x_1 == 0)
@@ -90,7 +90,7 @@ return x_5;
 }
 }
 }
-lean_object* l_Classical_typeDecidable_match__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Classical_typeDecidable_match__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -98,7 +98,7 @@ x_3 = lean_alloc_closure((void*)(l_Classical_typeDecidable_match__1___rarg___box
 return x_3;
 }
 }
-lean_object* l_Classical_typeDecidable_match__1___rarg___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Classical_typeDecidable_match__1___rarg___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 uint8_t x_4; lean_object* x_5; 
@@ -385,7 +385,7 @@ x_3 = lean_name_mk_string(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957_(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Classical_myMacro____x40_Init_Classical___hyg_957_(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; uint8_t x_5; 

@@ -13,37 +13,37 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-lean_object* l_Nat_shiftRight___boxed(lean_object*, lean_object*);
-lean_object* l_Nat_instOrOpNat___closed__1;
-lean_object* lean_nat_div(lean_object*, lean_object*);
-lean_object* l_Nat_instXorNat;
-lean_object* l_Nat_shiftLeft___boxed(lean_object*, lean_object*);
-lean_object* l_Nat_shiftLeft_match__1___rarg___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* lean_nat_add(lean_object*, lean_object*);
-uint8_t lean_nat_dec_eq(lean_object*, lean_object*);
-lean_object* lean_nat_lxor(lean_object*, lean_object*);
-lean_object* lean_nat_sub(lean_object*, lean_object*);
-lean_object* l_Nat_instShiftRightNat___closed__1;
-lean_object* l_Nat_instOrOpNat;
-lean_object* l_Nat_instAndOpNat;
-lean_object* l_Nat_instShiftLeftNat___closed__1;
-lean_object* l_Nat_lor___boxed(lean_object*, lean_object*);
-lean_object* l_Nat_bitwise(lean_object*, lean_object*, lean_object*);
-lean_object* lean_nat_lor(lean_object*, lean_object*);
-lean_object* l_Nat_xor___boxed(lean_object*, lean_object*);
-lean_object* l_Nat_instXorNat___closed__1;
-lean_object* l_Nat_instAndOpNat___closed__1;
-lean_object* l_Nat_shiftLeft_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Nat_instShiftLeftNat;
-lean_object* lean_nat_shiftl(lean_object*, lean_object*);
-lean_object* l_Nat_bitwise___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_Nat_land___boxed(lean_object*, lean_object*);
-lean_object* lean_nat_land(lean_object*, lean_object*);
-lean_object* lean_nat_mod(lean_object*, lean_object*);
-lean_object* l_Nat_instShiftRightNat;
-lean_object* l_Nat_shiftLeft_match__1(lean_object*);
-lean_object* lean_nat_shiftr(lean_object*, lean_object*);
-lean_object* l_Nat_bitwise(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Nat_shiftRight___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_instOrOpNat___closed__1;
+LEAN_EXPORT lean_object* lean_nat_div(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_instXorNat;
+LEAN_EXPORT lean_object* l_Nat_shiftLeft___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_shiftLeft_match__1___rarg___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_nat_add(lean_object*, lean_object*);
+LEAN_EXPORT uint8_t lean_nat_dec_eq(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_nat_lxor(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_nat_sub(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_instShiftRightNat___closed__1;
+LEAN_EXPORT lean_object* l_Nat_instOrOpNat;
+LEAN_EXPORT lean_object* l_Nat_instAndOpNat;
+LEAN_EXPORT lean_object* l_Nat_instShiftLeftNat___closed__1;
+LEAN_EXPORT lean_object* l_Nat_lor___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_bitwise(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_nat_lor(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_xor___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_instXorNat___closed__1;
+LEAN_EXPORT lean_object* l_Nat_instAndOpNat___closed__1;
+LEAN_EXPORT lean_object* l_Nat_shiftLeft_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_instShiftLeftNat;
+LEAN_EXPORT lean_object* lean_nat_shiftl(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_bitwise___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_land___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_nat_land(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_nat_mod(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_instShiftRightNat;
+LEAN_EXPORT lean_object* l_Nat_shiftLeft_match__1(lean_object*);
+LEAN_EXPORT lean_object* lean_nat_shiftr(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Nat_bitwise(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; uint8_t x_5; 
@@ -139,7 +139,7 @@ return x_3;
 }
 }
 }
-lean_object* l_Nat_bitwise___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Nat_bitwise___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -149,7 +149,7 @@ lean_dec(x_2);
 return x_4;
 }
 }
-lean_object* l_Nat_land___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Nat_land___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -157,7 +157,7 @@ x_3 = lean_nat_land(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Nat_lor___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Nat_lor___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -165,7 +165,7 @@ x_3 = lean_nat_lor(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Nat_xor___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Nat_xor___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -173,7 +173,7 @@ x_3 = lean_nat_lxor(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Nat_shiftLeft_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Nat_shiftLeft_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; uint8_t x_6; 
@@ -197,7 +197,7 @@ return x_10;
 }
 }
 }
-lean_object* l_Nat_shiftLeft_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Nat_shiftLeft_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -205,7 +205,7 @@ x_2 = lean_alloc_closure((void*)(l_Nat_shiftLeft_match__1___rarg___boxed), 4, 0)
 return x_2;
 }
 }
-lean_object* l_Nat_shiftLeft_match__1___rarg___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Nat_shiftLeft_match__1___rarg___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; 
@@ -214,7 +214,7 @@ lean_dec(x_2);
 return x_5;
 }
 }
-lean_object* l_Nat_shiftLeft___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Nat_shiftLeft___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -222,7 +222,7 @@ x_3 = lean_nat_shiftl(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Nat_shiftRight___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Nat_shiftRight___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 

@@ -13,55 +13,55 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-size_t l_USize_add(size_t, size_t);
-lean_object* l_Lean_Expr_hasSyntheticSorry_match__1(lean_object*);
-lean_object* lean_name_mk_string(lean_object*, lean_object*);
-uint8_t l_USize_decEq(size_t, size_t);
-lean_object* lean_array_uget(lean_object*, size_t);
-uint8_t l_Lean_Expr_isSyntheticSorry(lean_object*);
-lean_object* l_Lean_MessageData_hasSorry_match__1(lean_object*);
-lean_object* l_Lean_MessageData_hasSyntheticSorry___boxed(lean_object*);
-uint8_t lean_name_eq(lean_object*, lean_object*);
-lean_object* l_Lean_MessageData_hasSyntheticSorry_visit_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* lean_array_get_size(lean_object*);
-lean_object* l_Lean_MessageData_instantiateMVars(lean_object*);
-uint8_t l_Lean_Expr_hasSyntheticSorry(lean_object*);
-extern lean_object* l_instReprBool___closed__2;
-extern lean_object* l_Lean_instQuoteBool___closed__1;
-uint8_t l_Lean_MessageData_hasSyntheticSorry_visit(lean_object*);
-lean_object* l_Lean_Expr_hasSyntheticSorry___boxed(lean_object*);
-lean_object* l_Lean_Expr_isSyntheticSorry___boxed(lean_object*);
-uint8_t l_Lean_Exception_hasSyntheticSorry(lean_object*);
-lean_object* l_Lean_Expr_isSyntheticSorry_match__1(lean_object*);
-uint8_t l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSyntheticSorry_visit___spec__1(lean_object*, size_t, size_t);
-lean_object* l_Lean_Expr_isSyntheticSorry_match__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Exception_hasSyntheticSorry_match__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_MessageData_hasSyntheticSorry_visit___boxed(lean_object*);
-uint8_t l_Lean_MessageData_hasSyntheticSorry(lean_object*);
-lean_object* l_Lean_MessageData_hasSorry___boxed(lean_object*);
-size_t lean_usize_of_nat(lean_object*);
-lean_object* l_Lean_MessageData_hasSorry_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Expr_isSorry___boxed(lean_object*);
-lean_object* l_Lean_Expr_isSorry_match__1___rarg(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Expr_hasSorry_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-uint8_t lean_nat_dec_le(lean_object*, lean_object*);
-lean_object* l_Lean_MessageData_hasSyntheticSorry_visit_match__1(lean_object*);
-lean_object* l_Lean_Expr_isSorry_match__1(lean_object*);
-lean_object* l_Lean_Expr_isSorry_match__1___rarg___closed__1;
-lean_object* l_Lean_Exception_hasSyntheticSorry___boxed(lean_object*);
-lean_object* l_Lean_Expr_hasSorry___closed__1;
-uint8_t l_Lean_Expr_hasSorry(lean_object*);
-lean_object* l_Lean_Expr_hasSorry___boxed(lean_object*);
-uint8_t l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSorry___spec__1(lean_object*, size_t, size_t);
-lean_object* l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSorry___spec__1___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Expr_hasSyntheticSorry_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSyntheticSorry_visit___spec__1___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Expr_hasSorry_match__1(lean_object*);
-uint8_t l_Lean_MessageData_hasSorry(lean_object*);
-lean_object* l_Lean_Exception_hasSyntheticSorry_match__1(lean_object*);
-uint8_t l_Lean_Expr_isSorry(lean_object*);
-uint8_t lean_string_dec_eq(lean_object*, lean_object*);
-uint8_t lean_nat_dec_lt(lean_object*, lean_object*);
+LEAN_EXPORT size_t l_USize_add(size_t, size_t);
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSyntheticSorry_match__1(lean_object*);
+LEAN_EXPORT lean_object* lean_name_mk_string(lean_object*, lean_object*);
+LEAN_EXPORT uint8_t l_USize_decEq(size_t, size_t);
+LEAN_EXPORT lean_object* lean_array_uget(lean_object*, size_t);
+LEAN_EXPORT uint8_t l_Lean_Expr_isSyntheticSorry(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSorry_match__1(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSyntheticSorry___boxed(lean_object*);
+LEAN_EXPORT uint8_t lean_name_eq(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSyntheticSorry_visit_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* lean_array_get_size(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MessageData_instantiateMVars(lean_object*);
+LEAN_EXPORT uint8_t l_Lean_Expr_hasSyntheticSorry(lean_object*);
+extern LEAN_EXPORT lean_object* l_instReprBool___closed__2;
+extern LEAN_EXPORT lean_object* l_Lean_instQuoteBool___closed__1;
+LEAN_EXPORT uint8_t l_Lean_MessageData_hasSyntheticSorry_visit(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSyntheticSorry___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_isSyntheticSorry___boxed(lean_object*);
+LEAN_EXPORT uint8_t l_Lean_Exception_hasSyntheticSorry(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_isSyntheticSorry_match__1(lean_object*);
+LEAN_EXPORT uint8_t l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSyntheticSorry_visit___spec__1(lean_object*, size_t, size_t);
+LEAN_EXPORT lean_object* l_Lean_Expr_isSyntheticSorry_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Exception_hasSyntheticSorry_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSyntheticSorry_visit___boxed(lean_object*);
+LEAN_EXPORT uint8_t l_Lean_MessageData_hasSyntheticSorry(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSorry___boxed(lean_object*);
+LEAN_EXPORT size_t lean_usize_of_nat(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSorry_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_isSorry___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_isSorry_match__1___rarg(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSorry_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT uint8_t lean_nat_dec_le(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSyntheticSorry_visit_match__1(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_isSorry_match__1(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_isSorry_match__1___rarg___closed__1;
+LEAN_EXPORT lean_object* l_Lean_Exception_hasSyntheticSorry___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSorry___closed__1;
+LEAN_EXPORT uint8_t l_Lean_Expr_hasSorry(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSorry___boxed(lean_object*);
+LEAN_EXPORT uint8_t l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSorry___spec__1(lean_object*, size_t, size_t);
+LEAN_EXPORT lean_object* l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSorry___spec__1___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSyntheticSorry_match__1___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSyntheticSorry_visit___spec__1___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSorry_match__1(lean_object*);
+LEAN_EXPORT uint8_t l_Lean_MessageData_hasSorry(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Exception_hasSyntheticSorry_match__1(lean_object*);
+LEAN_EXPORT uint8_t l_Lean_Expr_isSorry(lean_object*);
+LEAN_EXPORT uint8_t lean_string_dec_eq(lean_object*, lean_object*);
+LEAN_EXPORT uint8_t lean_nat_dec_lt(lean_object*, lean_object*);
 static lean_object* _init_l_Lean_Expr_isSorry_match__1___rarg___closed__1() {
 _start:
 {
@@ -70,7 +70,7 @@ x_1 = lean_mk_string("sorryAx");
 return x_1;
 }
 }
-lean_object* l_Lean_Expr_isSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Expr_isSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 5)
@@ -188,7 +188,7 @@ return x_28;
 }
 }
 }
-lean_object* l_Lean_Expr_isSorry_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Expr_isSorry_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -196,7 +196,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_Expr_isSorry_match__1___rarg), 3, 0);
 return x_2;
 }
 }
-uint8_t l_Lean_Expr_isSorry(lean_object* x_1) {
+LEAN_EXPORT uint8_t l_Lean_Expr_isSorry(lean_object* x_1) {
 _start:
 {
 if (lean_obj_tag(x_1) == 5)
@@ -259,7 +259,7 @@ return x_13;
 }
 }
 }
-lean_object* l_Lean_Expr_isSorry___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Expr_isSorry___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
@@ -269,7 +269,7 @@ x_3 = lean_box(x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Expr_isSyntheticSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Expr_isSyntheticSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 5)
@@ -2771,7 +2771,7 @@ return x_439;
 }
 }
 }
-lean_object* l_Lean_Expr_isSyntheticSorry_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Expr_isSyntheticSorry_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -2779,7 +2779,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_Expr_isSyntheticSorry_match__1___rarg), 
 return x_2;
 }
 }
-uint8_t l_Lean_Expr_isSyntheticSorry(lean_object* x_1) {
+LEAN_EXPORT uint8_t l_Lean_Expr_isSyntheticSorry(lean_object* x_1) {
 _start:
 {
 if (lean_obj_tag(x_1) == 5)
@@ -2911,7 +2911,7 @@ return x_29;
 }
 }
 }
-lean_object* l_Lean_Expr_isSyntheticSorry___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Expr_isSyntheticSorry___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
@@ -2921,7 +2921,7 @@ x_3 = lean_box(x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Expr_hasSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -3091,7 +3091,7 @@ return x_50;
 }
 }
 }
-lean_object* l_Lean_Expr_hasSorry_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSorry_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -3109,7 +3109,7 @@ x_3 = lean_name_mk_string(x_1, x_2);
 return x_3;
 }
 }
-uint8_t l_Lean_Expr_hasSorry(lean_object* x_1) {
+LEAN_EXPORT uint8_t l_Lean_Expr_hasSorry(lean_object* x_1) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -3228,7 +3228,7 @@ return x_32;
 }
 }
 }
-lean_object* l_Lean_Expr_hasSorry___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSorry___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
@@ -3238,7 +3238,7 @@ x_3 = lean_box(x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Expr_hasSyntheticSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8) {
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSyntheticSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -3380,7 +3380,7 @@ return x_44;
 }
 }
 }
-lean_object* l_Lean_Expr_hasSyntheticSorry_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSyntheticSorry_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -3388,7 +3388,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_Expr_hasSyntheticSorry_match__1___rarg),
 return x_2;
 }
 }
-uint8_t l_Lean_Expr_hasSyntheticSorry(lean_object* x_1) {
+LEAN_EXPORT uint8_t l_Lean_Expr_hasSyntheticSorry(lean_object* x_1) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -3510,7 +3510,7 @@ return x_31;
 }
 }
 }
-lean_object* l_Lean_Expr_hasSyntheticSorry___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Expr_hasSyntheticSorry___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
@@ -3520,7 +3520,7 @@ x_3 = lean_box(x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_MessageData_hasSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -3660,7 +3660,7 @@ return x_28;
 }
 }
 }
-lean_object* l_Lean_MessageData_hasSorry_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSorry_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -3668,7 +3668,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_MessageData_hasSorry_match__1___rarg), 9
 return x_2;
 }
 }
-uint8_t l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSorry___spec__1(lean_object* x_1, size_t x_2, size_t x_3) {
+LEAN_EXPORT uint8_t l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSorry___spec__1(lean_object* x_1, size_t x_2, size_t x_3) {
 _start:
 {
 uint8_t x_4; 
@@ -3702,7 +3702,7 @@ return x_11;
 }
 }
 }
-uint8_t l_Lean_MessageData_hasSorry(lean_object* x_1) {
+LEAN_EXPORT uint8_t l_Lean_MessageData_hasSorry(lean_object* x_1) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -3804,7 +3804,7 @@ return x_27;
 }
 }
 }
-lean_object* l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSorry___spec__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSorry___spec__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 size_t x_4; size_t x_5; uint8_t x_6; lean_object* x_7; 
@@ -3818,7 +3818,7 @@ x_7 = lean_box(x_6);
 return x_7;
 }
 }
-lean_object* l_Lean_MessageData_hasSorry___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSorry___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
@@ -3828,7 +3828,7 @@ x_3 = lean_box(x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_MessageData_hasSyntheticSorry_visit_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9, lean_object* x_10) {
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSyntheticSorry_visit_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6, lean_object* x_7, lean_object* x_8, lean_object* x_9, lean_object* x_10) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -3995,7 +3995,7 @@ return x_32;
 }
 }
 }
-lean_object* l_Lean_MessageData_hasSyntheticSorry_visit_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSyntheticSorry_visit_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -4003,7 +4003,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_MessageData_hasSyntheticSorry_visit_matc
 return x_2;
 }
 }
-uint8_t l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSyntheticSorry_visit___spec__1(lean_object* x_1, size_t x_2, size_t x_3) {
+LEAN_EXPORT uint8_t l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSyntheticSorry_visit___spec__1(lean_object* x_1, size_t x_2, size_t x_3) {
 _start:
 {
 uint8_t x_4; 
@@ -4036,7 +4036,7 @@ return x_11;
 }
 }
 }
-uint8_t l_Lean_MessageData_hasSyntheticSorry_visit(lean_object* x_1) {
+LEAN_EXPORT uint8_t l_Lean_MessageData_hasSyntheticSorry_visit(lean_object* x_1) {
 _start:
 {
 switch (lean_obj_tag(x_1)) {
@@ -4145,7 +4145,7 @@ return x_29;
 }
 }
 }
-uint8_t l_Lean_MessageData_hasSyntheticSorry(lean_object* x_1) {
+LEAN_EXPORT uint8_t l_Lean_MessageData_hasSyntheticSorry(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; uint8_t x_3; 
@@ -4155,7 +4155,7 @@ lean_dec(x_2);
 return x_3;
 }
 }
-lean_object* l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSyntheticSorry_visit___spec__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Array_anyMUnsafe_any___at_Lean_MessageData_hasSyntheticSorry_visit___spec__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 size_t x_4; size_t x_5; uint8_t x_6; lean_object* x_7; 
@@ -4169,7 +4169,7 @@ x_7 = lean_box(x_6);
 return x_7;
 }
 }
-lean_object* l_Lean_MessageData_hasSyntheticSorry_visit___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSyntheticSorry_visit___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
@@ -4179,7 +4179,7 @@ x_3 = lean_box(x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_MessageData_hasSyntheticSorry___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_MessageData_hasSyntheticSorry___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
@@ -4188,7 +4188,7 @@ x_3 = lean_box(x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Exception_hasSyntheticSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Exception_hasSyntheticSorry_match__1___rarg(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -4212,7 +4212,7 @@ return x_7;
 }
 }
 }
-lean_object* l_Lean_Exception_hasSyntheticSorry_match__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Exception_hasSyntheticSorry_match__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -4220,7 +4220,7 @@ x_2 = lean_alloc_closure((void*)(l_Lean_Exception_hasSyntheticSorry_match__1___r
 return x_2;
 }
 }
-uint8_t l_Lean_Exception_hasSyntheticSorry(lean_object* x_1) {
+LEAN_EXPORT uint8_t l_Lean_Exception_hasSyntheticSorry(lean_object* x_1) {
 _start:
 {
 if (lean_obj_tag(x_1) == 0)
@@ -4241,7 +4241,7 @@ return x_4;
 }
 }
 }
-lean_object* l_Lean_Exception_hasSyntheticSorry___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Exception_hasSyntheticSorry___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
