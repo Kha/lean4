@@ -2542,11 +2542,11 @@ theorem ex (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
     rw [Nat.mod_eq_sub_mod h₁.2]
     exact ih h
   | base x y h₁ =&gt;
-     have ¬ 0 &lt; y ∨ ¬ y ≤ x from Iff.mp (Decidable.notAndIffOrNot ..) h₁
+     have : ¬ 0 &lt; y ∨ ¬ y ≤ x := Iff.mp (Decidable.notAndIffOrNot ..) h₁
      match this with
      | Or.inl h₁ =&gt; exact absurd h h₁
      | Or.inr h₁ =&gt;
-       have hgt : y &gt; x from Nat.gtOfNotLe h₁
+       have hgt : y &gt; x := Nat.gtOfNotLe h₁
        rw [← Nat.mod_eq_of_lt hgt] at hgt
        assumption
 </code></pre>
@@ -3822,7 +3822,7 @@ This is because modules are discovered not from a directory listing anymore but 
 </ul>
 <h1><a class="header" href="#editor-integration" id="editor-integration">Editor Integration</a></h1>
 <p>As in the standard Nix setup.
-After adding <code>src/</code> as an LSP workspace using <code>lsp-workspace-folder-add</code>, it should automatically fall back to using stage 0 in there.</p>
+After adding <code>src/</code> as an LSP workspace, it should automatically fall back to using stage 0 in there.</p>
 <p>Note that the UX of <code>emacs/vscode-dev</code> is quite different from the Make-based setup regarding the compilation of dependencies:
 there is no mutable directory incrementally filled by the build that we could point the editor at for .olean files.
 Instead, <code>emacs-dev</code> will gather the individual dependency outputs from the Nix store when checking a file -- and build them on the fly when necessary.
