@@ -1,7 +1,8 @@
 add_library(shell OBJECT lean.cpp)
 
+string(TOUPPER "${CMAKE_BUILD_TYPE}" uppercase_CMAKE_BUILD_TYPE)
 add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/bin/lean${CMAKE_EXECUTABLE_SUFFIX}
-  COMMAND sh -c "LEANC_GMP=${GMP_LIBRARIES} ${CMAKE_BINARY_DIR}/bin/leanc -x none ${CMAKE_EXE_LINKER_FLAGS} $<TARGET_OBJECTS:shell> -o ${CMAKE_BINARY_DIR}/bin/lean${CMAKE_EXECUTABLE_SUFFIX}"
+  COMMAND sh -c "LEANC_GMP=${GMP_LIBRARIES} LEAN_CXX='${CMAKE_CXX_COMPILER_LAUNCHER} ${CMAKE_CXX_COMPILER}' ${CMAKE_BINARY_DIR}/bin/leanc ${CMAKE_EXE_LINKER_FLAGS} ${CMAKE_CXX_FLAGS_${uppercase_CMAKE_BUILD_TYPE}}  $<TARGET_OBJECTS:shell> -o ${CMAKE_BINARY_DIR}/bin/lean${CMAKE_EXECUTABLE_SUFFIX}"
   DEPENDS Init Std Lean leancpp shell)
 
 add_custom_target(lean ALL
@@ -139,4 +140,11 @@ ENDFOREACH(T)
 
 add_test(NAME leanpkgtest
          WORKING_DIRECTORY "${LEAN_SOURCE_DIR}/../tests/leanpkg/b"
-         COMMAND bash -c "PATH=${LEAN_BIN}:$PATH leanpkg build")
+         COMMAND bash -c "
+           set -eu
+           export PATH=${LEAN_BIN}:$PATH
+           leanpkg build
+           # linking requires some manual steps
+           (cd ../a; leanpkg build lib)
+           leanpkg build bin LINK_OPTS=../a/build/lib/libA.a
+           ./build/bin/B")
