@@ -64,6 +64,7 @@ jobs:
       CCACHE_MAXSIZE: 200M
       EM_VERSION: 2.0.23
       EM_CACHE_FOLDER: 'emsdk-cache'
+      CC_FOR_BUILD: clang
     steps:
       - name: Checkout
         uses: actions/checkout@v2
