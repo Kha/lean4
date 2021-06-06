@@ -2,7 +2,7 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - '*'
     tags:
       - '*'
   pull_request:
@@ -23,31 +23,36 @@ jobs:
       matrix:
         include:
           # portable release build: link most libraries statically and use channel with older glibc (2.27; LLVM 7)
-          - name: Linux release
+          #- name: Linux release
+          #  os: ubuntu-latest
+          #  release: true
+          #  CMAKE_OPTIONS: -DSTATIC=ON
+          #  shell: nix-shell --arg pkgs "import (fetchTarball \"channel:nixos-19.03\") {{}}" --argstr llvmPackages latest --run "bash -euxo pipefail {0}"
+          #- name: Linux
+          #  os: ubuntu-latest
+          #  check-stage3: true
+          #  test-speedcenter: true
+          #- name: Linux Debug
+          #  os: ubuntu-latest
+          #  CMAKE_OPTIONS: -DCMAKE_BUILD_TYPE=Debug
+          #- name: Linux fsanitize
+          #  os: ubuntu-latest
+          #  # turn off custom allocator to make LSAN do its magic
+          #  CMAKE_OPTIONS: -DLEAN_EXTRA_CXX_FLAGS=-fsanitize=address,undefined -DLEANC_EXTRA_C_FLAGS=-fsanitize=address,undefined -DSMALL_ALLOCATOR=OFF
+          - name: Emscripten
             os: ubuntu-latest
             release: true
-            CMAKE_OPTIONS: -DSTATIC=ON
-            shell: nix-shell --arg pkgs "import (fetchTarball \"channel:nixos-19.03\") {{}}" --argstr llvmPackages latest --run "bash -euxo pipefail {0}"
-          - name: Linux
-            os: ubuntu-latest
-            check-stage3: true
-            test-speedcenter: true
-          - name: Linux Debug
-            os: ubuntu-latest
-            CMAKE_OPTIONS: -DCMAKE_BUILD_TYPE=Debug
-          - name: Linux fsanitize
-            os: ubuntu-latest
-            # turn off custom allocator to make LSAN do its magic
-            CMAKE_OPTIONS: -DLEAN_EXTRA_CXX_FLAGS=-fsanitize=address,undefined -DLEANC_EXTRA_C_FLAGS=-fsanitize=address,undefined -DSMALL_ALLOCATOR=OFF
-          - name: macOS
-            os: macos-latest
-            release: true
-            CMAKE_OPTIONS: -DSTATIC=ON
-          - name: Windows
-            os: windows-latest
-            release: true
-            shell: msys2 {0}
-            CMAKE_OPTIONS: -G "Unix Makefiles" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DSTATIC=ON
+            CMAKE: emcmake cmake
+            MAKE: emmake make
+          #- name: macOS
+          #  os: macos-latest
+          #  release: true
+          #  CMAKE_OPTIONS: -DSTATIC=ON
+          #- name: Windows
+          #  os: windows-latest
+          #  release: true
+          #  shell: msys2 {0}
+          #  CMAKE_OPTIONS: -G "Unix Makefiles" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DSTATIC=ON
       # complete all jobs
       fail-fast: false
     name: ${{ matrix.name }}
@@ -57,6 +62,8 @@ jobs:
       CCACHE_COMPRESS: true
       # current cache limit
       CCACHE_MAXSIZE: 200M
+      EM_VERSION: 2.0.23
+      EM_CACHE_FOLDER: 'emsdk-cache'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -87,6 +94,18 @@ jobs:
           # open nix-shell once for initial setup
           true
         if: matrix.os != 'windows-latest'
+      - name: Setup Emscripten system libraries cache
+        id: cache-system-libraries
+        uses: actions/cache@v2
+        with:
+          path: ${{env.EM_CACHE_FOLDER}}
+          key: ${{env.EM_VERSION}}-${{ runner.os }}
+        if: matrix.name == 'Emscripten'
+      - uses: mymindstorm/setup-emsdk@v10
+        with:
+          version: ${{env.EM_VERSION}}
+          actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+        if: matrix.name == 'Emscripten'
       # remove problematic tests for sanitized build
       - name: Pre build
         run: rm tests/compiler/StackOverflow.lean tests/compiler/StackOverflowTask.lean
@@ -106,8 +125,8 @@ jobs:
               echo "LEAN_VERSION_STRING=$LEAN_VERSION_STRING" >> $GITHUB_ENV
             fi
           fi
-          cmake .. ${{ matrix.CMAKE_OPTIONS }} $OPTIONS
-          make -j4
+          ${{ matrix.CMAKE || 'cmake' }} .. ${{ matrix.CMAKE_OPTIONS }} $OPTIONS
+          ${{ matrix.MAKE || 'make' }} -j4
       # de-Nix-ify binaries
       - name: Patch
         run: |
