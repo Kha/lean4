@@ -57,7 +57,7 @@ jobs:
       CCACHE_COMPRESS: true
       # current cache limit
       CCACHE_MAXSIZE: 200M
-      LSAN_OPTIONS=verbosity=1:log_threads=1:​log_pointers=1:max_leaks=1
+      LSAN_OPTIONS: verbosity=1:log_threads=1:​log_pointers=1:max_leaks=1
     steps:
       - name: Checkout
         uses: actions/checkout@v2
