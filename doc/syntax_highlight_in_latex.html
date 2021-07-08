@@ -204,6 +204,9 @@ theorem funext {f₁ f₂ : ∀ (x : α), β x} (h : ∀ x, f₁ x = f₂ x) : f
 <p>Compile the file via</p>
 <pre><code class="language-bash">$ pdflatex test.tex
 </code></pre>
+<ul>
+<li>for older LaTeX versions, you might need to use <code>[utf8x]</code> instead of <code>[utf8]</code> with <code>inputenc</code></li>
+</ul>
 <h2><a class="header" href="#example-with-minted" id="example-with-minted">Example with <code>minted</code></a></h2>
 <p>First <a href="https://pygments.org/download/">install Pygments</a>. Then save <a href="https://raw.githubusercontent.com/Kha/lean4/master/doc/latex/lean4.py"><code>lean4.py</code></a>, which contains an version of the Lean highlighter updated for Lean 4, and the following sample LaTeX file <code>test.tex</code> into the same directory:</p>
 <pre><code class="language-latex">\documentclass{article}
