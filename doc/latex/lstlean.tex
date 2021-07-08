@@ -29,19 +29,18 @@ mutual, do, def, run_cmd, const
 partial,mut,where,macro,syntax,deriving, return, try, catch, for, macro_rules,declare_syntax_cat,abbrev},
 
 % Sorts
-morekeywords=[2]{Sort, Type, Prop, Type*, Type₀, Type₁, Type₂, Type₃},
+morekeywords=[2]{Sort, Type, Prop},
 
 % tactics, list taken from lean-syntax.el
-% morekeywords=[3]{
-% Cond, or_else, then, try, when, assumption, eassumption, rapply,
-% apply, fapply, eapply, rename, intro, intros, all_goals, fold, focus, focus_at,
-% generalize, generalizes, clear, clears, revert, reverts, back, beta, done, exact, rexact,
-% refine, repeat, whnf, rotate, rotate_left, rotate_right, inversion, cases, rewrite,
-% xrewrite, krewrite, blast, simp, esimp, unfold, change, check_expr, contradiction,
-% exfalso, split, existsi, constructor, fconstructor, left, right, injection, congruence, reflexivity,
-% symmetry, transitivity, state, induction, induction_using, fail, append,
-% substvars, now, with_options, with_attributes, with_attrs, note
-% },
+morekeywords=[3]{
+assumption,
+apply, intro, intros, allGoals,
+generalize, clear, revert, done, exact,
+refine, repeat, cases, rewrite, rw,
+simp, simp_all, contradiction,
+constructor, injection,
+induction,
+},
 
 % modifiers, taken from lean-syntax.el
 % note: 'otherkeywords' is needed because these use a different symbol.
@@ -268,21 +267,21 @@ identifierstyle={\ttfamily\color{black}},
 % document. Don't know how to do better.
 
 % Style for declaration keywords
-%keywordstyle=[1]{\ttfamily\color{keywordcolor}},
+keywordstyle=[1]{\ttfamily\color{keywordcolor}},
 
 % Style for sorts
-%keywordstyle=[2]{\ttfamily\color{sortcolor}},
+keywordstyle=[2]{\ttfamily\color{sortcolor}},
 
 % Style for tactics keywords
-% keywordstyle=[3]{\ttfamily\color{tacticcolor}},
+keywordstyle=[3]{\ttfamily\color{tacticcolor}},
 
 % Style for attributes
-% keywordstyle=[4]{\ttfamily\color{attributecolor}},
+keywordstyle=[4]{\ttfamily\color{attributecolor}},
 
 % Style for strings
 stringstyle=\ttfamily,
 
 % Style for comments
-% commentstyle={\ttfamily\footnotesize },
+commentstyle={\ttfamily\footnotesize },
 
 }
