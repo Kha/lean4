@@ -125,7 +125,9 @@ def visitDecls (decls : Array Decl) (paramMap : ParamMap) : Array Decl :=
     | Decl.fdecl f xs ty b info =>
       let b := visitFnBody f paramMap b
       match paramMap.find? (ParamMap.Key.decl f) with
-      | some xs => Decl.fdecl f xs ty b info
+      | some xs' =>
+        let xs' := xs'.zipWith xs (fun x' x => { x' with borrow := x'.borrow || x.borrow })
+        Decl.fdecl f xs' ty b info
       | none    => unreachable!
     | other => other
 

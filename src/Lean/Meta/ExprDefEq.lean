@@ -1246,8 +1246,8 @@ private partial def isDefEqQuick (t s : Expr) : MetaM LBool :=
   | Expr.sort u _,       Expr.sort v _       => toLBoolM <| isLevelDefEqAux u v
   | Expr.lam ..,         Expr.lam ..         => if t == s then pure LBool.true else toLBoolM <| isDefEqBinding t s
   | Expr.forallE ..,     Expr.forallE ..     => if t == s then pure LBool.true else toLBoolM <| isDefEqBinding t s
-  | Expr.mdata _ t _,    s                   => isDefEqQuick t s
-  | t,                   Expr.mdata _ s _    => isDefEqQuick t s
+  | Expr.mdata _ t' _,    s                   => if s.isMVar then isDefEqQuickOther t s else isDefEqQuick t' s
+  | t,                   Expr.mdata _ s' _    => if t.isMVar then isDefEqQuickOther t s else isDefEqQuick t s'
   | Expr.fvar fvarId₁ _, Expr.fvar fvarId₂ _ => do
     if (← isLetFVar fvarId₁ <||> isLetFVar fvarId₂) then
       pure LBool.undef

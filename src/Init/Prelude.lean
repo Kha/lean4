@@ -1321,7 +1321,7 @@ end MonadExcept
 
 /-- An implementation of [ReaderT](https://hackage.haskell.org/package/transformers-0.5.5.0/docs/Control-Monad-Trans-Reader.html#t:ReaderT) -/
 def ReaderT (ρ : Type u) (m : Type u → Type v) (α : Type u) : Type (max u v) :=
-  ρ → m α
+  (@& ρ) → m α
 
 instance (ρ : Type u) (m : Type u → Type v) (α : Type u) [Inhabited (m α)] : Inhabited (ReaderT ρ m α) where
   default := fun _ => arbitrary

@@ -12,6 +12,7 @@ Author: Leonardo de Moura
 #include "library/trace.h"
 #include "library/compiler/util.h"
 #include "library/compiler/llnf.h"
+#include "library/compiler/borrowed_annotation.h"
 #include "library/compiler/extern_attribute.h"
 #include "library/compiler/ir.h"
 
@@ -197,7 +198,7 @@ class to_ir_fn {
         while (is_lambda(e)) {
             lean_assert(!has_loose_bvars(binding_domain(e)));
             expr new_fvar = m_lctx.mk_local_decl(ngen(), next_name(), binding_domain(e));
-            new_xs.push_back(ir::mk_param(to_var_id(new_fvar), to_ir_type(binding_domain(e))));
+            new_xs.push_back(ir::mk_param(to_var_id(new_fvar), to_ir_type(binding_domain(e)), is_borrowed(binding_domain(e))));
             fvars.push_back(new_fvar);
             e = binding_body(e);
         }
