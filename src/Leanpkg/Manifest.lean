@@ -54,22 +54,22 @@ def effectivePath (m : Manifest) : FilePath :=
 
 def fromToml (t : Toml.Value) : Option Manifest := OptionM.run do
   let pkg ← t.lookup "package"
-  let Toml.Value.str n ← pkg.lookup "name" | none
-  let Toml.Value.str ver ← pkg.lookup "version" | none
+  let Toml.Value.str n ← pkg.lookup "name" | failure
+  let Toml.Value.str ver ← pkg.lookup "version" | failure
   let leanVer ← match pkg.lookup "lean_version" with
     | some (Toml.Value.str leanVer) => some leanVer
-    | none => some leanVersionString
-    | _ => none
+    | none => pure leanVersionString
+    | _ => failure
   let tm ← match pkg.lookup "timeout" with
-    | some (Toml.Value.nat timeout) => some (some timeout)
-    | none => some none
+    | some (Toml.Value.nat timeout) => pure (some timeout)
+    | none => pure none
     | _ => none
   let path ← match pkg.lookup "path" with
-    | some (Toml.Value.str path) => some (some ⟨path⟩)
-    | none => some none
-    | _ => none
-  let Toml.Value.table deps ← t.lookup "dependencies" <|> some (Toml.Value.table []) | none
-  let deps ← deps.mapM fun ⟨n, src⟩ => do Dependency.mk n (← Source.fromToml src)
+    | some (Toml.Value.str path) => pure (some ⟨path⟩)
+    | none => pure none
+    | _ => failure
+  let Toml.Value.table deps ← pure (t.lookup "dependencies" |>.getD (Toml.Value.table [])) | failure
+  let deps ← deps.mapM fun (n, src) => do Dependency.mk n (← Source.fromToml src)
   return { name := n, version := ver, leanVersion := leanVer,
            path := path, dependencies := deps, timeout := tm }
 

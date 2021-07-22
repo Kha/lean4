@@ -69,7 +69,13 @@ instance (ε : Type u) [Monad m] [MonadExceptOf ε m] : MonadExceptOf ε (Option
 
 end OptionT
 
-abbrev OptionM (α : Type u) := OptionT Id α
+abbrev OptionM (α : Type u) := OptionT (ReaderT PUnit Id) α
+
+--instance : CoeT (Option α) o (OptionM α) where
+--  coe := fun _ => o
+
+instance : MonadLift Option OptionM where
+  monadLift o := fun _ => o
 
 abbrev OptionM.run (x : OptionM α) : Option α :=
-  x
+  x ()

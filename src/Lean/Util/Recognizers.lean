@@ -122,7 +122,7 @@ def constructorApp? (env : Environment) (e : Expr) : Option (ConstructorVal × A
         if v.numParams + v.numFields == e.getAppNumArgs then
           pure (v, e.getAppArgs)
         else
-          none
-      | _ => none
+          failure
+      | _ => failure
 
 end Lean.Expr

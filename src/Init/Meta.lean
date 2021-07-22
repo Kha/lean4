@@ -577,7 +577,7 @@ def decodeQuotedChar (s : String) (i : String.Pos) : Option (Char × String.Pos)
       let (d₄, i) ← decodeHexDigit s i
       pure (Char.ofNat (16*(16*(16*d₁ + d₂) + d₃) + d₄), i)
     else
-      none
+      failure
 
 partial def decodeStrLitAux (s : String) (i : String.Pos) (acc : String) : Option String :=
   OptionM.run do
@@ -586,7 +586,7 @@ partial def decodeStrLitAux (s : String) (i : String.Pos) (acc : String) : Optio
     if c == '\"' then
       pure acc
     else if s.atEnd i then
-      none
+      failure
     else if c == '\\' then do
       let (c, i) ← decodeQuotedChar s i
       decodeStrLitAux s i (acc.push c)
@@ -714,7 +714,7 @@ private def getEscapedNameParts? (acc : List String) : Name → OptionM (List St
   | Name.str n s _ => do
     let s ← Name.escapePart s
     getEscapedNameParts? (s::acc) n
-  | Name.num n i _ => none
+  | Name.num n i _ => failure
 
 private def quoteNameMk : Name → Syntax
   | Name.anonymous => mkCIdent ``Name.anonymous
@@ -722,7 +722,7 @@ private def quoteNameMk : Name → Syntax
   | Name.num n i _ => Syntax.mkCApp ``Name.mkNum #[quoteNameMk n, quote i]
 
 instance : Quote Name where
-  quote n := match getEscapedNameParts? [] n with
+  quote n := match getEscapedNameParts? [] n |>.run with
     | some ss => mkNode `Lean.Parser.Term.quotedName #[Syntax.mkNameLit ("`" ++ ".".intercalate ss)]
     | none    => quoteNameMk n
 
@@ -866,7 +866,7 @@ private def decodeInterpStrQuotedChar (s : String) (i : String.Pos) : Option (Ch
       let c := s.get i
       let i := s.next i
       if c == '{' then pure ('{', i)
-      else none
+      else failure
 
 private partial def decodeInterpStrLit (s : String) : Option String :=
   let rec loop (i : String.Pos) (acc : String) : OptionM String :=
@@ -875,13 +875,13 @@ private partial def decodeInterpStrLit (s : String) : Option String :=
     if c == '\"' || c == '{' then
       pure acc
     else if s.atEnd i then
-      none
+      failure
     else if c == '\\' then do
       let (c, i) ← decodeInterpStrQuotedChar s i
       loop i (acc.push c)
     else
       loop i (acc.push c)
-  loop 1 ""
+  loop 1 "" |>.run
 
 partial def isInterpolatedStrLit? (stx : Syntax) : Option String :=
   match isLit? interpolatedStrLitKind stx with

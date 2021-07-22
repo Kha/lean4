@@ -548,7 +548,7 @@ def Level.find? (u : Level) (p : Level → Bool) : Option Level :=
       | max u v _  => visit u <|> visit v
       | imax u v _ => visit u <|> visit v
       | _          => failure
-  visit u
+  visit u |>.run
 
 def Level.any (u : Level) (p : Level → Bool) : Bool :=
   u.find? p |>.isSome

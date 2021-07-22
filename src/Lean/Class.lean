@@ -98,15 +98,15 @@ private def consumeNLambdas : Nat → Expr → Option Expr
 partial def getClassName (env : Environment) : Expr → Option Name
   | Expr.forallE _ _ b _ => getClassName env b
   | e                    => OptionM.run do
-    let Expr.const c _ _ ← pure e.getAppFn | none
+    let Expr.const c _ _ ← pure e.getAppFn | failure
     let info ← env.find? c
     match info.value? with
     | some val => do
       let body ← consumeNLambdas e.getAppNumArgs val
       getClassName env body
     | none =>
-      if isClass env c then some c
-      else none
+      if isClass env c then pure c
+      else failure
 
 builtin_initialize
   registerBuiltinAttribute {

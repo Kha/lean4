@@ -142,6 +142,7 @@ macro_rules
 syntax declModifiers "class " "abbrev " declId bracketedBinder* (":" term)? 
   ":=" withPosition(group(colGe term ","?)*) : command
 
+set_option trace.Elab true in
 macro_rules
   | `($mods:declModifiers class abbrev $id $params* $[: $ty:term]? := $[ $parents:term $[,]? ]*) =>
     let name := id[0]

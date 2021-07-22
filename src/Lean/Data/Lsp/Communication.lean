@@ -19,11 +19,11 @@ section
     guard $ s ≠ "" ∧ s.takeRight 2 = "\r\n"
     let xs := (s.dropRight 2).splitOn ": "
     match xs with
-    | []  => none
-    | [_] => none
+    | []  => failure
+    | [_] => failure
     | name :: value :: rest =>
       let value := ": ".intercalate (value :: rest)
-      some ⟨name, value⟩
+      pure ⟨name, value⟩
 
   private partial def readHeaderFields (h : FS.Stream) : IO (List (String × String)) := do
     let l ← h.getLine

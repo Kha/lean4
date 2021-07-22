@@ -7,7 +7,7 @@ structure Payload :=
 
 
 @[noinline] def get? (p : Payload) (k : Nat) : OptionM Nat :=
-if p.key == k then p.val else none
+if p.key == k then p.val else failure
 
 inductive T
 | a (i : Nat)
@@ -31,7 +31,7 @@ inductive T
   pure (T.d i))
 
 def wrongOutput : String :=
-match foo (Payload.mk 1 20) with
+match foo (Payload.mk 1 20) |>.run with
 | some (t : T) =>
   match t with
   | T.a i => "1: " ++ toString i
