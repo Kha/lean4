@@ -343,8 +343,8 @@ private partial def getHeadInfo (alt : Alt) : TermElabM HeadInfo :=
             then contents[0]
             else mkNullNode contents
           `(match OptionM.run ($(discrs).sequenceMap fun
-                | `($contents) => some $tuple
-                | _            => none) with
+                | `($contents) => pure $tuple
+                | _            => failure) with
               | some $resId => $yes
               | none => $no)
     }
