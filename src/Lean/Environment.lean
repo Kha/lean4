@@ -44,14 +44,32 @@ constant CompactedRegion.isMemoryMapped : CompactedRegion → Bool
 @[extern "lean_compacted_region_free"]
 unsafe constant CompactedRegion.free : CompactedRegion → IO Unit
 
+/- Opaque persistent environment extension entry. -/
+constant EnvExtensionEntrySpec : PointedType.{0}
+def EnvExtensionEntry : Type := EnvExtensionEntrySpec.type
+instance : Inhabited EnvExtensionEntry := ⟨EnvExtensionEntrySpec.val⟩
+
+/- Content of a .olean file.
+   We use `compact.cpp` to generate the image of this object in disk. -/
+structure ModuleData where
+  imports    : Array Import
+  constants  : Array ConstantInfo
+  entries    : Array (Name × Array EnvExtensionEntry)
+
+instance : Inhabited ModuleData :=
+  ⟨{imports := arbitrary, constants := arbitrary, entries := arbitrary }⟩
+
+structure LoadedModule extends ModuleData where
+  name : Name
+  region : CompactedRegion
+
 /- Environment fields that are not used often. -/
 structure EnvironmentHeader where
   trustLevel   : UInt32       := 0
   quotInit     : Bool         := false
   mainModule   : Name         := arbitrary
   imports      : Array Import := #[] -- direct imports
-  regions      : Array CompactedRegion := #[] -- compacted regions of all imported modules
-  moduleNames  : Array Name   := #[] -- names of all imported modules
+  modules      : Array LoadedModule := #[] -- all imported modules
   deriving Inhabited
 
 open Std (HashMap)
@@ -80,7 +98,7 @@ def imports (env : Environment) : Array Import :=
   env.header.imports
 
 def allImportedModuleNames (env : Environment) : Array Name :=
-  env.header.moduleNames
+  env.header.modules.map (·.name)
 
 @[export lean_environment_set_main_module]
 def setMainModule (env : Environment) (m : Name) : Environment :=
@@ -316,11 +334,6 @@ structure PersistentEnvExtension (α : Type) (β : Type) (σ : Type) where
   exportEntriesFn : σ → Array α
   statsFn         : σ → Format
 
-/- Opaque persistent environment extension entry. -/
-constant EnvExtensionEntrySpec : PointedType.{0}
-def EnvExtensionEntry : Type := EnvExtensionEntrySpec.type
-instance : Inhabited EnvExtensionEntry := ⟨EnvExtensionEntrySpec.val⟩
-
 instance {α σ} [Inhabited σ] : Inhabited (PersistentEnvExtensionState α σ) :=
   ⟨{importedEntries := #[], state := arbitrary }⟩
 
@@ -494,28 +507,19 @@ def contains [Inhabited α] (ext : MapDeclarationExtension α) (env : Environmen
 
 end MapDeclarationExtension
 
-/- Content of a .olean file.
-   We use `compact.cpp` to generate the image of this object in disk. -/
-structure ModuleData where
-  imports    : Array Import
-  constants  : Array ConstantInfo
-  entries    : Array (Name × Array EnvExtensionEntry)
-
-instance : Inhabited ModuleData :=
-  ⟨{imports := arbitrary, constants := arbitrary, entries := arbitrary }⟩
-
 @[extern "lean_save_module_data"]
 constant saveModuleData (fname : @& System.FilePath) (mod : @& Name) (data : @& ModuleData) : IO Unit
 @[extern "lean_read_module_data"]
 constant readModuleData (fname : @& System.FilePath) : IO (ModuleData × CompactedRegion)
 
+set_option trace.compiler.ir.result true in
 /--
   Free compacted regions of imports. No live references to imported objects may exist at the time of invocation; in
   particular, `env` should be the last reference to any `Environment` derived from these imports. -/
 @[noinline, export lean_environment_free_regions]
 unsafe def Environment.freeRegions (env : Environment) : IO Unit :=
   /-
-    NOTE: This assumes `env` is not inferred as a borrowed parameter, and is freed after extracting the `header` field.
+    NOTE: This assumes `env` is not inferred as a borrowed parameter, and is freed after extracting the `region`s.
     Otherwise, we would encounter undefined behavior when the constant map in `env`, which may reference objects in
     compacted regions, is freed after the regions.
 
@@ -529,7 +533,8 @@ unsafe def Environment.freeRegions (env : Environment) : IO Unit :=
     ```
 
     TODO: statically check for this. -/
-  env.header.regions.forM CompactedRegion.free
+  let regions := env.header.modules.map (·.region)
+  regions.forM (·.free)
 
 def mkModuleData (env : Environment) : IO ModuleData := do
   let pExts ← persistentEnvExtensionsRef.get
@@ -557,12 +562,12 @@ private partial def getEntriesFor (mod : ModuleData) (extId : Name) (i : Nat) : 
   else
     #[]
 
-private def setImportedEntries (env : Environment) (mods : Array ModuleData) (startingAt : Nat := 0) : IO Environment := do
+private def setImportedEntries (env : Environment) (mods : Array LoadedModule) (startingAt : Nat := 0) : IO Environment := do
   let mut env := env
   let pExtDescrs ← persistentEnvExtensionsRef.get
   for mod in mods do
     for extDescr in pExtDescrs[startingAt:] do
-      let entries := getEntriesFor mod extDescr.name 0
+      let entries := getEntriesFor mod.toModuleData extDescr.name 0
       env ← extDescr.toEnvExtension.modifyState env fun s => { s with importedEntries := s.importedEntries.push entries }
   return env
 
@@ -577,7 +582,7 @@ private def setImportedEntries (env : Environment) (mods : Array ModuleData) (st
 -/
 builtin_initialize updateEnvAttributesRef : IO.Ref (Environment → IO Environment) ← IO.mkRef (fun env => pure env)
 
-private partial def finalizePersistentExtensions (env : Environment) (mods : Array ModuleData) (opts : Options) : IO Environment := do
+private partial def finalizePersistentExtensions (env : Environment) (mods : Array LoadedModule) (opts : Options) : IO Environment := do
   loop 0 env
 where
   loop (i : Nat) (env : Environment) : IO Environment := do
@@ -602,22 +607,20 @@ where
       return env
 
 structure ImportState where
+  modules       : Array LoadedModule := #[]
   moduleNameSet : NameSet := {}
-  moduleNames   : Array Name := #[]
-  moduleData    : Array ModuleData := #[]
-  regions       : Array CompactedRegion := #[]
 
 @[export lean_import_modules]
 partial def importModules (imports : List Import) (opts : Options) (trustLevel : UInt32 := 0) : IO Environment := profileitIO "import" opts do
   withImporting do
     let (_, s) ← importMods imports |>.run {}
     let mut numConsts := 0
-    for mod in s.moduleData do
+    for mod in s.modules do
       numConsts := numConsts + mod.constants.size
     let mut modIdx : Nat := 0
     let mut const2ModIdx : HashMap Name ModuleIdx := Std.mkHashMap (capacity := numConsts)
     let mut constantMap : HashMap Name ConstantInfo := Std.mkHashMap (capacity := numConsts)
-    for mod in s.moduleData do
+    for mod in s.modules do
       for cinfo in mod.constants do
         const2ModIdx := const2ModIdx.insert cinfo.name modIdx
         match constantMap.insert' cinfo.name cinfo with
@@ -635,12 +638,11 @@ partial def importModules (imports : List Import) (opts : Options) (trustLevel :
         quotInit     := !imports.isEmpty, -- We assume `core.lean` initializes quotient module
         trustLevel   := trustLevel,
         imports      := imports.toArray,
-        regions      := s.regions,
-        moduleNames  := s.moduleNames
+        modules      := s.modules
       }
     }
-    let env ← setImportedEntries env s.moduleData
-    let env ← finalizePersistentExtensions env s.moduleData opts
+    let env ← setImportedEntries env s.modules
+    let env ← finalizePersistentExtensions env s.modules opts
     pure env
 where
   importMods : List Import → StateRefT ImportState IO Unit
@@ -655,12 +657,9 @@ where
         throw $ IO.userError s!"object file '{mFile}' of module {i.module} does not exist"
       let (mod, region) ← readModuleData mFile
       importMods mod.imports.toList
-      modify fun s => { s with
-        moduleData  := s.moduleData.push mod
-        regions     := s.regions.push region
-        moduleNames := s.moduleNames.push i.module
-      }
+      modify fun s => { s with modules := s.modules.push { toModuleData := mod, region, name := i.module } }
       importMods is
+
 /--
   Create environment object from imports and free compacted regions after calling `act`. No live references to the
   environment object or imported objects may exist after `act` finishes. -/
@@ -704,8 +703,8 @@ def add (env : Environment) (cinfo : ConstantInfo) : Environment :=
 def displayStats (env : Environment) : IO Unit := do
   let pExtDescrs ← persistentEnvExtensionsRef.get
   IO.println ("direct imports:                        " ++ toString env.header.imports);
-  IO.println ("number of imported modules:            " ++ toString env.header.regions.size);
-  IO.println ("number of memory-mapped modules:       " ++ toString (env.header.regions.filter (·.isMemoryMapped) |>.size));
+  IO.println ("number of imported modules:            " ++ toString env.header.modules.size);
+  IO.println ("number of memory-mapped modules:       " ++ toString (env.header.modules.filter (·.region.isMemoryMapped) |>.size));
   IO.println ("number of consts:                      " ++ toString env.constants.size);
   IO.println ("number of imported consts:             " ++ toString env.constants.stageSizes.1);
   IO.println ("number of local consts:                " ++ toString env.constants.stageSizes.2);
