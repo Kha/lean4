@@ -211,5 +211,9 @@ def toArray (m : HashMap α β) : Array (α × β) :=
 def numBuckets (m : HashMap α β) : Nat :=
   m.val.buckets.val.size
 
+-- TODO: optimize
+instance [BEq α] [Hashable α] : ForIn m (HashMap α β) (α × β) where
+  forIn m := m.toArray.forIn
+
 end HashMap
 end Std

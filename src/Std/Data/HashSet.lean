@@ -164,5 +164,8 @@ def toArray (m : HashSet α) : Array α :=
 def numBuckets (m : HashSet α) : Nat :=
   m.val.buckets.val.size
 
+instance [BEq α] [Hashable α] : ForIn m (HashSet α) α where
+  forIn m := m.toArray.forIn
+
 end HashSet
 end Std
