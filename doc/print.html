@@ -2679,17 +2679,7 @@ where
 <h1><a class="header" href="#begin-end-lovers" id="begin-end-lovers"><code>begin-end</code> lovers</a></h1>
 <p>If you love Lean 3 <code>begin ... end</code> tactic blocks and commas, you can define this notation
 in Lean 4 using macros in a few lines of code.</p>
-<pre><code class="language-lean">open Lean in
-macro &quot;begin &quot; ts:tactic,*,? &quot;end&quot;%i : term =&gt; do
-  -- preserve position of the last token, which is used
-  -- as the error position in case of an unfinished proof
-  `(by { $[$ts:tactic]* }%$i)
-
-theorem ex1 (x : Nat) : x + 0 = 0 + x :=
-  begin
-    rw [Nat.zero_add],
-    rw [Nat.add_zero],
-  end
+<pre><code class="language-lean">{{#include ../tests/lean/beginEndAsMacro.lean:doc}}
 </code></pre>
 <h1><a class="header" href="#syntax-extensions" id="syntax-extensions">Syntax Extensions</a></h1>
 <p>Lean's syntax can be extended and customized by users at every level, ranging from basic &quot;mixfix&quot; notations to custom elaborators.
