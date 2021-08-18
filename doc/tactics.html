@@ -325,11 +325,11 @@ theorem ex (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
     rw [Nat.mod_eq_sub_mod h₁.2]
     exact ih h
   | base x y h₁ =&gt;
-     have : ¬ 0 &lt; y ∨ ¬ y ≤ x := Iff.mp (Decidable.notAndIffOrNot ..) h₁
+     have : ¬ 0 &lt; y ∨ ¬ y ≤ x := Iff.mp (Decidable.not_and_iff_or_not ..) h₁
      match this with
      | Or.inl h₁ =&gt; exact absurd h h₁
      | Or.inr h₁ =&gt;
-       have hgt : y &gt; x := Nat.gtOfNotLe h₁
+       have hgt : y &gt; x := Nat.gt_of_not_le h₁
        rw [← Nat.mod_eq_of_lt hgt] at hgt
        assumption
 </code></pre>
@@ -462,7 +462,17 @@ where
 <h1><a class="header" href="#begin-end-lovers" id="begin-end-lovers"><code>begin-end</code> lovers</a></h1>
 <p>If you love Lean 3 <code>begin ... end</code> tactic blocks and commas, you can define this notation
 in Lean 4 using macros in a few lines of code.</p>
-<pre><code class="language-lean">{{#include ../tests/lean/beginEndAsMacro.lean:doc}}
+<pre><code class="language-lean">open Lean in
+macro &quot;begin &quot; ts:tactic,*,? i:&quot;end&quot; : term =&gt; do
+  -- preserve position of the last token, which is used
+  -- as the error position in case of an unfinished proof
+  `(by { $[$ts:tactic]* }%$i)
+
+theorem ex1 (x : Nat) : x + 0 = 0 + x :=
+  begin
+    rw [Nat.zero_add],
+    rw [Nat.add_zero],
+  end
 </code></pre>
 
                     </main>
