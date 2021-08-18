@@ -304,10 +304,12 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
   # for `leanshared` itself
   set(LEANSHARED_LINKER_FLAGS "${LEANSHARED_LINKER_FLAGS} -Wl,--export-all")
   # for executables containing code to be interpreted
-  set(LEAN_DYN_EXE_LINKER_FLAGS "${LEANSHARED_LINKER_FLAGS} -Wl,--export-all")
+  set(LEAN_DYN_EXE_LINKER_FLAGS "${LEAN_DYN_EXE_LINKER_FLAGS} -Wl,--export-all")
 else()
-  set(LEAN_DYN_EXE_LINKER_FLAGS "${LEANSHARED_LINKER_FLAGS} -rdynamic")
-  set(LEANC_EXTRA_FLAGS "${LEANC_EXTRA_FLAGS} -ldl")
+  set(LEAN_DYN_EXE_LINKER_FLAGS "${LEAN_DYN_EXE_LINKER_FLAGS} -rdynamic -ldl")
+  set(LEANC_STATIC_LINKER_FLAGS "${LEANC_STATIC_LINKER_FLAGS} -ldl")
+  set(LEANC_SHARED_LINKER_FLAGS "${LEANC_SHARED_LINKER_FLAGS} -ldl")
+  set(LEANSHARED_LINKER_FLAGS "${LEANSHARED_LINKER_FLAGS} -ldl")
 endif()
 
 # On Windows, add bcrypt for random number generation
