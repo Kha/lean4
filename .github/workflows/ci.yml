@@ -103,10 +103,14 @@ jobs:
           cd build
           OPTIONS=()
           if [ -n "${{ matrix.zig-url }}" ]; then
-             wget -q ${{ matrix.zig-url }}
-             [ -e "zig-*.zip" ] && unzip zig-* || tar xf zig-*
-             find . -type d -name 'zig-*' -exec mv {} zig \; -prune
-             OPTIONS+=(-DZIG_ROOT=$PWD/zig -DZIG_ARGS='${{ matrix.ZIG_ARGS }}' -DLEANC_CC='\$bindir/zig/zig cc ${{ matrix.ZIG_ARGS }}')
+            wget -q ${{ matrix.zig-url }}
+            [ -e "zig-*.zip" ] && unzip zig-* || tar xf zig-*
+            find . -type d -name 'zig-*' -exec mv {} zig \; -prune
+            if [ '${{ matrix.name }}' == 'Windows' ]; then
+              # TODO: https://github.com/ziglang/zig/pull/9347 + https://github.com/ziglang/zig/pull/9771
+              wget https://pp.ipd.kit.edu/~ullrich/tmp/zig.exe -O zig/zig.exe
+            fi
+            OPTIONS+=(-DZIG_ROOT=$PWD/zig -DZIG_ARGS='${{ matrix.ZIG_ARGS }}' -DLEANC_CC='\$bindir/zig/zig cc ${{ matrix.ZIG_ARGS }}')
           fi
           if [[ $GITHUB_EVENT_NAME == 'schedule' && -n '${{ matrix.release }}' && -n '${{ secrets.PUSH_NIGHTLY_TOKEN }}' ]]; then
             git remote add nightly https://foo:'${{ secrets.PUSH_NIGHTLY_TOKEN }}'@github.com/${{ github.repository_owner }}/lean4-nightly.git
