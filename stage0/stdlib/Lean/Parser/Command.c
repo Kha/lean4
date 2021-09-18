@@ -14,21 +14,21 @@
 extern "C" {
 #endif
 static lean_object* l_Lean_Parser_Command_moduleDoc_parenthesizer___closed__5;
-lean_object* l_Lean_Parser_Command_deriving_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_deriving_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_abbrev_formatter___closed__9;
 static lean_object* l_Lean_Parser_Tactic_set__option_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__15;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__20;
 static lean_object* l_Lean_Parser_Command_check__failure___closed__5;
-lean_object* l___regBuiltinParser_Lean_Parser_Term_set__option(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Term_set__option(lean_object*);
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_section___closed__8;
 static lean_object* l_Lean_Parser_Command_attribute_formatter___closed__11;
 static lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_example___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__23;
-lean_object* l_Lean_Parser_Command_eraseAttr;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eraseAttr;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__22;
 static lean_object* l_Lean_Parser_Command_check_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__8;
@@ -36,7 +36,7 @@ static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__18;
 static lean_object* l_Lean_Parser_Command_init__quot___closed__3;
 static lean_object* l_Lean_Parser_Command_theorem___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_classInductive_formatter___closed__5;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_in(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_in(lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__20;
 static lean_object* l_Lean_Parser_Command_classTk___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_classInductive___elambda__1___closed__14;
@@ -48,7 +48,7 @@ static lean_object* l___regBuiltin_Lean_Parser_Command_exit_formatter___closed__
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__32;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__10;
 static lean_object* l_Lean_Parser_Command_ctor_parenthesizer___closed__2;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_resolve__name(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_resolve__name(lean_object*);
 static lean_object* l_Lean_Parser_Command_export_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_print_parenthesizer___closed__3;
 lean_object* l_Lean_Parser_nonReservedSymbol_formatter___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
@@ -66,7 +66,7 @@ static lean_object* l_Lean_Parser_Command_openRenaming_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_section___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_mutual_formatter___closed__8;
-lean_object* l_Lean_Parser_Command_structure_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structure_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openDecl_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_open___closed__3;
 static lean_object* l_Lean_Parser_Command_printAxioms___elambda__1___closed__7;
@@ -79,7 +79,7 @@ static lean_object* l_Lean_Parser_Command_optDeriving_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_optDeriving___closed__2;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Term_quot_parenthesizer___closed__4;
-lean_object* l_Lean_Parser_Command_optionValue_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optionValue_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_instance___elambda__1___closed__16;
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__5;
@@ -90,8 +90,8 @@ static lean_object* l_Lean_Parser_Command_theorem_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_derivingClasses_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__21;
-lean_object* l_Lean_Parser_Command_check___elambda__1(lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_namespace_formatter(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_namespace_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_initialize_formatter___closed__11;
 static lean_object* l_Lean_Parser_Command_derivingClasses___closed__9;
 static lean_object* l_Lean_Parser_Command_structCtor___elambda__1___closed__2;
@@ -111,7 +111,7 @@ static lean_object* l_Lean_Parser_Command_extends___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_optionValue_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_openScoped_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Term_quot___closed__11;
-lean_object* l_Lean_Parser_Command_ctor;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_ctor;
 static lean_object* l_Lean_Parser_Command_structure___closed__3;
 static lean_object* l_Lean_Parser_Command_declSig_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_instance_parenthesizer___closed__2;
@@ -119,10 +119,10 @@ static lean_object* l_Lean_Parser_Command_deriving_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_printAxioms_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_def___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_exit_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_exit_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_constant___closed__6;
 static lean_object* l_Lean_Parser_Command_check__failure___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_visibility___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_visibility___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___closed__8;
 static lean_object* l_Lean_Parser_Command_protected___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_print___elambda__1___closed__4;
@@ -133,7 +133,7 @@ static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed
 static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__16;
 static lean_object* l_Lean_Parser_Command_declSig___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___closed__6;
-lean_object* l_Lean_Parser_Command_nonrec_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_nonrec_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_quot___closed__8;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_axiom_parenthesizer___closed__5;
@@ -144,7 +144,7 @@ static lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1___clo
 static lean_object* l_Lean_Parser_Command_export___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_mutual___closed__4;
 static lean_object* l_Lean_Parser_Command_nonrec___closed__7;
-lean_object* l_Lean_Parser_Command_deriving___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_deriving___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_export_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_structCtor___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_check_formatter___closed__1;
@@ -152,10 +152,10 @@ static lean_object* l_Lean_Parser_Command_structCtor_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__15;
 static lean_object* l_Lean_Parser_Tactic_set__option___closed__1;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__13;
-lean_object* l___regBuiltin_Lean_Parser_Term_precheckedQuot_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_precheckedQuot_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__2___closed__1;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_exit___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_exit___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_classInductive_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__18;
@@ -168,7 +168,7 @@ static lean_object* l_Lean_Parser_Command_open___closed__5;
 static lean_object* l_Lean_Parser_Command_instance_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_deriving_parenthesizer___closed__7;
 static lean_object* l___regBuiltin_Lean_Parser_Tactic_set__option_formatter___closed__2;
-lean_object* l_Lean_Parser_Command_openDecl;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openDecl;
 static lean_object* l_Lean_Parser_Command_deriving_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_nonrec___elambda__1___closed__8;
 lean_object* l_Lean_Parser_andthenInfo(lean_object*, lean_object*);
@@ -181,21 +181,21 @@ static lean_object* l_Lean_Parser_Command_ctor___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__28;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__27;
 static lean_object* l_Lean_Parser_Command_openScoped_formatter___closed__2;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_variable(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_variable(lean_object*);
 static lean_object* l_Lean_Parser_Term_open___closed__6;
-lean_object* l___regBuiltin_Lean_Parser_Command_open_formatter(lean_object*);
-lean_object* l_Lean_Parser_Command_visibility;
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_open_formatter(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_visibility;
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__28;
 static lean_object* l_Lean_Parser_Command_namedPrio_parenthesizer___closed__2;
-lean_object* l_Lean_Parser_Command_optDefDeriving_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDefDeriving_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_inductive_parenthesizer___closed__10;
 static lean_object* l_Lean_Parser_Command_example___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___closed__10;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__15;
-lean_object* l_Lean_Parser_Command_inductive___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inductive___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_initialize_parenthesizer___closed__5;
-lean_object* l___regBuiltin_Lean_Parser_Term_precheckedQuot_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_precheckedQuot_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_ctor___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_def_parenthesizer___closed__8;
 static lean_object* l_Lean_Parser_Tactic_open_parenthesizer___closed__6;
@@ -203,7 +203,7 @@ static lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_formatter__
 static lean_object* l_Lean_Parser_Command_optDeriving___closed__1;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__29;
 static lean_object* l_Lean_Parser_Term_set__option___closed__2;
-lean_object* l_Lean_Parser_Command_reduce_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_reduce_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_attribute_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__3;
@@ -215,14 +215,14 @@ static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__1
 static lean_object* l_Lean_Parser_Command_variable___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___closed__2;
 static lean_object* l_Lean_Parser_Command_extends___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_printAxioms___elambda__1(lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_end___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_printAxioms___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_end___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_extends___closed__1;
 static lean_object* l_Lean_Parser_Term_quot_parenthesizer___closed__9;
 static lean_object* l_Lean_Parser_Command_synth_formatter___closed__4;
 lean_object* l_Lean_Parser_Term_leftArrow_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltinParser_Lean_Parser_Command_section(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_section(lean_object*);
 static lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1___closed__15;
 static lean_object* l_Lean_Parser_Command_synth_parenthesizer___closed__3;
 lean_object* l_Lean_Parser_ppSpace_parenthesizer___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
@@ -253,7 +253,7 @@ static lean_object* l_Lean_Parser_Command_check___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_universe___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__24;
-lean_object* l_Lean_Parser_Command_classInductive;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classInductive;
 static lean_object* l_Lean_Parser_Command_openHiding_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_optionValue___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_check___elambda__1___closed__5;
@@ -267,10 +267,10 @@ static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Term_quot___closed__2;
 static lean_object* l_Lean_Parser_Command_attribute___closed__7;
 static lean_object* l_Lean_Parser_Command_protected___elambda__1___closed__8;
-lean_object* l_Lean_Parser_Command_attribute_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_derivingClasses;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_attribute_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_derivingClasses;
 lean_object* l_Lean_PrettyPrinter_Formatter_withOpenDecl_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_noncomputable;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_noncomputable;
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_section___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_theorem___elambda__1___closed__8;
@@ -295,18 +295,18 @@ lean_object* l_Lean_Parser_Term_bracketedBinder(uint8_t);
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__12;
 lean_object* lean_name_mk_string(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_ctor___elambda__1___closed__15;
-lean_object* l___regBuiltin_Lean_Parser_Command_deriving_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_deriving_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_resolve__name___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_print_formatter___closed__2;
 lean_object* l_Lean_Parser_Term_attributes___elambda__1(lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_declModifiers___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___boxed(lean_object*);
 static lean_object* l_Lean_Parser_Command_extends_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_protected___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_nonrec___closed__5;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__26;
 static lean_object* l___regBuiltin_Lean_Parser_Term_quot_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__6;
-lean_object* l_Lean_Parser_Command_end_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_end_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optDefDeriving_formatter___closed__3;
 static lean_object* l_Lean_Parser_Term_set__option___closed__1;
 static lean_object* l_Lean_Parser_Command_abbrev___closed__10;
@@ -317,21 +317,21 @@ static lean_object* l_Lean_Parser_Command_declValSimple___elambda__1___closed__1
 lean_object* l_Lean_Parser_setLhsPrecFn(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___closed__11;
 static lean_object* l_Lean_Parser_Term_quot___closed__4;
-lean_object* l_Lean_Parser_Command_reduce;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_reduce;
 static lean_object* l_Lean_Parser_Command_variable_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_ctor___elambda__1___closed__18;
 static lean_object* l_Lean_Parser_Command_resolve__name_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_section_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_theorem_parenthesizer___closed__6;
-lean_object* l_Lean_Parser_Command_openRenaming;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenaming;
 static lean_object* l_Lean_Parser_Command_openScoped_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_partial___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_initialize_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__26;
-lean_object* l_Lean_Parser_Command_classInductive___elambda__1(lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_openHiding;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classInductive___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openHiding;
 static lean_object* l_Lean_Parser_Command_synth___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Term_open___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_declModifiers___closed__8;
@@ -345,7 +345,7 @@ static lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1___cl
 static lean_object* l_Lean_Parser_Command_def___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_nonrec___closed__3;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__6;
-lean_object* l_Lean_Parser_Command_attribute_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_attribute_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__7;
 static lean_object* l_Lean_Parser_Command_mutual___closed__8;
 static lean_object* l_Lean_Parser_Tactic_set__option_formatter___closed__5;
@@ -372,20 +372,20 @@ lean_object* l_Lean_Parser_symbol_formatter(lean_object*, lean_object*, lean_obj
 static lean_object* l_Lean_Parser_Command_extends___elambda__1___closed__2;
 static lean_object* l___regBuiltin_Lean_Parser_Tactic_set__option_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_deriving_formatter___closed__5;
-lean_object* l_Lean_Parser_Command_universe_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_universe_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declValSimple_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_universe___closed__7;
 static lean_object* l_Lean_Parser_Command_printAxioms_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_inductive_formatter___closed__13;
 static lean_object* l_Lean_Parser_Command_openScoped___closed__6;
-lean_object* l_Lean_Parser_Command_declValSimple_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Tactic_open___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValSimple_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_open___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___closed__5;
 static lean_object* l_Lean_Parser_Command_example___closed__5;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__19;
 static lean_object* l_Lean_Parser_Command_openScoped___closed__3;
-lean_object* l_Lean_Parser_Command_openOnly;
-lean_object* l___regBuiltin_Lean_Parser_Command_print_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openOnly;
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_print_parenthesizer(lean_object*);
 lean_object* l_Lean_PrettyPrinter_Parenthesizer_orelse_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_export___closed__7;
 static lean_object* l_Lean_Parser_Command_open___elambda__1___closed__3;
@@ -398,12 +398,12 @@ static lean_object* l_Lean_Parser_Command_print___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__24;
 static lean_object* l___regBuiltin_Lean_Parser_Term_set__option_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__2;
-lean_object* l_Lean_Parser_Command_export_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_export_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_Term_doSeq___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_print___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_optDeriving___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_init__quot___closed__5;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_eval(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_eval(lean_object*);
 static lean_object* l_Lean_Parser_Command_extends___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_partial___closed__7;
 static lean_object* l_Lean_Parser_Command_check__failure___elambda__1___closed__3;
@@ -411,7 +411,7 @@ lean_object* l_Lean_Parser_Term_binderTactic_formatter(lean_object*, lean_object
 lean_object* l_Lean_PrettyPrinter_Formatter_atomic_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optDeclSig_formatter___closed__7;
 static lean_object* l_Lean_Parser_Command_declSig___elambda__1___closed__14;
-lean_object* l_Lean_Parser_Command_synth___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_synth___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__15;
 static lean_object* l_Lean_Parser_Command_structFields_formatter___closed__2;
@@ -424,7 +424,7 @@ static lean_object* l_Lean_Parser_Command_ctor_formatter___closed__8;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_declaration___closed__7;
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__9;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_attribute(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_attribute(lean_object*);
 static lean_object* l_Lean_Parser_Command_section___closed__5;
 static lean_object* l_Lean_Parser_Command_openSimple___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__18;
@@ -432,16 +432,16 @@ static lean_object* l_Lean_Parser_Command_ctor_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___closed__3;
 static lean_object* l_Lean_Parser_Command_declSig___elambda__1___closed__15;
 lean_object* l_Lean_Parser_group_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_declaration_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declaration_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_extends___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_end_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_def_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_optDeclSig_parenthesizer___closed__6;
-lean_object* l___regBuiltinParser_Lean_Parser_Term_open(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Term_open(lean_object*);
 static lean_object* l_Lean_Parser_Command_ctor___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_nonrec_parenthesizer___closed__2;
-lean_object* l___regBuiltin_Lean_Parser_Command_universe_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_universe_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Tactic_set__option___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_inferMod___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_section_formatter___closed__2;
@@ -459,12 +459,12 @@ static lean_object* l_Lean_Parser_Command_structSimpleBinder_formatter___closed_
 static lean_object* l_Lean_Parser_Command_export___elambda__1___closed__18;
 static lean_object* l_Lean_Parser_Tactic_set__option_formatter___closed__3;
 static lean_object* l_Lean_Parser_Tactic_set__option_parenthesizer___closed__5;
-lean_object* l_Lean_Parser_Command_partial_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_partial_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declValSimple_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_export___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_structInstBinder_parenthesizer___closed__10;
 static lean_object* l_Lean_Parser_Command_print___elambda__1___closed__6;
-lean_object* l_Lean_Parser_Command_declVal___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declVal___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_unsafe___elambda__1___closed__4;
 lean_object* l_Lean_Parser_withOpenDeclFn(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_derivingClasses_formatter___closed__4;
@@ -476,7 +476,7 @@ static lean_object* l_Lean_Parser_Command_structureTk___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_openRenaming___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___closed__3;
 static lean_object* l_Lean_Parser_Command_derivingClasses_parenthesizer___closed__3;
-lean_object* l___regBuiltinParser_Lean_Parser_Term_precheckedQuot(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Term_precheckedQuot(lean_object*);
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__8;
 static lean_object* l_Lean_Parser_Command_structInstBinder___closed__3;
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__16;
@@ -497,7 +497,7 @@ static lean_object* l_Lean_Parser_Command_synth___closed__2;
 static lean_object* l_Lean_Parser_Command_structFields_formatter___closed__12;
 static lean_object* l_Lean_Parser_Command_check___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_set__option_parenthesizer___closed__4;
-lean_object* l_Lean_Parser_Command_openHiding_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openHiding_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structCtor_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1___closed__15;
 static lean_object* l_Lean_Parser_Command_partial_parenthesizer___closed__3;
@@ -512,7 +512,7 @@ static lean_object* l_Lean_Parser_Command_abbrev___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_declaration___closed__3;
 static lean_object* l_Lean_Parser_Command_theorem___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__25;
-lean_object* l_Lean_Parser_Command_abbrev;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_abbrev;
 static lean_object* l_Lean_Parser_Command_mutual_parenthesizer___closed__11;
 static lean_object* l_Lean_Parser_Command_variable_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__14;
@@ -521,9 +521,9 @@ lean_object* l_Lean_Parser_Term_binderTactic___elambda__1(lean_object*, lean_obj
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__9;
 static lean_object* l_Lean_Parser_Command_declValSimple_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__16;
-lean_object* l_Lean_Parser_Command_mutual_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_mutual_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_print___elambda__1___closed__13;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_initialize(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_initialize(lean_object*);
 lean_object* l_Lean_PrettyPrinter_Formatter_orelse_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_in___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_inductive_formatter___closed__6;
@@ -546,14 +546,14 @@ static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__22;
 static lean_object* l_Lean_Parser_Command_init__quot___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__16;
 static lean_object* l_Lean_Parser_Command_unsafe___closed__2;
-lean_object* l_Lean_Parser_Command_open;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open;
 static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_variable___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_universe_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_ctor_formatter___closed__6;
 static lean_object* l_Lean_Parser_Tactic_open___closed__6;
 static lean_object* l_Lean_Parser_Command_exit___elambda__1___closed__8;
-lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_section___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_axiom___closed__6;
@@ -572,16 +572,16 @@ static lean_object* l___regBuiltin_Lean_Parser_Command_end_formatter___closed__1
 static lean_object* l_Lean_Parser_Command_abbrev___closed__5;
 static lean_object* l_Lean_Parser_Command_section___closed__1;
 static lean_object* l_Lean_Parser_Command_example___closed__6;
-lean_object* l_Lean_Parser_Tactic_set__option_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_extends_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_set__option_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_extends_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_extends___closed__7;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__4;
-lean_object* l_Lean_Parser_Command_derivingClasses_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_derivingClasses_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_unsafe___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_resolve__name___elambda__1___closed__11;
 lean_object* l_Lean_Parser_nonReservedSymbolFn(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_precheckedQuot___elambda__1___closed__12;
-lean_object* l_Lean_Parser_Command_private_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_private_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structInstBinder_formatter___closed__8;
 static lean_object* l_Lean_Parser_Command_structureTk___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_private___elambda__1___closed__3;
@@ -597,14 +597,14 @@ static lean_object* l_Lean_Parser_Command_constant_formatter___closed__7;
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_reduce___elambda__1___closed__12;
-lean_object* l_Lean_Parser_Command_declValSimple___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValSimple___elambda__1(lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Tactic_set__option_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_derivingClasses___closed__10;
 static lean_object* l_Lean_Parser_Command_namedPrio___closed__3;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__21;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__22;
 static lean_object* l_Lean_Parser_Command_end_formatter___closed__1;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_export(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_export(lean_object*);
 static lean_object* l_Lean_Parser_Term_quot___closed__9;
 static lean_object* l_Lean_Parser_Command_instance___elambda__1___closed__15;
 static lean_object* l_Lean_Parser_Command_theorem_formatter___closed__5;
@@ -620,7 +620,7 @@ static lean_object* l_Lean_Parser_Command_synth___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___closed__6;
 static lean_object* l_Lean_Parser_Command_namespace___closed__4;
 lean_object* l_Lean_Parser_antiquotNestedExpr___elambda__1(lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_def;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_def;
 static lean_object* l_Lean_Parser_Command_end___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_declSig___closed__2;
@@ -635,7 +635,7 @@ static lean_object* l_Lean_Parser_Command_structSimpleBinder___closed__4;
 static lean_object* l_Lean_Parser_Command_instance___elambda__1___closed__18;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__28;
-lean_object* l_Lean_Parser_Command_mutual;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_mutual;
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Term_set__option___closed__6;
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__17;
@@ -657,7 +657,7 @@ static lean_object* l_Lean_Parser_Term_quot___closed__13;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__21;
 lean_object* l_Lean_Parser_Term_attributes_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_resolve__name_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_reduce___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_reduce___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_namedPrio___closed__5;
 static lean_object* l_Lean_Parser_Command_visibility_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_declaration_parenthesizer___closed__17;
@@ -666,9 +666,9 @@ static lean_object* l_Lean_Parser_Command_exit___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_declValEqns_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_openHiding_parenthesizer___closed__6;
-lean_object* l_Lean_Parser_Tactic_set__option___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_set__option___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_open_parenthesizer___closed__5;
-lean_object* l_Lean_Parser_Command_example;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_example;
 static lean_object* l_Lean_Parser_Command_classTk___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__21;
 static lean_object* l_Lean_Parser_Command_theorem___closed__3;
@@ -684,7 +684,7 @@ static lean_object* l_Lean_Parser_Command_printAxioms_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_declId___closed__4;
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__19;
 static lean_object* l_Lean_Parser_Command_openDecl_formatter___closed__2;
-lean_object* l_Lean_Parser_Command_end;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_end;
 static lean_object* l_Lean_Parser_Command_deriving_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_initialize___closed__1;
 static lean_object* l_Lean_Parser_Command_in___elambda__1___closed__4;
@@ -695,7 +695,7 @@ static lean_object* l___regBuiltin_Lean_Parser_Command_end_formatter___closed__2
 static lean_object* l_Lean_Parser_Command_builtin__initialize_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_attribute_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_openHiding___closed__7;
-lean_object* l___regBuiltin_Lean_Parser_Command_builtin__initialize_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_builtin__initialize_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_unsafe_formatter___closed__1;
 static lean_object* l___regBuiltin_Lean_Parser_Command_variable_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_noncomputable___elambda__1___closed__10;
@@ -746,7 +746,7 @@ lean_object* l_Lean_Parser_optional_formatter(lean_object*, lean_object*, lean_o
 static lean_object* l_Lean_Parser_Command_check__failure___elambda__1___closed__10;
 lean_object* lean_array_get_size(lean_object*);
 static lean_object* l_Lean_Parser_Command_declId_formatter___closed__1;
-lean_object* l_Lean_Parser_Command_structFields;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structFields;
 static lean_object* l_Lean_Parser_Command_openDecl_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_abbrev___closed__3;
 static lean_object* l_Lean_Parser_Command_abbrev_formatter___closed__6;
@@ -757,21 +757,21 @@ static lean_object* l_Lean_Parser_Command_structSimpleBinder___closed__5;
 static lean_object* l_Lean_Parser_Command_structInstBinder_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_in___elambda__1___closed__2;
 lean_object* l_Lean_Parser_Term_whereDecls___elambda__1(lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_moduleDoc_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_moduleDoc_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_ctor___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_openDecl_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_axiom___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__22;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__15;
 lean_object* lean_string_append(lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_in_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_in_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declValEqns___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_optDeriving___closed__6;
 static lean_object* l_Lean_Parser_Term_precheckedQuot___closed__6;
 static lean_object* l_Lean_Parser_Command_printAxioms___closed__5;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_abbrev___closed__7;
-lean_object* l_Lean_Parser_Command_abbrev_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_abbrev_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_initialize_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__10;
@@ -782,14 +782,14 @@ static lean_object* l_Lean_Parser_Term_set__option___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_moduleDoc___closed__4;
 static lean_object* l_Lean_Parser_Command_variable_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_printAxioms_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__1(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__1(lean_object*);
 static lean_object* l_Lean_Parser_Command_init__quot___elambda__1___closed__2;
 lean_object* l_Lean_Parser_Term_structInst_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_def_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__21;
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__8;
 static lean_object* l_Lean_Parser_Command_universe_parenthesizer___closed__4;
-lean_object* l_Lean_Parser_Command_visibility_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_visibility_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_eraseAttr_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_reduce___elambda__1___closed__11;
 lean_object* l_Lean_Parser_Term_attrInstance_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
@@ -809,7 +809,7 @@ static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__26;
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__17;
 static lean_object* l_Lean_Parser_Command_moduleDoc_parenthesizer___closed__4;
-lean_object* l_Lean_Parser_Command_universe_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_universe_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_precheckedQuot_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_declValSimple_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_constant___elambda__1___closed__11;
@@ -819,15 +819,15 @@ static lean_object* l_Lean_Parser_Command_declaration___closed__10;
 static lean_object* l_Lean_Parser_Command_eval___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_attribute___closed__12;
 static lean_object* l_Lean_Parser_Command_export___elambda__1___closed__1;
-lean_object* l_Lean_Parser_Command_synth_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_synth_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_synth___closed__7;
-lean_object* l_Lean_Parser_Command_extends;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_extends;
 static lean_object* l_Lean_Parser_Command_deriving___closed__5;
 static lean_object* l_Lean_Parser_Command_classInductive___elambda__1___closed__15;
 static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__12;
 static lean_object* l___regBuiltin_Lean_Parser_Command_section_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_initialize_formatter___closed__8;
-lean_object* l_Lean_Parser_Command_unsafe_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_unsafe_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_init__quot___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_extends___elambda__1___closed__10;
@@ -835,14 +835,14 @@ static lean_object* l_Lean_Parser_Command_export_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_abbrev___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_openDecl_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_moduleDoc___closed__8;
-lean_object* l_Lean_Parser_Command_openRenaming_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenaming_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_structInstBinder___closed__6;
-lean_object* l___regBuiltin_Lean_Parser_Command_exit_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_exit_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_synth___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_theorem___elambda__1___closed__4;
-lean_object* l_Lean_Parser_Command_openSimple;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_deriving(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openSimple;
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_deriving(lean_object*);
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_declaration___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Term_quot_formatter___closed__8;
@@ -854,13 +854,13 @@ static lean_object* l_Lean_Parser_Command_optDeriving_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_print___elambda__1___closed__1;
 static lean_object* l___regBuiltin_Lean_Parser_Command_attribute_parenthesizer___closed__1;
 lean_object* l_Lean_Parser_checkPrecFn___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_instance;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_instance;
 static lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__17;
 lean_object* l_Lean_Parser_sepBy1_formatter(lean_object*, lean_object*, lean_object*, uint8_t, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_inferMod___closed__8;
 static lean_object* l_Lean_Parser_Command_moduleDoc_parenthesizer___closed__8;
-lean_object* l_Lean_Parser_Command_initialize_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_initialize_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_PrettyPrinter_Parenthesizer_skip_parenthesizer___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__12;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__8;
@@ -872,15 +872,15 @@ static lean_object* l_Lean_Parser_Command_instance___closed__8;
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_inferMod___closed__4;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___closed__8;
-lean_object* l_Lean_Parser_Command_structFields___elambda__1___lambda__1(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structFields___elambda__1___lambda__1(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_printAxioms___elambda__1___closed__15;
-lean_object* l_Lean_Parser_Command_openOnly___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openOnly___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_reduce___closed__8;
 static lean_object* l_Lean_Parser_Command_declaration___elambda__1___closed__17;
 static lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_openSimple___elambda__1___closed__8;
 static lean_object* l___regBuiltin_Lean_Parser_Command_declaration_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_structFields___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structFields___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_set__option___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_export___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__1;
@@ -896,17 +896,17 @@ static lean_object* l_Lean_Parser_Command_derivingClasses_parenthesizer___closed
 static lean_object* l_Lean_Parser_Command_moduleDoc_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_eval___closed__6;
 static lean_object* l_Lean_Parser_Command_unsafe_parenthesizer___closed__2;
-lean_object* l_Lean_Parser_Command_instance___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_instance___elambda__1(lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_check__failure_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__2;
 static lean_object* l_Lean_Parser_Term_precheckedQuot_formatter___closed__4;
-lean_object* l_Lean_Parser_Command_set__option_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_set__option_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_constant___closed__1;
 static lean_object* l_Lean_Parser_Command_optDefDeriving_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_reduce___closed__4;
-lean_object* l_Lean_Parser_Command_resolve__name___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_resolve__name___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_set__option_formatter___closed__6;
 lean_object* l_Lean_Parser_Term_matchAltsWhereDecls_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_mkAntiquot_formatter___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
@@ -922,7 +922,7 @@ static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_example___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_print___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_derivingClasses_formatter___closed__5;
-lean_object* l_Lean_Parser_Command_declId;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declId;
 static lean_object* l_Lean_Parser_Command_openOnly___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_extends_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1___closed__10;
@@ -935,12 +935,12 @@ static lean_object* l_Lean_Parser_Command_optDeriving___closed__5;
 static lean_object* l_Lean_Parser_Command_ctor_parenthesizer___closed__9;
 static lean_object* l___regBuiltin_Lean_Parser_Term_quot_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_declValSimple___elambda__1___closed__15;
-lean_object* l_Lean_Parser_Command_noncomputable_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_noncomputable_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structureTk_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_universe_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__23;
 static lean_object* l_Lean_Parser_Command_universe___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_declaration_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declaration_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_ctor___closed__10;
 static lean_object* l_Lean_Parser_Command_init__quot_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_declaration_parenthesizer___closed__10;
@@ -948,7 +948,7 @@ static lean_object* l_Lean_Parser_Command_declId_formatter___closed__2;
 lean_object* l_Lean_Parser_checkColGeFn___boxed(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_example___elambda__1___closed__8;
 lean_object* l_Lean_KeyedDeclsAttribute_addBuiltin___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_print_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_print_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___closed__9;
 static lean_object* l_Lean_Parser_Command_classTk___closed__5;
 static lean_object* l_Lean_Parser_Command_section___elambda__1___closed__1;
@@ -985,12 +985,12 @@ static lean_object* l_Lean_Parser_Command_instance___closed__9;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___closed__8;
 static lean_object* l_Lean_Parser_Command_openHiding___closed__3;
 static lean_object* l_Lean_Parser_Command_declSig___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_init__quot___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_init__quot___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Term_set__option_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_declSig_parenthesizer___closed__4;
-lean_object* l_Lean_Parser_Command_namedPrio_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_deriving_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namedPrio_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_deriving_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_section_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_openSimple___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__20;
@@ -999,7 +999,7 @@ static lean_object* l_Lean_Parser_Command_structCtor___elambda__1___closed__9;
 lean_object* l_Lean_Parser_rawIdent_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openHiding___closed__5;
 static lean_object* l_Lean_Parser_Command_protected___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_printAxioms_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_printAxioms_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_partial_formatter___closed__3;
 static lean_object* l___regBuiltin_Lean_Parser_Command_end_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_declValSimple___elambda__1___closed__14;
@@ -1014,7 +1014,7 @@ static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__30;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__29;
 static lean_object* l_Lean_Parser_Command_instance_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_openScoped___closed__4;
-lean_object* l_Lean_Parser_Command_initialize___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_initialize___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_example___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Tactic_open___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__10;
@@ -1041,7 +1041,7 @@ static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_namedPrio_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__3;
 lean_object* l_Lean_Parser_checkPrecFn(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_genInjectiveTheorems;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_genInjectiveTheorems;
 static lean_object* l_Lean_Parser_Command_resolve__name___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Term_precheckedQuot_parenthesizer___closed__1;
 lean_object* l_Lean_Parser_Command_docComment_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
@@ -1049,50 +1049,50 @@ lean_object* l_Lean_PrettyPrinter_Parenthesizer_atomic_parenthesizer(lean_object
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Term_open___closed__1;
 lean_object* l_Lean_PrettyPrinter_Formatter_checkColGt_formatter___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_declId___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declId___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__13;
 static lean_object* l_Lean_Parser_Command_declId_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_print_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_declSig___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_declaration___closed__12;
-lean_object* l_Lean_Parser_Command_protected;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_protected;
 static lean_object* l_Lean_Parser_Command_namedPrio___closed__4;
 static lean_object* l_Lean_Parser_Command_optDeclSig_formatter___closed__5;
 static lean_object* l_Lean_Parser_Tactic_open_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__10;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__31;
-lean_object* l_Lean_Parser_Command_def_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_init__quot_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_def_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_init__quot_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__33;
 static lean_object* l_Lean_Parser_Command_classTk___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_unsafe___elambda__1___closed__12;
-lean_object* l_Lean_Parser_Command_nonrec;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_nonrec;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_namespace___closed__2;
 static lean_object* l_Lean_Parser_Tactic_set__option___elambda__1___closed__2;
 lean_object* l_Lean_Parser_many1Fn(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openDecl_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_print_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_print_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_theorem_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_initialize___closed__2;
 static lean_object* l_Lean_Parser_Command_inductive_parenthesizer___closed__14;
 static lean_object* l_Lean_Parser_Command_abbrev_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__3;
 static lean_object* l___regBuiltin_Lean_Parser_Term_precheckedQuot_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_openRenaming___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenaming___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_declaration___closed__16;
 static lean_object* l_Lean_Parser_Command_theorem___closed__6;
 static lean_object* l_Lean_Parser_Command_example___elambda__1___closed__10;
-lean_object* l_Lean_Parser_Command_optionValue___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optionValue___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openHiding___closed__4;
 static lean_object* l_Lean_Parser_Command_inductive___closed__7;
 static lean_object* l_Lean_Parser_Command_axiom_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_unsafe;
-lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_formatter(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_unsafe;
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_structImplicitBinder_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_structure___closed__6;
-lean_object* l_Lean_Parser_Term_quot_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_axiom___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Term_quot_formatter___closed__2;
 static lean_object* l_Lean_Parser_Tactic_open___elambda__1___closed__7;
@@ -1100,12 +1100,12 @@ static lean_object* l_Lean_Parser_Command_initialize_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_synth___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__9;
 lean_object* l_Lean_Parser_optional(lean_object*);
-lean_object* l_Lean_Parser_Command_inductive_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inductive_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__24;
 static lean_object* l_Lean_Parser_Command_check___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_printAxioms___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__13;
-lean_object* l___regBuiltinParser_Lean_Parser_Term_quot(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Term_quot(lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_open_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_initialize___closed__8;
 static lean_object* l_Lean_Parser_Command_namedPrio___closed__1;
@@ -1118,12 +1118,12 @@ static lean_object* l_Lean_Parser_Command_declaration___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__41;
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__20;
 static lean_object* l_Lean_Parser_Command_mutual_parenthesizer___closed__9;
-lean_object* l_Lean_Parser_Command_eraseAttr___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eraseAttr___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_reduce___closed__5;
 static lean_object* l_Lean_Parser_Command_declVal_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__29;
 static lean_object* l_Lean_Parser_Command_declValSimple_formatter___closed__6;
-lean_object* l_Lean_Parser_Command_private_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_private_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_classInductive_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_noncomputable___closed__7;
 static lean_object* l_Lean_Parser_Command_attribute_formatter___closed__2;
@@ -1131,7 +1131,7 @@ static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_classInductive_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___closed__3;
 static lean_object* l_Lean_Parser_Command_end_parenthesizer___closed__3;
-lean_object* l_Lean_Parser_Command_axiom_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_axiom_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optionValue___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_optDeclSig_parenthesizer___closed__10;
 static lean_object* l_Lean_Parser_Command_openScoped___closed__7;
@@ -1142,20 +1142,20 @@ static lean_object* l_Lean_Parser_Command_open___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___closed__12;
 static lean_object* l_Lean_Parser_Command_axiom___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder_formatter___closed__5;
-lean_object* l_Lean_Parser_Command_structure;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structure;
 static lean_object* l_Lean_Parser_Command_declModifiers___closed__6;
-lean_object* l_Lean_Parser_Command_constant_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Term_quot_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_constant_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_quot_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_moduleDoc___closed__6;
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__18;
 lean_object* l_Lean_Parser_registerAliasCore___rarg(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Tactic_set__option_formatter(lean_object*);
-lean_object* l___regBuiltinParser_Lean_Parser_Command_declaration(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Tactic_set__option_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_declaration(lean_object*);
 static lean_object* l_Lean_Parser_Command_namespace_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_openSimple_parenthesizer___closed__2;
-lean_object* l_Lean_Parser_Command_openRenamingItem_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenamingItem_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structFields_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_extends___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__20;
@@ -1186,7 +1186,7 @@ static lean_object* l___regBuiltin_Lean_Parser_Command_in_parenthesizer___closed
 static lean_object* l_Lean_Parser_Command_end_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_protected___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_printAxioms___closed__3;
-lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__2___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__2___boxed(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___closed__1;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__25;
 lean_object* l_Lean_PrettyPrinter_Formatter_trailingNode_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
@@ -1196,7 +1196,7 @@ static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_section_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_declValSimple___elambda__1___closed__1;
-lean_object* l___regBuiltin_Lean_Parser_Tactic_open_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Tactic_open_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_axiom_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__21;
@@ -1208,7 +1208,7 @@ static lean_object* l_Lean_Parser_Command_structImplicitBinder_parenthesizer___c
 lean_object* l_Lean_PrettyPrinter_Formatter_checkColGe_formatter___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optDeriving___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_def___elambda__1___closed__9;
-lean_object* l___regBuiltin_Lean_Parser_Command_genInjectiveTheorems_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_genInjectiveTheorems_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_private___closed__3;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__3;
 static lean_object* l_Lean_Parser_Tactic_open_parenthesizer___closed__7;
@@ -1218,7 +1218,7 @@ static lean_object* l_Lean_Parser_Command_structExplicitBinder___closed__4;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__17;
 static lean_object* l_Lean_Parser_Command_init__quot_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__20;
-lean_object* l_Lean_Parser_Command_openHiding_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openHiding_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_abbrev___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__18;
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__16;
@@ -1228,12 +1228,12 @@ static lean_object* l_Lean_Parser_Command_inferMod___closed__3;
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__3;
 extern lean_object* l_Lean_PrettyPrinter_parenthesizerAttribute;
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__23;
-lean_object* l_Lean_Parser_Command_noncomputable___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_noncomputable___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__5;
 static lean_object* l_Lean_Parser_Command_resolve__name___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_unsafe_formatter___closed__2;
-lean_object* l_Lean_Parser_Command_nonrec_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_nonrec_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_inferMod___closed__5;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__25;
 static lean_object* l_Lean_Parser_Term_set__option___elambda__1___closed__10;
@@ -1245,38 +1245,38 @@ static lean_object* l_Lean_Parser_Command_in_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_constant___elambda__1___closed__16;
 static lean_object* l_Lean_Parser_Command_optionValue_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_export___elambda__1___closed__10;
-lean_object* l_Lean_Parser_Command_synth;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_synth;
 static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__14;
 static lean_object* l_Lean_Parser_Command_namespace___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_abbrev___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__3;
-lean_object* l___regBuiltin_Lean_Parser_Command_synth_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_synth_formatter(lean_object*);
 extern lean_object* l_Lean_Parser_Term_binderDefault;
 static lean_object* l___regBuiltin_Lean_Parser_Term_quot_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_optDeriving_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__4;
-lean_object* l_Lean_Parser_Command_visibility_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_in_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_visibility_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_in_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_structFields_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_openSimple_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716_(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716_(lean_object*);
 static lean_object* l_Lean_Parser_Command_reduce___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_initialize___closed__4;
 static lean_object* l_Lean_Parser_Command_def___elambda__1___closed__4;
-lean_object* l_Lean_Parser_Command_optNamedPrio_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optNamedPrio_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declVal___closed__4;
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__17;
 static lean_object* l___regBuiltin_Lean_Parser_Command_in_parenthesizer___closed__2;
-lean_object* l_Lean_Parser_Command_resolve__name;
-lean_object* l_Lean_Parser_Command_declValEqns___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_resolve__name;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValEqns___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___closed__9;
-lean_object* l_Lean_Parser_Command_check__failure_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check__failure_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_quot___closed__12;
 static lean_object* l_Lean_Parser_Command_attribute___closed__6;
 static lean_object* l_Lean_Parser_Command_optionValue_formatter___closed__1;
-lean_object* l_Lean_Parser_Term_precheckedQuot_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_in;
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_precheckedQuot_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_in;
 static lean_object* l_Lean_Parser_Command_openHiding___closed__8;
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__16;
 static lean_object* l_Lean_Parser_Command_attribute_parenthesizer___closed__9;
@@ -1290,18 +1290,18 @@ static lean_object* l_Lean_Parser_Command_visibility_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__6;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_inductive_formatter___closed__8;
-lean_object* l_Lean_Parser_Command_inferMod_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inferMod_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_builtin__initialize_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_inferMod_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_declaration___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declaration___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_structFields_formatter___closed__11;
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__3;
 static lean_object* l_Lean_Parser_Command_structInstBinder___closed__13;
 static lean_object* l_Lean_Parser_Command_partial___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1___closed__5;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_check(lean_object*);
-lean_object* l_Lean_Parser_Command_optNamedPrio_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_check(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optNamedPrio_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_check__failure_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_exit___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Term_open___elambda__1___closed__12;
@@ -1311,10 +1311,10 @@ static lean_object* l___regBuiltin_Lean_Parser_Command_open_parenthesizer___clos
 static lean_object* l_Lean_Parser_Command_abbrev_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_classInductive___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_instance_parenthesizer___closed__3;
-lean_object* l___regBuiltin_Lean_Parser_Command_open_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_open_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_classTk_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_declaration_parenthesizer___closed__9;
-lean_object* l_Lean_Parser_Command_builtin__initialize_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_builtin__initialize_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_set__option_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_inferMod___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_attribute___closed__5;
@@ -1323,36 +1323,36 @@ static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__
 static lean_object* l_Lean_Parser_Command_optionValue___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___closed__11;
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__4;
-lean_object* l_Lean_Parser_Command_ctor_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_ctor_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_moduleDoc_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_openSimple___closed__1;
 static lean_object* l_Lean_Parser_Command_declaration___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__5;
-lean_object* l_Lean_Parser_Command_structInstBinder;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structInstBinder;
 static lean_object* l_Lean_Parser_Command_attribute_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__3;
 static lean_object* l___regBuiltin_Lean_Parser_Command_check_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_theorem_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_export_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_reduce_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_reduce_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structSimpleBinder_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_reduce___closed__7;
-lean_object* l_Lean_Parser_Command_declValEqns_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValEqns_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optDeclSig_formatter___closed__3;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_in_parenthesizer___closed__3;
-lean_object* l_Lean_Parser_Command_attribute;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_attribute;
 static lean_object* l___regBuiltin_Lean_Parser_Command_open_parenthesizer___closed__1;
 uint8_t lean_nat_dec_eq(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_openScoped_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openScoped_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_mutual_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_nonrec_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_structure___closed__10;
 static lean_object* l_Lean_Parser_Command_attribute_formatter___closed__8;
 lean_object* l_Lean_Parser_nonReservedSymbolFnAux(lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_private___elambda__1___closed__10;
-lean_object* l___regBuiltin_Lean_Parser_Term_set__option_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_set__option_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__24;
 static lean_object* l_Lean_Parser_Command_partial___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_declaration_parenthesizer___closed__4;
@@ -1364,7 +1364,7 @@ static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Tactic_set__option_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__4;
-lean_object* l_Lean_Parser_Command_in___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_in___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_set__option___closed__10;
 static lean_object* l_Lean_Parser_Command_unsafe___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__18;
@@ -1379,13 +1379,13 @@ static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__38;
 extern lean_object* l_Lean_Parser_Term_optType;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__8;
 static lean_object* l_Lean_Parser_Command_openRenaming___elambda__1___closed__12;
-lean_object* l___regBuiltin_Lean_Parser_Command_section_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_section_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_openDecl_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_declId___closed__2;
 static lean_object* l_Lean_Parser_Command_declVal___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__24;
 static lean_object* l_Lean_Parser_Term_set__option___elambda__1___closed__11;
-lean_object* l___regBuiltin_Lean_Parser_Command_mutual_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_mutual_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__15;
 static lean_object* l_Lean_Parser_Command_reduce_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_openHiding___closed__9;
@@ -1408,10 +1408,10 @@ static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_synth___closed__3;
 lean_object* l_Lean_Parser_nodeInfo(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_exit___elambda__1___closed__1;
-lean_object* l___regBuiltin_Lean_Parser_Command_builtin__initialize_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_builtin__initialize_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_constant_parenthesizer___closed__3;
 lean_object* l_Lean_Parser_checkLhsPrecFn(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_eval_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eval_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_attribute___closed__3;
 static lean_object* l_Lean_Parser_Term_precheckedQuot___elambda__1___closed__5;
 lean_object* l_Lean_Parser_symbolFn___boxed(lean_object*, lean_object*, lean_object*);
@@ -1422,7 +1422,7 @@ static lean_object* l_Lean_Parser_Command_openOnly___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_def___closed__10;
 static lean_object* l_Lean_Parser_Command_abbrev___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Term_set__option_parenthesizer___closed__6;
-lean_object* l___regBuiltinParser_Lean_Parser_Tactic_open(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Tactic_open(lean_object*);
 static lean_object* l_Lean_Parser_Command_initialize___closed__9;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__23;
 static lean_object* l_Lean_Parser_Command_protected___closed__6;
@@ -1442,8 +1442,8 @@ static lean_object* l_Lean_Parser_Command_unsafe_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__12;
 static lean_object* l_Lean_Parser_Command_openRenaming_parenthesizer___closed__4;
-lean_object* l_Lean_Parser_Command_mutual___elambda__1(lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_set__option_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_mutual___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_set__option_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_constant___closed__2;
 static lean_object* l_Lean_Parser_Command_openOnly_formatter___closed__4;
 lean_object* l_Lean_Parser_Term_bracketedBinder_parenthesizer___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
@@ -1456,16 +1456,16 @@ static lean_object* l_Lean_Parser_Command_inductive_formatter___closed__11;
 static lean_object* l_Lean_Parser_Command_def_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_export___closed__9;
 static lean_object* l_Lean_Parser_Command_reduce___elambda__1___closed__6;
-lean_object* l_Lean_Parser_Command_check__failure___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check__failure___elambda__1(lean_object*, lean_object*);
 lean_object* l_Lean_Parser_Term_simpleBinderWithoutType_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_openScoped;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openScoped;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__21;
-lean_object* l_Lean_Parser_Command_printAxioms_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_printAxioms_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_instance___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_axiom_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_end___elambda__1___closed__11;
-lean_object* l_Lean_Parser_Term_precheckedQuot___elambda__1(lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_printAxioms_formatter(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_precheckedQuot___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_printAxioms_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_init__quot_parenthesizer___closed__1;
 lean_object* l_Lean_Parser_Command_commentBody_parenthesizer___boxed(lean_object*);
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__4;
@@ -1476,17 +1476,17 @@ static lean_object* l_Lean_Parser_Command_structSimpleBinder_formatter___closed_
 static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_declId_parenthesizer___closed__6;
 lean_object* l_Lean_Parser_nonReservedSymbolInfo(lean_object*, uint8_t);
-lean_object* l_Lean_Parser_Command_example___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_example___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declValEqns_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__40;
 static lean_object* l_Lean_Parser_Command_declId___closed__1;
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__15;
 static lean_object* l_Lean_Parser_Command_resolve__name_parenthesizer___closed__4;
 lean_object* l_Lean_Parser_strLit_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_noncomputable_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_noncomputable_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declValSimple_parenthesizer___closed__4;
-lean_object* l_Lean_Parser_Command_optDefDeriving;
-lean_object* l_Lean_Parser_Command_export___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDefDeriving;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_export___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_precheckedQuot___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_declId_formatter___closed__7;
 static lean_object* l_Lean_Parser_Command_classTk_formatter___closed__1;
@@ -1501,26 +1501,26 @@ static lean_object* l_Lean_Parser_Command_derivingClasses___closed__11;
 static lean_object* l_Lean_Parser_Command_openSimple_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_initialize___closed__3;
 static lean_object* l_Lean_Parser_Command_mutual___closed__11;
-lean_object* l___regBuiltin_Lean_Parser_Term_quot_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_quot_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__32;
 static lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_classTk___closed__1;
 static lean_object* l_Lean_Parser_Command_eval___closed__4;
-lean_object* l___regBuiltin_Lean_Parser_Command_namespace_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_namespace_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_axiom_formatter___closed__5;
 static lean_object* l___regBuiltin_Lean_Parser_Command_deriving_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_reduce___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_declId_parenthesizer___closed__10;
 static lean_object* l_Lean_Parser_Command_printAxioms_formatter___closed__3;
-lean_object* l_Lean_Parser_Command_theorem_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_theorem_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_constant_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__25;
 lean_object* l_Lean_Parser_manyIndent_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_export___closed__4;
-lean_object* l_Lean_Parser_Term_quot___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_abbrev___elambda__1___closed__8;
-lean_object* l_Lean_Parser_Command_openHiding___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openHiding___elambda__1(lean_object*, lean_object*);
 lean_object* l_Lean_Parser_notSymbol_formatter___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_universe___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_variable___closed__8;
@@ -1530,16 +1530,16 @@ static lean_object* l_Lean_Parser_Command_mutual_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_export___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_def___elambda__1___closed__2;
-lean_object* l_Lean_Parser_Term_open___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_open___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_example___closed__7;
 extern lean_object* l_Lean_Parser_Term_typeSpec;
-lean_object* l_Lean_Parser_Command_eval___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eval___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Tactic_set__option___closed__7;
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_protected___closed__4;
 static lean_object* l_Lean_Parser_Command_check__failure___closed__8;
 static lean_object* l_Lean_Parser_Command_inferMod_parenthesizer___closed__5;
-lean_object* l_Lean_Parser_Tactic_set__option_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_set__option_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structFields_parenthesizer___closed__9;
 static lean_object* l_Lean_Parser_Term_set__option___closed__9;
 static lean_object* l_Lean_Parser_Command_extends___elambda__1___closed__15;
@@ -1554,7 +1554,7 @@ static lean_object* l_Lean_Parser_Command_end_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_declValSimple___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_partial___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_printAxioms___elambda__1___closed__10;
-lean_object* l___regBuiltin_Lean_Parser_Term_open_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_open_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_protected___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___closed__7;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__2;
@@ -1562,17 +1562,17 @@ static lean_object* l_Lean_Parser_Command_print___closed__3;
 static lean_object* l_Lean_Parser_Command_eraseAttr___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__18;
 static lean_object* l___regBuiltin_Lean_Parser_Term_open_parenthesizer___closed__2;
-lean_object* l_Lean_Parser_Command_openSimple_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openSimple_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__16;
 static lean_object* l_Lean_Parser_Term_precheckedQuot___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_example_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_example_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Tactic_open_formatter___closed__4;
-lean_object* l_Lean_Parser_Command_structExplicitBinder;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structExplicitBinder;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_ctor___elambda__1___closed__13;
-lean_object* l___regBuiltin_Lean_Parser_Command_reduce_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_reduce_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_optNamedPrio_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_openHiding_parenthesizer___closed__9;
 static lean_object* l_Lean_Parser_Command_optDeriving_formatter___closed__1;
@@ -1580,10 +1580,10 @@ static lean_object* l_Lean_Parser_Command_inferMod___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__18;
 static lean_object* l___regBuiltin_Lean_Parser_Term_precheckedQuot_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__17;
-lean_object* l_Lean_Parser_Command_axiom_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_axiom_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__16;
 static lean_object* l_Lean_Parser_Term_quot_parenthesizer___closed__10;
-lean_object* l_Lean_Parser_Command_openDecl_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openDecl_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_axiom___closed__7;
 static lean_object* l_Lean_Parser_Command_eval___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder_parenthesizer___closed__7;
@@ -1595,13 +1595,13 @@ static lean_object* l_Lean_Parser_Command_private___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_print___closed__5;
 static lean_object* l_Lean_Parser_Command_in___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Tactic_set__option___closed__5;
-lean_object* l_Lean_Parser_Command_genInjectiveTheorems_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_openScoped_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_genInjectiveTheorems_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openScoped_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openRenaming_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_structureTk___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_structFields_parenthesizer___closed__4;
 uint8_t l_Lean_Parser_tryAnti(lean_object*, lean_object*);
-lean_object* l___regBuiltinParser_Lean_Parser_Command_exit(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_exit(lean_object*);
 lean_object* l_Lean_Parser_many1_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_Term_attrInstance___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__11;
@@ -1623,7 +1623,7 @@ static lean_object* l_Lean_Parser_Term_precheckedQuot___closed__4;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_def___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_universe_parenthesizer___closed__3;
-lean_object* l_Lean_Parser_Command_example_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_example_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_classTk___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_variable___closed__1;
 static lean_object* l___regBuiltin_Lean_Parser_Command_check_formatter___closed__1;
@@ -1631,7 +1631,7 @@ static lean_object* l_Lean_Parser_Command_resolve__name___elambda__1___closed__1
 static lean_object* l_Lean_Parser_Command_exit___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_check_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__18;
-lean_object* l_Lean_Parser_Command_namespace___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namespace___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__24;
 static lean_object* l_Lean_Parser_Command_openDecl___closed__5;
 static lean_object* l_Lean_Parser_Command_classInductive_parenthesizer___closed__3;
@@ -1642,9 +1642,9 @@ static lean_object* l_Lean_Parser_Command_section___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_protected___elambda__1___closed__5;
 static lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__15;
-lean_object* l_Lean_Parser_Command_structSimpleBinder_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structSimpleBinder_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_classInductive_parenthesizer___closed__5;
-lean_object* l___regBuiltin_Lean_Parser_Tactic_open_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Tactic_open_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_section_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_inductive_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_deriving___closed__3;
@@ -1653,8 +1653,8 @@ static lean_object* l_Lean_Parser_Command_attribute_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_declId_formatter___closed__5;
 static lean_object* l___regBuiltin_Lean_Parser_Command_init__quot_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_openSimple___closed__3;
-lean_object* l_Lean_Parser_Command_classInductive_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_abbrev_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classInductive_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_abbrev_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_synth_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__11;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___closed__2;
@@ -1662,9 +1662,9 @@ static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___cl
 lean_object* l_Lean_Parser_Term_structInst___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__15;
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__5;
-lean_object* l___regBuiltin_Lean_Parser_Term_open_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_open_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_openRenaming___elambda__1___closed__8;
-lean_object* l___regBuiltin_Lean_Parser_Command_init__quot_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_init__quot_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_unsafe___closed__5;
 static lean_object* l_Lean_Parser_Command_mutual___closed__9;
 static lean_object* l_Lean_Parser_Command_openScoped___closed__2;
@@ -1673,7 +1673,7 @@ static lean_object* l_Lean_Parser_Command_classInductive___closed__3;
 static lean_object* l_Lean_Parser_Command_resolve__name___closed__7;
 static lean_object* l_Lean_Parser_Command_namedPrio___closed__13;
 static lean_object* l_Lean_Parser_Command_moduleDoc_parenthesizer___closed__6;
-lean_object* l_Lean_Parser_Command_optDeclSig;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeclSig;
 static lean_object* l_Lean_Parser_Command_synth___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_declId_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__2;
@@ -1681,16 +1681,16 @@ static lean_object* l_Lean_Parser_Command_def___closed__3;
 static lean_object* l_Lean_Parser_Command_structInstBinder_formatter___closed__1;
 static lean_object* l_Lean_Parser_Term_set__option_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_mutual_parenthesizer___closed__2;
-lean_object* l_Lean_Parser_Command_extends___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_extends___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_instance___elambda__1___closed__13;
 static lean_object* l___regBuiltin_Lean_Parser_Term_open_parenthesizer___closed__1;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_check__failure(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_check__failure(lean_object*);
 static lean_object* l_Lean_Parser_Command_namespace___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_section___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_export_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_attribute_formatter___closed__9;
 static lean_object* l_Lean_Parser_Command_nonrec___elambda__1___closed__3;
-lean_object* l_Lean_Parser_Command_variable_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_variable_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optDeclSig_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_optDeriving___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__21;
@@ -1701,7 +1701,7 @@ static lean_object* l_Lean_Parser_Command_inferMod___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_axiom_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_openScoped_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_optDeriving___elambda__1___closed__2;
-lean_object* l_Lean_Parser_Command_check_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_end___closed__3;
 static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1___closed__10;
@@ -1713,9 +1713,9 @@ static lean_object* l_Lean_Parser_Tactic_open___closed__9;
 static lean_object* l_Lean_Parser_Command_namedPrio___closed__8;
 static lean_object* l_Lean_Parser_Command_printAxioms_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_extends___elambda__1___closed__5;
-lean_object* l_Lean_Parser_Command_initialize;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_initialize;
 static lean_object* l_Lean_Parser_Command_inductive___closed__2;
-lean_object* l_Lean_Parser_Command_eraseAttr_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eraseAttr_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_eval_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_structure___closed__11;
 static lean_object* l_Lean_Parser_Command_structInstBinder_formatter___closed__7;
@@ -1734,18 +1734,18 @@ static lean_object* l___regBuiltin_Lean_Parser_Command_exit_parenthesizer___clos
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__19;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_declValEqns___closed__2;
-lean_object* l_Lean_Parser_Command_abbrev___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_abbrev___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__22;
 static lean_object* l_Lean_Parser_Command_instance___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_declModifiers___closed__3;
 static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__7;
-lean_object* l___regBuiltin_Lean_Parser_Command_printAxioms_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_printAxioms_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_end___closed__7;
-lean_object* l_Lean_Parser_Command_end_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_optDefDeriving_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_end_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDefDeriving_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_exit___closed__7;
 static lean_object* l_Lean_Parser_Command_classInductive___closed__1;
-lean_object* l_Lean_Parser_Command_exit_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_exit_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openSimple___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Term_open___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__33;
@@ -1753,9 +1753,9 @@ static lean_object* l_Lean_Parser_Command_declaration_parenthesizer___closed__14
 extern lean_object* l_Lean_Parser_Term_whereDecls;
 static lean_object* l_Lean_Parser_Command_structureTk___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_export___closed__1;
-lean_object* l_Lean_Parser_Command_set__option___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_set__option___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openRenamingItem___closed__10;
-lean_object* l___regBuiltin_Lean_Parser_Command_check__failure_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_check__failure_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Tactic_open___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_exit_parenthesizer___closed__2;
@@ -1770,9 +1770,9 @@ static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__18;
 static lean_object* l_Lean_Parser_Term_open___closed__4;
 static lean_object* l_Lean_Parser_Command_optionValue___closed__4;
 static lean_object* l_Lean_Parser_Command_structInstBinder___closed__8;
-lean_object* l_Lean_Parser_Command_theorem;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_theorem;
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__11;
-lean_object* l_Lean_Parser_Tactic_set__option;
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_set__option;
 static lean_object* l_Lean_Parser_Command_deriving_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_declaration_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__10;
@@ -1780,11 +1780,11 @@ static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_end_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_optDeclSig_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___closed__5;
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__2___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__2___boxed(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optDeclSig_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_in___elambda__1___closed__6;
 static lean_object* l___regBuiltin_Lean_Parser_Command_exit_parenthesizer___closed__2;
-lean_object* l_Lean_Parser_Command_variable___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_variable___elambda__1(lean_object*, lean_object*);
 extern lean_object* l_Lean_Parser_parserAliasesRef;
 static lean_object* l_Lean_Parser_Tactic_set__option_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_attribute_parenthesizer___closed__4;
@@ -1800,15 +1800,15 @@ static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_inferMod___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_declValSimple___elambda__1___closed__8;
 static lean_object* l___regBuiltin_Lean_Parser_Command_export_formatter___closed__1;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_namespace(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_namespace(lean_object*);
 static lean_object* l_Lean_Parser_Command_mutual_parenthesizer___closed__4;
-lean_object* l_Lean_Parser_Command_optDeclSig_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_in_formatter(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeclSig_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_in_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_check___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_abbrev___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_export___closed__2;
-lean_object* l___regBuiltin_Lean_Parser_Command_deriving_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_deriving_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_classTk___closed__4;
 static lean_object* l_Lean_Parser_Command_declValEqns___closed__1;
 static lean_object* l___regBuiltin_Lean_Parser_Command_printAxioms_formatter___closed__2;
@@ -1844,7 +1844,7 @@ static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed
 static lean_object* l_Lean_Parser_Command_universe_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_variable___closed__4;
 static lean_object* l_Lean_Parser_Command_reduce___elambda__1___closed__9;
-lean_object* l_Lean_Parser_Command_init__quot_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_init__quot_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__14;
 static lean_object* l_Lean_Parser_Command_example___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_variable___elambda__1___closed__8;
@@ -1857,7 +1857,7 @@ static lean_object* l_Lean_Parser_Command_declaration_parenthesizer___closed__18
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___closed__2;
 static lean_object* l_Lean_Parser_Command_set__option_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_openRenaming___elambda__1___closed__1;
-lean_object* l_Lean_Parser_Command_eval;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eval;
 static lean_object* l_Lean_Parser_Command_end_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_visibility___closed__3;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems_parenthesizer___closed__1;
@@ -1908,13 +1908,13 @@ static lean_object* l_Lean_Parser_Command_declVal___closed__2;
 static lean_object* l_Lean_Parser_Command_declValSimple_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_theorem___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_print___elambda__1___closed__12;
-lean_object* l_Lean_Parser_Command_partial_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_partial_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___closed__3;
 static lean_object* l_Lean_Parser_Command_axiom_formatter___closed__3;
 static lean_object* l_Lean_Parser_Term_open_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_reduce___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Term_quot_formatter___closed__5;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_moduleDoc(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_moduleDoc(lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_exit_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_eval___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__22;
@@ -1922,7 +1922,7 @@ static lean_object* l_Lean_Parser_Command_structCtor_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_openHiding_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Term_quot_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_constant___elambda__1___closed__10;
-lean_object* l_Lean_Parser_Command_open_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_open___closed__7;
 static lean_object* l_Lean_Parser_Command_structCtor___closed__1;
 static lean_object* l_Lean_Parser_Command_abbrev_formatter___closed__7;
@@ -1933,7 +1933,7 @@ static lean_object* l_Lean_Parser_Command_theorem_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_structInstBinder___closed__4;
 static lean_object* l_Lean_Parser_Term_precheckedQuot___closed__1;
-lean_object* l_Lean_Parser_Command_namedPrio;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namedPrio;
 static lean_object* l_Lean_Parser_Command_inductive___closed__3;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_mutual_formatter___closed__7;
@@ -1943,20 +1943,20 @@ static lean_object* l_Lean_Parser_Command_namedPrio_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_optDeriving_formatter___closed__2;
 static lean_object* l___regBuiltin_Lean_Parser_Command_export_formatter___closed__2;
-lean_object* l_Lean_Parser_Command_section;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_section;
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__19;
 static lean_object* l_Lean_Parser_Command_openOnly_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_openRenaming___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_declSig___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_check__failure___elambda__1___closed__12;
-lean_object* l___regBuiltin_Lean_Parser_Command_set__option_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_set__option_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_openScoped___closed__1;
 static lean_object* l_Lean_Parser_Command_attribute_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__16;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___closed__1;
 static lean_object* l_Lean_Parser_Command_protected___closed__2;
 static lean_object* l_Lean_Parser_Command_deriving___closed__8;
-lean_object* l_Lean_Parser_Command_declVal;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declVal;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__16;
 static lean_object* l_Lean_Parser_Command_mutual_parenthesizer___closed__8;
 static lean_object* l_Lean_Parser_Term_open_parenthesizer___closed__5;
@@ -1968,20 +1968,20 @@ static lean_object* l_Lean_Parser_Command_genInjectiveTheorems_parenthesizer___c
 static lean_object* l_Lean_Parser_Command_inductive_formatter___closed__9;
 static lean_object* l_Lean_Parser_Command_derivingClasses___closed__4;
 static lean_object* l_Lean_Parser_Command_exit_formatter___closed__3;
-lean_object* l_Lean_Parser_Command_extends_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_extends_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Tactic_open_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_optDeclSig___closed__1;
 static lean_object* l_Lean_Parser_Command_unsafe___closed__4;
 static lean_object* l_Lean_Parser_Command_structCtor___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_structFields___closed__6;
 static lean_object* l_Lean_Parser_Command_structCtor_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_inductive;
-lean_object* l_Lean_Parser_Command_optNamedPrio;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inductive;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optNamedPrio;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__20;
 extern lean_object* l_Lean_PrettyPrinter_formatterAttribute;
 static lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_declVal___elambda__1___closed__2;
-lean_object* l_Lean_Parser_Command_def_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_def_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_end___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_structCtor___closed__10;
 static lean_object* l_Lean_Parser_Command_mutual___closed__7;
@@ -1990,7 +1990,7 @@ static lean_object* l_Lean_Parser_Term_open_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Term_set__option_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__2;
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__29;
-lean_object* l___regBuiltinParser_Lean_Parser_Tactic_set__option(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Tactic_set__option(lean_object*);
 static lean_object* l_Lean_Parser_Command_theorem___closed__7;
 static lean_object* l_Lean_Parser_Command_structCtor___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_theorem___elambda__1___closed__15;
@@ -1998,11 +1998,11 @@ static lean_object* l_Lean_Parser_Command_structInstBinder___closed__2;
 static lean_object* l_Lean_Parser_Command_structureTk_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_mutual_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_instance___elambda__1___closed__1;
-lean_object* l_Lean_Parser_Command_resolve__name_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_resolve__name_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_inferMod_formatter___closed__3;
 static lean_object* l_Lean_Parser_Term_precheckedQuot___closed__5;
-lean_object* l_Lean_Parser_Command_inferMod;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_print(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inferMod;
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_print(lean_object*);
 static lean_object* l_Lean_Parser_Command_declValEqns___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__19;
 static lean_object* l_Lean_Parser_Command_axiom___elambda__1___closed__4;
@@ -2013,7 +2013,7 @@ static lean_object* l_Lean_Parser_Command_print___elambda__1___closed__16;
 static lean_object* l_Lean_Parser_Command_theorem___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__24;
 static lean_object* l_Lean_Parser_Command_variable_parenthesizer___closed__1;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_universe(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_universe(lean_object*);
 static lean_object* l_Lean_Parser_Command_set__option_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_eval___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__13;
@@ -2050,20 +2050,20 @@ static lean_object* l_Lean_Parser_Command_openOnly___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_deriving___closed__1;
 static lean_object* l_Lean_Parser_Tactic_open___closed__4;
 static lean_object* l___regBuiltin_Lean_Parser_Command_builtin__initialize_formatter___closed__2;
-lean_object* l___regBuiltin_Lean_Parser_Command_end_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_end_parenthesizer(lean_object*);
 lean_object* l_Lean_Parser_Term_attrInstance_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structFields_formatter___closed__13;
-lean_object* l___regBuiltin_Lean_Parser_Command_export_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_export_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_abbrev_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_declModifiers___elambda__2(lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_declModifiers(uint8_t);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___elambda__2(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers(uint8_t);
 static lean_object* l_Lean_Parser_Command_exit___elambda__1___closed__3;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_builtin__initialize(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_builtin__initialize(lean_object*);
 static lean_object* l_Lean_Parser_Command_theorem_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_ctor_formatter___closed__9;
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_protected___elambda__1___closed__10;
-lean_object* l___regBuiltin_Lean_Parser_Command_reduce_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_reduce_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_structFields___closed__3;
 static lean_object* l_Lean_Parser_Term_quot___closed__5;
 lean_object* l_Lean_Parser_Command_commentBody___elambda__1___boxed(lean_object*, lean_object*);
@@ -2079,16 +2079,16 @@ static lean_object* l_Lean_Parser_Command_structInstBinder_parenthesizer___close
 lean_object* l_Lean_FileMap_toPosition(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_instance___elambda__1___closed__4;
-lean_object* l_Lean_Parser_Command_deriving;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_deriving;
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_section___elambda__1___closed__6;
-lean_object* l_Lean_Parser_Command_declModifiers_formatter(uint8_t, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers_formatter(uint8_t, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_PrettyPrinter_Parenthesizer_withOpenDecl_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_axiom___elambda__1___closed__9;
 static lean_object* l___regBuiltin_Lean_Parser_Command_namespace_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_ctor_parenthesizer___closed__7;
-lean_object* l_Lean_Parser_Command_moduleDoc_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_moduleDoc_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declaration___closed__9;
 static lean_object* l_Lean_Parser_Command_declModifiers___closed__7;
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__6;
@@ -2103,11 +2103,11 @@ static lean_object* l_Lean_Parser_Command_deriving___closed__4;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__16;
 static lean_object* l_Lean_Parser_Command_export___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_eval___closed__3;
-lean_object* l___regBuiltin_Lean_Parser_Command_variable_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_variable_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_nonrec_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_partial___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_namedPrio_formatter___closed__5;
-lean_object* l_Lean_Parser_Command_structSimpleBinder_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structSimpleBinder_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_namespace_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Term_set__option___closed__10;
 static lean_object* l_Lean_Parser_Command_moduleDoc___closed__7;
@@ -2116,18 +2116,18 @@ static lean_object* l_Lean_Parser_Command_noncomputable___elambda__1___closed__7
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_open___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_openRenaming___elambda__1___closed__5;
-lean_object* l_Lean_Parser_Command_theorem___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_theorem___elambda__1(lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_check_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1___closed__7;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_set__option(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_set__option(lean_object*);
 static lean_object* l_Lean_Parser_Command_reduce_parenthesizer___closed__1;
 static lean_object* l___regBuiltin_Lean_Parser_Term_set__option_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_constant_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_private___elambda__1___closed__8;
-lean_object* l_Lean_Parser_Command_inferMod___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inferMod___elambda__1(lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_namespace_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_end___closed__4;
-lean_object* l_Lean_Parser_Command_variable;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_variable;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_in___closed__2;
 extern lean_object* l_Lean_Parser_Term_simpleBinderWithoutType;
@@ -2149,7 +2149,7 @@ static lean_object* l_Lean_Parser_Command_optDeriving___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_example___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_ctor_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___closed__5;
-lean_object* l_Lean_Parser_Command_eraseAttr_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eraseAttr_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_printAxioms_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_set__option_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__11;
@@ -2162,7 +2162,7 @@ static lean_object* l_Lean_Parser_Command_declaration___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Term_quot___closed__10;
 static lean_object* l_Lean_Parser_Command_inductive_parenthesizer___closed__9;
 static lean_object* l_Lean_Parser_Command_noncomputable_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_declSig___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declSig___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__22;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__8;
@@ -2171,7 +2171,7 @@ static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_unsafe_parenthesizer___closed__3;
 static lean_object* l___regBuiltin_Lean_Parser_Command_declaration_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_exit___elambda__1___closed__11;
-lean_object* l_Lean_Parser_Command_ctor___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_ctor___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_def___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_check___elambda__1___closed__11;
@@ -2188,28 +2188,28 @@ static lean_object* l_Lean_Parser_Command_initialize_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_exit_formatter___closed__1;
 static lean_object* l_Lean_Parser_Term_open___closed__9;
 static lean_object* l_Lean_Parser_Command_open___elambda__1___closed__8;
-lean_object* l___regBuiltin_Lean_Parser_Command_exit_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_exit_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_openScoped_formatter___closed__3;
-lean_object* l_Lean_Parser_Command_classTk___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classTk___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_classInductive___closed__9;
-lean_object* l___regBuiltin_Lean_Parser_Command_variable_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_variable_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_eval___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_ctor___elambda__1___closed__16;
 lean_object* l_Lean_Parser_nonReservedSymbol_parenthesizer___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_ParserState_restore(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_variable___elambda__1___closed__1;
-lean_object* l___regBuiltin_Lean_Parser_Command_check_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_check_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_universe___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___closed__8;
-lean_object* l_Lean_Parser_Command_optDeclSig___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeclSig___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_variable___closed__6;
 lean_object* l_Lean_Parser_sepBy1_parenthesizer___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_resolve__name_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_resolve__name_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_namedPrio_parenthesizer___closed__10;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_openRenaming_parenthesizer___closed__2;
-lean_object* l_Lean_Parser_Command_theorem_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_theorem_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_precheckedQuot___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_derivingClasses_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__19;
@@ -2227,9 +2227,9 @@ static lean_object* l_Lean_Parser_Command_protected___closed__3;
 static lean_object* l___regBuiltin_Lean_Parser_Command_genInjectiveTheorems_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Tactic_set__option___closed__10;
 static lean_object* l_Lean_Parser_Command_exit___elambda__1___closed__5;
-lean_object* l_Lean_Parser_Command_structCtor;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structCtor;
 static lean_object* l_Lean_Parser_Command_reduce___elambda__1___closed__5;
-lean_object* l___regBuiltin_Lean_Parser_Command_check__failure_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_check__failure_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_private_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___closed__10;
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__7;
@@ -2239,7 +2239,7 @@ static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__26;
 static lean_object* l_Lean_Parser_Command_eraseAttr___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_derivingClasses___closed__8;
 static lean_object* l_Lean_Parser_Command_inductive___closed__8;
-lean_object* l_Lean_Parser_Command_declModifiersF_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiersF_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_printAxioms___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_variable___elambda__1___closed__13;
@@ -2251,7 +2251,7 @@ static lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___closed__2
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___closed__5;
 static lean_object* l_Lean_Parser_Command_private___closed__2;
 static lean_object* l_Lean_Parser_Command_eraseAttr___closed__5;
-lean_object* l_Lean_Parser_Command_declSig_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declSig_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_open___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_open___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_openRenaming___elambda__1___closed__4;
@@ -2268,26 +2268,26 @@ static lean_object* l_Lean_Parser_Command_optDefDeriving_parenthesizer___closed_
 static lean_object* l_Lean_Parser_Term_precheckedQuot_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__22;
 static lean_object* l___regBuiltin_Lean_Parser_Command_check_parenthesizer___closed__2;
-lean_object* l_Lean_Parser_Command_export;
-lean_object* l_Lean_Parser_Command_instance_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_export;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_instance_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openRenaming___closed__3;
 static lean_object* l_Lean_Parser_Command_moduleDoc___closed__3;
 static lean_object* l_Lean_Parser_Command_structInstBinder_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_moduleDoc_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_extends___closed__8;
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__17;
-lean_object* l_Lean_Parser_Command_synth_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_synth_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openHiding_formatter___closed__9;
 static lean_object* l_Lean_Parser_Command_reduce___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_reduce___closed__6;
 static lean_object* l_Lean_Parser_Command_reduce_parenthesizer___closed__2;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_init__quot(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_init__quot(lean_object*);
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__25;
 extern lean_object* l_Lean_Parser_Term_attrInstance;
 static lean_object* l_Lean_Parser_Command_namespace___elambda__1___closed__3;
-lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_axiom___elambda__1___closed__1;
-lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___lambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___lambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_abbrev___closed__2;
 static lean_object* l_Lean_Parser_Command_unsafe___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_extends_formatter___closed__5;
@@ -2343,10 +2343,10 @@ static lean_object* l_Lean_Parser_Command_declaration_parenthesizer___closed__12
 static lean_object* l_Lean_Parser_Command_private___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_inferMod___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_resolve__name___closed__3;
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___closed__6;
 static lean_object* l_Lean_Parser_Command_instance_formatter___closed__6;
-lean_object* l_Lean_Parser_Command_def___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_def___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_abbrev___closed__4;
 static lean_object* l___regBuiltin_Lean_Parser_Command_print_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_declId_parenthesizer___closed__3;
@@ -2381,13 +2381,13 @@ static lean_object* l_Lean_Parser_Command_check_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_reduce___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_printAxioms___closed__9;
 static lean_object* l_Lean_Parser_Command_openRenaming___elambda__1___closed__9;
-lean_object* l_Lean_Parser_Command_protected_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_protected_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_instance___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__13;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_printAxioms(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_printAxioms(lean_object*);
 static lean_object* l_Lean_Parser_Command_printAxioms___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_noncomputable___elambda__1___closed__3;
-lean_object* l_Lean_Parser_Term_quot_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_instance___closed__10;
 static lean_object* l_Lean_Parser_Command_example_parenthesizer___closed__1;
@@ -2404,20 +2404,20 @@ static lean_object* l_Lean_Parser_Command_resolve__name___closed__1;
 static lean_object* l_Lean_Parser_Command_axiom___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_inductive___closed__4;
 static lean_object* l_Lean_Parser_Command_export_formatter___closed__4;
-lean_object* l_Lean_Parser_Command_structCtor_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structCtor_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__34;
-lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___lambda__1___boxed(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___lambda__1___boxed(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_printAxioms_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_inferMod_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_builtin__initialize___closed__5;
-lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer(uint8_t, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_private;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer(uint8_t, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_private;
 static lean_object* l_Lean_Parser_Command_check___closed__6;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_openDecl_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openDecl_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declVal_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__27;
-lean_object* l_Lean_Parser_Command_structSimpleBinder;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structSimpleBinder;
 lean_object* l_Lean_Parser_mkAntiquot_parenthesizer___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_extends___closed__4;
 static lean_object* l_Lean_Parser_Term_quot_formatter___closed__3;
@@ -2431,7 +2431,7 @@ static lean_object* l_Lean_Parser_Command_unsafe_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_inductive_parenthesizer___closed__8;
 static lean_object* l_Lean_Parser_Command_moduleDoc_formatter___closed__7;
 static lean_object* l___regBuiltin_Lean_Parser_Command_initialize_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_openScoped___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openScoped___elambda__1(lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Tactic_open_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_structCtor___elambda__1___closed__5;
 lean_object* l_Lean_Parser_ppLine_parenthesizer___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
@@ -2448,12 +2448,12 @@ static lean_object* l_Lean_Parser_Command_ctor___elambda__1___closed__10;
 extern lean_object* l_Lean_groupKind;
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_nonrec___elambda__1___closed__10;
-lean_object* l_Lean_Parser_Command_structureTk_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structureTk_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_eval_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__7;
 static lean_object* l_Lean_Parser_Command_def___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__18;
-lean_object* l___regBuiltin_Lean_Parser_Command_eval_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_eval_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_structInstBinder_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_def_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_moduleDoc_formatter___closed__5;
@@ -2462,8 +2462,8 @@ static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_universe___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_protected_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_declValEqns___closed__3;
-lean_object* l_Lean_Parser_Command_nonrec___elambda__1(lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__1___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_nonrec___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__1___boxed(lean_object*);
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Tactic_open_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_builtin__initialize_parenthesizer___closed__4;
@@ -2487,13 +2487,13 @@ static lean_object* l_Lean_Parser_Command_declValEqns_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_mutual_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__23;
-lean_object* l_Lean_Parser_Command_openRenamingItem;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenamingItem;
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__23;
 static lean_object* l_Lean_Parser_Term_open_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__2(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__2(lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_commandParser_formatter___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__22;
-lean_object* l_Lean_Parser_Command_partial___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_partial___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_synth___closed__1;
 static lean_object* l_Lean_Parser_Term_open___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_structFields_parenthesizer___closed__12;
@@ -2504,20 +2504,20 @@ lean_object* l_Lean_Parser_ident___elambda__1(lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_synth_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__17;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_reduce(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_reduce(lean_object*);
 lean_object* l_Lean_Parser_Term_doSeq_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declSig___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_attribute_formatter___closed__6;
 static lean_object* l_Lean_Parser_Tactic_open___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_set__option___closed__4;
 static lean_object* l_Lean_Parser_Command_example___elambda__1___closed__9;
-lean_object* l_Lean_Parser_Command_structureTk_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structureTk_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_constant_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_structFields_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_declVal___closed__1;
 static lean_object* l_Lean_Parser_Command_openRenaming___closed__1;
 static lean_object* l_Lean_Parser_Command_optDeclSig_formatter___closed__4;
-lean_object* l___regBuiltin_Lean_Parser_Tactic_set__option_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Tactic_set__option_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_reduce_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_builtin__initialize_formatter___closed__2;
@@ -2529,19 +2529,19 @@ static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__20;
 static lean_object* l_Lean_Parser_Term_open_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_variable___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_openOnly_formatter___closed__1;
-lean_object* l_Lean_Parser_Command_check;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check;
 static lean_object* l_Lean_Parser_Tactic_set__option___closed__6;
 static lean_object* l_Lean_Parser_Command_instance_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_eval___elambda__1___closed__5;
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__2(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__2(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structInstBinder_parenthesizer___closed__6;
-lean_object* l_Lean_Parser_Command_inferMod_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inferMod_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__8;
 static lean_object* l_Lean_Parser_Command_inductive___closed__11;
 static lean_object* l_Lean_Parser_Tactic_set__option_formatter___closed__1;
 extern lean_object* l_Lean_Parser_numLit;
-lean_object* l___regBuiltin_Lean_Parser_Command_end_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_end_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_structSimpleBinder_parenthesizer___closed__4;
 extern lean_object* l_Lean_Parser_Term_leftArrow;
 static lean_object* l_Lean_Parser_Command_noncomputable___closed__1;
@@ -2571,7 +2571,7 @@ static lean_object* l_Lean_Parser_Command_openRenamingItem_parenthesizer___close
 static lean_object* l_Lean_Parser_Command_deriving_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_printAxioms___closed__1;
 static lean_object* l_Lean_Parser_Command_declSig___elambda__1___closed__4;
-lean_object* l_Lean_Parser_Command_openRenaming_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenaming_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_check_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_attribute___closed__1;
 static lean_object* l_Lean_Parser_Command_structureTk___closed__7;
@@ -2585,12 +2585,12 @@ static lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1___cl
 lean_object* l_Lean_Parser_numLit___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_abbrev___closed__1;
 static lean_object* l_Lean_Parser_Command_namedPrio_parenthesizer___closed__6;
-lean_object* l_Lean_Parser_Command_optDeriving___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeriving___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optionValue___closed__2;
 static lean_object* l_Lean_Parser_Command_namespace_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_open___closed__1;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__11;
-lean_object* l_Lean_Parser_Command_optDeriving;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeriving;
 static lean_object* l_Lean_Parser_Command_export_formatter___closed__2;
 lean_object* l_Lean_Parser_Term_doSeqIndent___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__1;
@@ -2607,7 +2607,7 @@ static lean_object* l_Lean_Parser_Command_structSimpleBinder_parenthesizer___clo
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_section___elambda__1___closed__14;
 lean_object* l_Lean_Syntax_getNumArgs(lean_object*);
-lean_object* l_Lean_Parser_Command_structImplicitBinder;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structImplicitBinder;
 static lean_object* l_Lean_Parser_Command_openRenaming_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_reduce_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_example_parenthesizer___closed__4;
@@ -2618,12 +2618,12 @@ static lean_object* l_Lean_Parser_Command_set__option___closed__8;
 static lean_object* l_Lean_Parser_Command_namedPrio___closed__11;
 extern lean_object* l_Lean_PrettyPrinter_Formatter_formatterAliasesRef;
 extern lean_object* l_Lean_Parser_Term_attrKind;
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3(lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3(lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_quot_parenthesizer___closed__5;
-lean_object* l_Lean_Parser_Command_initialize_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_initialize_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_export_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__11;
-lean_object* l___regBuiltin_Lean_Parser_Command_initialize_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_initialize_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__9;
 static lean_object* l_Lean_Parser_Command_axiom___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_private___closed__1;
@@ -2631,7 +2631,7 @@ static lean_object* l_Lean_Parser_Command_initialize_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_declValEqns_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_inductive_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__16;
-lean_object* l_Lean_Parser_Command_universe___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_universe___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__20;
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__13;
 lean_object* l_Lean_Parser_Term_binderDefault___elambda__1(lean_object*, lean_object*);
@@ -2645,7 +2645,7 @@ static lean_object* l_Lean_Parser_Command_classInductive___closed__6;
 static lean_object* l_Lean_Parser_Command_namespace_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_eraseAttr_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_end___elambda__1___closed__1;
-lean_object* l___regBuiltin_Lean_Parser_Command_genInjectiveTheorems_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_genInjectiveTheorems_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_optDeriving_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_namespace_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_noncomputable___elambda__1___closed__2;
@@ -2665,19 +2665,19 @@ static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__1
 static lean_object* l_Lean_Parser_Command_synth___closed__4;
 static lean_object* l_Lean_Parser_Command_inductive_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_in_formatter___closed__1;
-lean_object* l_Lean_Parser_Term_open_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_open_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_open_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_exit___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_resolve__name___closed__6;
 static lean_object* l_Lean_Parser_Command_init__quot_parenthesizer___closed__2;
 lean_object* l_Lean_Parser_Term_attrKind_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_mutual_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_mutual_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_theorem___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_declVal___closed__3;
 static lean_object* l_Lean_Parser_Term_precheckedQuot___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_openRenamingItem_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__13;
-lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_initialize_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_check_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_derivingClasses___closed__2;
@@ -2693,7 +2693,7 @@ static lean_object* l_Lean_Parser_Command_open_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_private___closed__4;
 static lean_object* l_Lean_Parser_Command_constant___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_reduce___closed__3;
-lean_object* l_Lean_Parser_Command_structure_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structure_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Tactic_open___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_optDeclSig_formatter___closed__9;
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__5;
@@ -2704,7 +2704,7 @@ static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hy
 static lean_object* l_Lean_Parser_Command_export_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_ctor___closed__1;
 static lean_object* l_Lean_Parser_Command_printAxioms___closed__4;
-lean_object* l_Lean_Parser_Command_declModifiers___elambda__1(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___elambda__1(lean_object*);
 lean_object* l_Lean_Parser_priorityParser_formatter___rarg(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declValSimple___closed__6;
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__13;
@@ -2715,13 +2715,13 @@ static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__22;
 static lean_object* l_Lean_Parser_Term_open_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_namespace___closed__7;
-lean_object* l_Lean_Parser_Command_namespace_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namespace_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_categoryParser(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_check__failure___elambda__1___closed__2;
-lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__25;
 static lean_object* l_Lean_Parser_Command_ctor___closed__2;
-lean_object* l_Lean_Parser_Term_quot;
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot;
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__1;
 static lean_object* l___regBuiltin_Lean_Parser_Command_variable_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__10;
@@ -2731,7 +2731,7 @@ static lean_object* l_Lean_Parser_Command_structCtor___closed__3;
 static lean_object* l___regBuiltin_Lean_Parser_Command_print_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_synth_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_nonrec___closed__4;
-lean_object* l_Lean_Parser_Command_moduleDoc_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_moduleDoc_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_axiom_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_synth_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_noncomputable___elambda__1___closed__4;
@@ -2752,9 +2752,9 @@ static lean_object* l___regBuiltin_Lean_Parser_Command_section_formatter___close
 static lean_object* l_Lean_Parser_Command_inferMod___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_instance___closed__6;
 static lean_object* l_Lean_Parser_Command_namespace___elambda__1___closed__6;
-lean_object* l_Lean_Parser_Command_structImplicitBinder_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structImplicitBinder_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declaration___elambda__1___closed__16;
-lean_object* l_Lean_Parser_Command_openSimple___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openSimple___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Tactic_set__option___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_structureTk___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_namedPrio___closed__2;
@@ -2764,7 +2764,7 @@ static lean_object* l_Lean_Parser_Command_openOnly_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_structInstBinder_parenthesizer___closed__8;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__23;
 static lean_object* l___regBuiltin_Lean_Parser_Command_builtin__initialize_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_declVal_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declVal_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declSig___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__23;
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__2;
@@ -2773,7 +2773,7 @@ static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed
 static lean_object* l_Lean_Parser_Command_openHiding_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_declId_formatter___closed__10;
 static lean_object* l_Lean_Parser_Command_check__failure___closed__2;
-lean_object* l_Lean_Parser_Command_declaration;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declaration;
 static lean_object* l_Lean_Parser_Command_deriving_formatter___closed__7;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___closed__2;
 static lean_object* l_Lean_Parser_Command_in_formatter___closed__2;
@@ -2784,7 +2784,7 @@ static lean_object* l_Lean_Parser_Command_def___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Term_open_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_ctor___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__13;
-lean_object* l_Lean_Parser_Command_declSig_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declSig_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Tactic_open_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_resolve__name___closed__8;
 lean_object* l_Lean_PrettyPrinter_Formatter_incQuotDepth_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
@@ -2799,16 +2799,16 @@ static lean_object* l_Lean_Parser_Command_print_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_openRenaming_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__16;
 static lean_object* l_Lean_Parser_Command_attribute_parenthesizer___closed__12;
-lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___rarg(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___rarg(lean_object*);
 static lean_object* l_Lean_Parser_Command_declId___closed__7;
-lean_object* l___regBuiltin_Lean_Parser_Command_section_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_section_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___closed__6;
 static lean_object* l_Lean_Parser_Command_openOnly___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_check__failure___elambda__1___closed__8;
-lean_object* l_Lean_Parser_Command_declModifiersF_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiersF_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_protected___elambda__1___closed__4;
-lean_object* l_Lean_Parser_Command_declId_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declId_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__16;
 static lean_object* l_Lean_Parser_Command_openDecl_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_synth___elambda__1___closed__11;
@@ -2822,10 +2822,10 @@ static lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1___clos
 static lean_object* l_Lean_Parser_Command_declValSimple___closed__4;
 static lean_object* l_Lean_Parser_Command_noncomputable_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_ctor___closed__8;
-lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___rarg___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___rarg___boxed(lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_declaration_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_nonrec___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Term_set__option___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_set__option___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__21;
 static lean_object* l_Lean_Parser_Command_theorem___closed__1;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__17;
@@ -2835,7 +2835,7 @@ static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hy
 static lean_object* l_Lean_Parser_Command_declaration_parenthesizer___closed__21;
 static lean_object* l_Lean_Parser_Command_unsafe___elambda__1___closed__6;
 lean_object* l_Lean_Parser_addQuotDepthFn(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Term_set__option_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_set__option_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_init__quot___elambda__1___closed__10;
 lean_object* l_Lean_Parser_Term_binderDefault_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__10;
@@ -2845,10 +2845,10 @@ lean_object* l_Lean_Parser_symbolInfo(lean_object*);
 static lean_object* l_Lean_Parser_Command_structImplicitBinder_formatter___closed__1;
 static lean_object* l_Lean_Parser_Term_open___closed__3;
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__17;
-lean_object* l_Lean_Parser_Command_classTk;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classTk;
 static lean_object* l_Lean_Parser_Command_end___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Term_set__option___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_axiom___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_axiom___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__10;
 static lean_object* l_Lean_Parser_Command_set__option_parenthesizer___closed__7;
 extern lean_object* l_Lean_Parser_Tactic_tacticSeq;
@@ -2864,7 +2864,7 @@ extern lean_object* l_Lean_Parser_Command_docComment;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_inductive_formatter___closed__12;
 lean_object* l_Lean_Parser_orelseFnCore(lean_object*, lean_object*, uint8_t, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___boxed(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___boxed(lean_object*);
 static lean_object* l_Lean_Parser_Command_structInstBinder_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_structCtor___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__24;
@@ -2892,7 +2892,7 @@ static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__
 static lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1___closed__12;
 static lean_object* l___regBuiltin_Lean_Parser_Term_set__option_formatter___closed__2;
 static lean_object* l___regBuiltin_Lean_Parser_Command_section_formatter___closed__2;
-lean_object* l_Lean_Parser_Command_print___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_print___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structImplicitBinder_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_openRenaming___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__13;
@@ -2903,11 +2903,11 @@ static lean_object* l_Lean_Parser_Command_declValSimple___closed__8;
 static lean_object* l_Lean_Parser_Command_openDecl___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_noncomputable___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_attribute___closed__8;
-lean_object* l_Lean_Parser_Command_structureTk___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structureTk___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_reduce___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___closed__4;
-lean_object* l_Lean_Parser_Command_open___elambda__1(lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_mutual_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_mutual_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_categoryParser___elambda__1(lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__7;
 static lean_object* l_Lean_Parser_Tactic_open___closed__8;
@@ -2919,12 +2919,12 @@ static lean_object* l_Lean_Parser_Command_variable___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_classInductive___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_end___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__6;
-lean_object* l_Lean_Parser_Command_print_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_print_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declId_parenthesizer___closed__11;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__21;
 static lean_object* l_Lean_Parser_Command_instance___elambda__1___closed__7;
 lean_object* l_Lean_PrettyPrinter_Formatter_withOpen_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_section_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_section_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declValSimple___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_noncomputable___closed__4;
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__2;
@@ -2934,7 +2934,7 @@ static lean_object* l_Lean_Parser_Command_export___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_section___closed__7;
 static lean_object* l_Lean_Parser_Command_noncomputable___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__2;
-lean_object* l_Lean_Parser_Command_structFields_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structFields_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_section___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_classInductive_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_eval___elambda__1___closed__1;
@@ -2942,7 +2942,7 @@ static lean_object* l_Lean_Parser_Command_structImplicitBinder_parenthesizer___c
 static lean_object* l_Lean_Parser_Command_optDefDeriving_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_structure___closed__9;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__16;
-lean_object* l_Lean_Parser_Command_set__option_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_set__option_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openOnly_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_declaration___closed__2;
 static lean_object* l_Lean_Parser_Command_printAxioms___elambda__1___closed__9;
@@ -2950,14 +2950,14 @@ static lean_object* l_Lean_Parser_Command_inductive_parenthesizer___closed__15;
 static lean_object* l_Lean_Parser_Term_quot_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_open_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1___closed__6;
-lean_object* l___regBuiltin_Lean_Parser_Command_declaration_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_declaration_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_nonrec___closed__1;
 static lean_object* l_Lean_Parser_Command_end___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_example_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_initialize_formatter___closed__10;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_constant___elambda__1___closed__8;
-lean_object* l_Lean_Parser_Command_attribute___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_attribute___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optDeclSig_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_private___elambda__1___closed__12;
@@ -2967,7 +2967,7 @@ static lean_object* l_Lean_Parser_Command_protected_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_variable___closed__3;
 static lean_object* l_Lean_Parser_Command_mutual_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_exit___elambda__1___closed__13;
-lean_object* l_Lean_Parser_Command_optionValue;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optionValue;
 static lean_object* l_Lean_Parser_Command_check__failure_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_nonrec___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_namedPrio_formatter___closed__10;
@@ -2978,11 +2978,11 @@ static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed
 static lean_object* l_Lean_Parser_Command_synth___closed__5;
 static lean_object* l___regBuiltin_Lean_Parser_Command_set__option_formatter___closed__1;
 static lean_object* l_Lean_Parser_Term_quot___closed__1;
-lean_object* l_Lean_Parser_Command_namespace_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namespace_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_axiom___closed__8;
 static lean_object* l_Lean_Parser_Command_extends___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_noncomputable_formatter___closed__3;
-lean_object* l_Lean_Parser_Command_declModifiersT_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiersT_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_quot_formatter___closed__10;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_openOnly___closed__2;
@@ -2991,7 +2991,7 @@ static lean_object* l_Lean_Parser_Command_partial_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__22;
 static lean_object* l_Lean_Parser_Command_structureTk___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_export_formatter___closed__7;
-lean_object* l_Lean_Parser_Command_ctor_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_ctor_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_section___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_openDecl_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_declId_parenthesizer___closed__8;
@@ -3002,7 +3002,7 @@ static lean_object* l_Lean_Parser_Command_printAxioms___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_declValSimple___closed__1;
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__2;
 lean_object* l_Lean_Parser_ident_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_moduleDoc_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_moduleDoc_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__11;
 static lean_object* l_Lean_Parser_Command_declaration___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_resolve__name___elambda__1___closed__7;
@@ -3018,16 +3018,16 @@ static lean_object* l_Lean_Parser_Command_optDeclSig_parenthesizer___closed__4;
 static lean_object* l_Lean_Parser_Command_nonrec___closed__2;
 static lean_object* l_Lean_Parser_Command_eraseAttr___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Term_set__option___closed__5;
-lean_object* l_Lean_Parser_Command_openDecl___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openDecl___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openRenamingItem___closed__9;
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__19;
 static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__19;
 static lean_object* l_Lean_Parser_Command_namedPrio_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_universe_formatter___closed__3;
-lean_object* l_Lean_Parser_Tactic_open;
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_open;
 static lean_object* l_Lean_Parser_Command_partial___closed__2;
 static lean_object* l_Lean_Parser_Command_inductive_parenthesizer___closed__11;
-lean_object* l_Lean_Parser_Term_open_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_open_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_inductive_parenthesizer___closed__12;
 static lean_object* l_Lean_Parser_Command_derivingClasses_parenthesizer___closed__1;
@@ -3069,7 +3069,7 @@ static lean_object* l_Lean_Parser_Command_deriving_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_optDeclSig_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_declaration_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_structInstBinder___closed__12;
-lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structImplicitBinder_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__19;
 static lean_object* l_Lean_Parser_Command_print___closed__9;
@@ -3086,7 +3086,7 @@ static lean_object* l_Lean_Parser_Command_namedPrio___closed__7;
 static lean_object* l_Lean_Parser_Command_print___closed__8;
 static lean_object* l_Lean_Parser_Command_check___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__1;
-lean_object* l_Lean_Parser_Command_openOnly_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openOnly_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_ppSpace_formatter___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declId_parenthesizer___closed__9;
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__9;
@@ -3106,7 +3106,7 @@ static lean_object* l_Lean_Parser_Command_eraseAttr___elambda__1___closed__15;
 static lean_object* l_Lean_Parser_Command_eraseAttr___closed__6;
 static lean_object* l_Lean_Parser_Command_unsafe___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_optDeclSig___elambda__1___closed__4;
-lean_object* l_Lean_Parser_Command_openSimple_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openSimple_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_abbrev_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__17;
 static lean_object* l_Lean_Parser_Tactic_set__option___closed__3;
@@ -3114,41 +3114,41 @@ static lean_object* l_Lean_Parser_Command_extends_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1___closed__1;
 lean_object* l_String_trim(lean_object*);
 lean_object* l_Lean_Parser_Term_doSeq_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_genInjectiveTheorems_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_genInjectiveTheorems_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_def___elambda__1___closed__16;
-lean_object* l_Lean_Parser_Command_structure___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structure___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_def_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__33;
 static lean_object* l_Lean_Parser_Command_derivingClasses_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_structFields_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_def___closed__8;
-lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__1___boxed(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__1___boxed(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_axiom___closed__4;
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_exit___closed__5;
-lean_object* l_Lean_Parser_Command_section_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_section_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_nodeFn(lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Term_open_formatter___closed__2;
-lean_object* l_Lean_Parser_Command_declValSimple;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValSimple;
 static lean_object* l_Lean_Parser_Command_eval_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_abbrev___elambda__1___closed__11;
-lean_object* l_Lean_Parser_Command_constant_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_constant_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_resolve__name___closed__5;
 static lean_object* l_Lean_Parser_Command_check__failure_formatter___closed__2;
 static lean_object* l___regBuiltin_Lean_Parser_Command_printAxioms_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_moduleDoc;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_moduleDoc;
 static lean_object* l_Lean_Parser_Command_openOnly___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__11;
 static lean_object* l_Lean_Parser_Command_declaration___elambda__1___closed__1;
-lean_object* l_Lean_Parser_Tactic_open_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_open_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Term_set__option___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_axiom___closed__1;
 static lean_object* l_Lean_Parser_Command_partial_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_exit___closed__3;
-lean_object* l_Lean_Parser_Command_unsafe___elambda__1(lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_builtin__initialize;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_unsafe___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_builtin__initialize;
 static lean_object* l_Lean_Parser_Command_nonrec___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___closed__11;
 static lean_object* l___regBuiltin_Lean_Parser_Command_declaration_parenthesizer___closed__2;
@@ -3157,11 +3157,11 @@ static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__29;
 static lean_object* l_Lean_Parser_Command_private___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_noncomputable___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__17;
-lean_object* l_Lean_Parser_Command_builtin__initialize_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_builtin__initialize_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declaration___closed__17;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__8;
 static lean_object* l_Lean_Parser_Command_builtin__initialize___closed__7;
-lean_object* l_Lean_Parser_Command_variable_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_variable_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__30;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1___closed__5;
 lean_object* l_Lean_Parser_unicodeSymbol_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
@@ -3189,7 +3189,7 @@ static lean_object* l_Lean_Parser_Command_classInductive_parenthesizer___closed_
 static lean_object* l_Lean_Parser_Command_def_formatter___closed__8;
 static lean_object* l_Lean_Parser_Command_set__option___closed__1;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__8;
-lean_object* l_Lean_Parser_Command_protected___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_protected___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__10;
@@ -3199,13 +3199,13 @@ static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__32;
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__10;
 static lean_object* l___regBuiltin_Lean_Parser_Command_reduce_formatter___closed__2;
 static lean_object* l___regBuiltin_Lean_Parser_Command_export_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_structExplicitBinder_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structExplicitBinder_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 extern lean_object* l_Lean_PrettyPrinter_Parenthesizer_parenthesizerAliasesRef;
 static lean_object* l_Lean_Parser_Command_resolve__name___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_inferMod___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_unsafe___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__16;
-lean_object* l_Lean_Parser_Command_open_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structure_parenthesizer___closed__19;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__16;
 static lean_object* l_Lean_Parser_Command_namedPrio___elambda__1___closed__27;
@@ -3227,18 +3227,18 @@ static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_classInductive___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_inductive_formatter___closed__3;
 static lean_object* l_Lean_Parser_Tactic_open___elambda__1___closed__8;
-lean_object* l_Lean_Parser_Command_structInstBinder_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structInstBinder_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_unsafe___closed__7;
 uint8_t l___private_Init_Data_Option_Basic_0__beqOption____x40_Init_Data_Option_Basic___hyg_677____at_Lean_Parser_ParserState_hasError___spec__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__7;
 lean_object* l_Lean_ppLine_formatter___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___closed__1;
 static lean_object* l_Lean_Parser_Command_declValSimple___elambda__1___closed__3;
-lean_object* l_Lean_Parser_Term_precheckedQuot;
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_precheckedQuot;
 static lean_object* l_Lean_Parser_Command_abbrev___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_set__option___closed__2;
 static lean_object* l_Lean_Parser_Command_init__quot___elambda__1___closed__6;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_mutual(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_mutual(lean_object*);
 static lean_object* l_Lean_Parser_Command_inductive_formatter___closed__15;
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__17;
 static lean_object* l_Lean_Parser_Command_constant___elambda__1___closed__14;
@@ -3253,8 +3253,8 @@ static lean_object* l_Lean_Parser_Command_abbrev_parenthesizer___closed__9;
 static lean_object* l_Lean_Parser_Command_theorem___elambda__1___closed__1;
 static lean_object* l___regBuiltin_Lean_Parser_Command_reduce_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_exit___elambda__1___closed__10;
-lean_object* l_Lean_Parser_Command_optDeclSig_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_attribute_formatter(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeclSig_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_attribute_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_universe___closed__6;
 static lean_object* l_Lean_Parser_Command_optDeclSig___closed__7;
 static lean_object* l_Lean_Parser_Command_attribute___closed__11;
@@ -3269,18 +3269,18 @@ static lean_object* l_Lean_Parser_Command_set__option_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1___closed__12;
 lean_object* l_Lean_Parser_Term_typeSpec___elambda__1(lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_init__quot_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_init__quot_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__9;
-lean_object* l_Lean_Parser_Command_unsafe_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_unsafe_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structCtor___elambda__1___closed__8;
-lean_object* l_Lean_Parser_Command_structureTk;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structureTk;
 static lean_object* l_Lean_Parser_Command_eval_formatter___closed__1;
-lean_object* l_Lean_Parser_Term_open;
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_open;
 static lean_object* l_Lean_Parser_Command_builtin__initialize___closed__4;
 static lean_object* l_Lean_Parser_Command_extends_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_end___elambda__1___closed__3;
-lean_object* l_Lean_Parser_Command_structImplicitBinder_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l___regBuiltinParser_Lean_Parser_Command_open(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structImplicitBinder_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_open(lean_object*);
 static lean_object* l_Lean_Parser_Command_variable___closed__5;
 static lean_object* l_Lean_Parser_Command_variable___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_initialize_formatter___closed__7;
@@ -3310,11 +3310,11 @@ static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__27;
 static lean_object* l_Lean_Parser_Command_openRenaming___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___closed__8;
 static lean_object* l_Lean_Parser_Command_mutual_parenthesizer___closed__3;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_end(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_end(lean_object*);
 lean_object* l_Lean_Parser_Tactic_tacticSeq_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_print_formatter___closed__5;
-lean_object* l_Lean_Parser_Command_namedPrio___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namedPrio___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_mutual___closed__3;
 lean_object* l_Lean_PrettyPrinter_Parenthesizer_withOpen_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1___closed__8;
@@ -3324,9 +3324,9 @@ static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__24;
 static lean_object* l_Lean_Parser_Command_derivingClasses___closed__5;
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Term_quot___closed__6;
-lean_object* l_Lean_Parser_Command_structCtor___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structCtor___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_optDefDeriving_parenthesizer___closed__2;
-lean_object* l_Lean_Parser_Command_partial;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_partial;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_declModifiers___closed__11;
@@ -3341,7 +3341,7 @@ static lean_object* l_Lean_Parser_Command_nonrec___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_set__option_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___closed__4;
 static lean_object* l_Lean_Parser_Command_check___closed__7;
-lean_object* l_Lean_Parser_Command_check_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Syntax_getArg(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__9;
@@ -3352,7 +3352,7 @@ static lean_object* l_Lean_Parser_Command_optDeclSig___closed__3;
 static lean_object* l_Lean_Parser_Tactic_open___elambda__1___closed__1;
 static lean_object* l_Lean_Parser_Command_check___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_namedPrio_parenthesizer___closed__3;
-lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1(lean_object*, lean_object*);
 lean_object* l_Lean_Parser_many_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_print_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_declaration___elambda__1___closed__4;
@@ -3363,8 +3363,8 @@ static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_end___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_instance___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_structureTk___elambda__1___closed__9;
-lean_object* l_Lean_Parser_Command_classTk_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_declModifiersT_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classTk_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiersT_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structFields_formatter___closed__9;
 static lean_object* l_Lean_Parser_Command_universe___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_optDeclSig___elambda__1___closed__2;
@@ -3372,10 +3372,10 @@ static lean_object* l_Lean_Parser_Command_openDecl_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__23;
 static lean_object* l_Lean_Parser_Command_declValSimple_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder_formatter___closed__3;
-lean_object* l_Lean_Parser_Command_structFields_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structFields_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder_parenthesizer___closed__8;
-lean_object* l_Lean_Parser_Command_exit;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_exit;
 static lean_object* l_Lean_Parser_Command_namespace___closed__1;
 static lean_object* l_Lean_Parser_Command_structFields_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_partial___closed__6;
@@ -3389,7 +3389,7 @@ static lean_object* l_Lean_Parser_Term_set__option___elambda__1___closed__3;
 static lean_object* l___regBuiltin_Lean_Parser_Tactic_open_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_reduce___closed__1;
 static lean_object* l_Lean_Parser_Command_declValSimple___elambda__1___closed__7;
-lean_object* l_Lean_Parser_Command_namespace;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namespace;
 static lean_object* l_Lean_Parser_Command_print___closed__2;
 static lean_object* l_Lean_Parser_Command_structCtor_formatter___closed__5;
 static lean_object* l_Lean_Parser_Tactic_set__option___elambda__1___closed__10;
@@ -3409,7 +3409,7 @@ static lean_object* l_Lean_Parser_Command_derivingClasses___closed__3;
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__27;
 static lean_object* l_Lean_Parser_Command_reduce___closed__2;
 static lean_object* l_Lean_Parser_Command_axiom___closed__2;
-lean_object* l_Lean_Parser_Command_constant___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_constant___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openOnly___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_inductive_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_derivingClasses___closed__14;
@@ -3420,7 +3420,7 @@ static lean_object* l_Lean_Parser_Command_set__option_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_check___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Term_quot_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_namespace_formatter___closed__1;
-lean_object* l_Lean_Parser_Term_set__option_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_set__option_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structCtor_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_openHiding_formatter___closed__1;
@@ -3444,10 +3444,10 @@ lean_object* l_Lean_Parser_Term_binderDefault_formatter(lean_object*, lean_objec
 static lean_object* l_Lean_Parser_Command_openHiding_parenthesizer___closed__7;
 static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_axiom___elambda__1___closed__15;
-lean_object* l___regBuiltin_Lean_Parser_Command_eval_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_eval_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_partial___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Term_set__option_parenthesizer___closed__4;
-lean_object* l_Lean_Parser_Command_openOnly_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openOnly_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openOnly___closed__7;
 static lean_object* l_Lean_Parser_Command_eraseAttr_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__28;
@@ -3467,7 +3467,7 @@ static lean_object* l_Lean_Parser_Command_moduleDoc_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_namedPrio_parenthesizer___closed__9;
 static lean_object* l_Lean_Parser_Command_optionValue___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_inferMod_formatter___closed__4;
-lean_object* l___regBuiltin_Lean_Parser_Command_declaration_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_declaration_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_namespace_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_synth_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_inductive_formatter___closed__10;
@@ -3479,13 +3479,13 @@ static lean_object* l_Lean_Parser_Command_eraseAttr___closed__1;
 static lean_object* l___regBuiltin_Lean_Parser_Command_print_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__1;
 lean_object* l_Lean_PrettyPrinter_Parenthesizer_checkColGe_parenthesizer___boxed(lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Tactic_open_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_open_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_printAxioms_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_builtin__initialize_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Tactic_set__option___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_openHiding_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Tactic_open___closed__7;
-lean_object* l_Lean_Parser_Command_printAxioms;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_printAxioms;
 static lean_object* l_Lean_Parser_Command_ctor___closed__11;
 static lean_object* l_Lean_Parser_Command_def___closed__4;
 static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__1;
@@ -3506,16 +3506,16 @@ static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__17;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__20;
 lean_object* l_Lean_Parser_unicodeSymbolInfo(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_openDecl___closed__1;
-lean_object* l_Lean_Parser_Command_init__quot;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_init__quot;
 static lean_object* l_Lean_Parser_Command_openRenaming___elambda__1___closed__10;
 lean_object* l_Lean_PrettyPrinter_Parenthesizer_leadingNode_parenthesizer___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_print___elambda__1___closed__15;
 static lean_object* l_Lean_Parser_Command_openRenaming___closed__6;
 static lean_object* l_Lean_Parser_Command_check__failure___elambda__1___closed__14;
-lean_object* l_Lean_Parser_Command_inductive_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inductive_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_universe_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_axiom___elambda__1___closed__5;
-lean_object* l_Lean_Parser_Command_declModifiersF;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiersF;
 static lean_object* l_Lean_Parser_Command_deriving___closed__10;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__30;
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__4;
@@ -3525,7 +3525,7 @@ static lean_object* l_Lean_Parser_Command_constant___closed__10;
 static lean_object* l_Lean_Parser_Command_abbrev___elambda__1___closed__16;
 static lean_object* l_Lean_Parser_Command_protected___closed__7;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__27;
-lean_object* l_Lean_Parser_Command_axiom;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_axiom;
 static lean_object* l_Lean_Parser_Command_ctor_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_exit___closed__2;
 static lean_object* l_Lean_Parser_Command_initialize___elambda__1___closed__12;
@@ -3540,20 +3540,20 @@ static lean_object* l_Lean_Parser_Command_noncomputable___closed__2;
 static lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1___closed__19;
 static lean_object* l_Lean_Parser_Command_theorem___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_derivingClasses___closed__7;
-lean_object* l_Lean_Parser_Command_derivingClasses_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_derivingClasses_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_check__failure_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Tactic_open_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_declValSimple_parenthesizer___closed__6;
 static lean_object* l_Lean_Parser_Command_synth_parenthesizer___closed__1;
-lean_object* l___regBuiltin_Lean_Parser_Command_synth_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_synth_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_structImplicitBinder_parenthesizer___closed__5;
 static lean_object* l_Lean_Parser_Command_def_formatter___closed__5;
 static lean_object* l_Lean_Parser_Term_quot_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_inductive_parenthesizer___closed__6;
-lean_object* l_Lean_Parser_Command_check__failure;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check__failure;
 static lean_object* l_Lean_Parser_Command_printAxioms___elambda__1___closed__2;
-lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__1(lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__1(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter___closed__12;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__28;
 static lean_object* l_Lean_Parser_Command_optionValue_parenthesizer___closed__5;
@@ -3564,12 +3564,12 @@ static lean_object* l_Lean_Parser_Command_check__failure___elambda__1___closed__
 static lean_object* l_Lean_Parser_Command_structFields_formatter___closed__8;
 static lean_object* l_Lean_Parser_Command_print___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_optDeriving___closed__4;
-lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_open___closed__8;
 static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Tactic_open___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_extends_parenthesizer___closed__5;
-lean_object* l_Lean_Parser_Term_set__option_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_set__option_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_unsafe___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_optDefDeriving___closed__4;
 static lean_object* l_Lean_Parser_Command_synth___elambda__1___closed__8;
@@ -3577,11 +3577,11 @@ static lean_object* l_Lean_Parser_Command_openRenamingItem_formatter___closed__4
 static lean_object* l___regBuiltin_Lean_Parser_Command_reduce_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__5;
 static lean_object* l_Lean_Parser_Command_structCtor_parenthesizer___closed__5;
-lean_object* l_Lean_Parser_Command_namedPrio_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namedPrio_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__15;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Command_extends___elambda__1___closed__11;
-lean_object* l___regBuiltin_Lean_Parser_Command_export_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_export_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_optDeriving___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_ctor_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1___closed__2;
@@ -3599,8 +3599,8 @@ static lean_object* l_Lean_Parser_Command_inferMod_formatter___closed__1;
 static lean_object* l_Lean_Parser_Term_open___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_axiom___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_mutual_parenthesizer___closed__10;
-lean_object* l_Lean_Parser_Command_openRenamingItem_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_declVal_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenamingItem_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declVal_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structureTk_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_optDefDeriving_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_openHiding_formatter___closed__8;
@@ -3620,7 +3620,7 @@ static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_declaration_formatter___closed__12;
 static lean_object* l_Lean_Parser_Command_eraseAttr___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__14;
-lean_object* l_Lean_Parser_Term_set__option;
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_set__option;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__18;
 static lean_object* l_Lean_Parser_Tactic_open___elambda__1___closed__4;
 static lean_object* l___regBuiltin_Lean_Parser_Term_quot_parenthesizer___closed__2;
@@ -3645,14 +3645,14 @@ static lean_object* l_Lean_Parser_Command_structSimpleBinder___closed__2;
 static lean_object* l_Lean_Parser_Command_private_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_instance___closed__5;
-lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_theorem___elambda__1___closed__6;
 static lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_partial___elambda__1___closed__4;
 static lean_object* l_Lean_Parser_Command_resolve__name___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_print_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_openOnly___closed__3;
-lean_object* l_Lean_Parser_Command_declValSimple_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValSimple_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structFields___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_inductive___closed__10;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1___closed__7;
@@ -3672,9 +3672,9 @@ static lean_object* l_Lean_Parser_Command_private_formatter___closed__1;
 static lean_object* l_Lean_Parser_Term_open___closed__5;
 static lean_object* l_Lean_Parser_Command_declValSimple___closed__7;
 static lean_object* l_Lean_Parser_Command_abbrev_parenthesizer___closed__2;
-lean_object* l_Lean_Parser_Command_check__failure_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check__failure_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__22;
-lean_object* l___regBuiltin_Lean_Parser_Command_check_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_check_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__19;
 static lean_object* l_Lean_Parser_Command_reduce_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_declaration___closed__13;
@@ -3689,16 +3689,16 @@ static lean_object* l_Lean_Parser_Command_declId___elambda__1___closed__17;
 static lean_object* l_Lean_Parser_Command_structure___closed__5;
 static lean_object* l_Lean_Parser_Command_structInstBinder_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__3;
-lean_object* l_Lean_Parser_Term_precheckedQuot_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_precheckedQuot_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l___regBuiltin_Lean_Parser_Command_reduce_parenthesizer___closed__2;
 lean_object* l_Lean_Parser_ident_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_optDeriving_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeriving_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__9;
 static lean_object* l_Lean_Parser_Command_constant___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_openDecl___closed__2;
 static lean_object* l_Lean_Parser_Command_abbrev___closed__6;
 static lean_object* l_Lean_Parser_Command_example___closed__2;
-lean_object* l_Lean_Parser_Command_declValEqns_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValEqns_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_mutual___closed__5;
 static lean_object* l_Lean_Parser_Tactic_set__option___closed__8;
 static lean_object* l_Lean_Parser_Command_derivingClasses_parenthesizer___closed__4;
@@ -3724,7 +3724,7 @@ static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__15;
 lean_object* l_Lean_Parser_withResultOfInfo(lean_object*);
 static lean_object* l_Lean_Parser_Command_structure___elambda__1___closed__22;
 static lean_object* l_Lean_Parser_Command_example___closed__8;
-lean_object* l_Lean_Parser_Command_declSig;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declSig;
 static lean_object* l_Lean_Parser_Command_eraseAttr___closed__4;
 static lean_object* l_Lean_Parser_Command_declaration_parenthesizer___closed__11;
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__17;
@@ -3737,23 +3737,23 @@ static lean_object* l_Lean_Parser_Command_set__option___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_declId___closed__6;
-lean_object* l_Lean_Parser_Command_in_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_in_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Tactic_open_parenthesizer___closed__4;
-lean_object* l_Lean_Parser_Command_instance_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_instance_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers___elambda__2___closed__19;
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___closed__7;
 static lean_object* l_Lean_Parser_Command_in___closed__7;
 static lean_object* l_Lean_Parser_Command_declSig___closed__6;
-lean_object* l_Lean_Parser_Command_print;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_print;
 static lean_object* l_Lean_Parser_Command_abbrev_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__8;
 static lean_object* l_Lean_Parser_Command_example___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_namedPrio_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_optDeriving_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeriving_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_structInstBinder_formatter___closed__9;
-lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_universe;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_universe;
 lean_object* l_Lean_Parser_identFn(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_check___closed__8;
 static lean_object* l_Lean_Parser_Command_classTk___elambda__1___closed__8;
@@ -3767,9 +3767,9 @@ static lean_object* l_Lean_Parser_Command_resolve__name___closed__4;
 static lean_object* l_Lean_Parser_Command_ctor_formatter___closed__5;
 static lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___closed__7;
 static lean_object* l_Lean_Parser_Command_structInstBinder___closed__7;
-lean_object* l___regBuiltin_Lean_Parser_Command_universe_formatter(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_universe_formatter(lean_object*);
 static lean_object* l_Lean_Parser_Command_openRenamingItem_formatter___closed__2;
-lean_object* l_Lean_Parser_Command_structInstBinder_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structInstBinder_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_abbrev_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_universe___closed__5;
 static lean_object* l_Lean_Parser_Command_openHiding___elambda__1___closed__2;
@@ -3783,7 +3783,7 @@ static lean_object* l_Lean_Parser_Command_attribute___closed__9;
 static lean_object* l_Lean_Parser_Command_optionValue___elambda__1___closed__3;
 static lean_object* l_Lean_Parser_Command_structCtor___elambda__1___closed__13;
 static lean_object* l_Lean_Parser_Command_declId_parenthesizer___closed__4;
-lean_object* l_Lean_Parser_Command_classInductive_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classInductive_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_export___closed__10;
 static lean_object* l_Lean_Parser_Command_constant___elambda__1___closed__2;
 static lean_object* l_Lean_Parser_Term_open___elambda__1___closed__3;
@@ -3803,16 +3803,16 @@ static lean_object* l_Lean_Parser_Command_inductive_parenthesizer___closed__1;
 lean_object* l_Lean_Parser_Term_attrKind___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_noncomputable___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_eraseAttr___elambda__1___closed__5;
-lean_object* l_Lean_Parser_Command_private___elambda__1(lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_section___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_private___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_section___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__17;
 static lean_object* l_Lean_Parser_Command_openOnly_formatter___closed__5;
 static lean_object* l_Lean_Parser_Command_partial_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_openHiding_formatter___closed__4;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_genInjectiveTheorems(lean_object*);
-lean_object* l___regBuiltin_Lean_Parser_Command_initialize_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_genInjectiveTheorems(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_initialize_parenthesizer(lean_object*);
 lean_object* l_Lean_Parser_checkColGtFn___boxed(lean_object*, lean_object*, lean_object*);
-lean_object* l_Lean_Parser_Command_declModifiers_formatter___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers_formatter___boxed(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 lean_object* l_Lean_Parser_rawIdent___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__5;
 static lean_object* l_Lean_Parser_Command_structInstBinder_formatter___closed__4;
@@ -3827,14 +3827,14 @@ static lean_object* l_Lean_Parser_Command_openOnly_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_attribute_parenthesizer___closed__10;
 static lean_object* l_Lean_Parser_Command_check___closed__1;
 static lean_object* l_Lean_Parser_Command_constant_formatter___closed__5;
-lean_object* l_Lean_Parser_Command_eval_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eval_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 extern lean_object* l_Lean_Parser_strLit;
 static lean_object* l_Lean_Parser_Command_mutual___elambda__1___closed__25;
 static lean_object* l_Lean_Parser_Command_eraseAttr_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_inferMod___elambda__1___closed__10;
 static lean_object* l_Lean_Parser_Command_declId_formatter___closed__11;
 lean_object* l_Lean_Parser_many1(lean_object*);
-lean_object* l_Lean_Parser_Command_structCtor_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structCtor_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__5;
 static lean_object* l___regBuiltin_Lean_Parser_Command_eval_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_exit___closed__4;
@@ -3858,9 +3858,9 @@ static lean_object* l_Lean_Parser_Command_structure___closed__12;
 static lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1___closed__11;
 static lean_object* l_Lean_Parser_Command_declaration___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_constant_parenthesizer___closed__4;
-lean_object* l___regBuiltin_Lean_Parser_Command_attribute_parenthesizer(lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_attribute_parenthesizer(lean_object*);
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__11;
-lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1(lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1(lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structExplicitBinder___closed__10;
 static lean_object* l_Lean_Parser_Command_optionValue___closed__7;
 static lean_object* l_Lean_Parser_Tactic_set__option___elambda__1___closed__9;
@@ -3870,7 +3870,7 @@ static lean_object* l_Lean_Parser_Command_init__quot___elambda__1___closed__9;
 lean_object* l_Lean_Parser_ppDedent_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_structCtor_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_declId_parenthesizer___closed__1;
-lean_object* l_Lean_Parser_Command_declValEqns;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValEqns;
 static lean_object* l_Lean_Parser_Command_declModifiers___closed__9;
 static lean_object* l_Lean_Parser_Command_declModifiers_formatter___closed__1;
 static lean_object* l_Lean_Parser_Term_open_formatter___closed__6;
@@ -3883,10 +3883,10 @@ static lean_object* l_Lean_Parser_Term_quot___elambda__1___closed__14;
 static lean_object* l_Lean_Parser_Command_universe___elambda__1___closed__12;
 static lean_object* l_Lean_Parser_Command_eraseAttr___closed__8;
 static lean_object* l_Lean_Parser_Command_declaration___closed__14;
-lean_object* l_Lean_Parser_Command_optionValue_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optionValue_formatter(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_deriving___elambda__1___closed__18;
 static lean_object* l_Lean_Parser_Command_example___closed__1;
-lean_object* l_Lean_Parser_Command_protected_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_protected_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_constant_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_open_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__3;
@@ -3894,22 +3894,22 @@ static lean_object* l_Lean_Parser_Command_openRenaming_formatter___closed__6;
 static lean_object* l_Lean_Parser_Command_openHiding_formatter___closed__2;
 static lean_object* l_Lean_Parser_Command_resolve__name_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_inductive___elambda__1___closed__12;
-lean_object* l___regBuiltinParser_Lean_Parser_Command_synth(lean_object*);
-lean_object* l_Lean_Parser_Command_classTk_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_synth(lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classTk_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_abbrev_parenthesizer___closed__8;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__15;
 static lean_object* l_Lean_Parser_Command_initialize_parenthesizer___closed__8;
 static lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___closed__8;
 static lean_object* l_Lean_Parser_Command_declValEqns_formatter___closed__1;
 static lean_object* l_Lean_Parser_Command_structure_formatter___closed__15;
-lean_object* l_Lean_Parser_Command_export_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_export_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_def_formatter___closed__4;
 static lean_object* l_Lean_Parser_Command_openScoped___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_end___closed__2;
 static lean_object* l_Lean_Parser_Command_initialize_formatter___closed__12;
 static lean_object* l_Lean_Parser_Command_genInjectiveTheorems___closed__3;
 static lean_object* l_Lean_Parser_Term_quot___closed__3;
-lean_object* l_Lean_Parser_Command_declId_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declId_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__18;
 lean_object* l_Lean_Parser_termParser_parenthesizer(lean_object*, lean_object*, lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_classInductive___closed__10;
@@ -3932,7 +3932,7 @@ static lean_object* l_Lean_Parser_Term_set__option_parenthesizer___closed__2;
 static lean_object* l_Lean_Parser_Command_nonrec_formatter___closed__3;
 static lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716____closed__18;
 static lean_object* l_Lean_Parser_Command_protected___elambda__1___closed__6;
-lean_object* l_Lean_Parser_Command_set__option;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_set__option;
 static lean_object* l_Lean_Parser_Command_variable___elambda__1___closed__7;
 static lean_object* l_Lean_Parser_Command_classTk___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1___closed__8;
@@ -3950,7 +3950,7 @@ static lean_object* l_Lean_Parser_Command_ctor___closed__12;
 static lean_object* l_Lean_Parser_Command_attribute___elambda__1___closed__18;
 static lean_object* l_Lean_Parser_Command_open___elambda__1___closed__9;
 static lean_object* l_Lean_Parser_Command_theorem___closed__2;
-lean_object* l_Lean_Parser_Command_declModifiersT;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiersT;
 lean_object* l_Lean_Parser_setLhsPrecFn___boxed(lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_check_parenthesizer___closed__1;
 static lean_object* l_Lean_Parser_Command_declaration___elambda__1___closed__5;
@@ -3962,9 +3962,9 @@ static lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1___clos
 lean_object* l_Lean_Parser_andthenFn(lean_object*, lean_object*, lean_object*, lean_object*);
 static lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___closed__3;
 static lean_object* l_Lean_Parser_Command_nonrec___elambda__1___closed__4;
-lean_object* l_Lean_Parser_Command_constant;
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_constant;
 static lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1___closed__13;
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; 
@@ -4004,7 +4004,7 @@ x_3 = lean_name_mk_string(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__2(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__2(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -4121,7 +4121,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_antiquotNestedExpr___elambda__1),
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; lean_object* x_9; lean_object* x_10; uint8_t x_11; lean_object* x_12; 
@@ -4641,7 +4641,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Term_quot___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -4965,7 +4965,7 @@ x_1 = l_Lean_Parser_Term_quot___closed__14;
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__1___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__1___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -4974,7 +4974,7 @@ lean_dec(x_1);
 return x_2;
 }
 }
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__2___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__2___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -4984,7 +4984,7 @@ lean_dec(x_1);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot___elambda__1___lambda__3___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4) {
 _start:
 {
 lean_object* x_5; 
@@ -4993,7 +4993,7 @@ lean_dec(x_4);
 return x_5;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Term_quot(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Term_quot(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -5127,7 +5127,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Term_quot_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -5163,7 +5163,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Term_quot_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Term_quot_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_quot_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -5300,7 +5300,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Term_quot_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_quot_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -5336,7 +5336,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Term_quot_parenthesizer), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Term_quot_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_quot_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -5492,7 +5492,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Term_precheckedQuot___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_precheckedQuot___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -5718,7 +5718,7 @@ x_1 = l_Lean_Parser_Term_precheckedQuot___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Term_precheckedQuot(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Term_precheckedQuot(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -5782,7 +5782,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Term_precheckedQuot_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_precheckedQuot_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -5810,7 +5810,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Term_precheckedQuot_formatter), 5
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Term_precheckedQuot_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_precheckedQuot_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -5873,7 +5873,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Term_precheckedQuot_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_precheckedQuot_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -5901,7 +5901,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Term_precheckedQuot_parenthesizer
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Term_precheckedQuot_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_precheckedQuot_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -5913,7 +5913,7 @@ x_6 = l_Lean_KeyedDeclsAttribute_addBuiltin___rarg(x_2, x_3, x_4, x_5, x_1);
 return x_6;
 }
 }
-lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___lambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___lambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_inc(x_2);
@@ -6110,7 +6110,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -6345,7 +6345,7 @@ x_1 = l_Lean_Parser_Command_moduleDoc___closed__9;
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___lambda__1___boxed(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_moduleDoc___elambda__1___lambda__1___boxed(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; 
@@ -6355,7 +6355,7 @@ lean_dec(x_1);
 return x_3;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_moduleDoc(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_moduleDoc(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -6457,7 +6457,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_moduleDoc_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_moduleDoc_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -6485,7 +6485,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_moduleDoc_formatter), 5, 
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_moduleDoc_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_moduleDoc_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -6586,7 +6586,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_moduleDoc_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_moduleDoc_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -6614,7 +6614,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_moduleDoc_parenthesizer),
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_moduleDoc_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_moduleDoc_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -6920,7 +6920,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_namedPrio___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namedPrio___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -7424,7 +7424,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_private___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_private___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -7766,7 +7766,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_protected___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_protected___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -7976,7 +7976,7 @@ x_1 = l_Lean_Parser_Command_protected___closed__7;
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_visibility___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_visibility___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; lean_object* x_6; 
@@ -8161,7 +8161,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_noncomputable___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_noncomputable___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -8503,7 +8503,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_unsafe___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_unsafe___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -8845,7 +8845,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_partial___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_partial___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -9187,7 +9187,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_nonrec___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_nonrec___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -9397,14 +9397,14 @@ x_1 = l_Lean_Parser_Command_nonrec___closed__7;
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___rarg(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___rarg(lean_object* x_1) {
 _start:
 {
 lean_inc(x_1);
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiers___elambda__1(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___elambda__1(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -9703,7 +9703,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiers___elambda__2(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___elambda__2(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; lean_object* x_9; lean_object* x_10; lean_object* x_11; lean_object* x_12; lean_object* x_13; lean_object* x_14; lean_object* x_15; lean_object* x_16; uint8_t x_17; 
@@ -10018,7 +10018,7 @@ lean_ctor_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiers(uint8_t x_1) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers(uint8_t x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -10026,7 +10026,7 @@ x_2 = l_Lean_Parser_Command_declModifiers___closed__11;
 return x_2;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___rarg___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___rarg___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -10035,7 +10035,7 @@ lean_dec(x_1);
 return x_2;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___elambda__1___boxed(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; 
@@ -10044,7 +10044,7 @@ lean_dec(x_1);
 return x_2;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiers___boxed(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers___boxed(lean_object* x_1) {
 _start:
 {
 uint8_t x_2; lean_object* x_3; 
@@ -10382,7 +10382,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_declId___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declId___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -10748,7 +10748,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_declSig___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declSig___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -11025,7 +11025,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_optDeclSig___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeclSig___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; 
@@ -11384,7 +11384,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_declValSimple___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValSimple___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -11746,7 +11746,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_declValEqns___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValEqns___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -11903,7 +11903,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_declVal___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declVal___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; lean_object* x_6; 
@@ -12136,7 +12136,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_abbrev___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_abbrev___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -12835,7 +12835,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_def___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_def___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -13308,7 +13308,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_theorem___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_theorem___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -13801,7 +13801,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_constant___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_constant___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -14316,7 +14316,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_instance___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_instance___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; 
@@ -14813,7 +14813,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_axiom___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_axiom___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -15227,7 +15227,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_example___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_example___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -15617,7 +15617,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_inferMod___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inferMod___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -15963,7 +15963,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_ctor___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_ctor___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -16581,7 +16581,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_optDeriving___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeriving___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -17063,7 +17063,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_inductive___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inductive___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; 
@@ -17561,7 +17561,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_classInductive___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classInductive___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; 
@@ -18069,7 +18069,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structExplicitBinder___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; lean_object* x_9; lean_object* x_10; uint8_t x_11; 
@@ -18579,7 +18579,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structImplicitBinder___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; 
@@ -19127,7 +19127,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structInstBinder___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; 
@@ -19587,7 +19587,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structSimpleBinder___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; 
@@ -19883,7 +19883,7 @@ x_1 = l_Lean_Parser_Command_structSimpleBinder___closed__10;
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_structFields___elambda__1___lambda__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structFields___elambda__1___lambda__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; uint8_t x_5; 
@@ -20221,7 +20221,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_structFields___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structFields___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -20546,7 +20546,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_structCtor___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structCtor___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -20859,7 +20859,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_structureTk___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structureTk___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -21164,7 +21164,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_classTk___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classTk___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -21523,7 +21523,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_extends___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_extends___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -22088,7 +22088,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_structure___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structure___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; lean_object* x_9; lean_object* x_10; lean_object* x_11; lean_object* x_12; uint8_t x_13; 
@@ -22637,7 +22637,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_declaration___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declaration___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -22938,7 +22938,7 @@ x_1 = l_Lean_Parser_Command_declaration___closed__17;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_declaration(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_declaration(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -22990,7 +22990,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_private_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_private_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -23039,7 +23039,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_protected_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_protected_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -23065,7 +23065,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_protected_formatter), 5, 
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_visibility_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_visibility_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -23114,7 +23114,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_noncomputable_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_noncomputable_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -23163,7 +23163,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_unsafe_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_unsafe_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -23212,7 +23212,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_partial_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_partial_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -23261,7 +23261,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_nonrec_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_nonrec_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -23578,7 +23578,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiers_formatter(uint8_t x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers_formatter(uint8_t x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
 _start:
 {
 if (x_1 == 0)
@@ -23599,7 +23599,7 @@ return x_12;
 }
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiers_formatter___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers_formatter___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
 _start:
 {
 uint8_t x_7; lean_object* x_8; 
@@ -23739,7 +23739,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declId_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declId_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -23859,7 +23859,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_optDeclSig_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeclSig_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -23950,7 +23950,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declValSimple_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValSimple_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -23997,7 +23997,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declValEqns_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValEqns_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -24035,7 +24035,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_declValSimple_formatter),
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_declVal_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declVal_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -24144,7 +24144,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_abbrev_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_abbrev_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -24208,7 +24208,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_optDefDeriving_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDefDeriving_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; 
@@ -24312,7 +24312,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_def_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_def_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -24371,7 +24371,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declSig_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declSig_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -24464,7 +24464,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_theorem_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_theorem_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -24559,7 +24559,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_constant_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_constant_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -24697,7 +24697,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_namedPrio_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namedPrio_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -24715,7 +24715,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_namedPrio_formatter), 5, 
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_optNamedPrio_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optNamedPrio_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; 
@@ -24837,7 +24837,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_instance_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_instance_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -24910,7 +24910,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_axiom_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_axiom_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -24971,7 +24971,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_example_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_example_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -25042,7 +25042,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_inferMod_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inferMod_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -25168,7 +25168,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_ctor_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_ctor_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -25240,7 +25240,7 @@ lean_closure_set(x_2, 0, x_1);
 return x_2;
 }
 }
-lean_object* l_Lean_Parser_Command_derivingClasses_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_derivingClasses_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; lean_object* x_10; 
@@ -25311,7 +25311,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_optDeriving_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeriving_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -25488,7 +25488,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_inductive_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inductive_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -25581,7 +25581,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_classInductive_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classInductive_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -25630,7 +25630,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structureTk_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structureTk_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -25669,7 +25669,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_classTk_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classTk_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -25747,7 +25747,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_extends_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_extends_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -25842,7 +25842,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structCtor_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structCtor_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -26011,7 +26011,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structExplicitBinder_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -26120,7 +26120,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structImplicitBinder_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structImplicitBinder_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -26249,7 +26249,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structInstBinder_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structInstBinder_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -26346,7 +26346,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structSimpleBinder_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structSimpleBinder_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -26495,7 +26495,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structFields_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structFields_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -26744,7 +26744,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structure_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structure_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -26994,7 +26994,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declaration_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declaration_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -27022,7 +27022,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_declaration_formatter), 5
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_declaration_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_declaration_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -27073,7 +27073,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_private_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_private_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -27122,7 +27122,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_protected_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_protected_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -27148,7 +27148,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_protected_parenthesizer),
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_visibility_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_visibility_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -27197,7 +27197,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_noncomputable_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_noncomputable_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -27246,7 +27246,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_unsafe_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_unsafe_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -27295,7 +27295,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_partial_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_partial_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -27344,7 +27344,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_nonrec_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_nonrec_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -27661,7 +27661,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer(uint8_t x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer(uint8_t x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
 _start:
 {
 if (x_1 == 0)
@@ -27682,7 +27682,7 @@ return x_12;
 }
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiers_parenthesizer___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5, lean_object* x_6) {
 _start:
 {
 uint8_t x_7; lean_object* x_8; 
@@ -27822,7 +27822,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declId_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declId_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -27942,7 +27942,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_optDeclSig_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeclSig_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -28033,7 +28033,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declValSimple_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValSimple_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -28080,7 +28080,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declValEqns_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declValEqns_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -28118,7 +28118,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_declValSimple_parenthesiz
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_declVal_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declVal_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -28227,7 +28227,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_abbrev_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_abbrev_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -28291,7 +28291,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_optDefDeriving_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDefDeriving_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; 
@@ -28395,7 +28395,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_def_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_def_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -28454,7 +28454,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declSig_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declSig_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -28547,7 +28547,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_theorem_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_theorem_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -28642,7 +28642,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_constant_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_constant_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -28782,7 +28782,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_namedPrio_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namedPrio_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -28800,7 +28800,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_namedPrio_parenthesizer),
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_optNamedPrio_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optNamedPrio_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; 
@@ -28922,7 +28922,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_instance_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_instance_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -28995,7 +28995,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_axiom_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_axiom_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -29056,7 +29056,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_example_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_example_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -29127,7 +29127,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_inferMod_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inferMod_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -29253,7 +29253,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_ctor_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_ctor_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -29325,7 +29325,7 @@ lean_closure_set(x_2, 0, x_1);
 return x_2;
 }
 }
-lean_object* l_Lean_Parser_Command_derivingClasses_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_derivingClasses_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; lean_object* x_10; 
@@ -29396,7 +29396,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_optDeriving_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optDeriving_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -29573,7 +29573,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_inductive_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_inductive_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -29666,7 +29666,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_classInductive_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classInductive_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -29715,7 +29715,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structureTk_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structureTk_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -29754,7 +29754,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_classTk_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_classTk_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -29832,7 +29832,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_extends_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_extends_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -29927,7 +29927,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structCtor_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structCtor_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -30096,7 +30096,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structExplicitBinder_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structExplicitBinder_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -30205,7 +30205,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structImplicitBinder_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structImplicitBinder_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -30334,7 +30334,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structInstBinder_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structInstBinder_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -30431,7 +30431,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structSimpleBinder_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structSimpleBinder_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -30580,7 +30580,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structFields_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structFields_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -30829,7 +30829,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_structure_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_structure_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -31079,7 +31079,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_declaration_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declaration_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -31107,7 +31107,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_declaration_parenthesizer
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_declaration_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_declaration_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -31323,7 +31323,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_deriving___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_deriving___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; 
@@ -31722,7 +31722,7 @@ x_1 = l_Lean_Parser_Command_deriving___closed__11;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_deriving(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_deriving(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -31822,7 +31822,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_deriving_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_deriving_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -31850,7 +31850,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_deriving_formatter), 5, 0
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_deriving_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_deriving_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -31949,7 +31949,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_deriving_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_deriving_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -31977,7 +31977,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_deriving_parenthesizer), 
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_deriving_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_deriving_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -32144,7 +32144,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_section___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_section___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -32376,7 +32376,7 @@ x_1 = l_Lean_Parser_Command_section___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_section(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_section(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -32450,7 +32450,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_section_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_section_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -32478,7 +32478,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_section_formatter), 5, 0)
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_section_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_section_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -32551,7 +32551,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_section_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_section_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -32579,7 +32579,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_section_parenthesizer), 5
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_section_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_section_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -32735,7 +32735,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_namespace___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namespace___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -32961,7 +32961,7 @@ x_1 = l_Lean_Parser_Command_namespace___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_namespace(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_namespace(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -33025,7 +33025,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_namespace_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namespace_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -33053,7 +33053,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_namespace_formatter), 5, 
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_namespace_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_namespace_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -33116,7 +33116,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_namespace_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_namespace_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -33144,7 +33144,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_namespace_parenthesizer),
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_namespace_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_namespace_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -33302,7 +33302,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_end___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_end___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -33534,7 +33534,7 @@ x_1 = l_Lean_Parser_Command_end___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_end(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_end(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -33598,7 +33598,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_end_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_end_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -33626,7 +33626,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_end_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_end_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_end_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -33689,7 +33689,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_end_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_end_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -33717,7 +33717,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_end_parenthesizer), 5, 0)
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_end_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_end_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -33876,7 +33876,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_variable___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_variable___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -34108,7 +34108,7 @@ x_1 = l_Lean_Parser_Command_variable___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_variable(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_variable(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -34182,7 +34182,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_variable_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_variable_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -34210,7 +34210,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_variable_formatter), 5, 0
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_variable_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_variable_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -34283,7 +34283,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_variable_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_variable_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -34311,7 +34311,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_variable_parenthesizer), 
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_variable_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_variable_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -34469,7 +34469,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_universe___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_universe___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -34701,7 +34701,7 @@ x_1 = l_Lean_Parser_Command_universe___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_universe(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_universe(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -34765,7 +34765,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_universe_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_universe_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -34793,7 +34793,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_universe_formatter), 5, 0
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_universe_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_universe_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -34856,7 +34856,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_universe_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_universe_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -34884,7 +34884,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_universe_parenthesizer), 
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_universe_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_universe_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -35040,7 +35040,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_check___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -35268,7 +35268,7 @@ x_1 = l_Lean_Parser_Command_check___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_check(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_check(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -35332,7 +35332,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_check_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -35360,7 +35360,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_check_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_check_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_check_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -35423,7 +35423,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_check_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -35451,7 +35451,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_check_parenthesizer), 5, 
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_check_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_check_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -35607,7 +35607,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_check__failure___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check__failure___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -35835,7 +35835,7 @@ x_1 = l_Lean_Parser_Command_check__failure___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_check__failure(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_check__failure(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -35899,7 +35899,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_check__failure_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check__failure_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -35927,7 +35927,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_check__failure_formatter)
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_check__failure_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_check__failure_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -35990,7 +35990,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_check__failure_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_check__failure_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -36018,7 +36018,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_check__failure_parenthesi
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_check__failure_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_check__failure_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -36174,7 +36174,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_reduce___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_reduce___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -36402,7 +36402,7 @@ x_1 = l_Lean_Parser_Command_reduce___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_reduce(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_reduce(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -36466,7 +36466,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_reduce_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_reduce_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -36494,7 +36494,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_reduce_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_reduce_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_reduce_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -36557,7 +36557,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_reduce_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_reduce_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -36585,7 +36585,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_reduce_parenthesizer), 5,
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_reduce_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_reduce_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -36741,7 +36741,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_eval___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eval___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -36969,7 +36969,7 @@ x_1 = l_Lean_Parser_Command_eval___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_eval(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_eval(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -37033,7 +37033,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_eval_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eval_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -37061,7 +37061,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_eval_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_eval_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_eval_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -37124,7 +37124,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_eval_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eval_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -37152,7 +37152,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_eval_parenthesizer), 5, 0
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_eval_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_eval_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -37308,7 +37308,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_synth___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_synth___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -37536,7 +37536,7 @@ x_1 = l_Lean_Parser_Command_synth___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_synth(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_synth(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -37600,7 +37600,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_synth_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_synth_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -37628,7 +37628,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_synth_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_synth_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_synth_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -37691,7 +37691,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_synth_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_synth_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -37719,7 +37719,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_synth_parenthesizer), 5, 
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_synth_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_synth_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -37863,7 +37863,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_exit___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_exit___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -38073,7 +38073,7 @@ x_1 = l_Lean_Parser_Command_exit___closed__7;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_exit(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_exit(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -38125,7 +38125,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_exit_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_exit_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -38153,7 +38153,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_exit_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_exit_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_exit_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -38204,7 +38204,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_exit_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_exit_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -38232,7 +38232,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_exit_parenthesizer), 5, 0
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_exit_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_exit_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -38408,7 +38408,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_print___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_print___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -38649,7 +38649,7 @@ x_1 = l_Lean_Parser_Command_print___closed__9;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_print(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_print(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -38733,7 +38733,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_print_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_print_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -38761,7 +38761,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_print_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_print_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_print_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -38844,7 +38844,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_print_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_print_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -38872,7 +38872,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_print_parenthesizer), 5, 
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_print_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_print_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -39040,7 +39040,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_printAxioms___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_printAxioms___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -39316,7 +39316,7 @@ x_1 = l_Lean_Parser_Command_printAxioms___closed__9;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_printAxioms(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_printAxioms(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -39395,7 +39395,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_printAxioms_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_printAxioms_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -39423,7 +39423,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_printAxioms_formatter), 5
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_printAxioms_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_printAxioms_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -39501,7 +39501,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_printAxioms_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_printAxioms_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -39529,7 +39529,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_printAxioms_parenthesizer
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_printAxioms_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_printAxioms_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -39685,7 +39685,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_resolve__name___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_resolve__name___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -39911,7 +39911,7 @@ x_1 = l_Lean_Parser_Command_resolve__name___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_resolve__name(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_resolve__name(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -39975,7 +39975,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_resolve__name_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_resolve__name_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -40003,7 +40003,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_resolve__name_formatter),
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -40066,7 +40066,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_resolve__name_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_resolve__name_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -40094,7 +40094,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_resolve__name_parenthesiz
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_resolve__name_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -40230,7 +40230,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_init__quot___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_init__quot___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -40440,7 +40440,7 @@ x_1 = l_Lean_Parser_Command_init__quot___closed__7;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_init__quot(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_init__quot(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -40492,7 +40492,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_init__quot_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_init__quot_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -40520,7 +40520,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_init__quot_formatter), 5,
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_init__quot_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_init__quot_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -40571,7 +40571,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_init__quot_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_init__quot_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -40599,7 +40599,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_init__quot_parenthesizer)
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_init__quot_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_init__quot_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -40717,7 +40717,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_optionValue___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optionValue___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; lean_object* x_6; 
@@ -40978,7 +40978,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_set__option___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_set__option___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -41258,7 +41258,7 @@ x_1 = l_Lean_Parser_Command_set__option___closed__10;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_set__option(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_set__option(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -41329,7 +41329,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_optionValue_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optionValue_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -41422,7 +41422,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_set__option_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_set__option_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -41450,7 +41450,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_set__option_formatter), 5
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_set__option_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_set__option_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -41520,7 +41520,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_optionValue_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_optionValue_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -41613,7 +41613,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_set__option_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_set__option_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -41641,7 +41641,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_set__option_parenthesizer
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_set__option_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_set__option_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -41805,7 +41805,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_eraseAttr___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eraseAttr___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -42350,7 +42350,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_attribute___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_attribute___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; 
@@ -42758,7 +42758,7 @@ x_1 = l_Lean_Parser_Command_attribute___closed__12;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_attribute(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_attribute(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -42830,7 +42830,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_eraseAttr_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eraseAttr_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -42982,7 +42982,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_attribute_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_attribute_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -43010,7 +43010,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_attribute_formatter), 5, 
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_attribute_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_attribute_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -43081,7 +43081,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_eraseAttr_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_eraseAttr_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -43233,7 +43233,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_attribute_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_attribute_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -43261,7 +43261,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_attribute_parenthesizer),
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_attribute_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_attribute_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -43475,7 +43475,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_export___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_export___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -43845,7 +43845,7 @@ x_1 = l_Lean_Parser_Command_export___closed__11;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_export(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_export(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -43945,7 +43945,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_export_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_export_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -43973,7 +43973,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_export_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_export_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_export_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -44072,7 +44072,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_export_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_export_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -44100,7 +44100,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_export_parenthesizer), 5,
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_export_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_export_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -44323,7 +44323,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_openHiding___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openHiding___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -44745,7 +44745,7 @@ lean_ctor_set(x_3, 1, x_1);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenamingItem___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -45241,7 +45241,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_openRenaming___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenaming___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -45557,7 +45557,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_openOnly___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openOnly___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -45887,7 +45887,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_openSimple___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openSimple___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -46175,7 +46175,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_openScoped___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openScoped___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -46443,7 +46443,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_openDecl___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openDecl___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; lean_object* x_6; 
@@ -46532,7 +46532,7 @@ x_1 = l_Lean_Parser_Command_openDecl___closed__6;
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__1(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; lean_object* x_9; lean_object* x_10; uint8_t x_11; lean_object* x_12; 
@@ -46642,7 +46642,7 @@ return x_17;
 }
 }
 }
-lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__2(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__2(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 uint8_t x_4; 
@@ -46918,7 +46918,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_open___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -47200,7 +47200,7 @@ x_1 = l_Lean_Parser_Command_open___closed__8;
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__1___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -47209,7 +47209,7 @@ lean_dec(x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__2___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open___elambda__1___lambda__2___boxed(lean_object* x_1, lean_object* x_2, lean_object* x_3) {
 _start:
 {
 lean_object* x_4; 
@@ -47218,7 +47218,7 @@ lean_dec(x_1);
 return x_4;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_open(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_open(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -47334,7 +47334,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openHiding_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openHiding_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -47409,7 +47409,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openRenamingItem_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenamingItem_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -47517,7 +47517,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openRenaming_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenaming_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -47590,7 +47590,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openOnly_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openOnly_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -47629,7 +47629,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openSimple_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openSimple_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -47690,7 +47690,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openScoped_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openScoped_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -47776,7 +47776,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_openHiding_formatter), 5,
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_openDecl_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openDecl_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -47855,7 +47855,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_open_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -47883,7 +47883,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_open_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_open_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_open_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -47998,7 +47998,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openHiding_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openHiding_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -48073,7 +48073,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openRenamingItem_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenamingItem_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -48181,7 +48181,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openRenaming_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openRenaming_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -48254,7 +48254,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openOnly_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openOnly_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -48293,7 +48293,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openSimple_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openSimple_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -48354,7 +48354,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_openScoped_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openScoped_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -48440,7 +48440,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_openHiding_parenthesizer)
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_openDecl_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_openDecl_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -48519,7 +48519,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_open_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_open_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -48547,7 +48547,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_open_parenthesizer), 5, 0
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_open_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_open_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -48857,7 +48857,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_mutual___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_mutual___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -49154,7 +49154,7 @@ x_1 = l_Lean_Parser_Command_mutual___closed__11;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_mutual(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_mutual(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -49306,7 +49306,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_mutual_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_mutual_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -49334,7 +49334,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_mutual_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_mutual_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_mutual_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -49485,7 +49485,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_mutual_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_mutual_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -49513,7 +49513,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_mutual_parenthesizer), 5,
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_mutual_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_mutual_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -49810,7 +49810,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Term_doSeqIndent___elambda__1), 2
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_initialize___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_initialize___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; 
@@ -50139,7 +50139,7 @@ x_1 = l_Lean_Parser_Command_initialize___closed__10;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_initialize(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_initialize(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -50287,7 +50287,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_initialize_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_initialize_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -50315,7 +50315,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_initialize_formatter), 5,
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_initialize_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_initialize_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -50462,7 +50462,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_initialize_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_initialize_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -50490,7 +50490,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_initialize_parenthesizer)
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_initialize_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_initialize_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -50660,7 +50660,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_builtin__initialize___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; lean_object* x_8; uint8_t x_9; 
@@ -50975,7 +50975,7 @@ x_1 = l_Lean_Parser_Command_builtin__initialize___closed__9;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_builtin__initialize(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_builtin__initialize(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -51051,7 +51051,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_builtin__initialize_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_builtin__initialize_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -51079,7 +51079,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_builtin__initialize_forma
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_builtin__initialize_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_builtin__initialize_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -51154,7 +51154,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_builtin__initialize_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_builtin__initialize_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -51182,7 +51182,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_builtin__initialize_paren
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_builtin__initialize_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_builtin__initialize_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -51261,7 +51261,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_in___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_in___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -51413,7 +51413,7 @@ x_1 = l_Lean_Parser_Command_in___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_in(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_in(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -51458,7 +51458,7 @@ lean_closure_set(x_2, 0, x_1);
 return x_2;
 }
 }
-lean_object* l_Lean_Parser_Command_in_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_in_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; lean_object* x_9; lean_object* x_10; 
@@ -51488,7 +51488,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_in_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_in_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_in_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -51532,7 +51532,7 @@ lean_closure_set(x_2, 0, x_1);
 return x_2;
 }
 }
-lean_object* l_Lean_Parser_Command_in_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_in_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; lean_object* x_9; lean_object* x_10; 
@@ -51562,7 +51562,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_in_parenthesizer), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_in_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_in_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -51718,7 +51718,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_genInjectiveTheorems___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -51944,7 +51944,7 @@ x_1 = l_Lean_Parser_Command_genInjectiveTheorems___closed__8;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Command_genInjectiveTheorems(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Command_genInjectiveTheorems(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -52008,7 +52008,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_genInjectiveTheorems_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_genInjectiveTheorems_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -52036,7 +52036,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_genInjectiveTheorems_form
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_genInjectiveTheorems_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_genInjectiveTheorems_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -52099,7 +52099,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Command_genInjectiveTheorems_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_genInjectiveTheorems_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -52127,7 +52127,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Command_genInjectiveTheorems_pare
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Command_genInjectiveTheorems_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Command_genInjectiveTheorems_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -52139,7 +52139,7 @@ x_6 = l_Lean_KeyedDeclsAttribute_addBuiltin___rarg(x_2, x_3, x_4, x_5, x_1);
 return x_6;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiersF_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiersF_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 uint8_t x_6; lean_object* x_7; 
@@ -52148,7 +52148,7 @@ x_7 = l_Lean_Parser_Command_declModifiers_formatter(x_6, x_1, x_2, x_3, x_4, x_5
 return x_7;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiersF_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiersF_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 uint8_t x_6; lean_object* x_7; 
@@ -52165,7 +52165,7 @@ x_1 = l_Lean_Parser_Command_declaration___closed__1;
 return x_1;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiersT_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiersT_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 uint8_t x_6; lean_object* x_7; 
@@ -52174,7 +52174,7 @@ x_7 = l_Lean_Parser_Command_declModifiers_formatter(x_6, x_1, x_2, x_3, x_4, x_5
 return x_7;
 }
 }
-lean_object* l_Lean_Parser_Command_declModifiersT_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_declModifiersT_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 uint8_t x_6; lean_object* x_7; 
@@ -52527,7 +52527,7 @@ lean_ctor_set(x_2, 0, x_1);
 return x_2;
 }
 }
-lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716_(lean_object* x_1) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Command_initFn____x40_Lean_Parser_Command___hyg_1716_(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; 
@@ -53319,7 +53319,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Term_open___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_open___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -53591,7 +53591,7 @@ x_1 = l_Lean_Parser_Term_open___closed__9;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Term_open(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Term_open(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -53679,7 +53679,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Term_open_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_open_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -53707,7 +53707,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Term_open_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Term_open_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_open_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -53794,7 +53794,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Term_open_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_open_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -53822,7 +53822,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Term_open_parenthesizer), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Term_open_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_open_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -53977,7 +53977,7 @@ x_3 = lean_string_append(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Term_set__option___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_set__option___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -54297,7 +54297,7 @@ x_1 = l_Lean_Parser_Term_set__option___closed__10;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Term_set__option(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Term_set__option(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -54395,7 +54395,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Term_set__option_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_set__option_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -54423,7 +54423,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Term_set__option_formatter), 5, 0
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Term_set__option_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_set__option_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -54520,7 +54520,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Term_set__option_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Term_set__option_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -54548,7 +54548,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Term_set__option_parenthesizer), 
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Term_set__option_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Term_set__option_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -54693,7 +54693,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Tactic_open___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_open___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; uint8_t x_5; 
@@ -54983,7 +54983,7 @@ x_3 = lean_name_mk_string(x_1, x_2);
 return x_3;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Tactic_open(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Tactic_open(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -55079,7 +55079,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Tactic_open_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_open_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -55107,7 +55107,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Tactic_open_formatter), 5, 0);
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Tactic_open_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Tactic_open_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -55202,7 +55202,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Tactic_open_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_open_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -55230,7 +55230,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Tactic_open_parenthesizer), 5, 0)
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Tactic_open_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Tactic_open_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -55357,7 +55357,7 @@ lean_closure_set(x_3, 1, x_2);
 return x_3;
 }
 }
-lean_object* l_Lean_Parser_Tactic_set__option___elambda__1(lean_object* x_1, lean_object* x_2) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_set__option___elambda__1(lean_object* x_1, lean_object* x_2) {
 _start:
 {
 lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; uint8_t x_7; 
@@ -55685,7 +55685,7 @@ x_1 = l_Lean_Parser_Tactic_set__option___closed__10;
 return x_1;
 }
 }
-lean_object* l___regBuiltinParser_Lean_Parser_Tactic_set__option(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltinParser_Lean_Parser_Tactic_set__option(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; uint8_t x_4; lean_object* x_5; lean_object* x_6; lean_object* x_7; 
@@ -55775,7 +55775,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Tactic_set__option_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_set__option_formatter(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -55803,7 +55803,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Tactic_set__option_formatter), 5,
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Tactic_set__option_formatter(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Tactic_set__option_formatter(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -55892,7 +55892,7 @@ lean_closure_set(x_4, 2, x_3);
 return x_4;
 }
 }
-lean_object* l_Lean_Parser_Tactic_set__option_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
+LEAN_EXPORT lean_object* l_Lean_Parser_Tactic_set__option_parenthesizer(lean_object* x_1, lean_object* x_2, lean_object* x_3, lean_object* x_4, lean_object* x_5) {
 _start:
 {
 lean_object* x_6; lean_object* x_7; lean_object* x_8; 
@@ -55920,7 +55920,7 @@ x_1 = lean_alloc_closure((void*)(l_Lean_Parser_Tactic_set__option_parenthesizer)
 return x_1;
 }
 }
-lean_object* l___regBuiltin_Lean_Parser_Tactic_set__option_parenthesizer(lean_object* x_1) {
+LEAN_EXPORT lean_object* l___regBuiltin_Lean_Parser_Tactic_set__option_parenthesizer(lean_object* x_1) {
 _start:
 {
 lean_object* x_2; lean_object* x_3; lean_object* x_4; lean_object* x_5; lean_object* x_6; 
@@ -55936,7 +55936,7 @@ lean_object* initialize_Init(lean_object*);
 lean_object* initialize_Lean_Parser_Term(lean_object*);
 lean_object* initialize_Lean_Parser_Do(lean_object*);
 static bool _G_initialized = false;
-lean_object* initialize_Lean_Parser_Command(lean_object* w) {
+LEAN_EXPORT lean_object* initialize_Lean_Parser_Command(lean_object* w) {
 lean_object * res;
 if (_G_initialized) return lean_io_result_mk_ok(lean_box(0));
 _G_initialized = true;
