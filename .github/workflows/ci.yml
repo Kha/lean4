@@ -119,7 +119,7 @@ jobs:
             fi
           fi
           # contortion to support empty OPTIONS with old macOS bash
-          cmake .. ${{ matrix.CMAKE_OPTIONS }} ${OPTIONS[@]+"${OPTIONS[@]}"} -DLEAN_INSTALL_PREFIX=$PWD/..
+          cmake .. ${{ matrix.CMAKE_OPTIONS }} ${OPTIONS[@]+"${OPTIONS[@]}"}
           make -j4
           make install
       - name: Check binaries
