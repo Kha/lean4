@@ -121,8 +121,8 @@ constant mapTask (f : α → EIO ε β) (t : Task α) (prio := Task.Priority.def
 
 /-- See `IO.asTask`. -/
 @[extern "lean_io_bind_task"]
-constant bindTask (t : Task α) (f : α → EIO ε (Task (Except ε β))) (prio := Task.Priority.default) : EIO Empty (Task (Except ε β)) :=
-  f t.get |>.catchExceptions fun e => Task.pure <| Except.error e
+constant bindTask (t : Task α) (f : α → EIO Empty (Task (Except ε β))) (prio := Task.Priority.default) : EIO Empty (Task (Except ε β)) :=
+  f t.get
 
 def mapTasks (f : List α → EIO ε β) (tasks : List (Task α)) (prio := Task.Priority.default) : EIO Empty (Task (Except ε β)) :=
   go tasks []

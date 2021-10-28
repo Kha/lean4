@@ -71,7 +71,7 @@ partial def getAll : AsyncList ε α → List α × Option ε
     | Except.error e => ⟨[], some e⟩
 
 /-- Spawns a `Task` waiting on the prefix of elements for which `p` is true. -/
-partial def waitAll [Coe Error ε] (p : α → Bool := fun _ => true) : AsyncList ε α → IO (Task (List α × Option ε))
+partial def waitAll [Coe Error ε] (p : α → Bool := fun _ => true) : AsyncList ε α → EIO Empty (Task (List α × Option ε))
   | cons hd tl => do
     if p hd then
       let t ← tl.waitAll p
@@ -90,7 +90,7 @@ partial def waitAll [Coe Error ε] (p : α → Bool := fun _ => true) : AsyncLis
 /-- Spawns a `Task` acting like `List.find?` but which will wait for tail evalution
 when necessary to traverse the list. If the tail terminates before a matching element
 is found, the task throws the terminating value. -/
-partial def waitFind? (p : α → Bool) [Coe Error ε] : AsyncList ε α → IO (Task $ Except ε $ Option α)
+partial def waitFind? (p : α → Bool) [Coe Error ε] : AsyncList ε α → EIO Empty (Task $ Except ε $ Option α)
   | nil => return Task.pure <| Except.ok none
   | cons hd tl => do
     if p hd then return Task.pure <| Except.ok <| some hd

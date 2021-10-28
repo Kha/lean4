@@ -9,7 +9,7 @@
 
 #eval id (α := IO _) do
   let t1 ← IO.bindTask (Task.spawn fun _ => "hu") fun s =>
-    liftM <| IO.asTask (IO.println s);
+    IO.asTask (IO.println s);
   pure ()
 
 #eval id (α := IO _) do
