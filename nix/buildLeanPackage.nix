@@ -110,6 +110,7 @@ with builtins; let
       cp $src $leanPath
       lean -o $out/$oleanPath -c $c/$cPath $leanPath $leanFlags $leanPluginFlags $leanLoadDynlibFlags
     '';
+    __relocatable = true;
   } // {
     inherit deps;
   };
@@ -126,6 +127,7 @@ with builtins; let
       # on the other hand, a debug build is pretty fast anyway, so preserve the path for gdb
       leanc -c -o $out/$oPath $leancFlags -fPIC ${if debug then "${drv.c}/${drv.cPath} -g -v" else "src.c -O3 -DNDEBUG"}
     '';
+    __relocatable = true;
   };
   singleton = name: value: listToAttrs [ { inherit name value; } ];
   externalModMap = lib.foldr (dep: depMap: depMap // dep.mods) {} allExternalDeps;

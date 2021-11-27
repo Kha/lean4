@@ -1,5 +1,6 @@
 { debug ? false, stage0debug ? false, extraCMakeFlags ? [],
   stdenv, lib, cmake, gmp, gnumake, bash, buildLeanPackage, writeShellScriptBin, runCommand, symlinkJoin, lndir, perl, gnused,
+  binutils,
   ... } @ args:
 with builtins;
 rec {
@@ -111,9 +112,24 @@ rec {
       leanc = writeShellScriptBin "leanc" ''
         LEAN_CC=${stdenv.cc}/bin/cc ${Leanc.executable.withSharedStdlib}/bin/leanc -I${lean-bin-tools-unwrapped}/include ${stdlibLinkFlags} -L${leanshared} "$@"
       '';
-      lean = runCommand "lean" {} ''
+      lean = runCommand "lean" { buildInputs = [ binutils ]; __relocatable = true;} ''
         mkdir -p $out/bin
-        ${leanc}/bin/leanc ${leancpp}/lib/lean.cpp.o ${leanshared}/* -o $out/bin/lean
+        ${leanc}/bin/leanc ${leancpp}/lib/lean.cpp.o -lleanshared -o $out/bin/lean
+        relStore=$(realpath --relative-to=$out/bin $NIX_STORE)
+        # relativize RPATH
+        patchelf --set-rpath $(patchelf --print-rpath $out/bin/lean | sed "s!$NIX_STORE!\$ORIGIN/$relStore!g") $out/bin/lean
+        # get rid of some other dependencies
+        strip $out/bin/lean
+        # relativize INTERP, replace with sh wrapper that prepends the executable's directory
+        interp=$(patchelf --print-interpreter $out/bin/lean | sed "s!$NIX_STORE!$relStore!g")
+        patchelf --set-interpreter "this space intentionally left blank" $out/bin/lean
+        mv $out/bin/lean $out/bin/lean.orig
+        echo $out
+        cat > $out/bin/lean <<EOF
+#! /bin/sh
+exec -a "\$0" \$(dirname "\$0")/$interp "\$0.orig" "\$@"
+EOF
+        chmod u+x $out/bin/lean
       '';
       leanpkg = Leanpkg.executable.withSharedStdlib;
       # derivation following the directory layout of the "basic" setup, mostly useful for running tests
