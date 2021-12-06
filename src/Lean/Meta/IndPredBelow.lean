@@ -6,7 +6,6 @@ Authors: Dany Fabian
 
 import Lean.Meta.Constructions
 import Lean.Meta.Transform
-import Lean.Meta.Tactic
 import Lean.Meta.Match.Match
 import Lean.Meta.Reduce
 

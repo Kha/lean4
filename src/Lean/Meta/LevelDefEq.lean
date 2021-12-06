@@ -292,24 +292,6 @@ def isLevelDefEq (u v : Level) : MetaM Bool :=
     trace[Meta.isLevelDefEq] "{u} =?= {v} ... {if b then "success" else "failure"}"
     return b
 
-def isExprDefEq (t s : Expr) : MetaM Bool :=
-  traceCtx `Meta.isDefEq <| withReader (fun ctx => { ctx with defEqCtx? := some { lhs := t, rhs := s, lctx := ctx.lctx, localInstances := ctx.localInstances } }) do
-    let b ← checkpointDefEq (mayPostpone := true) <| Meta.isExprDefEqAux t s
-    trace[Meta.isDefEq] "{t} =?= {s} ... {if b then "success" else "failure"}"
-    return b
-
-abbrev isDefEq (t s : Expr) : MetaM Bool :=
-  isExprDefEq t s
-
-def isExprDefEqGuarded (a b : Expr) : MetaM Bool := do
-  try isExprDefEq a b catch _ => return false
-
-abbrev isDefEqGuarded (t s : Expr) : MetaM Bool :=
-  isExprDefEqGuarded t s
-
-def isDefEqNoConstantApprox (t s : Expr) : MetaM Bool :=
-  approxDefEq <| isDefEq t s
-
 builtin_initialize
   registerTraceClass `Meta.isLevelDefEq
   registerTraceClass `Meta.isLevelDefEq.step
