@@ -31,7 +31,7 @@ def getDeclarationRange [Monad m] [MonadFileMap m] (stx : Syntax) : m Declaratio
   This function converts the given `Syntax` into one that represents its "selection range".
 -/
 def getDeclarationSelectionRef (stx : Syntax) : Syntax :=
-  if stx.isOfKind ``Lean.Parser.Command.instance then
+  if stx.isOfKind `Lean.Parser.Command.instance then
     -- must skip `attrKind` and `optPrio` for `instance`
     if !stx[3].isNone then
       stx[3][0]
@@ -51,7 +51,7 @@ def getDeclarationSelectionRef (stx : Syntax) : Syntax :=
   This method is for the builtin declarations only.
   User-defined commands should use `Lean.addDeclarationRanges` to store this information for their commands. -/
 def addDeclarationRanges [Monad m] [MonadEnv m] [MonadFileMap m] (declName : Name) (stx : Syntax) : m Unit := do
-  if stx.getKind == ``Parser.Command.«example» then
+  if stx.getKind == `Lean.Parser.Command.«example» then
     return ()
   else
     Lean.addDeclarationRanges declName {

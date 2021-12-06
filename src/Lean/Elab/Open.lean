@@ -72,13 +72,13 @@ private def elabOpenRenaming (n : Syntax) : M (m:=m) Unit := do
 
 def elabOpenDecl [MonadResolveName m] (openDeclStx : Syntax) : m (List OpenDecl) := do
   StateRefT'.run' (s := { openDecls := (← getOpenDecls), currNamespace := (← getCurrNamespace) }) do
-    if openDeclStx.getKind == ``Parser.Command.openSimple then
+    if openDeclStx.getKind == `Lean.Parser.Command.openSimple then
       elabOpenSimple openDeclStx
-    else if openDeclStx.getKind == ``Parser.Command.openScoped then
+    else if openDeclStx.getKind == `Lean.Parser.Command.openScoped then
       elabOpenScoped openDeclStx
-    else if openDeclStx.getKind == ``Parser.Command.openOnly then
+    else if openDeclStx.getKind == `Lean.Parser.Command.openOnly then
       elabOpenOnly openDeclStx
-    else if openDeclStx.getKind == ``Parser.Command.openHiding then
+    else if openDeclStx.getKind == `Lean.Parser.Command.openHiding then
       elabOpenHiding openDeclStx
     else
       elabOpenRenaming openDeclStx

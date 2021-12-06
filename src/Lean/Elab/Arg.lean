@@ -34,18 +34,18 @@ partial def expandArgs (args : Array Syntax) (pattern := false) : TermElabM (Arr
   let (args, ellipsis) :=
     if args.isEmpty then
       (args, false)
-    else if args.back.isOfKind ``Lean.Parser.Term.ellipsis then
+    else if args.back.isOfKind `Lean.Parser.Term.ellipsis then
       (args.pop, true)
     else
       (args, false)
   let (namedArgs, args) ← args.foldlM (init := (#[], #[])) fun (namedArgs, args) stx => do
-    if stx.getKind == ``Lean.Parser.Term.namedArgument then
+    if stx.getKind == `Lean.Parser.Term.namedArgument then
       -- trailing_tparser try ("(" >> ident >> " := ") >> termParser >> ")"
       let name := stx[1].getId.eraseMacroScopes
       let val  := stx[3]
       let namedArgs ← addNamedArg namedArgs { ref := stx, name := name, val := Arg.stx val }
       return (namedArgs, args)
-    else if stx.getKind == ``Lean.Parser.Term.ellipsis then
+    else if stx.getKind == `Lean.Parser.Term.ellipsis then
       throwErrorAt stx "unexpected '..'"
     else
       return (namedArgs, args.push $ Arg.stx stx)

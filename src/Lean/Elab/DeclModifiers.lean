@@ -104,7 +104,7 @@ def elabModifiers (stx : Syntax) : m Modifiers := do
   let recKind       :=
     if stx[5].isNone then
       RecKind.default
-    else if stx[5][0].getKind == ``Parser.Command.partial then
+    else if stx[5][0].getKind == `Lean.Parser.Command.partial then
       RecKind.partial
     else
       RecKind.nonrec

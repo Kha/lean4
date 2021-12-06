@@ -17,7 +17,6 @@ import Lean.Elab.Level
 import Lean.Elab.Attributes
 import Lean.Elab.AutoBound
 import Lean.Elab.InfoTree
-import Lean.Elab.Open
 import Lean.Elab.SetOption
 
 namespace Lean.Elab.Term
@@ -464,7 +463,7 @@ def withoutPostponing (x : TermElabM α) : TermElabM α :=
 
 /-- Creates syntax for `(` <ident> `:` <type> `)` -/
 def mkExplicitBinder (ident : Syntax) (type : Syntax) : Syntax :=
-  mkNode ``Lean.Parser.Term.explicitBinder #[mkAtom "(", mkNullNode #[ident], mkNullNode #[mkAtom ":", type], mkNullNode, mkAtom ")"]
+  mkNode `Lean.Parser.Term.explicitBinder #[mkAtom "(", mkNullNode #[ident], mkNullNode #[mkAtom ":", type], mkNullNode, mkAtom ")"]
 
 /--
   Convert unassigned universe level metavariables into parameters.
@@ -1073,14 +1072,14 @@ private def isExplicit (stx : Syntax) : Bool :=
   | _      => false
 
 private def isExplicitApp (stx : Syntax) : Bool :=
-  stx.getKind == ``Lean.Parser.Term.app && isExplicit stx[0]
+  stx.getKind == `Lean.Parser.Term.app && isExplicit stx[0]
 
 /--
   Return true if `stx` if a lambda abstraction containing a `{}` or `[]` binder annotation.
   Example: `fun {α} (a : α) => a` -/
 private def isLambdaWithImplicit (stx : Syntax) : Bool :=
   match stx with
-  | `(fun $binders* => $body) => binders.any fun b => b.isOfKind ``Lean.Parser.Term.implicitBinder || b.isOfKind `Lean.Parser.Term.instBinder
+  | `(fun $binders* => $body) => binders.any fun b => b.isOfKind `Lean.Parser.Term.implicitBinder || b.isOfKind `Lean.Parser.Term.instBinder
   | _                         => false
 
 private partial def dropTermParens : Syntax → Syntax := fun stx =>
