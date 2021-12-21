@@ -148,33 +148,33 @@ jobs:
       - name: Lean stats
         run: |
           build/stage1/bin/lean --stats src/Lean.lean
-      - name: Test
-        run: |
-          cd build/stage1
-          ctest -j4 --output-on-failure --timeout 300 ${{ matrix.CTEST_OPTIONS }} < /dev/null
-      - name: Check Test Binary
-        run: ${{ matrix.binary-check }} tests/compiler/534.lean.out
-      - name: Build Stage 2
-        run: |
-          cd build
-          make -j4 stage2
-        if: matrix.build-stage2 || matrix.check-stage3
-      - name: Check Stage 3
-        run: |
-          cd build
-          make -j4 check-stage3
-        if: matrix.check-stage3
-      - name: Test Speedcenter Benchmarks
-        run: |
-          echo -1 | sudo tee /proc/sys/kernel/perf_event_paranoid
-          export BUILD=$PWD/build PATH=$PWD/build/stage1/bin:$PATH
-          nix-shell -A with-temci --run "cd tests/bench; temci exec --config speedcenter.yaml --included_blocks fast --runs 1"
-        if: matrix.test-speedcenter
-      - name: Check rebootstrap
-        run: |
-          cd build
-          make update-stage0 && make -j4
-        if: matrix.name == 'Linux'
+      #- name: Test
+      #  run: |
+      #    cd build/stage1
+      #    ctest -j4 --output-on-failure --timeout 300 ${{ matrix.CTEST_OPTIONS }} < /dev/null
+      #- name: Check Test Binary
+      #  run: ${{ matrix.binary-check }} tests/compiler/534.lean.out
+      #- name: Build Stage 2
+      #  run: |
+      #    cd build
+      #    make -j4 stage2
+      #  if: matrix.build-stage2 || matrix.check-stage3
+      #- name: Check Stage 3
+      #  run: |
+      #    cd build
+      #    make -j4 check-stage3
+      #  if: matrix.check-stage3
+      #- name: Test Speedcenter Benchmarks
+      #  run: |
+      #    echo -1 | sudo tee /proc/sys/kernel/perf_event_paranoid
+      #    export BUILD=$PWD/build PATH=$PWD/build/stage1/bin:$PATH
+      #    nix-shell -A with-temci --run "cd tests/bench; temci exec --config speedcenter.yaml --included_blocks fast --runs 1"
+      #  if: matrix.test-speedcenter
+      #- name: Check rebootstrap
+      #  run: |
+      #    cd build
+      #    make update-stage0 && make -j4
+      #  if: matrix.name == 'Linux'
       - name: CCache stats
         run: ccache -s
         
