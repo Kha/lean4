@@ -1,11 +1,11 @@
-{ pkgs, nix, temci, mdBook, ... } @ args:
-with pkgs;
+{ __splicedPackages, buildPackages, nix, temci, mdBook, ... } @ args:
+with __splicedPackages;
 let
   nix-pinned = writeShellScriptBin "nix" ''
     ${nix.defaultPackage.${system}}/bin/nix --experimental-features 'nix-command flakes' --extra-substituters https://lean4.cachix.org/ --option warn-dirty false "$@"
   '';
   # https://github.com/NixOS/nixpkgs/issues/130963
-  llvmPackages = if stdenv.isDarwin then llvmPackages_11 else llvmPackages_13;
+  llvmPackages = with buildPackages; if stdenv.isDarwin then llvmPackages_11 else llvmPackages_13;
   cc = (ccacheWrapper.override rec {
     cc = llvmPackages.clang;
     extraConfig = ''
@@ -50,8 +50,8 @@ let
     version = "1";
     commit = "1";
     src = ../lean4-mode;
-    packageRequires = with pkgs.emacsPackages.melpaPackages; [ dash f flycheck magit-section lsp-mode s ];
-    recipe = pkgs.writeText "recipe" ''
+    packageRequires = with emacsPackages.melpaPackages; [ dash f flycheck magit-section lsp-mode s ];
+    recipe = writeText "recipe" ''
       (lean4-mode :repo "leanprover/lean4" :fetcher github :files ("*.el"))
     '';
     fileSpecs = [ "*.el" ];
@@ -108,7 +108,7 @@ in {
   HEAD-as-stage1 = (lean.stage1.Lean.overrideArgs { srcTarget = "..\?rev=$(git rev-parse HEAD)#stage0"; });
   temci = (import temci {}).override { doCheck = false; };
   nix = nix-pinned;
-  nixpkgs = pkgs;
+  nixpkgs = __splicedPackages;
   ciShell = writeShellScriptBin "ciShell" ''
     set -o pipefail
     export PATH=${nix-pinned}/bin:${moreutils}/bin:$PATH

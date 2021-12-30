@@ -29,7 +29,7 @@
         # for `vscode-with-extensions`
         config.allowUnfree = true;
       };
-      lean-packages = pkgs.callPackage (./nix/packages.nix) { inherit nix temci mdBook; };
+      lean-packages = pkgs.pkgsCross.musl64.callPackage (./nix/packages.nix) { inherit nix temci mdBook; };
     in {
       packages = lean-packages // rec {
         debug = lean-packages.override { debug = true; };

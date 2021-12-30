@@ -154,9 +154,9 @@ with builtins; let
   allLinkFlags = lib.foldr (shared: acc: acc ++ [ "-L${shared}" "-l${shared.linkName or shared.name}" ]) linkFlags allNativeSharedLibs;
 
   objects   = mapAttrs compileMod mods;
-  staticLib = runCommand "${name}-lib" { buildInputs = [ stdenv.cc.bintools.bintools ]; } ''
+  staticLib = runCommand "${name}-lib" { nativeBuildInputs = [ stdenv.cc.bintools.bintools ]; } ''
     mkdir -p $out
-    ar Trcs $out/lib${name}.a ${lib.concatStringsSep " " (map (drv: "${drv}/${drv.oPath}") (attrValues objects))};
+    ${stdenv.cc.targetPrefix}ar Trcs $out/lib${name}.a ${lib.concatStringsSep " " (map (drv: "${drv}/${drv.oPath}") (attrValues objects))};
   '';
 
   # Static lib inputs
@@ -176,13 +176,13 @@ in rec {
       ${staticLibArguments} \
       -o $out/${name}.so
   '';
-  executable = runCommand executableName { buildInputs = [ stdenv.cc leanc ]; } ''
+  executable = runCommand executableName { nativeBuildInputs = [ stdenv.cc leanc ]; } ''
     mkdir -p $out/bin
     leanc ${staticLibArguments} \
       -o $out/bin/${executableName} \
       ${lib.concatStringsSep " " allLinkFlags}
   '' // {
-    withSharedStdlib = runCommand executableName { buildInputs = [ stdenv.cc leanc ]; } ''
+    withSharedStdlib = runCommand executableName { nativeBuildInputs = [ stdenv.cc leanc ]; } ''
       mkdir -p $out/bin
       leanc ${staticLib}/* -lleanshared \
         -o $out/bin/${executableName} \

@@ -103,23 +103,23 @@ rec {
       stdlibLinkFlags = "-L${gmp}/lib -L${Init.staticLib} -L${Std.staticLib} -L${Lean.staticLib} -L${leancpp}/lib/lean";
       leanshared = runCommand "leanshared" { buildInputs = [ stdenv.cc ]; } ''
         mkdir $out
-        LEAN_CC=${stdenv.cc}/bin/cc ${lean-bin-tools-unwrapped}/bin/leanc -shared ${lib.optionalString stdenv.isLinux "-Bsymbolic"} \
+        LEAN_CC=${stdenv.cc}/bin/${stdenv.cc.targetPrefix}cc ${lean-bin-tools-unwrapped}/bin/leanc -shared ${lib.optionalString stdenv.isLinux "-Bsymbolic"} \
           ${if stdenv.isDarwin then "-Wl,-force_load,${Init.staticLib}/libInit.a -Wl,-force_load,${Std.staticLib}/libStd.a -Wl,-force_load,${Lean.staticLib}/libLean.a -Wl,-force_load,${leancpp}/lib/lean/libleancpp.a ${leancpp}/lib/libleanrt_initial-exec.a -lc++"
             else "-Wl,--whole-archive -lInit -lStd -lLean -lleancpp ${leancpp}/lib/libleanrt_initial-exec.a -Wl,--no-whole-archive -lstdc++"} -lm ${stdlibLinkFlags} \
-          -o $out/libleanshared${stdenv.hostPlatform.extensions.sharedLibrary}
+          -o $out/libleanshared${stdenv.hostPlatform.extensions.sharedLibrary} -fuse-ld=${stdenv.cc}/bin/${stdenv.cc.targetPrefix}ld
       '';
       mods = Init.mods // Std.mods // Lean.mods;
       leanc = writeShellScriptBin "leanc" ''
-        LEAN_CC=${stdenv.cc}/bin/cc ${Leanc.executable.withSharedStdlib}/bin/leanc -I${lean-bin-tools-unwrapped}/include ${stdlibLinkFlags} -L${leanshared} "$@"
+        LEAN_CC=${stdenv.cc}/bin/${stdenv.cc.targetPrefix}cc ${Leanc.executable.withSharedStdlib}/bin/leanc -I${lean-bin-tools-unwrapped}/include ${stdlibLinkFlags} -L${leanshared} "$@"
       '';
-      lean = runCommand "lean" { buildInputs = [ binutils ]; __relocatable = true;} ''
+      lean = runCommand "lean" { nativeBuildInputs = [ binutils ]; __relocatable = true;} ''
         mkdir -p $out/bin
-        ${leanc}/bin/leanc ${leancpp}/lib/lean.cpp.o -lleanshared -o $out/bin/lean
+        ${leanc}/bin/leanc ${leancpp}/lib/lean.cpp.o -lleanshared -o $out/bin/lean -fuse-ld=${stdenv.cc}/bin/${stdenv.cc.targetPrefix}ld
         relStore=$(realpath --relative-to=$out/bin $NIX_STORE)
         # relativize RPATH
         patchelf --set-rpath $(patchelf --print-rpath $out/bin/lean | sed "s!$NIX_STORE!\$ORIGIN/$relStore!g") $out/bin/lean
         # get rid of some other dependencies
-        strip $out/bin/lean
+        ${stdenv.cc.targetPrefix}strip $out/bin/lean
         # relativize INTERP, replace with sh wrapper that prepends the executable's directory
         interp=$(patchelf --print-interpreter $out/bin/lean | sed "s!$NIX_STORE!$relStore!g")
         patchelf --set-interpreter "this space intentionally left blank" $out/bin/lean
@@ -139,7 +139,7 @@ EOF
           mkdir -p $out/bin $out/lib/lean
           ln -sf ${leancpp}/lib/lean/* ${lib.concatMapStringsSep " " (l: "${l.modRoot}/* ${l.staticLib}/*") (lib.reverseList extlib)} $out/lib/lean/
           # put everything in a single final derivation so `IO.appDir` references work
-          cp ${lean}/bin/lean ${leanpkg}/bin/leanpkg ${leanc}/bin/leanc $out/bin
+          cp ${lean}/bin/lean* ${leanpkg}/bin/leanpkg ${leanc}/bin/leanc $out/bin
           # NOTE: `lndir` will not override existing `bin/leanc`
           ${lndir}/bin/lndir -silent ${lean-bin-tools-unwrapped} $out
         '';
@@ -147,7 +147,8 @@ EOF
       test = buildCMake {
         name = "lean-test-${desc}";
         realSrc = lib.sourceByRegex ../. [ "src.*" "tests.*" ];
-        buildInputs = [ gmp perl ];
+        nativeBuildInputs = [ perl cmake ];
+        buildInputs = [ gmp ];
         preConfigure = ''
           cd src
         '';
