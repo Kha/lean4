@@ -7,7 +7,11 @@ let
   # https://github.com/NixOS/nixpkgs/issues/130963
   llvmPackages = if stdenv.isDarwin then llvmPackages_11 else llvmPackages_13;
   cc = (ccacheWrapper.override rec {
-    cc = llvmPackages.clang;
+    # try again on macOS after updating LLVM for it
+    cc = if stdenv.isDarwin then llvmPackages.clang else llvmPackages.clang.override {
+      # linker go brrr
+      inherit (llvmPackages) bintools;
+    };
     extraConfig = ''
       export CCACHE_DIR=/nix/var/cache/ccache
       export CCACHE_UMASK=007
@@ -26,9 +30,8 @@ let
     # https://github.com/NixOS/nixpkgs/issues/119779
     installPhase = builtins.replaceStrings ["use_response_file_by_default=1"] ["use_response_file_by_default=0"] old.installPhase;
   });
-  stdenv' = if stdenv.isLinux then useGoldLinker stdenv else stdenv;
   lean = callPackage (import ./bootstrap.nix) (args // {
-    stdenv = overrideCC stdenv' cc;
+    stdenv = overrideCC stdenv cc;
     inherit buildLeanPackage;
   });
   makeOverridableLeanPackage = f:
