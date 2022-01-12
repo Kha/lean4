@@ -90,11 +90,14 @@ rec {
         fullSrc = ../.;
         inherit debug;
       } // args);
+      Init' = build { name = "Init"; deps = []; precompileModules = true; };
+      Std'  = build { name = "Std";  deps = [ Init' ]; precompileModules = true; };
+      Lean' = build { name = "Lean"; deps = [ Init' Std' ]; precompileModules = true; };
     in (all: all // all.lean) rec {
+      Init = Init' // { sharedLib = leanshared; };
+      Std  = Std' // { allExternalDeps = [ Init ]; sharedLib = leanshared; };
+      Lean = Lean' // { allExternalDeps = [ Init Std ]; sharedLib = leanshared; };
       inherit (Lean) emacs-dev emacs-package vscode-dev vscode-package;
-      Init = build { name = "Init"; deps = []; } // { sharedLib = leanshared; };
-      Std  = build { name = "Std";  deps = [ Init ]; } // { sharedLib = leanshared; };
-      Lean = build { name = "Lean"; deps = [ Init Std ]; } // { sharedLib = leanshared; };
       stdlib = [ Init Std Lean ];
       Leanpkg = build { name = "Leanpkg"; deps = stdlib; linkFlags = ["-L${gmp}/lib -L${leanshared}"]; };
       extlib = stdlib ++ [ Leanpkg ];
