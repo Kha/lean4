@@ -40,6 +40,11 @@ with builtins; let
     preferLocalBuild = true;
     allowSubstitutes = false;
   }) buildCommand;
+  mkSharedLib = name: args: runCommand "${name}.so" { buildInputs = [ stdenv.cc gmp ]; } ''
+    mkdir -p $out
+    ${leanc}/bin/leanc -fPIC -shared ${lib.optionalString stdenv.isLinux "-Bsymbolic"} \
+      ${args} -o $out/${name}.so
+  '';
   depRoot = name: deps: mkBareDerivation {
     name = "${name}-depRoot";
     inherit deps;
@@ -93,7 +98,7 @@ with builtins; let
     preferLocalBuild = true;
     allowSubstitutes = false;
   };
-  # build module (.olean and .c) given derivations of all (transitive) dependencies
+  # build module (.olean and .c) given derivations of all (immediate) dependencies
   buildMod = mod: deps: mkBareDerivation rec {
     name = "${mod}";
     LEAN_PATH = depRoot mod deps;
@@ -158,7 +163,7 @@ with builtins; let
   '';
 
   # Static lib inputs
-  staticLibLinkWrapper = libs: if groupStaticLibs
+  staticLibLinkWrapper = libs: if groupStaticLibs && !stdenv.isDarwin
     then "-Wl,--start-group ${libs} -Wl,--end-group"
     else "${libs}";
   staticLibArguments = staticLibLinkWrapper ("${staticLib}/* ${lib.concatStringsSep " " (map (d: "${d}/*.a") allStaticLibDeps)}");
@@ -167,13 +172,9 @@ in rec {
   modRoot   = depRoot name [ mods.${name} ];
   cTree     = symlinkJoin { name = "${name}-cTree"; paths = map (mod: mod.c) (attrValues mods); };
   oTree     = symlinkJoin { name = "${name}-oTree"; paths = (attrValues objects); };
-  sharedLib = runCommand "${name}.so" { buildInputs = [ stdenv.cc gmp ]; } ''
-    mkdir -p $out/lib
-    ${leanc}/bin/leanc -fPIC -shared \
-      -Wl,--whole-archive ${staticLib}/* -Wl,--no-whole-archive\
-      ${staticLibArguments} \
-      -o $out/${name}.so
-  '';
+  sharedLib = mkSharedLib name ''
+    ${if stdenv.isDarwin then "-Wl,-force_load,${staticLib}/*" else "-Wl,--whole-archive ${staticLib}/* -Wl,--no-whole-archive"} \
+    ${lib.concatStringsSep " " (map (d: "${d.sharedLib}/*") deps)}'';
   executable = runCommand executableName { buildInputs = [ stdenv.cc leanc ]; } ''
     mkdir -p $out/bin
     leanc ${staticLibArguments} \
