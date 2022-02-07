@@ -48,6 +48,7 @@ jobs:
             CMAKE: emcmake cmake
             MAKE: emmake make
             release: true
+            CMAKE_OPTIONS: -DUSE_GMP=OFF
           - name: macOS
             os: macos-latest
             release: true
