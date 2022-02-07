@@ -230,16 +230,12 @@ endif ()
 
 if("${USE_GMP}" MATCHES "ON")
   set(CMAKE_CXX_FLAGS                "-D LEAN_USE_GMP ${CMAKE_CXX_FLAGS}")
-  if("${CMAKE_SYSTEM_NAME}" MATCHES "Emscripten")
-    include_directories(${GMP_INSTALL_PREFIX}/include)
-    set(GMP_LIBRARIES "${GMP_INSTALL_PREFIX}/lib/libgmp.a")
-  else()
-    # GMP
-    find_package(GMP 5.0.5 REQUIRED)
-    include_directories(${GMP_INCLUDE_DIR})
-    # dlopen
-    set(EXTRA_LIBS ${EXTRA_LIBS} ${CMAKE_DL_LIBS})
-  endif()
+  # GMP
+  find_package(GMP 5.0.5 REQUIRED)
+  include_directories(${GMP_INCLUDE_DIR})
+  # dlopen
+  set(EXTRA_LIBS ${EXTRA_LIBS} ${CMAKE_DL_LIBS})
+  set(GMP_LINKER_FLAGS "-lgmp")
 endif()
 
 # ccache
