@@ -142,6 +142,7 @@ jobs:
             tar cf - $dir | zstd -T0 --no-progress -o pack/$dir.tar.zst
           fi
       - uses: actions/upload-artifact@v2
+        if: matrix.release
         with:
           name: build-${{ matrix.name }}
           path: pack/*.zst
