@@ -26,6 +26,7 @@ if (NOT CMAKE_BUILD_TYPE)
   message(STATUS "No build type selected, default to Release")
   set(CMAKE_BUILD_TYPE "Release")
 endif()
+message(WARNING "sys ${CMAKE_SYSTEM_NAME}")
 
 set(CMAKE_COLOR_MAKEFILE ON)
 enable_testing()

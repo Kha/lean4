@@ -108,7 +108,7 @@ jobs:
           fi
           # contortion to support empty OPTIONS with old macOS bash
           $CMAKE .. ${{ matrix.CMAKE_OPTIONS }} ${OPTIONS[@]+"${OPTIONS[@]}"} -DLEAN_INSTALL_PREFIX=$PWD/..
-          $MAKE -j4
+          $MAKE -j4 VERBOSE=1
           $MAKE install
       - name: Check Binaries
         run: ${{ matrix.binary-check }} lean-*/bin/* || true
