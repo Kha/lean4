@@ -29,7 +29,7 @@ Beware of the licensing consequences since GMP is LGPL."
   let cflags := getCFlags root
   let mut cflagsInternal := "@LEANC_INTERNAL_FLAGS@".trim.splitOn
   let mut ldflagsInternal := "@LEANC_INTERNAL_LINKER_FLAGS@".trim.splitOn
-  let ldflags := getLinkerFlags root linkStatic ((← IO.getEnv "LEANC_GMP").getD "-lgmp")
+  let ldflags := getLinkerFlags root linkStatic ((← IO.getEnv "LEANC_GMP").getD "@GMP_LINKER_FLAGS@")
 
   for arg in args do
     match arg with

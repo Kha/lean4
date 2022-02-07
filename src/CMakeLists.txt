@@ -235,6 +235,7 @@ if("${USE_GMP}" MATCHES "ON")
   include_directories(${GMP_INCLUDE_DIR})
   # dlopen
   set(EXTRA_LIBS ${EXTRA_LIBS} ${CMAKE_DL_LIBS})
+  set(GMP_LINKER_FLAGS "-lgmp")
 endif()
 
 # ccache
