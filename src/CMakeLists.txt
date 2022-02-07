@@ -276,7 +276,7 @@ string(APPEND LEANSHARED_LINKER_FLAGS " ${LEAN_CXX_STDLIB}")
 # get rid of unused parts of C++ stdlib
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   string(APPEND LEANSHARED_LINKER_FLAGS " -Wl,-dead_strip")
-else()
+elseif(NOT(${CMAKE_SYSTEM_NAME} MATCHES "Emscripten"))
   string(APPEND LEANSHARED_LINKER_FLAGS " -Wl,--gc-sections")
 endif()
 
