@@ -28,7 +28,7 @@ def charType (c : Char) : CharType :=
 inductive CharRole where
   | head | tail | separator
 
-def charRole (prev? : Option CharType) (curr : CharType) : CharRole :=
+def charRole (prev? : Option CharType) (curr : CharType) (next?: Option CharType) : CharRole :=
   if curr matches CharType.separator then
     CharRole.separator
   else if prev? matches none || prev? matches some CharType.separator then
@@ -41,24 +41,38 @@ def charRole (prev? : Option CharType) (curr : CharType) : CharRole :=
     CharRole.head
 
 
+private def iterateLookaround (f : α → (Option Char × Char × Option Char) → α) (init : α) (string : String) : α :=
+  if string.isEmpty then
+    init
+  else Id.run do
+    let tail := string.drop 1
+    let mut it := tail.mkIterator
+
+    let mut prev? := none
+    let mut curr := string.front
+    let mut res := init
+    for _ in [:tail.bsize] do
+      let next := it.curr
+      res := f res (prev?, curr, some next)
+
+      prev? := some curr
+      curr := next
+      it := it.next
+    f res (prev?, curr, none)
+
+
 /- Combines different information about a character. -/
 private structure CharInfo where
   char : Char
   charLower : Char
-  type : CharType
   role : CharRole
 
 /- Add additional information to each character in a string and return the
 resulting list in reverse order. -/
 private def reverseStringInfo (s : String) : List CharInfo :=
-  s.toList.foldl (init := (none, [])) (fun (prev, res) curr => (
-    some curr,
-    ⟨curr, curr.toLower, charType curr, charRole (prev.map charType) (charType curr)⟩ :: res
-  )) |>.2
+  iterateLookaround (string := s) (init := []) fun res (prev?, curr, next?) =>
+    ⟨curr, curr.toLower, charRole (prev?.map charType) (charType curr) (next?.map charType)⟩ :: res
 
-
-private def Option.map₂ (f : α → β → γ) : Option α × Option β → Option γ
-  | (a?, b?) => a?.bind fun a => b?.map fun b => f a b
 
 private def containsInOrder (a b : String) : Bool := Id.run do
   let mut aIt := a.mkIterator
@@ -106,15 +120,16 @@ private partial def fuzzyMatchRec (pattern word : List CharInfo) (patternComplet
   | ([], (wh :: wt)) =>
     ⟨fuzzyMatchRec [] wt patternComplete |>.MissScore? |>.map (· - skipPenalty wh patternComplete wt.isEmpty), none⟩
   | ((ph :: pt), (wh :: wt)) =>
-    let missScore := fuzzyMatchRec pattern wt patternComplete |> selectBest |>.map (· - skipPenalty wh patternComplete wt.isEmpty)
+    let missScore? := fuzzyMatchRec pattern wt patternComplete |> selectBest |>.map (· - skipPenalty wh patternComplete wt.isEmpty)
 
-    let matchScores := fuzzyMatchRec pt wt false
-    let matchScore := selectBest ⟨
-      (matchScores.MissScore?, matchResult ph wh false wt.isEmpty) |> Option.map₂ (· + ·),
-      (matchScores.MatchScore?, matchResult ph wh true wt.isEmpty) |> Option.map₂ (· + ·)
-    ⟩
+    let matchScore? := if ph.charLower != wh.charLower then none else
+      let matchScores := fuzzyMatchRec pt wt false
+      selectBest ⟨
+        matchScores.MissScore?.map (· + matchResult ph wh false wt.isEmpty),
+        matchScores.MatchScore?.map (· + matchResult ph wh true wt.isEmpty)
+      ⟩
 
-    ⟨missScore, matchScore⟩
+    ⟨missScore?, matchScore?⟩
 
   where
     /- Heuristic to penalize skipping characters in the word. -/
@@ -132,11 +147,7 @@ private partial def fuzzyMatchRec (pattern word : List CharInfo) (patternComplet
       return 0
 
     /- Heuristic to rate a match or `none` if the characters do not match. -/
-    matchResult (ph wh : CharInfo) (consecutive : Bool) (wordStart : Bool) : Option Int := Id.run <| do
-      /- Different characters. -/
-      if ph.charLower != wh.charLower then
-        return none
-
+    matchResult (ph wh : CharInfo) (consecutive : Bool) (wordStart : Bool) : Int := Id.run <| do
       let mut score := 1
       /- Case-sensitive equality or beginning of a segment in pattern and word. -/
       if ph.char == wh.char || (ph.role matches CharRole.head && wh.role matches CharRole.head) then
@@ -152,7 +163,7 @@ private partial def fuzzyMatchRec (pattern word : List CharInfo) (patternComplet
       if ph.role matches CharRole.head && wh.role matches CharRole.tail then
         score := score - 1
 
-      return some score
+      return score
 
 /- Match the given pattern with the given word using a fuzzy matching
 algorithm. The resulting scores are in the interval `[0, 1]` or `none` if no
