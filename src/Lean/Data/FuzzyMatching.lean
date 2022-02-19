@@ -35,7 +35,7 @@ def charRole (prev? : Option CharType) (curr : CharType) (next?: Option CharType
     CharRole.head
   else if curr matches CharType.lower then
     CharRole.tail
-  else if prev? matches some CharType.upper then
+  else if prev? matches some CharType.upper && !(next? matches some CharType.lower) then
     CharRole.tail
   else
     CharRole.head
