@@ -172,6 +172,8 @@ algorithm. The resulting scores are in the interval `[0, 1]` or `none` if no
 match was found. -/
 def fuzzyMatchScore? (pattern word : String) : Option Float := Id.run <| do
   /- Some fast and simple checks. -/
+  if pattern.isEmpty then
+    return some 1
   if pattern.length > word.length then
     return none
   if !(containsInOrderLower pattern word) then
