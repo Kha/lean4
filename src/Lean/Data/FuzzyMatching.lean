@@ -31,7 +31,7 @@ inductive CharRole where
 def charRole (prev? : Option CharType) (curr : CharType) (next?: Option CharType) : CharRole :=
   if curr matches CharType.separator then
     CharRole.separator
-  else if prev? matches none || prev? matches some CharType.separator then
+  else if prev?.isNone || prev? matches some CharType.separator then
     CharRole.head
   else if curr matches CharType.lower then
     CharRole.tail
@@ -44,45 +44,43 @@ def charRole (prev? : Option CharType) (curr : CharType) (next?: Option CharType
 private def iterateLookaround (f : α → (Option Char × Char × Option Char) → α) (init : α) (string : String) : α :=
   if string.isEmpty then
     init
-  else Id.run do
-    let tail := string.drop 1
-    let mut it := tail.mkIterator
-
+  else if string.length == 1 then
+    f init (none, string.get 0, none)
+  else Id.run <| do
     let mut prev? := none
-    let mut curr := string.front
+    let mut curr := string.get 0
+
     let mut res := init
-    for _ in [:tail.bsize] do
-      let next := it.curr
+    for i in [1:string.bsize] do
+      let next := string.get i
       res := f res (prev?, curr, some next)
 
       prev? := some curr
       curr := next
-      it := it.next
     f res (prev?, curr, none)
 
 
 /- Combines different information about a character. -/
 private structure CharInfo where
   char : Char
-  charLower : Char
   role : CharRole
 
 /- Add additional information to each character in a string and return the
 resulting list in reverse order. -/
 private def reverseStringInfo (s : String) : List CharInfo :=
   iterateLookaround (string := s) (init := []) fun res (prev?, curr, next?) =>
-    ⟨curr, curr.toLower, charRole (prev?.map charType) (charType curr) (next?.map charType)⟩ :: res
+    ⟨curr, charRole (prev?.map charType) (charType curr) (next?.map charType)⟩ :: res
 
 
-private def containsInOrder (a b : String) : Bool := Id.run do
+private def containsInOrderLower (a b : String) : Bool := Id.run <| do
+  if a.isEmpty then
+    return true
   let mut aIt := a.mkIterator
-  let mut bIt := b.mkIterator
-  for _ in [:b.bsize] do
-    if aIt.curr == bIt.curr then
+  for i in [:b.bsize] do
+    if aIt.curr.toLower == (b.get i).toLower then
       aIt := aIt.next
       if !aIt.hasNext then
         return true
-    bIt := bIt.next
   return false
 
 
@@ -117,12 +115,16 @@ private partial def fuzzyMatchRec (pattern word : List CharInfo) (patternComplet
   match (pattern, word) with
   | ([], [])       => ⟨some 0, none⟩
   | ((_ :: _), []) => ⟨none, none⟩
-  | ([], (wh :: wt)) =>
-    ⟨fuzzyMatchRec [] wt patternComplete |>.MissScore? |>.map (· - skipPenalty wh patternComplete wt.isEmpty), none⟩
+  | ([], (_ :: _)) =>
+    if patternComplete then ⟨some 0, none⟩ else
+      -- this is a more efficient implementation of a fold over `word` using `skipPenalty`
+      -- the `+2` is a correction for the first character of the word
+      -- (`wordStart` instead of `CharRole.head`)
+      ⟨some <| Int.neg <| Int.ofNat <| (·.length + 2) <| word.filter (·.role matches CharRole.head), none⟩
   | ((ph :: pt), (wh :: wt)) =>
     let missScore? := fuzzyMatchRec pattern wt patternComplete |> selectBest |>.map (· - skipPenalty wh patternComplete wt.isEmpty)
 
-    let matchScore? := if ph.charLower != wh.charLower then none else
+    let matchScore? := if ph.char.toLower != wh.char.toLower then none else
       let matchScores := fuzzyMatchRec pt wt false
       selectBest ⟨
         matchScores.MissScore?.map (· + matchResult ph wh false wt.isEmpty),
@@ -170,23 +172,24 @@ algorithm. The resulting scores are in the interval `[0, 1]` or `none` if no
 match was found. -/
 def fuzzyMatchScore? (pattern word : String) : Option Float := Id.run <| do
   /- Some fast and simple checks. -/
-  if pattern.length == 0 then
-    return some 0
   if pattern.length > word.length then
     return none
-  if !(containsInOrder pattern.toLower word.toLower) then
+  if !(containsInOrderLower pattern word) then
     return none
 
-  let mut score := selectBest <| fuzzyMatchRec (reverseStringInfo pattern) (reverseStringInfo word)
+  let some score := selectBest <| fuzzyMatchRec (reverseStringInfo pattern) (reverseStringInfo word)
+    | none
+  let mut score := score
+
   /- Bonus if every character is matched. -/
   if pattern.length == word.length then
-    score := score.map (· * 2)
+    score := score * 2
 
   /- Perfect score per character given the heuristic in `matchResult`. -/
   let perfect := 4
-  let normScore := score.map (Float.ofInt · / Float.ofInt (perfect * pattern.length))
+  let normScore := Float.ofInt score / Float.ofInt (perfect * pattern.length)
 
-  return normScore.map fun s => min 1 (max 0 s)
+  return some <| min 1 (max 0 normScore)
 
 /- Match the given pattern with the given word using a fuzzy matching
 algorithm. Return `false` if no match was found or the found match received a
