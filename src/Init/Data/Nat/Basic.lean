@@ -39,13 +39,39 @@ namespace Nat
     | succ n, a => loop n (f a)
   loop n a
 
+def blt (a b : Nat) : Bool :=
+  ble a.succ b
+
 /- Helper "packing" theorems -/
 
 @[simp] theorem zero_eq : Nat.zero = 0 := rfl
 @[simp] theorem add_eq : Nat.add x y = x + y := rfl
 @[simp] theorem mul_eq : Nat.mul x y = x * y := rfl
+@[simp] theorem sub_eq : Nat.sub x y = x - y := rfl
 @[simp] theorem lt_eq : Nat.lt x y = (x < y) := rfl
 @[simp] theorem le_eq : Nat.le x y = (x ≤ y) := rfl
+
+/- Helper Bool relation theorems -/
+
+@[simp] theorem beq_refl (a : Nat) : Nat.beq a a = true := by
+  induction a with simp [Nat.beq]
+  | succ a ih => simp [ih]
+
+@[simp] theorem beq_eq : (Nat.beq x y = true) = (x = y) := propext <| Iff.intro Nat.eq_of_beq_eq_true (fun h => h ▸ (Nat.beq_refl x))
+@[simp] theorem ble_eq : (Nat.ble x y = true) = (x ≤ y) := propext <| Iff.intro Nat.le_of_ble_eq_true Nat.ble_eq_true_of_le
+@[simp] theorem blt_eq : (Nat.blt x y = true) = (x < y) := propext <| Iff.intro Nat.le_of_ble_eq_true Nat.ble_eq_true_of_le
+
+instance : LawfulBEq Nat where
+  eq_of_beq _ _ h := Nat.eq_of_beq_eq_true h
+  rfl a := by simp [BEq.beq]
+
+@[simp] theorem beq_eq_true_eq (a b : Nat) : ((a == b) = true) = (a = b) := propext <| Iff.intro eq_of_beq (fun h => by subst h; apply LawfulBEq.rfl)
+@[simp] theorem not_beq_eq_true_eq (a b : Nat) : ((!(a == b)) = true) = ¬(a = b) :=
+  propext <| Iff.intro
+    (fun h₁ h₂ => by subst h₂; rw [LawfulBEq.rfl] at h₁; contradiction)
+    (fun h =>
+      have : ¬ ((a == b) = true) := fun h' => absurd (eq_of_beq h') h
+      by simp [this])
 
 /- Nat.add theorems -/
 
@@ -526,20 +552,38 @@ protected theorem eq_add_of_sub_eq {a b c : Nat} (hle : b ≤ a) (h : a - b = c)
 protected theorem sub_eq_of_eq_add {a b c : Nat} (h : a = c + b) : a - b = c := by
   rw [h, Nat.add_sub_cancel]
 
-theorem le_add_of_sub_le {a b c : Nat} (hle : b ≤ a) (h : a - b ≤ c) : a ≤ c + b := by
-  match le.dest h with
-  | ⟨d, hd⟩ =>
+theorem le_add_of_sub_le {a b c : Nat} (h : a - b ≤ c) : a ≤ c + b := by
+  match le.dest h, Nat.le_total a b with
+  | _, Or.inl hle =>
+    exact Nat.le_trans hle (Nat.le_add_left ..)
+  | ⟨d, hd⟩, Or.inr hge =>
     apply @le.intro _ _ d
-    rw [Nat.add_comm, ← Nat.add_sub_assoc hle] at hd
-    have hd := Nat.eq_add_of_sub_eq (Nat.le_trans hle (Nat.le_add_left ..)) hd
+    rw [Nat.add_comm, ← Nat.add_sub_assoc hge] at hd
+    have hd := Nat.eq_add_of_sub_eq (Nat.le_trans hge (Nat.le_add_left ..)) hd
     rw [Nat.add_comm, hd]
 
-theorem sub_le_of_le_add {a b c : Nat} (hle : b ≤ a) (h : a ≤ c + b) : a - b ≤ c := by
+@[simp] protected theorem zero_sub (n : Nat) : 0 - n = 0 := by
+  induction n with
+  | zero => rfl
+  | succ n ih => simp [ih, Nat.sub_succ]
+
+protected theorem sub_self_add (n m : Nat) : n - (n + m) = 0 := by
+  show (n + 0) - (n + m) = 0
+  rw [Nat.add_sub_add_left, Nat.zero_sub]
+
+protected theorem sub_eq_zero_of_le {n m : Nat} (h : n ≤ m) : n - m = 0 := by
   match le.dest h with
-  | ⟨d, hd⟩ =>
+  | ⟨k, hk⟩ => rw [← hk, Nat.sub_self_add]
+
+theorem sub_le_of_le_add {a b c : Nat} (h : a ≤ c + b) : a - b ≤ c := by
+  match le.dest h, Nat.le_total a b with
+  | _, Or.inl hle =>
+    rw [Nat.sub_eq_zero_of_le hle]
+    apply Nat.zero_le
+  | ⟨d, hd⟩, Or.inr hge =>
     apply @le.intro _ _ d
     have hd := Nat.sub_eq_of_eq_add hd
-    rw [Nat.add_comm, ← Nat.add_sub_assoc hle, Nat.add_comm]
+    rw [Nat.add_comm, ← Nat.add_sub_assoc hge, Nat.add_comm]
     exact hd
 
 theorem add_le_of_le_sub {a b c : Nat} (hle : b ≤ c) (h : a ≤ c - b) : a + b ≤ c := by
@@ -562,19 +606,6 @@ theorem le_sub_of_add_le {a b c : Nat} (h : a + b ≤ c) : a ≤ c - b := by
 
 @[simp] protected theorem pred_succ (n : Nat) : pred n.succ = n :=
   rfl
-
-@[simp] protected theorem zero_sub (n : Nat) : 0 - n = 0 := by
-  induction n with
-  | zero => rfl
-  | succ n ih => simp [ih, Nat.sub_succ]
-
-protected theorem sub_self_add (n m : Nat) : n - (n + m) = 0 := by
-  show (n + 0) - (n + m) = 0
-  rw [Nat.add_sub_add_left, Nat.zero_sub]
-
-protected theorem sub_eq_zero_of_le {n m : Nat} (h : n ≤ m) : n - m = 0 := by
-  match le.dest h with
-  | ⟨k, hk⟩ => rw [← hk, Nat.sub_self_add]
 
 theorem sub.elim {motive : Nat → Prop}
     (x y : Nat)
@@ -605,6 +636,20 @@ protected theorem mul_sub_right_distrib (n m k : Nat) : (n - m) * k = n * k - m 
 
 protected theorem mul_sub_left_distrib (n m k : Nat) : n * (m - k) = n * m - n * k := by
   rw [Nat.mul_comm, Nat.mul_sub_right_distrib, Nat.mul_comm m n, Nat.mul_comm n k]
+
+/- Helper normalization theorems -/
+
+theorem not_le_eq (a b : Nat) : (¬ (a ≤ b)) = (b + 1 ≤ a) :=
+  propext <| Iff.intro (fun h => Nat.gt_of_not_le h) (fun h => Nat.not_le_of_gt h)
+
+theorem not_ge_eq (a b : Nat) : (¬ (a ≥ b)) = (a + 1 ≤ b) :=
+  not_le_eq b a
+
+theorem not_lt_eq (a b : Nat) : (¬ (a < b)) = (b ≤ a) :=
+  propext <| Iff.intro (fun h => have h := Nat.succ_le_of_lt (Nat.gt_of_not_le h); Nat.le_of_succ_le_succ h) (fun h => Nat.not_le_of_gt (Nat.succ_le_succ h))
+
+theorem not_gt_eq (a b : Nat) : (¬ (a > b)) = (a ≤ b) :=
+  not_lt_eq b a
 
 end Nat
 

@@ -42,6 +42,9 @@ attribute [extern "lean_mk_thunk"] Thunk.mk
 @[inline] protected def Thunk.bind (x : Thunk α) (f : α → Thunk β) : Thunk β :=
   ⟨fun _ => (f x.get).get⟩
 
+@[simp] theorem Thunk.sizeOf_eq [SizeOf α] (a : Thunk α) : sizeOf a = 1 + sizeOf a.get := by
+   cases a; rfl
+
 abbrev Eq.ndrecOn.{u1, u2} {α : Sort u2} {a : α} {motive : α → Sort u1} {b : α} (h : a = b) (m : motive a) : motive b :=
   Eq.ndrec m h
 
@@ -176,6 +179,25 @@ theorem optParam_eq (α : Sort u) (default : α) : optParam α default = α := r
 
 infix:50 " != " => bne
 
+class LawfulBEq (α : Type u) [BEq α] : Prop where
+  eq_of_beq : (a b : α) → (a == b) = true → a = b
+  rfl : (a : α) → (a == a) = true
+
+theorem eq_of_beq [BEq α] [LawfulBEq α] {a b : α} (h : (a == b) = true) : a = b :=
+  LawfulBEq.eq_of_beq a b h
+
+instance : LawfulBEq Bool where
+  eq_of_beq a b h := by cases a <;> cases b <;> first | rfl | contradiction
+  rfl a := by cases a <;> decide
+
+instance : LawfulBEq Char where
+  eq_of_beq _ _  h := of_decide_eq_true h
+  rfl a := of_decide_eq_self_eq_true a
+
+instance : LawfulBEq String where
+  eq_of_beq _ _  h := of_decide_eq_true h
+  rfl a := of_decide_eq_self_eq_true a
+
 /- Logical connectives an equality -/
 
 def implies (a b : Prop) := a → b
@@ -242,6 +264,22 @@ theorem true_ne_false : ¬True = False :=
   ne_false_of_self trivial
 
 end Ne
+
+theorem Bool.of_not_eq_true : {b : Bool} → ¬ (b = true) → b = false
+  | true,  h => absurd rfl h
+  | false, h => rfl
+
+theorem Bool.of_not_eq_false : {b : Bool} → ¬ (b = false) → b = true
+  | true,  h => rfl
+  | false, h => absurd rfl h
+
+theorem ne_of_beq_false [BEq α] [LawfulBEq α] {a b : α} (h : (a == b) = false) : a ≠ b := by
+  intro h'; subst h'; have : true = false := Eq.trans (LawfulBEq.rfl a).symm h; contradiction
+
+theorem beq_false_of_ne [BEq α] [LawfulBEq α] {a b : α} (h : a ≠ b) : (a == b) = false :=
+  have : ¬ (a == b) = true := by
+    intro h'; rw [eq_of_beq h'] at h; contradiction
+  Bool.of_not_eq_true this
 
 section
 variable {α β φ : Sort u} {a a' : α} {b b' : β} {c : φ}
@@ -315,7 +353,8 @@ theorem Iff.comm : (a ↔ b) ↔ (b ↔ a) :=
 
 theorem Exists.elim {α : Sort u} {p : α → Prop} {b : Prop}
    (h₁ : Exists (fun x => p x)) (h₂ : ∀ (a : α), p a → b) : b :=
-  h₂ h₁.1 h₁.2
+  match h₁ with
+  | intro a h => h₂ a h
 
 /- Decidable -/
 

@@ -32,6 +32,12 @@ instance : SizeOf Nat where
 
 @[simp] theorem sizeOf_nat (n : Nat) : sizeOf n = n := rfl
 
+instance [SizeOf α] : SizeOf (Unit → α) where
+  sizeOf f := sizeOf (f ())
+
+@[simp] theorem sizeOf_thunk [SizeOf α] (f : Unit → α) : sizeOf f = sizeOf (f ()) :=
+  rfl
+
 deriving instance SizeOf for Prod
 deriving instance SizeOf for PUnit
 deriving instance SizeOf for Bool
@@ -50,6 +56,9 @@ deriving instance SizeOf for String
 deriving instance SizeOf for Substring
 deriving instance SizeOf for Except
 deriving instance SizeOf for EStateM.Result
+
+@[simp] theorem Unit.sizeOf (u : Unit) : sizeOf u = 1 := rfl
+@[simp] theorem Bool.sizeOf_eq_one (b : Bool) : sizeOf b = 1 := by cases b <;> rfl
 
 /- We manually define `Lean.Name` instance because we use
    an opaque function for computing the hashcode field. -/

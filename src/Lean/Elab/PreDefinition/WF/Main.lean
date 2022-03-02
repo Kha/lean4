@@ -79,13 +79,13 @@ def getFixedPrefix (preDefs : Array PreDefinition) : TermElabM Nat :=
     resultRef.get
 
 def wfRecursion (preDefs : Array PreDefinition) (wf? : Option TerminationWF) (decrTactic? : Option Syntax) : TermElabM Unit := do
-  let fixedPrefixSize ← getFixedPrefix preDefs
-  trace[Elab.definition.wf] "fixed prefix: {fixedPrefixSize}"
-  let unaryPreDef ← withoutModifyingEnv do
+  let (unaryPreDef, fixedPrefixSize) ← withoutModifyingEnv do
     for preDef in preDefs do
       addAsAxiom preDef
+    let fixedPrefixSize ← getFixedPrefix preDefs
+    trace[Elab.definition.wf] "fixed prefix: {fixedPrefixSize}"
     let unaryPreDefs ← packDomain fixedPrefixSize preDefs
-    packMutual fixedPrefixSize unaryPreDefs
+    return (← packMutual fixedPrefixSize unaryPreDefs, fixedPrefixSize)
   let preDefNonRec ← forallBoundedTelescope unaryPreDef.type fixedPrefixSize fun prefixArgs type => do
     let packedArgType := type.bindingDomain!
     let wfRel ← elabWFRel preDefs unaryPreDef.declName fixedPrefixSize packedArgType wf?
@@ -99,7 +99,7 @@ def wfRecursion (preDefs : Array PreDefinition) (wf? : Option TerminationWF) (de
     return { unaryPreDef with value }
   trace[Elab.definition.wf] ">> {preDefNonRec.declName} :=\n{preDefNonRec.value}"
   let preDefs ← preDefs.mapM fun d => eraseRecAppSyntax d
-  addNonRec preDefNonRec
+  addNonRec preDefNonRec (applyAttrAfterCompilation := false)
   addNonRecPreDefs preDefs preDefNonRec fixedPrefixSize
   registerEqnsInfo preDefs preDefNonRec.declName
   for preDef in preDefs do

@@ -82,3 +82,20 @@ termination_by' measure fun ⟨i, _⟩ => as.size - i
 ```
 
 * Add `while <cond> do <do-block>`, `repeat <do-block>`, and `repeat <do-block> until <cond>` macros for `do`-block. These macros are based on `partial` definitions, and consequently are useful only for writing programs we don't want to prove anything about.
+
+* Add `arith` option to `Simp.Config`, the macro `simp_arith` expands to `simp (config := { arith := true })`. Only `Nat` and linear arithmetic is currently supported.
+
+* Add `fail <string>?` tactic that always fail.
+
+* Add support for acyclicity at dependent elimination. See [issue #1022](https://github.com/leanprover/lean4/issues/1022).
+
+* Add `trace <string>` tactic for debugging purposes.
+
+* Add nontrivial `SizeOf` instance for types `Unit → α`, and add support for them in the auto-generated `SizeOf` instances for user-defined inductive types. For example, given the inductive datatype
+```lean
+inductive LazyList (α : Type u) where
+  | nil                               : LazyList α
+  | cons (hd : α) (tl : LazyList α)   : LazyList α
+  | delayed (t : Thunk (LazyList α))  : LazyList α
+```
+we now have `sizeOf (LazyList.delayed t) = 1 + sizeOf t` instead of `sizeOf (LazyList.delayed t) = 2`.

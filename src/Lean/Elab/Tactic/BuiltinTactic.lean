@@ -129,7 +129,14 @@ partial def evalChoiceAux (tactics : Array Syntax) (i : Nat) : TacticM Unit :=
 
 @[builtinTactic traceState] def evalTraceState : Tactic := fun stx => do
   let gs ← getUnsolvedGoals
-  logInfo (goalsToMessageData gs)
+  addRawTrace (goalsToMessageData gs)
+
+@[builtinTactic traceMessage] def evalTraceMessage : Tactic := fun stx => do
+  match stx[1].isStrLit? with
+  | none     => throwIllFormedSyntax
+  | some msg =>
+    let gs ← getUnsolvedGoals
+    withRef stx[0] <| addRawTrace msg
 
 @[builtinTactic Lean.Parser.Tactic.assumption] def evalAssumption : Tactic := fun stx =>
   liftMetaTactic fun mvarId => do Meta.assumption mvarId; pure []
@@ -272,5 +279,16 @@ where
       evalTactic tacs[i][1]
     else
       evalTactic tacs[i][1] <|> loop tacs (i+1)
+
+@[builtinTactic «fail»] def evalFail : Tactic := fun stx => do
+  let goals ← getGoals
+  let goalsMsg := MessageData.joinSep (goals.map MessageData.ofGoal) m!"\n\n"
+  match stx with
+  | `(tactic| fail)      => throwError "tactic 'fail' failed\n{goalsMsg}"
+  | `(tactic| fail $msg) =>
+    match msg.isStrLit? with
+    | none     => throwIllFormedSyntax
+    | some msg => throwError "{msg}\n{goalsMsg}"
+  | _ => throwUnsupportedSyntax
 
 end Lean.Elab.Tactic

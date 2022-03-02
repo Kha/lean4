@@ -204,7 +204,8 @@ class inductive Nonempty (α : Sort u) : Prop where
 axiom Classical.choice {α : Sort u} : Nonempty α → α
 
 protected def Nonempty.elim {α : Sort u} {p : Prop} (h₁ : Nonempty α) (h₂ : α → p) : p :=
-  h₂ h₁.1
+  match h₁ with
+  | intro a => h₂ a
 
 instance {α : Sort u} [Inhabited α] : Nonempty α :=
   ⟨default⟩
@@ -298,6 +299,11 @@ theorem of_decide_eq_false [s : Decidable p] : Eq (decide p) false → Not p := 
   match (generalizing := false) s with
   | isTrue  h₁ => absurd h (ne_false_of_eq_true (decide_eq_true h₁))
   | isFalse h₁ => h₁
+
+theorem of_decide_eq_self_eq_true [s : DecidableEq α] (a : α) : Eq (decide (Eq a a)) true :=
+  match (generalizing := false) s a a with
+  | isTrue  h₁ => rfl
+  | isFalse h₁ => absurd rfl h₁
 
 @[inline] instance : DecidableEq Bool :=
   fun a b => match a, b with
@@ -598,6 +604,9 @@ def Nat.beq : (@& Nat) → (@& Nat) → Bool
   | zero,   succ m => false
   | succ n, zero   => false
   | succ n, succ m => beq n m
+
+instance : BEq Nat where
+  beq := Nat.beq
 
 theorem Nat.eq_of_beq_eq_true : {n m : Nat} → Eq (beq n m) true → Eq n m
   | zero,   zero,   h => rfl

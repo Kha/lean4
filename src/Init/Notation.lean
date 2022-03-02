@@ -154,6 +154,13 @@ macro_rules
 macro "if " "let " pat:term " := " d:term " then " t:term " else " e:term : term =>
   `(match $d:term with | $pat:term => $t | _ => $e)
 
+syntax (name := boolIfThenElse)
+  ppRealGroup(ppRealFill(ppIndent("bif " term " then") ppSpace term)
+    ppDedent(ppSpace) ppRealFill("else " term)) : term
+
+macro_rules
+  | `(bif $c then $t:term else $e:term) => `(cond $c $t $e)
+
 syntax:min term " <| " term:min : term
 
 macro_rules
@@ -303,6 +310,7 @@ syntax (name := skip) "skip" : tactic
 /-- `done` succeeds iff there are no remaining goals. -/
 syntax (name := done) "done" : tactic
 syntax (name := traceState) "trace_state" : tactic
+syntax (name := traceMessage) "trace " str : tactic
 syntax (name := failIfSuccess) "fail_if_success " tacticSeq : tactic
 syntax (name := paren) "(" tacticSeq ")" : tactic
 syntax (name := withReducible) "with_reducible " tacticSeq : tactic
@@ -438,6 +446,8 @@ macro_rules | `(tactic| trivial) => `(tactic| apply True.intro)
 macro_rules | `(tactic| trivial) => `(tactic| apply And.intro <;> trivial)
 
 macro "unhygienic " t:tacticSeq : tactic => `(set_option tactic.hygienic false in $t:tacticSeq)
+
+syntax (name := fail) "fail " (str)? : tactic
 
 end Tactic
 
