@@ -206,13 +206,15 @@ def fuzzyMatchScore? (pattern word : String) : Option Float := Id.run <| do
 
   return some <| min 1 (max 0 normScore)
 
+def fuzzyMatchScoreWithThreshold? (pattern word : String) (threshold := 0.2) : Option Float :=
+  let score? := fuzzyMatchScore? pattern word
+  score?.bind fun score => if score > threshold then some score else none
+
 /- Match the given pattern with the given word using a fuzzy matching
 algorithm. Return `false` if no match was found or the found match received a
 score below the given threshold. -/
 def fuzzyMatch (pattern word : String) (threshold := 0.2) : Bool :=
-  match fuzzyMatchScore? pattern word with
-  | none       => false
-  | some score => score > threshold
+  fuzzyMatchScoreWithThreshold? pattern word threshold |>.isSome
 
 end FuzzyMatching
 end Lean

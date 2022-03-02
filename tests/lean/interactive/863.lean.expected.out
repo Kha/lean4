@@ -1,11 +1,7 @@
 {"textDocument": {"uri": "file://863.lean"},
  "position": {"line": 3, "character": 12}}
 {"items":
- [{"label": "getConstInfoRec",
-   "kind": 3,
-   "detail":
-   "[inst : Monad m] → [inst : MonadEnv m] → [inst : MonadError m] → Name → m RecursorVal"},
-  {"label": "getRecAppSyntax?",
+ [{"label": "getRecAppSyntax?",
    "kind": 3,
    "documentation":
    {"value":
@@ -25,16 +21,16 @@
    "detail": "Environment → Name → Option Name"},
   {"label": "getRevAliases",
    "kind": 3,
-   "detail": "Environment → Name → List Name"}],
+   "detail": "Environment → Name → List Name"},
+  {"label": "getConstInfoRec",
+   "kind": 3,
+   "detail":
+   "[inst : Monad m] → [inst : MonadEnv m] → [inst : MonadError m] → Name → m RecursorVal"}],
  "isIncomplete": true}
 {"textDocument": {"uri": "file://863.lean"},
  "position": {"line": 7, "character": 12}}
 {"items":
- [{"label": "getConstInfoRec",
-   "kind": 3,
-   "detail":
-   "[inst : Monad m] → [inst : MonadEnv m] → [inst : MonadError m] → Name → m RecursorVal"},
-  {"label": "getRecAppSyntax?",
+ [{"label": "getRecAppSyntax?",
    "kind": 3,
    "documentation":
    {"value":
@@ -54,5 +50,9 @@
    "detail": "Environment → Name → Option Name"},
   {"label": "getRevAliases",
    "kind": 3,
-   "detail": "Environment → Name → List Name"}],
+   "detail": "Environment → Name → List Name"},
+  {"label": "getConstInfoRec",
+   "kind": 3,
+   "detail":
+   "[inst : Monad m] → [inst : MonadEnv m] → [inst : MonadError m] → Name → m RecursorVal"}],
  "isIncomplete": true}

@@ -106,6 +106,102 @@
    {"replace":
     {"start": {"line": 10, "character": 11},
      "end": {"line": 10, "character": 18}},
+    "newText": "trace.PrettyPrinter",
+    "insert":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}}},
+   "label": "trace.PrettyPrinter",
+   "kind": 10,
+   "detail":
+   "(false), enable/disable tracing for the given module and submodules"},
+  {"textEdit":
+   {"replace":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}},
+    "newText": "trace.PrettyPrinter.delab",
+    "insert":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}}},
+   "label": "trace.PrettyPrinter.delab",
+   "kind": 10,
+   "detail":
+   "(false), enable/disable tracing for the given module and submodules"},
+  {"textEdit":
+   {"replace":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}},
+    "newText": "trace.PrettyPrinter.format",
+    "insert":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}}},
+   "label": "trace.PrettyPrinter.format",
+   "kind": 10,
+   "detail":
+   "(false), enable/disable tracing for the given module and submodules"},
+  {"textEdit":
+   {"replace":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}},
+    "newText": "trace.PrettyPrinter.parenthesize",
+    "insert":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}}},
+   "label": "trace.PrettyPrinter.parenthesize",
+   "kind": 10,
+   "detail":
+   "(false), enable/disable tracing for the given module and submodules"},
+  {"textEdit":
+   {"replace":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}},
+    "newText": "trace.pp.analyze",
+    "insert":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}}},
+   "label": "trace.pp.analyze",
+   "kind": 10,
+   "detail":
+   "(false), enable/disable tracing for the given module and submodules"},
+  {"textEdit":
+   {"replace":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}},
+    "newText": "trace.pp.analyze.annotate",
+    "insert":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}}},
+   "label": "trace.pp.analyze.annotate",
+   "kind": 10,
+   "detail":
+   "(false), enable/disable tracing for the given module and submodules"},
+  {"textEdit":
+   {"replace":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}},
+    "newText": "trace.pp.analyze.error",
+    "insert":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}}},
+   "label": "trace.pp.analyze.error",
+   "kind": 10,
+   "detail":
+   "(false), enable/disable tracing for the given module and submodules"},
+  {"textEdit":
+   {"replace":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}},
+    "newText": "trace.pp.analyze.tryUnify",
+    "insert":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}}},
+   "label": "trace.pp.analyze.tryUnify",
+   "kind": 10,
+   "detail":
+   "(false), enable/disable tracing for the given module and submodules"},
+  {"textEdit":
+   {"replace":
+    {"start": {"line": 10, "character": 11},
+     "end": {"line": 10, "character": 18}},
     "newText": "trace.Elab.postpone",
     "insert":
     {"start": {"line": 10, "character": 11},
@@ -142,71 +238,11 @@
    {"replace":
     {"start": {"line": 10, "character": 11},
      "end": {"line": 10, "character": 18}},
-    "newText": "trace.Meta.isLevelDefEq.postponed",
-    "insert":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}}},
-   "label": "trace.Meta.isLevelDefEq.postponed",
-   "kind": 10,
-   "detail":
-   "(false), enable/disable tracing for the given module and submodules"},
-  {"textEdit":
-   {"replace":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}},
     "newText": "trace.Meta.synthPending",
     "insert":
     {"start": {"line": 10, "character": 11},
      "end": {"line": 10, "character": 18}}},
    "label": "trace.Meta.synthPending",
-   "kind": 10,
-   "detail":
-   "(false), enable/disable tracing for the given module and submodules"},
-  {"textEdit":
-   {"replace":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}},
-    "newText": "trace.PrettyPrinter",
-    "insert":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}}},
-   "label": "trace.PrettyPrinter",
-   "kind": 10,
-   "detail":
-   "(false), enable/disable tracing for the given module and submodules"},
-  {"textEdit":
-   {"replace":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}},
-    "newText": "trace.PrettyPrinter.delab",
-    "insert":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}}},
-   "label": "trace.PrettyPrinter.delab",
-   "kind": 10,
-   "detail":
-   "(false), enable/disable tracing for the given module and submodules"},
-  {"textEdit":
-   {"replace":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}},
-    "newText": "trace.PrettyPrinter.format",
-    "insert":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}}},
-   "label": "trace.PrettyPrinter.format",
-   "kind": 10,
-   "detail":
-   "(false), enable/disable tracing for the given module and submodules"},
-  {"textEdit":
-   {"replace":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}},
-    "newText": "trace.PrettyPrinter.parenthesize",
-    "insert":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}}},
-   "label": "trace.PrettyPrinter.parenthesize",
    "kind": 10,
    "detail":
    "(false), enable/disable tracing for the given module and submodules"},
@@ -238,47 +274,11 @@
    {"replace":
     {"start": {"line": 10, "character": 11},
      "end": {"line": 10, "character": 18}},
-    "newText": "trace.pp.analyze",
+    "newText": "trace.Meta.isLevelDefEq.postponed",
     "insert":
     {"start": {"line": 10, "character": 11},
      "end": {"line": 10, "character": 18}}},
-   "label": "trace.pp.analyze",
-   "kind": 10,
-   "detail":
-   "(false), enable/disable tracing for the given module and submodules"},
-  {"textEdit":
-   {"replace":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}},
-    "newText": "trace.pp.analyze.annotate",
-    "insert":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}}},
-   "label": "trace.pp.analyze.annotate",
-   "kind": 10,
-   "detail":
-   "(false), enable/disable tracing for the given module and submodules"},
-  {"textEdit":
-   {"replace":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}},
-    "newText": "trace.pp.analyze.error",
-    "insert":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}}},
-   "label": "trace.pp.analyze.error",
-   "kind": 10,
-   "detail":
-   "(false), enable/disable tracing for the given module and submodules"},
-  {"textEdit":
-   {"replace":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}},
-    "newText": "trace.pp.analyze.tryUnify",
-    "insert":
-    {"start": {"line": 10, "character": 11},
-     "end": {"line": 10, "character": 18}}},
-   "label": "trace.pp.analyze.tryUnify",
+   "label": "trace.Meta.isLevelDefEq.postponed",
    "kind": 10,
    "detail":
    "(false), enable/disable tracing for the given module and submodules"}],
@@ -290,11 +290,11 @@
    {"replace":
     {"start": {"line": 13, "character": 11},
      "end": {"line": 13, "character": 19}},
-    "newText": "trace.Elab.postpone",
+    "newText": "trace.pp.analyze",
     "insert":
     {"start": {"line": 13, "character": 11},
      "end": {"line": 13, "character": 19}}},
-   "label": "trace.Elab.postpone",
+   "label": "trace.pp.analyze",
    "kind": 10,
    "detail":
    "(false), enable/disable tracing for the given module and submodules"},
@@ -302,11 +302,35 @@
    {"replace":
     {"start": {"line": 13, "character": 11},
      "end": {"line": 13, "character": 19}},
-    "newText": "trace.Meta.isLevelDefEq.postponed",
+    "newText": "trace.pp.analyze.annotate",
     "insert":
     {"start": {"line": 13, "character": 11},
      "end": {"line": 13, "character": 19}}},
-   "label": "trace.Meta.isLevelDefEq.postponed",
+   "label": "trace.pp.analyze.annotate",
+   "kind": 10,
+   "detail":
+   "(false), enable/disable tracing for the given module and submodules"},
+  {"textEdit":
+   {"replace":
+    {"start": {"line": 13, "character": 11},
+     "end": {"line": 13, "character": 19}},
+    "newText": "trace.pp.analyze.error",
+    "insert":
+    {"start": {"line": 13, "character": 11},
+     "end": {"line": 13, "character": 19}}},
+   "label": "trace.pp.analyze.error",
+   "kind": 10,
+   "detail":
+   "(false), enable/disable tracing for the given module and submodules"},
+  {"textEdit":
+   {"replace":
+    {"start": {"line": 13, "character": 11},
+     "end": {"line": 13, "character": 19}},
+    "newText": "trace.pp.analyze.tryUnify",
+    "insert":
+    {"start": {"line": 13, "character": 11},
+     "end": {"line": 13, "character": 19}}},
+   "label": "trace.pp.analyze.tryUnify",
    "kind": 10,
    "detail":
    "(false), enable/disable tracing for the given module and submodules"},
@@ -374,11 +398,11 @@
    {"replace":
     {"start": {"line": 13, "character": 11},
      "end": {"line": 13, "character": 19}},
-    "newText": "trace.pp.analyze",
+    "newText": "trace.Elab.postpone",
     "insert":
     {"start": {"line": 13, "character": 11},
      "end": {"line": 13, "character": 19}}},
-   "label": "trace.pp.analyze",
+   "label": "trace.Elab.postpone",
    "kind": 10,
    "detail":
    "(false), enable/disable tracing for the given module and submodules"},
@@ -386,35 +410,11 @@
    {"replace":
     {"start": {"line": 13, "character": 11},
      "end": {"line": 13, "character": 19}},
-    "newText": "trace.pp.analyze.annotate",
+    "newText": "trace.Meta.isLevelDefEq.postponed",
     "insert":
     {"start": {"line": 13, "character": 11},
      "end": {"line": 13, "character": 19}}},
-   "label": "trace.pp.analyze.annotate",
-   "kind": 10,
-   "detail":
-   "(false), enable/disable tracing for the given module and submodules"},
-  {"textEdit":
-   {"replace":
-    {"start": {"line": 13, "character": 11},
-     "end": {"line": 13, "character": 19}},
-    "newText": "trace.pp.analyze.error",
-    "insert":
-    {"start": {"line": 13, "character": 11},
-     "end": {"line": 13, "character": 19}}},
-   "label": "trace.pp.analyze.error",
-   "kind": 10,
-   "detail":
-   "(false), enable/disable tracing for the given module and submodules"},
-  {"textEdit":
-   {"replace":
-    {"start": {"line": 13, "character": 11},
-     "end": {"line": 13, "character": 19}},
-    "newText": "trace.pp.analyze.tryUnify",
-    "insert":
-    {"start": {"line": 13, "character": 11},
-     "end": {"line": 13, "character": 19}}},
-   "label": "trace.pp.analyze.tryUnify",
+   "label": "trace.Meta.isLevelDefEq.postponed",
    "kind": 10,
    "detail":
    "(false), enable/disable tracing for the given module and submodules"}],

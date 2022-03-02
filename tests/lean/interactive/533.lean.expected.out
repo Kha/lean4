@@ -71,6 +71,10 @@
    "kind": 3,
    "detail":
    "(α₁ → α₂ → α₃ → α₄ → α₅ → α₆ → β) →\n  ((α₁ → α₂ → α₃ → α₄ → α₅ → α₆ → β) → α₁ → α₂ → α₃ → α₄ → α₅ → α₆ → β) → α₁ → α₂ → α₃ → α₄ → α₅ → α₆ → β"},
+  {"label": "failure",
+   "kind": 5,
+   "detail": "[self : Alternative f] → {α : Type u} → f α"},
+  {"label": "false", "kind": 4, "detail": "Bool"},
   {"label": "false_and",
    "kind": 3,
    "detail": "∀ (p : Prop), (False ∧ p) = False"},
@@ -88,6 +92,14 @@
    "kind": 3,
    "detail": "(a b : Float) → Decidable (a < b)"},
   {"label": "floatSpec", "kind": 21, "detail": "FloatSpec"},
+  {"label": "forIn",
+   "kind": 5,
+   "detail":
+   "[self : ForIn m ρ α] → {β : Type u₁} → [inst : Monad m] → ρ → β → (α → β → m (ForInStep β)) → m β"},
+  {"label": "forM",
+   "kind": 5,
+   "detail":
+   "[self : ForM m γ α] → [inst : Monad m] → γ → (α → m PUnit) → m PUnit"},
   {"label": "forall_congr",
    "kind": 3,
    "detail": "(∀ (a : α), p a = q a) → (∀ (a : α), p a) = ∀ (a : α), q a"},
