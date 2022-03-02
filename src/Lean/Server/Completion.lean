@@ -5,6 +5,7 @@ Authors: Leonardo de Moura
 -/
 import Lean.Environment
 import Lean.Parser.Term
+import Lean.Data.FuzzyMatching
 import Lean.Data.Lsp.LanguageFeatures
 import Lean.Data.Lsp.Capabilities
 import Lean.Data.Lsp.Utf16
@@ -17,6 +18,7 @@ namespace Lean.Server.Completion
 open Lsp
 open Elab
 open Meta
+open FuzzyMatching
 
 builtin_initialize completionBlackListExt : TagDeclarationExtension ← mkTagDeclarationExtension `blackListCompletion
 
@@ -122,7 +124,7 @@ private def runM (ctx : ContextInfo) (lctx : LocalContext) (x : M Unit) : IO (Op
 
 private def matchAtomic (id : Name) (declName : Name) : Bool :=
   match id, declName with
-  | Name.str Name.anonymous s₁ _, Name.str Name.anonymous s₂ _ => s₁.isPrefixOf s₂
+  | Name.str Name.anonymous s₁ _, Name.str Name.anonymous s₂ _ => fuzzyMatch s₁ s₂
   | _, _ => false
 
 private def normPrivateName (declName : Name) : MetaM Name := do
@@ -156,7 +158,7 @@ private def matchDecl? (ns : Name) (id : Name) (danglingDot : Bool) (declName : 
     else if !danglingDot then
       match id, declName with
       | Name.str p₁ s₁ _, Name.str p₂ s₂ _ =>
-        if p₁ == p₂ && s₁.isPrefixOf s₂ then
+        if p₁ == p₂ && fuzzyMatch s₁ s₂  then
           return some s₂
         else
           return none
@@ -195,7 +197,7 @@ def matchNamespace (ns : Name) (nsFragment : Name) (danglingDot : Bool) : Bool :
     nsFragment != ns && nsFragment.isPrefixOf ns
   else
     match ns, nsFragment with
-    | Name.str p₁ s₁ _, Name.str p₂ s₂ _ => p₁ == p₂ && s₂.isPrefixOf s₁
+    | Name.str p₁ s₁ _, Name.str p₂ s₂ _ => p₁ == p₂ && fuzzyMatch s₂ s₁
     | _, _ => false
 
 def completeNamespaces (ctx : ContextInfo) (id : Name) (danglingDot : Bool) : M Unit := do
@@ -266,7 +268,7 @@ private def idCompletionCore (ctx : ContextInfo) (id : Name) (hoverInfo : HoverI
         | _ => pure ()
   -- Recall that aliases may not be atomic and include the namespace where they were created.
   let matchAlias (ns : Name) (alias : Name) : Bool :=
-    ns.isPrefixOf alias && matchAtomic id (alias.replacePrefix ns Name.anonymous)
+    fuzzyMatch ns.toString alias.toString && matchAtomic id (alias.replacePrefix ns Name.anonymous)
   -- Auxiliary function for `alias`
   let addAlias (alias : Name) (declNames : List Name) : M Unit := do
     declNames.forM fun declName => do
@@ -375,7 +377,7 @@ private def optionCompletion (ctx : ContextInfo) (stx : Syntax) (caps : ClientCa
     let opts ← getOptions
     let mut items := #[]
     for ⟨name, decl⟩ in decls do
-      if partialName.isPrefixOf name.toString then
+      if fuzzyMatch partialName name.toString then
         let textEdit :=
           if !caps.textDocument?.any (·.completion?.any (·.completionItem?.any (·.insertReplaceSupport?.any (·)))) then
             none -- InsertReplaceEdit not supported by client
