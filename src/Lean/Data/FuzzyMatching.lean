@@ -124,12 +124,14 @@ private partial def fuzzyMatchRec (pattern word : List CharInfo) (patternComplet
   | ((ph :: pt), (wh :: wt)) =>
     let missScore? := fuzzyMatchRec pattern wt patternComplete |> selectBest |>.map (· - skipPenalty wh patternComplete wt.isEmpty)
 
-    let matchScore? := if ph.char.toLower != wh.char.toLower then none else
-      let matchScores := fuzzyMatchRec pt wt false
-      selectBest ⟨
-        matchScores.MissScore?.map (· + matchResult ph wh false wt.isEmpty),
-        matchScores.MatchScore?.map (· + matchResult ph wh true wt.isEmpty)
-      ⟩
+    let matchScore? :=
+      if allowMatch ph wh then
+        let matchScores := fuzzyMatchRec pt wt false
+        selectBest ⟨
+          matchScores.MissScore?.map (· + matchResult ph wh false wt.isEmpty),
+          matchScores.MatchScore?.map (· + matchResult ph wh true wt.isEmpty)
+        ⟩
+      else none
 
     ⟨missScore?, matchScore?⟩
 
@@ -148,7 +150,18 @@ private partial def fuzzyMatchRec (pattern word : List CharInfo) (patternComplet
 
       return 0
 
-    /- Heuristic to rate a match or `none` if the characters do not match. -/
+    /- Whether characters from the pattern and the word match. -/
+    allowMatch (ph wh : CharInfo) : Bool := Id.run <| do
+      /- Different characters do not match. -/
+      if ph.char.toLower != wh.char.toLower then
+        return false
+      /- The beginning of a segment in the pattern must align with the beginning of a segment in the word. -/
+      if ph.role matches CharRole.head && !(wh.role matches CharRole.head) then
+        return false
+
+      return true
+
+    /- Heuristic to rate a match. -/
     matchResult (ph wh : CharInfo) (consecutive : Bool) (wordStart : Bool) : Int := Id.run <| do
       let mut score := 1
       /- Case-sensitive equality or beginning of a segment in pattern and word. -/
