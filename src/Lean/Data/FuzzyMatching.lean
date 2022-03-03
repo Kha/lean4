@@ -81,20 +81,11 @@ private def containsInOrderLower (a b : String) : Bool := Id.run <| do
   return false
 
 
-/- Contains the best possible scores when skipping or matching the last
-seen character.
-
-`none`       - no possible match was found
-`some score` - possible match, quality is indicated by score -/
-private structure MatchResult where
-  MissScore? : Option Int
-  MatchScore? : Option Int
-  deriving Inhabited
-
-private def selectBest : MatchResult → Option Int
-  | ⟨missScore, none⟩  => missScore
-  | ⟨none, matchScore⟩ => matchScore
-  | ⟨some missScore, some matchScore⟩ =>
+private def selectBest (missScore? matchScore? : Option Int) : Option Int :=
+  match (missScore?, matchScore?) with
+  | (missScore, none)  => missScore
+  | (none, matchScore) => matchScore
+  | (some missScore, some matchScore) =>
     some <| max missScore matchScore
 
 /- Match the given pattern with the given word. The algorithm uses dynamic
@@ -108,64 +99,61 @@ bonus.
 
 `patternComplete` is necessary to know when we are behind the match in the
 word. -/
-private def fuzzyMatchCore (pattern word : String) (patternRoles wordRoles : Array CharRole) (patternComplete := true) : MatchResult := Id.run <| do
-  let mut result : Array MatchResult := Array.mkEmpty ((pattern.length + 1) * (word.length + 1))
+private def fuzzyMatchCore (pattern word : String) (patternRoles wordRoles : Array CharRole) (patternComplete := true) : Option Int := Id.run <| do
+  let mut result : Array (Option Int) := Array.mkEmpty ((pattern.length + 1) * (word.length + 1) * 2)
 
-  result := result.push ⟨some 0, none⟩
+  for _ in [:(pattern.length + 1) * (word.length + 1) * 2] do
+    result := result.push none
+
+  result := set result 0 0 (some 0) none
 
   let mut penalty := 0
-  for wordIdx in [:word.length] do
+  for wordIdx in [:word.length - pattern.length] do
     penalty := penalty - skipPenalty (wordRoles.get! wordIdx) false (wordIdx == 0)
-    result := result.push ⟨some penalty, none⟩
+    result := set result 0 (wordIdx+1) (some penalty) none
 
   for patternIdx in [:pattern.length] do
-    result := result.push ⟨none, none⟩
-
     let patternComplete := patternIdx == pattern.length - 1
 
-    for wordIdx in [:word.length] do
-      if wordIdx < patternIdx then
-        result := result.push ⟨none, none⟩
-      else if (word.length - wordIdx) < (pattern.length - patternIdx) then
-        result := result.push ⟨none, none⟩
-      else
-        let missScore? :=
-          getPrevMiss result patternIdx wordIdx
-          |> selectBest
-          |>.map (· - skipPenalty (wordRoles.get! wordIdx) patternComplete (wordIdx == 0))
+    for wordIdx in [patternIdx:word.length-(pattern.length - patternIdx - 1)] do
+      let missScore? := selectBest
+        (getMiss result (patternIdx + 1) wordIdx)
+        (getMatch result (patternIdx + 1) wordIdx)
+        |>.map (· - skipPenalty (wordRoles.get! wordIdx) patternComplete (wordIdx == 0))
 
-        let matchScore? :=
-          if allowMatch (pattern.get patternIdx) (word.get wordIdx) (patternRoles.get! patternIdx) (wordRoles.get! wordIdx) then
-            let matchScores := getPrevMatch result patternIdx wordIdx
-            selectBest ⟨
-              matchScores.MissScore?.map (· + matchResult
-                (pattern.get patternIdx) (word.get wordIdx)
-                (patternRoles.get! patternIdx) (wordRoles.get! wordIdx)
-                false
-                (wordIdx == 0)
-              ),
-              matchScores.MatchScore?.map (· + matchResult
-                (pattern.get patternIdx) (word.get wordIdx)
-                (patternRoles.get! patternIdx) (wordRoles.get! wordIdx)
-                true
-                (wordIdx == 0)
-              )
-            ⟩
-          else none
+      let matchScore? :=
+        if allowMatch (pattern.get patternIdx) (word.get wordIdx) (patternRoles.get! patternIdx) (wordRoles.get! wordIdx) then
+          selectBest
+            (getMiss result patternIdx wordIdx |>.map (· + matchResult
+              (pattern.get patternIdx) (word.get wordIdx)
+              (patternRoles.get! patternIdx) (wordRoles.get! wordIdx)
+              false
+              (wordIdx == 0)
+            ))
+            (getMatch result patternIdx wordIdx |>.map (· + matchResult
+              (pattern.get patternIdx) (word.get wordIdx)
+              (patternRoles.get! patternIdx) (wordRoles.get! wordIdx)
+              true
+              (wordIdx == 0)
+            ))
+        else none
 
-        result := result.push ⟨missScore?, matchScore?⟩
+      result := set result (patternIdx + 1) (wordIdx + 1) missScore? matchScore?
 
-  return result.get! (result.size - 1)
+  return selectBest (getMiss result pattern.length word.length) (getMatch result pattern.length word.length)
 
   where
-    getPrevMiss (result : Array MatchResult) (patternIdx wordIdx : Nat) : MatchResult :=
-      let patternIdx := patternIdx + 1
-      let idx := patternIdx * (word.length + 1) + wordIdx
+    getMiss (result : Array (Option Int)) (patternIdx wordIdx : Nat) : Option Int :=
+      let idx := patternIdx * (word.length + 1) * 2 + wordIdx * 2
       result.get! idx
 
-    getPrevMatch (result : Array MatchResult) (patternIdx wordIdx : Nat) : MatchResult :=
-      let idx := patternIdx * (word.length + 1) + wordIdx
+    getMatch (result : Array (Option Int)) (patternIdx wordIdx : Nat) : Option Int :=
+      let idx := patternIdx * (word.length + 1) * 2 + wordIdx * 2 + 1
       result.get! idx
+
+    set (result : Array (Option Int)) (patternIdx wordIdx : Nat) (missValue matchValue : Option Int) : Array (Option Int) :=
+      let idx := patternIdx * (word.length + 1) * 2 + wordIdx * 2
+      result |>.set! idx missValue |>.set! (idx + 1) matchValue
 
     /- Heuristic to penalize skipping characters in the word. -/
     skipPenalty (wordRole : CharRole) (patternComplete : Bool) (wordStart : Bool) : Int := Id.run <| do
@@ -223,8 +211,7 @@ def fuzzyMatchScore? (pattern word : String) : Option Float := Id.run <| do
   if !(containsInOrderLower pattern word) then
     return none
 
-  let result := fuzzyMatchCore pattern word (stringInfo pattern) (stringInfo word)
-  let some score := selectBest <| result
+  let some score := fuzzyMatchCore pattern word (stringInfo pattern) (stringInfo word)
     | none
   let mut score := score
 
