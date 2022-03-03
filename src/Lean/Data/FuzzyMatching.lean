@@ -126,6 +126,8 @@ private def fuzzyMatchCore (pattern word : String) (patternRoles wordRoles : Arr
     for wordIdx in [:word.length] do
       if wordIdx < patternIdx then
         result := result.push ⟨none, none⟩
+      else if (word.length - wordIdx) < (pattern.length - patternIdx) then
+        result := result.push ⟨none, none⟩
       else
         let missScore? :=
           getPrevMiss result patternIdx wordIdx
