@@ -58,14 +58,6 @@ jobs:
             CMAKE_OPTIONS: -DLEAN_EXTRA_CXX_FLAGS=-fsanitize=address,undefined -DLEANC_EXTRA_FLAGS='-fsanitize=address,undefined -fsanitize-link-c++-runtime' -DSMALL_ALLOCATOR=OFF -DBSYMBOLIC=OFF
             # exclude problematic tests
             CTEST_OPTIONS: -E laketest
-          - name: macOS
-            os: macos-latest
-            release: true
-            shell: bash -euxo pipefail {0}
-            CMAKE_OPTIONS: -DCMAKE_OSX_DEPLOYMENT_TARGET=10.15
-            llvm-url: https://github.com/leanprover/lean-llvm/releases/download/13.0.0/lean-llvm-x86_64-apple-darwin.tar.zst
-            prepare-llvm: script/prepare-llvm-macos.sh lean-llvm*
-            binary-check: otool -L
       # complete all jobs
       fail-fast: false
     name: ${{ matrix.name }}
@@ -94,6 +86,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     needs: [build]
+    if: needs.build.result == 'success'
     steps:
       - uses: actions/download-artifact@v2
         with:
