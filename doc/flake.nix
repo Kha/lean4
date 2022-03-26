@@ -64,13 +64,13 @@
         name = "alectryon";
         src = alectryon-src;
         propagatedBuildInputs =
-          [ leanInk lean-all ] ++
+          [ leanInk ] ++
           # https://github.com/cpitclaudel/alectryon/blob/master/setup.cfg
           (with python3Packages; [ pygments dominate beautifulsoup4 docutils ]);
         doCheck = false;
       };
       examples = let
-        renderLean = name: file: runCommandNoCC "${name}.html" { buildInputs = [ alectryon ]; } ''
+        renderLean = name: file: runCommandNoCC "${name}.html" { buildInputs = [ alectryon lean-all ]; } ''
           mkdir -p $out/examples
           alectryon --frontend lean4+rst ${file} -o $out/examples/${name}.html
         '';
