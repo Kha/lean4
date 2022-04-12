@@ -70,7 +70,9 @@ def notationItem := ppSpace >> withAntiquot (mkAntiquot "notationItem" `Lean.Par
 @[builtinCommandParser] def «notation»    := leading_parser Term.attrKind >> "notation" >> optPrecedence >> optNamedName >> optNamedPrio >> many notationItem >> darrow >> termParser
 @[builtinCommandParser] def «macro_rules» := suppressInsideQuot (leading_parser optional docComment >> Term.attrKind >> "macro_rules" >>  optKind >> Term.matchAlts)
 @[builtinCommandParser] def «syntax»      := leading_parser optional docComment >> Term.attrKind >> "syntax " >> optPrecedence >> optNamedName >> optNamedPrio >> many1 (syntaxParser argPrec) >> " : " >> ident
-@[builtinCommandParser] def syntaxAbbrev  := leading_parser optional docComment >> "syntax " >> ident >> " := " >> many1 syntaxParser
+open Parser.Term in
+def unwrapped := "(" >> nonReservedSymbol "unwrapped" >> " := " >> (trueVal <|> falseVal) >> ")"
+@[builtinCommandParser] def syntaxAbbrev  := leading_parser optional docComment >> "syntax " >> optional unwrapped >> ident >> " := " >> many1 syntaxParser
 def catBehaviorBoth   := leading_parser nonReservedSymbol "both"
 def catBehaviorSymbol := leading_parser nonReservedSymbol "symbol"
 def catBehavior := optional ("(" >> nonReservedSymbol "behavior" >> " := " >> (catBehaviorBoth <|> catBehaviorSymbol) >> ")")

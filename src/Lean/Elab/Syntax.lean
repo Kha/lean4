@@ -331,12 +331,19 @@ def resolveSyntaxKind (k : Name) : CommandElabM Name := do
   trace `Elab fun _ => d
   withMacroExpansion stx d <| elabCommand d
 
+/--
+  `syntax id := stx ...` declares a *syntax abbreviation*.
+  It allows `id` to be used in place of `stx ...` in syntax declarations, along with antiquotations `$x` and `$x:id` in syntax quotations.
+  The variant `syntax (unwrapped := true) id := ...` suppresses both the generation of a syntax node of kind `id` around every syntax tree parsed by `stx ...` as well as generation of antiquotations.
+-/
 @[builtinCommandElab «syntaxAbbrev»] def elabSyntaxAbbrev : CommandElab := fun stx => do
-  let `($[$doc?:docComment]? syntax $declName:ident := $[$ps:stx]*) ← pure stx | throwUnsupportedSyntax
+  let `($[$doc?:docComment]? syntax $[(unwrapped := $unwrapped?)]? $declName:ident := $[$ps:stx]*) ← pure stx | throwUnsupportedSyntax
   -- TODO: nonatomic names
-  let (val, _) ← runTermElabM none fun _ => Term.toParserDescr (mkNullNode ps) Name.anonymous
-  let stxNodeKind := (← getCurrNamespace) ++ declName.getId
-  let stx' ← `($[$doc?:docComment]? def $declName:ident : Lean.ParserDescr := ParserDescr.nodeWithAntiquot $(quote (toString declName.getId)) $(quote stxNodeKind) $val)
+  let mut (val, _) ← runTermElabM none fun _ => Term.toParserDescr (mkNullNode ps) Name.anonymous
+  if unwrapped?.all (·.isOfKind ``Parser.Term.falseVal) then
+    let stxNodeKind := (← getCurrNamespace) ++ declName.getId
+    val ← `(ParserDescr.nodeWithAntiquot $(quote (toString declName.getId)) $(quote stxNodeKind) $val)
+  let stx' ← `($[$doc?:docComment]? def $declName:ident : Lean.ParserDescr := $val)
   withMacroExpansion stx stx' <| elabCommand stx'
 
 def checkRuleKind (given expected : SyntaxNodeKind) : Bool :=
