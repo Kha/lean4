@@ -43,7 +43,7 @@ an element of the list `as`. The constructor `Member.head` says that `a`
 is in the list if the list begins with it. The constructor `Member.tail`
 says that if `a` is in the list `bs`, it is also in the list `b::bs`.
 -/
-inductive Member : α → List α → Type _
+inductive Member : α → List α → Type
   | head : Member a (a::as)
   | tail : Member a bs → Member a (b::bs)
 
@@ -70,7 +70,7 @@ We can write a function to translate `Ty` values to a Lean type
 — remember that types are first class, so can be calculated just like any other value.
 We mark `Ty.denote` as `[reducible]` to make sure the typeclass resolution procedure can
 unfold/reduce it. For example, suppose Lean is trying to synthesize a value for the instance
-`Add (Ty.denote Ty.nat)`. Since `Ty.denote` is marked as `[reducible],
+`Add (Ty.denote Ty.nat)`. Since `Ty.denote` is marked as `[reducible]`,
 the typeclass resolution procedure can reduce `Ty.denote Ty.nat` to `Nat`, and use
 the builtin instance for `Add Nat` as the solution.
 
