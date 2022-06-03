@@ -318,9 +318,11 @@ partial def InfoTree.termGoalAt? (t : InfoTree) (hoverPos : String.Pos) : Option
     else
       headFns
   t.smallestInfo? fun i => Id.run do
-    if i.contains hoverPos then
-      if let Info.ofTermInfo ti := i then
-        return !ti.stx.isIdent || !headFns.contains i.pos?.get!
+    if let (some pos, some tailPos) := (i.pos?, i.tailPos?) then
+      let trailSize := i.stx.getTrailingSize
+      if pos ≤ hoverPos ∧ hoverPos.byteIdx < tailPos.byteIdx + trailSize then
+        if let Info.ofTermInfo ti := i then
+          return !ti.stx.isIdent || !headFns.contains i.pos?.get!
     false
   where
     /- Returns the position of the head function symbol, if it is an identifier. -/

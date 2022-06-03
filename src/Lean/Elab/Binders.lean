@@ -581,7 +581,7 @@ open Lean.Elab.Term.Quotation in
 
    The default elaboration order is `binders`, `typeStx`, `valStx`, and `body`.
    If `elabBodyFirst == true`, then we use the order `binders`, `typeStx`, `body`, and `valStx`. -/
-def elabLetDeclAux (id : Syntax) (binders : Array Syntax) (typeStx : Syntax) (valStx : Syntax) (body : Syntax)
+def elabLetDeclAux (id : Syntax) (binders : Array Syntax) (typeStx : Syntax) (valStx valRef : Syntax) (body : Syntax)
     (expectedType? : Option Expr) (useLetExpr : Bool) (elabBodyFirst : Bool) (usedLetOnly : Bool) : TermElabM Expr := do
   let (type, val, binders) ← elabBindersEx binders fun xs => do
     let (binders, fvars) := xs.unzip
@@ -592,7 +592,8 @@ def elabLetDeclAux (id : Syntax) (binders : Array Syntax) (typeStx : Syntax) (va
       let val  ← mkFreshExprMVar type
       pure (type, val, binders)
     else
-      let val  ← elabTermEnsuringType valStx type
+      let val ← withInfoContext' valRef (mkInfo := mkTermInfo Name.anonymous (expectedType? := type) valRef) <|
+        elabTermEnsuringType valStx type
       let type ← mkForallFVars fvars type
       /- By default `mkLambdaFVars` and `mkLetFVars` create binders only for let-declarations that are actually used
          in the body. This generates counterintuitive behavior in the elaborator since users will not be notified
@@ -658,7 +659,7 @@ def elabLetDeclCore (stx : Syntax) (expectedType? : Option Expr) (useLetExpr : B
   let body    := stx[3]
   if letDecl.getKind == ``Lean.Parser.Term.letIdDecl then
     let { id := id, binders := binders, type := type, value := val } := mkLetIdDeclView letDecl
-    elabLetDeclAux id binders type val body expectedType? useLetExpr elabBodyFirst usedLetOnly
+    elabLetDeclAux id binders type val letDecl[3] body expectedType? useLetExpr elabBodyFirst usedLetOnly
   else if letDecl.getKind == ``Lean.Parser.Term.letPatDecl then
     -- node `Lean.Parser.Term.letPatDecl  $ try (termParser >> pushNone >> optType >> " := ") >> termParser
     if elabBodyFirst then
@@ -670,7 +671,7 @@ def elabLetDeclCore (stx : Syntax) (expectedType? : Option Expr) (useLetExpr : B
       -- `let _ := ...` should not be treated at a `letIdDecl`
       let id   := mkIdentFrom pat `_
       let type := expandOptType id optType
-      elabLetDeclAux id #[] type val body expectedType? useLetExpr elabBodyFirst usedLetOnly
+      elabLetDeclAux id #[] type val letDecl[3] body expectedType? useLetExpr elabBodyFirst usedLetOnly
     else
       -- We are currently treating `let_fun` and `let` the same way when patterns are used.
       let stxNew ←
