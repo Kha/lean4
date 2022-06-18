@@ -627,14 +627,15 @@ partial def importModules (imports : List Import) (opts : Options) (trustLevel :
     let mut modIdx : Nat := 0
     let mut const2ModIdx : HashMap Name ModuleIdx := Std.mkHashMap (capacity := numConsts)
     let mut constantMap : HashMap Name ConstantInfo := Std.mkHashMap (capacity := numConsts)
-    for mod in s.moduleData do
-      for cinfo in mod.constants do
-        const2ModIdx := const2ModIdx.insert cinfo.name modIdx
-        match constantMap.insert' cinfo.name cinfo with
-        | (constantMap', replaced) =>
-          constantMap := constantMap'
-          if replaced then throw (IO.userError s!"import failed, environment already contains '{cinfo.name}'")
-       modIdx := modIdx + 1
+    for mod in s.moduleData, name in s.moduleNames do
+      if name != `Init.Parser && !s.moduleNameSet.contains `Lean.Parser.Basic then
+        for cinfo in mod.constants do
+          const2ModIdx := const2ModIdx.insert cinfo.name modIdx
+          match constantMap.insert' cinfo.name cinfo with
+          | (constantMap', replaced) =>
+            constantMap := constantMap'
+            if replaced then throw (IO.userError s!"import failed, environment already contains '{cinfo.name}'")
+        modIdx := modIdx + 1
     let constants : ConstMap := SMap.fromHashMap constantMap false
     let exts ← mkInitialExtensionStates
     let env : Environment := {

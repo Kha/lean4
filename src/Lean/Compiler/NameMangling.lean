@@ -55,9 +55,11 @@ private def Name.mangleAux : Name → String
     | p              => mangleAux p ++ "_" ++ m
   | Name.num p n _ => mangleAux p ++ "_" ++ toString n ++ "_"
 
-@[export lean_name_mangle]
 def Name.mangle (n : Name) (pre : String := "l_") : String :=
   pre ++ Name.mangleAux n
+
+@[export lean_name_mangle]
+def Name.mangleEx := Name.mangle
 
 @[export lean_mk_module_initialization_function_name]
 def mkModuleInitializationFunctionName (moduleName : Name) : String :=

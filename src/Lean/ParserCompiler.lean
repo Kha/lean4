@@ -55,7 +55,7 @@ variable {α} (ctx : Context α) (builtin : Bool) (force : Bool) in
 /--
   Translate an expression of type `Parser` into one of type `tyName`, tagging intermediary constants with
   `ctx.combinatorAttr`. If `force` is `false`, refuse to do so for imported constants. -/
-partial def compileParserExpr (e : Expr) : MetaM Expr := do
+partial def compileParserExpr (e : Expr) : MetaM Expr := withReducible do
   let e ← whnfCore e
   match e with
   | .lam ..  => lambdaLetTelescope e fun xs b => compileParserExpr b >>= mkLambdaFVars xs
@@ -67,14 +67,14 @@ partial def compileParserExpr (e : Expr) : MetaM Expr := do
     -- of type `ty` (i.e. formerly `Parser`)
     let mkCall (p : Name) := do
       let ty ← inferType (mkConst p)
-      forallTelescope ty fun params _ => do
+      forallTelescopeReducing ty fun params _ => do
         let mut p := mkConst p
         let args  := e.getAppArgs
         for i in [:Nat.min params.size args.size] do
           let param := params[i]
           let arg   := args[i]
           let paramTy ← inferType param
-          let resultTy ← forallTelescope paramTy fun _ b => pure b
+          let resultTy ← forallTelescopeReducing paramTy fun _ b => pure b
           let arg ← if resultTy.isConstOf ctx.tyName then compileParserExpr arg else pure arg
           p := mkApp p arg
         return p
@@ -84,7 +84,7 @@ partial def compileParserExpr (e : Expr) : MetaM Expr := do
     | none   =>
       let c' := c ++ ctx.varName
       let cinfo ← getConstInfo c
-      let resultTy ← forallTelescope cinfo.type fun _ b => pure b
+      let resultTy ← forallTelescopeReducing cinfo.type fun _ b => pure b
       if resultTy.isConstOf `Lean.Parser.TrailingParser || resultTy.isConstOf `Lean.Parser.Parser then do
         -- synthesize a new `[combinatorAttr c]`
         let some value ← pure cinfo.value?
@@ -92,7 +92,7 @@ partial def compileParserExpr (e : Expr) : MetaM Expr := do
         unless (env.getModuleIdxFor? c).isNone || force do
           throwError "refusing to generate code for imported parser declaration '{c}'; use `@[runParserAttributeHooks]` on its definition instead."
         let value ← compileParserExpr <| replaceParserTy ctx value
-        let ty ← forallTelescope cinfo.type fun params _ =>
+        let ty ← forallTelescopeReducing cinfo.type fun params _ =>
           params.foldrM (init := mkConst ctx.tyName) fun param ty => do
             let paramTy ← replaceParserTy ctx <$> inferType param
             return mkForall `_ BinderInfo.default paramTy ty
