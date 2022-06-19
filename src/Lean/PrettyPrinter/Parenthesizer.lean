@@ -248,7 +248,7 @@ def visitToken : Parenthesizer := do
   modify fun st => { st with contPrec := none, contCat := Name.anonymous, visitedToken := true }
   goLeft
 
-@[combinatorParenthesizer Lean.Parser.orelse] def orelse.parenthesizer (p1 p2 : Parenthesizer) : Parenthesizer := do
+@[combinatorParenthesizer Lean.Parser.orelse] def _root_.Lean.Parser.orelse.parenthesizer (p1 p2 : Parenthesizer) : Parenthesizer := do
   -- HACK: We have no (immediate) information on which side of the orelse could have produced the current node, so try
   -- them in turn. Uses the syntax traverser non-linearly!
   p1 <|> p2
@@ -263,19 +263,19 @@ opaque mkAntiquot.parenthesizer' (name : String) (kind : Option SyntaxNodeKind) 
 @[inline] def liftCoreM {α} (x : CoreM α) : ParenthesizerM α :=
   liftM x
 
--- break up big mutual recursion
-@[extern "lean_pretty_printer_parenthesizer_interpret_parser_descr"]
-opaque interpretParserDescr' : ParserDescr → CoreM Parenthesizer
-
-unsafe def parenthesizerForKindUnsafe (k : SyntaxNodeKind) : Parenthesizer := do
+def parenthesizerForKind (k : SyntaxNodeKind) : Parenthesizer := do
   if k == `missing then
     pure ()
   else
-    let p ← runForNodeKind parenthesizerAttribute k interpretParserDescr'
+    let p ← runForNodeKind parenthesizerAttribute k
     p
 
-@[implementedBy parenthesizerForKindUnsafe]
-opaque parenthesizerForKind (k : SyntaxNodeKind) : Parenthesizer
+end Lean.PrettyPrinter.Parenthesizer
+
+namespace Lean.Parser
+open Lean.PrettyPrinter
+open Lean.PrettyPrinter.Parenthesizer
+open Syntax.MonadTraverser
 
 @[combinatorParenthesizer Lean.Parser.withAntiquot]
 def withAntiquot.parenthesizer (antiP p : Parenthesizer) : Parenthesizer := do
@@ -300,7 +300,7 @@ def tokenWithAntiquot.parenthesizer (p : Parenthesizer) : Parenthesizer := do
   else
     p
 
-def parenthesizeCategoryCore (cat : Name) (_prec : Nat) : Parenthesizer :=
+private def parenthesizeCategoryCore (cat : Name) (_prec : Nat) : Parenthesizer :=
   withReader (fun ctx => { ctx with cat := cat }) do
     let stx ← getCur
     if stx.getKind == `choice then
@@ -506,24 +506,13 @@ def interpolatedStr.parenthesizer (p : Parenthesizer) : Parenthesizer := do
 
 @[combinatorParenthesizer Lean.Parser.dbgTraceState] def dbgTraceState.parenthesizer (_label : String) (p : Parenthesizer) : Parenthesizer := p
 
-@[combinatorParenthesizer ite, macroInline] def ite {_ : Type} (c : Prop) [Decidable c] (t e : Parenthesizer) : Parenthesizer :=
+@[combinatorParenthesizer ite, macroInline] def ite.parenthesizer {_ : Type} (c : Prop) [Decidable c] (t e : Parenthesizer) : Parenthesizer :=
   if c then t else e
 
-open Parser
+end Lean.Parser
 
-abbrev ParenthesizerAliasValue := AliasValue Parenthesizer
-
-builtin_initialize parenthesizerAliasesRef : IO.Ref (NameMap ParenthesizerAliasValue) ← IO.mkRef {}
-
-def registerAlias (aliasName : Name) (v : ParenthesizerAliasValue) : IO Unit := do
-  Parser.registerAliasCore parenthesizerAliasesRef aliasName v
-
-instance : Coe Parenthesizer ParenthesizerAliasValue := { coe := AliasValue.const }
-instance : Coe (Parenthesizer → Parenthesizer) ParenthesizerAliasValue := { coe := AliasValue.unary }
-instance : Coe (Parenthesizer → Parenthesizer → Parenthesizer) ParenthesizerAliasValue := { coe := AliasValue.binary }
-
-end Parenthesizer
-open Parenthesizer
+namespace Lean.PrettyPrinter
+open Lean.Parser
 
 /-- Add necessary parentheses in `stx` parsed by `parser`. -/
 def parenthesize (parenthesizer : Parenthesizer) (stx : Syntax) : CoreM Syntax := do

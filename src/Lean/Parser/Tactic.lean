@@ -9,9 +9,6 @@ namespace Lean
 namespace Parser
 namespace Tactic
 
-builtin_initialize
-  register_parser_alias tacticSeq
-
 @[builtinTacticParser] def «unknown»    := leading_parser withPosition (ident >> errorAtSavedPos "unknown tactic" true)
 @[builtinTacticParser] def nestedTactic := tacticSeqBracketed
 

@@ -311,17 +311,5 @@ end Term
 
 @[builtinTermParser] def Level.quot  : Parser := leading_parser "`(level|" >> incQuotDepth levelParser >> ")"
 
-open Term in
-builtin_initialize
-  register_parser_alias letDecl
-  register_parser_alias haveDecl
-  register_parser_alias sufficesDecl
-  register_parser_alias letRecDecls
-  register_parser_alias hole
-  register_parser_alias syntheticHole
-  register_parser_alias matchDiscr
-  register_parser_alias bracketedBinder
-  register_parser_alias attrKind
-
 end Parser
 end Lean

@@ -172,7 +172,7 @@ def withMaybeTag (pos? : Option String.Pos) (x : FormatterM Unit) : Formatter :=
   else
     x
 
-@[combinatorFormatter Lean.Parser.orelse] def orelse.formatter (p1 p2 : Formatter) : Formatter :=
+@[combinatorFormatter Lean.Parser.orelse] def _root_.Lean.Parser.orelse.formatter (p1 p2 : Formatter) : Formatter :=
   -- HACK: We have no (immediate) information on which side of the orelse could have produced the current node, so try
   -- them in turn. Uses the syntax traverser non-linearly!
   p1 <|> p2
@@ -184,10 +184,6 @@ def withMaybeTag (pos? : Option String.Pos) (x : FormatterM Unit) : Formatter :=
 @[extern "lean_mk_antiquot_formatter"]
 opaque mkAntiquot.formatter' (name : String) (kind : Option SyntaxNodeKind) (anonymous := true) : Formatter
 
--- break up big mutual recursion
-@[extern "lean_pretty_printer_formatter_interpret_parser_descr"]
-opaque interpretParserDescr' : ParserDescr → CoreM Formatter
-
 private def SourceInfo.getExprPos? : SourceInfo → Option String.Pos
   | SourceInfo.synthetic pos _ => pos
   | _ => none
@@ -198,111 +194,20 @@ private def getExprPos? : Syntax → Option String.Pos
   | Syntax.ident info _ _ _ => SourceInfo.getExprPos? info
   | Syntax.missing => none
 
-unsafe def formatterForKindUnsafe (k : SyntaxNodeKind) : Formatter := do
+def formatterForKind (k : SyntaxNodeKind) : Formatter := do
   if k == `missing then
     push "<missing>"
     goLeft
   else
     let stx ← getCur
-    let f ← runForNodeKind formatterAttribute k interpretParserDescr'
+    let f ← runForNodeKind formatterAttribute k
     withMaybeTag (getExprPos? stx) f
-
-@[implementedBy formatterForKindUnsafe]
-opaque formatterForKind (k : SyntaxNodeKind) : Formatter
-
-@[combinatorFormatter Lean.Parser.withAntiquot]
-def withAntiquot.formatter (antiP p : Formatter) : Formatter :=
-  -- TODO: could be optimized using `isAntiquot` (which would have to be moved), but I'd rather
-  -- fix the backtracking hack outright.
-  orelse.formatter antiP p
-
-@[combinatorFormatter Lean.Parser.withAntiquotSuffixSplice]
-def withAntiquotSuffixSplice.formatter (_ : SyntaxNodeKind) (p suffix : Formatter) : Formatter := do
-  if (← getCur).isAntiquotSuffixSplice then
-    visitArgs <| suffix *> p
-  else
-    p
-
-@[combinatorFormatter Lean.Parser.tokenWithAntiquot]
-def tokenWithAntiquot.formatter (p : Formatter) : Formatter := do
-  if (← getCur).isTokenAntiquot then
-    visitArgs p
-  else
-    p
-
-def categoryFormatterCore (cat : Name) : Formatter := do
-  modify fun st => { st with mustBeGrouped := true, isUngrouped := false }
-  let stx ← getCur
-  trace[PrettyPrinter.format] "formatting {indentD (format stx)}"
-  if stx.getKind == `choice then
-    visitArgs do
-      -- format only last choice
-      -- TODO: We could use elaborator data here to format the chosen child when available
-      formatterForKind (← getCur).getKind
-  else if cat == `rawStx then
-    withAntiquot.formatter (mkAntiquot.formatter' cat.toString none) (push stx.formatStx *> goLeft)
-  else
-    withAntiquot.formatter (mkAntiquot.formatter' cat.toString none) (formatterForKind stx.getKind)
-  modify fun st => { st with mustBeGrouped := true, isUngrouped := !st.mustBeGrouped }
-
-@[combinatorFormatter Lean.Parser.categoryParser]
-def categoryParser.formatter (cat : Name) : Formatter := do
-  concat <| categoryFormatterCore cat
-  unless (← get).isUngrouped do
-    let indent := Std.Format.getIndent (← read).options
-    modify fun st => { st with
-      stack := st.stack.modify (st.stack.size - 1) fun fmt =>
-        fmt.nest indent |>.fill
-    }
-
-def categoryFormatter (cat : Name) : Formatter :=
-  fill <| indent <| categoryFormatterCore cat
-
-@[combinatorFormatter Lean.Parser.categoryParserOfStack]
-def categoryParserOfStack.formatter (offset : Nat) : Formatter := do
-  let st ← get
-  let stx := st.stxTrav.parents.back.getArg (st.stxTrav.idxs.back - offset)
-  categoryParser.formatter stx.getId
-
-@[combinatorFormatter Lean.Parser.parserOfStack]
-def parserOfStack.formatter (offset : Nat) (_prec : Nat := 0) : Formatter := do
-  let st ← get
-  let stx := st.stxTrav.parents.back.getArg (st.stxTrav.idxs.back - offset)
-  formatterForKind stx.getKind
-
-@[combinatorFormatter Lean.Parser.error]
-def error.formatter (_msg : String) : Formatter := pure ()
-@[combinatorFormatter Lean.Parser.errorAtSavedPos]
-def errorAtSavedPos.formatter (_msg : String) (_delta : Bool) : Formatter := pure ()
-@[combinatorFormatter Lean.Parser.atomic]
-def atomic.formatter (p : Formatter) : Formatter := p
-@[combinatorFormatter Lean.Parser.lookahead]
-def lookahead.formatter (_ : Formatter) : Formatter := pure ()
-
-@[combinatorFormatter Lean.Parser.notFollowedBy]
-def notFollowedBy.formatter (_ : Formatter) : Formatter := pure ()
-
-@[combinatorFormatter Lean.Parser.andthen]
-def andthen.formatter (p1 p2 : Formatter) : Formatter := p2 *> p1
 
 def checkKind (k : SyntaxNodeKind) : FormatterM Unit := do
   let stx ← getCur
   if k != stx.getKind then
     trace[PrettyPrinter.format.backtrack] "unexpected node kind '{stx.getKind}', expected '{k}'"
     throwBacktrack
-
-@[combinatorFormatter Lean.Parser.node]
-def node.formatter (k : SyntaxNodeKind) (p : Formatter) : Formatter := do
-  checkKind k;
-  visitArgs p
-
-@[combinatorFormatter Lean.Parser.trailingNode]
-def trailingNode.formatter (k : SyntaxNodeKind) (_ _ : Nat) (p : Formatter) : Formatter := do
-  checkKind k
-  visitArgs do
-    p;
-    -- leading term, not actually produced by `p`
-    categoryParser.formatter `foo
 
 def parseToken (s : String) : FormatterM ParserState :=
   -- include comment tokens, e.g. when formatting `- -0`
@@ -369,6 +274,107 @@ def pushToken (info : SourceInfo) (tk : String) : FormatterM Unit := do
       modify fun st => { st with leadWord := "" }
   | _ => pure ()
 
+def visitAtom (k : SyntaxNodeKind) : Formatter := do
+  let stx ← getCur
+  if k != Name.anonymous then
+    checkKind k
+  let Syntax.atom info val ← pure $ stx.ifNode (fun n => n.getArg 0) (fun _ => stx)
+    | throwError m!"not an atom: {stx}"
+  pushToken info val
+  goLeft
+
+end Lean.PrettyPrinter.Formatter
+
+namespace Lean.Parser
+open Lean.PrettyPrinter
+open Lean.PrettyPrinter.Formatter
+open Syntax.MonadTraverser
+
+@[combinatorFormatter Lean.Parser.withAntiquot]
+def withAntiquot.formatter (antiP p : Formatter) : Formatter :=
+  -- TODO: could be optimized using `isAntiquot` (which would have to be moved), but I'd rather
+  -- fix the backtracking hack outright.
+  orelse.formatter antiP p
+
+@[combinatorFormatter Lean.Parser.withAntiquotSuffixSplice]
+def withAntiquotSuffixSplice.formatter (_ : SyntaxNodeKind) (p suffix : Formatter) : Formatter := do
+  if (← getCur).isAntiquotSuffixSplice then
+    visitArgs <| suffix *> p
+  else
+    p
+
+@[combinatorFormatter Lean.Parser.tokenWithAntiquot]
+def tokenWithAntiquot.formatter (p : Formatter) : Formatter := do
+  if (← getCur).isTokenAntiquot then
+    visitArgs p
+  else
+    p
+
+private def categoryFormatterCore (cat : Name) : Formatter := do
+  modify fun st => { st with mustBeGrouped := true, isUngrouped := false }
+  let stx ← getCur
+  trace[PrettyPrinter.format] "formatting {indentD (format stx)}"
+  if stx.getKind == `choice then
+    visitArgs do
+      -- format only last choice
+      -- TODO: We could use elaborator data here to format the chosen child when available
+      formatterForKind (← getCur).getKind
+  else if cat == `rawStx then
+    withAntiquot.formatter (mkAntiquot.formatter' cat.toString none) (push stx.formatStx *> goLeft)
+  else
+    withAntiquot.formatter (mkAntiquot.formatter' cat.toString none) (formatterForKind stx.getKind)
+  modify fun st => { st with mustBeGrouped := true, isUngrouped := !st.mustBeGrouped }
+
+@[combinatorFormatter Lean.Parser.categoryParser]
+def categoryParser.formatter (cat : Name) : Formatter := do
+  concat <| categoryFormatterCore cat
+  unless (← get).isUngrouped do
+    let indent := Std.Format.getIndent (← read).options
+    modify fun st => { st with
+      stack := st.stack.modify (st.stack.size - 1) fun fmt =>
+        fmt.nest indent |>.fill
+    }
+
+@[combinatorFormatter Lean.Parser.categoryParserOfStack]
+def categoryParserOfStack.formatter (offset : Nat) : Formatter := do
+  let st ← get
+  let stx := st.stxTrav.parents.back.getArg (st.stxTrav.idxs.back - offset)
+  categoryParser.formatter stx.getId
+
+@[combinatorFormatter Lean.Parser.parserOfStack]
+def parserOfStack.formatter (offset : Nat) (_prec : Nat := 0) : Formatter := do
+  let st ← get
+  let stx := st.stxTrav.parents.back.getArg (st.stxTrav.idxs.back - offset)
+  formatterForKind stx.getKind
+
+@[combinatorFormatter Lean.Parser.error]
+def error.formatter (_msg : String) : Formatter := pure ()
+@[combinatorFormatter Lean.Parser.errorAtSavedPos]
+def errorAtSavedPos.formatter (_msg : String) (_delta : Bool) : Formatter := pure ()
+@[combinatorFormatter Lean.Parser.atomic]
+def atomic.formatter (p : Formatter) : Formatter := p
+@[combinatorFormatter Lean.Parser.lookahead]
+def lookahead.formatter (_ : Formatter) : Formatter := pure ()
+
+@[combinatorFormatter Lean.Parser.notFollowedBy]
+def notFollowedBy.formatter (_ : Formatter) : Formatter := pure ()
+
+@[combinatorFormatter Lean.Parser.andthen]
+def andthen.formatter (p1 p2 : Formatter) : Formatter := p2 *> p1
+
+@[combinatorFormatter Lean.Parser.node]
+def node.formatter (k : SyntaxNodeKind) (p : Formatter) : Formatter := do
+  checkKind k;
+  visitArgs p
+
+@[combinatorFormatter Lean.Parser.trailingNode]
+def trailingNode.formatter (k : SyntaxNodeKind) (_ _ : Nat) (p : Formatter) : Formatter := do
+  checkKind k
+  visitArgs do
+    p;
+    -- leading term, not actually produced by `p`
+    categoryParser.formatter `foo
+
 @[combinatorFormatter Lean.Parser.symbolNoAntiquot]
 def symbolNoAntiquot.formatter (sym : String) : Formatter := do
   let stx ← getCur
@@ -411,15 +417,6 @@ def identNoAntiquot.formatter : Formatter := do
   goLeft
 
 @[combinatorFormatter Lean.Parser.identEq] def identEq.formatter (_id : Name) := rawIdentNoAntiquot.formatter
-
-def visitAtom (k : SyntaxNodeKind) : Formatter := do
-  let stx ← getCur
-  if k != Name.anonymous then
-    checkKind k
-  let Syntax.atom info val ← pure $ stx.ifNode (fun n => n.getArg 0) (fun _ => stx)
-    | throwError m!"not an atom: {stx}"
-  pushToken info val
-  goLeft
 
 @[combinatorFormatter Lean.Parser.charLitNoAntiquot] def charLitNoAntiquot.formatter := visitAtom charLitKind
 @[combinatorFormatter Lean.Parser.strLitNoAntiquot] def strLitNoAntiquot.formatter := visitAtom strLitKind
@@ -503,22 +500,14 @@ def interpolatedStr.formatter (p : Formatter) : Formatter := do
 
 @[combinatorFormatter Lean.Parser.dbgTraceState] def dbgTraceState.formatter (_label : String) (p : Formatter) : Formatter := p
 
-@[combinatorFormatter ite, macroInline] def ite {_ : Type} (c : Prop) [Decidable c] (t e : Formatter) : Formatter :=
+@[combinatorFormatter ite, macroInline] def ite.formatter {_ : Type} (c : Prop) [Decidable c] (t e : Formatter) : Formatter :=
   if c then t else e
 
-abbrev FormatterAliasValue := AliasValue Formatter
+end Lean.Parser
 
-builtin_initialize formatterAliasesRef : IO.Ref (NameMap FormatterAliasValue) ← IO.mkRef {}
-
-def registerAlias (aliasName : Name) (v : FormatterAliasValue) : IO Unit := do
-  Parser.registerAliasCore formatterAliasesRef aliasName v
-
-instance : Coe Formatter FormatterAliasValue := { coe := AliasValue.const }
-instance : Coe (Formatter → Formatter) FormatterAliasValue := { coe := AliasValue.unary }
-instance : Coe (Formatter → Formatter → Formatter) FormatterAliasValue := { coe := AliasValue.binary }
-
-end Formatter
-open Formatter
+namespace Lean.PrettyPrinter
+open Lean.Parser
+open Lean.PrettyPrinter.Formatter
 
 def format (formatter : Formatter) (stx : Syntax) : CoreM Format := do
   trace[PrettyPrinter.format.input] "{Std.format stx}"
@@ -529,6 +518,9 @@ def format (formatter : Formatter) (stx : Syntax) : CoreM Format := do
       let (_, st) ← (concat formatter { table := table, options := options }).run { stxTrav := Syntax.Traverser.fromSyntax stx };
       pure $ Format.fill $ st.stack.get! 0)
     (fun _ => throwError "format: uncaught backtrack exception")
+
+def categoryFormatter (cat : Name) : Formatter :=
+  fill <| indent <| categoryFormatterCore cat
 
 def formatCategory (cat : Name) := format $ categoryFormatter cat
 

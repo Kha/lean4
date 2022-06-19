@@ -27,10 +27,6 @@ def termBeforeDo := withForbidden "do" termParser
 
 attribute [runBuiltinParserAttributeHooks] doSeq termBeforeDo
 
-builtin_initialize
-  register_parser_alias doSeq
-  register_parser_alias termBeforeDo
-
 def notFollowedByRedefinedTermToken :=
   -- Remark: we don't currently support `open` and `set_option` in `do`-blocks, but we include them in the following list to fix the ambiguity
   -- "open" command following `do`-block. If we don't add `do`, then users would have to indent `do` blocks or use `{ ... }`.

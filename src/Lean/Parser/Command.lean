@@ -141,15 +141,6 @@ def openDecl         := openHiding <|> openRenaming <|> openOnly <|> openSimple 
 @[runBuiltinParserAttributeHooks] abbrev declModifiersF := declModifiers false
 @[runBuiltinParserAttributeHooks] abbrev declModifiersT := declModifiers true
 
-builtin_initialize
-  register_parser_alias "declModifiers"       declModifiersF
-  register_parser_alias "nestedDeclModifiers" declModifiersT
-  register_parser_alias                       declId
-  register_parser_alias                       declSig
-  register_parser_alias                       declVal
-  register_parser_alias                       optDeclSig
-  register_parser_alias                       openDecl
-
 end Command
 
 namespace Term
