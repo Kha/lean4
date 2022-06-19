@@ -61,18 +61,17 @@ structure WorkerContext where
   hIn              : FS.Stream
   hOut             : FS.Stream
   hLog             : FS.Stream
-  srcSearchPath    : SearchPath
+  srcSearchPath    : Task SearchPath
   initParams       : InitializeParams
   clientHasWidgets : Bool
 
 /- Asynchronous snapshot elaboration. -/
 section Elab
   structure AsyncElabState where
-    headerSnap : Snapshot
     snaps : Array Snapshot
 
   private def AsyncElabState.lastSnap (s : AsyncElabState) : Snapshot :=
-    s.snaps.getD (s.snaps.size - 1) s.headerSnap
+    s.snaps.get! (s.snaps.size - 1)
 
   abbrev AsyncElabM := StateT AsyncElabState <| EIO ElabTaskError
 
@@ -101,7 +100,7 @@ section Elab
       publishProgressDone m ctx.hOut
       -- This will overwrite existing ilean info for the file, in case something
       -- went wrong during the incremental updates.
-      publishIleanInfoFinal m ctx.hOut <| s.snaps.insertAt 0 s.headerSnap
+      publishIleanInfoFinal m ctx.hOut s.snaps
       return none
     publishProgressAtPos m lastSnap.endPos ctx.hOut
     let snap ← compileNextCmd m.mkInputContext lastSnap ctx.clientHasWidgets
@@ -124,22 +123,22 @@ section Elab
     publishIleanInfoUpdate m ctx.hOut #[snap]
     return some snap
 
-  /-- Elaborates all commands after the last snap (using `headerSnap` if `snaps`
-  is empty), emitting the diagnostics into `hOut`. -/
-  def unfoldCmdSnaps (m : DocumentMeta) (headerSnap : Snapshot) (snaps : Array Snapshot) (cancelTk : CancelToken)
-      : ReaderT WorkerContext IO (AsyncList ElabTaskError Snapshot) := do
+  /-- Elaborates all commands after the last snap (at least the header snap is assumed to exist), emitting the diagnostics into `hOut`. -/
+  def unfoldCmdSnaps (m : DocumentMeta) (snaps : Array Snapshot) (cancelTk : CancelToken)
+      : ReaderT WorkerContext (EIO ElabTaskError) (AsyncList ElabTaskError Snapshot) := do
     let ctx ← read
-    if snaps.isEmpty && headerSnap.msgLog.hasErrors then
+    let headerSnap := snaps[0]
+    if headerSnap.msgLog.hasErrors then
       -- Treat header processing errors as fatal so users aren't swamped with
       -- followup errors
       publishProgressAtPos m headerSnap.beginPos ctx.hOut (kind := LeanFileProgressKind.fatalError)
       publishIleanInfoFinal m ctx.hOut #[headerSnap]
-      pure AsyncList.nil
+      return AsyncList.ofList [headerSnap]
     else
       -- This will overwrite existing ilean info for the file since this has a
       -- higher version number.
-      publishIleanInfoUpdate m ctx.hOut <| snaps.insertAt 0 headerSnap
-      AsyncList.unfoldAsync (nextCmdSnap ctx m cancelTk) { headerSnap, snaps }
+      publishIleanInfoUpdate m ctx.hOut snaps
+      return AsyncList.ofList snaps.toList ++ (← AsyncList.unfoldAsync (nextCmdSnap ctx m cancelTk) { snaps })
 end Elab
 
 -- Pending requests are tracked so they can be cancelled
@@ -248,18 +247,22 @@ section Initialization
   def initializeWorker (meta : DocumentMeta) (i o e : FS.Stream) (initParams : InitializeParams) (opts : Options)
       : IO (WorkerContext × WorkerState) := do
     let clientHasWidgets := initParams.initializationOptions?.bind (·.hasWidgets?) |>.getD false
-    let (headerSnap, srcSearchPath) ← compileHeader meta o opts (hasWidgets := clientHasWidgets)
+    let headerTask ← EIO.asTask <| compileHeader meta o opts (hasWidgets := clientHasWidgets)
     let cancelTk ← CancelToken.new
     let ctx :=
       { hIn  := i
         hOut := o
         hLog := e
-        srcSearchPath
+        -- OK to swallow exception here as we usually wait on the header snapshot task first
+        srcSearchPath := headerTask.map (match · with | Except.ok (_, p) => p | _ => [])
         initParams
         clientHasWidgets
       }
-    let cmdSnaps ← unfoldCmdSnaps meta headerSnap #[] cancelTk ctx
-    let doc : EditableDocument := ⟨meta, headerSnap, cmdSnaps, cancelTk⟩
+    let cmdSnaps ← EIO.mapTask (t := headerTask) (match · with
+      | Except.ok (s, _) => unfoldCmdSnaps meta #[s] cancelTk ctx
+      | Except.error e   => throw (e : ElabTaskError))
+    --let cmdSnaps := cmdSnaps.map (Except.mapError Coe.coe)
+    let doc : EditableDocument := ⟨meta, AsyncList.asyncTail cmdSnaps, cancelTk⟩
     return (ctx,
     { doc             := doc
       pendingRequests := RBMap.empty
@@ -278,9 +281,6 @@ section Updates
     -- need to reparse the header so that the offsets are correct.
     let ctx ← read
     let oldDoc := (←get).doc
-    let newHeaderSnap ← reparseHeader newMeta.mkInputContext oldDoc.headerSnap
-    if newHeaderSnap.stx != oldDoc.headerSnap.stx then
-      throwServerError "Internal server error: header changed but worker wasn't restarted."
     let ⟨cmdSnaps, e?⟩ ← oldDoc.cmdSnaps.updateFinishedPrefix
     match e? with
     -- This case should not be possible. only the main task aborts tasks and ensures that aborted tasks
@@ -289,15 +289,15 @@ section Updates
       throwServerError "Internal server error: elab task was aborted while still in use."
     | some (ElabTaskError.ioError ioError) => throw ioError
     | _ => -- No error or EOF
+      let (newHeaderStx, newMpState, _) ← Parser.parseHeader newMeta.mkInputContext
+      let newHeaderSnap := { cmdSnaps.finishedPrefix.head! with stx := newHeaderStx, mpState := newMpState }
       oldDoc.cancelTk.set
       let changePos := oldDoc.meta.text.source.firstDiffPos newMeta.text.source
       -- NOTE(WN): we invalidate eagerly as `endPos` consumes input greedily. To re-elaborate only
       -- when really necessary, we could do a whitespace-aware `Syntax` comparison instead.
       let mut validSnaps := cmdSnaps.finishedPrefix.takeWhile (fun s => s.endPos < changePos)
       if validSnaps.length = 0 then
-        let cancelTk ← CancelToken.new
-        let newCmdSnaps ← unfoldCmdSnaps newMeta newHeaderSnap #[] cancelTk ctx
-        modify fun st => { st with doc := ⟨newMeta, newHeaderSnap, newCmdSnaps, cancelTk⟩ }
+        validSnaps := [newHeaderSnap]
       else
         /- When at least one valid non-header snap exists, it may happen that a change does not fall
            within the syntactic range of that last snap but still modifies it by appending tokens.
@@ -311,10 +311,9 @@ section Updates
         let newLastStx ← parseNextCmd newMeta.mkInputContext preLastSnap
         if newLastStx != lastSnap.stx then
           validSnaps := validSnaps.dropLast
-        let cancelTk ← CancelToken.new
-        let newSnaps ← unfoldCmdSnaps newMeta newHeaderSnap validSnaps.toArray cancelTk ctx
-        let newCmdSnaps := AsyncList.ofList validSnaps ++ newSnaps
-        modify fun st => { st with doc := ⟨newMeta, newHeaderSnap, newCmdSnaps, cancelTk⟩ }
+      let cancelTk ← CancelToken.new
+      let newSnaps ← EIO.asTask <| unfoldCmdSnaps newMeta validSnaps.toArray cancelTk ctx
+      modify fun st => { st with doc := ⟨newMeta, AsyncList.asyncTail newSnaps, cancelTk⟩ }
 end Updates
 
 /- Notifications are handled in the main thread. They may change global worker state
