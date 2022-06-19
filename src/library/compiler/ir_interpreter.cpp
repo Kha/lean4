@@ -766,7 +766,7 @@ private:
                 for (param const & p : decl_params(e_new.m_decl)) {
                     if (!all_boxed) break;
                     type ty = param_type(p);
-                    all_boxed &= !type_is_scalar(ty) && ty != type::Irrelevant;
+                    all_boxed &= !type_is_scalar(ty);
                 }
                 // Recall that the interpreter can only handle boxed signatures.
                 if (all_boxed && decl_tag(e_new.m_decl) == decl_kind::Extern) {
@@ -859,19 +859,23 @@ private:
         symbol_cache_entry e = lookup_symbol(fn);
         if (e.m_addr) {
             object ** args2 = static_cast<object **>(LEAN_ALLOCA(args.size() * sizeof(object *))); // NOLINT
+            size_t j = 0;
             for (size_t i = 0; i < args.size(); i++) {
                 type t = param_type(decl_params(e.m_decl)[i]);
-                args2[i] = box_t(eval_arg(args[i]), t);
-                if (e.m_boxed && param_borrow(decl_params(e.m_decl)[i])) {
-                    // NOTE: If we chose the boxed version where the IR chose the unboxed one, we need to manually increment
-                    // originally borrowed parameters because the wrapper will decrement these after the call.
-                    // Basically the wrapper is more homogeneous (removing both unboxed and borrowed parameters) than we
-                    // would need in this instance.
-                    inc(args2[i]);
+                if (e.m_boxed || decl_tag(e.m_decl) != decl_kind::Extern || t != type::Irrelevant) {
+                    args2[j] = box_t(eval_arg(args[i]), t);
+                    if (e.m_boxed && param_borrow(decl_params(e.m_decl)[i])) {
+                        // NOTE: If we chose the boxed version where the IR chose the unboxed one, we need to manually increment
+                        // originally borrowed parameters because the wrapper will decrement these after the call.
+                        // Basically the wrapper is more homogeneous (removing both unboxed and borrowed parameters) than we
+                        // would need in this instance.
+                        inc(args2[j]);
+                    }
+                    j++;
                 }
             }
             push_frame(e.m_decl, old_size);
-            object * o = curry(e.m_addr, args.size(), args2);
+            object * o = curry(e.m_addr, j, args2);
             type t = decl_type(e.m_decl);
             if (type_is_scalar(t)) {
                 lean_assert(e.m_boxed);
