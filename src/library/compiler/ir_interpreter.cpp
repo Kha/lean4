@@ -44,6 +44,7 @@ functions, which have a (relatively) homogeneous ABI that we can use without run
 #include "library/trace.h"
 #include "library/compiler/ir.h"
 #include "library/compiler/init_attribute.h"
+#include "library/compiler/extern_attribute.h"
 #include "util/nat.h"
 #include "util/option_declarations.h"
 
@@ -179,6 +180,12 @@ fun_id const & decl_fun_id(decl const & b) { return cnstr_get_ref_t<fun_id>(b, 0
 array_ref<param> const & decl_params(decl const & b) { return cnstr_get_ref_t<array_ref<param>>(b, 1); }
 type decl_type(decl const & b) { return cnstr_get_type(b, 2); }
 fn_body const & decl_fun_body(decl const & b) { lean_assert(decl_tag(b) == decl_kind::Fun); return cnstr_get_ref_t<fn_body>(b, 3); }
+extern_attr_data_value const & decl_extern_attr_data(decl const & b) { lean_assert(decl_tag(b) == decl_kind::Extern); return cnstr_get_ref_t<extern_attr_data_value>(b, 3); }
+
+extern "C" object * lean_get_extern_name_for(object * data, object * fn);
+option_ref<string_ref> get_extern_name_for(extern_attr_data_value const & data, name const & backend) {
+    return option_ref<string_ref>(lean_get_extern_name_for(data.to_obj_arg(), backend.to_obj_arg()));
+}
 
 extern "C" object * lean_ir_find_env_decl(object * env, object * n);
 option_ref<decl> find_ir_decl(environment const & env, name const & n) {
@@ -187,6 +194,7 @@ option_ref<decl> find_ir_decl(environment const & env, name const & n) {
 
 extern "C" double lean_float_of_nat(lean_obj_arg a);
 
+static string_ref * g_backend = nullptr;
 static string_ref * g_mangle_prefix = nullptr;
 static string_ref * g_boxed_suffix = nullptr;
 static string_ref * g_boxed_mangled_suffix = nullptr;
@@ -748,21 +756,45 @@ private:
     }
 
     /** \brief Return cached lookup result for given unmangled function name in the current binary. */
-    symbol_cache_entry lookup_symbol(name const & fn) {
+    symbol_cache_entry lookup_symbol(name const & fn, bool allow_init_interp = false) {
         if (symbol_cache_entry const * e = m_symbol_cache.find(fn)) {
             return *e;
         } else {
             symbol_cache_entry e_new { get_decl(fn), nullptr, false };
             if (m_prefer_native || decl_tag(e_new.m_decl) == decl_kind::Extern || has_init_attribute(m_env, fn)) {
-                string_ref mangled = name_mangle(fn, *g_mangle_prefix);
-                string_ref boxed_mangled(string_append(mangled.to_obj_arg(), g_boxed_mangled_suffix->raw()));
-                // check for boxed version first
-                if (void *p_boxed = lookup_symbol_in_cur_exe(boxed_mangled.data())) {
-                    e_new.m_addr = p_boxed;
-                    e_new.m_boxed = true;
-                } else if (void *p = lookup_symbol_in_cur_exe(mangled.data())) {
-                    // if there is no boxed version, there are no unboxed parameters, so use default version
-                    e_new.m_addr = p;
+                bool all_boxed = !type_is_scalar(decl_type(e_new.m_decl));
+                for (param const & p : decl_params(e_new.m_decl)) {
+                    if (!all_boxed) break;
+                    type ty = param_type(p);
+                    all_boxed &= !type_is_scalar(ty) && ty != type::Irrelevant;
+                }
+                // Recall that the interpreter can only handle boxed signatures.
+                if (all_boxed && decl_tag(e_new.m_decl) == decl_kind::Extern) {
+                    if (auto sym = get_extern_name_for(decl_extern_attr_data(e_new.m_decl), *g_backend)) {
+                        e_new.m_addr = lookup_symbol_in_cur_exe(sym.get()->data());
+                        if (!e_new.m_addr) {
+                            // This doesn't work for header-declared functions...
+                            //throw exception(sstream() << "could not find native implementation of external declaration '" << fn
+                            //                << "' (symbol '" << sym.get()->data() << "')");
+                            all_boxed = false;
+                        }
+                    }
+                }
+                if (!e_new.m_addr) {
+                    string_ref mangled = name_mangle(fn, *g_mangle_prefix);
+                    if (!all_boxed) {
+                        mangled = string_ref(string_append(mangled.to_obj_arg(), g_boxed_mangled_suffix->raw()));
+                        e_new.m_boxed = true;
+                    }
+                    e_new.m_addr = lookup_symbol_in_cur_exe(mangled.data());
+                    if (!e_new.m_addr && decl_tag(e_new.m_decl) == decl_kind::Extern) {
+                        throw exception(sstream() << "could not find native implementation of external declaration '" << fn
+                                        << "' (symbol '" << mangled.data() << "')");
+                    }
+                    if (!e_new.m_addr && !allow_init_interp && has_init_attribute(m_env, fn)) {
+                        // We don't know whether `[init]` decls can be re-executed, so let's not.
+                        throw exception(sstream() << "cannot evaluate `[init]` declaration '" << fn << "' in the same module");
+                    }
                 }
             }
             m_symbol_cache.insert(fn, e_new);
@@ -811,11 +843,6 @@ private:
             }
         }
 
-        // no native code, so might be part of the current module
-        if (get_regular_init_fn_name_for(m_env, fn)) {
-            // We don't know whether `[init]` decls can be re-executed, so let's not.
-            throw exception(sstream() << "cannot evaluate `[init]` declaration '" << fn << "' in the same module");
-        }
         push_frame(e.m_decl, m_arg_stack.size());
         value r = eval_body(decl_fun_body(e.m_decl));
         pop_frame(r, decl_type(e.m_decl));
@@ -855,12 +882,6 @@ private:
                 r = o;
             }
         } else {
-            if (decl_tag(e.m_decl) == decl_kind::Extern) {
-                string_ref mangled = name_mangle(fn, *g_mangle_prefix);
-                string_ref boxed_mangled(string_append(mangled.to_obj_arg(), g_boxed_mangled_suffix->raw()));
-                throw exception(sstream() << "could not find native implementation of external declaration '" << fn
-                                          << "' (symbols '" << boxed_mangled.data() << "' or '" << mangled.data() << "')");
-            }
             // evaluate args in old stack frame
             for (const auto & arg : args) {
                 m_arg_stack.push_back(eval_arg(arg));
@@ -1026,7 +1047,7 @@ public:
                 object * o = io_result_get_value(r);
                 mark_persistent(o);
                 dec_ref(r);
-                symbol_cache_entry e = lookup_symbol(decl);
+                symbol_cache_entry e = lookup_symbol(decl, /* allow_init_interp */ true);
                 if (e.m_addr) {
                     *((object **)e.m_addr) = o;
                 } else {
@@ -1095,6 +1116,8 @@ extern "C" LEAN_EXPORT object * lean_run_init(object * env, object * opts, objec
 }
 
 void initialize_ir_interpreter() {
+    ir::g_backend = new string_ref("c");
+    mark_persistent(ir::g_backend->raw());
     ir::g_mangle_prefix = new string_ref("l_");
     mark_persistent(ir::g_mangle_prefix->raw());
     ir::g_boxed_suffix = new string_ref("_boxed");
@@ -1117,5 +1140,6 @@ void finalize_ir_interpreter() {
     delete ir::g_boxed_mangled_suffix;
     delete ir::g_boxed_suffix;
     delete ir::g_mangle_prefix;
+    delete ir::g_backend;
 }
 }

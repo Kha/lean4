@@ -130,13 +130,17 @@ def isExternC (env : Environment) (fn : Name) : Bool :=
   | some { entries := [ ExternEntry.standard `all _ ], .. } => true
   | _ => false
 
-def getExternNameFor (env : Environment) (backend : Name) (fn : Name) : Option String := do
-  let data ← getExternAttrData env fn
+@[export lean_get_extern_name_for]
+def ExternAttrData.getExternNameFor (data : ExternAttrData) (backend : Name) : Option String := do
   let entry ← getExternEntryFor data backend
   match entry with
   | ExternEntry.standard _ n => pure n
   | ExternEntry.foreign _ n  => pure n
   | _ => failure
+
+def getExternNameFor (env : Environment) (backend : Name) (fn : Name) : Option String := do
+  let data ← getExternAttrData env fn
+  data.getExternNameFor backend
 
 private def getExternConstArity (declName : Name) : CoreM Nat := do
   let fromSignature : Unit → CoreM Nat := fun _ => do
