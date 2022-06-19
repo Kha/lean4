@@ -10,7 +10,7 @@ namespace Lean
 namespace Parser
 
 builtin_initialize
-  registerBuiltinParserAttribute `builtinSyntaxParser `stx LeadingIdentBehavior.both
+  registerBuiltinParserAttribute `builtinSyntaxParser `stx
   registerBuiltinDynamicParserAttribute `stxParser `stx
 
 builtin_initialize
