@@ -826,7 +826,7 @@ def evalPrec (stx : Syntax) : MacroM Nat :=
     let stx ← expandMacros stx
     match stx with
     | `(prec| $num:num) => return num.isNatLit?.getD 0
-    | _ => Macro.throwErrorAt stx "unexpected precedence"
+    | _ => Macro.throwErrorAt stx "unexpected precedence '{stx}'"
 
 macro_rules
   | `(prec| $a + $b) => do `(prec| $(quote <| (← evalPrec a) + (← evalPrec b)):num)
