@@ -10,7 +10,7 @@ namespace Lean
 namespace Parser
 
 builtin_initialize
-  registerBuiltinParserAttribute `builtinSyntaxParser `stx
+  registerBuiltinParserAttribute `builtinSyntaxParser `stx LeadingIdentBehavior.both
   registerBuiltinDynamicParserAttribute `stxParser `stx
 
 builtin_initialize
@@ -33,7 +33,10 @@ namespace Syntax
 @[builtinSyntaxParser] def cat             := leading_parser ident >> optPrecedence
 @[builtinSyntaxParser] def unary           := leading_parser ident >> checkNoWsBefore >> "(" >> many1 syntaxParser >> ")"
 @[builtinSyntaxParser] def binary          := leading_parser ident >> checkNoWsBefore >> "(" >> many1 syntaxParser >> ", " >> many1 syntaxParser >> ")"
+@[builtinSyntaxParser] def sepBy           := leading_parser "sepBy(" >> many1 syntaxParser >> ", " >> strLit >> optional (", " >> many1 syntaxParser) >> optional (", " >> nonReservedSymbol "allowTrailingSep") >> ")"
+@[builtinSyntaxParser] def sepBy1          := leading_parser "sepBy1(" >> many1 syntaxParser >> ", " >> strLit >> optional (", " >> many1 syntaxParser) >> optional (", " >> nonReservedSymbol "allowTrailingSep") >> ")"
 @[builtinSyntaxParser] def atom            := leading_parser strLit
+@[builtinSyntaxParser] def nonReserved     := leading_parser "&" >> strLit
 
 end Syntax
 

@@ -30,7 +30,7 @@ def expandMacroArg (stx : Syntax) : MacroM (Syntax × Syntax) := do
       -- if there is a binding, we assume the user knows what they are doing
       | some id => pure <| mkAntiquotNode id
       -- otherwise `group` the syntax to enforce arity 1, e.g. for `noWs`
-      | none    => return (← `(stx| group($stx)), mkAntiquotNode id)
+      | none    => return (← `(stx| Lean.Parser.group($stx)), mkAntiquotNode id)
   pure (stx, pat)
 where mkSplicePat kind id suffix :=
   mkNullNode #[mkAntiquotSuffixSpliceNode kind (mkAntiquotNode id) suffix]

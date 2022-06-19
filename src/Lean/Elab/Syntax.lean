@@ -80,8 +80,14 @@ where
       processUnary stx
     else if kind == ``Lean.Parser.Syntax.binary then
       processBinary stx
+    else if kind == ``Lean.Parser.Syntax.sepBy then
+      processSepBy stx
+    else if kind == ``Lean.Parser.Syntax.sepBy1 then
+      processSepBy1 stx
     else if kind == ``Lean.Parser.Syntax.atom then
       processAtom stx
+    else if kind == ``Lean.Parser.Syntax.nonReserved then
+      processNonReserved stx
     else
       let stxNew? ← liftM (liftMacroM (expandMacro? stx) : TermElabM _)
       match stxNew? with
@@ -103,7 +109,7 @@ where
   processNullaryOrCat (stx : Syntax) := do
     match stx[1].getOptional? with
     | none => return stx[0]
-    | some prec =>
+    | some _ =>
       let prec? ← liftMacroM <| expandOptPrecedence stx[1]
       let prec := prec?.getD 0
       `($(stx[0]) $(quote prec))
@@ -116,6 +122,20 @@ where
     let p₁ ← withNestedParser do process stx[2]
     let p₂ ← withNestedParser do process stx[4]
     `($(stx[0]) $p₁ $p₂)
+
+  processSepBy (stx : Syntax) := do
+    let p ← withNestedParser $ process stx[1]
+    let sep := stx[3]
+    let psep ← if stx[4].isNone then `(Parser.symbol $sep) else process stx[4][1]
+    let allowTrailingSep := !stx[5].isNone
+    `(Parser.sepBy $p $sep $psep $(quote allowTrailingSep))
+
+  processSepBy1 (stx : Syntax) := do
+    let p ← withNestedParser do process stx[1]
+    let sep := stx[3]
+    let psep ← if stx[4].isNone then `(Parser.symbol $sep) else process stx[4][1]
+    let allowTrailingSep := !stx[5].isNone
+    `(Parser.sepBy1 $p $sep $psep $(quote allowTrailingSep))
 
   isValidAtom (s : String) : Bool :=
     !s.isEmpty &&
@@ -136,6 +156,12 @@ where
       else
         ``(Parser.symbol $(quote atom))
     | none => throwUnsupportedSyntax
+
+  processNonReserved (stx : Syntax) := do
+    match stx[1].isStrLit? with
+    | some atom => `(Parser.nonReservedSymbol $(quote atom) false)
+    | none      => throwUnsupportedSyntax
+
 
 end Term
 
