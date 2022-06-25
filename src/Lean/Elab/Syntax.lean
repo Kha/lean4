@@ -107,12 +107,14 @@ where
       mkParserSeq args
 
   processNullaryOrCat (stx : Syntax) := do
+    let n := stx[0].getId
+    let n ← resolveGlobalConstNoOverloadCore (`Lean.Parser ++ n) <|> pure n
     match stx[1].getOptional? with
-    | none => return stx[0]
+    | none => return mkIdent n
     | some _ =>
       let prec? ← liftMacroM <| expandOptPrecedence stx[1]
       let prec := prec?.getD 0
-      `($(stx[0]) $(quote prec))
+      `($(mkIdent n) $(quote prec))
 
   processUnary (stx : Syntax) := do
     let p ← withNestedParser do process stx[2]
