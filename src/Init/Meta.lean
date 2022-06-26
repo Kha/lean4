@@ -455,8 +455,8 @@ def mkLit (kind : SyntaxNodeKind) (val : String) (info := SourceInfo.none) : Syn
   let atom : Syntax := Syntax.atom info val
   mkNode kind #[atom]
 
-def mkStrLit (val : String) (info := SourceInfo.none) : Syntax :=
-  mkLit strLitKind (String.quote val) info
+--def mkStrLit (val : String) (info := SourceInfo.none) : Syntax :=
+--  mkLit strLitKind (String.quote val) info
 
 def mkNumLit (val : String) (info := SourceInfo.none) : Syntax :=
   mkLit numLitKind val info
@@ -1088,6 +1088,7 @@ macro "declare_simp_like_tactic" opt:((simpAllKind <|> dsimpKind)?) tacName:iden
       let r := s.setArg 1 (mkNullNode #[c])
       return r)
 
+#exit
 declare_simp_like_tactic simpAutoUnfold "simp! " fun (c : Lean.Meta.Simp.Config) => { c with autoUnfold := true }
 declare_simp_like_tactic simpArith "simp_arith " fun (c : Lean.Meta.Simp.Config) => { c with arith := true }
 declare_simp_like_tactic simpArithAutoUnfold "simp_arith! " fun (c : Lean.Meta.Simp.Config) => { c with arith := true, autoUnfold := true }

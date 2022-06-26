@@ -6,6 +6,20 @@ Authors: Leonardo de Moura
 prelude
 import Init.Notation
 
+namespace Lean.Parser
+
+declare_syntax_cat rawStx
+
+--def rawStx (rbp := 0) := categoryParser `rawStx rbp
+def tactic (rbp := 0) := categoryParser `tactic rbp
+
+abbrev colGt := checkColGt
+abbrev colGe := checkColGe
+
+end Lean.Parser
+open Lean.Parser
+open Lean.Parser.Term
+
 namespace Lean
 
 namespace Parser.Tactic
@@ -176,6 +190,7 @@ macro "sorry" : tactic => `(exact sorry)
 /-- `infer_instance` is an abbreviation for `exact inferInstance` -/
 macro "infer_instance" : tactic => `(exact inferInstance)
 
+set_option trace.compiler.ir.result true in
 /-- Optional configuration option for tactics -/
 syntax config := atomic("(" &"config") " := " term ")"
 

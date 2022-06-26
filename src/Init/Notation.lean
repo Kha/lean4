@@ -8,6 +8,154 @@ Notation for operators defined at Prelude.lean
 prelude
 import Init.Prelude
 
+namespace Lean.PrettyPrinter
+
+def Formatter : Type := Nat → Nat → Nat → Nat → Nat → Nat
+--@[extern "lean_formatter_empty"]
+--axiom Formatter.empty : Formatter
+--abbrev TrailingFormatter := Formatter
+instance Formatter.inhabited : Inhabited Formatter := ⟨sorry⟩
+
+def Parenthesizer : Type := Nat → Nat → Nat → Nat → Nat → Nat
+instance Parenthesizer.inhabited : Inhabited Parenthesizer := ⟨sorry⟩
+
+end Lean.PrettyPrinter
+
+namespace Lean.Parser
+open Lean.PrettyPrinter
+
+opaque Parser : Type
+@[extern "lean_parser_empty"]
+axiom Parser.empty : Parser
+instance Parser.inhabited : Inhabited Parser := ⟨Parser.empty⟩
+abbrev TrailingParser := Parser
+
+@[extern "l_Lean_Parser_andthen"]
+opaque andthen (p q : Parser) : Parser
+@[combinatorFormatter Lean.Parser.andthen, extern "l_Lean_Parser_andthen_formatter"]
+opaque andthen.formatter (p q : Formatter) : Formatter
+@[combinatorParenthesizer Lean.Parser.andthen, extern "l_Lean_Parser_andthen_parenthesizer"]
+opaque andthen.parenthesizer (p q : Parenthesizer) : Parenthesizer
+
+@[extern "l_Lean_Parser_leadingNode"]
+opaque leadingNode (n : SyntaxNodeKind) (prec : Nat) (p : Parser) : TrailingParser
+@[combinatorFormatter Lean.Parser.leadingNode, extern "l_Lean_Parser_leadingNode_formatter"]
+opaque leadingNode.formatter (n : SyntaxNodeKind) (prec : Nat) (p : Formatter) : Formatter
+@[combinatorParenthesizer Lean.Parser.leadingNode, extern "l_Lean_Parser_leadingNode_parenthesizer"]
+opaque leadingNode.parenthesizer (n : SyntaxNodeKind) (prec : Nat) (p : Parenthesizer) : Parenthesizer
+
+@[extern "l_Lean_Parser_symbol"]
+opaque symbol (sym : String) : Parser
+@[combinatorFormatter Lean.Parser.symbol, extern "l_Lean_Parser_symbol_formatter"]
+opaque symbol.formatter (sym : String) : Formatter
+@[combinatorParenthesizer Lean.Parser.symbol, extern "l_Lean_Parser_symbol_parenthesizer"]
+opaque symbol.parenthesizer (sym : String) : Parenthesizer
+
+@[extern "l_Lean_Parser_categoryParser"]
+opaque categoryParser (cat : Name) (rbp : Nat) : Parser
+@[combinatorFormatter Lean.Parser.categoryParser, extern "l_Lean_Parser_categoryParser_formatter"]
+opaque categoryParser.formatter (cat : Name) (rbp : Nat) : Formatter
+@[combinatorParenthesizer Lean.Parser.categoryParser, extern "l_Lean_Parser_categoryParser_parenthesizer"]
+opaque categoryParser.parenthesizer (cat : Name) (rbp : Nat) : Parenthesizer
+
+def prec (rbp := 0) := categoryParser `prec rbp
+def prio (rbp := 0) := categoryParser `prio rbp
+def stx (rbp := 0) := categoryParser `stx rbp
+def term (rbp := 0) := categoryParser `term rbp
+
+@[extern "l_Lean_Parser_ident"]
+opaque ident : Parser
+@[combinatorFormatter Lean.Parser.ident, extern "l_Lean_Parser_ident_formatter"]
+opaque ident.formatter : Formatter
+@[combinatorParenthesizer Lean.Parser.ident, extern "l_Lean_Parser_ident_parenthesizer"]
+opaque ident.parenthesizer : Parenthesizer
+
+end Lean.Parser
+
+open Lean
+open Lean.Parser
+open Lean.PrettyPrinter
+
+@[extern "l_Lean_Name_mangle"]
+opaque Lean.Name.mangle (n : Name) (pre : String := "l_") : String := ""
+
+@[extern "l_Lean_Syntax_mkStrLit"]
+opaque Lean.Syntax.mkStrLit (s : String) (info : SourceInfo := SourceInfo.none) : Syntax
+
+local macro "bootstrap_parser" id:ident ty:term : command =>
+  set_option hygiene false in
+  `(@[extern $(.mkStrLit id.getId.mangle):str]
+    opaque $id:ident : $ty Parser
+    namespace $id
+      --@[combinatorParenthesizer $id, extern $(.mkStrLit (id.getId.append `parenthesizer).mangle):str]
+      --opaque parenthesizer : $ty Parenthesizer
+      --@[combinatorFormatter $id, extern $(.mkStrLit (id.getId.append `formatter).mangle):str]
+      --opaque formatter : $ty Formatter
+      @[combinatorParenthesizer $id]
+      opaque parenthesizer : $ty Parenthesizer
+      @[combinatorFormatter $id]
+      opaque formatter : $ty Formatter
+    end $id)
+
+bootstrap_parser Lean.Parser.group fun Parser => Parser → Parser
+bootstrap_parser Lean.Parser.ppRealGroup fun Parser => Parser → Parser
+bootstrap_parser Lean.Parser.ppRealFill fun Parser => Parser → Parser
+bootstrap_parser Lean.Parser.ppIndent fun Parser => Parser → Parser
+bootstrap_parser Lean.Parser.ppDedent fun Parser => Parser → Parser
+bootstrap_parser Lean.Parser.ppSpace fun Parser => Parser
+bootstrap_parser Lean.Parser.ppLine fun Parser => Parser
+
+bootstrap_parser Lean.Parser.checkColGt fun Parser => (errorMsg : String := "checkColGt") → Parser
+bootstrap_parser Lean.Parser.checkColGe fun Parser => (errorMsg : String := "checkColGe") → Parser
+bootstrap_parser Lean.Parser.checkWsBefore fun Parser => (errorMsg : String := "space before") → Parser
+abbrev Lean.Parser.ws := checkWsBefore
+bootstrap_parser Lean.Parser.checkNoWsBefore fun Parser => (errorMsg : String := "no space before") → Parser
+@[runParserAttributeHooks] abbrev Lean.Parser.noWs := checkNoWsBefore
+bootstrap_parser Lean.Parser.withPosition fun Parser => Parser → Parser
+
+bootstrap_parser Lean.Parser.numLit fun Parser => Parser
+abbrev Lean.Parser.num := numLit
+bootstrap_parser Lean.Parser.strLit fun Parser => Parser
+abbrev Lean.Parser.str := strLit
+bootstrap_parser Lean.Parser.Tactic.tacticSeq fun Parser => Parser
+
+--bootstrap_parser Lean.Parser.nonReservedSymbol fun Parser => String → (includeIdent : Bool := false) → Parser
+bootstrap_parser Lean.Parser.optional fun Parser => Parser → Parser
+bootstrap_parser Lean.Parser.many fun Parser => Parser → Parser
+bootstrap_parser Lean.Parser.many1 fun Parser => Parser → Parser
+bootstrap_parser Lean.Parser.atomic fun Parser => Parser → Parser
+bootstrap_parser Lean.Parser.orelse fun Parser => Parser → Parser → Parser
+bootstrap_parser Lean.Parser.trailingNode fun Parser => SyntaxNodeKind → (prec lhsPrec : Nat) → Parser → Parser
+bootstrap_parser Lean.Parser.notFollowedBy fun Parser => Parser → Parser
+bootstrap_parser Lean.Parser.sepBy fun Parser => (p : Parser) → (sep : String) → (psep : Parser) → (allowTrailingSep : Bool := false) → Parser
+bootstrap_parser Lean.Parser.sepBy1 fun Parser => (p : Parser) → (sep : String) → (psep : Parser) → (allowTrailingSep : Bool := false) → Parser
+
+@[extern "l_Lean_Parser_nonReservedSymbol"]
+opaque Lean.Parser.nonReservedSymbol (sym : String) (b : Bool := false) : Parser
+@[combinatorFormatter Lean.Parser.nonReservedSymbol, extern "l_Lean_Parser_nonReservedSymbol_formatter"]
+opaque Lean.Parser.nonReservedSymbol.formatter (sym : String) (b : Bool := false) : Formatter
+@[combinatorParenthesizer Lean.Parser.nonReservedSymbol, extern "l_Lean_Parser_nonReservedSymbol_parenthesizer"]
+opaque Lean.Parser.nonReservedSymbol.parenthesizer (sym : String) (b : Bool := false) : Parenthesizer
+
+@[extern "l_Lean_Parser_nodeWithAntiquot"]
+opaque Lean.Parser.nodeWithAntiquot (name : String) (kind : SyntaxNodeKind) (p : Parser) (anonymous := false) : Parser
+@[combinatorFormatter Lean.Parser.nodeWithAntiquot, extern "l_Lean_Parser_nodeWithAntiquot_formatter"]
+opaque Lean.Parser.nodeWithAntiquot.formatter (name : String) (kind : SyntaxNodeKind) (p : Formatter) (anonymous := false) : Formatter
+@[combinatorParenthesizer Lean.Parser.nodeWithAntiquot, extern "l_Lean_Parser_nodeWithAntiquot_parenthesizer"]
+opaque Lean.Parser.nodeWithAntiquot.parenthesizer (name : String) (kind : SyntaxNodeKind) (p : Parenthesizer) (anonymous := false) : Parenthesizer
+
+bootstrap_parser Lean.Parser.Term.letDecl fun Parser => Parser
+bootstrap_parser Lean.Parser.Term.haveDecl fun Parser => Parser
+bootstrap_parser Lean.Parser.Term.sufficesDecl fun Parser => Parser
+bootstrap_parser Lean.Parser.Term.letRecDecls fun Parser => Parser
+bootstrap_parser Lean.Parser.Term.hole fun Parser => Parser
+bootstrap_parser Lean.Parser.Term.syntheticHole fun Parser => Parser
+bootstrap_parser Lean.Parser.Term.matchDiscr fun Parser => Parser
+bootstrap_parser Lean.Parser.Term.bracketedBinder fun Parser => Parser
+bootstrap_parser Lean.Parser.Term.attrKind fun Parser => Parser
+
+bootstrap_parser Lean.Parser.interpolatedStr fun Parser => Parser → Parser
+
 -- DSL for specifying parser precedences and priorities
 
 namespace Lean.Parser.Syntax
@@ -217,8 +365,3 @@ macro_rules
 -- The keyword prevents declaring a `this` binding except through metapgrogramming, as is done by `have`/`show`.
 /-- Special identifier introduced by "anonymous" `have : ...`, `suffices p ...` etc. -/
 macro tk:"this" : term => return Syntax.ident tk.getHeadInfo "this".toSubstring `this []
-
-/-
-  Category for carrying raw syntax trees between macros; any content is printed as is by the pretty printer.
-  The only accepted parser for this category is an antiquotation. -/
-declare_syntax_cat rawStx

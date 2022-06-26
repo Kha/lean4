@@ -9,6 +9,8 @@ import Init.Data.ToString.Macro
 
 namespace Std
 
+open Lean.Parser
+
 syntax:max "f!" interpolatedStr(term) : term
 
 macro_rules

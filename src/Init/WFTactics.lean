@@ -17,6 +17,8 @@ macro_rules | `(tactic| decreasing_trivial) => `(tactic| apply Nat.sub_succ_lt_s
 macro_rules | `(tactic| decreasing_trivial) => `(tactic| apply Nat.pred_lt'; assumption) -- i-1 < i if j < i
 macro_rules | `(tactic| decreasing_trivial) => `(tactic| apply Nat.pred_lt; assumption)  -- i-1 < i if i ≠ 0
 
+open Lean.Parser.Tactic
+
 macro "decreasing_with " ts:tacticSeq : tactic =>
  `((simp_wf
     repeat (first | apply Prod.Lex.right | apply Prod.Lex.left)

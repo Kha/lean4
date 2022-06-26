@@ -11,6 +11,7 @@ import Init.Data.Array.Subarray
 import Init.Data.ToString
 namespace Lean
 
+open Lean.Parser in
 macro "Macro.trace[" id:ident "]" s:interpolatedStr(term) : term =>
   `(Macro.trace $(quote id.getId.eraseMacroScopes) (s! $s))
 

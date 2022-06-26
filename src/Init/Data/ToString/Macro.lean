@@ -7,6 +7,8 @@ prelude
 import Init.Meta
 import Init.Data.ToString.Basic
 
+open Lean.Parser
+
 syntax:max "s!" interpolatedStr(term) : term
 
 macro_rules
