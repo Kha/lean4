@@ -239,14 +239,6 @@ unsafe def mkParserOfConstantUnsafe (constName : Name) (compileParserDescr : Par
     | Expr.const `Lean.Parser.Parser _ _ =>
       let p ← IO.ofExcept $ env.evalConst Parser opts constName
       pure ⟨true, p⟩
-    | Expr.const `Lean.ParserDescr _ _ =>
-      let d ← IO.ofExcept $ env.evalConst ParserDescr opts constName
-      let p ← compileParserDescr d
-      pure ⟨true, p⟩
-    | Expr.const `Lean.TrailingParserDescr _ _ =>
-      let d ← IO.ofExcept $ env.evalConst TrailingParserDescr opts constName
-      let p ← compileParserDescr d
-      pure ⟨false, p⟩
     | _ => throw ↑s!"unexpected parser type at '{constName}' (`ParserDescr`, `TrailingParserDescr`, `Parser` or `TrailingParser` expected)"
 
 @[implementedBy mkParserOfConstantUnsafe]
