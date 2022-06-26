@@ -6,6 +6,8 @@ lib.makeOverridable (
 { name, src,  fullSrc ? src, 
   # Lean dependencies. Each entry should be an output of buildLeanPackage.
   deps ? [ lean.Lean ],
+  # Output from `lean --deps-json` on every .lean file in `src/`. Persist the corresponding output attribute to a file and pass it back in here to avoid IFD.
+  modDepsFile ? null,
   # Static library dependencies. Each derivation `static` should contain a static library in the directory `${static}`.
   staticLibDeps ? [],
   # Whether to wrap static library inputs in a -Wl,--start-group [...] -Wl,--end-group to ensure dependencies are resolved.
@@ -22,7 +24,7 @@ lib.makeOverridable (
   # Lean plugin dependencies. Each derivation `plugin` should contain a plugin library at path `${plugin}/${plugin.name}`.
   pluginDeps ? [],
   debug ? false, leanFlags ? [], leancFlags ? [], linkFlags ? [], executableName ? lib.toLower name,
-  srcTarget ? "..#stage0", srcArgs ? "(\${args[*]})", lean-final ? lean-final' }:
+  srcTarget ? "..#stage0", srcArgs ? "(\${args[*]})", lean-final ? lean-final' }@args:
 with builtins; let
   # "Init.Core" ~> "Init/Core"
   modToPath = mod: replaceStrings ["."] ["/"] mod;
@@ -85,26 +87,13 @@ with builtins; let
   leanPluginFlags = lib.concatStringsSep " " (map (dep: "--plugin=${pathOfSharedLib dep}") pluginDeps);
   loadDynlibsOfDeps = deps: lib.unique (concatMap (d: d.propagatedLoadDynlibs) deps);
 
-  fakeDepRoot = runBareCommandLocal "${name}-dep-root" {} ''
-    mkdir $out
-    cd $out
-    mkdir ${lib.concatStringsSep " " ([name] ++ (map (d: d.name) allExternalDeps))}
-  '';
-  print-lean-deps = writeShellScriptBin "print-lean-deps" ''
-    export LEAN_PATH=${fakeDepRoot}
-    ${lean-leanDeps}/bin/lean --deps --stdin | ${gnused}/bin/sed "s!$LEAN_PATH/!!;s!/!.!g;s!.olean!!"
-  '';
-  # build a file containing the module names of all immediate dependencies of `mod`
-  leanDeps = mod: mkBareDerivation {
+  modDepsFile = args.modDepsFile or mkBareDerivation {
     name ="${mod}-deps";
-    src = src + ("/" + modToLean mod);
-    buildInputs = [ print-lean-deps ];
     buildCommand = ''
-      print-lean-deps < $src > $out
+      ${lean-leanDeps}/bin/lean --deps-json $(find src -name '*.lean')
     '';
-    preferLocalBuild = true;
-    allowSubstitutes = false;
   };
+  modDeps = fromJSON modDepsFile;
   # build module (.olean and .c) given derivations of all (immediate) dependencies
   buildMod = mod: deps: mkBareDerivation rec {
     name = "${mod}";
@@ -160,7 +149,7 @@ with builtins; let
   # recursion to memoize common dependencies.
   buildModAndDeps = mod: modMap: if modMap ? ${mod} || externalModMap ? ${mod} then modMap else
     let
-      deps = filter (p: p != "") (lib.splitString "\n" (readFile (leanDeps mod)));
+      deps = if modDeps.${mod} ? "error" then abort "error while parsing imports of ${mod}:\n${modDeps.${mod}.error}" else map (m: m.module) modDeps.${mod}.mods;
       modMap' = lib.foldr buildModAndDeps modMap deps;
     in modMap' // { ${mod} = mkMod mod (map (dep: if modMap' ? ${dep} then modMap'.${dep} else externalModMap.${dep}) deps); };
   makeEmacsWrapper = name: emacs: lean: writeShellScriptBin name ''
