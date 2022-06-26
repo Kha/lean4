@@ -8,8 +8,8 @@ options get_default_options() {
     // switch to `true` for ABI-breaking changes affecting meta code
     opts = opts.update({"interpreter", "prefer_native"}, false);
     // switch to `true` for changing built-in parsers used in quotations
-    opts = opts.update({"internal", "parseQuotWithCurrentStage"}, false);
 #endif
+    opts = opts.update({"internal", "parseQuotWithCurrentStage"}, true);
     return opts;
 }
 }
