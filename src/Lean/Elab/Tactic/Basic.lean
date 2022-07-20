@@ -236,20 +236,20 @@ instance : MonadBacktrack SavedState TacticM where
   saveState := Tactic.saveState
   restoreState b := b.restore
 
+/-- Execute `x` with error recovery disabled -/
+def withoutRecover (x : TacticM α) : TacticM α :=
+  withReader (fun ctx => { ctx with recover := false }) x
+
 @[inline] protected def tryCatch {α} (x : TacticM α) (h : Exception → TacticM α) : TacticM α := do
   let b ← saveState
-  try x catch ex => b.restore; h ex
+  try withoutRecover x catch ex => b.restore; h ex
 
 instance : MonadExcept Exception TacticM where
   throw    := throw
   tryCatch := Tactic.tryCatch
 
-/-- Execute `x` with error recovery disabled -/
-def withoutRecover (x : TacticM α) : TacticM α :=
-  withReader (fun ctx => { ctx with recover := false }) x
-
 @[inline] protected def orElse (x : TacticM α) (y : Unit → TacticM α) : TacticM α := do
-  try withoutRecover x catch _ => y ()
+  try x catch _ => y ()
 
 instance : OrElse (TacticM α) where
   orElse := Tactic.orElse
