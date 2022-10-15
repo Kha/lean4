@@ -5,6 +5,7 @@ with builtins;
 rec {
   inherit stdenv;
   buildCMake = args: stdenv.mkDerivation ({
+    src = lib.sourceByRegex ../src [ "/src/[a-z].*" "/src/CMakeLists\.txt" ];
     nativeBuildInputs = [ cmake ];
     buildInputs = [ gmp ];
     # https://github.com/NixOS/nixpkgs/issues/60919
@@ -15,7 +16,6 @@ rec {
       patchShebangs .
     '';
   } // args // {
-    src = args.realSrc or (lib.sourceByRegex args.src [ "[a-z].*" "CMakeLists\.txt" ]);
     cmakeFlags = (args.cmakeFlags or [ "-DSTAGE=1" "-DPREV_STAGE=./faux-prev-stage" "-DUSE_GITHASH=OFF" ]) ++ (args.extraCMakeFlags or extraCMakeFlags) ++ lib.optional (args.debug or debug) [ "-DCMAKE_BUILD_TYPE=Debug" ];
     preConfigure = args.preConfigure or "" + ''
       # ignore absence of submodule
@@ -25,7 +25,7 @@ rec {
   lean-bin-tools-unwrapped = buildCMake {
     name = "lean-bin-tools";
     outputs = [ "out" "leanc_src" ];
-    realSrc = lib.sourceByRegex ../src [ "CMakeLists\.txt" "cmake.*" "bin.*" "include.*" ".*\.in" "Leanc\.lean" ];
+    src = lib.sourceByRegex ../src [ "/src/CMakeLists\.txt" "/src/cmake.*" "/src/bin.*" "/src/include.*" "/src/.*\.in" "/src/Leanc\.lean" ];
     preConfigure = ''
       touch empty.cpp
       sed -i 's/add_subdirectory.*//;s/set(LEAN_OBJS.*/set(LEAN_OBJS empty.cpp)/' CMakeLists.txt
@@ -43,7 +43,6 @@ rec {
   };
   leancpp = buildCMake {
     name = "leancpp";
-    src = ../src;
     buildFlags = [ "leancpp" "leanrt" "leanrt_initial-exec" "shell" ];
     installPhase = ''
       mkdir -p $out
@@ -58,7 +57,7 @@ rec {
   '';
   stage0 = wrapStage (args.stage0 or (buildCMake {
     name = "lean-stage0";
-    realSrc = ../stage0/src;
+    src = ../stage0/src;
     debug = stage0debug;
     cmakeFlags = [ "-DSTAGE=0" ];
     extraCMakeFlags = [];
@@ -138,7 +137,7 @@ rec {
       });
       test = buildCMake {
         name = "lean-test-${desc}";
-        realSrc = lib.sourceByRegex ../. [ "src.*" "tests.*" ];
+        src = lib.sourceByRegex ../. [ "/src.*" "/tests.*" ];
         buildInputs = [ gmp perl ];
         preConfigure = ''
           cd src
