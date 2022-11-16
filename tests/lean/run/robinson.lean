@@ -18,7 +18,7 @@ abbrev P (c : Option Subst) u v := match c with
   | none => strangers u v
   | some f => act f u = act f v
 
-def rel : WellFoundedRelation (Term × Term) := measure (λ (u, v) => depth u + depth v)
+noncomputable def rel : WellFoundedRelation (Term × Term) := measure (λ (u, v) => depth u + depth v)
 
 theorem decr_left (l₁ r₁ l₂ r₂ : Term) :
   rel.rel (l₁, l₂) (Term.Cons l₁ r₁, Term.Cons l₂ r₂) := by

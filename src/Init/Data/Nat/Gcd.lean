@@ -20,8 +20,9 @@ def gcd (a b : @& Nat) : Nat :=
 @[simp] theorem gcd_zero_left (y : Nat) : gcd 0 y = y :=
   rfl
 
-theorem gcd_succ (x y : Nat) : gcd (succ x) y = gcd (y % succ x) (succ x) :=
-  rfl
+theorem gcd_succ (x y : Nat) : gcd (succ x) y = gcd (y % succ x) (succ x) := by
+  rw [gcd, WellFounded.fix_eq, gcd]
+  simp [gcdF]
 
 @[simp] theorem gcd_one_left (n : Nat) : gcd 1 n = 1 := by
   rw [gcd_succ, mod_one]
