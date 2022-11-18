@@ -21,9 +21,6 @@ export Repr (reprPrec)
 abbrev repr [Repr α] (a : α) : Format :=
   reprPrec a 0
 
-abbrev reprStr [Repr α] (a : α) : String :=
-  reprPrec a 0 |>.pretty
-
 abbrev reprArg [Repr α] (a : α) : Format :=
   reprPrec a max_prec
 

@@ -98,9 +98,6 @@ instance : ToString UInt64 :=
 instance : ToString USize :=
   ⟨fun n => toString n.toNat⟩
 
-instance : ToString Format where
-  toString f := f.pretty
-
 def addParenHeuristic (s : String) : String :=
   if "(".isPrefixOf s || "[".isPrefixOf s || "{".isPrefixOf s || "#[".isPrefixOf s then s
   else if !s.any Char.isWhitespace then s

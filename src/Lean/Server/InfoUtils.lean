@@ -247,7 +247,7 @@ where
   isAtomicFormat : Format → Bool
     | Std.Format.text _    => true
     | Std.Format.group f _ => isAtomicFormat f
-    | Std.Format.nest _ f  => isAtomicFormat f
+    | Std.Format.indent f _ => isAtomicFormat f
     | Std.Format.tag _ f   => isAtomicFormat f
     | _                    => false
 

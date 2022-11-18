@@ -69,19 +69,16 @@ instance [RpcEncodable α] : RpcEncodable (TaggedText α) where
 
 private structure TaggedState where
   out      : TaggedText (Nat × Nat)              := TaggedText.text ""
-  tagStack : List (Nat × Nat × TaggedText (Nat × Nat)) := []
   column   : Nat                                 := 0
   deriving Inhabited
 
-instance : Std.Format.MonadPrettyFormat (StateM TaggedState) where
-  pushOutput s       := modify fun ⟨out, ts, col⟩ => ⟨out.appendText s, ts, col + s.length⟩
-  pushNewline indent := modify fun ⟨out, ts, _⟩ => ⟨out.appendText ("\n".pushn ' ' indent), ts, indent⟩
+instance : Std.MonadPrettyFormat (StateM TaggedState) where
+  pushText s         := modify fun st => { out := st.out.appendText s, column := st.column + s.length }
+  pushNewline indent := modify fun st => { out := st.out.appendText ("\n".pushn ' ' indent), column := indent }
   currColumn         := return (←get).column
-  startTag n         := modify fun ⟨out, ts, col⟩ => ⟨TaggedText.text "", (n, col, out) :: ts, col⟩
-  endTags n          := modify fun ⟨out, ts, col⟩ =>
-    let (ended, left) := (ts.take n, ts.drop n)
-    let out' := ended.foldl (init := out) fun acc (n, col', top) => top.appendTag (n, col') acc
-    ⟨out', left, col⟩
+  withTag t x        := modifyGet fun ⟨currOut, currCol⟩ =>
+    let ⟨ret, out, col⟩ := x { column := currCol }
+    (ret, ⟨currOut.appendTag (t, col) out, col⟩)
 
 /-- The output is tagged with `(tag, indent)` where `tag` is from the input `Format` and `indent`
 is the indentation level at this point. The latter is used to print sub-trees accurately by passing

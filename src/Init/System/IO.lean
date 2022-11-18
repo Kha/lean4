@@ -13,6 +13,7 @@ import Init.System.FilePath
 import Init.System.ST
 import Init.Data.ToString.Macro
 import Init.Data.Ord
+import Init.Data.Format
 
 open System
 

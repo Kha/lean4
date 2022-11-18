@@ -130,6 +130,9 @@ def ofSubarray (s : Subarray α) : Array α := Id.run do
 def extract (as : Array α) (start stop : Nat) : Array α :=
   ofSubarray (as.toSubarray  start stop)
 
+def splitAt (as : Array α) (idx : Nat) : Array α × Array α :=
+  (as.extract 0 idx, as.extract idx as.size)
+
 instance : Coe (Subarray α) (Array α) := ⟨ofSubarray⟩
 
 syntax:max term noWs "[" withoutPosition(term ":" term) "]" : term

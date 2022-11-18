@@ -6,6 +6,7 @@ Author: Leonardo de Moura
 prelude
 import Init.Data.Format.Macro
 import Init.Data.Format.Instances
+import Init.Data.Format.PrettyPrint
 import Init.Meta
 
 namespace Lean.Syntax
