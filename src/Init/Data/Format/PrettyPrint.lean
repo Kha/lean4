@@ -63,16 +63,11 @@ private partial def measureFlatUpToWidth : ResolvedFormat → StateM Nat Unit
 /- Fits as many formats on the current line as possible and returns them together with the remaining formats. -/
 private def fillLine (currColumn : Nat) (width : Nat) (fmts : Array ResolvedFormat) :
     Array ResolvedFormat × Array ResolvedFormat := Id.run <| StateT.run' (s := currColumn) do
-  let mut prevSoftIdx := 0
   for i in [0:fmts.size] do
     let f := fmts[i]!
-    if f matches .hardBreak .. then
-      return fmts.splitAt i
-    if f matches .softBreak .. then
-      prevSoftIdx := i
     measureFlatUpToWidth width f
     if (← get) >= width then
-      return fmts.splitAt prevSoftIdx
+      return fmts.splitAt i
   return (fmts, #[])
 
 variable (width : Nat) in
@@ -112,12 +107,9 @@ private partial def ResolvedFormat.prettyM [Monad m] [MonadPrettyFormat m] (flat
         | some .fill =>
           -- flatten the parts of the group that fit in the current line
           line.forM (prettyM true)
-          for i in [0:rest.size] do
-            prettyM false rest[i]!
-            if rest[i]! matches .softBreak .. | .hardBreak .. then
-              -- continue with the rest of the group
-              prettyM false <| .group behavior (rest.extract (i + 1) rest.size)
-              break
+          prettyM false rest[0]!
+          -- continue with the rest of the group
+          prettyM false <| .group behavior (rest.extract 1 rest.size)
 
 def Format.prettyM [Monad m] [MonadPrettyFormat m] (fmt : Format) (width : Nat := defWidth) (indent := 0) : m Unit :=
   fmt.resolve indent |>.prettyM width false
