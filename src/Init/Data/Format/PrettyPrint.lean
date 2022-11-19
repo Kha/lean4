@@ -6,6 +6,7 @@ Authors: Leonardo de Moura, Sebastian Ullrich, Lars König
 prelude
 import Init.Data.Format.Basic
 import Init.Data.Array.Basic
+import Init.Data.Range
 import Init.NotationExtra
 
 namespace Std
@@ -19,7 +20,7 @@ private inductive ResolvedFormat
   | softBreak (s : String) (indent : Nat)
   | group (behavior : Option Format.GroupBehavior) (fmts : Array ResolvedFormat)
   | tag (t : Nat) (f : ResolvedFormat)
-  deriving Inhabited, Repr
+  deriving Inhabited
 
 partial def Format.resolve (f : Format) (indent := 0) : ResolvedFormat :=
   .group none (go indent f)
@@ -70,7 +71,6 @@ private def fillLine (currColumn : Nat) (width : Nat) (fmts : Array ResolvedForm
     if f matches .softBreak .. then
       prevSoftIdx := i
     measureFlatUpToWidth width f
-    --dbg_trace "{prevSoftIdx}: {← get} {repr f}"
     if (← get) >= width then
       return fmts.splitAt prevSoftIdx
   return (fmts, #[])
@@ -90,7 +90,7 @@ private partial def ResolvedFormat.prettyM [Monad m] [MonadPrettyFormat m] (flat
     if behavior.isNone then
       fmts.forM (prettyM false)
     else if flatten then
-      -- we already know that the entire flattened group wil fit in the current line
+      -- we already know that the entire flattened group will fit in the current line
       fmts.forM (prettyM true)
     else
       -- make sure the group is non-empty
@@ -110,12 +110,14 @@ private partial def ResolvedFormat.prettyM [Monad m] [MonadPrettyFormat m] (flat
           -- do not flatten any separators
           fmts.forM (prettyM false)
         | some .fill =>
-            -- flatten the parts of the group that fit in the current line
-            line.forM (prettyM true)
-            -- insert a line break (from `.sep` or `.line`)
-            prettyM false rest[0]!
-            -- continue with the rest of the group
-            prettyM false <| .group behavior (rest.extract 1 rest.size)
+          -- flatten the parts of the group that fit in the current line
+          line.forM (prettyM true)
+          for i in [0:rest.size] do
+            prettyM false rest[i]!
+            if rest[i]! matches .softBreak .. | .hardBreak .. then
+              -- continue with the rest of the group
+              prettyM false <| .group behavior (rest.extract (i + 1) rest.size)
+              break
 
 def Format.prettyM [Monad m] [MonadPrettyFormat m] (fmt : Format) (width : Nat := defWidth) (indent := 0) : m Unit :=
   fmt.resolve indent |>.prettyM width false
