@@ -22,6 +22,21 @@ private inductive ResolvedFormat
   | tag (t : Nat) (f : ResolvedFormat)
   deriving Inhabited
 
+instance : ToString Format.GroupBehavior where
+  toString
+    | .uniform => "uniform"
+    | .fill => "fill"
+
+private partial def ResolvedFormat.toString : ResolvedFormat → String
+  | .hardBreak indent => s!"(line {indent})"
+  | .text s => s!"(text \"{s}\")"
+  | .softBreak s indent => s!"(softLine \"{s}\" {indent})"
+  | .group behavior fmts => s!"(group {behavior} {fmts.map toString})"
+  | .tag t f => s!"(tag {t} {toString f})"
+
+instance : ToString ResolvedFormat where
+  toString f := f.toString
+
 partial def Format.resolve (f : Format) (indent := 0) : ResolvedFormat :=
   .group none (go indent f)
 where
@@ -97,6 +112,7 @@ private partial def ResolvedFormat.prettyM [Monad m] [MonadPrettyFormat m] (flat
 
       -- try to fit as many parts of the flattened group in the current line
       let (line, rest) := fillLine (← currColumn) width (behavior matches some .fill) fmts
+      dbg_trace (line, rest)
       if rest.isEmpty then
         -- entire group fits
         fmts.forM (prettyM true)
@@ -115,6 +131,7 @@ private partial def ResolvedFormat.prettyM [Monad m] [MonadPrettyFormat m] (flat
           prettyM false <| .group behavior (rest.extract 1 rest.size)
 
 def Format.prettyM [Monad m] [MonadPrettyFormat m] (fmt : Format) (width : Nat := defWidth) (indent := 0) : m Unit :=
+  dbg_trace fmt.resolve
   fmt.resolve indent |>.prettyM width false
 
 -- default instances for `PrettyMonad`
