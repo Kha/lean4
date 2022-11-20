@@ -46,26 +46,29 @@ open MonadPrettyFormat
 /- Measures the length of the given format, but stops when the current line is exceeded.
 Requires `currentColumn` to be less than `width`. -/
 variable (width : Nat) in
-private partial def measureFlatUpToWidth : ResolvedFormat → StateM Nat Unit
-  | .hardBreak _ =>
-    set width  -- never fits in line
-  | .text s =>
+private partial def measureFlatUpToWidth (upToHardBreak : Bool) : ResolvedFormat → ExceptT Unit (StateM Nat) Unit
+  | .hardBreak _ => do
+    if upToHardBreak then
+      throw ()
+    else
+      set width  -- never fits in line
+  | .text s | .softBreak s _ =>
     modify (· + s.length)
-  | .softBreak s _ =>
-    measureFlatUpToWidth <| .text s
   | .group _ fmts => do
     for fmt in fmts do
-      measureFlatUpToWidth fmt
+      measureFlatUpToWidth false fmt
       if (← get) ≥ width then
         break
-  | .tag _ f => measureFlatUpToWidth f
+  | .tag _ f => measureFlatUpToWidth upToHardBreak f
 
 /- Fits as many formats on the current line as possible and returns them together with the remaining formats. -/
-private def fillLine (currColumn : Nat) (width : Nat) (fmts : Array ResolvedFormat) :
+private def fillLine (currColumn : Nat) (width : Nat) (upToHardBreak : Bool) (fmts : Array ResolvedFormat) :
     Array ResolvedFormat × Array ResolvedFormat := Id.run <| StateT.run' (s := currColumn) do
   for i in [0:fmts.size] do
     let f := fmts[i]!
-    measureFlatUpToWidth width f
+    let res ← measureFlatUpToWidth width upToHardBreak f |>.run
+    if !res.isOk then
+      return fmts.splitAt i
     if (← get) >= width then
       return fmts.splitAt i
   return (fmts, #[])
@@ -93,7 +96,7 @@ private partial def ResolvedFormat.prettyM [Monad m] [MonadPrettyFormat m] (flat
         return ()
 
       -- try to fit as many parts of the flattened group in the current line
-      let (line, rest) := fillLine (← currColumn) width fmts
+      let (line, rest) := fillLine (← currColumn) width (behavior matches some .fill) fmts
       if rest.isEmpty then
         -- entire group fits
         fmts.forM (prettyM true)
