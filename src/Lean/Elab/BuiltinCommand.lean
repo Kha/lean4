@@ -10,6 +10,7 @@ import Lean.Elab.Eval
 import Lean.Elab.Command
 import Lean.Elab.Open
 import Lean.Elab.SetOption
+import Lean.Elab.Quotation.Util
 
 namespace Lean.Elab.Command
 
@@ -217,7 +218,8 @@ private def replaceBinderAnnotation (binder : TSyntax ``Parser.Term.bracketedBin
   else
     return #[binder]
 
-@[builtin_command_elab «variable»] def elabVariable : CommandElab
+open TSyntax.Compat in
+@[builtin_command_elab «variable»] partial def elabVariable : CommandElab
   | `(variable $binders*) => do
     -- Try to elaborate `binders` for sanity checking
     runTermElabM fun _ => Term.withAutoBoundImplicit <|
@@ -226,9 +228,27 @@ private def replaceBinderAnnotation (binder : TSyntax ``Parser.Term.bracketedBin
       let binders ← replaceBinderAnnotation binder
       -- Remark: if we want to produce error messages when variables shadow existing ones, here is the place to do it.
       for binder in binders do
+        let binder ← if Term.Quotation.hygiene.get (← getOptions) then preresolveBinder binder else pure binder
+        let binder := binder.dropAllInfo
         let varUIds ← getBracketedBinderIds binder |>.mapM (withFreshMacroScope ∘ MonadQuotation.addMacroScope)
-        modifyScope fun scope => { scope with varDecls := scope.varDecls.push binder, varUIds := scope.varUIds ++ varUIds }
+        modifyScope fun scope => { scope with varDecls := scope.varDecls.push ⟨binder⟩, varUIds := scope.varUIds ++ varUIds }
   | _ => throwUnsupportedSyntax
+where
+  preresolveBinder : Syntax → CommandElabM Syntax
+    -- visit everything but the binder idents
+    | `(bracketedBinderF|($ids* $[: $ty?]? $(annot?)?)) => do
+      `(bracketedBinderF|($ids* $[: $(← ty?.mapM preresolve)]? $(← annot?.mapM preresolve)?))
+    | `(bracketedBinderF|{$ids* $[: $ty?]?}) => do
+      `(bracketedBinderF|{$ids* $[: $(← ty?.mapM preresolve)]?})
+    | `(bracketedBinderF|[$[$id? :]? $ty]) => do
+      `(bracketedBinderF|[$[$id? :]? $(← preresolve ty)])
+    | _ => throwUnsupportedSyntax
+  preresolve : Syntax → CommandElabM Syntax
+    | id@(.ident info rawVal val _) => do
+      let preresolved ← Term.Quotation.preresolveIdent (← getSectionVars) ⟨id⟩
+      return Syntax.ident info rawVal (← MonadQuotation.addMacroScope val) preresolved
+    | .node info k args => return .node info k (← args.mapM preresolve)
+    | stx => return stx
 
 open Meta
 

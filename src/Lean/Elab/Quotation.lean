@@ -60,19 +60,6 @@ partial def mkTuple : Array Syntax → TermElabM Syntax
     let stx ← mkTuple (es.eraseIdx 0)
     `(Prod.mk $(es[0]!) $stx)
 
-def resolveSectionVariable (sectionVars : NameMap Name) (id : Name) : List (Name × List String) :=
-  -- decode macro scopes from name before recursion
-  let extractionResult := extractMacroScopes id
-  let rec loop : Name → List String → List (Name × List String)
-    | id@(.str p s), projs =>
-      -- NOTE: we assume that macro scopes always belong to the projected constant, not the projections
-      let id := { extractionResult with name := id }.review
-      match sectionVars.find? id with
-      | some newId => [(newId, projs)]
-      | none       => loop p (s::projs)
-    | _, _ => []
-  loop extractionResult.name []
-
 /-- Transform sequence of pushes and appends into acceptable code -/
 def ArrayStxBuilder := Sum (Array Term) Term
 
@@ -123,23 +110,12 @@ instance : Quote Syntax.Preresolved where
 
 /-- Elaborate the content of a syntax quotation term -/
 private partial def quoteSyntax : Syntax → TermElabM Term
-  | Syntax.ident _ rawVal val preresolved => do
-    if !hygiene.get (← getOptions) then
-      return ← `(Syntax.ident info $(quote rawVal) $(quote val) $(quote preresolved))
+  | id@(Syntax.ident _ rawVal val _) => do
     -- Add global scopes at compilation time (now), add macro scope at runtime (in the quotation).
     -- See the paper for details.
-    let consts ← resolveGlobalName val
-    -- extension of the paper algorithm: also store unique section variable names as top-level scopes
-    -- so they can be captured and used inside the section, but not outside
-    let sectionVars := resolveSectionVariable (← read).sectionVars val
-    -- extension of the paper algorithm: resolve namespaces as well
-    let namespaces ← resolveNamespaceCore (allowEmpty := true) val
-    let preresolved := (consts ++ sectionVars).map (fun (n, projs) => Preresolved.decl n projs) ++
-      namespaces.map .namespace ++
-      preresolved
-    let val := quote val
+    let preresolved ← preresolveIdent (← read).sectionVars id
     -- `scp` is bound in stxQuot.expand
-    `(Syntax.ident info $(quote rawVal) (addMacroScope mainModule $val scp) $(quote preresolved))
+    `(Syntax.ident info $(quote rawVal) (addMacroScope mainModule $(quote val) scp) $(quote preresolved))
   -- if antiquotation, insert contents as-is, else recurse
   | stx@(Syntax.node _ k _) => do
     if let some (k, _) := stx.antiquotKind? then

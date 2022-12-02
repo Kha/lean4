@@ -135,6 +135,14 @@ private def updateInfo : SourceInfo → String.Pos → String.Pos → SourceInfo
     SourceInfo.original { lead with startPos := leadStart } pos { trail with stopPos := trailStop } endPos
   | info, _, _ => info
 
+/-- Replaces all `SourceInfo` values with `none`. -/
+partial def dropAllInfo : Syntax → Syntax
+  | .ident _ rawVal val preresolved =>
+    .ident .none rawVal val preresolved
+  | .node _ k args => .node .none k (args.map dropAllInfo)
+  | .atom _ a => .atom .none a
+  | .missing => .missing
+
 private def chooseNiceTrailStop (trail : Substring) : String.Pos :=
 trail.startPos + trail.posOf '\n'
 

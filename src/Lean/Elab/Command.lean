@@ -348,15 +348,21 @@ def getBracketedBinderIds : Syntax → Array Name
   | `(bracketedBinderF|[$_])                           => #[Name.anonymous]
   | _                                                 => #[]
 
-private def mkTermContext (ctx : Context) (s : State) : Term.Context := Id.run do
-  let scope      := s.scopes.head!
+def getSectionVars : CommandElabM (NameMap Name) := do
+  let scope ← getScope
   let mut sectionVars := {}
   for id in scope.varDecls.concatMap getBracketedBinderIds, uid in scope.varUIds do
     sectionVars := sectionVars.insert id uid
-  { macroStack             := ctx.macroStack
-    sectionVars            := sectionVars
-    isNoncomputableSection := scope.isNoncomputable
-    tacticCache?           := ctx.tacticCache? }
+  return sectionVars
+
+private def mkTermContext : CommandElabM Term.Context := do
+  let ctx ← read
+  return {
+    macroStack             := ctx.macroStack
+    sectionVars            := (← getSectionVars)
+    isNoncomputableSection := (← getScope).isNoncomputable
+    tacticCache?           := ctx.tacticCache?
+  }
 
 /--
 Lift the `TermElabM` monadic action `x` into a `CommandElabM` monadic action.
@@ -391,7 +397,7 @@ def liftTermElabM (x : TermElabM α) : CommandElabM α := do
   -- We execute `x` with an empty message log. Thus, `x` cannot modify/view messages produced by previous commands.
   -- This is useful for implementing `runTermElabM` where we use `Term.resetMessageLog`
   let x : TermElabM _  := withSaveInfoContext x
-  let x : MetaM _      := (observing x).run (mkTermContext ctx s) { levelNames := scope.levelNames }
+  let x : MetaM _      := (observing x).run (← mkTermContext) { levelNames := scope.levelNames }
   let x : CoreM _      := x.run mkMetaContext {}
   let x : EIO _ _      := x.run (mkCoreContext ctx s heartbeats) { env := s.env, ngen := s.ngen, nextMacroScope := s.nextMacroScope, infoState.enabled := s.infoState.enabled }
   let (((ea, _), _), coreS) ← liftEIO x
@@ -428,24 +434,29 @@ variable (n : Nat)
       IO.println s!"{← ppExpr x} : {← ppExpr (← inferType x)}"
 ```
 -/
-def runTermElabM (elabFn : Array Expr → TermElabM α) : CommandElabM α := do
+partial def runTermElabM (elabFn : Array Expr → TermElabM α) : CommandElabM α := do
   let scope ← getScope
   liftTermElabM <|
     Term.withAutoBoundImplicit <|
-      Term.elabBinders scope.varDecls fun xs => do
+      elabSectionVars scope fun xs => do
         -- We need to synthesize postponed terms because this is a checkpoint for the auto-bound implicit feature
         -- If we don't use this checkpoint here, then auto-bound implicits in the postponed terms will not be handled correctly.
         Term.synthesizeSyntheticMVarsNoPostponing
-        let mut sectionFVars := {}
-        for uid in scope.varUIds, x in xs do
-          sectionFVars := sectionFVars.insert uid x
-        withReader ({ · with sectionFVars := sectionFVars }) do
-          -- We don't want to store messages produced when elaborating `(getVarDecls s)` because they have already been saved when we elaborated the `variable`(s) command.
-          -- So, we use `Core.resetMessageLog`.
-          Core.resetMessageLog
-          let someType := mkSort levelZero
-          Term.addAutoBoundImplicits' xs someType fun xs _ =>
-            Term.withoutAutoBoundImplicit <| elabFn xs
+        -- We don't want to store messages produced when elaborating `(getVarDecls s)` because they have already been saved when we elaborated the `variable`(s) command.
+        -- So, we use `Core.resetMessageLog`.
+        Core.resetMessageLog
+        let someType := mkSort levelZero
+        Term.addAutoBoundImplicits' xs someType fun xs _ =>
+          Term.withoutAutoBoundImplicit <| elabFn xs
+where
+  elabSectionVars (scope : Scope) (k : Array Expr → TermElabM α) (i := 0) (xs : Array Expr := #[]) : TermElabM α :=
+    if h : i < scope.varDecls.size then
+      Term.elabBinder scope.varDecls[i] fun x =>
+        -- must register section fvar immediately for name resolution in subsequent section vars
+        withReader (fun ctx => { ctx with sectionFVars := ctx.sectionFVars.insert scope.varUIds[i]! x }) do
+          elabSectionVars scope k (i + 1) (xs.push x)
+    else
+      k xs
 
 @[inline] def catchExceptions (x : CommandElabM Unit) : CommandElabCoreM Empty Unit := fun ctx ref =>
   EIO.catchExceptions (withLogging x ctx ref) (fun _ => pure ())
