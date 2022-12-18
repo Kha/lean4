@@ -27,8 +27,7 @@ case $1 in
             target="$target.\"$dep\""
         done
         echo "Building dependencies..." >&2
-        # -v only has "built ...", but "-vv" is a bit too verbose
-        exec @nix@/bin/nix run "$target" ${args[*]} -v
+        exec nix run "$target" ${args[*]}
         ;;
     serve)
         shift

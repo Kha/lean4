@@ -277,7 +277,7 @@ in rec {
     src = ./lean-dev.in;
     isExecutable = true;
     srcRoot = fullSrc;  # use root flake.nix in case of Lean repo
-    inherit bash nix srcTarget srcArgs;
+    inherit bash srcTarget srcArgs;
   };
   lake-dev = substituteAll {
     name = "lake";
@@ -285,7 +285,7 @@ in rec {
     src = ./lake-dev.in;
     isExecutable = true;
     srcRoot = fullSrc;  # use root flake.nix in case of Lean repo
-    inherit bash nix srcTarget srcArgs;
+    inherit bash srcTarget srcArgs;
   };
   lean-dev = symlinkJoin { name = "lean-dev"; paths = [ lean-bin-dev lake-dev ]; };
   emacs-dev = makeEmacsWrapper "emacs-dev" "${lean-emacs}/bin/emacs" lean-dev;
@@ -293,7 +293,6 @@ in rec {
   vscode-dev = makeVSCodeWrapper "vscode-dev" lean-dev;
 
   devShell = mkShell {
-    buildInputs = [ nix ];
     shellHook = ''
       export LEAN_SRC_PATH="$PWD/${srcPrefix}"
     '';

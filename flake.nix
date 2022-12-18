@@ -3,7 +3,6 @@
 
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;
   inputs.flake-utils.url = github:numtide/flake-utils;
-  inputs.nix.url = github:NixOS/nix;
   inputs.lean4-mode = {
     url = github:leanprover/lean4-mode;
     flake = false;
@@ -13,18 +12,17 @@
   #  url = github:leanprover/lean4;
   #  inputs.nixpkgs.follows = "nixpkgs";
   #  inputs.flake-utils.follows = "flake-utils";
-  #  inputs.nix.follows = "nix";
   #  inputs.lean4-mode.follows = "lean4-mode";
   #};
 
-  outputs = { self, nixpkgs, flake-utils, nix, lean4-mode, ... }@inputs: flake-utils.lib.eachDefaultSystem (system:
+  outputs = { self, nixpkgs, flake-utils, lean4-mode, ... }@inputs: flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs {
         inherit system;
         # for `vscode-with-extensions`
         config.allowUnfree = true;
       };
-      lean-packages = pkgs.callPackage (./nix/packages.nix) { inherit nix lean4-mode; };
+      lean-packages = pkgs.callPackage (./nix/packages.nix) { inherit lean4-mode; };
     in {
       packages = lean-packages // rec {
         debug = lean-packages.override { debug = true; };

@@ -1,9 +1,6 @@
-{ pkgs, nix, ... } @ args:
+{ pkgs, ... } @ args:
 with pkgs;
 let
-  nix-pinned = writeShellScriptBin "nix" ''
-    ${nix.packages.${system}.default}/bin/nix --experimental-features 'nix-command flakes' --extra-substituters https://lean4.cachix.org/ --option warn-dirty false "$@"
-  '';
   # https://github.com/NixOS/nixpkgs/issues/130963
   llvmPackages = if stdenv.isDarwin then llvmPackages_11 else llvmPackages_14;
   cc = (ccacheWrapper.override rec {
@@ -43,7 +40,6 @@ let
     lean = lean.stage1;
     inherit (lean.stage1) leanc;
     inherit lean-emacs lean-vscode;
-    nix = nix-pinned;
   }));
   lean4-mode = emacsPackages.melpaBuild {
     pname = "lean4-mode";
@@ -72,7 +68,6 @@ in {
   stage0print-paths = lean.stage1.Lean.print-paths;
   HEAD-as-stage0 = (lean.stage1.Lean.overrideArgs { srcTarget = "..#stage0-from-input.stage0"; srcArgs = "(--override-input lean-stage0 ..\?rev=$(git rev-parse HEAD) -- -Dinterpreter.prefer_native=false \"$@\")"; });
   HEAD-as-stage1 = (lean.stage1.Lean.overrideArgs { srcTarget = "..\?rev=$(git rev-parse HEAD)#stage0"; });
-  nix = nix-pinned;
   nixpkgs = pkgs;
   ciShell = writeShellScriptBin "ciShell" ''
     set -o pipefail
