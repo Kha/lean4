@@ -191,15 +191,12 @@ with builtins; let
   # `{ deps, drv }` pairs of a derivation and its transitive dependencies (as a nested
   # mapping from module names to derivations). It is passed linearly through the
   # recursion to memoize common dependencies.
-  buildModAndDeps = mod: modMap: if modMap ? ${mod} || externalModMap ? ${mod} then modMap else
+  modCandidates = mapAttrs (mod: header:
     let
-      deps = if modDepsMap ? ${mod}
-             then if modDepsMap.${mod}.errors == []
-             then map (m: m.module) modDepsMap.${mod}.imports
-             else abort "errors while parsing imports of ${mod}:\n${lib.concatStringsSep "\n" modDepsMap.${mod}.errors}"
-             else [];
-      modMap' = lib.foldr buildModAndDeps modMap deps;
-    in modMap' // { ${mod} = mkMod mod (map (dep: if modMap' ? ${dep} then modMap'.${dep} else externalModMap.${dep}) deps); };
+      deps = if header.errors == []
+             then map (m: m.module) header.imports
+             else abort "errors while parsing imports of ${mod}:\n${lib.concatStringsSep "\n" header.errors}";
+    in mkMod mod (map (dep: if modDepsMap ? ${dep} then modCandidates.${dep} else externalModMap.${dep}) deps)) modDepsMap;
   makeEmacsWrapper = name: emacs: lean: writeShellScriptBin name ''
     ${emacs} --eval "(progn (setq lean4-rootdir \"${lean}\"))" "$@"
   '';
@@ -220,7 +217,10 @@ with builtins; let
     else if g.glob == "submodules" then submodules g.mod
     else if g.glob == "andSubmodules" then [g.mod] ++ submodules g.mod
     else throw "unknown glob kind '${g}'";
-  mods' = lib.foldr buildModAndDeps {} (concatMap expandGlob roots);
+  mods' = listToAttrs (map (e: { name = e.key; value = modCandidates.${e.key}; }) (genericClosure {
+    startSet = map (m: { key = m; }) (concatMap expandGlob roots);
+    operator = e: if modDepsMap ? ${e.key} then map (m: { key = m.module; }) (filter (m: modCandidates ? ${m.module}) (modDepsMap.${e.key}.imports)) else [];
+  }));
   allLinkFlags = lib.foldr (shared: acc: acc ++ [ "-L${shared}" "-l${shared.linkName or shared.name}" ]) linkFlags allNativeSharedLibs;
 
   objects   = mapAttrs (_: m: m.obj) mods';
