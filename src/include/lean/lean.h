@@ -422,17 +422,13 @@ LEAN_SHARED void lean_inc_ref_cold(lean_object * o);
 LEAN_SHARED void lean_inc_ref_n_cold(lean_object * o, unsigned n);
 
 static inline void lean_inc_ref(lean_object * o) {
-    if (LEAN_LIKELY(lean_is_st(o))) {
-        o->m_rc++;
-    } else if (o->m_rc != 0) {
+    if (o->m_rc != 0) {
         lean_inc_ref_cold(o);
     }
 }
 
 static inline void lean_inc_ref_n(lean_object * o, size_t n) {
-    if (LEAN_LIKELY(lean_is_st(o))) {
-        o->m_rc += n;
-    } else if (o->m_rc != 0) {
+    if (o->m_rc != 0) {
         lean_inc_ref_n_cold(o, n);
     }
 }
@@ -440,9 +436,7 @@ static inline void lean_inc_ref_n(lean_object * o, size_t n) {
 LEAN_SHARED void lean_dec_ref_cold(lean_object * o);
 
 static inline void lean_dec_ref(lean_object * o) {
-    if (LEAN_LIKELY(o->m_rc > 1)) {
-        o->m_rc--;
-    } else if (o->m_rc != 0) {
+    if (o->m_rc != 0) {
         lean_dec_ref_cold(o);
     }
 }
@@ -478,27 +472,17 @@ static inline lean_task_object * lean_to_task(lean_object * o) { assert(lean_is_
 static inline lean_ref_object * lean_to_ref(lean_object * o) { assert(lean_is_ref(o)); return (lean_ref_object*)(o); }
 static inline lean_external_object * lean_to_external(lean_object * o) { assert(lean_is_external(o)); return (lean_external_object*)(o); }
 
-static inline bool lean_is_exclusive(lean_object * o) {
-    if (LEAN_LIKELY(lean_is_st(o))) {
-        return o->m_rc == 1;
-    } else {
-        return false;
-    }
-}
+LEAN_SHARED bool lean_is_exclusive(lean_object * o);
 
 static inline bool lean_is_shared(lean_object * o) {
-    if (LEAN_LIKELY(lean_is_st(o))) {
-        return o->m_rc > 1;
-    } else {
-        return false;
-    }
+    return !lean_is_exclusive(o);
 }
 
 LEAN_SHARED void lean_mark_mt(lean_object * o);
 LEAN_SHARED void lean_mark_persistent(lean_object * o);
 
 static inline void lean_set_st_header(lean_object * o, unsigned tag, unsigned other) {
-    o->m_rc       = 1;
+    o->m_rc       = -1;
     o->m_tag      = tag;
     o->m_other    = other;
     o->m_cs_sz    = 0;
