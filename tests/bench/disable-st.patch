@@ -11,22 +11,12 @@ diff --git a/src/include/lean/lean.h b/src/include/lean/lean.h
 index 6b37fd91a..c53137860 100644
 --- a/src/include/lean/lean.h
 +++ b/src/include/lean/lean.h
-@@ -567,13 +567,13 @@ void lean_mark_persistent(lean_object * o);
+@@ -498,7 +498,7 @@ LEAN_SHARED void lean_mark_mt(lean_object * o);
+ LEAN_SHARED void lean_mark_persistent(lean_object * o);
 
  static inline void lean_set_st_header(lean_object * o, unsigned tag, unsigned other) {
- #if defined(LEAN_COMPRESSED_OBJECT_HEADER)
--    o->m_header   = ((size_t)(tag) << 56) | ((size_t)(other) << 48) | (1ull << LEAN_ST_BIT) | 1;
-+    o->m_header   = ((size_t)(tag) << 56) | ((size_t)(other) << 48) | (1ull << LEAN_MT_BIT) | 1;
- #elif defined(LEAN_COMPRESSED_OBJECT_HEADER_SMALL_RC)
--    o->m_header   = ((size_t)(tag) << 56) | ((size_t)(other) << 48) | ((size_t)LEAN_ST_MEM_KIND << 40) | 1;
-+    o->m_header   = ((size_t)(tag) << 56) | ((size_t)(other) << 48) | ((size_t)LEAN_MT_MEM_KIND << 40) | 1;
- #else
-     o->m_rc       = 1;
+-    o->m_rc       = 1;
++    o->m_rc       = -1;
      o->m_tag      = tag;
--    o->m_mem_kind = LEAN_ST_MEM_KIND;
-+    o->m_mem_kind = LEAN_MT_MEM_KIND;
      o->m_other    = other;
- #endif
- }
---
-2.23.0
+     o->m_cs_sz    = 0;

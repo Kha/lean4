@@ -103,7 +103,7 @@ bench:
 bench/%.bench: %.out | bench
 	ulimit -s unlimited && $(TEMCI) short exec $(TEMCI_FLAGS) -d $< "./$< $(BENCH_PARAMS)" --out $@
 
-bench/parser.%.bench: BENCH_PARAMS = $(PARSER_TEST_FILE) 100
+bench/parser.%.bench: BENCH_PARAMS = $(PARSER_TEST_FILE) 10
 
 bench/binarytrees.%.bench: BENCH_PARAMS = 21
 bench/binarytrees.ml.bench: BENCH_PARAMS = $$(nproc) 21
