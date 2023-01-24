@@ -4,6 +4,8 @@
   inputs.flake-utils.follows = "lean/flake-utils";
   inputs.temci.url = github:Kha/temci;
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;
+  inputs.disable-st.url = https://github.com/Kha/lean4/commit/no-st.patch;
+  inputs.disable-st.flake = false;
 
   outputs = inputs: inputs.flake-utils.lib.eachDefaultSystem (system: { packages = rec {
     leanPkgs = inputs.lean.packages.${system};
@@ -85,7 +87,8 @@
         src = pkgs.runCommand "lean-no-st-src" {} ''
           cp -r ${args.src} $out
           chmod -R u+w $out
-          patch $out/src/include/lean/lean.h ${./disable-st.patch}
+          cd $out
+          patch -p1 < ${inputs.disable-st}
         '';
       })).lean-all}/bin";
       PARSER_TEST_FILE = ../../src/Init/Prelude.lean;

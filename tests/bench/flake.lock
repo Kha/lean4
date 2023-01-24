@@ -1,5 +1,17 @@
 {
   "nodes": {
+    "disable-st": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-8Wlf9O+YRInYJdN9ydBGh5vaYAqESpZ4Kn0BvxivYog=",
+        "type": "file",
+        "url": "https://github.com/Kha/lean4/commit/no-st.patch"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/Kha/lean4/commit/no-st.patch"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1656928814,
@@ -182,6 +194,7 @@
     },
     "root": {
       "inputs": {
+        "disable-st": "disable-st",
         "flake-utils": [
           "lean",
           "flake-utils"
