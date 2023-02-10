@@ -3,9 +3,9 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Compiler.IR.Basic
-import Lean.Compiler.IR.LiveVars
-import Lean.Compiler.IR.Format
+private import Lean.Compiler.IR.Basic
+private import Lean.Compiler.IR.LiveVars
+private import Lean.Compiler.IR.Format
 
 namespace Lean.IR.ResetReuse
 /-! Remark: the insertResetReuse transformation is applied before we have

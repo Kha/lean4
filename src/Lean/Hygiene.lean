@@ -3,9 +3,9 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich
 -/
-import Lean.Data.Name
-import Lean.Data.Options
-import Lean.Data.Format
+private import Lean.Data.Name
+private import Lean.Data.Options
+private import Lean.Data.Format
 
 namespace Lean
 /-! Remark: `MonadQuotation` class is part of the `Init` package and loaded by default since it is used in the builtin command `macro`. -/

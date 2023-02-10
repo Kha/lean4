@@ -3,10 +3,10 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Compiler.BorrowedAnnotation
-import Lean.Meta.KAbstract
-import Lean.Meta.MatchUtil
-import Lean.Elab.SyntheticMVars
+private import Lean.Compiler.BorrowedAnnotation
+private import Lean.Meta.KAbstract
+private import Lean.Meta.MatchUtil
+private import Lean.Elab.SyntheticMVars
 
 namespace Lean.Elab.Term
 open Meta

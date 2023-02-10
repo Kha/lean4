@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Dany Fabian
 -/
 
-import Lean.Data.Parsec
-import Lean.Data.Xml.Basic
+private import Lean.Data.Parsec
+private import Lean.Data.Xml.Basic
 open IO
 open System
 open Lean

@@ -3,12 +3,12 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Tactic.Simp.SimpTheorems
-import Lean.Meta.Tactic.Simp.SimpCongrTheorems
-import Lean.Meta.Tactic.Simp.Types
-import Lean.Meta.Tactic.Simp.Main
-import Lean.Meta.Tactic.Simp.Rewrite
-import Lean.Meta.Tactic.Simp.SimpAll
+private import Lean.Meta.Tactic.Simp.SimpTheorems
+private import Lean.Meta.Tactic.Simp.SimpCongrTheorems
+private import Lean.Meta.Tactic.Simp.Types
+private import Lean.Meta.Tactic.Simp.Main
+private import Lean.Meta.Tactic.Simp.Rewrite
+private import Lean.Meta.Tactic.Simp.SimpAll
 
 namespace Lean
 

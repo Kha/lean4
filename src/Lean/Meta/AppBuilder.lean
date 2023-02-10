@@ -3,11 +3,11 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Structure
-import Lean.Util.Recognizers
-import Lean.Meta.SynthInstance
-import Lean.Meta.Check
-import Lean.Meta.DecLevel
+private import Lean.Structure
+private import Lean.Util.Recognizers
+private import Lean.Meta.SynthInstance
+private import Lean.Meta.Check
+private import Lean.Meta.DecLevel
 
 namespace Lean.Meta
 

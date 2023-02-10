@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Marc Huisinga, Wojciech Nawrocki
 -/
-import Lean.Data.Lsp.Basic
-import Lean.Server.Rpc.Basic
+private import Lean.Data.Lsp.Basic
+private import Lean.Server.Rpc.Basic
 
 /-! This file contains Lean-specific extensions to LSP. See the structures below for which
 additional requests and notifications are supported. -/

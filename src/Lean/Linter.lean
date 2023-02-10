@@ -1,5 +1,5 @@
-import Lean.Linter.Util
-import Lean.Linter.Builtin
-import Lean.Linter.Deprecated
-import Lean.Linter.UnusedVariables
-import Lean.Linter.MissingDocs
+private import Lean.Linter.Util
+private import Lean.Linter.Builtin
+private import Lean.Linter.Deprecated
+private import Lean.Linter.UnusedVariables
+private import Lean.Linter.MissingDocs

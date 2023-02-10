@@ -3,10 +3,10 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.InferType
-import Lean.Compiler.LCNF.Util
-import Lean.Compiler.LCNF.BaseTypes
-import Lean.Compiler.LCNF.CompilerM
+private import Lean.Meta.InferType
+private import Lean.Compiler.LCNF.Util
+private import Lean.Compiler.LCNF.BaseTypes
+private import Lean.Compiler.LCNF.CompilerM
 
 namespace Lean.Compiler.LCNF
 

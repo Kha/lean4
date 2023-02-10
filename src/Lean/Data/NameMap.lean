@@ -3,11 +3,11 @@ Copyright (c) 2018 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
-import Lean.Data.HashSet
-import Lean.Data.RBMap
-import Lean.Data.RBTree
-import Lean.Data.SSet
-import Lean.Data.Name
+private import Lean.Data.HashSet
+private import Lean.Data.RBMap
+private import Lean.Data.RBTree
+private import Lean.Data.SSet
+private import Lean.Data.Name
 namespace Lean
 
 instance : Coe String Name := ⟨Name.mkSimple⟩

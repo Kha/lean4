@@ -3,15 +3,15 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Compiler.Options
-import Lean.Compiler.LCNF.PassManager
-import Lean.Compiler.LCNF.Passes
-import Lean.Compiler.LCNF.PrettyPrinter
-import Lean.Compiler.LCNF.ToDecl
-import Lean.Compiler.LCNF.Check
-import Lean.Compiler.LCNF.PullLetDecls
-import Lean.Compiler.LCNF.PhaseExt
-import Lean.Compiler.LCNF.CSE
+private import Lean.Compiler.Options
+private import Lean.Compiler.LCNF.PassManager
+private import Lean.Compiler.LCNF.Passes
+private import Lean.Compiler.LCNF.PrettyPrinter
+private import Lean.Compiler.LCNF.ToDecl
+private import Lean.Compiler.LCNF.Check
+private import Lean.Compiler.LCNF.PullLetDecls
+private import Lean.Compiler.LCNF.PhaseExt
+private import Lean.Compiler.LCNF.CSE
 
 namespace Lean.Compiler.LCNF
 /--

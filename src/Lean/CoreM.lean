@@ -3,13 +3,13 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Util.RecDepth
-import Lean.Util.Trace
-import Lean.Log
-import Lean.Eval
-import Lean.ResolveName
-import Lean.Elab.InfoTree.Types
-import Lean.MonadEnv
+private import Lean.Util.RecDepth
+private import Lean.Util.Trace
+private import Lean.Log
+private import Lean.Eval
+private import Lean.ResolveName
+private import Lean.Elab.InfoTree.Types
+private import Lean.MonadEnv
 
 namespace Lean
 namespace Core

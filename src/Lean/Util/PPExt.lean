@@ -3,10 +3,10 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
-import Lean.Environment
-import Lean.MetavarContext
-import Lean.Data.OpenDecl
-import Lean.Elab.InfoTree.Types
+private import Lean.Environment
+private import Lean.MetavarContext
+private import Lean.Data.OpenDecl
+private import Lean.Elab.InfoTree.Types
 
 namespace Lean
 register_builtin_option pp.raw : Bool := {

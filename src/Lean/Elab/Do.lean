@@ -3,11 +3,11 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Elab.Term
-import Lean.Elab.BindersUtil
-import Lean.Elab.PatternVar
-import Lean.Elab.Quotation.Util
-import Lean.Parser.Do
+private import Lean.Elab.Term
+private import Lean.Elab.BindersUtil
+private import Lean.Elab.PatternVar
+private import Lean.Elab.Quotation.Util
+private import Lean.Parser.Do
 
 -- HACK: avoid code explosion until heuristics are improved
 set_option compiler.reuse false

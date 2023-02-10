@@ -3,9 +3,9 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Compiler.LCNF.Types
-import Lean.Compiler.LCNF.Bind
-import Lean.Compiler.LCNF.CompilerM
+private import Lean.Compiler.LCNF.Types
+private import Lean.Compiler.LCNF.Bind
+private import Lean.Compiler.LCNF.CompilerM
 
 namespace Lean.Compiler.LCNF
 

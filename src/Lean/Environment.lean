@@ -3,15 +3,15 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Data.HashMap
-import Lean.ImportingFlag
-import Lean.Data.SMap
-import Lean.Declaration
-import Lean.LocalContext
-import Lean.Util.Path
-import Lean.Util.FindExpr
-import Lean.Util.Profile
-import Lean.Util.InstantiateLevelParams
+private import Lean.Data.HashMap
+private import Lean.ImportingFlag
+private import Lean.Data.SMap
+private import Lean.Declaration
+private import Lean.LocalContext
+private import Lean.Util.Path
+private import Lean.Util.FindExpr
+private import Lean.Util.Profile
+private import Lean.Util.InstantiateLevelParams
 
 namespace Lean
 /-- Opaque environment extension state. -/
@@ -62,7 +62,7 @@ structure ModuleData where
   `constNames` contains all constant names in `constants`.
   This information is redundant. It is equal to `constants.map fun c => c.name`,
   but it improves the performance of `importModules`. `perf` reports that 12% of the
-  runtime was being spent on `ConstantInfo.name` when importing a file containing only `import Lean`
+  runtime was being spent on `ConstantInfo.name` when importing a file containing only `private import Lean`
   -/
   constNames      : Array Name
   constants       : Array ConstantInfo
@@ -810,7 +810,7 @@ builtin_initialize namespacesExt : SimplePersistentEnvExtension Name NameSSet â†
     addImportedFn   := fun as =>
       /-
       We compute a `HashMap Name Unit` and then convert to `NameSSet` to improve Lean startup time.
-      Note: we have used `perf` to profile Lean startup cost when processing a file containing just `import Lean`.
+      Note: we have used `perf` to profile Lean startup cost when processing a file containing just `private import Lean`.
       6.18% of the runtime is here. It was 9.31% before the `HashMap` optimization.
       -/
       let capacity := as.foldl (init := 0) fun r e => r + e.size

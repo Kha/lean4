@@ -3,9 +3,9 @@ Copyright (c) 2022 Henrik Böving. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Henrik Böving
 -/
-import Lean.Compiler.LCNF.CompilerM
-import Lean.Compiler.LCNF.InferType
-import Lean.Compiler.LCNF.PassManager
+private import Lean.Compiler.LCNF.CompilerM
+private import Lean.Compiler.LCNF.InferType
+private import Lean.Compiler.LCNF.PassManager
 
 namespace Lean.Compiler.LCNF.Simp
 namespace ConstantFold

@@ -1,6 +1,6 @@
-import Lean.Data.Options
-import Lean.Server.InfoUtils
-import Lean.Linter.Basic
+private import Lean.Data.Options
+private import Lean.Server.InfoUtils
+private import Lean.Linter.Basic
 
 namespace Lean.Linter
 

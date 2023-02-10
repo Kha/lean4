@@ -3,7 +3,7 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.InferType
+private import Lean.Meta.InferType
 
 /-!
 This is not the Kernel type checker, but an auxiliary method for checking

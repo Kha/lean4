@@ -3,14 +3,14 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Util.CollectLevelParams
-import Lean.Meta.Reduce
-import Lean.Elab.DeclarationRange
-import Lean.Elab.Eval
-import Lean.Elab.Command
-import Lean.Elab.Open
-import Lean.Elab.SetOption
-import Lean.PrettyPrinter
+private import Lean.Util.CollectLevelParams
+private import Lean.Meta.Reduce
+private import Lean.Elab.DeclarationRange
+private import Lean.Elab.Eval
+private import Lean.Elab.Command
+private import Lean.Elab.Open
+private import Lean.Elab.SetOption
+private import Lean.PrettyPrinter
 
 namespace Lean.Elab.Command
 

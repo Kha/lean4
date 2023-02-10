@@ -3,9 +3,9 @@ Copyright (c) 2018 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich and Leonardo de Moura
 -/
-import Lean.ImportingFlag
-import Lean.Data.KVMap
-import Lean.Data.NameMap
+private import Lean.ImportingFlag
+private import Lean.Data.KVMap
+private import Lean.Data.NameMap
 
 namespace Lean
 

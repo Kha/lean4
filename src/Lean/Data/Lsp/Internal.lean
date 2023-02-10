@@ -5,8 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joscha Mennicken
 -/
 
-import Lean.Expr
-import Lean.Data.Lsp.Basic
+private import Lean.Expr
+private import Lean.Data.Lsp.Basic
 
 /-! This file contains types for communication between the watchdog and the
 workers. These messages are not visible externally to users of the LSP server.

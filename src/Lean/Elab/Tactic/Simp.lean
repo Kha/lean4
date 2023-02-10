@@ -3,13 +3,13 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Tactic.Simp
-import Lean.Meta.Tactic.Replace
-import Lean.Elab.BuiltinNotation
-import Lean.Elab.Tactic.Basic
-import Lean.Elab.Tactic.ElabTerm
-import Lean.Elab.Tactic.Location
-import Lean.Elab.Tactic.Config
+private import Lean.Meta.Tactic.Simp
+private import Lean.Meta.Tactic.Replace
+private import Lean.Elab.BuiltinNotation
+private import Lean.Elab.Tactic.Basic
+private import Lean.Elab.Tactic.ElabTerm
+private import Lean.Elab.Tactic.Location
+private import Lean.Elab.Tactic.Config
 
 namespace Lean.Elab.Tactic
 open Meta

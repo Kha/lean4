@@ -3,8 +3,8 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Mario Carneiro
 -/
-import Lean.Elab.InfoTree.Main
-import Lean.DocString
+private import Lean.Elab.InfoTree.Main
+private import Lean.DocString
 
 namespace Lean
 

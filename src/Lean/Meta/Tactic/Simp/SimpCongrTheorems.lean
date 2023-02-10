@@ -3,10 +3,10 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.ScopedEnvExtension
-import Lean.Util.Recognizers
-import Lean.Util.CollectMVars
-import Lean.Meta.Basic
+private import Lean.ScopedEnvExtension
+private import Lean.Util.Recognizers
+private import Lean.Util.CollectMVars
+private import Lean.Meta.Basic
 
 namespace Lean.Meta
 

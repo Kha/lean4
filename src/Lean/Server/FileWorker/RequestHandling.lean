@@ -4,19 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Wojciech Nawrocki, Marc Huisinga
 -/
-import Lean.DeclarationRange
+private import Lean.DeclarationRange
 
-import Lean.Data.Json
-import Lean.Data.Lsp
+private import Lean.Data.Json
+private import Lean.Data.Lsp
 
-import Lean.Server.FileWorker.Utils
-import Lean.Server.Requests
-import Lean.Server.Completion
-import Lean.Server.References
-import Lean.Server.GoTo
+private import Lean.Server.FileWorker.Utils
+private import Lean.Server.Requests
+private import Lean.Server.Completion
+private import Lean.Server.References
+private import Lean.Server.GoTo
 
-import Lean.Widget.InteractiveGoal
-import Lean.Widget.Diff
+private import Lean.Widget.InteractiveGoal
+private import Lean.Widget.Diff
 
 namespace Lean.Server.FileWorker
 open Lsp

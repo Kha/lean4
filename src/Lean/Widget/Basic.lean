@@ -1,7 +1,7 @@
-import Lean.Elab.InfoTree
-import Lean.Message
-import Lean.Server.Rpc.Basic
-import Lean.Server.InfoUtils
+private import Lean.Elab.InfoTree
+private import Lean.Message
+private import Lean.Server.Rpc.Basic
+private import Lean.Server.InfoUtils
 
 namespace Lean.Widget
 

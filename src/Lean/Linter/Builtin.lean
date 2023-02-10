@@ -1,5 +1,5 @@
-import Lean.Linter.Util
-import Lean.Elab.Command
+private import Lean.Linter.Util
+private import Lean.Elab.Command
 
 namespace Lean.Linter
 

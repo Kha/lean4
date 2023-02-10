@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 
-import Lean.Util.ReplaceExpr
+private import Lean.Util.ReplaceExpr
 
 namespace Lean.Expr
 

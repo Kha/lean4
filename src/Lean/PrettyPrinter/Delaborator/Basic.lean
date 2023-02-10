@@ -3,10 +3,10 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich
 -/
-import Lean.Elab.Term
-import Lean.PrettyPrinter.Delaborator.Options
-import Lean.PrettyPrinter.Delaborator.SubExpr
-import Lean.PrettyPrinter.Delaborator.TopDownAnalyze
+private import Lean.Elab.Term
+private import Lean.PrettyPrinter.Delaborator.Options
+private import Lean.PrettyPrinter.Delaborator.SubExpr
+private import Lean.PrettyPrinter.Delaborator.TopDownAnalyze
 
 /-!
 The delaborator is the first stage of the pretty printer, and the inverse of the

@@ -3,10 +3,10 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Data.HashSet
-import Lean.Data.HashMap
-import Lean.Data.PersistentHashMap
-import Lean.Data.PersistentHashSet
+private import Lean.Data.HashSet
+private import Lean.Data.HashMap
+private import Lean.Data.PersistentHashMap
+private import Lean.Data.PersistentHashSet
 
 open ShareCommon
 namespace Lean.ShareCommon

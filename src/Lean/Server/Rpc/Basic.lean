@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Wojciech Nawrocki
 -/
-import Lean.Data.Json
+private import Lean.Data.Json
 
 /-! Allows LSP clients to make Remote Procedure Calls to the server.
 

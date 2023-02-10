@@ -3,43 +3,43 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Basic
-import Lean.Meta.LevelDefEq
-import Lean.Meta.WHNF
-import Lean.Meta.InferType
-import Lean.Meta.FunInfo
-import Lean.Meta.ExprDefEq
-import Lean.Meta.DecLevel
-import Lean.Meta.DiscrTree
-import Lean.Meta.Reduce
-import Lean.Meta.Instances
-import Lean.Meta.AbstractMVars
-import Lean.Meta.SynthInstance
-import Lean.Meta.AppBuilder
-import Lean.Meta.Tactic
-import Lean.Meta.KAbstract
-import Lean.Meta.RecursorInfo
-import Lean.Meta.GeneralizeTelescope
-import Lean.Meta.Match
-import Lean.Meta.ReduceEval
-import Lean.Meta.Closure
-import Lean.Meta.AbstractNestedProofs
-import Lean.Meta.ForEachExpr
-import Lean.Meta.Transform
-import Lean.Meta.PPGoal
-import Lean.Meta.UnificationHint
-import Lean.Meta.Inductive
-import Lean.Meta.SizeOf
-import Lean.Meta.IndPredBelow
-import Lean.Meta.Coe
-import Lean.Meta.CollectFVars
-import Lean.Meta.GeneralizeVars
-import Lean.Meta.Injective
-import Lean.Meta.Structure
-import Lean.Meta.Constructions
-import Lean.Meta.CongrTheorems
-import Lean.Meta.Eqns
-import Lean.Meta.CasesOn
-import Lean.Meta.ExprLens
-import Lean.Meta.ExprTraverse
-import Lean.Meta.Eval
+private import Lean.Meta.Basic
+private import Lean.Meta.LevelDefEq
+private import Lean.Meta.WHNF
+private import Lean.Meta.InferType
+private import Lean.Meta.FunInfo
+private import Lean.Meta.ExprDefEq
+private import Lean.Meta.DecLevel
+private import Lean.Meta.DiscrTree
+private import Lean.Meta.Reduce
+private import Lean.Meta.Instances
+private import Lean.Meta.AbstractMVars
+private import Lean.Meta.SynthInstance
+private import Lean.Meta.AppBuilder
+private import Lean.Meta.Tactic
+private import Lean.Meta.KAbstract
+private import Lean.Meta.RecursorInfo
+private import Lean.Meta.GeneralizeTelescope
+private import Lean.Meta.Match
+private import Lean.Meta.ReduceEval
+private import Lean.Meta.Closure
+private import Lean.Meta.AbstractNestedProofs
+private import Lean.Meta.ForEachExpr
+private import Lean.Meta.Transform
+private import Lean.Meta.PPGoal
+private import Lean.Meta.UnificationHint
+private import Lean.Meta.Inductive
+private import Lean.Meta.SizeOf
+private import Lean.Meta.IndPredBelow
+private import Lean.Meta.Coe
+private import Lean.Meta.CollectFVars
+private import Lean.Meta.GeneralizeVars
+private import Lean.Meta.Injective
+private import Lean.Meta.Structure
+private import Lean.Meta.Constructions
+private import Lean.Meta.CongrTheorems
+private import Lean.Meta.Eqns
+private import Lean.Meta.CasesOn
+private import Lean.Meta.ExprLens
+private import Lean.Meta.ExprTraverse
+private import Lean.Meta.Eval

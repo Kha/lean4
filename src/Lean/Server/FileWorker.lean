@@ -5,26 +5,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Marc Huisinga, Wojciech Nawrocki
 -/
 import Init.System.IO
-import Lean.Data.RBMap
+private import Lean.Data.RBMap
 
-import Lean.Environment
+private import Lean.Environment
 
-import Lean.Data.Lsp
-import Lean.Data.Json.FromToJson
+private import Lean.Data.Lsp
+private import Lean.Data.Json.FromToJson
 
-import Lean.Util.Paths
-import Lean.LoadDynlib
+private import Lean.Util.Paths
+private import Lean.LoadDynlib
 
-import Lean.Server.Utils
-import Lean.Server.Snapshots
-import Lean.Server.AsyncList
-import Lean.Server.References
+private import Lean.Server.Utils
+private import Lean.Server.Snapshots
+private import Lean.Server.AsyncList
+private import Lean.Server.References
 
-import Lean.Server.FileWorker.Utils
-import Lean.Server.FileWorker.RequestHandling
-import Lean.Server.FileWorker.WidgetRequests
-import Lean.Server.Rpc.Basic
-import Lean.Widget.InteractiveDiagnostic
+private import Lean.Server.FileWorker.Utils
+private import Lean.Server.FileWorker.RequestHandling
+private import Lean.Server.FileWorker.WidgetRequests
+private import Lean.Server.Rpc.Basic
+private import Lean.Widget.InteractiveDiagnostic
 
 /-!
 For general server architecture, see `README.md`. For details of IPC communication, see `Watchdog.lean`.

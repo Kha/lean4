@@ -3,8 +3,8 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura, Sebastian Ullrich
 -/
-import Lean.Structure
-import Lean.Elab.Attributes
+private import Lean.Structure
+private import Lean.Elab.Attributes
 
 namespace Lean.Elab
 

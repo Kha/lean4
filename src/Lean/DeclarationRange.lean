@@ -3,9 +3,9 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.MonadEnv
-import Lean.AuxRecursor
-import Lean.ToExpr
+private import Lean.MonadEnv
+private import Lean.AuxRecursor
+private import Lean.ToExpr
 
 namespace Lean
 

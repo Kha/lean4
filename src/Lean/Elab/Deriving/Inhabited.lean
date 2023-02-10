@@ -3,8 +3,8 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Util.ForEachExprWhere
-import Lean.Elab.Deriving.Basic
+private import Lean.Util.ForEachExprWhere
+private import Lean.Elab.Deriving.Basic
 
 namespace Lean.Elab
 open Command Meta Parser Term

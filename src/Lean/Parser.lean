@@ -3,14 +3,14 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura, Sebastian Ullrich
 -/
-import Lean.Parser.Basic
-import Lean.Parser.Level
-import Lean.Parser.Term
-import Lean.Parser.Tactic
-import Lean.Parser.Command
-import Lean.Parser.Module
-import Lean.Parser.Syntax
-import Lean.Parser.Do
+private import Lean.Parser.Basic
+private import Lean.Parser.Level
+private import Lean.Parser.Term
+private import Lean.Parser.Tactic
+private import Lean.Parser.Command
+private import Lean.Parser.Module
+private import Lean.Parser.Syntax
+private import Lean.Parser.Do
 
 namespace Lean
 namespace Parser

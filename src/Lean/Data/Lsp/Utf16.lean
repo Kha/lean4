@@ -6,8 +6,8 @@ Authors: Marc Huisinga, Wojciech Nawrocki
 -/
 import Init.Data.String
 import Init.Data.Array
-import Lean.Data.Lsp.Basic
-import Lean.Data.Position
+private import Lean.Data.Lsp.Basic
+private import Lean.Data.Position
 
 /-! LSP uses UTF-16 for indexing, so we need to provide some primitives
 to interact with Lean strings using UTF-16 indices. -/

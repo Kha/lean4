@@ -3,18 +3,18 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura, Sebastian Ullrich
 -/
-import Lean.Util.CollectFVars
-import Lean.AuxRecursor
-import Lean.Parser.Term
-import Lean.Meta.RecursorInfo
-import Lean.Meta.CollectMVars
-import Lean.Meta.Tactic.ElimInfo
-import Lean.Meta.Tactic.Induction
-import Lean.Meta.Tactic.Cases
-import Lean.Meta.GeneralizeVars
-import Lean.Elab.App
-import Lean.Elab.Tactic.ElabTerm
-import Lean.Elab.Tactic.Generalize
+private import Lean.Util.CollectFVars
+private import Lean.AuxRecursor
+private import Lean.Parser.Term
+private import Lean.Meta.RecursorInfo
+private import Lean.Meta.CollectMVars
+private import Lean.Meta.Tactic.ElimInfo
+private import Lean.Meta.Tactic.Induction
+private import Lean.Meta.Tactic.Cases
+private import Lean.Meta.GeneralizeVars
+private import Lean.Elab.App
+private import Lean.Elab.Tactic.ElabTerm
+private import Lean.Elab.Tactic.Generalize
 
 namespace Lean.Elab.Tactic
 open Meta

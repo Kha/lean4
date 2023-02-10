@@ -3,12 +3,12 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.ACLt
-import Lean.Meta.Match.MatchEqsExt
-import Lean.Meta.AppBuilder
-import Lean.Meta.SynthInstance
-import Lean.Meta.Tactic.Simp.Types
-import Lean.Meta.Tactic.LinearArith.Simp
+private import Lean.Meta.ACLt
+private import Lean.Meta.Match.MatchEqsExt
+private import Lean.Meta.AppBuilder
+private import Lean.Meta.SynthInstance
+private import Lean.Meta.Tactic.Simp.Types
+private import Lean.Meta.Tactic.LinearArith.Simp
 
 namespace Lean.Meta.Simp
 

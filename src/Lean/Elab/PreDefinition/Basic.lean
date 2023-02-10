@@ -3,11 +3,11 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Compiler.NoncomputableAttr
-import Lean.Util.CollectLevelParams
-import Lean.Meta.AbstractNestedProofs
-import Lean.Elab.RecAppSyntax
-import Lean.Elab.DefView
+private import Lean.Compiler.NoncomputableAttr
+private import Lean.Util.CollectLevelParams
+private import Lean.Meta.AbstractNestedProofs
+private import Lean.Elab.RecAppSyntax
+private import Lean.Elab.DefView
 
 namespace Lean.Elab
 open Meta

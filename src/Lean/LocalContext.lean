@@ -3,9 +3,9 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Data.PersistentArray
-import Lean.Expr
-import Lean.Hygiene
+private import Lean.Data.PersistentArray
+private import Lean.Expr
+private import Lean.Hygiene
 
 namespace Lean
 

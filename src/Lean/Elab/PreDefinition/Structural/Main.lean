@@ -3,13 +3,13 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Elab.PreDefinition.Structural.Basic
-import Lean.Elab.PreDefinition.Structural.FindRecArg
-import Lean.Elab.PreDefinition.Structural.Preprocess
-import Lean.Elab.PreDefinition.Structural.BRecOn
-import Lean.Elab.PreDefinition.Structural.IndPred
-import Lean.Elab.PreDefinition.Structural.Eqns
-import Lean.Elab.PreDefinition.Structural.SmartUnfolding
+private import Lean.Elab.PreDefinition.Structural.Basic
+private import Lean.Elab.PreDefinition.Structural.FindRecArg
+private import Lean.Elab.PreDefinition.Structural.Preprocess
+private import Lean.Elab.PreDefinition.Structural.BRecOn
+private import Lean.Elab.PreDefinition.Structural.IndPred
+private import Lean.Elab.PreDefinition.Structural.Eqns
+private import Lean.Elab.PreDefinition.Structural.SmartUnfolding
 
 namespace Lean.Elab
 namespace Structural

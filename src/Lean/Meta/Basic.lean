@@ -3,14 +3,14 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Data.LOption
-import Lean.Environment
-import Lean.Class
-import Lean.ReducibilityAttrs
-import Lean.Util.ReplaceExpr
-import Lean.Util.MonadBacktrack
-import Lean.Compiler.InlineAttrs
-import Lean.Meta.TransparencyMode
+private import Lean.Data.LOption
+private import Lean.Environment
+private import Lean.Class
+private import Lean.ReducibilityAttrs
+private import Lean.Util.ReplaceExpr
+private import Lean.Util.MonadBacktrack
+private import Lean.Compiler.InlineAttrs
+private import Lean.Meta.TransparencyMode
 
 /-!
 This module provides four (mutually dependent) goodies that are needed for building the elaborator and tactic frameworks.

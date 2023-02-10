@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Wojciech Nawrocki, Marc Huisinga
 -/
-import Lean.Server.Utils
-import Lean.Server.Snapshots
-import Lean.Server.AsyncList
+private import Lean.Server.Utils
+private import Lean.Server.Snapshots
+private import Lean.Server.AsyncList
 
-import Lean.Server.Rpc.Basic
+private import Lean.Server.Rpc.Basic
 
 namespace Lean.Server.FileWorker
 open Snapshots

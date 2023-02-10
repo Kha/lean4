@@ -3,9 +3,9 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Parser.Command
-import Lean.KeyedDeclsAttribute
-import Lean.Elab.Exception
+private import Lean.Parser.Command
+private import Lean.KeyedDeclsAttribute
+private import Lean.Elab.Exception
 
 namespace Lean
 

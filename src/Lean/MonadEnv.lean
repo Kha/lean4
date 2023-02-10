@@ -3,12 +3,12 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Environment
-import Lean.Exception
-import Lean.Declaration
-import Lean.Log
-import Lean.AuxRecursor
-import Lean.Compiler.Old
+private import Lean.Environment
+private import Lean.Exception
+private import Lean.Declaration
+private import Lean.Log
+private import Lean.AuxRecursor
+private import Lean.Compiler.Old
 
 namespace Lean
 

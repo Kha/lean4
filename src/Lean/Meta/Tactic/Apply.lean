@@ -3,10 +3,10 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Util.FindMVar
-import Lean.Meta.SynthInstance
-import Lean.Meta.CollectMVars
-import Lean.Meta.Tactic.Util
+private import Lean.Util.FindMVar
+private import Lean.Meta.SynthInstance
+private import Lean.Meta.CollectMVars
+private import Lean.Meta.Tactic.Util
 
 namespace Lean.Meta
 /-- Controls which new mvars are turned in to goals by the `apply` tactic.

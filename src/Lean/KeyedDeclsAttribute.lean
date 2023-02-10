@@ -3,9 +3,9 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura, Sebastian Ullrich
 -/
-import Lean.Compiler.InitAttr
-import Lean.ScopedEnvExtension
-import Lean.Compiler.IR.CompilerM
+private import Lean.Compiler.InitAttr
+private import Lean.ScopedEnvExtension
+private import Lean.Compiler.IR.CompilerM
 
 /-!
 A builder for attributes that are applied to declarations of a common type and

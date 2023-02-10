@@ -1,7 +1,7 @@
-import Lean.Elab.Command
-import Lean.Util.ForEachExprWhere
-import Lean.Linter.Util
-import Lean.Server.References
+private import Lean.Elab.Command
+private import Lean.Util.ForEachExprWhere
+private import Lean.Linter.Util
+private import Lean.Server.References
 
 namespace Lean.Linter
 open Lean.Elab.Command Lean.Server Std

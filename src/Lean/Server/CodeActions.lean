@@ -5,8 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: E.W.Ayers
 -/
 
-import Lean.Server.FileWorker.RequestHandling
-import Lean.Server.InfoUtils
+private import Lean.Server.FileWorker.RequestHandling
+private import Lean.Server.InfoUtils
 
 namespace Lean.Server
 

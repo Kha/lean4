@@ -3,10 +3,10 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.CoreM
-import Lean.Compiler.LCNF.Basic
-import Lean.Compiler.LCNF.LCtx
-import Lean.Compiler.LCNF.ConfigOptions
+private import Lean.CoreM
+private import Lean.Compiler.LCNF.Basic
+private import Lean.Compiler.LCNF.LCtx
+private import Lean.Compiler.LCNF.ConfigOptions
 
 namespace Lean.Compiler.LCNF
 /--

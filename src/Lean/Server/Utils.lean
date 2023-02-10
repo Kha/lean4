@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Wojciech Nawrocki, Marc Huisinga
 -/
-import Lean.Data.Lsp.Communication
-import Lean.Data.Lsp.Diagnostics
-import Lean.Data.Lsp.Extra
-import Lean.Data.Lsp.TextSync
-import Lean.Server.InfoUtils
+private import Lean.Data.Lsp.Communication
+private import Lean.Data.Lsp.Diagnostics
+private import Lean.Data.Lsp.Extra
+private import Lean.Data.Lsp.TextSync
+private import Lean.Server.InfoUtils
 
 namespace IO
 

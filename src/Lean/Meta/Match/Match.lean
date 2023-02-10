@@ -3,12 +3,12 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Check
-import Lean.Meta.Closure
-import Lean.Meta.Tactic.Cases
-import Lean.Meta.Tactic.Contradiction
-import Lean.Meta.GeneralizeTelescope
-import Lean.Meta.Match.Basic
+private import Lean.Meta.Check
+private import Lean.Meta.Closure
+private import Lean.Meta.Tactic.Cases
+private import Lean.Meta.Tactic.Contradiction
+private import Lean.Meta.GeneralizeTelescope
+private import Lean.Meta.Match.Basic
 
 namespace Lean.Meta.Match
 

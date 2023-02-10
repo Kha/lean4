@@ -3,16 +3,16 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Util.HasConstCache
-import Lean.Meta.CasesOn
-import Lean.Meta.Match.Match
-import Lean.Meta.Tactic.Simp.Main
-import Lean.Meta.Tactic.Cleanup
-import Lean.Elab.Tactic.Basic
-import Lean.Elab.RecAppSyntax
-import Lean.Elab.PreDefinition.Basic
-import Lean.Elab.PreDefinition.Structural.Basic
-import Lean.Elab.PreDefinition.Structural.BRecOn
+private import Lean.Util.HasConstCache
+private import Lean.Meta.CasesOn
+private import Lean.Meta.Match.Match
+private import Lean.Meta.Tactic.Simp.Main
+private import Lean.Meta.Tactic.Cleanup
+private import Lean.Elab.Tactic.Basic
+private import Lean.Elab.RecAppSyntax
+private import Lean.Elab.PreDefinition.Basic
+private import Lean.Elab.PreDefinition.Structural.Basic
+private import Lean.Elab.PreDefinition.Structural.BRecOn
 
 namespace Lean.Elab.WF
 open Meta

@@ -3,19 +3,19 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Class
-import Lean.Parser.Command
-import Lean.Meta.Closure
-import Lean.Meta.SizeOf
-import Lean.Meta.Injective
-import Lean.Meta.Structure
-import Lean.Meta.AppBuilder
-import Lean.Elab.Command
-import Lean.Elab.DeclModifiers
-import Lean.Elab.DeclUtil
-import Lean.Elab.Inductive
-import Lean.Elab.DeclarationRange
-import Lean.Elab.Binders
+private import Lean.Class
+private import Lean.Parser.Command
+private import Lean.Meta.Closure
+private import Lean.Meta.SizeOf
+private import Lean.Meta.Injective
+private import Lean.Meta.Structure
+private import Lean.Meta.AppBuilder
+private import Lean.Elab.Command
+private import Lean.Elab.DeclModifiers
+private import Lean.Elab.DeclUtil
+private import Lean.Elab.Inductive
+private import Lean.Elab.DeclarationRange
+private import Lean.Elab.Binders
 
 namespace Lean.Elab.Command
 

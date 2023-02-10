@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Marc Huisinga, Wojciech Nawrocki
 -/
-import Lean.Data.Json
-import Lean.Data.Lsp.Basic
+private import Lean.Data.Json
+private import Lean.Data.Lsp.Basic
 
 /-! Section "Text Document Synchronization" of the LSP spec. -/
 

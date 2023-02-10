@@ -3,45 +3,45 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Elab.Import
-import Lean.Elab.Exception
-import Lean.Elab.Config
-import Lean.Elab.Command
-import Lean.Elab.Term
-import Lean.Elab.App
-import Lean.Elab.Binders
-import Lean.Elab.LetRec
-import Lean.Elab.Frontend
-import Lean.Elab.BuiltinNotation
-import Lean.Elab.Declaration
-import Lean.Elab.Tactic
-import Lean.Elab.Match
+private import Lean.Elab.Import
+private import Lean.Elab.Exception
+private import Lean.Elab.Config
+private import Lean.Elab.Command
+private import Lean.Elab.Term
+private import Lean.Elab.App
+private import Lean.Elab.Binders
+private import Lean.Elab.LetRec
+private import Lean.Elab.Frontend
+private import Lean.Elab.BuiltinNotation
+private import Lean.Elab.Declaration
+private import Lean.Elab.Tactic
+private import Lean.Elab.Match
 -- HACK: must come after `Match` because builtin elaborators (for `match` in this case) do not take priorities
-import Lean.Elab.Quotation
-import Lean.Elab.Syntax
-import Lean.Elab.Do
-import Lean.Elab.StructInst
-import Lean.Elab.Inductive
-import Lean.Elab.Structure
-import Lean.Elab.Print
-import Lean.Elab.MutualDef
-import Lean.Elab.AuxDef
-import Lean.Elab.PreDefinition
-import Lean.Elab.Deriving
-import Lean.Elab.DeclarationRange
-import Lean.Elab.Extra
-import Lean.Elab.GenInjective
-import Lean.Elab.BuiltinTerm
-import Lean.Elab.Arg
-import Lean.Elab.PatternVar
-import Lean.Elab.ElabRules
-import Lean.Elab.Macro
-import Lean.Elab.Notation
-import Lean.Elab.Mixfix
-import Lean.Elab.MacroRules
-import Lean.Elab.BuiltinCommand
-import Lean.Elab.RecAppSyntax
-import Lean.Elab.Eval
-import Lean.Elab.Calc
-import Lean.Elab.InheritDoc
-import Lean.Elab.ParseImportsFast
+private import Lean.Elab.Quotation
+private import Lean.Elab.Syntax
+private import Lean.Elab.Do
+private import Lean.Elab.StructInst
+private import Lean.Elab.Inductive
+private import Lean.Elab.Structure
+private import Lean.Elab.Print
+private import Lean.Elab.MutualDef
+private import Lean.Elab.AuxDef
+private import Lean.Elab.PreDefinition
+private import Lean.Elab.Deriving
+private import Lean.Elab.DeclarationRange
+private import Lean.Elab.Extra
+private import Lean.Elab.GenInjective
+private import Lean.Elab.BuiltinTerm
+private import Lean.Elab.Arg
+private import Lean.Elab.PatternVar
+private import Lean.Elab.ElabRules
+private import Lean.Elab.Macro
+private import Lean.Elab.Notation
+private import Lean.Elab.Mixfix
+private import Lean.Elab.MacroRules
+private import Lean.Elab.BuiltinCommand
+private import Lean.Elab.RecAppSyntax
+private import Lean.Elab.Eval
+private import Lean.Elab.Calc
+private import Lean.Elab.InheritDoc
+private import Lean.Elab.ParseImportsFast

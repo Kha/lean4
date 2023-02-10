@@ -3,12 +3,12 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.ProjFns
-import Lean.Compiler.BorrowedAnnotation
-import Lean.Compiler.LCNF.Types
-import Lean.Compiler.LCNF.Bind
-import Lean.Compiler.LCNF.InferType
-import Lean.Compiler.LCNF.Util
+private import Lean.ProjFns
+private import Lean.Compiler.BorrowedAnnotation
+private import Lean.Compiler.LCNF.Types
+private import Lean.Compiler.LCNF.Bind
+private import Lean.Compiler.LCNF.InferType
+private import Lean.Compiler.LCNF.Util
 
 namespace Lean.Compiler.LCNF
 namespace ToLCNF

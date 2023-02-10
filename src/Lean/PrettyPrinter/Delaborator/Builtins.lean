@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich
 -/
 
-import Lean.PrettyPrinter.Delaborator.Basic
-import Lean.PrettyPrinter.Delaborator.SubExpr
-import Lean.PrettyPrinter.Delaborator.TopDownAnalyze
-import Lean.Parser
+private import Lean.PrettyPrinter.Delaborator.Basic
+private import Lean.PrettyPrinter.Delaborator.SubExpr
+private import Lean.PrettyPrinter.Delaborator.TopDownAnalyze
+private import Lean.Parser
 
 namespace Lean.PrettyPrinter.Delaborator
 open Lean.Meta

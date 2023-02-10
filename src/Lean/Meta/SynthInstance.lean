@@ -5,12 +5,12 @@ Authors: Daniel Selsam, Leonardo de Moura
 
 Type class instance synthesizer using tabled resolution.
 -/
-import Lean.Meta.Basic
-import Lean.Meta.Instances
-import Lean.Meta.AbstractMVars
-import Lean.Meta.WHNF
-import Lean.Meta.Check
-import Lean.Util.Profile
+private import Lean.Meta.Basic
+private import Lean.Meta.Instances
+private import Lean.Meta.AbstractMVars
+private import Lean.Meta.WHNF
+private import Lean.Meta.Check
+private import Lean.Util.Profile
 
 namespace Lean.Meta
 

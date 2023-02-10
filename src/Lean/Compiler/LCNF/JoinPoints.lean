@@ -3,12 +3,12 @@ Copyright (c) 2022 Henrik Böving. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Henrik Böving
 -/
-import Lean.Compiler.LCNF.CompilerM
-import Lean.Compiler.LCNF.PassManager
-import Lean.Compiler.LCNF.PullFunDecls
-import Lean.Compiler.LCNF.FVarUtil
-import Lean.Compiler.LCNF.ScopeM
-import Lean.Compiler.LCNF.InferType
+private import Lean.Compiler.LCNF.CompilerM
+private import Lean.Compiler.LCNF.PassManager
+private import Lean.Compiler.LCNF.PullFunDecls
+private import Lean.Compiler.LCNF.FVarUtil
+private import Lean.Compiler.LCNF.ScopeM
+private import Lean.Compiler.LCNF.InferType
 
 namespace Lean.Compiler.LCNF
 

@@ -3,10 +3,10 @@ Copyright (c) 2020 Sebastian Ullrich. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich
 -/
-import Lean.Meta.ReduceEval
-import Lean.KeyedDeclsAttribute
-import Lean.ParserCompiler.Attribute
-import Lean.Parser.Extension
+private import Lean.Meta.ReduceEval
+private import Lean.KeyedDeclsAttribute
+private import Lean.ParserCompiler.Attribute
+private import Lean.Parser.Extension
 
 /-!
 Gadgets for compiling parser declarations into other programs, such as pretty printers.

@@ -3,12 +3,12 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Tactic.Apply
-import Lean.Meta.Tactic.Cases
-import Lean.Meta.Tactic.Rename
-import Lean.Elab.SyntheticMVars
-import Lean.Elab.PreDefinition.Basic
-import Lean.Elab.PreDefinition.WF.TerminationHint
+private import Lean.Meta.Tactic.Apply
+private import Lean.Meta.Tactic.Cases
+private import Lean.Meta.Tactic.Rename
+private import Lean.Elab.SyntheticMVars
+private import Lean.Elab.PreDefinition.Basic
+private import Lean.Elab.PreDefinition.WF.TerminationHint
 
 namespace Lean.Elab.WF
 open Meta

@@ -3,10 +3,10 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Eval
-import Lean.Elab.Tactic.Basic
-import Lean.Elab.SyntheticMVars
-import Lean.Linter.MissingDocs
+private import Lean.Meta.Eval
+private import Lean.Elab.Tactic.Basic
+private import Lean.Elab.SyntheticMVars
+private import Lean.Linter.MissingDocs
 
 namespace Lean.Elab.Tactic
 open Meta

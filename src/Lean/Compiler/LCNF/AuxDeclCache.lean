@@ -3,9 +3,9 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Compiler.LCNF.CompilerM
-import Lean.Compiler.LCNF.DeclHash
-import Lean.Compiler.LCNF.Internalize
+private import Lean.Compiler.LCNF.CompilerM
+private import Lean.Compiler.LCNF.DeclHash
+private import Lean.Compiler.LCNF.Internalize
 
 namespace Lean.Compiler.LCNF
 

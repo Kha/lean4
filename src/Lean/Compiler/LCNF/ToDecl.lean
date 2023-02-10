@@ -3,10 +3,10 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Transform
-import Lean.Meta.Match.MatcherInfo
-import Lean.Compiler.ImplementedByAttr
-import Lean.Compiler.LCNF.ToLCNF
+private import Lean.Meta.Transform
+private import Lean.Meta.Match.MatcherInfo
+private import Lean.Compiler.ImplementedByAttr
+private import Lean.Compiler.LCNF.ToLCNF
 
 namespace Lean.Compiler.LCNF
 /--

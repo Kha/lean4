@@ -1,4 +1,4 @@
-import Lean.Compiler.FFI
+private import Lean.Compiler.FFI
 
 open Lean.Compiler.FFI
 

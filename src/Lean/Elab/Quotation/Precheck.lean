@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich
 -/
 
-import Lean.KeyedDeclsAttribute
-import Lean.Parser.Command  -- for `precheckedQuot`
-import Lean.Elab.Term
-import Lean.Elab.Quotation.Util
+private import Lean.KeyedDeclsAttribute
+private import Lean.Parser.Command  -- for `precheckedQuot`
+private import Lean.Elab.Term
+private import Lean.Elab.Quotation.Util
 
 namespace Lean.Elab.Term.Quotation
 open Lean.Elab.Term

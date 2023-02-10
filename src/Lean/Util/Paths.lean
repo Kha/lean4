@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Sebastian Ullrich
 -/
-import Lean.Data.Json
-import Lean.Util.Path
+private import Lean.Data.Json
+private import Lean.Util.Path
 
 /-! Communicating Lean search paths between processes -/
 

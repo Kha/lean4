@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: E.W.Ayers
 -/
-import Lean.Meta.PPGoal
-import Lean.Widget.InteractiveCode
-import Lean.Widget.InteractiveGoal
-import Lean.Data.Lsp.Extra
-import Lean.Elab.InfoTree
+private import Lean.Meta.PPGoal
+private import Lean.Widget.InteractiveCode
+private import Lean.Widget.InteractiveGoal
+private import Lean.Data.Lsp.Extra
+private import Lean.Elab.InfoTree
 
 namespace Lean.Widget
 

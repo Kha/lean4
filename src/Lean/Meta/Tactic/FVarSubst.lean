@@ -3,10 +3,10 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Data.AssocList
-import Lean.Expr
-import Lean.LocalContext
-import Lean.Util.ReplaceExpr
+private import Lean.Data.AssocList
+private import Lean.Expr
+private import Lean.LocalContext
+private import Lean.Util.ReplaceExpr
 
 namespace Lean.Meta
 /--

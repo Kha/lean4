@@ -3,8 +3,8 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Elab.Binders
-import Lean.Elab.SyntheticMVars
+private import Lean.Elab.Binders
+private import Lean.Elab.SyntheticMVars
 
 namespace Lean.Elab.Command
 
@@ -372,7 +372,7 @@ consider using `runTermElabM`.
 Recall that `TermElabM` actions can automatically lift `MetaM` and `CoreM` actions.
 Example:
 ```
-import Lean
+private import Lean
 
 open Lean Elab Command Meta
 
@@ -417,7 +417,7 @@ command.
 
 Example:
 ```
-import Lean
+private import Lean
 
 open Lean Elab Command Meta
 

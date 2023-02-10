@@ -3,14 +3,14 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Instances
-import Lean.Compiler.InlineAttrs
-import Lean.Compiler.LCNF.Closure
-import Lean.Compiler.LCNF.Types
-import Lean.Compiler.LCNF.MonadScope
-import Lean.Compiler.LCNF.Internalize
-import Lean.Compiler.LCNF.Level
-import Lean.Compiler.LCNF.AuxDeclCache
+private import Lean.Meta.Instances
+private import Lean.Compiler.InlineAttrs
+private import Lean.Compiler.LCNF.Closure
+private import Lean.Compiler.LCNF.Types
+private import Lean.Compiler.LCNF.MonadScope
+private import Lean.Compiler.LCNF.Internalize
+private import Lean.Compiler.LCNF.Level
+private import Lean.Compiler.LCNF.AuxDeclCache
 
 namespace Lean.Compiler.LCNF
 namespace LambdaLifting

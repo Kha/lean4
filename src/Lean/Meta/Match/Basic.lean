@@ -3,10 +3,10 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Check
-import Lean.Meta.CollectFVars
-import Lean.Meta.Match.MatcherInfo
-import Lean.Meta.Match.CaseArraySizes
+private import Lean.Meta.Check
+private import Lean.Meta.CollectFVars
+private import Lean.Meta.Match.MatcherInfo
+private import Lean.Meta.Match.CaseArraySizes
 
 namespace Lean.Meta.Match
 

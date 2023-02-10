@@ -3,13 +3,13 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Eqns
-import Lean.Util.CollectFVars
-import Lean.Util.ForEachExprWhere
-import Lean.Meta.Tactic.Split
-import Lean.Meta.Tactic.Apply
-import Lean.Meta.Tactic.Refl
-import Lean.Meta.Match.MatchEqs
+private import Lean.Meta.Eqns
+private import Lean.Util.CollectFVars
+private import Lean.Util.ForEachExprWhere
+private import Lean.Meta.Tactic.Split
+private import Lean.Meta.Tactic.Apply
+private import Lean.Meta.Tactic.Refl
+private import Lean.Meta.Match.MatchEqs
 
 namespace Lean.Elab.Eqns
 open Meta

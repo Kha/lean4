@@ -3,12 +3,12 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Structure
-import Lean.Util.Recognizers
-import Lean.Meta.GetConst
-import Lean.Meta.FunInfo
-import Lean.Meta.Match.MatcherInfo
-import Lean.Meta.Match.MatchPatternAttr
+private import Lean.Structure
+private import Lean.Util.Recognizers
+private import Lean.Meta.GetConst
+private import Lean.Meta.FunInfo
+private import Lean.Meta.Match.MatcherInfo
+private import Lean.Meta.Match.MatchPatternAttr
 
 namespace Lean.Meta
 

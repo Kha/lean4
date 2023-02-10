@@ -3,14 +3,14 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Elab.PreDefinition.Basic
-import Lean.Elab.PreDefinition.WF.TerminationHint
-import Lean.Elab.PreDefinition.WF.PackDomain
-import Lean.Elab.PreDefinition.WF.PackMutual
-import Lean.Elab.PreDefinition.WF.Rel
-import Lean.Elab.PreDefinition.WF.Fix
-import Lean.Elab.PreDefinition.WF.Eqns
-import Lean.Elab.PreDefinition.WF.Ite
+private import Lean.Elab.PreDefinition.Basic
+private import Lean.Elab.PreDefinition.WF.TerminationHint
+private import Lean.Elab.PreDefinition.WF.PackDomain
+private import Lean.Elab.PreDefinition.WF.PackMutual
+private import Lean.Elab.PreDefinition.WF.Rel
+private import Lean.Elab.PreDefinition.WF.Fix
+private import Lean.Elab.PreDefinition.WF.Eqns
+private import Lean.Elab.PreDefinition.WF.Ite
 
 namespace Lean.Elab
 open WF

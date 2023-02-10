@@ -3,11 +3,11 @@ Copyright (c) 2020 Sebastian Ullrich. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich
 -/
-import Lean.PrettyPrinter.Delaborator
-import Lean.PrettyPrinter.Parenthesizer
-import Lean.PrettyPrinter.Formatter
-import Lean.Parser.Module
-import Lean.ParserCompiler
+private import Lean.PrettyPrinter.Delaborator
+private import Lean.PrettyPrinter.Parenthesizer
+private import Lean.PrettyPrinter.Formatter
+private import Lean.Parser.Module
+private import Lean.ParserCompiler
 
 namespace Lean
 

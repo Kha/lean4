@@ -3,10 +3,10 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Message
-import Lean.InternalExceptionId
-import Lean.Data.Options
-import Lean.Util.MonadCache
+private import Lean.Message
+private import Lean.InternalExceptionId
+private import Lean.Data.Options
+private import Lean.Util.MonadCache
 
 namespace Lean
 

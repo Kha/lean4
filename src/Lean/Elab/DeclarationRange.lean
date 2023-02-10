@@ -3,10 +3,10 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Log
-import Lean.Parser.Command
-import Lean.DeclarationRange
-import Lean.Data.Lsp.Utf16
+private import Lean.Log
+private import Lean.Parser.Command
+private import Lean.DeclarationRange
+private import Lean.Data.Lsp.Utf16
 
 namespace Lean.Elab
 

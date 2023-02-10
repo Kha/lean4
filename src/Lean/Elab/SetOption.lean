@@ -3,8 +3,8 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Log
-import Lean.Elab.InfoTree
+private import Lean.Log
+private import Lean.Elab.InfoTree
 namespace Lean.Elab
 
 variable [Monad m] [MonadOptions m] [MonadExceptOf Exception m] [MonadRef m]

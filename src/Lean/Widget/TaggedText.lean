@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Wojciech Nawrocki
 -/
-import Lean.Data.Json.FromToJson
-import Lean.Server.Rpc.Basic
+private import Lean.Data.Json.FromToJson
+private import Lean.Server.Rpc.Basic
 
 namespace Lean.Widget
 open Server

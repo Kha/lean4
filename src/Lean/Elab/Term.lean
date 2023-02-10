@@ -3,13 +3,13 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura, Sebastian Ullrich
 -/
-import Lean.Meta.AppBuilder
-import Lean.Meta.CollectMVars
-import Lean.Meta.Coe
-import Lean.Linter.Deprecated
-import Lean.Elab.Config
-import Lean.Elab.Level
-import Lean.Elab.DeclModifiers
+private import Lean.Meta.AppBuilder
+private import Lean.Meta.CollectMVars
+private import Lean.Meta.Coe
+private import Lean.Linter.Deprecated
+private import Lean.Elab.Config
+private import Lean.Elab.Level
+private import Lean.Elab.DeclModifiers
 
 namespace Lean.Elab
 

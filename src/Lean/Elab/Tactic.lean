@@ -3,22 +3,22 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura, Sebastian Ullrich
 -/
-import Lean.Elab.Term
-import Lean.Elab.Tactic.Basic
-import Lean.Elab.Tactic.ElabTerm
-import Lean.Elab.Tactic.Induction
-import Lean.Elab.Tactic.Generalize
-import Lean.Elab.Tactic.Injection
-import Lean.Elab.Tactic.Match
-import Lean.Elab.Tactic.Rewrite
-import Lean.Elab.Tactic.Location
-import Lean.Elab.Tactic.Simp
-import Lean.Elab.Tactic.BuiltinTactic
-import Lean.Elab.Tactic.Split
-import Lean.Elab.Tactic.Conv
-import Lean.Elab.Tactic.Delta
-import Lean.Elab.Tactic.Meta
-import Lean.Elab.Tactic.Unfold
-import Lean.Elab.Tactic.Cache
-import Lean.Elab.Tactic.Calc
-import Lean.Elab.Tactic.Congr
+private import Lean.Elab.Term
+private import Lean.Elab.Tactic.Basic
+private import Lean.Elab.Tactic.ElabTerm
+private import Lean.Elab.Tactic.Induction
+private import Lean.Elab.Tactic.Generalize
+private import Lean.Elab.Tactic.Injection
+private import Lean.Elab.Tactic.Match
+private import Lean.Elab.Tactic.Rewrite
+private import Lean.Elab.Tactic.Location
+private import Lean.Elab.Tactic.Simp
+private import Lean.Elab.Tactic.BuiltinTactic
+private import Lean.Elab.Tactic.Split
+private import Lean.Elab.Tactic.Conv
+private import Lean.Elab.Tactic.Delta
+private import Lean.Elab.Tactic.Meta
+private import Lean.Elab.Tactic.Unfold
+private import Lean.Elab.Tactic.Cache
+private import Lean.Elab.Tactic.Calc
+private import Lean.Elab.Tactic.Congr

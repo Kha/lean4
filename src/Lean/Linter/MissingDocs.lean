@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Mario Carneiro
 -/
-import Lean.Meta.Tactic.Simp.SimpTheorems
-import Lean.Elab.Command
-import Lean.Elab.SetOption
-import Lean.Linter.Util
+private import Lean.Meta.Tactic.Simp.SimpTheorems
+private import Lean.Elab.Command
+private import Lean.Elab.SetOption
+private import Lean.Linter.Util
 
 namespace Lean.Linter
 open Elab.Command Parser.Command

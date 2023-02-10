@@ -4,18 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Siddharth Bhat
 -/
 
-import Lean.Data.HashMap
-import Lean.Runtime
-import Lean.Compiler.NameMangling
-import Lean.Compiler.ExportAttr
-import Lean.Compiler.InitAttr
-import Lean.Compiler.IR.CompilerM
-import Lean.Compiler.IR.EmitUtil
-import Lean.Compiler.IR.NormIds
-import Lean.Compiler.IR.SimpCase
-import Lean.Compiler.IR.Boxing
-import Lean.Compiler.IR.ResetReuse
-import Lean.Compiler.IR.LLVMBindings
+private import Lean.Data.HashMap
+private import Lean.Runtime
+private import Lean.Compiler.NameMangling
+private import Lean.Compiler.ExportAttr
+private import Lean.Compiler.InitAttr
+private import Lean.Compiler.IR.CompilerM
+private import Lean.Compiler.IR.EmitUtil
+private import Lean.Compiler.IR.NormIds
+private import Lean.Compiler.IR.SimpCase
+private import Lean.Compiler.IR.Boxing
+private import Lean.Compiler.IR.ResetReuse
+private import Lean.Compiler.IR.LLVMBindings
 
 open Lean.IR.ExplicitBoxing (isBoxedName)
 

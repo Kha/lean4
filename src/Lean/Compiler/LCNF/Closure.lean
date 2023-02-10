@@ -3,8 +3,8 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Util.ForEachExprWhere
-import Lean.Compiler.LCNF.CompilerM
+private import Lean.Util.ForEachExprWhere
+private import Lean.Compiler.LCNF.CompilerM
 
 namespace Lean.Compiler.LCNF
 namespace Closure

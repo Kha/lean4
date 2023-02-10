@@ -3,8 +3,8 @@ Copyright (c) 2018 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura, Sebastian Ullrich
 -/
-import Lean.Data.Format
-import Lean.ToExpr
+private import Lean.Data.Format
+private import Lean.ToExpr
 
 namespace Lean
 

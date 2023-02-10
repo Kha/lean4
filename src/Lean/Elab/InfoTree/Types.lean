@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Wojciech Nawrocki, Leonardo de Moura, Sebastian Ullrich
 -/
-import Lean.Data.Position
-import Lean.Data.OpenDecl
-import Lean.MetavarContext
-import Lean.Environment
-import Lean.Data.Json
+private import Lean.Data.Position
+private import Lean.Data.OpenDecl
+private import Lean.MetavarContext
+private import Lean.Environment
+private import Lean.Data.Json
 
 namespace Lean.Elab
 

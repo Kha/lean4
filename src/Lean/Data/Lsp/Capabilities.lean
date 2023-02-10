@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Marc Huisinga, Wojciech Nawrocki
 -/
-import Lean.Data.JsonRpc
-import Lean.Data.Lsp.TextSync
-import Lean.Data.Lsp.LanguageFeatures
-import Lean.Data.Lsp.CodeActions
+private import Lean.Data.JsonRpc
+private import Lean.Data.Lsp.TextSync
+private import Lean.Data.Lsp.LanguageFeatures
+private import Lean.Data.Lsp.CodeActions
 
 /-! Minimal LSP servers/clients do not have to implement a lot
 of functionality. Most useful additional behavior is instead

@@ -3,8 +3,8 @@ Copyright (c) 2022 Sebastian Ullrich. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich
 -/
-import Lean.Meta.Eval
-import Lean.Elab.SyntheticMVars
+private import Lean.Meta.Eval
+private import Lean.Elab.SyntheticMVars
 
 namespace Lean.Elab.Term
 open Meta

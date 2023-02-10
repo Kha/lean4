@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Sebastian Ullrich, Lars König, Wojciech Nawrocki
 -/
-import Lean.Data.Json.FromToJson
-import Lean.Util.Path
-import Lean.Server.Utils
+private import Lean.Data.Json.FromToJson
+private import Lean.Util.Path
+private import Lean.Server.Utils
 
 namespace Lean.Server
 

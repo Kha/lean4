@@ -3,9 +3,9 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Compiler.LCNF.InferType
-import Lean.Compiler.LCNF.PrettyPrinter
-import Lean.Compiler.LCNF.CompatibleTypes
+private import Lean.Compiler.LCNF.InferType
+private import Lean.Compiler.LCNF.PrettyPrinter
+private import Lean.Compiler.LCNF.CompatibleTypes
 
 namespace Lean.Compiler.LCNF
 

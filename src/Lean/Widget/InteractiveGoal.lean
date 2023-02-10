@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Wojciech Nawrocki
 -/
-import Lean.Meta.PPGoal
-import Lean.Widget.InteractiveCode
-import Lean.Data.Lsp.Extra
+private import Lean.Meta.PPGoal
+private import Lean.Widget.InteractiveCode
+private import Lean.Data.Lsp.Extra
 
 /-! Functionality related to tactic-mode and term-mode goals with embedded `CodeWithInfos`. -/
 

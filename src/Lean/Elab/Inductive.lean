@@ -3,20 +3,20 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Util.ForEachExprWhere
-import Lean.Util.ReplaceLevel
-import Lean.Util.ReplaceExpr
-import Lean.Util.CollectLevelParams
-import Lean.Meta.Constructions
-import Lean.Meta.CollectFVars
-import Lean.Meta.SizeOf
-import Lean.Meta.Injective
-import Lean.Meta.IndPredBelow
-import Lean.Elab.Command
-import Lean.Elab.ComputedFields
-import Lean.Elab.DefView
-import Lean.Elab.DeclUtil
-import Lean.Elab.Deriving.Basic
+private import Lean.Util.ForEachExprWhere
+private import Lean.Util.ReplaceLevel
+private import Lean.Util.ReplaceExpr
+private import Lean.Util.CollectLevelParams
+private import Lean.Meta.Constructions
+private import Lean.Meta.CollectFVars
+private import Lean.Meta.SizeOf
+private import Lean.Meta.Injective
+private import Lean.Meta.IndPredBelow
+private import Lean.Elab.Command
+private import Lean.Elab.ComputedFields
+private import Lean.Elab.DefView
+private import Lean.Elab.DeclUtil
+private import Lean.Elab.Deriving.Basic
 
 namespace Lean.Elab.Command
 open Meta

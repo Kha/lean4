@@ -3,9 +3,9 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura, Sebastian Ullrich
 -/
-import Lean.Data.Trie
-import Lean.Syntax
-import Lean.Message
+private import Lean.Data.Trie
+private import Lean.Syntax
+private import Lean.Message
 
 namespace Lean.Parser
 

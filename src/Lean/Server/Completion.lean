@@ -3,16 +3,16 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Environment
-import Lean.Parser.Term
-import Lean.Data.FuzzyMatching
-import Lean.Data.Lsp.LanguageFeatures
-import Lean.Data.Lsp.Capabilities
-import Lean.Data.Lsp.Utf16
-import Lean.Meta.Tactic.Apply
-import Lean.Meta.Match.MatcherInfo
-import Lean.Server.InfoUtils
-import Lean.Parser.Extension
+private import Lean.Environment
+private import Lean.Parser.Term
+private import Lean.Data.FuzzyMatching
+private import Lean.Data.Lsp.LanguageFeatures
+private import Lean.Data.Lsp.Capabilities
+private import Lean.Data.Lsp.Utf16
+private import Lean.Meta.Tactic.Apply
+private import Lean.Meta.Match.MatcherInfo
+private import Lean.Server.InfoUtils
+private import Lean.Parser.Extension
 
 namespace Lean.Server.Completion
 open Lsp

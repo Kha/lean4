@@ -5,9 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Marc Huisinga
 -/
 import Init.System.IO
-import Lean.Data.Json.Parser
-import Lean.Data.Json.Printer
-import Lean.Data.Json.FromToJson
+private import Lean.Data.Json.Parser
+private import Lean.Data.Json.Printer
+private import Lean.Data.Json.FromToJson
 
 namespace IO.FS.Stream
 

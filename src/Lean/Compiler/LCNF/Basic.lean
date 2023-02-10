@@ -3,11 +3,11 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Expr
-import Lean.Meta.Instances
-import Lean.Compiler.InlineAttrs
-import Lean.Compiler.Specialize
-import Lean.Compiler.LCNF.Types
+private import Lean.Expr
+private import Lean.Meta.Instances
+private import Lean.Compiler.InlineAttrs
+private import Lean.Compiler.Specialize
+private import Lean.Compiler.LCNF.Types
 
 namespace Lean.Compiler.LCNF
 

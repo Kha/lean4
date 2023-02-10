@@ -3,14 +3,14 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Match.Match
-import Lean.Meta.Match.MatchEqsExt
-import Lean.Meta.Tactic.Apply
-import Lean.Meta.Tactic.Refl
-import Lean.Meta.Tactic.Delta
-import Lean.Meta.Tactic.SplitIf
-import Lean.Meta.Tactic.Injection
-import Lean.Meta.Tactic.Contradiction
+private import Lean.Meta.Match.Match
+private import Lean.Meta.Match.MatchEqsExt
+private import Lean.Meta.Tactic.Apply
+private import Lean.Meta.Tactic.Refl
+private import Lean.Meta.Tactic.Delta
+private import Lean.Meta.Tactic.SplitIf
+private import Lean.Meta.Tactic.Injection
+private import Lean.Meta.Tactic.Contradiction
 
 namespace Lean.Meta
 

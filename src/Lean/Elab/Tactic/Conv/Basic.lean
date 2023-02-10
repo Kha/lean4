@@ -3,11 +3,11 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Reduce
-import Lean.Meta.Tactic.Apply
-import Lean.Meta.Tactic.Replace
-import Lean.Elab.Tactic.Basic
-import Lean.Elab.Tactic.BuiltinTactic
+private import Lean.Meta.Reduce
+private import Lean.Meta.Tactic.Apply
+private import Lean.Meta.Tactic.Replace
+private import Lean.Elab.Tactic.Basic
+private import Lean.Elab.Tactic.BuiltinTactic
 
 namespace Lean.Elab.Tactic.Conv
 open Meta

@@ -3,9 +3,9 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Data.LBool
-import Lean.Meta.InferType
-import Lean.Meta.AppBuilder
+private import Lean.Data.LBool
+private import Lean.Meta.InferType
+private import Lean.Meta.AppBuilder
 
 namespace Lean.Meta
 

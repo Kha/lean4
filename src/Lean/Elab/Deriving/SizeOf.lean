@@ -3,8 +3,8 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.SizeOf
-import Lean.Elab.Deriving.Basic
+private import Lean.Meta.SizeOf
+private import Lean.Elab.Deriving.Basic
 
 /-!
 Remark: `SizeOf` instances are automatically generated. We add support for `deriving instance` for `SizeOf`

@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Wojciech Nawrocki
 -/
-import Lean.Elab.Command
-import Lean.Elab.Term
-import Lean.Elab.Deriving.Basic
-import Lean.Elab.Deriving.Util
+private import Lean.Elab.Command
+private import Lean.Elab.Term
+private import Lean.Elab.Deriving.Basic
+private import Lean.Elab.Deriving.Util
 
-import Lean.Server.Rpc.Basic
+private import Lean.Server.Rpc.Basic
 
 namespace Lean.Server.RpcEncodable
 

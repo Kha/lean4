@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Dany Fabian
 -/
 
-import Lean.Meta.Constructions
-import Lean.Meta.Match.Match
+private import Lean.Meta.Constructions
+private import Lean.Meta.Match.Match
 
 namespace Lean.Meta.IndPredBelow
 open Match

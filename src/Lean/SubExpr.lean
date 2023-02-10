@@ -3,9 +3,9 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich, Daniel Selsam, Wojciech Nawrocki, E.W.Ayers
 -/
-import Lean.Meta.Basic
-import Lean.Data.Json
-import Lean.Data.RBMap
+private import Lean.Meta.Basic
+private import Lean.Data.Json
+private import Lean.Data.RBMap
 
 namespace Lean
 

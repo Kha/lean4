@@ -3,24 +3,24 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Compiler.IR.Basic
-import Lean.Compiler.IR.Format
-import Lean.Compiler.IR.CompilerM
-import Lean.Compiler.IR.PushProj
-import Lean.Compiler.IR.ElimDeadVars
-import Lean.Compiler.IR.SimpCase
-import Lean.Compiler.IR.ResetReuse
-import Lean.Compiler.IR.NormIds
-import Lean.Compiler.IR.Checker
-import Lean.Compiler.IR.Borrow
-import Lean.Compiler.IR.Boxing
-import Lean.Compiler.IR.RC
-import Lean.Compiler.IR.ExpandResetReuse
-import Lean.Compiler.IR.UnboxResult
-import Lean.Compiler.IR.ElimDeadBranches
-import Lean.Compiler.IR.EmitC
-import Lean.Compiler.IR.CtorLayout
-import Lean.Compiler.IR.Sorry
+private import Lean.Compiler.IR.Basic
+private import Lean.Compiler.IR.Format
+private import Lean.Compiler.IR.CompilerM
+private import Lean.Compiler.IR.PushProj
+private import Lean.Compiler.IR.ElimDeadVars
+private import Lean.Compiler.IR.SimpCase
+private import Lean.Compiler.IR.ResetReuse
+private import Lean.Compiler.IR.NormIds
+private import Lean.Compiler.IR.Checker
+private import Lean.Compiler.IR.Borrow
+private import Lean.Compiler.IR.Boxing
+private import Lean.Compiler.IR.RC
+private import Lean.Compiler.IR.ExpandResetReuse
+private import Lean.Compiler.IR.UnboxResult
+private import Lean.Compiler.IR.ElimDeadBranches
+private import Lean.Compiler.IR.EmitC
+private import Lean.Compiler.IR.CtorLayout
+private import Lean.Compiler.IR.Sorry
 
 namespace Lean.IR
 

@@ -3,9 +3,9 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Author: Leonardo de Moura
 -/
-import Lean.Data.Occurrences
-import Lean.HeadIndex
-import Lean.Meta.Basic
+private import Lean.Data.Occurrences
+private import Lean.HeadIndex
+private import Lean.Meta.Basic
 
 namespace Lean.Meta
 

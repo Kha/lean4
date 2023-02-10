@@ -3,9 +3,9 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Meta.Offset
-import Lean.Meta.UnificationHint
-import Lean.Util.OccursCheck
+private import Lean.Meta.Offset
+private import Lean.Meta.UnificationHint
+private import Lean.Util.OccursCheck
 
 namespace Lean.Meta
 

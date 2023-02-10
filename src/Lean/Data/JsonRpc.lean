@@ -6,8 +6,8 @@ Authors: Marc Huisinga, Wojciech Nawrocki
 -/
 import Init.Control
 import Init.System.IO
-import Lean.Data.RBTree
-import Lean.Data.Json
+private import Lean.Data.RBTree
+private import Lean.Data.Json
 
 /-! Implementation of JSON-RPC 2.0 (https://www.jsonrpc.org/specification)
 for use in the LSP server. -/

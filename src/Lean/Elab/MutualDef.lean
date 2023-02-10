@@ -3,17 +3,17 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Parser.Term
-import Lean.Meta.Closure
-import Lean.Meta.Check
-import Lean.Meta.Transform
-import Lean.PrettyPrinter.Delaborator.Options
-import Lean.Elab.Command
-import Lean.Elab.Match
-import Lean.Elab.DefView
-import Lean.Elab.Deriving.Basic
-import Lean.Elab.PreDefinition.Main
-import Lean.Elab.DeclarationRange
+private import Lean.Parser.Term
+private import Lean.Meta.Closure
+private import Lean.Meta.Check
+private import Lean.Meta.Transform
+private import Lean.PrettyPrinter.Delaborator.Options
+private import Lean.Elab.Command
+private import Lean.Elab.Match
+private import Lean.Elab.DefView
+private import Lean.Elab.Deriving.Basic
+private import Lean.Elab.PreDefinition.Main
+private import Lean.Elab.DeclarationRange
 
 namespace Lean.Elab
 open Lean.Parser.Term

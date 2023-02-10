@@ -5,7 +5,7 @@ Author: Sebastian Ullrich, Leonardo de Moura
 
 Trie for tokenizing the Lean language
 -/
-import Lean.Data.Format
+private import Lean.Data.Format
 
 namespace Lean
 namespace Parser

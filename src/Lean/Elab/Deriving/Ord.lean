@@ -3,9 +3,9 @@ Copyright (c) 2021 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Dany Fabian
 -/
-import Lean.Meta.Transform
-import Lean.Elab.Deriving.Basic
-import Lean.Elab.Deriving.Util
+private import Lean.Meta.Transform
+private import Lean.Elab.Deriving.Basic
+private import Lean.Elab.Deriving.Util
 
 namespace Lean.Elab.Deriving.Ord
 open Lean.Parser.Term

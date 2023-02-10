@@ -3,13 +3,13 @@ Copyright (c) 2018 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Data.HashMap
-import Lean.Data.HashSet
-import Lean.Data.PersistentHashMap
-import Lean.Data.PersistentHashSet
-import Lean.Hygiene
-import Lean.Data.Name
-import Lean.Data.Format
+private import Lean.Data.HashMap
+private import Lean.Data.HashSet
+private import Lean.Data.PersistentHashMap
+private import Lean.Data.PersistentHashSet
+private import Lean.Hygiene
+private import Lean.Data.Name
+private import Lean.Data.Format
 
 def Nat.imax (n m : Nat) : Nat :=
   if m = 0 then 0 else Nat.max n m

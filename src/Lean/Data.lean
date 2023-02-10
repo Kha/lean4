@@ -3,31 +3,31 @@ Copyright (c) 2020 Sebastian Ullrich. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sebastian Ullrich
 -/
-import Lean.Data.AssocList
-import Lean.Data.Format
-import Lean.Data.HashMap
-import Lean.Data.HashSet
-import Lean.Data.Json
-import Lean.Data.JsonRpc
-import Lean.Data.KVMap
-import Lean.Data.LBool
-import Lean.Data.LOption
-import Lean.Data.Lsp
-import Lean.Data.Name
-import Lean.Data.NameMap
-import Lean.Data.Occurrences
-import Lean.Data.OpenDecl
-import Lean.Data.Options
-import Lean.Data.Parsec
-import Lean.Data.PersistentArray
-import Lean.Data.PersistentHashMap
-import Lean.Data.PersistentHashSet
-import Lean.Data.Position
-import Lean.Data.PrefixTree
-import Lean.Data.SMap
-import Lean.Data.Trie
-import Lean.Data.Xml
-import Lean.Data.NameTrie
-import Lean.Data.RBTree
-import Lean.Data.RBMap
-import Lean.Data.Rat
+private import Lean.Data.AssocList
+private import Lean.Data.Format
+private import Lean.Data.HashMap
+private import Lean.Data.HashSet
+private import Lean.Data.Json
+private import Lean.Data.JsonRpc
+private import Lean.Data.KVMap
+private import Lean.Data.LBool
+private import Lean.Data.LOption
+private import Lean.Data.Lsp
+private import Lean.Data.Name
+private import Lean.Data.NameMap
+private import Lean.Data.Occurrences
+private import Lean.Data.OpenDecl
+private import Lean.Data.Options
+private import Lean.Data.Parsec
+private import Lean.Data.PersistentArray
+private import Lean.Data.PersistentHashMap
+private import Lean.Data.PersistentHashSet
+private import Lean.Data.Position
+private import Lean.Data.PrefixTree
+private import Lean.Data.SMap
+private import Lean.Data.Trie
+private import Lean.Data.Xml
+private import Lean.Data.NameTrie
+private import Lean.Data.RBTree
+private import Lean.Data.RBMap
+private import Lean.Data.Rat

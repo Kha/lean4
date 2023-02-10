@@ -3,8 +3,8 @@ Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Expr
-import Lean.Util.MonadCache
+private import Lean.Expr
+private import Lean.Util.MonadCache
 
 namespace Lean
 /-!

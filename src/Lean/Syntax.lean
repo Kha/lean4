@@ -3,8 +3,8 @@ Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Author: Sebastian Ullrich, Leonardo de Moura
 -/
-import Lean.Data.Name
-import Lean.Data.Format
+private import Lean.Data.Name
+private import Lean.Data.Format
 
 /--
 A position range inside a string. This type is mostly in combination with syntax trees,

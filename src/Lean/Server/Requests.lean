@@ -4,16 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 Authors: Wojciech Nawrocki, Marc Huisinga
 -/
-import Lean.DeclarationRange
+private import Lean.DeclarationRange
 
-import Lean.Data.Json
-import Lean.Data.Lsp
-import Lean.Elab.Command
+private import Lean.Data.Json
+private import Lean.Data.Lsp
+private import Lean.Elab.Command
 
-import Lean.Server.FileSource
-import Lean.Server.FileWorker.Utils
+private import Lean.Server.FileSource
+private import Lean.Server.FileWorker.Utils
 
-import Lean.Server.Rpc.Basic
+private import Lean.Server.Rpc.Basic
 
 namespace Lean.Server
 

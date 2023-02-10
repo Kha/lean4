@@ -3,11 +3,11 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.Elab.Attributes
-import Lean.Elab.Binders
-import Lean.Elab.DeclModifiers
-import Lean.Elab.SyntheticMVars
-import Lean.Elab.DeclarationRange
+private import Lean.Elab.Attributes
+private import Lean.Elab.Binders
+private import Lean.Elab.DeclModifiers
+private import Lean.Elab.SyntheticMVars
+private import Lean.Elab.DeclarationRange
 
 namespace Lean.Elab.Term
 open Meta

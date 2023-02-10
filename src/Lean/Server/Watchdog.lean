@@ -6,16 +6,16 @@ Authors: Marc Huisinga, Wojciech Nawrocki
 -/
 import Init.System.IO
 import Init.Data.ByteArray
-import Lean.Data.RBMap
+private import Lean.Data.RBMap
 
-import Lean.Util.Paths
+private import Lean.Util.Paths
 
-import Lean.Data.FuzzyMatching
-import Lean.Data.Json
-import Lean.Data.Lsp
-import Lean.Server.Utils
-import Lean.Server.Requests
-import Lean.Server.References
+private import Lean.Data.FuzzyMatching
+private import Lean.Data.Json
+private import Lean.Data.Lsp
+private import Lean.Server.Utils
+private import Lean.Server.Requests
+private import Lean.Server.References
 
 /-!
 For general server architecture, see `README.md`. This module implements the watchdog process.

@@ -5,10 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Marc Huisinga, Wojciech Nawrocki
 -/
 import Init.System.IO
-import Lean.Data.Json
-import Lean.Data.Lsp.Communication
-import Lean.Data.Lsp.Diagnostics
-import Lean.Data.Lsp.Extra
+private import Lean.Data.Json
+private import Lean.Data.Lsp.Communication
+private import Lean.Data.Lsp.Diagnostics
+private import Lean.Data.Lsp.Extra
 
 /-! Provides an IpcM monad for interacting with an external LSP process.
 Used for testing the Lean server. -/

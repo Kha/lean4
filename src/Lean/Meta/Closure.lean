@@ -3,11 +3,11 @@ Copyright (c) 2020 Microsoft Corporation. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
-import Lean.MetavarContext
-import Lean.Environment
-import Lean.Util.FoldConsts
-import Lean.Meta.Basic
-import Lean.Meta.Check
+private import Lean.MetavarContext
+private import Lean.Environment
+private import Lean.Util.FoldConsts
+private import Lean.Meta.Basic
+private import Lean.Meta.Check
 
 /-!
 

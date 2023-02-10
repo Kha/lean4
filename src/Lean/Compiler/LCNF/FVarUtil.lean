@@ -3,9 +3,9 @@ Copyright (c) 2022 Henrik Böving. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Henrik Böving
 -/
-import Lean.Expr
-import Lean.Compiler.LCNF.Basic
-import Lean.Compiler.LCNF.CompilerM
+private import Lean.Expr
+private import Lean.Compiler.LCNF.Basic
+private import Lean.Compiler.LCNF.CompilerM
 
 namespace Lean.Compiler.LCNF
 
