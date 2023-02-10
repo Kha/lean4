@@ -12,6 +12,7 @@ structure State where
   imports : Array Import := #[]
   pos     : String.Pos := 0
   error?  : Option String := none
+  nextPriv : Bool := false
   deriving Inhabited
 
 def Parser := String → State → State
@@ -186,9 +187,12 @@ partial def moduleIdent (runtimeOnly : Bool) : Parser := fun input s =>
 @[inline] partial def preludeOpt (k : String) : Parser :=
   keywordCore k (fun _ s => s.pushModule `Init false) (fun _ s => s)
 
+@[inline] partial def privateOpt (k : String) : Parser :=
+  keywordCore k (fun _ s => { s with nextPriv := true }) (fun _ s => { s with nextPriv := false })
+
 def main : Parser :=
   preludeOpt "prelude" >>
-  many (keyword "import" >> keywordCore "runtime" (moduleIdent false) (moduleIdent true))
+  many (privateOpt "private" >> keyword "import" >> keywordCore "runtime" (moduleIdent false) (moduleIdent true))
 
 end ParseImports
 

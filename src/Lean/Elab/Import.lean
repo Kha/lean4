@@ -11,10 +11,11 @@ namespace Lean.Elab
 def headerToImports (header : Syntax) : List Import :=
   let imports := if header[0].isNone then [{ module := `Init : Import }] else []
   imports ++ header[1].getArgs.toList.map fun stx =>
-    -- `stx` is of the form `(Module.import "import" "runtime"? id)
-    let runtime := !stx[1].isNone
-    let id      := stx[2].getId
-    { module := id, runtimeOnly := runtime }
+    -- `stx` is of the form `(Module.import "private"? "import" "runtime"? id)
+    let priv    := !stx[0].isNone
+    let runtime := !stx[2].isNone
+    let id      := stx[3].getId
+    { module := id, «private» := priv, runtimeOnly := runtime }
 
 def processHeader (header : Syntax) (opts : Options) (messages : MessageLog) (inputCtx : Parser.InputContext) (trustLevel : UInt32 := 0)
     : IO (Environment × MessageLog) := do

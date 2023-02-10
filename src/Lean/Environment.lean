@@ -30,10 +30,11 @@ abbrev ConstMap := SMap Name ConstantInfo
 
 structure Import where
   module      : Name
+  «private»   : Bool := false
   runtimeOnly : Bool := false
   deriving Repr, Inhabited
 
-instance : ToString Import := ⟨fun imp => toString imp.module ++ if imp.runtimeOnly then " (runtime)" else ""⟩
+instance : ToString Import := ⟨fun imp => (if imp.private then "private " else "") ++ toString imp.module ++ if imp.runtimeOnly then " (runtime)" else ""⟩
 
 /--
   A compacted region holds multiple Lean objects in a contiguous memory region, which can be read/written to/from disk.
