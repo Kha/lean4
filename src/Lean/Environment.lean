@@ -787,7 +787,7 @@ where
       unless (← mFile.pathExists) do
         throw <| IO.userError s!"object file '{mFile}' of module {i.module} does not exist"
       let (mod, region) ← readModuleData mFile
-      importMods mod.imports.toList
+      importMods (mod.imports.filter (!·.private)).toList
       modify fun s => { s with
         moduleData  := s.moduleData.push mod
         regions     := s.regions.push region
