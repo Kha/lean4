@@ -8,6 +8,10 @@
     url = github:leanprover/lean4-mode;
     flake = false;
   };
+  inputs.lean-llvm = {
+    url = https://github.com/leanprover/lean-llvm/releases/latest;
+    flake = false;
+  };
   # used *only* by `stage0-from-input` below
   #inputs.lean-stage0 = {
   #  url = github:leanprover/lean4;

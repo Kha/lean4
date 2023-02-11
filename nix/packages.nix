@@ -5,9 +5,26 @@ let
     ${nix.packages.${system}.default}/bin/nix --experimental-features 'nix-command flakes' --extra-substituters https://lean4.cachix.org/ --option warn-dirty false "$@"
   '';
   # https://github.com/NixOS/nixpkgs/issues/130963
-  llvmPackages = if stdenv.isDarwin then llvmPackages_11 else llvmPackages_14;
+  lean-llvm =
+    let bin = fetchTarball {
+      url = "https://github.com/leanprover/lean-llvm/releases/download/15.0.1/lean-llvm-x86_64-linux-gnu.tar.zst";
+      sha256 = "06j8g3ykzl49idgcd32w1f80ys9xj50a2k5vxh5qvnfk8faf4xwj";
+        };
+    in runCommand "lean-llvm" { buildInputs = [ makeWrapper ]; } ''
+      mkdir -p $out/{bin,lib}
+      (cd ${bin}; cp --parents bin/{clang,ld.lld,llvm-ar,llvm-config} lib/lib{clang-cpp,LLVM}*.so* $out)
+      cp ${bin}/lib/*/lib{c++,c++abi,unwind}.* ${zlib}/lib/libz.so* ${gmp}/lib/libgmp.so* ${gcc.cc.lib}/lib/libatomic.so* $out/lib/
+      cd $out/bin
+      chmod u+w *
+      #mv clang .clang-unwrapped
+      wrapProgram $out/bin/clang
+      sed -i "s!\"\$0\"!\\0 $(< ${bintools}/nix-support/dynamic-linker) --argv0 \\0!" clang
+      #patchelf --set-interpreter $(< ${bintools}/nix-support/dynamic-linker) $out/bin/*
+      ln -s clang cc
+      ln -s clang c++
+    '' // { lib = ""; };
   cc = (ccacheWrapper.override rec {
-    cc = llvmPackages.clang;
+    cc = wrapCC lean-llvm;
     extraConfig = ''
       export CCACHE_DIR=/nix/var/cache/ccache
       export CCACHE_UMASK=007
@@ -26,10 +43,9 @@ let
     # https://github.com/NixOS/nixpkgs/issues/119779
     installPhase = builtins.replaceStrings ["use_response_file_by_default=1"] ["use_response_file_by_default=0"] old.installPhase;
   });
-  stdenv' = if stdenv.isLinux then useGoldLinker stdenv else stdenv;
   lean = callPackage (import ./bootstrap.nix) (args // {
-    stdenv = overrideCC stdenv' cc;
-    inherit buildLeanPackage llvmPackages;
+    stdenv = overrideCC stdenv cc;
+    inherit buildLeanPackage lean-llvm;
   });
   makeOverridableLeanPackage = f:
     let newF = origArgs: f origArgs // {
@@ -67,7 +83,7 @@ let
     vscodeExtensions = [ vscode-lean4 ];
   };
 in {
-  inherit cc lean4-mode buildLeanPackage llvmPackages vscode-lean4;
+  inherit cc lean4-mode buildLeanPackage vscode-lean4 lean-llvm;
   lean = lean.stage1;
   stage0print-paths = lean.stage1.Lean.print-paths;
   HEAD-as-stage0 = (lean.stage1.Lean.overrideArgs { srcTarget = "..#stage0-from-input.stage0"; srcArgs = "(--override-input lean-stage0 ..\?rev=$(git rev-parse HEAD) -- -Dinterpreter.prefer_native=false \"$@\")"; });
