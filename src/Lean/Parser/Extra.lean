@@ -31,11 +31,11 @@ attribute [run_builtin_parser_attribute_hooks]
   many1NoAntiquot (withAntiquotSpliceAndSuffix `many p (symbol "*"))
 
 @[run_builtin_parser_attribute_hooks] def ident : Parser :=
-  withAntiquot (mkAntiquot "ident" identKind) identNoAntiquot
+  withAntiquot (mkAntiquot "ident" identKind) (tokenWithAntiquot identNoAntiquot)
 
 -- `ident` and `rawIdent` produce the same syntax tree, so we reuse the antiquotation kind name
 @[run_builtin_parser_attribute_hooks] def rawIdent : Parser :=
-  withAntiquot (mkAntiquot "ident" identKind) rawIdentNoAntiquot
+  withAntiquot (mkAntiquot "ident" identKind) (tokenWithAntiquot rawIdentNoAntiquot)
 
 @[run_builtin_parser_attribute_hooks] def numLit : Parser :=
   withAntiquot (mkAntiquot "num" numLitKind) numLitNoAntiquot
