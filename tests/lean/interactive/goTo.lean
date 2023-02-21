@@ -109,6 +109,11 @@ set_option pp.all true in
 #check (Foo5.foo)
            --^ textDocument/definition
 
+macro_rules | `($x +%$tk $y)   => `(binop% HAdd.hAdd%$tk $x $y)
+set_option trace.Elab.info true
+#check 1 + 1
+#check HAdd.hAdd 1 1
+
 -- duplicate definitions link to the original
 def mkFoo₁ := 1
      --^ textDocument/definition
