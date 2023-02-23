@@ -67,8 +67,8 @@ with builtins; let
   '';
   depRoot = name: deps: mkBareDerivation {
     name = "${name}-depRoot";
-    inherit deps;
-    depRoots = map (drv: drv.LEAN_PATH) deps;
+    depRoots = lib.unique (concatMap (drv: map (drv: drv.LEAN_PATH) (filter (drv: !drv.private) drv.deps)) deps);
+    deps = lib.unique (concatMap (drv: [drv] ++ filter (drv: !drv.private) drv.deps) deps);
     buildCommand = ''
       mkdir -p $out
       for i in $depRoots; do
@@ -188,13 +188,14 @@ with builtins; let
       propagatedLoadDynlibs = [sharedLib];
     };
   externalModMap = lib.foldr (dep: depMap: depMap // dep.mods) {} allExternalDeps;
+  allModMap = externalModMap // modCandidates;
   # map from module name to derivation
   modCandidates = mapAttrs (mod: header:
     let
       deps = if header.errors == []
-             then map (m: m.module) header.imports
+             then header.imports
              else abort "errors while parsing imports of ${mod}:\n${lib.concatStringsSep "\n" header.errors}";
-    in mkMod mod (map (dep: if modDepsMap ? ${dep} then modCandidates.${dep} else externalModMap.${dep}) deps)) modDepsMap;
+    in mkMod mod (map (dep: allModMap.${dep.module} // dep) deps)) modDepsMap;
   makeEmacsWrapper = name: emacs: lean: writeShellScriptBin name ''
     ${emacs} --eval "(progn (setq lean4-rootdir \"${lean}\"))" "$@"
   '';
