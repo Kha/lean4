@@ -5,7 +5,7 @@ Authors: Gabriel Ebner
 -/
 import Lean.Meta.Constructions
 import Lean.Compiler.ImplementedByAttr
-import Lean.Elab.PreDefinition.WF.Eqns
+private import Lean.Elab.PreDefinition.WF.Eqns
 
 /-!
 # Computed fields

@@ -67,14 +67,10 @@ with builtins; let
   '';
   depRoot = name: deps: mkBareDerivation {
     name = "${name}-depRoot";
-    depRoots = lib.unique (concatMap (drv: map (drv: drv.LEAN_PATH) (filter (drv: !drv.private) drv.deps)) deps);
-    deps = lib.unique (concatMap (drv: [drv] ++ filter (drv: !drv.private) drv.deps) deps);
+    ents = lib.unique (concatMap (drv: [drv] ++ concatMap (drv: [drv] ++ drv.LEAN_PATH.ents) (filter (drv: !drv.private) drv.deps)) deps);
     buildCommand = ''
       mkdir -p $out
-      for i in $depRoots; do
-        cp -dru --no-preserve=mode $i/. $out
-      done
-      for i in $deps; do
+      for i in $ents; do
         cp -drsu --no-preserve=mode $i/. $out
       done
     '';

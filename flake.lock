@@ -15,6 +15,36 @@
         "type": "github"
       }
     },
+    "lean-stage0": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "lean4-mode": [
+          "lean4-mode"
+        ],
+        "nix": [
+          "nix"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1676998257,
+        "narHash": "sha256-WgB+oeiCY5K0HCNXGFn13Xl1vRt3rjiSdI+LPrIhDXU=",
+        "ref": "private-import2-stage0",
+        "rev": "3dad232b8f96c0d3b72c8b0624317599ab472ae8",
+        "revCount": 30601,
+        "type": "git",
+        "url": "file:///home/sebastian/lean/lean"
+      },
+      "original": {
+        "owner": "leanprover",
+        "repo": "lean4",
+        "type": "github"
+      }
+    },
     "lean4-mode": {
       "flake": false,
       "locked": {
@@ -118,6 +148,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "lean-stage0": "lean-stage0",
         "lean4-mode": "lean4-mode",
         "nix": "nix",
         "nixpkgs": "nixpkgs_2"

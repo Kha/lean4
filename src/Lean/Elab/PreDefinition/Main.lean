@@ -5,8 +5,8 @@ Authors: Leonardo de Moura
 -/
 import Lean.Util.SCC
 import Lean.Elab.PreDefinition.Basic
-import Lean.Elab.PreDefinition.Structural
-import Lean.Elab.PreDefinition.WF.Main
+private import Lean.Elab.PreDefinition.Structural
+private import Lean.Elab.PreDefinition.WF.Main
 import Lean.Elab.PreDefinition.MkInhabitant
 
 namespace Lean.Elab

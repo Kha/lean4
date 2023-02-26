@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 import Lean.Util.ForEachExprWhere
-import Lean.Meta.Match.Match
+private import Lean.Meta.Match.Match
 import Lean.Meta.GeneralizeVars
 import Lean.Meta.ForEachExpr
 import Lean.Elab.BindersUtil

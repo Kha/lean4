@@ -6,9 +6,9 @@ Authors: Leonardo de Moura, Sebastian Ullrich
 import Lean.Util.CollectLevelParams
 import Lean.Elab.DeclUtil
 import Lean.Elab.DefView
-import Lean.Elab.Inductive
-import Lean.Elab.Structure
-import Lean.Elab.MutualDef
+private import Lean.Elab.Inductive
+private import Lean.Elab.Structure
+private import Lean.Elab.MutualDef
 import Lean.Elab.DeclarationRange
 namespace Lean.Elab.Command
 

@@ -14,6 +14,7 @@ import Lean.Elab.DefView
 import Lean.Elab.Deriving.Basic
 import Lean.Elab.PreDefinition.Main
 import Lean.Elab.DeclarationRange
+private import Lean.Meta.CollectFVars
 
 namespace Lean.Elab
 open Lean.Parser.Term

@@ -5,7 +5,7 @@ Authors: Dany Fabian
 -/
 
 import Lean.Meta.Constructions
-import Lean.Meta.Match.Match
+private import Lean.Meta.Match.Match
 
 namespace Lean.Meta.IndPredBelow
 open Match
