@@ -597,7 +597,7 @@ where
     | ReduceMatcherResult.stuck e' =>
       let mvarId ← getStuckMVar? e'
       /- Try to "unstuck" by resolving pending TC problems -/
-      if (← Meta.synthPending mvarId) then
+      if (← Meta.synthPending mvarId) matches .some _ then
         goMatch e
       else
         failure

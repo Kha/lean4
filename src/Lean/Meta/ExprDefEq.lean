@@ -138,7 +138,10 @@ def isEtaUnassignedMVar (e : Expr) : MetaM Bool := do
 private def trySynthPending (e : Expr) : MetaM Bool := do
   let mvarId? ← getStuckMVar? e
   match mvarId? with
-  | some mvarId => Meta.synthPending mvarId
+  | some mvarId => match (← Meta.synthPending mvarId) with
+    | .none => throw <| Exception.internal synthFailedExceptionId
+    | .some _ => pure true
+    | .undef => pure false
   | none        => pure false
 
 /--
@@ -1627,7 +1630,7 @@ end
   match (← getStuckMVar? e) with
   | some mvarId =>
     trace[Meta.isDefEq.stuckMVar] "found stuck MVar {mkMVar mvarId} : {← inferType (mkMVar mvarId)}"
-    if (← Meta.synthPending mvarId) then
+    if (← trySynthPending e) then  -- HACK, restructure code to avoid double `getStuckMVar?`
       let e ← instantiateMVars e
       successK e
     else

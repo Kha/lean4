@@ -749,35 +749,34 @@ def synthInstance (type : Expr) (maxResultSize? : Option Nat := none) : MetaM Ex
     (fun _ => throwError "failed to synthesize{indentExpr type}")
 
 @[export lean_synth_pending]
-private def synthPendingImp (mvarId : MVarId) : MetaM Bool := withIncRecDepth <| mvarId.withContext do
+private def synthPendingImp (mvarId : MVarId) : MetaM (LOption Unit) := withIncRecDepth <| mvarId.withContext do
   let mvarDecl ← mvarId.getDecl
   match mvarDecl.kind with
   | MetavarKind.syntheticOpaque =>
-    return false
+    return .undef
   | _ =>
     /- Check whether the type of the given metavariable is a class or not. If yes, then try to synthesize
        it using type class resolution. We only do it for `synthetic` and `natural` metavariables. -/
     match (← isClass? mvarDecl.type) with
     | none   =>
-      return false
+      return .undef
     | some _ =>
       /- TODO: use a configuration option instead of the hard-coded limit `1`. -/
       if (← read).synthPendingDepth > 1 then
         trace[Meta.synthPending] "too many nested synthPending invocations"
-        return false
+        return .undef
       else
         withReader (fun ctx => { ctx with synthPendingDepth := ctx.synthPendingDepth + 1 }) do
           trace[Meta.synthPending] "synthPending {mkMVar mvarId}"
-          let val? ← catchInternalId isDefEqStuckExceptionId (synthInstance? mvarDecl.type (maxResultSize? := none)) (fun _ => pure none)
-          match val? with
-          | none     =>
-            return false
-          | some val =>
+          match (← trySynthInstance mvarDecl.type) with
+          | .some val =>
             if (← mvarId.isAssigned) then
-              return false
+              return .none
             else
               mvarId.assign val
-              return true
+              return .some ()
+          | .none => return .none
+          | .undef => return .undef
 
 builtin_initialize
   registerTraceClass `Meta.synthPending

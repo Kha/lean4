@@ -25,6 +25,7 @@ They are packed into the MetaM monad.
 namespace Lean.Meta
 
 builtin_initialize isDefEqStuckExceptionId : InternalExceptionId ← registerInternalExceptionId `isDefEqStuck
+builtin_initialize synthFailedExceptionId : InternalExceptionId ← registerInternalExceptionId `synthFailed
 
 /--
 Configuration flags for the `MetaM` monad.
@@ -420,7 +421,7 @@ but may contain subexpressions which have not been reduced. -/
 @[extern 6 "lean_infer_type"] opaque inferType : Expr → MetaM Expr
 @[extern 7 "lean_is_expr_def_eq"] opaque isExprDefEqAux : Expr → Expr → MetaM Bool
 @[extern 7 "lean_is_level_def_eq"] opaque isLevelDefEqAux : Level → Level → MetaM Bool
-@[extern 6 "lean_synth_pending"] protected opaque synthPending : MVarId → MetaM Bool
+@[extern 6 "lean_synth_pending"] protected opaque synthPending : MVarId → MetaM (LOption Unit)
 
 def whnfForall (e : Expr) : MetaM Expr := do
   let e' ← whnf e
@@ -1646,6 +1647,10 @@ def isLevelDefEq (u v : Level) : MetaM Bool :=
 /-- See `isDefEq`. -/
 def isExprDefEq (t s : Expr) : MetaM Bool :=
   withReader (fun ctx => { ctx with defEqCtx? := some { lhs := t, rhs := s, lctx := ctx.lctx, localInstances := ctx.localInstances } }) do
+    -- the scope of this exception could be extended into other subsystems where synthesis
+    -- is either not backtracked or exceptions are backtracked (e.g. the elaborator proper),
+    -- but that is not true for e.g. `synthInstance` itself, so would require further adjustments
+    catchInternalId synthFailedExceptionId (h := fun _ => pure false) do
     checkpointDefEq (mayPostpone := true) <| Meta.isExprDefEqAux t s
 
 /--
