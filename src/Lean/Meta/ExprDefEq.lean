@@ -1131,9 +1131,10 @@ private def isDefEqLeftRight (fn : Name) (t s : Expr) : MetaM LBool := do
   toLBoolM <| Meta.isExprDefEqAux t s
 
 /-- Try to solve `f a₁ ... aₙ =?= f b₁ ... bₙ` by solving `a₁ =?= b₁, ..., aₙ =?= bₙ`.
+    Return `undef` if heuristic was not tried.
 
     Auxiliary method for isDefEqDelta -/
-private def tryHeuristic (t s : Expr) : MetaM Bool := do
+private def tryHeuristic (t s : Expr) : MetaM LBool := do
   let mut t := t
   let mut s := s
   let tFn := t.getAppFn
@@ -1152,30 +1153,31 @@ private def tryHeuristic (t s : Expr) : MetaM Bool := do
      case is used to help the kernel type checker. -/
   unless info.hints.isRegular || isMatcherCore (← getEnv) tFn.constName! do
     unless t.hasExprMVar || s.hasExprMVar do
-      return false
-  withTraceNodeBefore `Meta.isDefEq.delta (return m!"{t} =?= {s}") do
-    /-
-      We process arguments before universe levels to reduce a source of brittleness in the TC procedure.
+      return .undef
+  toLBoolM do
+    withTraceNodeBefore `Meta.isDefEq.delta (return m!"{t} =?= {s}") do
+      /-
+        We process arguments before universe levels to reduce a source of brittleness in the TC procedure.
 
-      In the TC procedure, we can solve problems containing metavariables.
-      If the TC procedure tries to assign one of these metavariables, it interrupts the search
-      using a "stuck" exception. The elaborator catches it, and "interprets" it as "we should try again later".
-      Now suppose we have a TC problem, and there are two "local" candidate instances we can try: "bad" and "good".
-      The "bad" candidate is stuck because of a universe metavariable in the TC problem.
-      If we try "bad" first, the TC procedure is interrupted. Moreover, if we have ignored the exception,
-      "bad" would fail anyway trying to assign two different free variables `α =?= β`.
-      Example: `Preorder.{?u} α =?= Preorder.{?v} β`, where `?u` and `?v` are universe metavariables that were
-      not created by the TC procedure.
-      The key issue here is that we have an `isDefEq t s` invocation that is interrupted by the "stuck" exception,
-      but it would have failed anyway if we had continued processing it.
-      By solving the arguments first, we make the example above fail without throwing the "stuck" exception.
+        In the TC procedure, we can solve problems containing metavariables.
+        If the TC procedure tries to assign one of these metavariables, it interrupts the search
+        using a "stuck" exception. The elaborator catches it, and "interprets" it as "we should try again later".
+        Now suppose we have a TC problem, and there are two "local" candidate instances we can try: "bad" and "good".
+        The "bad" candidate is stuck because of a universe metavariable in the TC problem.
+        If we try "bad" first, the TC procedure is interrupted. Moreover, if we have ignored the exception,
+        "bad" would fail anyway trying to assign two different free variables `α =?= β`.
+        Example: `Preorder.{?u} α =?= Preorder.{?v} β`, where `?u` and `?v` are universe metavariables that were
+        not created by the TC procedure.
+        The key issue here is that we have an `isDefEq t s` invocation that is interrupted by the "stuck" exception,
+        but it would have failed anyway if we had continued processing it.
+        By solving the arguments first, we make the example above fail without throwing the "stuck" exception.
 
-      TODO: instead of throwing an exception as soon as we get stuck, we should just set a flag.
-      Then the entry-point for `isDefEq` checks the flag before returning `true`.
-    -/
-    checkpointDefEq do
-      isDefEqArgs tFn t.getAppArgs s.getAppArgs <&&>
-        isListLevelDefEqAux tFn.constLevels! sFn.constLevels!
+        TODO: instead of throwing an exception as soon as we get stuck, we should just set a flag.
+        Then the entry-point for `isDefEq` checks the flag before returning `true`.
+      -/
+      checkpointDefEq do
+        isDefEqArgs tFn t.getAppArgs s.getAppArgs <&&>
+          isListLevelDefEqAux tFn.constLevels! sFn.constLevels!
 
 /-- Auxiliary method for isDefEqDelta -/
 private abbrev unfold (e : Expr) (failK : MetaM α) (successK : Expr → MetaM α) : MetaM α := do
@@ -1188,12 +1190,15 @@ private def unfoldBothDefEq (fn : Name) (t s : Expr) : MetaM LBool := do
   match t, s with
   | Expr.const _ ls₁, Expr.const _ ls₂ => isListLevelDefEq ls₁ ls₂
   | Expr.app _ _,     Expr.app _ _     =>
-    if (← tryHeuristic t s) then
-      pure LBool.true
-    else
+    match (← tryHeuristic t s) with
+    | .true => pure LBool.true
+    | h =>
       unfold t
-       (unfold s (pure LBool.undef) (fun s => isDefEqRight fn t s))
-       (fun t => unfold s (isDefEqLeft fn t s) (fun s => isDefEqLeftRight fn t s))
+        (unfold s
+          -- when neither function can be unfolded, the heuristic becomes precise
+          (pure h)
+          (fun s => isDefEqRight fn t s))
+        (fun t => unfold s (isDefEqLeft fn t s) (fun s => isDefEqLeftRight fn t s))
   | _, _ => pure LBool.false
 
 private def sameHeadSymbol (t s : Expr) : Bool :=
