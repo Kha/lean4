@@ -514,7 +514,7 @@ private:
                 for (size_t i = 0; i < expr_ap_args(e).size(); i++) {
                     args[i] = eval_arg(expr_ap_args(e)[i]).m_obj;
                 }
-                time_task tt("", m_opts);
+                excluded_time_task ett;
                 object * r = apply_n(var(expr_ap_fun(e)).m_obj, expr_ap_args(e).size(), args);
                 return r;
             }
@@ -852,7 +852,7 @@ private:
                 }
             }
             push_frame(e.m_decl, old_size);
-            time_task tt("", m_opts);
+            excluded_time_task ett;
             object * o = curry(e.m_addr, args.size(), args2);
             type t = decl_type(e.m_decl);
             if (type_is_scalar(t)) {
@@ -982,7 +982,7 @@ public:
             }
         }
         if (n > 0) {
-            time_task tt("", m_opts);
+            excluded_time_task ett;
             r = apply_n(r, n, args);
         }
         return r;
@@ -1033,7 +1033,7 @@ public:
             object * args[] = { io_mk_world() };
             object * r = call_boxed(init_decl, 1, args);
             if (io_result_is_ok(r)) {
-                time_task tt("", m_opts);
+                excluded_time_task ett;
                 object * o = io_result_get_value(r);
                 mark_persistent(o);
                 dec_ref(r);

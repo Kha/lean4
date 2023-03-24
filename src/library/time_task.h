@@ -16,12 +16,21 @@ void display_cumulative_profiling_times(std::ostream & out);
 
 /** Measure time of some task and report it for the final cumulative profile. */
 class time_task {
-    std::string     m_category;
+    std::string       m_category;
     optional<xtimeit> m_timeit;
-    time_task *     m_parent_task;
+    xtimeit *         m_parent_timeit;
 public:
     time_task(std::string const & category, options const & opts, name decl = name());
     ~time_task();
+};
+
+/** Exclude time of block from surrounding time task, if any. */
+class excluded_time_task {
+    optional<xtimeit> m_timeit;
+    xtimeit *         m_parent_timeit;
+public:
+    excluded_time_task();
+    ~excluded_time_task();
 };
 
 void initialize_time_task();

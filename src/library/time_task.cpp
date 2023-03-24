@@ -13,7 +13,7 @@ namespace lean {
 
 static std::map<std::string, second_duration> * g_cum_times;
 static mutex * g_cum_times_mutex;
-LEAN_THREAD_PTR(time_task, g_current_time_task);
+LEAN_THREAD_PTR(xtimeit, g_current_timeit);
 
 void report_profiling_time(std::string const & category, second_duration time) {
     lock_guard<mutex> _(*g_cum_times_mutex);
@@ -43,14 +43,8 @@ void finalize_time_task() {
 
 time_task::time_task(std::string const & category, options const & opts, name decl) :
         m_category(category) {
-    if (!m_category.size()) {
-        // ignore given block in timings of surrounding task, if any
-        if (g_current_time_task) {
-            m_timeit = optional<xtimeit>([](prof_clock::duration _) {});
-            m_parent_task = g_current_time_task;
-            g_current_time_task = this;
-        }
-    } else if (get_profiler(opts)) {
+    if (get_profiler(opts)) {
+        m_parent_timeit = g_current_timeit;
         m_timeit = optional<xtimeit>(get_profiling_threshold(opts), [=](prof_clock::duration duration) mutable {
             sstream ss;
             ss << m_category;
@@ -60,24 +54,34 @@ time_task::time_task(std::string const & category, options const & opts, name de
             // output atomically, like IO.print
             tout() << ss.str();
         });
-        m_parent_task = g_current_time_task;
-        g_current_time_task = this;
+        g_current_timeit = &*m_timeit;
     }
 }
 
 time_task::~time_task() {
     if (m_timeit) {
-        g_current_time_task = m_parent_task;
-        if (m_category.size()) {
-            report_profiling_time(m_category, m_timeit->get_elapsed());
-            if (m_parent_task)
-                // report exclusive times
-                m_parent_task->m_timeit->exclude_duration(m_timeit->get_elapsed_inclusive());
-        } else {
-            if (m_parent_task) {
-                m_parent_task->m_timeit->ignore(*m_timeit);
-            }
+        report_profiling_time(m_category, m_timeit->get_elapsed());
+        if (m_parent_timeit)
+            // report exclusive times
+            m_parent_timeit->exclude_duration(m_timeit->get_elapsed_inclusive());
+        g_current_timeit = m_parent_timeit;
+    }
+}
+
+excluded_time_task::excluded_time_task() {
+    if (g_current_timeit) {
+        m_parent_timeit = g_current_timeit;
+        m_timeit = optional<xtimeit>([](prof_clock::duration) {});
+        g_current_timeit = &*m_timeit;
+    }
+}
+
+excluded_time_task::~excluded_time_task() {
+    if (m_timeit) {
+        if (m_parent_timeit) {
+            m_parent_timeit->ignore(*m_timeit);
         }
+        g_current_timeit = m_parent_timeit;
     }
 }
 
