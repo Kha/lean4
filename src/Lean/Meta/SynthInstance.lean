@@ -693,6 +693,17 @@ def synthInstance? (type : Expr) (maxResultSize? : Option Nat := none) : MetaM (
           return none
       pure result
     | none        =>
+      (fun cont => do
+        let abs ← abstractMVars type
+        try
+          match s.cache.synthInstanceExperiment.find? (localInsts, abs.expr) with
+          | none => cont
+          | some _ =>
+            trace[Meta.synthInstance] "could possibly cache {abs.expr}"
+            profileitM Exception "possibly cacheable typeclass inference" (← getOptions) do cont
+        finally
+          modify fun s => { s with cache.synthInstanceExperiment := s.cache.synthInstanceExperiment.insert (localInsts, abs.expr) () }
+            ) do
       let result? ← withNewMCtxDepth (allowLevelAssignments := true) do
         let normType ← preprocessOutParam type
         SynthInstance.main normType maxResultSize

@@ -214,6 +214,7 @@ structure Cache where
   inferType      : InferTypeCache := {}
   funInfo        : FunInfoCache   := {}
   synthInstance  : SynthInstanceCache := {}
+  synthInstanceExperiment : PersistentHashMap (LocalInstances × Expr) Unit := {}
   whnfDefault    : WhnfCache := {} -- cache for closed terms and `TransparencyMode.default`
   whnfAll        : WhnfCache := {} -- cache for closed terms and `TransparencyMode.all`
   defEq          : DefEqCache := {}
@@ -363,10 +364,10 @@ variable [MonadControlT MetaM n] [Monad n]
   modify fun ⟨mctx, cache, zetaFVarIds, postponed⟩ => ⟨mctx, f cache, zetaFVarIds, postponed⟩
 
 @[inline] def modifyInferTypeCache (f : InferTypeCache → InferTypeCache) : MetaM Unit :=
-  modifyCache fun ⟨ic, c1, c2, c3, c4, c5⟩ => ⟨f ic, c1, c2, c3, c4, c5⟩
+  modifyCache fun ⟨ic, c1, c2, c3, c4, c5, c6⟩ => ⟨f ic, c1, c2, c3, c4, c5, c6⟩
 
 @[inline] def modifyDefEqCache (f : DefEqCache → DefEqCache) : MetaM Unit :=
-  modifyCache fun ⟨c1, c2, c3, c4, c5, defeq⟩ => ⟨c1, c2, c3, c4, c5, f defeq⟩
+  modifyCache fun ⟨c1, c2, c3, c4, c5, c6, defeq⟩ => ⟨c1, c2, c3, c4, c5, c6, f defeq⟩
 
 def getLocalInstances : MetaM LocalInstances :=
   return (← read).localInstances
