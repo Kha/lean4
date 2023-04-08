@@ -93,7 +93,7 @@ where
   go (opt : Name) : Bool :=
     if let some enabled := opts.get? opt then
       enabled
-    else if let .str parent _ := opt then
+    else if let .str parent@(.str ..) _ := opt then  -- stop when only one element (i.e. `trace`) is left
       inherited.contains opt && go parent
     else
       false
