@@ -87,8 +87,8 @@ def printTraces : m Unit := do
 def resetTraceState : m Unit :=
   modifyTraceState (fun _ => {})
 
-private def checkTraceOption (inherited : HashSet Name) (opts : Options) (cls : Name) : Bool :=
-  !opts.isEmpty && go (`trace ++ cls)
+private def checkTraceOption (inherited : HashSet Name) (opts : Options) (opt : Name) : Bool :=
+  !opts.isEmpty && go opt
 where
   go (opt : Name) : Bool :=
     if let some enabled := opts.get? opt then
@@ -98,9 +98,9 @@ where
     else
       false
 
-def isTracingEnabledFor (cls : Name) : m Bool := do
+@[inline] def isTracingEnabledFor (cls : Name) : m Bool := do
   let inherited ← (inheritedTraceOptions.get : IO _)
-  pure (checkTraceOption inherited (← getOptions) cls)
+  pure (checkTraceOption inherited (← getOptions) (`trace ++ cls))
 
 @[inline] def getTraces : m (PersistentArray TraceElem) := do
   let s ← getTraceState
