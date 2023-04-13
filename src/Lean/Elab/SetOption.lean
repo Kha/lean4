@@ -20,7 +20,7 @@ def elabSetOption (id : Syntax) (val : Syntax) : m Options := do
   pushInfoLeaf <| .ofOptionInfo { stx := id, optionName, declName := decl.declName }
   let rec setOption (val : DataValue) : m Options := do
     unless decl.defValue.sameCtor val do throwError "type mismatch at set_option"
-    return (← getOptions).insert optionName val
+    return (← getOptions).set optionName val
   match val.isStrLit? with
   | some str => setOption (DataValue.ofString str)
   | none     =>

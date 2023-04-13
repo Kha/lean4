@@ -672,7 +672,7 @@ def parserOfStackFn (offset : Nat) : ParserFn := fun ctx s => Id.run do
       if !internal.parseQuotWithCurrentStage.get ctx.options then
         -- static quotations such as `(e) do not use the interpreter unless the above option is set,
         -- so for consistency neither should dynamic quotations using this function
-        { ctx with options := ctx.options.setBool `interpreter.prefer_native true }
+        { ctx with options := ctx.options.set `interpreter.prefer_native true }
       else ctx) (evalParserConst parserName) ctx s
     if !s.hasError && s.stackSize != iniSz + 1 then
       s.mkUnexpectedError "expected parser to return exactly one syntax object"

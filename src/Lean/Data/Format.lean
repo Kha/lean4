@@ -10,10 +10,6 @@ namespace Std
 namespace Format
 open Lean
 
-def getWidth (o : Options) : Nat    := o.get `format.width  defWidth
-def getIndent (o : Options) : Nat   := o.get `format.indent defIndent
-def getUnicode (o : Options) : Bool := o.get `format.unicode defUnicode
-
 register_builtin_option format.width : Nat := {
   defValue := defWidth
   descr := "indentation"
@@ -28,6 +24,10 @@ register_builtin_option format.indent : Nat := {
   defValue := defIndent
   descr    := "indentation"
 }
+
+def getWidth (o : Options) : Nat    := format.width.get o
+def getIndent (o : Options) : Nat   := format.indent.get o
+def getUnicode (o : Options) : Bool := format.unicode.get o
 
 def pretty' (f : Format) (o : Options := {}) : String :=
   pretty f (format.width.get o)

@@ -9,14 +9,18 @@ import Lean.Data.NameMap
 
 namespace Lean
 
-def Options := KVMap
+private def isTrace (opt : Name) : Bool :=
+  (`trace).isPrefixOf opt
+
+structure Options extends KVMap where
+  hasTrace : Bool := entries.any (isTrace ·.1)
 
 def Options.empty : Options  := {}
 instance : Inhabited Options where
-  default := {}
-instance : ToString Options := inferInstanceAs (ToString KVMap)
-instance : ForIn m Options (Name × DataValue) := inferInstanceAs (ForIn _ KVMap _)
-instance : BEq Options := inferInstanceAs (BEq KVMap)
+  default := .empty
+--instance : ToString Options := inferInstanceAs (ToString KVMap)
+--instance : ForIn m Options (Name × DataValue) := inferInstanceAs (ForIn _ KVMap _)
+--instance : BEq Options := inferInstanceAs (BEq KVMap)
 
 structure OptionDecl where
   declName : Name := by exact decl_name%
@@ -67,7 +71,7 @@ def setOptionFromString (opts : Options) (entry : String) : IO Options := do
   let [key, val] ← pure ps | throw $ IO.userError "invalid configuration option entry, it must be of the form '<key> = <value>'"
   let key := Name.mkSimple key
   let defValue ← getOptionDefaultValue key
-  match defValue with
+  let kvmap ← match defValue with
   | DataValue.ofString _ => pure $ opts.setString key val
   | DataValue.ofBool _   =>
     if key == `true then pure $ opts.setBool key true
@@ -83,6 +87,7 @@ def setOptionFromString (opts : Options) (entry : String) : IO Options := do
     | none   => throw (IO.userError s!"invalid Int option value '{val}'")
     | some v => pure $ opts.setInt key v
   | DataValue.ofSyntax _ => throw (IO.userError s!"invalid Syntax option value")
+  return { kvmap with }
 
 class MonadOptions (m : Type → Type) where
   getOptions : m Options
@@ -114,10 +119,15 @@ instance [MonadFunctor m n] [MonadWithOptions m] : MonadWithOptions n where
    the term being delaborated should be treated as a pattern. -/
 
 def withInPattern [MonadWithOptions m] (x : m α) : m α :=
-  withOptions (fun o => o.setBool `_inPattern true) x
+  -- `hasTrace` is unaffected
+  withOptions (fun o => { o with toKVMap := o.setBool `_inPattern true }) x
 
 def Options.getInPattern (o : Options) : Bool :=
   o.getBool `_inPattern
+
+def Options.set [KVMap.Value α] (opts : Options) (opt : Name) (val : α) : Options where
+  toKVMap  := opts.toKVMap.set opt val
+  hasTrace := opts.hasTrace || isTrace opt
 
 /-- A strongly-typed reference to an option. -/
 protected structure Option (α : Type) where

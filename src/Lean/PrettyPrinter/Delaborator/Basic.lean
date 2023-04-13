@@ -142,8 +142,8 @@ def getOptionsAtCurrPos : DelabM Options := do
   let ctx ← read
   let mut opts ← getOptions
   if let some opts' := ctx.optionsPerPos.find? (← getPos) then
-    for (k, v) in opts' do
-      opts := opts.insert k v
+    for (k, v) in opts'.entries do
+      opts := opts.set k v
   return opts
 
 /-- Evaluate option accessor, using subterm-specific options if set. -/
@@ -163,7 +163,7 @@ def withOptionAtCurrPos (k : Name) (v : DataValue) (x : DelabM α) : DelabM α :
   let pos ← getPos
   withReader
     (fun ctx =>
-      let opts' := ctx.optionsPerPos.find? pos |>.getD {} |>.insert k v
+      let opts' := ctx.optionsPerPos.find? pos |>.getD {} |>.set k v
       { ctx with optionsPerPos := ctx.optionsPerPos.insert pos opts' })
     x
 

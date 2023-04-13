@@ -99,6 +99,9 @@ where
       false
 
 def isTracingEnabledFor (cls : Name) : m Bool := do
+  let opts ← getOptions
+  unless opts.hasTrace do
+    return false
   let inherited ← (inheritedTraceOptions.get : IO _)
   pure (checkTraceOption inherited (← getOptions) cls)
 
