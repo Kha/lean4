@@ -1590,7 +1590,6 @@ partial def processPostponed (mayPostpone : Bool := true) (exceptionOnFailure :=
     See issue #1102 for an example that triggers an exponential blowup if we don't use this more
     aggresive form of caching.
   -/
-  modifyDefEqCache fun _ => {}
   let postponed ← getResetPostponed
   try
     if (← x) then
@@ -1617,6 +1616,7 @@ def isLevelDefEq (u v : Level) : MetaM Bool :=
 /-- See `isDefEq`. -/
 def isExprDefEq (t s : Expr) : MetaM Bool :=
   withReader (fun ctx => { ctx with defEqCtx? := some { lhs := t, rhs := s, lctx := ctx.lctx, localInstances := ctx.localInstances } }) do
+    modifyDefEqCache fun _ => {}
     checkpointDefEq (mayPostpone := true) <| Meta.isExprDefEqAux t s
 
 /--
