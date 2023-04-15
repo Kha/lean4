@@ -1617,7 +1617,10 @@ def isLevelDefEq (u v : Level) : MetaM Bool :=
 def isExprDefEq (t s : Expr) : MetaM Bool :=
   withReader (fun ctx => { ctx with defEqCtx? := some { lhs := t, rhs := s, lctx := ctx.lctx, localInstances := ctx.localInstances } }) do
     modifyDefEqCache fun _ => {}
-    checkpointDefEq (mayPostpone := true) <| Meta.isExprDefEqAux t s
+    try
+      checkpointDefEq (mayPostpone := true) (Meta.isExprDefEqAux t s)
+    finally
+      modifyDefEqCache fun _ => {}
 
 /--
   Determines whether two expressions are definitionally equal to each other.
