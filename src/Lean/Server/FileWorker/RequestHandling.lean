@@ -411,6 +411,7 @@ structure SemanticTokensContext where
   endPos    : String.Pos
   text      : FileMap
   snap      : Snapshot
+  refs      : ModuleRefs
 
 structure SemanticTokensState where
   data       : Array Nat
@@ -431,11 +432,12 @@ partial def handleSemanticTokens (beginPos endPos : String.Pos)
   let t := doc.cmdSnaps.waitAll (·.beginPos < endPos)
   mapTask t fun (snaps, _) =>
     StateT.run' (s := { data := #[], lastLspPos := ⟨0, 0⟩ : SemanticTokensState }) do
-      for s in snaps do
-        if s.endPos <= beginPos then
+      for snap in snaps do
+        if snap.endPos <= beginPos then
           continue
-        ReaderT.run (r := SemanticTokensContext.mk beginPos endPos text s) <|
-          go s.stx
+        let refs := findModuleRefs text #[snap.infoTree]
+        ReaderT.run (r := { beginPos, endPos, text, snap, refs }) <|
+          go snap.stx
       return { data := (← get).data }
 where
   go (stx : Syntax) := do
@@ -471,7 +473,10 @@ where
               if ti.isBinder then
                 addToken ti.stx SemanticTokenType.function
             else
-              addToken ti.stx SemanticTokenType.variable
+              let mut mods := if (← read).refs.find? (.fvar fvarId) |>.any (·.definition.isNone) then
+                #[.leanNoDef]
+              else #[]
+              addToken ti.stx SemanticTokenType.variable mods
         else if ti.stx.getPos?.get! > lastPos then
           -- any info after the start position: must be projection notation
           addToken ti.stx SemanticTokenType.property
@@ -482,8 +487,8 @@ where
          -- Support for keywords of the form `#<alpha>...`
          (val.length > 1 && val.front == '#' && (val.get ⟨1⟩).isAlpha) then
         addToken stx (keywordSemanticTokenMap.findD val .keyword)
-  addToken stx type := do
-    let ⟨beginPos, endPos, text, _⟩ ← read
+  addToken stx type (mods : Array SemanticTokenModifier := #[]) := do
+    let { beginPos, endPos, text, .. } ← read
     if let (some pos, some tailPos) := (stx.getPos?, stx.getTailPos?) then
       if beginPos <= pos && pos < endPos then
         let lspPos := (← get).lastLspPos
@@ -492,7 +497,8 @@ where
         let deltaStart := lspPos'.character - (if lspPos'.line == lspPos.line then lspPos.character else 0)
         let length := (text.utf8PosToLspPos tailPos).character - lspPos'.character
         let tokenType := type.toNat
-        let tokenModifiers := 0
+        -- transform to bitmap
+        let tokenModifiers := mods.foldl (· ||| ·.toNat) 0
         modify fun st => {
           data := st.data ++ #[deltaLine, deltaStart, length, tokenType, tokenModifiers]
           lastLspPos := lspPos'

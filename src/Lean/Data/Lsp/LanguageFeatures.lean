@@ -267,10 +267,9 @@ def SemanticTokenType.toNat (type : SemanticTokenType) : Nat :=
   type.toCtorIdx
 
 -- sanity check
--- TODO: restore after update-stage0
---example {v : SemanticTokenType} : open SemanticTokenType in
---    names[v.toNat]?.map (toString <| toJson ·) = some (toString <| toJson v) := by
---  cases v <;> native_decide
+example {v : SemanticTokenType} : open SemanticTokenType in
+    names[v.toNat]?.map (toString <| toJson ·) = some (toString <| toJson v) := by
+  cases v <;> native_decide
 
 /--
 The semantic token modifiers included by default in the LSP specification.
@@ -288,20 +287,23 @@ inductive SemanticTokenModifier where
   | modification
   | documentation
   | defaultLibrary
+  -- Extensions
+  | leanNoDef
   deriving ToJson, FromJson
 
 -- must be in the same order as the constructors
 def SemanticTokenModifier.names : Array String :=
   #["declaration", "definition", "readonly", "static", "deprecated", "abstract",
-    "async", "modification", "documentation", "defaultLibrary"]
+    "async", "modification", "documentation", "defaultLibrary", "leanNoDef"]
 
 def SemanticTokenModifier.toNat (modifier : SemanticTokenModifier) : Nat :=
-  modifier.toCtorIdx
+  1 <<< modifier.toCtorIdx
 
 -- sanity check
-example {v : SemanticTokenModifier} : open SemanticTokenModifier in
-    names[v.toNat]?.map (toString <| toJson ·) = some (toString <| toJson v) := by
-  cases v <;> native_decide
+-- TODO: reenable after update-stage0
+--example {v : SemanticTokenModifier} : open SemanticTokenModifier in
+--    names[v.toNat]?.map (toString <| toJson ·) = some (toString <| toJson v) := by
+--  cases v <;> native_decide
 
 structure SemanticTokensLegend where
   tokenTypes : Array String
