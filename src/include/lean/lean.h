@@ -1951,35 +1951,35 @@ static inline lean_object* lean_expr_checker_get_usize_size() {
     return lean_box(sizeof(size_t));
 }
 
-static uint8_t lean_init_core_strict_or(uint8_t b1, uint8_t b2) {
+static inline uint8_t lean_init_core_strict_or(uint8_t b1, uint8_t b2) {
     return b1 || b2;
 }
 
-static uint8_t lean_init_core_strict_and(uint8_t b1, uint8_t b2) {
+static inline uint8_t lean_init_core_strict_and(uint8_t b1, uint8_t b2) {
     return b1 && b2;
 }
 
-static lean_object *lean_init_meta_version_get_major() {
+static inline lean_object *lean_init_meta_version_get_major() {
     return lean_box(LEAN_VERSION_MAJOR);
 }
 
-static lean_object *lean_init_meta_version_get_minor() {
+static inline lean_object *lean_init_meta_version_get_minor() {
     return lean_box(LEAN_VERSION_MINOR);
 }
 
-static lean_object *lean_init_meta_version_get_patch() {
+static inline lean_object *lean_init_meta_version_get_patch() {
     return lean_box(LEAN_VERSION_PATCH);
 }
 
-static uint8_t lean_init_meta_version_is_release() {
+static inline uint8_t lean_init_meta_version_is_release() {
     return LEAN_VERSION_IS_RELEASE;
 }
 
-static lean_object *lean_init_meta_version_get_special_desc() {
+static inline lean_object *lean_init_meta_version_get_special_desc() {
     return lean_mk_string(LEAN_SPECIAL_VERSION_DESC);
 }
 
-static uint8_t lean_init_meta_internal_is_stage0() {
+static inline uint8_t lean_init_meta_internal_is_stage0() {
     return LEAN_IS_STAGE0;
 }
 
