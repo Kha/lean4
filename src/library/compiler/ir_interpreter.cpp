@@ -51,6 +51,10 @@ functions, which have a (relatively) homogeneous ABI that we can use without run
 #define LEAN_DEFAULT_INTERPRETER_PREFER_NATIVE true
 #endif
 
+#ifndef LEAN_DEFAULT_PROFILER_INTERPRETER
+#define LEAN_DEFAULT_PROFILER_INTERPRETER false
+#endif
+
 namespace lean {
 namespace ir {
 // C++ wrappers of Lean data types
@@ -191,6 +195,7 @@ static string_ref * g_mangle_prefix = nullptr;
 static string_ref * g_boxed_suffix = nullptr;
 static string_ref * g_boxed_mangled_suffix = nullptr;
 static name * g_interpreter_prefer_native = nullptr;
+static name * g_profiler_interpreter = nullptr;
 
 // constants (lacking native declarations) initialized by `lean_run_init`
 static name_map<object *> * g_init_globals;
@@ -379,12 +384,20 @@ public:
             return f(*g_interpreter);
         } else {
             // We changed threads or the closure was stored and called in a different context.
-            time_task t("interpretation", opts, fn);
-            scope_trace_env scope_trace(env, opts);
-            // the caches contain data from the Environment, so we cannot reuse them when changing it
-            interpreter interp(env, opts);
-            flet<interpreter *> fl(g_interpreter, &interp);
-            return f(interp);
+            if (opts.get_bool(*g_profiler_interpreter, LEAN_DEFAULT_PROFILER_INTERPRETER)) {
+                time_task t("interpretation", opts, fn);
+                scope_trace_env scope_trace(env, opts);
+                // the caches contain data from the Environment, so we cannot reuse them when changing it
+                interpreter interp(env, opts);
+                flet<interpreter *> fl(g_interpreter, &interp);
+                return f(interp);
+            } else {
+                scope_trace_env scope_trace(env, opts);
+                // the caches contain data from the Environment, so we cannot reuse them when changing it
+                interpreter interp(env, opts);
+                flet<interpreter *> fl(g_interpreter, &interp);
+                return f(interp);
+            }
         }
     }
 
@@ -1109,8 +1122,10 @@ void initialize_ir_interpreter() {
     ir::g_boxed_mangled_suffix = new string_ref("___boxed");
     mark_persistent(ir::g_boxed_mangled_suffix->raw());
     ir::g_interpreter_prefer_native = new name({"interpreter", "prefer_native"});
+    ir::g_profiler_interpreter = new name({"profiler", "interpreter"});
     ir::g_init_globals = new name_map<object *>();
     register_bool_option(*ir::g_interpreter_prefer_native, LEAN_DEFAULT_INTERPRETER_PREFER_NATIVE, "(interpreter) whether to use precompiled code where available");
+    register_bool_option(*ir::g_profiler_interpreter, LEAN_DEFAULT_PROFILER_INTERPRETER, "profile interpreter execution as separate metric (overapproximation)");
     DEBUG_CODE({
         register_trace_class({"interpreter"});
         register_trace_class({"interpreter", "call"});
@@ -1120,6 +1135,7 @@ void initialize_ir_interpreter() {
 
 void finalize_ir_interpreter() {
     delete ir::g_init_globals;
+    delete ir::g_profiler_interpreter;
     delete ir::g_interpreter_prefer_native;
     delete ir::g_boxed_mangled_suffix;
     delete ir::g_boxed_suffix;
