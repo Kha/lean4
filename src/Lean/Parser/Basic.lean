@@ -195,83 +195,6 @@ def trailingNodeAux (n : SyntaxNodeKind) (p : Parser) : TrailingParser := {
 def trailingNode (n : SyntaxNodeKind) (prec lhsPrec : Nat) (p : Parser) : TrailingParser :=
   checkPrec prec >> checkLhsPrec lhsPrec >> trailingNodeAux n p >> setLhsPrec prec
 
-def mergeOrElseErrors (s : ParserState) (error1 : Error) (iniPos : String.Pos) (mergeErrors : Bool) : ParserState :=
-  match s with
-  | ⟨stack, lhsPrec, pos, cache, some error2⟩ =>
-    if pos == iniPos then ⟨stack, lhsPrec, pos, cache, some (if mergeErrors then error1.merge error2 else error2)⟩
-    else s
-  | other => other
-
--- When `p` in `p <|> q` parses exactly one antiquotation, ...
-inductive OrElseOnAntiquotBehavior where
-  | acceptLhs    -- return it
-  | takeLongest  -- return result of `q` instead if it made more progress
-  | merge        -- ... and create choice node if both made the same progress
-  deriving BEq
-
-def orelseFnCore (p q : ParserFn) (antiquotBehavior := OrElseOnAntiquotBehavior.merge) : ParserFn := fun c s => Id.run do
-  let iniSz  := s.stackSize
-  let iniPos := s.pos
-  let mut s  := p c s
-  match s.errorMsg with
-  | some errorMsg =>
-    if s.pos == iniPos then
-      mergeOrElseErrors (q c (s.restore iniSz iniPos)) errorMsg iniPos true
-    else
-      s
-  | none =>
-    let pBack := s.stxStack.back
-    if antiquotBehavior == .acceptLhs || s.stackSize != iniSz + 1 || !pBack.isAntiquots then
-      return s
-    let pPos := s.pos
-    s := s.restore iniSz iniPos
-    s := q c s
-    if s.hasError then
-      return s.restore iniSz pPos |>.pushSyntax pBack
-    -- If `q` made more progress than `p`, we prefer its result.
-    -- Thus `(structInstField| $id := $val) is interpreted as
-    -- `(structInstField| $id:ident := $val:term), not
-    -- `(structInstField| $id:structInstField <ERROR: expected ')'>.
-    if s.pos > pPos then
-      return s
-    if s.pos < pPos || antiquotBehavior != .merge || s.stackSize != iniSz + 1 || !s.stxStack.back.isAntiquots then
-      return s.restore iniSz pPos |>.pushSyntax pBack
-    -- Pop off result of `q`, push result(s) of `p` and `q` in that order, turn them into a choice node
-    let qBack := s.stxStack.back
-    s := s.popSyntax
-    let pushAntiquots stx s :=
-      if stx.isOfKind choiceKind then
-        -- Flatten existing choice node
-        { s with stxStack := s.stxStack ++ stx.getArgs }
-      else
-        s.pushSyntax stx
-    s := pushAntiquots pBack s
-    s := pushAntiquots qBack s
-    s.mkNode choiceKind iniSz
-
-def orelseFn (p q : ParserFn) : ParserFn :=
-  orelseFnCore p q
-
-@[noinline] def orelseInfo (p q : ParserInfo) : ParserInfo := {
-  collectTokens := p.collectTokens ∘ q.collectTokens
-  collectKinds  := p.collectKinds ∘ q.collectKinds
-  firstTokens   := p.firstTokens.merge q.firstTokens
-}
-
-/--
-  Run `p`, falling back to `q` if `p` failed without consuming any input.
-
-  NOTE: In order for the pretty printer to retrace an `orelse`, `p` must be a call to `node` or some other parser
-  producing a single node kind. Nested `orelse` calls are flattened for this, i.e. `(node k1 p1 <|> node k2 p2) <|> ...`
-  is fine as well. -/
-def orelse (p q : Parser) : Parser := {
-  info := orelseInfo p.info q.info
-  fn   := orelseFn p.fn q.fn
-}
-
-instance : OrElse Parser where
-  orElse a b := orelse a (b ())
-
 @[noinline] def noFirstTokenInfo (info : ParserInfo) : ParserInfo := {
   collectTokens := info.collectTokens
   collectKinds  := info.collectKinds
@@ -844,6 +767,92 @@ def peekToken (c : ParserContext) (s : ParserState) : ParserState × Except Pars
     (s, .ok tkc.token)
   else
     peekTokenAux c s
+
+def mergeOrElseErrors (s : ParserState) (error1 : Error) (iniPos : String.Pos) (mergeErrors : Bool) : ParserState :=
+  match s with
+  | ⟨stack, lhsPrec, pos, cache, some error2⟩ =>
+    if pos == iniPos then ⟨stack, lhsPrec, pos, cache, some (if mergeErrors then error1.merge error2 else error2)⟩
+    else s
+  | other => other
+
+-- When `p` in `p <|> q` parses exactly one antiquotation, ...
+inductive OrElseOnAntiquotBehavior where
+  | acceptLhs    -- return it
+  | takeLongest  -- return result of `q` instead if it made more progress
+  | merge        -- ... and create choice node if both made the same progress
+  deriving BEq
+
+def orelseFnCore (p q : ParserFn) (antiquotBehavior := OrElseOnAntiquotBehavior.merge) : ParserFn := fun c s => Id.run do
+  let iniSz  := s.stackSize
+  let iniPos := s.pos
+  let mut s  := p c s
+  match s.errorMsg with
+  | some errorMsg =>
+    if s.pos == iniPos then
+      mergeOrElseErrors (q c (s.restore iniSz iniPos)) errorMsg iniPos true
+    else
+      s
+  | none =>
+    let pBack := s.stxStack.back
+    if antiquotBehavior == .acceptLhs || s.stackSize != iniSz + 1 || !pBack.isAntiquots then
+      return s
+    let pPos := s.pos
+    s := s.restore iniSz iniPos
+    s := q c s
+    if s.hasError then
+      return s.restore iniSz pPos |>.pushSyntax pBack
+    -- If `q` made more progress than `p`, we prefer its result.
+    -- Thus `(structInstField| $id := $val) is interpreted as
+    -- `(structInstField| $id:ident := $val:term), not
+    -- `(structInstField| $id:structInstField <ERROR: expected ')'>.
+    if s.pos > pPos then
+      return s
+    if s.pos < pPos || antiquotBehavior != .merge || s.stackSize != iniSz + 1 || !s.stxStack.back.isAntiquots then
+      return s.restore iniSz pPos |>.pushSyntax pBack
+    -- Pop off result of `q`, push result(s) of `p` and `q` in that order, turn them into a choice node
+    let qBack := s.stxStack.back
+    s := s.popSyntax
+    let pushAntiquots stx s :=
+      if stx.isOfKind choiceKind then
+        -- Flatten existing choice node
+        { s with stxStack := s.stxStack ++ stx.getArgs }
+      else
+        s.pushSyntax stx
+    s := pushAntiquots pBack s
+    s := pushAntiquots qBack s
+    s.mkNode choiceKind iniSz
+
+def orelseFn (p q : ParserFn) : ParserFn :=
+  orelseFnCore p q
+
+def orelseFnQuicklook (tk : String) (p q : ParserFn) : ParserFn := fun c s => Id.run do
+  let (s, tk'?) := peekToken c s
+  if let .ok (.atom _ tk') := tk'? then
+    if tk' != tk then
+      return q c s
+  orelseFnCore p q .merge c s
+
+@[noinline] def orelseInfo (p q : ParserInfo) : ParserInfo := {
+  collectTokens := p.collectTokens ∘ q.collectTokens
+  collectKinds  := p.collectKinds ∘ q.collectKinds
+  firstTokens   := p.firstTokens.merge q.firstTokens
+}
+
+/--
+  Run `p`, falling back to `q` if `p` failed without consuming any input.
+
+  NOTE: In order for the pretty printer to retrace an `orelse`, `p` must be a call to `node` or some other parser
+  producing a single node kind. Nested `orelse` calls are flattened for this, i.e. `(node k1 p1 <|> node k2 p2) <|> ...`
+  is fine as well. -/
+def orelse (p q : Parser) : Parser := {
+  info := orelseInfo p.info q.info
+  fn   := match p.info.firstTokens with
+    | .tokens [tk] => orelseFnQuicklook tk p.fn q.fn
+    | _            => orelseFn p.fn q.fn
+}
+
+instance : OrElse Parser where
+  orElse a b := orelse a (b ())
 
 /-- Treat keywords as identifiers. -/
 def rawIdentFn : ParserFn := fun c s =>
