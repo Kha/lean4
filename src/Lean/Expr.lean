@@ -140,9 +140,11 @@ def Expr.Data.approxDepth (c : Expr.Data) : UInt8 :=
 def Expr.Data.looseBVarRange (c : Expr.Data) : UInt32 :=
   (c.shiftRight 44).toUInt32
 
+@[inline]
 def Expr.Data.hasFVar (c : Expr.Data) : Bool :=
   ((c.shiftRight 40).land 1) == 1
 
+@[inline]
 def Expr.Data.hasExprMVar (c : Expr.Data) : Bool :=
   ((c.shiftRight 41).land 1) == 1
 
@@ -532,6 +534,7 @@ instance : Hashable Expr := ⟨Expr.hash⟩
 Return `true` if `e` contains free variables.
 This is a constant time operation.
 -/
+@[inline]
 def hasFVar (e : Expr) : Bool :=
   e.data.hasFVar
 
@@ -539,6 +542,7 @@ def hasFVar (e : Expr) : Bool :=
 Return `true` if `e` contains expression metavariables.
 This is a constant time operation.
 -/
+@[inline]
 def hasExprMVar (e : Expr) : Bool :=
   e.data.hasExprMVar
 
