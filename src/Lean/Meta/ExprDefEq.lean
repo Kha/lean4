@@ -1811,6 +1811,7 @@ private def cacheResult (key : Expr × Expr) (result : Bool) : MetaM Unit := do
 
 @[export lean_is_expr_def_eq]
 partial def isExprDefEqAuxImpl (t : Expr) (s : Expr) : MetaM Bool := withIncRecDepth do
+  profileitM Exception (if t.hasExprMVar || s.hasExprMVar then "unification" else "conversion checking") (← getOptions) do
   withTraceNodeBefore `Meta.isDefEq (return m!"{t} =?= {s}") do
   checkMaxHeartbeats "isDefEq"
   whenUndefDo (isDefEqQuick t s) do
