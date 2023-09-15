@@ -11,7 +11,10 @@ jobs:
         with:
           version: 3.1.44
           actions-cache-folder: 'emsdk'
-      - run: |
+      - name: install 32bit c libs
+        run: sudo apt-get install gcc-multilib g++-multilib
+      - name: compile
+        run: |
           cd ${{ github.workspace }}
           mkdir -p build/release
           cd build/release
