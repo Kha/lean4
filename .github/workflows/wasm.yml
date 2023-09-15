@@ -26,6 +26,8 @@ jobs:
           make -j4 || true
           make -j4 || true
           make -j4 || true
+          make -j4 || true
+          make -j4 || true
           make -j4
       - name: Compile wasm
         run: |
