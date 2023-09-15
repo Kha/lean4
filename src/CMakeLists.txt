@@ -93,7 +93,6 @@ if (NOT("${CHECK_OLEAN_VERSION}" MATCHES "ON"))
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
-    set(MULTI_THREAD OFF)
     # TODO(WN): code size/performance tradeoffs
     # - we're using -O3; it's /okay/
     # - -flto crashes at runtime
@@ -104,7 +103,8 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 
     # From https://emscripten.org/docs/compiling/WebAssembly.html#backends:
     # > The simple and safe thing is to pass all -s flags at both compile and link time.
-    set(EMSCRIPTEN_SETTINGS "-s ALLOW_MEMORY_GROWTH=1 -s DISABLE_EXCEPTION_CATCHING=0 -s MAIN_MODULE=1 -fexceptions")
+    set(EMSCRIPTEN_SETTINGS "-s ALLOW_MEMORY_GROWTH=1 -s MAIN_MODULE=1 -fwasm-exceptions -pthread")
+    string(APPEND LEANC_EXTRA_FLAGS " -pthread")
     string(APPEND LEAN_EXTRA_CXX_FLAGS " -D LEAN_EMSCRIPTEN ${EMSCRIPTEN_SETTINGS}")
     string(APPEND LEAN_EXTRA_LINKER_FLAGS " ${EMSCRIPTEN_SETTINGS}")
 endif()
