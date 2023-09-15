@@ -11,11 +11,11 @@ jobs:
         with:
           version: 3.1.44
           actions-cache-folder: 'emsdk'
-      - name: install 32bit c libs
+      - name: Install 32bit c libs
         run: |
           sudo apt-get update
           sudo apt-get install gcc-multilib g++-multilib
-      - name: compile
+      - name: Compile native 32bit + oleans
         run: |
           cd ${{ github.workspace }}
           mkdir -p build/release
@@ -27,9 +27,13 @@ jobs:
           make -j4 || true
           make -j4 || true
           make -j4
+      - name: Compile wasm
+        run: |
           rm -rf stage0
-          emcmake cmake ../.. -DUSE_GMP=OFF -DSTAGE0_CMAKE_AR=${{ github.workspace }}/emsdk/upstream/emscripten/emar -DSTAGE0_CMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DDSTAGE0_CMAKE_CROSSCOMPILING_EMULATOR="${{ github.workspace }}/emsdk/node/12.9.1_64bit/bin/node"
+          emcmake cmake ../.. -DUSE_GMP=OFF -DSTAGE0_CMAKE_AR=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/emar -DSTAGE0_CMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DDSTAGE0_CMAKE_CROSSCOMPILING_EMULATOR="${{ github.workspace }}/emsdk/emsdk-main/node/12.9.1_64bit/bin/node"
           emmake make -j4 stage0
           "${{ github.workspace }}/build/release/stage0/leanc.sh" ${{ github.workspace }}/build/release/stage0/shell/CMakeFiles/shell.dir/lean.cpp.o -Wl,--whole-archive -lInit -lLean -lleancpp -lleanrt -rdynamic -o ${{ github.workspace }}/build/release/stage0/bin/lean -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s ASSERTIONS=1 -s WASM=1 -fexceptions -lnodefs.js -s MAIN_MODULE=1 -s LINKABLE=1 -s EXPORT_ALL=1 -s LLD_REPORT_UNDEFINED=1
+      - name: Compile wasm  
+        run: |
           echo "#check Nat" | LEAN_PATH=${{ github.workspace }}/build/release/stage0/bin node --stack-size=8192 stage0/bin/lean --stdin
 
