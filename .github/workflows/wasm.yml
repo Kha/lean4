@@ -33,6 +33,10 @@ jobs:
           make -j4 || true
           make -j4 || true
           make -j4
+      - name: Run tests
+        run: |
+          cd ${{ github.workspace }}/build/release
+          make -j4 test || true
       - name: Compile wasm
         run: |
           cd ${{ github.workspace }}/build/release
