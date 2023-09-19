@@ -22,25 +22,35 @@ open Lean Server Elab Command
 inductive Snapshot.Exception
   | restartWorker
 
-structure SnapshotF (rec : Type) where
+structure SnapshotF (Snapshot : Type) where
   beginPos : Nat
-  interactiveDiags : PersistentArray Widget.InteractiveDiagnostic
-  processNext (doc : DocumentMeta) : EIO Snapshot.Exception (Option rec)
+  messages : MessageLog
+  processNext (doc : DocumentMeta) : EIO _root_.Snapshot.Exception (Option Snapshot)
 deriving Inhabited
 
 abbrev Snapshot := Fix SnapshotF
-abbrev Snapshot.ProcessCont := DocumentMeta → EIO Exception (Option Snapshot)
+abbrev Snapshot.ProcessContM := EIO Exception
+abbrev Snapshot.ProcessCont := DocumentMeta → ProcessContM (Option Snapshot)
+
+def withFatalExceptions (beginPos : Nat) (act : IO (Option Snapshot)) : Snapshot.ProcessContM (Option Snapshot) := do
+  match (← act.toBaseIO) with
+  | .ok a => return a
+  | .error e => return some <| .mk {
+    beginPos
+    messages := MessageLog.empty.add { fileName := "TODO", pos := ⟨0, 0⟩, data := e.toString }
+    processNext := fun _ => return none
+  }
 
 open Lean.Server.FileWorker in
-partial def processLean (hOut : IO.FS.Stream) (opts : Options) (hasWidgets : Bool) : Snapshot :=
+partial def processLean (hOut : IO.FS.Stream) (opts : Options) : Snapshot :=
   initial
 where
   initial : Snapshot := .mk {
     beginPos := 0
-    interactiveDiags := .empty
+    messages := .empty
     processNext := processHeader
   }
-  processHeader := fun m => IO.toEIO sorry do
+  processHeader := fun m => withFatalExceptions (beginPos := 0) do
     -- COPIED
     let (headerStx, headerParserState, msgLog) ← Parser.parseHeader m.mkInputContext
     let mut srcSearchPath ← initSrcSearchPath (← getBuildDir)
@@ -87,7 +97,7 @@ where
     -- END COPIED
     return some <| .mk {
       beginPos := 0
-      interactiveDiags := (← cmdState.messages.msgs.mapM (Widget.msgToInteractiveDiagnostic m.text · hasWidgets))
+      messages := cmdState.messages
       processNext := processCmd headerParserState cmdState
     }
   processCmd (mpState : Parser.ModuleParserState) (cmdState : Command.State) := fun doc => do
@@ -122,6 +132,6 @@ where
     -- END COPIED
     return some <| .mk {
       beginPos := mpState.pos.byteIdx
-      interactiveDiags := (← (cmdState.messages.msgs.mapM (Widget.msgToInteractiveDiagnostic doc.text · hasWidgets)).toEIO sorry)
+      messages := postCmdState.messages
       processNext := processCmd cmdParserState postCmdState
     }
