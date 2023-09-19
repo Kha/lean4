@@ -19,27 +19,37 @@ opaque Fix.unmk [∀ α, Inhabited (F α)] : Fix F → F (Fix F)
 
 open Lean Server Elab Command
 
-inductive Snapshot.Exception
+inductive Snapshot.Exception (Other : Type)
   | restartWorker
+  | unchanged
+  | eof
+  | other (_ : Other)
+deriving Inhabited
 
 structure SnapshotF (Snapshot : Type) where
   beginPos : Nat
   messages : MessageLog
-  processNext (doc : DocumentMeta) : EIO _root_.Snapshot.Exception (Option Snapshot)
+  process (doc : DocumentMeta) : EIO (_root_.Snapshot.Exception Empty) Snapshot
 deriving Inhabited
 
 abbrev Snapshot := Fix SnapshotF
-abbrev Snapshot.ProcessContM := EIO Exception
-abbrev Snapshot.ProcessCont := DocumentMeta → ProcessContM (Option Snapshot)
+abbrev Snapshot.ProcessContM := EIO (Exception Empty)
+abbrev Snapshot.ProcessCont := DocumentMeta → ProcessContM Snapshot
 
-def withFatalExceptions (beginPos : Nat) (act : IO (Option Snapshot)) : Snapshot.ProcessContM (Option Snapshot) := do
+instance : MonadLift IO (EIO (Snapshot.Exception IO.Error)) where
+  monadLift act := act.adaptExcept .other
+
+def withFatalExceptions (beginPos : Nat) (rec : Snapshot.ProcessCont) (act : EIO (Snapshot.Exception IO.Error) Snapshot) : Snapshot.ProcessContM Snapshot := do
   match (← act.toBaseIO) with
-  | .ok a => return a
-  | .error e => return some <| .mk {
+  | .error (.other e) => return .mk {
     beginPos
     messages := MessageLog.empty.add { fileName := "TODO", pos := ⟨0, 0⟩, data := e.toString }
-    processNext := fun _ => return none
+    process := rec
   }
+  | .error .restartWorker => throw .restartWorker
+  | .error .unchanged => throw .unchanged
+  | .error .eof => throw .eof
+  | .ok a => return a
 
 open Lean.Server.FileWorker in
 partial def processLean (hOut : IO.FS.Stream) (opts : Options) : Snapshot :=
@@ -48,11 +58,15 @@ where
   initial : Snapshot := .mk {
     beginPos := 0
     messages := .empty
-    processNext := processHeader
+    process := processHeader none
   }
-  processHeader := fun m => withFatalExceptions (beginPos := 0) do
+  processHeader (oldStx : Option Syntax) := fun m => withFatalExceptions (rec := processHeader none) (beginPos := 0) do
+    let (headerStx, headerParserState, msgLog) ← do
+      Parser.parseHeader m.mkInputContext
+    if oldStx == some headerStx then
+      throw .unchanged
+    show IO _ from do
     -- COPIED
-    let (headerStx, headerParserState, msgLog) ← Parser.parseHeader m.mkInputContext
     let mut srcSearchPath ← initSrcSearchPath (← getBuildDir)
     let lakePath ← match (← IO.getEnv "LAKE") with
       | some path => pure <| System.FilePath.mk path
@@ -95,18 +109,20 @@ where
       )].toPArray'
     }}
     -- END COPIED
-    return some <| .mk {
+    return .mk {
       beginPos := 0
       messages := cmdState.messages
-      processNext := processCmd headerParserState cmdState
+      process := processCmd oldStx headerParserState cmdState
     }
-  processCmd (mpState : Parser.ModuleParserState) (cmdState : Command.State) := fun doc => do
-    -- COPIED
+  processCmd (oldStx : Option Syntax) (mpState : Parser.ModuleParserState) (cmdState : Command.State) := fun doc => do
     let scope := cmdState.scopes.head!
     let inputCtx := doc.mkInputContext
     let pmctx := { env := cmdState.env, options := scope.opts, currNamespace := scope.currNamespace, openDecls := scope.openDecls }
     let (cmdStx, cmdParserState, msgLog) :=
       Parser.parseCommand inputCtx pmctx mpState cmdState.messages
+    if oldStx == some cmdStx then
+      throw .unchanged
+    -- COPIED
     let cmdStateRef ← IO.mkRef { cmdState with messages := msgLog }
     let cmdCtx : Elab.Command.Context := {
       cmdPos       := mpState.pos
@@ -130,8 +146,8 @@ where
         }
       }
     -- END COPIED
-    return some <| .mk {
+    return .mk {
       beginPos := mpState.pos.byteIdx
       messages := postCmdState.messages
-      processNext := processCmd cmdParserState postCmdState
+      process := processCmd cmdStx cmdParserState postCmdState
     }
