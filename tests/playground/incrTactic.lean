@@ -62,9 +62,9 @@ where
     return .next <| .mk {
       beginPos := 0
       messages := msgLog
-      process := processHeader headerStx headerParserState
+      process := elabHeader headerStx headerParserState
     }
-  processHeader headerStx headerParserState := fun m => withFatalExceptions (rec := processHeader headerStx headerParserState) (beginPos := 0) do
+  elabHeader headerStx headerParserState := fun m => withFatalExceptions (rec := elabHeader headerStx headerParserState) (beginPos := 0) do
     -- COPIED
     let mut srcSearchPath ← initSrcSearchPath (← getBuildDir)
     let lakePath ← match (← IO.getEnv "LAKE") with
@@ -111,9 +111,9 @@ where
     return .next <| .mk {
       beginPos := 0
       messages := cmdState.messages
-      process := parseCmd none headerParserState cmdState
+      process := processCmd none headerParserState cmdState
     }
-  parseCmd (oldStx : Option Syntax) (mpState : Parser.ModuleParserState) (cmdState : Command.State) := fun doc => do
+  processCmd (oldStx : Option Syntax) (mpState : Parser.ModuleParserState) (cmdState : Command.State) := fun doc => do
     let scope := cmdState.scopes.head!
     let inputCtx := doc.mkInputContext
     let pmctx := { env := cmdState.env, options := scope.opts, currNamespace := scope.currNamespace, openDecls := scope.openDecls }
@@ -124,35 +124,34 @@ where
     return .next <| .mk {
       beginPos := mpState.pos.byteIdx
       messages := msgLog
-      process := processCmd cmdStx cmdState mpState inputCtx scope cmdParserState
-    }
-  processCmd cmdStx cmdState mpState inputCtx scope cmdParserState := fun _ => do
-    -- COPIED
-    let cmdStateRef ← IO.mkRef { cmdState with messages := .empty }
-    let cmdCtx : Elab.Command.Context := {
-      cmdPos       := mpState.pos
-      fileName     := inputCtx.fileName
-      fileMap      := inputCtx.fileMap
-      tacticCache? := none
-    }
-    let (output, _) ← IO.FS.withIsolatedStreams (isolateStderr := Snapshots.server.stderrAsMessages.get scope.opts) <| liftM (m := BaseIO) do
-      Elab.Command.catchExceptions
-        (getResetInfoTrees *> Elab.Command.elabCommandTopLevel cmdStx)
-        cmdCtx cmdStateRef
-    let mut postCmdState ← cmdStateRef.get
-    if !output.isEmpty then
-      postCmdState := {
-        postCmdState with
-        messages := postCmdState.messages.add {
-          fileName := inputCtx.fileName
-          severity := MessageSeverity.information
-          pos      := inputCtx.fileMap.toPosition mpState.pos
-          data     := output
+      process := fun _ => do
+        -- COPIED
+        let cmdStateRef ← IO.mkRef { cmdState with messages := .empty }
+        let cmdCtx : Elab.Command.Context := {
+          cmdPos       := mpState.pos
+          fileName     := inputCtx.fileName
+          fileMap      := inputCtx.fileMap
+          tacticCache? := none
         }
-      }
-    -- END COPIED
-    return .next <| .mk {
-      beginPos := mpState.pos.byteIdx
-      messages := postCmdState.messages
-      process := parseCmd cmdStx cmdParserState postCmdState
+        let (output, _) ← IO.FS.withIsolatedStreams (isolateStderr := Snapshots.server.stderrAsMessages.get scope.opts) <| liftM (m := BaseIO) do
+          Elab.Command.catchExceptions
+            (getResetInfoTrees *> Elab.Command.elabCommandTopLevel cmdStx)
+            cmdCtx cmdStateRef
+        let mut postCmdState ← cmdStateRef.get
+        if !output.isEmpty then
+          postCmdState := {
+            postCmdState with
+            messages := postCmdState.messages.add {
+              fileName := inputCtx.fileName
+              severity := MessageSeverity.information
+              pos      := inputCtx.fileMap.toPosition mpState.pos
+              data     := output
+            }
+          }
+        -- END COPIED
+        return .next <| .mk {
+          beginPos := mpState.pos.byteIdx
+          messages := postCmdState.messages
+          process := processCmd cmdStx cmdParserState postCmdState
+        }
     }
