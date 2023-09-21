@@ -52,13 +52,19 @@ where
   initial : Snapshot := .mk {
     beginPos := 0
     messages := .empty
-    process := processHeader none
+    process := parseHeader none
   }
-  processHeader (oldStx : Option Syntax) := fun m => withFatalExceptions (rec := processHeader none) (beginPos := 0) do
+  parseHeader (oldStx : Option Syntax) := fun m => withFatalExceptions (rec := parseHeader oldStx) (beginPos := 0) do
     let (headerStx, headerParserState, msgLog) ← do
       Parser.parseHeader m.mkInputContext
     if oldStx == some headerStx then
       return .unchanged
+    return .next <| .mk {
+      beginPos := 0
+      messages := msgLog
+      process := processHeader headerStx headerParserState
+    }
+  processHeader headerStx headerParserState := fun m => withFatalExceptions (rec := processHeader headerStx headerParserState) (beginPos := 0) do
     -- COPIED
     let mut srcSearchPath ← initSrcSearchPath (← getBuildDir)
     let lakePath ← match (← IO.getEnv "LAKE") with
@@ -75,7 +81,7 @@ where
         if path.fileName != "lakefile.lean" && (← System.FilePath.pathExists lakePath) then
           let pkgSearchPath ← lakeSetupSearchPath lakePath m (Lean.Elab.headerToImports headerStx) hOut
           srcSearchPath ← initSrcSearchPath (← getBuildDir) pkgSearchPath
-      Elab.processHeader headerStx opts msgLog m.mkInputContext
+      Elab.processHeader headerStx opts .empty m.mkInputContext
     catch e =>  -- should be from `lake print-paths`
       let msgs := MessageLog.empty.add { fileName := "<ignored>", pos := ⟨0, 0⟩, data := e.toString }
       pure (← mkEmptyEnvironment, msgs)
@@ -105,9 +111,9 @@ where
     return .next <| .mk {
       beginPos := 0
       messages := cmdState.messages
-      process := processCmd oldStx headerParserState cmdState
+      process := parseCmd none headerParserState cmdState
     }
-  processCmd (oldStx : Option Syntax) (mpState : Parser.ModuleParserState) (cmdState : Command.State) := fun doc => do
+  parseCmd (oldStx : Option Syntax) (mpState : Parser.ModuleParserState) (cmdState : Command.State) := fun doc => do
     let scope := cmdState.scopes.head!
     let inputCtx := doc.mkInputContext
     let pmctx := { env := cmdState.env, options := scope.opts, currNamespace := scope.currNamespace, openDecls := scope.openDecls }
@@ -115,8 +121,14 @@ where
       Parser.parseCommand inputCtx pmctx mpState cmdState.messages
     if oldStx == some cmdStx then
       return .unchanged
+    return .next <| .mk {
+      beginPos := mpState.pos.byteIdx
+      messages := msgLog
+      process := processCmd cmdStx cmdState mpState inputCtx scope cmdParserState
+    }
+  processCmd cmdStx cmdState mpState inputCtx scope cmdParserState := fun _ => do
     -- COPIED
-    let cmdStateRef ← IO.mkRef { cmdState with messages := msgLog }
+    let cmdStateRef ← IO.mkRef { cmdState with messages := .empty }
     let cmdCtx : Elab.Command.Context := {
       cmdPos       := mpState.pos
       fileName     := inputCtx.fileName
@@ -142,5 +154,5 @@ where
     return .next <| .mk {
       beginPos := mpState.pos.byteIdx
       messages := postCmdState.messages
-      process := processCmd cmdStx cmdParserState postCmdState
+      process := parseCmd cmdStx cmdParserState postCmdState
     }
