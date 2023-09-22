@@ -14,29 +14,22 @@ open Lean System
 
 deriving instance BEq, Hashable for Import
 
-/- Cache for the import state of Lake configuration files. -/
-initialize importStateCache : IO.Ref (HashMap (Array Import) ImportState) ← IO.mkRef {}
+/- Cache for the imported header environment of Lake configuration files. -/
+initialize importEnvCache : IO.Ref (HashMap (Array Import) Environment) ← IO.mkRef {}
 
-/--
-Like `importModulesCore`, but fetch the
-resulting import state from the cache if possible. -/
-def importModulesUsingCache (imports : Array Import) : IO ImportState := do
-  match (← importStateCache.get).find? imports with
-  | none =>
-    let (_, s) ← importModulesCore imports |>.run
-    importStateCache.modify (·.insert imports s)
-    return s
-  | some s =>
-    return s
+def importModulesUsingCache (imports : Array Import) (opts : Options) (trustLevel : UInt32) : IO Environment := do
+  if let some env := (← importEnvCache.get).find? imports then
+    return env
+  let env ← importModules imports opts trustLevel
+  importEnvCache.modify (·.insert imports env)
+  return env
 
 /-- Like `Lean.Elab.processHeader`, but using `importEnvCache`. -/
 def processHeader (header : Syntax) (opts : Options)
 (inputCtx : Parser.InputContext) : StateT MessageLog IO Environment := do
   try
     let imports := Elab.headerToImports header
-    withImporting do
-      let s ← importModulesUsingCache imports
-      finalizeImport s imports opts 1024
+    importModulesUsingCache imports opts 1024
   catch e =>
     let pos := inputCtx.fileMap.toPosition <| header.getPos?.getD 0
     modify (·.add { fileName := inputCtx.fileName, data := toString e, pos })
@@ -95,13 +88,15 @@ def importConfigFile (wsDir pkgDir : FilePath) (lakeOpts : NameMap String)
   if useOLean then
     withImporting do
     let (mod, region) ← readModuleData olean
-    let s ← importModulesUsingCache mod.imports
-    let s := {s with
-      moduleData  := s.moduleData.push mod
-      regions     := s.regions.push region
-      moduleNames := s.moduleNames.push configModuleName
-    }
-    finalizeImport s #[configModuleName] leanOpts 1024
+    let mut env ← importModulesUsingCache mod.imports leanOpts 1024
+    env := mod.constants.foldl (·.add) env
+    let extDescrs ← persistentEnvExtensionsRef.get
+    let extNameIdx ← mkExtNameMap 0
+    for (extName, ents) in mod.entries do
+      if let some entryIdx := extNameIdx.find? extName then
+        for ent in ents do
+          env := extDescrs[entryIdx]!.addEntry env ent
+    return env
   else
     let env ← elabConfigFile pkgDir lakeOpts leanOpts configFile
     Lean.writeModule env olean
