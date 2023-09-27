@@ -28,9 +28,12 @@ opaque Fix.unfix [∀ α, Nonempty (F α)] : Fix F → F (Fix F)
 
 open Lean Server Elab Command
 
+/--
+  The base class of all snapshots: all the generic information the language server
+  needs about a snapshot. -/
 structure Snapshot where
+  /-- The messages produced by this step, to be sent to the client. -/
   msgLog : MessageLog
-  stx : Syntax
 deriving Inhabited
 
 abbrev SnapshotTask α := Task α
@@ -68,7 +71,6 @@ abbrev InitialSnapshot := HeaderParsedSnapshot
 def withFatalExceptions (ex : Snapshot → α) (act : IO α) : BaseIO α := do
   match (← act.toBaseIO) with
   | .error e => return ex {
-    stx := .missing
     msgLog := MessageLog.empty.add { fileName := "TODO", pos := ⟨0, 0⟩, data := e.toString }
   }
   | .ok a => return a
@@ -157,7 +159,7 @@ where
     if let some old := old? then
       let old := old.unfix
       if old.stx == stx then
-        -- NOTE: we do NOT `getOrCancel` `old.processed` as its eventual result
+        -- NOTE: we do NOT `getOrCancel` `old.sig` as its eventual result
         -- should be unchanged, so there is no reason to restart the computation
         return .fix {
           old with
