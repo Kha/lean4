@@ -1,7 +1,7 @@
 name: 32bit Test
 on: [push]
 jobs:
-  32bit-ci:
+  native-32bit-ci:
     runs-on: ubuntu-latest
     steps:
       - name: Install CCache
