@@ -19,26 +19,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install gcc-multilib g++-multilib
-      - name: Compile native 32bit + oleans
-        run: |
-          cd ${{ github.workspace }}
-          mkdir -p build/release
-          cd build/release
-          cmake ../.. -DSTAGE0_CMAKE_C_COMPILER_WORKS=1 -DSTAGE0_USE_GMP=OFF -DSTAGE0_LEAN_EXTRA_CXX_FLAGS='-m32' -DSTAGE0_LEANC_OPTS='-m32' -DSTAGE0_CMAKE_CXX_COMPILER=clang++ -DSTAGE0_CMAKE_C_COMPILER=clang -DCMAKE_C_COMPILER_WORKS=1 -DUSE_GMP=OFF -DLEAN_EXTRA_CXX_FLAGS='-m32' -DLEANC_OPTS='-m32' -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DMMAP=OFF -DSTAGE0_MMAP=OFF
-          make -j4
-      - name: Run tests
-        run: |
-          cd ${{ github.workspace }}/build/release
-          make -j4 test || true
       - name: Compile wasm
         run: |
           cd ${{ github.workspace }}/build/release
-          rm -rf stage0
-          emcmake cmake ../.. -DUSE_GMP=OFF -DSTAGE0_CMAKE_AR=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/emar -DSTAGE0_CMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DDSTAGE0_CMAKE_CROSSCOMPILING_EMULATOR="${{ github.workspace }}/emsdk/emsdk-main/node/12.9.1_64bit/bin/node" -DSTAGE0_MMAP=OFF
-          emmake make -j4 stage0
-          "${{ github.workspace }}/build/release/stage0/leanc.sh" ${{ github.workspace }}/build/release/stage0/shell/CMakeFiles/shell.dir/lean.cpp.o -Wl,--whole-archive -lInit -lLean -lleancpp -lleanrt -rdynamic -o ${{ github.workspace }}/build/release/stage0/bin/lean -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s ASSERTIONS=1 -s WASM=1 -fexceptions -lnodefs.js -s MAIN_MODULE=1 -s LINKABLE=1 -s EXPORT_ALL=1 -s LLD_REPORT_UNDEFINED=1
+          cmake ../.. -DCMAKE_C_COMPILER_WORKS=1 -DSTAGE0_USE_GMP=OFF -DSTAGE0_LEAN_EXTRA_CXX_FLAGS='-m32' -DSTAGE0_LEANC_OPTS='-m32' -DSTAGE0_CMAKE_CXX_COMPILER=clang++ -DSTAGE0_CMAKE_C_COMPILER=clang -DUSE_GMP=OFF -DMMAP=OFF -DSTAGE0_MMAP=OFF -DUSE_GMP=OFF -DCMAKE_AR=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/emar -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
+          make -j4
       - name: Test wasm binary
         run: |
           cd ${{ github.workspace }}/build/release
-          echo "#check Nat" | LEAN_PATH=${{ github.workspace }}/build/release/stage0/bin node --stack-size=8192 stage0/bin/lean --stdin
+          echo "#check Nat" | LEAN_PATH=${{ github.workspace }}/build/release/stage1/bin node --stack-size=8192 stage1/bin/lean --stdin
 

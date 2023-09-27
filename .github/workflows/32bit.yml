@@ -1,0 +1,27 @@
+name: 32bit Test
+on: [push]
+jobs:
+  32bit-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install CCache
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ccache
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install 32bit c libs
+        run: |
+          sudo apt-get update
+          sudo apt-get install gcc-multilib g++-multilib
+      - name: Compile native 32bit + oleans
+        run: |
+          cd ${{ github.workspace }}
+          mkdir -p build/release
+          cd build/release
+          cmake ../.. -DSTAGE0_CMAKE_C_COMPILER_WORKS=1 -DSTAGE0_USE_GMP=OFF -DSTAGE0_LEAN_EXTRA_CXX_FLAGS='-m32' -DSTAGE0_LEANC_OPTS='-m32' -DSTAGE0_CMAKE_CXX_COMPILER=clang++ -DSTAGE0_CMAKE_C_COMPILER=clang -DCMAKE_C_COMPILER_WORKS=1 -DUSE_GMP=OFF -DLEAN_EXTRA_CXX_FLAGS='-m32' -DLEANC_OPTS='-m32' -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DMMAP=OFF -DSTAGE0_MMAP=OFF
+          make -j4
+      - name: Run tests
+        run: |
+          cd ${{ github.workspace }}/build/release
+          make -j4 test || true
