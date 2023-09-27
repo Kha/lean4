@@ -36,7 +36,22 @@ structure Snapshot where
   msgLog : MessageLog
 deriving Inhabited
 
-abbrev SnapshotTask α := Task α
+structure SnapshotTask (α : Type) where
+  range : String.Range
+  task : Task α
+deriving Nonempty
+
+def SnapshotTask.ofIO (range : String.Range) (act : BaseIO α) : BaseIO (SnapshotTask α) := do
+  return {
+    range
+    task := (← BaseIO.asTask act)
+  }
+
+def SnapshotTask.pure (a : α) : SnapshotTask α where
+  -- irrelevant when already finished
+  range := default
+  task := .pure a
+
 
 structure CommandFinishedSnapshot extends Snapshot where
   cmdState : Command.State
@@ -52,11 +67,12 @@ structure CommandSignatureProcessedSnapshot extends Snapshot where
 deriving Nonempty
 
 structure CommandParsedSnapshotF (CommandParsedSnapshot : Type) extends Snapshot where
+  stx : Syntax
   sig : SnapshotTask CommandSignatureProcessedSnapshot
   next? : Option (SnapshotTask CommandParsedSnapshot)
 --deriving Nonempty  -- introduces unnecessary TC assumption
 instance : Nonempty (CommandParsedSnapshotF CommandParsedSnapshot) :=
-  .intro { (default : Snapshot) with sig := Classical.ofNonempty, next? := none }
+  .intro { (default : Snapshot) with sig := Classical.ofNonempty, stx := default, next? := default }
 abbrev CommandParsedSnapshot := Fix CommandParsedSnapshotF
 
 structure HeaderProcessedSnapshot extends Snapshot where
@@ -64,6 +80,7 @@ structure HeaderProcessedSnapshot extends Snapshot where
   next? : Option (SnapshotTask CommandParsedSnapshot)
 
 structure HeaderParsedSnapshot extends Snapshot where
+  stx : Syntax
   next? : Option (SnapshotTask HeaderProcessedSnapshot)
 
 abbrev InitialSnapshot := HeaderParsedSnapshot
@@ -77,27 +94,30 @@ def withFatalExceptions (ex : Snapshot → α) (act : IO α) : BaseIO α := do
 
 def getOrCancel (t? : Option (SnapshotTask α)) : BaseIO (Option α) := do
   let some t := t? | return none
-  if (← IO.hasFinished t) then
-    return t.get
-  IO.cancel t
+  if (← IO.hasFinished t.task) then
+    return t.task.get
+  IO.cancel t.task
   return none
 
 open Lean.Server.FileWorker in
 partial def processLean (hOut : IO.FS.Stream) (opts : Options) (doc : DocumentMeta) (old? : Option InitialSnapshot) :
-    BaseIO InitialSnapshot :=
+    BaseIO (SnapshotTask InitialSnapshot) :=
   parseHeader old?
 where
-  parseHeader (old? : Option HeaderParsedSnapshot) := withFatalExceptions ({ · with stx := .missing, next? := none }) do
+  parseHeader (old? : Option HeaderParsedSnapshot) :=
+    SnapshotTask.ofIO ⟨0, doc.text.source.endPos⟩ do
+    withFatalExceptions ({ · with stx := .missing, next? := none }) do
     let oldNext? ← old?.bind (·.next?) |> getOrCancel
     let (stx, parserState, msgLog) ← do
       Parser.parseHeader doc.mkInputContext
-    return { stx, msgLog, next? := some (← BaseIO.asTask <| processHeader oldNext? stx parserState) }
-  processHeader (old? : Option HeaderProcessedSnapshot) (stx : Syntax) (parserState : Parser.ModuleParserState) := do
+    let oldNext? := if old?.any (·.stx == stx) then oldNext? else none
+    return { stx, msgLog, next? := some (← processHeader oldNext? stx parserState) }
+  processHeader (old? : Option HeaderProcessedSnapshot) (stx : Syntax) (parserState : Parser.ModuleParserState) :=
+    SnapshotTask.ofIO ⟨0, doc.text.source.endPos⟩ do
     withFatalExceptions ({ · with next? := none, cmdState? := none }) do
     if let some old@{ cmdState? := some cmdState, .. } := old? then
-      if old.stx == stx then
-        let oldNext? ← old?.bind (·.next?) |> getOrCancel
-        return { old with next? := some (← BaseIO.asTask <| parseCmd oldNext? parserState cmdState) }
+      let oldNext? ← old?.bind (·.next?) |> getOrCancel
+      return { old with next? := some (← parseCmd oldNext? parserState cmdState) }
     let _ ← old?.bind (·.next?) |> getOrCancel
     -- COPIED
     let mut srcSearchPath ← initSrcSearchPath (← getBuildDir)
@@ -143,12 +163,13 @@ where
     }}
     -- END COPIED
     return {
-      stx
       cmdState? := cmdState
       msgLog := cmdState.messages
-      next? := some (← BaseIO.asTask <| parseCmd none parserState cmdState)
+      next? := some (← parseCmd none parserState cmdState)
     }
-  parseCmd (old? : Option CommandParsedSnapshot) (parserState : Parser.ModuleParserState) (cmdState : Command.State) := do
+  parseCmd (old? : Option CommandParsedSnapshot) (parserState : Parser.ModuleParserState) (cmdState : Command.State) :
+      BaseIO (SnapshotTask CommandParsedSnapshot) :=
+    SnapshotTask.ofIO ⟨parserState.pos, doc.text.source.endPos⟩ do
     let beginPos := parserState.pos
     let scope := cmdState.scopes.head!
     let inputCtx := doc.mkInputContext
@@ -161,17 +182,14 @@ where
       if old.stx == stx then
         -- NOTE: we do NOT `getOrCancel` `old.sig` as its eventual result
         -- should be unchanged, so there is no reason to restart the computation
-        return .fix {
-          old with
-          next? := (← BaseIO.asTask <| parseCmd oldNext? parserState cmdState)
-        }
+        return .fix { old with next? := (← parseCmd oldNext? parserState cmdState) }
     let oldSig? ← old?.map (·.unfix.sig) |> getOrCancel
-    let sig : Task CommandSignatureProcessedSnapshot ← BaseIO.asTask do
+    let sig ← SnapshotTask.ofIO (stx.getRange?.getD ⟨parserState.pos, parserState.pos⟩) do
       -- TODO: only invalidate and recreate tactics up to the first difference in
       -- the syntax trees
       if let some old := oldSig? then
         for t in old.tacs do
-          IO.cancel t
+          IO.cancel t.task
 
       -- COPIED
       let cmdStateRef ← IO.mkRef { cmdState with messages := .empty }
@@ -198,12 +216,10 @@ where
         }
       -- END COPIED
       return {
-        stx
         msgLog := postCmdState.messages
         -- TODO
         tacs := #[]
         finished := .pure {
-          stx
           msgLog := .empty
           cmdState := (← cmdStateRef.get)
         }
@@ -214,8 +230,8 @@ where
       msgLog
       sig
       next? :=
-        if Parser.isTerminalCommand stx then some (← BaseIO.bindTask sig fun sig => do
-          BaseIO.bindTask sig.finished fun finished =>
-            BaseIO.asTask <| parseCmd none parserState finished.cmdState)
-        else none
+        if Parser.isTerminalCommand stx then none
+        else some ⟨⟨parserState.pos, doc.text.source.endPos⟩, (← BaseIO.bindTask sig.task fun sig => do
+          BaseIO.bindTask sig.finished.task fun finished =>
+            (·.task) <$> parseCmd none parserState finished.cmdState)⟩
     }
