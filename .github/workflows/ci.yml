@@ -218,7 +218,7 @@ jobs:
         if: matrix.wasm
       - name: Install 32bit c libs
         run: |
-          nix-env -i glibc_multi
+          nix-env -i nixpkgs/8b5ab8341e33322e5b66fb46ce23d724050f6606#glibc_multi
         if: matrix.wasm
       - name: Cache
         uses: actions/cache@v3
