@@ -192,7 +192,8 @@ private def reduceRec (recVal : RecursorVal) (recLvls : List Level) (recArgs : A
         let nparams := majorArgs.size - rule.nfields
         let rhs := mkAppRange rhs nparams majorArgs.size majorArgs
         let rhs := mkAppRange rhs (majorIdx + 1) recArgs.size recArgs
-        successK rhs
+        withTraceNode `Meta.whnf (fun _ => pure m!"rule {rule.ctor}") do
+          successK rhs
     | none => failK ()
   else
     failK ()
@@ -421,7 +422,7 @@ private def whnfMatcher (e : Expr) : MetaM Expr := do
      TODO: consider other solutions; investigate whether the solution above produces counterintuitive behavior.  -/
   let mut transparency ← getTransparency
   if transparency == TransparencyMode.reducible then
-    transparency := TransparencyMode.instances
+    transparency := TransparencyMode.all
   withTransparency transparency <| withReader (fun ctx => { ctx with canUnfold? := canUnfoldAtMatcher }) do
     whnf e
 
@@ -434,9 +435,12 @@ def reduceMatcher? (e : Expr) : MetaM ReduceMatcherResult := do
     let prefixSz := info.numParams + 1 + info.numDiscrs
     if args.size < prefixSz + info.numAlts then
       return ReduceMatcherResult.partialApp
-    else
+    else withTraceNode `Meta.whnf.matcher (fun _ => return m!"{declName}") do
       let constInfo ← getConstInfo declName
       let f ← instantiateValueLevelParams constInfo declLevels
+      let mut args := args
+      --for i in [0:info.numDiscrs] do
+      --  args ← withTransparency .all do args.modifyM (info.numParams + 1 + i) whnf
       let auxApp := mkAppN f args[0:prefixSz]
       let auxAppType ← inferType auxApp
       forallBoundedTelescope auxAppType info.numAlts fun hs _ => do
@@ -447,8 +451,10 @@ def reduceMatcher? (e : Expr) : MetaM ReduceMatcherResult := do
           if auxAppFn == h then
             let result := mkAppN args[i]! auxApp.getAppArgs
             let result := mkAppN result args[prefixSz + info.numAlts:args.size]
+            trace[Meta.whnf.matcher] "reduced: {result.headBeta}"
             return ReduceMatcherResult.reduced result.headBeta
           i := i + 1
+        trace[Meta.whnf.matcher] "stuck: {auxApp}"
         return ReduceMatcherResult.stuck auxApp
   | _ => pure ReduceMatcherResult.notMatcher
 
@@ -829,7 +835,7 @@ def reduceNat? (e : Expr) : MetaM (Option Expr) :=
 @[inline] private def useWHNFCache (e : Expr) : MetaM Bool := do
   -- We cache only closed terms without expr metavars.
   -- Potential refinement: cache if `e` is not stuck at a metavariable
-  if e.hasFVar || e.hasExprMVar || (← read).canUnfold?.isSome then
+  if e.hasFVar || e.hasExprMVar then
     return false
   else
     match (← getConfig).transparency with
@@ -859,8 +865,10 @@ partial def whnfImp (e : Expr) : MetaM Expr :=
   withIncRecDepth <| whnfEasyCases e fun e => do
     checkMaxHeartbeats "whnf"
     let useCache ← useWHNFCache e
+    unless useCache do
+      trace[Meta.whnf] "not using cache {repr (← getConfig).transparency} {e.hasFVar} {e.hasExprMVar} {(← read).canUnfold?.isSome}"
     match (← cached? useCache e) with
-    | some e' => pure e'
+    | some e' => trace[Meta.whnf] "cached {e} ~> {e'}"; pure e'
     | none    =>
       let e' ← whnfCore e
       match (← reduceNat? e') with
@@ -891,6 +899,7 @@ def reduceProjOf? (e : Expr) (p : Name → Bool) : MetaM (Option Expr) := do
 
 builtin_initialize
   registerTraceClass `Meta.whnf
+  registerTraceClass `Meta.whnf.matcher
   registerTraceClass `Meta.isDefEq.whnf.reduceBinOp
 
 end Lean.Meta
