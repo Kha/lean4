@@ -24,7 +24,7 @@ jobs:
           cd ${{ github.workspace }}
           mkdir -p build/release
           cd build/release
-          cmake ../.. -DCMAKE_C_COMPILER_WORKS=1 -DSTAGE0_USE_GMP=OFF -DSTAGE0_LEAN_EXTRA_CXX_FLAGS='-m32' -DSTAGE0_LEANC_OPTS='-m32' -DSTAGE0_CMAKE_CXX_COMPILER=clang++ -DSTAGE0_CMAKE_C_COMPILER=clang -DUSE_GMP=OFF -DMMAP=OFF -DSTAGE0_MMAP=OFF -DUSE_GMP=OFF -DCMAKE_AR=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/emar -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
+          cmake ../.. -DCMAKE_C_COMPILER_WORKS=1 -DSTAGE0_USE_GMP=OFF -DSTAGE0_LEAN_EXTRA_CXX_FLAGS='-m32' -DSTAGE0_LEANC_OPTS='-m32' -DSTAGE0_CMAKE_CXX_COMPILER=clang++ -DSTAGE0_CMAKE_C_COMPILER=clang -DUSE_GMP=OFF -DMMAP=OFF -DSTAGE0_MMAP=OFF -DUSE_GMP=OFF -DCMAKE_AR=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/emar -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
           make -j4
       - name: Test wasm binary
         run: |
