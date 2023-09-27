@@ -219,7 +219,7 @@ jobs:
       - name: Install 32bit c libs
         run: |
           sudo apt-get update
-          sudo apt-get install gcc-multilib g++-multilib
+          sudo apt-get install gcc-multilib g++-multilib libc6-dev-i386
         if: matrix.wasm
       - name: Cache
         uses: actions/cache@v3
