@@ -32,11 +32,19 @@ open Lean Server Elab Command
   The base class of all snapshots: all the generic information the language server
   needs about a snapshot. -/
 structure Snapshot where
-  /-- The messages produced by this step, to be sent to the client. -/
+  /--
+    The messages produced by this step. The union of message logs of all
+    finished snapshots is reported to the user. -/
   msgLog : MessageLog
 deriving Inhabited
 
+/-- A task producing some snapshot type (usually a subclass of `Snapshot`). -/
+-- Longer-term TODO: Give the server more control over the priority of tasks,
+-- depending on e.g. the cursor position. This may require starting the tasks
+-- suspended (e.g. in `Thunk`). The server may also need more dependency
+-- information for this in order to avoid priority inversion.
 structure SnapshotTask (α : Type) where
+  /-- Range that is marked as being processed by the server while the task is running. -/
   range : String.Range
   task : Task α
 deriving Nonempty
@@ -52,39 +60,60 @@ def SnapshotTask.pure (a : α) : SnapshotTask α where
   range := default
   task := .pure a
 
+/-! The hierarchy of Lean snapshot types -/
+-- (other languages would have to design their own hierarchies)
 
+/-- Final state of processing of a command. -/
 structure CommandFinishedSnapshot extends Snapshot where
   cmdState : Command.State
 deriving Nonempty
 
+/-- State after execution of a single synchronous tactic step. -/
 structure TacticEvaluatedSnapshotF (TacticEvaluatedSnapshot : Type) extends Snapshot where
-  next? : Option (SnapshotTask TacticEvaluatedSnapshot)
+  /-- Potential, potentially parallel, follow-up tactic executions. -/
+  -- In the first, non-parallel version, each task will depend on its predecessor
+  next : Array (SnapshotTask TacticEvaluatedSnapshot)
 abbrev TacticEvaluatedSnapshot := Fix TacticEvaluatedSnapshotF
 
+/--
+  State after processing a command's signature and before executing its tactic
+  body, if any. Other commands should immediately proceed to `finished`. -/
 structure CommandSignatureProcessedSnapshot extends Snapshot where
+  /-- Potential, potentially parallel, follow-up tactic executions. -/
   tacs : Array (SnapshotTask TacticEvaluatedSnapshot)
+  /-- State after processing is finished. -/
+  -- If we make proofs completely opaque, this will not have to depend on `tacs`
   finished : SnapshotTask CommandFinishedSnapshot
 deriving Nonempty
 
+/-- State after a command has been parsed. -/
 structure CommandParsedSnapshotF (CommandParsedSnapshot : Type) extends Snapshot where
   stx : Syntax
   sig : SnapshotTask CommandSignatureProcessedSnapshot
+  /-- Next command, unless this is a terminal command. -/
+  -- It would be really nice to not make this depend on `sig.finished` where possible
   next? : Option (SnapshotTask CommandParsedSnapshot)
---deriving Nonempty  -- introduces unnecessary TC assumption
+--deriving Nonempty  -- FIXME: introduces unnecessary TC assumption
 instance : Nonempty (CommandParsedSnapshotF CommandParsedSnapshot) :=
   .intro { (default : Snapshot) with sig := Classical.ofNonempty, stx := default, next? := default }
 abbrev CommandParsedSnapshot := Fix CommandParsedSnapshotF
 
+/-- State after the module header has been processed including imports. -/
 structure HeaderProcessedSnapshot extends Snapshot where
+  /-- Resulting command state, `none` on import error. -/
   cmdState? : Option Command.State
+  /-- First command, `none` on import error. -/
   next? : Option (SnapshotTask CommandParsedSnapshot)
 
+/-- State after the module header has been parsed. -/
 structure HeaderParsedSnapshot extends Snapshot where
   stx : Syntax
+  /-- State after processing, `none` on parse error. -/
   next? : Option (SnapshotTask HeaderProcessedSnapshot)
 
 abbrev InitialSnapshot := HeaderParsedSnapshot
 
+/-- Reports `IO` exceptions as single snapshot message. -/
 def withFatalExceptions (ex : Snapshot → α) (act : IO α) : BaseIO α := do
   match (← act.toBaseIO) with
   | .error e => return ex {
@@ -100,6 +129,9 @@ def getOrCancel (t? : Option (SnapshotTask α)) : BaseIO (Option α) := do
   return none
 
 open Lean.Server.FileWorker in
+/-- Entry point of the Lean language processor. -/
+-- As a general note, for each processing function we pass in the previous
+-- state, if any, in order to
 partial def processLean (hOut : IO.FS.Stream) (opts : Options) (doc : DocumentMeta) (old? : Option InitialSnapshot) :
     BaseIO (SnapshotTask InitialSnapshot) :=
   parseHeader old?
