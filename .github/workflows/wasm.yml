@@ -24,14 +24,7 @@ jobs:
           cd ${{ github.workspace }}
           mkdir -p build/release
           cd build/release
-          cmake ../.. -DSTAGE0_CMAKE_C_COMPILER_WORKS=1 -DSTAGE0_USE_GMP=OFF -DSTAGE0_LEAN_EXTRA_CXX_FLAGS='-m32' -DSTAGE0_LEANC_OPTS='-m32' -DSTAGE0_CMAKE_CXX_COMPILER=clang++ -DSTAGE0_CMAKE_C_COMPILER=clang -DCMAKE_C_COMPILER_WORKS=1 -DUSE_GMP=OFF -DLEAN_EXTRA_CXX_FLAGS='-m32' -DLEANC_OPTS='-m32' -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang
-          make -j4 || true
-          make -j4 || true
-          make -j4 || true
-          make -j4 || true
-          make -j4 || true
-          make -j4 || true
-          make -j4 || true
+          cmake ../.. -DSTAGE0_CMAKE_C_COMPILER_WORKS=1 -DSTAGE0_USE_GMP=OFF -DSTAGE0_LEAN_EXTRA_CXX_FLAGS='-m32' -DSTAGE0_LEANC_OPTS='-m32' -DSTAGE0_CMAKE_CXX_COMPILER=clang++ -DSTAGE0_CMAKE_C_COMPILER=clang -DCMAKE_C_COMPILER_WORKS=1 -DUSE_GMP=OFF -DLEAN_EXTRA_CXX_FLAGS='-m32' -DLEANC_OPTS='-m32' -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang -DMMAP=OFF -DSTAGE0_MMAP=OFF
           make -j4
       - name: Run tests
         run: |
@@ -41,7 +34,7 @@ jobs:
         run: |
           cd ${{ github.workspace }}/build/release
           rm -rf stage0
-          emcmake cmake ../.. -DUSE_GMP=OFF -DSTAGE0_CMAKE_AR=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/emar -DSTAGE0_CMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DDSTAGE0_CMAKE_CROSSCOMPILING_EMULATOR="${{ github.workspace }}/emsdk/emsdk-main/node/12.9.1_64bit/bin/node"
+          emcmake cmake ../.. -DUSE_GMP=OFF -DSTAGE0_CMAKE_AR=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/emar -DSTAGE0_CMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/emsdk/emsdk-main/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DDSTAGE0_CMAKE_CROSSCOMPILING_EMULATOR="${{ github.workspace }}/emsdk/emsdk-main/node/12.9.1_64bit/bin/node" -DSTAGE0_MMAP=OFF
           emmake make -j4 stage0
           "${{ github.workspace }}/build/release/stage0/leanc.sh" ${{ github.workspace }}/build/release/stage0/shell/CMakeFiles/shell.dir/lean.cpp.o -Wl,--whole-archive -lInit -lLean -lleancpp -lleanrt -rdynamic -o ${{ github.workspace }}/build/release/stage0/bin/lean -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s ASSERTIONS=1 -s WASM=1 -fexceptions -lnodefs.js -s MAIN_MODULE=1 -s LINKABLE=1 -s EXPORT_ALL=1 -s LLD_REPORT_UNDEFINED=1
       - name: Test wasm binary
