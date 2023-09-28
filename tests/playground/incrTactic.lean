@@ -89,13 +89,14 @@ deriving Nonempty
 /-- State after a command has been parsed. -/
 structure CommandParsedSnapshotF (CommandParsedSnapshot : Type) extends Snapshot where
   stx : Syntax
+  parserState : Parser.ModuleParserState
   sig : SnapshotTask CommandSignatureProcessedSnapshot
   /-- Next command, unless this is a terminal command. -/
   -- It would be really nice to not make this depend on `sig.finished` where possible
   next? : Option (SnapshotTask CommandParsedSnapshot)
 --deriving Nonempty  -- FIXME: introduces unnecessary TC assumption
 instance : Nonempty (CommandParsedSnapshotF CommandParsedSnapshot) :=
-  .intro { (default : Snapshot) with sig := Classical.ofNonempty, stx := default, next? := default }
+  .intro { (default : Snapshot) with sig := Classical.ofNonempty, stx := default, next? := default, parserState := default }
 abbrev CommandParsedSnapshot := Fix CommandParsedSnapshotF
 
 /-- State after the module header has been processed including imports. -/
@@ -108,6 +109,7 @@ structure HeaderProcessedSnapshot extends Snapshot where
 /-- State after the module header has been parsed. -/
 structure HeaderParsedSnapshot extends Snapshot where
   stx : Syntax
+  parserState? : Option Parser.ModuleParserState
   /-- State after processing, `none` on parse error. -/
   next? : Option (SnapshotTask HeaderProcessedSnapshot)
 
@@ -128,22 +130,31 @@ def getOrCancel (t? : Option (SnapshotTask α)) : BaseIO (Option α) := do
   IO.cancel t.task
   return none
 
-open Lean.Server.FileWorker in
 /-- Entry point of the Lean language processor. -/
 -- As a general note, for each processing function we pass in the previous
--- state, if any, in order to
+-- state, if any, in order to reuse still-valid state. Thus the logic of
+-- what snapshots to reuse is completely moved out of the server into the
+-- language-specific processor.
 partial def processLean (hOut : IO.FS.Stream) (opts : Options) (doc : DocumentMeta) (old? : Option InitialSnapshot) :
     BaseIO (SnapshotTask InitialSnapshot) :=
   parseHeader old?
 where
-  parseHeader (old? : Option HeaderParsedSnapshot) :=
+  parseHeader (old? : Option HeaderParsedSnapshot) := do
+    if let some old@{ next? := some oldNext, parserState? := some parserState, .. } := old? then
+      if let (.original start .., .original _ _ stop ..) := (old.stx.getHeadInfo, old.stx.getTailInfo) then
+        let oldSubstr := { start with stopPos := stop.stopPos + (⟨1⟩ : String.Pos) }
+        if oldSubstr == { oldSubstr with str := doc.text.source } then
+          return .pure { old with next? := some { oldNext with task := (← BaseIO.bindTask oldNext.task fun oldNext =>
+            return (← processHeader oldNext old.stx parserState).task) } }
+
     SnapshotTask.ofIO ⟨0, doc.text.source.endPos⟩ do
-    withFatalExceptions ({ · with stx := .missing, next? := none }) do
-    let oldNext? ← old?.bind (·.next?) |> getOrCancel
-    let (stx, parserState, msgLog) ← do
-      Parser.parseHeader doc.mkInputContext
-    let oldNext? := if old?.any (·.stx == stx) then oldNext? else none
-    return { stx, msgLog, next? := some (← processHeader oldNext? stx parserState) }
+      withFatalExceptions ({ · with stx := .missing, parserState? := none, next? := none }) do
+      let oldNext? ← old?.bind (·.next?) |> getOrCancel
+      let (stx, parserState, msgLog) ← do
+        Parser.parseHeader doc.mkInputContext
+      let oldNext? := if old?.any (·.stx == stx) then oldNext? else none
+      return { stx, msgLog, parserState? := parserState, next? := some (← processHeader oldNext? stx parserState) }
+
   processHeader (old? : Option HeaderProcessedSnapshot) (stx : Syntax) (parserState : Parser.ModuleParserState) :=
     SnapshotTask.ofIO ⟨0, doc.text.source.endPos⟩ do
     withFatalExceptions ({ · with next? := none, cmdState? := none }) do
@@ -165,7 +176,7 @@ where
         -- NOTE: we assume for now that `lakefile.lean` does not have any non-stdlib deps
         -- NOTE: lake does not exist in stage 0 (yet?)
         if path.fileName != "lakefile.lean" && (← System.FilePath.pathExists lakePath) then
-          let pkgSearchPath ← lakeSetupSearchPath lakePath doc (Lean.Elab.headerToImports stx) hOut
+          let pkgSearchPath ← FileWorker.lakeSetupSearchPath lakePath doc (Lean.Elab.headerToImports stx) hOut
           srcSearchPath ← initSrcSearchPath (← getBuildDir) pkgSearchPath
       Elab.processHeader stx opts .empty doc.mkInputContext
     catch e =>  -- should be from `lake print-paths`
@@ -200,70 +211,81 @@ where
       next? := some (← parseCmd none parserState cmdState)
     }
   parseCmd (old? : Option CommandParsedSnapshot) (parserState : Parser.ModuleParserState) (cmdState : Command.State) :
-      BaseIO (SnapshotTask CommandParsedSnapshot) :=
-    SnapshotTask.ofIO ⟨parserState.pos, doc.text.source.endPos⟩ do
-    let beginPos := parserState.pos
-    let scope := cmdState.scopes.head!
-    let inputCtx := doc.mkInputContext
-    let pmctx := { env := cmdState.env, options := scope.opts, currNamespace := scope.currNamespace, openDecls := scope.openDecls }
-    let (stx, parserState, msgLog) :=
-      Parser.parseCommand inputCtx pmctx parserState cmdState.messages
-    let oldNext? ← old?.bind (·.unfix.next?) |> getOrCancel
+      BaseIO (SnapshotTask CommandParsedSnapshot) := do
+    let old? := old?.map (·.unfix)
+    let oldNext? ← old?.bind (·.next?) |> getOrCancel
     if let some old := old? then
-      let old := old.unfix
-      if old.stx == stx then
-        -- NOTE: we do NOT `getOrCancel` `old.sig` as its eventual result
-        -- should be unchanged, so there is no reason to restart the computation
-        return .fix { old with next? := (← parseCmd oldNext? parserState cmdState) }
-    let oldSig? ← old?.map (·.unfix.sig) |> getOrCancel
-    let sig ← SnapshotTask.ofIO (stx.getRange?.getD ⟨parserState.pos, parserState.pos⟩) do
-      -- TODO: only invalidate and recreate tactics up to the first difference in
-      -- the syntax trees
-      if let some old := oldSig? then
-        for t in old.tacs do
-          IO.cancel t.task
+      if let { next? := some oldNext, .. } := old then
+      if let (.original start .., .original _ _ stop ..) := (old.stx.getHeadInfo, old.stx.getTailInfo) then
+        let oldSubstr := { start with stopPos := stop.stopPos + (⟨1⟩ : String.Pos) }
+        if oldSubstr == { oldSubstr with str := doc.text.source } then
+          return .pure <| .fix { old with next? := some { oldNext with task := (← BaseIO.bindTask old.sig.task fun sig =>
+            BaseIO.bindTask sig.finished.task fun finished =>
+              (·.task) <$> parseCmd oldNext? old.parserState finished.cmdState) } }
 
-      -- COPIED
-      let cmdStateRef ← IO.mkRef { cmdState with messages := .empty }
-      let cmdCtx : Elab.Command.Context := {
-        cmdPos       := parserState.pos
-        fileName     := inputCtx.fileName
-        fileMap      := inputCtx.fileMap
-        tacticCache? := none
-      }
-      let (output, _) ← IO.FS.withIsolatedStreams (isolateStderr := Snapshots.server.stderrAsMessages.get scope.opts) <| liftM (m := BaseIO) do
-        Elab.Command.catchExceptions
-          (getResetInfoTrees *> Elab.Command.elabCommandTopLevel stx)
-          cmdCtx cmdStateRef
-      let mut postCmdState ← cmdStateRef.get
-      if !output.isEmpty then
-        postCmdState := {
-          postCmdState with
-          messages := postCmdState.messages.add {
-            fileName := inputCtx.fileName
-            severity := MessageSeverity.information
-            pos      := inputCtx.fileMap.toPosition beginPos
-            data     := output
+    SnapshotTask.ofIO ⟨parserState.pos, doc.text.source.endPos⟩ do
+      let beginPos := parserState.pos
+      let scope := cmdState.scopes.head!
+      let inputCtx := doc.mkInputContext
+      let pmctx := { env := cmdState.env, options := scope.opts, currNamespace := scope.currNamespace, openDecls := scope.openDecls }
+      let (stx, parserState, msgLog) :=
+        Parser.parseCommand inputCtx pmctx parserState cmdState.messages
+      let oldNext? ← old?.bind (·.next?) |> getOrCancel
+      if let some old := old? then
+        if old.stx == stx then
+          -- NOTE: we do NOT `getOrCancel` `old.sig` as its eventual result
+          -- should be unchanged, so there is no reason to restart the computation
+          return .fix { old with next? := (← parseCmd oldNext? parserState cmdState) }
+      let oldSig? ← old?.map (·.sig) |> getOrCancel
+      let sig ← SnapshotTask.ofIO (stx.getRange?.getD ⟨parserState.pos, parserState.pos⟩) do
+        -- TODO: only invalidate and recreate tactics up to the first difference in
+        -- the syntax trees
+        if let some old := oldSig? then
+          for t in old.tacs do
+            IO.cancel t.task
+
+        -- COPIED
+        let cmdStateRef ← IO.mkRef { cmdState with messages := .empty }
+        let cmdCtx : Elab.Command.Context := {
+          cmdPos       := parserState.pos
+          fileName     := inputCtx.fileName
+          fileMap      := inputCtx.fileMap
+          tacticCache? := none
+        }
+        let (output, _) ← IO.FS.withIsolatedStreams (isolateStderr := Snapshots.server.stderrAsMessages.get scope.opts) <| liftM (m := BaseIO) do
+          Elab.Command.catchExceptions
+            (getResetInfoTrees *> Elab.Command.elabCommandTopLevel stx)
+            cmdCtx cmdStateRef
+        let mut postCmdState ← cmdStateRef.get
+        if !output.isEmpty then
+          postCmdState := {
+            postCmdState with
+            messages := postCmdState.messages.add {
+              fileName := inputCtx.fileName
+              severity := MessageSeverity.information
+              pos      := inputCtx.fileMap.toPosition beginPos
+              data     := output
+            }
+          }
+        -- END COPIED
+        return {
+          msgLog := postCmdState.messages
+          -- TODO
+          tacs := #[]
+          finished := .pure {
+            msgLog := .empty
+            cmdState := (← cmdStateRef.get)
           }
         }
-      -- END COPIED
-      return {
-        msgLog := postCmdState.messages
-        -- TODO
-        tacs := #[]
-        finished := .pure {
-          msgLog := .empty
-          cmdState := (← cmdStateRef.get)
-        }
-      }
 
-    return .fix <| {
-      stx
-      msgLog
-      sig
-      next? :=
-        if Parser.isTerminalCommand stx then none
-        else some ⟨⟨parserState.pos, doc.text.source.endPos⟩, (← BaseIO.bindTask sig.task fun sig => do
-          BaseIO.bindTask sig.finished.task fun finished =>
-            (·.task) <$> parseCmd none parserState finished.cmdState)⟩
-    }
+      return .fix <| {
+        msgLog
+        stx
+        parserState
+        sig
+        next? :=
+          if Parser.isTerminalCommand stx then none
+          else some ⟨⟨parserState.pos, doc.text.source.endPos⟩, (← BaseIO.bindTask sig.task fun sig => do
+            BaseIO.bindTask sig.finished.task fun finished =>
+              (·.task) <$> parseCmd none parserState finished.cmdState)⟩
+      }
