@@ -216,6 +216,7 @@ structure Cache where
   synthInstance  : SynthInstanceCache := {}
   whnfDefault    : WhnfCache := {} -- cache for closed terms and `TransparencyMode.default`
   whnfAll        : WhnfCache := {} -- cache for closed terms and `TransparencyMode.all`
+  whnfMatcher    : WhnfCache := {} -- cache for closed terms and `canUnfoldMatcher` at `TransparencyMode.default`
   defEq          : DefEqCache := {}
   deriving Inhabited
 
@@ -263,6 +264,17 @@ structure SavedState where
   meta        : State
   deriving Nonempty
 
+/-- A predicate to control whether a constant can be unfolded or not at `whnf`. -/
+inductive CanUnfoldPred where
+  /-- Use standard rules. -/
+  | none
+  /--
+    Unfold helper constants of `match` compilation. We use a separate
+    constructor so that we can test for it for caching, which is crucial when
+    reducing programs using `match` (#2564). -/
+  | unfoldMatcher
+  | custom (pred : Config → ConstantInfo → CoreM Bool)
+
 /--
   Contextual information for the `MetaM` monad.
 -/
@@ -283,8 +295,8 @@ structure Context where
   synthPendingDepth : Nat                  := 0
   /--
     A predicate to control whether a constant can be unfolded or not at `whnf`.
-    Note that we do not cache results at `whnf` when `canUnfold?` is not `none`. -/
-  canUnfold?        : Option (Config → ConstantInfo → CoreM Bool) := none
+    Note that we do not cache results at `whnf` when `canUnfold?` is `.custom`. -/
+  canUnfold?        : CanUnfoldPred := .none
 
 abbrev MetaM  := ReaderT Context $ StateRefT State CoreM
 
@@ -363,10 +375,10 @@ variable [MonadControlT MetaM n] [Monad n]
   modify fun ⟨mctx, cache, zetaFVarIds, postponed⟩ => ⟨mctx, f cache, zetaFVarIds, postponed⟩
 
 @[inline] def modifyInferTypeCache (f : InferTypeCache → InferTypeCache) : MetaM Unit :=
-  modifyCache fun ⟨ic, c1, c2, c3, c4, c5⟩ => ⟨f ic, c1, c2, c3, c4, c5⟩
+  modifyCache fun ⟨ic, c1, c2, c3, c4, c5, c6⟩ => ⟨f ic, c1, c2, c3, c4, c5, c6⟩
 
 @[inline] def modifyDefEqCache (f : DefEqCache → DefEqCache) : MetaM Unit :=
-  modifyCache fun ⟨c1, c2, c3, c4, c5, defeq⟩ => ⟨c1, c2, c3, c4, c5, f defeq⟩
+  modifyCache fun ⟨c1, c2, c3, c4, c5, c6, defeq⟩ => ⟨c1, c2, c3, c4, c5, c6, f defeq⟩
 
 def getLocalInstances : MetaM LocalInstances :=
   return (← read).localInstances

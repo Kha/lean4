@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Leonardo de Moura
 -/
 import Lean.Meta.GlobalInstances
+import Lean.Meta.Match.MatchPatternAttr
 
 namespace Lean.Meta
 
-private def canUnfoldDefault (cfg : Config) (info : ConstantInfo) : CoreM Bool := do
-  match cfg.transparency with
+def canUnfold (info : ConstantInfo) : MetaM Bool := do
+  let ctx ← read
+  match ctx.config.transparency with
   | .all => return true
   | .default => return !(← isIrreducible info.name)
   | m =>
@@ -16,15 +18,25 @@ private def canUnfoldDefault (cfg : Config) (info : ConstantInfo) : CoreM Bool :
       return true
     else if m == .instances && isGlobalInstance (← getEnv) info.name then
       return true
-    else
+    else if !ctx.canUnfoldMatcher then
       return false
-
-def canUnfold (info : ConstantInfo) : MetaM Bool := do
-  let ctx ← read
-  if let some f := ctx.canUnfold? then
-    f ctx.config info
-  else
-    canUnfoldDefault ctx.config info
+    else if hasMatchPatternAttribute (← getEnv) info.name then
+      return true
+    else
+      return info.name == ``ite
+       || info.name == ``dite
+       || info.name == ``decEq
+       || info.name == ``Nat.decEq
+       || info.name == ``Char.ofNat   || info.name == ``Char.ofNatAux
+       || info.name == ``String.decEq || info.name == ``List.hasDecEq
+       || info.name == ``Fin.ofNat
+       || info.name == ``UInt8.ofNat  || info.name == ``UInt8.decEq
+       || info.name == ``UInt16.ofNat || info.name == ``UInt16.decEq
+       || info.name == ``UInt32.ofNat || info.name == ``UInt32.decEq
+       || info.name == ``UInt64.ofNat || info.name == ``UInt64.decEq
+       /- Remark: we need to unfold the following two definitions because they are used for `Fin`, and
+          lazy unfolding at `isDefEq` does not unfold projections.  -/
+       || info.name == ``HMod.hMod || info.name == ``Mod.mod
 
 /--
 Look up a constant name, returning the `ConstantInfo`

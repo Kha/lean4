@@ -422,7 +422,7 @@ private def whnfMatcher (e : Expr) : MetaM Expr := do
   let mut transparency ← getTransparency
   if transparency == TransparencyMode.reducible then
     transparency := TransparencyMode.instances
-  withTransparency transparency <| withReader (fun ctx => { ctx with canUnfold? := canUnfoldAtMatcher }) do
+  withTransparency transparency <| withReader (fun ctx => { ctx with canUnfoldMatcher := true }) do
     whnf e
 
 def reduceMatcher? (e : Expr) : MetaM ReduceMatcherResult := do
@@ -830,29 +830,35 @@ def reduceNat? (e : Expr) : MetaM (Option Expr) :=
 @[inline] private def useWHNFCache (e : Expr) : MetaM Bool := do
   -- We cache only closed terms without expr metavars.
   -- Potential refinement: cache if `e` is not stuck at a metavariable
-  if e.hasFVar || e.hasExprMVar || (← read).canUnfold?.isSome then
+  if e.hasFVar || e.hasExprMVar then
     return false
   else
-    match (← getConfig).transparency with
-    | TransparencyMode.default => return true
-    | TransparencyMode.all     => return true
-    | _                        => return false
+    let ctx ← read
+    match ctx.config.transparency, ctx.canUnfoldMatcher with
+    | .default,   false => return true
+    | .all,       false => return true
+    | .default, true  => return true
+    | _,          _     => return false
 
 @[inline] private def cached? (useCache : Bool) (e : Expr) : MetaM (Option Expr) := do
   if useCache then
-    match (← getConfig).transparency with
-    | TransparencyMode.default => return (← get).cache.whnfDefault.find? e
-    | TransparencyMode.all     => return (← get).cache.whnfAll.find? e
-    | _                        => unreachable!
+    let ctx ← read
+    match ctx.config.transparency, ctx.canUnfoldMatcher with
+    | .default,   false => return (← get).cache.whnfDefault.find? e
+    | .all,       false => return (← get).cache.whnfAll.find? e
+    | .default, true  => return (← get).cache.whnfMatcher.find? e
+    | _,          _     => unreachable!
   else
     return none
 
 private def cache (useCache : Bool) (e r : Expr) : MetaM Expr := do
   if useCache then
-    match (← getConfig).transparency with
-    | TransparencyMode.default => modify fun s => { s with cache.whnfDefault := s.cache.whnfDefault.insert e r }
-    | TransparencyMode.all     => modify fun s => { s with cache.whnfAll     := s.cache.whnfAll.insert e r }
-    | _                        => unreachable!
+    let ctx ← read
+    match ctx.config.transparency, ctx.canUnfoldMatcher with
+    | .default,   false => modify fun s => { s with cache.whnfDefault := s.cache.whnfDefault.insert e r }
+    | .all,       false => modify fun s => { s with cache.whnfAll     := s.cache.whnfAll.insert e r }
+    | .default, true  => modify fun s => { s with cache.whnfMatcher := s.cache.whnfMatcher.insert e r }
+    | _,          _     => unreachable!
   return r
 
 @[export lean_whnf]
