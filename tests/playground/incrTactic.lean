@@ -1,29 +1,5 @@
 import Lean
 
-/-! First the mentioned `Fix` helper; just a prototype as well. -/
-
-private unsafe inductive FixImp (F : Type u → Type u) : Type u where
-  | mk : F (FixImp F) → FixImp F
-
-private unsafe example (F : Type u → Type u) [∀ α, Inhabited (F α)] : NonemptyType.{u} := ⟨FixImp F, .intro <| .mk default⟩
-private opaque FixPointed (F : Type u → Type u) : NonemptyType.{u}
-
-/--
-  `Fix F` for `F : Type → Type` represents the fixpoint `F (F (F ...))`.
-  It can be used to construct nested types not accepted by `inductive`.
-  In exchange, there is no accessible recursor or `Sizeof` instance,
-  and so recursion over a value of type `Fix F` has to be done using
-  `partial` or another argument of the function. -/
-def Fix F := FixPointed F |>.type
-instance : Nonempty (Fix F) := FixPointed F |>.property
-
-@[extern "fix_imp_mk"]
-opaque Fix.fix : F (Fix F) → Fix F
-@[extern "fix_imp_unfix"]
-opaque Fix.unfix [∀ α, Nonempty (F α)] : Fix F → F (Fix F)
-
----
-
 /-! New snapshot API -/
 
 open Lean Server Elab Command
@@ -79,11 +55,12 @@ structure CommandFinishedSnapshot extends Snapshot where
 deriving Nonempty
 
 /-- State after execution of a single synchronous tactic step. -/
-structure TacticEvaluatedSnapshotF (TacticEvaluatedSnapshot : Type) extends Snapshot where
-  /-- Potential, potentially parallel, follow-up tactic executions. -/
-  -- In the first, non-parallel version, each task will depend on its predecessor
-  next : Array (SnapshotTask TacticEvaluatedSnapshot)
-abbrev TacticEvaluatedSnapshot := Fix TacticEvaluatedSnapshotF
+inductive TacticEvaluatedSnapshot where
+  | mk (next : Array (SnapshotTask TacticEvaluatedSnapshot))
+/-- Potential, potentially parallel, follow-up tactic executions. -/
+-- In the first, non-parallel version, each task will depend on its predecessor
+abbrev TacticEvaluatedSnapshot.next : TacticEvaluatedSnapshot → Array (SnapshotTask TacticEvaluatedSnapshot)
+  | mk next => next
 
 /--
   State after processing a command's signature and before executing its tactic
@@ -97,20 +74,22 @@ structure CommandSignatureProcessedSnapshot extends Snapshot where
 deriving Nonempty
 
 /-- State after a command has been parsed. -/
-structure CommandParsedSnapshotF (CommandParsedSnapshot : Type) extends Snapshot where
+structure CommandParsedSnapshotData extends Snapshot where
   stx : Syntax
   parserState : Parser.ModuleParserState
   /-- Furthest position the parser has looked at; used for incremental parsing. -/
   stopPos : String.Pos
   sig : SnapshotTask CommandSignatureProcessedSnapshot
-  /-- Next command, unless this is a terminal command. -/
-  -- It would be really nice to not make this depend on `sig.finished` where possible
-  next? : Option (SnapshotTask CommandParsedSnapshot)
---deriving Nonempty  -- FIXME: introduces unnecessary TC assumption
-instance : Nonempty (CommandParsedSnapshotF CommandParsedSnapshot) :=
-  .intro { (default : Snapshot) with
-    sig := Classical.ofNonempty, stx := default, next? := default, parserState := default, stopPos := default }
-abbrev CommandParsedSnapshot := Fix CommandParsedSnapshotF
+deriving Nonempty
+inductive CommandParsedSnapshot where
+  | mk (data : CommandParsedSnapshotData) (next? : Option (SnapshotTask CommandParsedSnapshot))
+deriving Nonempty
+abbrev CommandParsedSnapshot.data : CommandParsedSnapshot → CommandParsedSnapshotData
+  | mk data _ => data
+/-- Next command, unless this is a terminal command. -/
+-- It would be really nice to not make this depend on `sig.finished` where possible
+abbrev CommandParsedSnapshot.next? : CommandParsedSnapshot → Option (SnapshotTask CommandParsedSnapshot)
+  | mk _ next? => next?
 
 structure HeaderProcessedSucessfully where
   cmdState : Command.State
@@ -231,19 +210,18 @@ where
 
   parseCmd (old? : Option CommandParsedSnapshot) (parserState : Parser.ModuleParserState) (cmdState : Command.State) :
       BaseIO (SnapshotTask CommandParsedSnapshot) := do
-    let old? := old?.map (·.unfix)
     let unchanged old : BaseIO CommandParsedSnapshot :=
       -- when syntax is unchanged, reuse command processing task as is
       if let some oldNext := old.next? then
-        return .fix { old with
-          next? := (← old.sig.bind fun sig =>
+        return .mk (data := old.data)
+          (next? := (← old.data.sig.bind fun sig =>
             sig.finished.bind fun finished => do
-              parseCmd (← getOrCancel oldNext) old.parserState finished.cmdState) }
-      else return .fix old  -- terminal command, we're done!
+              parseCmd (← getOrCancel oldNext) old.data.parserState finished.cmdState))
+      else return old  -- terminal command, we're done!
 
     -- fast path, do not even start new task for this snapshot
     if let some old := old? then
-      if unchangedParse old.stx old.stopPos doc.text.source then
+      if unchangedParse old.data.stx old.data.stopPos doc.text.source then
         return .pure (← unchanged old)
 
     SnapshotTask.ofIO ⟨parserState.pos, doc.text.source.endPos⟩ do
@@ -257,12 +235,12 @@ where
       -- which is the full extent the parser considered before stopping
       let stopPos := parserState.pos + (⟨1⟩ : String.Pos)
       if let some old := old? then
-        if old.stx == stx then
+        if old.data.stx == stx then
           return (← unchanged old)
 
       -- signature elaboration task; for now, does full elaboration
       -- TODO: do tactic snapshots, reuse old state for them
-      let _ ← old?.map (·.sig) |> getOrCancel
+      let _ ← old?.map (·.data.sig) |> getOrCancel
       let sig ← SnapshotTask.ofIO (stx.getRange?.getD ⟨parserState.pos, parserState.pos⟩) do
         let cmdState ← doElab stx cmdState beginPos inputCtx scope
         return {
@@ -275,19 +253,18 @@ where
           }
         }
 
-      return .fix <| {
+      return .mk (data := {
         msgLog
         stx
         parserState
         stopPos
         sig
-        next? :=
+      }) (next? :=
           if Parser.isTerminalCommand stx then none
           -- for now, wait on "command finished" snapshot before parsing next command
           else some (← sig.bind fun sig => do
             sig.finished.bind fun finished =>
-              parseCmd none parserState finished.cmdState)
-      }
+              parseCmd none parserState finished.cmdState))
 
   -- COPIED
   doImport stx := do
