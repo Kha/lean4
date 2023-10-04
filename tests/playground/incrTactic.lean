@@ -39,12 +39,41 @@ def SnapshotTask.pure (a : α) : SnapshotTask α where
 def SnapshotTask.cancel (t : SnapshotTask α) : BaseIO Unit :=
   IO.cancel t.task
 
+def SnapshotTask.map (t : SnapshotTask α) (f : α → β) : SnapshotTask β :=
+  { t with task := t.task.map f }
+
 /--
   Chain two snapshot tasks. The range is taken from the first task if not specified;
   the range of the second task is discarded. -/
-def SnapshotTask.bind (t : SnapshotTask α) (act : α → BaseIO (SnapshotTask β)) (range : String.Range := t.range) :
+def SnapshotTask.bindIO (t : SnapshotTask α) (act : α → BaseIO (SnapshotTask β)) (range : String.Range := t.range) :
     BaseIO (SnapshotTask β) :=
   return { range, task := (← BaseIO.bindTask t.task fun a => (·.task) <$> (act a)) }
+
+/--
+  Tree of snapshots where each snapshot comes with an array of asynchronous
+  further subtrees. Used for asynchronously collecting information about the
+  entirety of snapshots in the language server. The involved tasks may form a
+  DAG on the `Task` dependency level but this is not captured by this data
+  structure. -/
+inductive SnapshotTree where
+  | mk (element : Snapshot) (children : Array (SnapshotTask SnapshotTree))
+deriving Nonempty
+abbrev SnapshotTree.element : SnapshotTree → Snapshot
+  | mk s _ => s
+abbrev SnapshotTree.children : SnapshotTree → Array (SnapshotTask SnapshotTree)
+  | mk _ children => children
+
+/--
+  Helper class for projecting a heterogeneous hierarchy of snapshot classes to a
+  homogeneous representation. -/
+class ToSnapshotTree (α : Type) where
+  toSnapshotTree : α → SnapshotTree
+export ToSnapshotTree (toSnapshotTree)
+
+def pushOpt (a? : Option α) (as : Array α) : Array α :=
+  match a? with
+  | some a => as.push a
+  | none   => as
 
 /-! The hierarchy of Lean snapshot types -/
 -- (other languages would have to design their own hierarchies)
@@ -53,14 +82,19 @@ def SnapshotTask.bind (t : SnapshotTask α) (act : α → BaseIO (SnapshotTask �
 structure CommandFinishedSnapshot extends Snapshot where
   cmdState : Command.State
 deriving Nonempty
+instance : ToSnapshotTree CommandFinishedSnapshot where
+  toSnapshotTree s := ⟨s.toSnapshot, #[]⟩
 
 /-- State after execution of a single synchronous tactic step. -/
 inductive TacticEvaluatedSnapshot where
-  | mk (next : Array (SnapshotTask TacticEvaluatedSnapshot))
+  | mk (toSnapshot : Snapshot) (next : Array (SnapshotTask TacticEvaluatedSnapshot))
 /-- Potential, potentially parallel, follow-up tactic executions. -/
 -- In the first, non-parallel version, each task will depend on its predecessor
 abbrev TacticEvaluatedSnapshot.next : TacticEvaluatedSnapshot → Array (SnapshotTask TacticEvaluatedSnapshot)
-  | mk next => next
+  | mk _ next => next
+partial instance : ToSnapshotTree TacticEvaluatedSnapshot where
+  toSnapshotTree := go where
+    go := fun ⟨s, next⟩ => ⟨s, next.map (·.map go)⟩
 
 /--
   State after processing a command's signature and before executing its tactic
@@ -72,6 +106,8 @@ structure CommandSignatureProcessedSnapshot extends Snapshot where
   -- If we make proofs completely opaque, this will not have to depend on `tacs`
   finished : SnapshotTask CommandFinishedSnapshot
 deriving Nonempty
+instance : ToSnapshotTree CommandSignatureProcessedSnapshot where
+  toSnapshotTree s := ⟨s.toSnapshot, s.tacs.map (·.map toSnapshotTree) |>.push (s.finished.map toSnapshotTree)⟩
 
 /-- State after a command has been parsed. -/
 structure CommandParsedSnapshotData extends Snapshot where
@@ -90,6 +126,9 @@ abbrev CommandParsedSnapshot.data : CommandParsedSnapshot → CommandParsedSnaps
 -- It would be really nice to not make this depend on `sig.finished` where possible
 abbrev CommandParsedSnapshot.next? : CommandParsedSnapshot → Option (SnapshotTask CommandParsedSnapshot)
   | mk _ next? => next?
+partial instance : ToSnapshotTree CommandParsedSnapshot where
+  toSnapshotTree := go where
+    go s := ⟨s.data.toSnapshot, #[s.data.sig.map toSnapshotTree] |> pushOpt (s.next?.map (·.map go))⟩
 
 structure HeaderProcessedSucessfully where
   cmdState : Command.State
@@ -98,6 +137,8 @@ structure HeaderProcessedSucessfully where
 /-- State after the module header has been processed including imports. -/
 structure HeaderProcessedSnapshot extends Snapshot where
   success? : Option HeaderProcessedSucessfully
+instance : ToSnapshotTree HeaderProcessedSnapshot where
+  toSnapshotTree s := ⟨s.toSnapshot, #[] |> pushOpt (s.success?.map (·.next.map toSnapshotTree))⟩
 
 structure HeaderParsedSucessfully where
   parserState : Parser.ModuleParserState
@@ -109,6 +150,8 @@ structure HeaderParsedSucessfully where
 structure HeaderParsedSnapshot extends Snapshot where
   stx : Syntax
   success? : Option HeaderParsedSucessfully
+instance : ToSnapshotTree HeaderParsedSnapshot where
+  toSnapshotTree s := ⟨s.toSnapshot, #[] |> pushOpt (s.success?.map (·.next.map toSnapshotTree))⟩
 
 abbrev InitialSnapshot := HeaderParsedSnapshot
 
@@ -159,7 +202,7 @@ where
     let unchanged old success :=
       -- when header syntax is unchanged, reuse import processing task as is
       return { old with success? := some { success with
-        next := (← success.next.bind (processHeader · old.stx success.parserState)) } }
+        next := (← success.next.bindIO (processHeader · old.stx success.parserState)) } }
 
     -- fast path: if we have parsed the header sucessfully...
     if let some old@{ success? := some success, .. } := old? then
@@ -193,7 +236,7 @@ where
     if let some old := old? then
       if let some success := old.success? then
         return .pure { old with success? := some { success with
-          next := (← success.next.bind (parseCmd · parserState success.cmdState)) } }
+          next := (← success.next.bindIO (parseCmd · parserState success.cmdState)) } }
       else
         return .pure old
 
@@ -214,8 +257,8 @@ where
       -- when syntax is unchanged, reuse command processing task as is
       if let some oldNext := old.next? then
         return .mk (data := old.data)
-          (next? := (← old.data.sig.bind fun sig =>
-            sig.finished.bind fun finished => do
+          (next? := (← old.data.sig.bindIO fun sig =>
+            sig.finished.bindIO fun finished => do
               parseCmd (← getOrCancel oldNext) old.data.parserState finished.cmdState))
       else return old  -- terminal command, we're done!
 
@@ -262,8 +305,8 @@ where
       }) (next? :=
           if Parser.isTerminalCommand stx then none
           -- for now, wait on "command finished" snapshot before parsing next command
-          else some (← sig.bind fun sig => do
-            sig.finished.bind fun finished =>
+          else some (← sig.bindIO fun sig => do
+            sig.finished.bindIO fun finished =>
               parseCmd none parserState finished.cmdState))
 
   -- COPIED
@@ -346,3 +389,16 @@ partial def processLeanIncrementally (hOut : IO.FS.Stream) (opts : Options) :
     let snap ← processLean hOut opts doc (← oldRef.get)
     oldRef.set (some snap)
     return snap
+
+/--
+  Runs a tree of snapshots to conclusion and incrementally report messages
+  on stdout. Messages are reported in tree preorder. -/
+partial def runSnapshotTree (s : SnapshotTree) : IO Unit := do
+  s.element.msgLog.forM (·.toString >>= IO.println)
+  for t in s.children do
+    runSnapshotTree t.task.get
+
+/-- Runs processing of a Lean module to conclusion. -/
+def runLean (opts : Options) (doc : DocumentMeta) : IO Unit := do
+  let snap ← (← processLeanIncrementally (← IO.getStdout) opts) doc
+  runSnapshotTree (toSnapshotTree snap)
