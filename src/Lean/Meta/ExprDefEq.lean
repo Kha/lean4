@@ -1834,9 +1834,16 @@ private def getCachedResult (keyInfo : DefEqCacheKeyInfo) : MetaM LBool := do
     | .permAll => cache.defEqAll
     | .permInst => cache.defEqInstances
     | .permReducible => cache.defEqReducible
-  match cache.find? keyInfo.key with
+  match (← get).cache.defEq.find? keyInfo.key with
   | some val => return val.toLBool
-  | none => return .undef
+  | none =>
+    match cache.find? keyInfo.key with
+    | some val =>
+      let key := keyInfo.key
+      let key := (← instantiateMVars key.1, ← instantiateMVars key.2)
+      modifyDefEqTransientCache fun c => c.insert key val
+      return val.toLBool
+    | none => return .undef
 
 register_builtin_option Meta.isDefEq.cache : Bool := {
   defValue := true
@@ -1850,14 +1857,14 @@ private def cacheResult (keyInfo : DefEqCacheKeyInfo) (result : Bool) : MetaM Un
   | .permAll       => modify fun s => { s with cache.defEqAll       := s.cache.defEqAll.insert key result }
   | .permInst      => modify fun s => { s with cache.defEqInstances := s.cache.defEqInstances.insert key result }
   | .permReducible => modify fun s => { s with cache.defEqReducible := s.cache.defEqReducible.insert key result }
-  | .transient =>
-    /-
-    We must ensure that all assigned metavariables in the key are replaced by their current assignments.
-    Otherwise, the key is invalid after the assignment is "backtracked".
-    See issue #1870 for an example.
-    -/
-    let key := (← instantiateMVars key.1, ← instantiateMVars key.2)
-    modifyDefEqTransientCache fun c => c.insert key result
+  | _ => pure ()
+  /-
+  We must ensure that all assigned metavariables in the key are replaced by their current assignments.
+  Otherwise, the key is invalid after the assignment is "backtracked".
+  See issue #1870 for an example.
+  -/
+  let key := (← instantiateMVars key.1, ← instantiateMVars key.2)
+  modifyDefEqTransientCache fun c => c.insert key result
 
 @[export lean_is_expr_def_eq]
 partial def isExprDefEqAuxImpl (t : Expr) (s : Expr) : MetaM Bool := withIncRecDepth do
