@@ -1608,6 +1608,7 @@ partial def processPostponed (mayPostpone : Bool := true) (exceptionOnFailure :=
     See issue #1102 for an example that triggers an exponential blowup if we don't use this more
     aggressive form of caching.
   -/
+  trace[Meta.isDefEq.cache] "resetting transient cache"
   modifyDefEqTransientCache fun _ => {}
   let postponed ← getResetPostponed
   try
@@ -1654,6 +1655,7 @@ def isExprDefEq (t s : Expr) : MetaM Bool :=
 
     Remark: the kernel does *not* update the type of variables in the local context.
     -/
+    trace[Meta.isDefEq.cache] "resetting permanent caches"
     resetDefEqPermCaches
     checkpointDefEq (mayPostpone := true) <| Meta.isExprDefEqAux t s
 

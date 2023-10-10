@@ -1797,9 +1797,18 @@ inductive DefEqCacheKind where
   | permReducible | permInst | permDefault | permAll -- problem does not have mvars and we are using stardard config, we can use one persistent cache.
 
 private def getDefEqCacheKind (t s : Expr) : MetaM DefEqCacheKind := do
-  if t.hasMVar || s.hasMVar || (← read).canUnfold?.isSome then
+  if t.hasMVar then
+    trace[Meta.isDefEq.cache] "using transient caching, rhs has mvars"
     return .transient
-  else match (← getConfig).transparency with
+  if s.hasMVar then
+    trace[Meta.isDefEq.cache] "using transient caching, lhs has mvars"
+    return .transient
+  if (← read).canUnfold?.isSome then
+    trace[Meta.isDefEq.cache] "using transient caching, `canUnfold?` is set"
+    return .transient
+  else
+    trace[Meta.isDefEq.cache] "using permanent caching @ {repr (← getConfig).transparency}"
+    match (← getConfig).transparency with
     | .default   => return .permDefault
     | .all       => return .permAll
     | .reducible => return .permReducible
@@ -1828,6 +1837,11 @@ private def getCachedResult (keyInfo : DefEqCacheKeyInfo) : MetaM LBool := do
   match cache.find? keyInfo.key with
   | some val => return val.toLBool
   | none => return .undef
+
+register_builtin_option Meta.isDefEq.cache : Bool := {
+  defValue := true
+  descr    := "treat warnings as errors"
+}
 
 private def cacheResult (keyInfo : DefEqCacheKeyInfo) (result : Bool) : MetaM Unit := do
   let key := keyInfo.key
@@ -1886,8 +1900,9 @@ partial def isExprDefEqAuxImpl (t : Expr) (s : Expr) : MetaM Bool := withIncRecD
     | .undef =>
       let result ← isExprDefEqExpensive t s
       if numPostponed == (← getNumPostponed) then
-        trace[Meta.isDefEq.cache] "cache {result} for {t} =?= {s}"
-        cacheResult k result
+        if Meta.isDefEq.cache.get (← getOptions) then
+          trace[Meta.isDefEq.cache] "cache {result} for {t} =?= {s}"
+          cacheResult k result
       return result
 
 builtin_initialize
