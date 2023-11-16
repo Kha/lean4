@@ -709,29 +709,31 @@ private def setImportedEntries (env : Environment) (mods : Array ModuleData) (st
 @[extern 1 "lean_get_num_attributes"] opaque getNumBuiltinAttributes : IO Nat
 
 private partial def finalizePersistentExtensions (env : Environment) (mods : Array ModuleData) (opts : Options) : IO Environment := do
-  loop 0 env
-where
-  loop (i : Nat) (env : Environment) : IO Environment := do
-    -- Recall that the size of the array stored `persistentEnvExtensionRef` may increase when we import user-defined environment extensions.
-    let pExtDescrs ← persistentEnvExtensionsRef.get
-    if i < pExtDescrs.size then
-      let extDescr := pExtDescrs[i]!
+  let mut env := env
+  for extDescr in (← persistentEnvExtensionsRef.get) do
+    if extDescr.name == `Lean.regularInitAttr then
       let s := extDescr.toEnvExtension.getState env
       let prevSize := (← persistentEnvExtensionsRef.get).size
       let prevAttrSize ← getNumBuiltinAttributes
-      let newState ← extDescr.addImportedFn s.importedEntries { env := env, opts := opts }
-      let mut env := extDescr.toEnvExtension.setState env { s with state := newState }
+      let state ← extDescr.addImportedFn s.importedEntries { env := env, opts := opts }
+      env := extDescr.toEnvExtension.setState env ({ s with state })
       env ← ensureExtensionsArraySize env
       if (← persistentEnvExtensionsRef.get).size > prevSize || (← getNumBuiltinAttributes) > prevAttrSize then
         -- This branch is executed when `pExtDescrs[i]` is the extension associated with the `init` attribute, and
         -- a user-defined persistent extension is imported.
         -- Thus, we invoke `setImportedEntries` to update the array `importedEntries` with the entries for the new extensions.
-        env ← setImportedEntries env mods prevSize
+        env ← setImportedEntries env mods
         -- See comment at `updateEnvAttributesRef`
         env ← updateEnvAttributes env
-      loop (i + 1) env
-    else
-      return env
+  -- Recall that the size of the array stored `persistentEnvExtensionRef` may increase when we import user-defined environment extensions.
+  let pExtDescrs ← persistentEnvExtensionsRef.get
+  let ts ← pExtDescrs.filter (·.name != `Lean.regularInitAttr) |>.mapM fun extDescr =>
+    let s := extDescr.toEnvExtension.getState env
+    IO.asTask <| extDescr.addImportedFn s.importedEntries { env := env, opts := opts }
+  for extDescr in pExtDescrs.filter (·.name != `Lean.regularInitAttr), t in ts do
+    let state ← IO.ofExcept t.get
+    env := extDescr.toEnvExtension.modifyState env ({ · with state })
+  return env
 
 structure ImportState where
   moduleNameSet : NameHashSet := {}
