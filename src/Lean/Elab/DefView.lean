@@ -65,40 +65,17 @@ def mkDefViewOfTheorem (modifiers : Modifiers) (stx : Syntax) : DefView :=
   { ref := stx, kind := DefKind.theorem, modifiers,
     declId := stx[1], binders, type? := some type, value := stx[3] }
 
-def mkFreshInstanceName : CommandElabM Name := do
-  let s ← get
-  let idx := s.nextInstIdx
-  modify fun s => { s with nextInstIdx := s.nextInstIdx + 1 }
-  return Lean.Elab.mkFreshInstanceName s.env idx
-
-/--
-  Generate a name for an instance with the given type.
-  Note that we elaborate the type twice. Once for producing the name, and another when elaborating the declaration. -/
-def mkInstanceName (binders : Array Syntax) (type : Syntax) : CommandElabM Name := do
-  let savedState ← get
+/-- Generates a name for an instance with the given type. -/
+def mkInstanceName (type : Syntax) : MacroM Name := do
+  let mut name := "inst"
   try
-    let result ← runTermElabM fun _ => Term.withAutoBoundImplicit <| Term.elabBinders binders fun _ => Term.withoutErrToSorry do
-      let type ← instantiateMVars (← Term.elabType type)
-      let ref ← IO.mkRef ""
-      Meta.forEachExpr type fun e => do
-        if e.isForall then ref.modify (· ++ "ForAll")
-        else if e.isProp then ref.modify (· ++ "Prop")
-        else if e.isType then ref.modify (· ++ "Type")
-        else if e.isSort then ref.modify (· ++ "Sort")
-        else if e.isConst then
-          match e.constName!.eraseMacroScopes with
-          | .str _ str =>
-              if str.front.isLower then
-                ref.modify (· ++ str.capitalize)
-              else
-                ref.modify (· ++ str)
-          | _ => pure ()
-      ref.get
-    set savedState
-    liftMacroM <| mkUnusedBaseName <| Name.mkSimple ("inst" ++ result)
-  catch _ =>
-    set savedState
-    mkFreshInstanceName
+    let type ← expandMacros type
+    if let `($f:ident $_*) := type then
+      if let .str _ str := f.getId.eraseMacroScopes then
+        name := name ++ str.capitalize
+  catch _ => pure ()
+  name := name ++ s!"@{← getMainModule}"
+  mkUnusedBaseName name
 
 def mkDefViewOfInstance (modifiers : Modifiers) (stx : Syntax) : CommandElabM DefView := do
   -- leading_parser Term.attrKind >> "instance " >> optNamedPrio >> optional declId >> declSig >> declVal
@@ -110,7 +87,7 @@ def mkDefViewOfInstance (modifiers : Modifiers) (stx : Syntax) : CommandElabM De
   let declId ← match stx[3].getOptional? with
     | some declId => pure declId
     | none        =>
-      let id ← mkInstanceName binders.getArgs type
+      let id ← liftMacroM <| mkInstanceName type
       pure <| mkNode ``Parser.Command.declId #[mkIdentFrom stx id, mkNullNode]
   return {
     ref := stx, kind := DefKind.def, modifiers := modifiers,
