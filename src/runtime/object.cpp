@@ -436,6 +436,9 @@ extern "C" LEAN_EXPORT void lean_mark_persistent(object * o) {
         object * o = todo.back();
         todo.pop_back();
         if (!lean_is_scalar(o) && lean_has_rc(o)) {
+            if (lean_is_mt(o)) {
+                lean_internal_panic("lean_mark_persistent called on multi-threaded object");
+            }
             o->m_rc = 0;
 #if defined(__has_feature)
 #if __has_feature(address_sanitizer)
