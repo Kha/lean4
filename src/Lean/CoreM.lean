@@ -57,10 +57,21 @@ structure Cache where
   instLevelValue : InstantiateLevelCache := {}
   deriving Inhabited
 
+structure AsyncTheoremVal extends ConstantVal where
+  value : Task (Option Expr)
+  /--
+    List of all (including this one) declarations in the same mutual block.
+    See comment at `DefinitionVal.all`. -/
+  all : List Name := [name]
+
+inductive AsyncEnv where
+  | base (env : Environment)
+  | theorem (env : Environment) (val : AsyncTheoremVal)
+
 /-- State for the CoreM monad. -/
 structure State where
   /-- Current environment. -/
-  env             : Environment
+  asyncEnv        : AsyncEnv
   /-- Next macro scope. We use macro scopes to avoid accidental name capture. -/
   nextMacroScope  : MacroScope     := firstFrontendMacroScope + 1
   /-- Name generator for producing unique `FVarId`s, `MVarId`s, and `LMVarId`s -/
