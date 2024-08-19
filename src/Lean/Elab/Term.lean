@@ -656,7 +656,7 @@ def getInfoTreeWithContext? : TermElabM (Option InfoTree) := do
   let ctx ← readThe Core.Context
   let s ← getThe Core.State
   let ctx := PartialContextInfo.commandCtx {
-    env := s.env, fileMap := ctx.fileMap, mctx := {}, currNamespace := ctx.currNamespace,
+    asyncEnv := ctx.asyncEnv, fileMap := ctx.fileMap, mctx := {}, currNamespace := ctx.currNamespace,
     openDecls := ctx.openDecls, options := ctx.options, ngen := s.ngen
   }
   return InfoTree.context ctx t

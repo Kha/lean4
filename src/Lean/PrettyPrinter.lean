@@ -13,11 +13,11 @@ import Lean.ParserCompiler
 namespace Lean
 
 def PPContext.runCoreM {α : Type} (ppCtx : PPContext) (x : CoreM α) : IO α :=
-  Prod.fst <$> x.toIO { options := ppCtx.opts, currNamespace := ppCtx.currNamespace
+  Prod.fst <$> x.toIO { asyncEnv := .ofEnv ppCtx.env, options := ppCtx.opts, currNamespace := ppCtx.currNamespace
                         openDecls := ppCtx.openDecls
                         fileName := "<PrettyPrinter>", fileMap := default
                         diag     := getDiag ppCtx.opts }
-                      { env := ppCtx.env, ngen := { namePrefix := `_pp_uniq } }
+                      { ngen := { namePrefix := `_pp_uniq } }
 
 def PPContext.runMetaM {α : Type} (ppCtx : PPContext) (x : MetaM α) : IO α :=
   ppCtx.runCoreM <| x.run' { lctx := ppCtx.lctx } { mctx := ppCtx.mctx }
@@ -52,8 +52,8 @@ def ppExprWithInfos (e : Expr) (optsPerPos : Delaborator.OptionsPerPos := {}) (d
 @[export lean_pp_expr]
 def ppExprLegacy (env : Environment) (mctx : MetavarContext) (lctx : LocalContext) (opts : Options) (e : Expr) : IO Format :=
   Prod.fst <$> ((withOptions (fun _ => opts) <| ppExpr e).run' { lctx := lctx } { mctx := mctx }).toIO
-    { fileName := "<PrettyPrinter>", fileMap := default }
-    { env := env }
+    { asyncEnv := .ofEnv env, fileName := "<PrettyPrinter>", fileMap := default }
+    {}
 
 def ppTactic (stx : TSyntax `tactic) : CoreM Format := ppCategory `tactic stx
 

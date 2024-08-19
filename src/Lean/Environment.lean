@@ -1015,7 +1015,7 @@ private def registerNamePrefixes : Environment → Name → Environment
   | env, _        => env
 
 @[export lean_environment_add]
-private def add (env : Environment) (cinfo : ConstantInfo) : Environment :=
+def add (env : Environment) (cinfo : ConstantInfo) : Environment :=
   let env := registerNamePrefixes env cinfo.name
   env.addAux cinfo
 
@@ -1107,5 +1107,54 @@ def mkDefinitionValInferrringUnsafe [Monad m] [MonadEnv m] (name : Name) (levelP
   let env ← getEnv
   let safety := if env.hasUnsafe type || env.hasUnsafe value then DefinitionSafety.unsafe else DefinitionSafety.safe
   return { name, levelParams, type, value, hints, safety }
+
+structure AsyncTheoremVal extends ConstantVal where
+  value : Task Expr
+  /--
+    List of all (including this one) declarations in the same mutual block.
+    See comment at `DefinitionVal.all`. -/
+  all : List Name := [name]
+
+def AsyncTheoremVal.toTheoremVal (v : AsyncTheoremVal) : TheoremVal :=
+  { v with value := v.value.get }
+
+structure AsyncEnvironment where
+  private base : Environment
+  private asyncThms : Array AsyncTheoremVal := #[]
+deriving Nonempty
+
+def AsyncEnvironment.ofEnv (env : Environment) : AsyncEnvironment :=
+  { base := env }
+
+def AsyncEnvironment.wait (asyncEnv : AsyncEnvironment) : Environment :=
+  dbgStackTrace fun _ => Id.run do
+    let mut env := asyncEnv.base
+    for thm in asyncEnv.asyncThms do
+      env := env.add (.thmInfo thm.toTheoremVal)
+    env
+
+class MonadAsyncEnv (m : Type → Type) where
+  getAsyncEnv : m AsyncEnvironment
+
+export MonadAsyncEnv (getAsyncEnv)
+
+@[always_inline]
+instance (m n) [MonadLift m n] [MonadAsyncEnv m] : MonadAsyncEnv n where
+  getAsyncEnv := liftM (getAsyncEnv : m AsyncEnvironment)
+
+namespace EnvExtension
+
+instance {σ} [s : Inhabited σ] : Inhabited (EnvExtension σ) := EnvExtensionInterfaceImp.inhabitedExt s
+
+def setStateAsync {σ : Type} (ext : EnvExtension σ) (asyncEnv : AsyncEnvironment) (s : σ) : AsyncEnvironment :=
+  { asyncEnv with base.extensions := EnvExtensionInterfaceImp.setState ext asyncEnv.base.extensions s }
+
+def modifyStateAsync {σ : Type} (ext : EnvExtension σ) (asyncEnv : AsyncEnvironment) (f : σ → σ) : AsyncEnvironment :=
+  { asyncEnv with base.extensions := EnvExtensionInterfaceImp.modifyState ext asyncEnv.base.extensions f }
+
+def getStateAsync {σ : Type} [Inhabited σ] (ext : EnvExtension σ) (asyncEnv : AsyncEnvironment) : σ :=
+  EnvExtensionInterfaceImp.getState ext asyncEnv.base.extensions
+
+end EnvExtension
 
 end Lean

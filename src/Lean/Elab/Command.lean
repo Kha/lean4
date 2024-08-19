@@ -74,7 +74,7 @@ structure Scope where
   deriving Inhabited
 
 structure State where
-  env            : Environment
+  asyncEnv       : AsyncEnvironment
   messages       : MessageLog := {}
   scopes         : List Scope := [{ header := "" }]
   nextMacroScope : Nat := firstFrontendMacroScope + 1
@@ -143,8 +143,8 @@ instance : MonadExceptOf Exception CommandElabM where
   throw    := throw
   tryCatch := Command.tryCatch
 
-def mkState (env : Environment) (messages : MessageLog := {}) (opts : Options := {}) : State := {
-  env         := env
+def mkState (asyncEnv : AsyncEnvironment) (messages : MessageLog := {}) (opts : Options := {}) : State := {
+  asyncEnv    := asyncEnv
   messages    := messages
   scopes      := [{ header := "", opts := opts }]
   maxRecDepth := maxRecDepth.get opts
@@ -163,9 +163,12 @@ instance : MonadInfoTree CommandElabM where
   getInfoState      := return (← get).infoState
   modifyInfoState f := modify fun s => { s with infoState := f s.infoState }
 
+instance : MonadAsyncEnv CommandElabM where
+  getAsyncEnv := do pure (← get).asyncEnv
+
 instance : MonadEnv CommandElabM where
-  getEnv := do pure (← get).env
-  modifyEnv f := modify fun s => { s with env := f s.env }
+  getEnv := do pure (← get).asyncEnv.wait
+  modifyEnv f := modify fun s => { s with asyncEnv := .ofEnv <| f s.asyncEnv.wait }
 
 @[always_inline]
 instance : MonadOptions CommandElabM where
@@ -230,6 +233,7 @@ private def runCore (x : CoreM α) : CommandElabM α := do
   let env := Kernel.resetDiag s.env
   let scope := s.scopes.head!
   let coreCtx : Core.Context := {
+    asyncEnv           := s.asyncEnv
     fileName           := ctx.fileName
     fileMap            := ctx.fileMap
     currRecDepth       := ctx.currRecDepth

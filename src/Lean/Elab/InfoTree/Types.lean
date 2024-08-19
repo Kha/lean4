@@ -12,6 +12,7 @@ import Lean.Environment
 import Lean.Data.Json
 import Lean.Server.Rpc.Basic
 import Lean.Widget.Types
+import Lean.AsyncEnvironment
 
 namespace Lean.Elab
 
@@ -21,7 +22,7 @@ Note that the term information collected during elaboration may contain metavari
 assignments are stored at `mctx`.
 -/
 structure CommandContextInfo where
-  env           : Environment
+  asyncEnv      : AsyncEnvironment
   fileMap       : FileMap
   mctx          : MetavarContext := {}
   options       : Options        := {}

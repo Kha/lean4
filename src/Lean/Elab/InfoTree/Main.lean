@@ -10,10 +10,10 @@ import Lean.ReservedNameAction
 
 namespace Lean.Elab.CommandContextInfo
 
-variable [Monad m] [MonadEnv m] [MonadMCtx m] [MonadOptions m] [MonadResolveName m] [MonadNameGenerator m]
+variable [Monad m] [MonadAsyncEnv m] [MonadMCtx m] [MonadOptions m] [MonadResolveName m] [MonadNameGenerator m]
 
 def saveNoFileMap : m CommandContextInfo := return {
-    env           := (← getEnv)
+    asyncEnv      := (← getAsyncEnv)
     fileMap       := default
     mctx          := (← getMCtx)
     options       := (← getOptions)
@@ -103,15 +103,15 @@ def ContextInfo.runCoreM (info : ContextInfo) (x : CoreM α) : IO α := do
   -/
   (·.1) <$>
     (withOptions (fun _ => info.options) x).toIO
-      { currNamespace := info.currNamespace, openDecls := info.openDecls
+      { asyncEnv := info.asyncEnv, currNamespace := info.currNamespace, openDecls := info.openDecls
         fileName := "<InfoTree>", fileMap := default }
-      { env := info.env, ngen := info.ngen }
+      {}
 
 def ContextInfo.runMetaM (info : ContextInfo) (lctx : LocalContext) (x : MetaM α) : IO α := do
   (·.1) <$> info.runCoreM (x.run { lctx := lctx } { mctx := info.mctx })
 
 def ContextInfo.toPPContext (info : ContextInfo) (lctx : LocalContext) : PPContext :=
-  { env  := info.env, mctx := info.mctx, lctx := lctx,
+  { env  := info.asyncEnv.wait, mctx := info.mctx, lctx := lctx,
     opts := info.options, currNamespace := info.currNamespace, openDecls := info.openDecls }
 
 def ContextInfo.ppSyntax (info : ContextInfo) (lctx : LocalContext) (stx : Syntax) : IO Format := do
@@ -374,7 +374,7 @@ from the monad state.
 def withSaveInfoContext
     [MonadNameGenerator m]
     [MonadFinally m]
-    [MonadEnv m]
+    [MonadAsyncEnv m]
     [MonadOptions m]
     [MonadMCtx m]
     [MonadResolveName m]

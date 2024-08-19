@@ -824,7 +824,7 @@ private def addConstImportData
   cacheRef.set (Cache.empty ngen)
   let ctx : Meta.Context := { config := { transparency := .reducible } }
   let cm := (act name constInfo).run ctx mstate
-  let cstate : Core.State := {env, cache := core_cache, ngen}
+  let cstate : Core.State := {cache := core_cache, ngen}
   match ←(cm.run cctx cstate).toBaseIO with
   | .ok ((a, ms), cs) =>
     cacheRef.set { ngen := cs.ngen, core := cs.cache, meta := ms.cache }
@@ -964,6 +964,7 @@ def createImportedDiscrTree [Monad m] [MonadLog m] [AddMessageContext m] [MonadO
 
 /-- Creates the core context used for initializing a tree using the current context. -/
 private def createTreeCtx (ctx : Core.Context) : Core.Context := {
+    asyncEnv := ctx.asyncEnv
     fileName := ctx.fileName
     fileMap := ctx.fileMap
     options := ctx.options
