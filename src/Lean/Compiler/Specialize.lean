@@ -105,10 +105,23 @@ def switch : SpecState → SpecState
 
 end SpecState
 
-builtin_initialize specExtension : SimplePersistentEnvExtension SpecEntry SpecState ←
-  registerSimplePersistentEnvExtension {
-    addEntryFn    := SpecState.addEntry,
-    addImportedFn := fun es => (mkStateFromImportedEntries SpecState.addEntry {} es).switch
+register_builtin_option compiler.specialize.crossModule : Bool := {
+  defValue := true
+  descr    := "reuse specializations from other modules; must be set at importing time"
+}
+
+builtin_initialize specExtension : PersistentEnvExtension SpecEntry SpecEntry (List SpecEntry × SpecState) ←
+  registerPersistentEnvExtension {
+    mkInitial       := pure ([], {}),
+    addImportedFn   := fun as => do
+      if compiler.specialize.crossModule.get (← read).opts then
+        pure ([], (mkStateFromImportedEntries SpecState.addEntry {} as).switch)
+      else
+        pure ([], {}),
+    addEntryFn      := fun s e => match s with
+      | (entries, s) => (e::entries, s.addEntry e),
+    exportEntriesFn := fun s => s.1.reverse.toArray,
+    statsFn := fun s => format "number of local entries: " ++ format s.1.length
   }
 
 @[export lean_add_specialization_info]
@@ -117,7 +130,7 @@ def addSpecializationInfo (env : Environment) (fn : Name) (info : SpecInfo) : En
 
 @[export lean_get_specialization_info]
 def getSpecializationInfo (env : Environment) (fn : Name) : Option SpecInfo :=
-  (specExtension.getState env).specInfo.find? fn
+  (specExtension.getState env).2.specInfo.find? fn
 
 @[export lean_cache_specialization]
 def cacheSpecialization (env : Environment) (e : Expr) (fn : Name) : Environment :=
@@ -125,6 +138,6 @@ def cacheSpecialization (env : Environment) (e : Expr) (fn : Name) : Environment
 
 @[export lean_get_cached_specialization]
 def getCachedSpecialization (env : Environment) (e : Expr) : Option Name :=
-  (specExtension.getState env).cache.find? e
+  (specExtension.getState env).2.cache.find? e
 
 end Lean.Compiler
