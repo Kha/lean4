@@ -12,6 +12,12 @@ import Lean.Linter.MissingDocs
 namespace Lean.Elab.Tactic
 open Meta Parser.Tactic Command
 
+-- We automatically disable the following option for `macro`s but this file contains factored-out
+-- `private def`s containing quotations that ultimately are used only in the final `macro`s. Thus
+-- we disable the option for the full file, which is always correct for code that is only run at
+-- compile time of the current stage.
+set_option internal.parseQuotWithCurrentStage false
+
 private structure ConfigItemView where
   ref : Syntax
   option : Ident
