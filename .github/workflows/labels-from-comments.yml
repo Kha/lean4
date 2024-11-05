@@ -51,7 +51,7 @@ jobs:
           const chlog = commentLines.find(line => line.startsWith("changelog-");
           if (chlog) {
             const previous = labels.find(label => label.name.startsWith("changelog-");
-            if (previous)) {
+            if (previous) {
               await github.rest.issues.removeLabel({ owner, repo, issue_number, name: previous.name });
             }
             await github.rest.issues.addLabels({ owner, repo, issue_number, labels: [chlog] });
