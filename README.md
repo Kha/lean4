@@ -23,3 +23,4 @@ Please read our [Contribution Guidelines](CONTRIBUTING.md) first.
 # Building from Source
 
 See [Building Lean](https://lean-lang.org/lean4/doc/make/index.html) (documentation source: [doc/make/index.md](doc/make/index.md)).
+``
