@@ -6,10 +6,10 @@ on:
     types: [opened, synchronize, reopened, edited, labeled]
 
 jobs:
-  check-pr-title:
+  check-pr-body:
     runs-on: ubuntu-latest
     steps:
-      - name: Check PR title
+      - name: Check PR body
         uses: actions/github-script@v7
         with:
           script: |
