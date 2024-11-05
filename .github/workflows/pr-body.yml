@@ -15,6 +15,7 @@ jobs:
           script: |
             const { title, body, labels } = context.payload.pull_request;
             if (/^(feat|fix):/.test(title) && !labels.some(label => label.name == "changelog-no")) {
+              console.log(labels);
               if (!labels.some(label => label.name.startsWith("changelog-"))) {
                 core.setFailed('feat/fix PR must have a `changelog-*` label');
               }
