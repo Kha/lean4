@@ -4,9 +4,13 @@ on:
   merge_group:
   pull_request:
     types: [opened, synchronize, reopened, edited]
+  issue_comment:
+    types: [created]
+
 
 jobs:
   check-pr-title:
+    if: github.event.issue.pull_request != null
     runs-on: ubuntu-latest
     steps:
       - name: Check PR title
