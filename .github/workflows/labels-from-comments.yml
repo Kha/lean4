@@ -20,7 +20,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const { owner, repo, number: issue_number, labels } = context.issue;
+          const { owner, repo, number: issue_number } = context.issue;
           const commentLines = context.payload.comment.body.split('\r\n');
 
           const awaitingReview = commentLines.includes('awaiting-review');
@@ -50,7 +50,7 @@ jobs:
 
           const chlog = commentLines.find(line => line.startsWith("changelog-"));
           if (chlog) {
-            const previous = labels.find(label => label.name.startsWith("changelog-"));
+            const previous = context.payload.issue.labels.find(label => label.name.startsWith("changelog-"));
             if (previous) {
               await github.rest.issues.removeLabel({ owner, repo, issue_number, name: previous.name });
             }
