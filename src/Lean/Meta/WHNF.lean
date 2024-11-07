@@ -64,13 +64,6 @@ def isAuxDef (constName : Name) : MetaM Bool := do
   let env ← getEnv
   return isAuxRecursor env constName || isNoConfusion env constName
 
-@[inline] private def matchConstAux {α} (e : Expr) (failK : Unit → MetaM α) (k : ConstantInfo → List Level → MetaM α) : MetaM α := do
-  let .const name lvls := e
-    | failK ()
-  let (some cinfo) ← getUnfoldableConst? name
-    | failK ()
-  k cinfo lvls
-
 -- ===========================
 /-! # Helper functions for reducing recursors -/
 -- ===========================
@@ -640,17 +633,18 @@ where
           | .partialApp   => pure e
           | .stuck _      => pure e
           | .notMatcher   =>
-            matchConstAux f' (fun _ => return e) fun cinfo lvls =>
-              match cinfo with
-              | .recInfo rec    => reduceRec rec lvls e.getAppArgs (fun _ => return e) (fun e => do recordUnfold cinfo.name; go e)
-              | .quotInfo rec   => reduceQuotRec rec e.getAppArgs (fun _ => return e) (fun e => do recordUnfold cinfo.name; go e)
-              | c@(.defnInfo _) => do
-                if (← isAuxDef c.name) then
-                  recordUnfold c.name
-                  deltaBetaDefinition c lvls e.getAppRevArgs (fun _ => return e) go
-                else
-                  return e
-              | _ => return e
+            let .const cname lvls := f' | return e
+            let some cinfo := (← getEnv).find? cname | return e
+            match cinfo with
+            | .recInfo rec    => reduceRec rec lvls e.getAppArgs (fun _ => return e) (fun e => do recordUnfold cinfo.name; go e)
+            | .quotInfo rec   => reduceQuotRec rec e.getAppArgs (fun _ => return e) (fun e => do recordUnfold cinfo.name; go e)
+            | c@(.defnInfo _) => do
+              if (← isAuxDef c.name) then
+                recordUnfold c.name
+                deltaBetaDefinition c lvls e.getAppRevArgs (fun _ => return e) go
+              else
+                return e
+            | _ => return e
       | .proj _ i c =>
         let k (c : Expr) := do
           match (← projectCore? c i) with
@@ -759,8 +753,11 @@ mutual
   /-- Unfold definition using "smart unfolding" if possible. -/
   partial def unfoldDefinition? (e : Expr) : MetaM (Option Expr) :=
     match e with
-    | .app f _ =>
-      matchConstAux f.getAppFn (fun _ => unfoldProjInstWhenInstances? e) fun fInfo fLvls => do
+    | .app f _ => do
+      let .const fName fLvls := f.getAppFn | unfoldProjInstWhenInstances? e
+      match (← getUnfoldableConst? fName) with
+      | none => unfoldProjInstWhenInstances? e
+      | some fInfo => do
         if fInfo.levelParams.length != fLvls.length then
           return none
         else
@@ -869,7 +866,9 @@ def reduceRecMatcher? (e : Expr) : MetaM (Option Expr) := do
     return none
   else match (← reduceMatcher? e) with
     | .reduced e => return e
-    | _ => matchConstAux e.getAppFn (fun _ => pure none) fun cinfo lvls => do
+    | _ =>
+      let .const cname lvls := e.getAppFn | return none
+      let some cinfo := (← getEnv).find? cname | return none
       match cinfo with
       | .recInfo «rec»  => reduceRec «rec» lvls e.getAppArgs (fun _ => pure none) (fun e => do recordUnfold cinfo.name; pure (some e))
       | .quotInfo «rec» => reduceQuotRec «rec» e.getAppArgs (fun _ => pure none) (fun e => do recordUnfold cinfo.name; pure (some e))
