@@ -762,11 +762,8 @@ mutual
           return none
         else
           let unfoldDefault (_ : Unit) : MetaM (Option Expr) := do
-            if fInfo.hasValue then
-              recordUnfold fInfo.name
-              deltaBetaDefinition fInfo fLvls e.getAppRevArgs (fun _ => pure none) (fun e => pure (some e))
-            else
-              return none
+            recordUnfold fInfo.name
+            deltaBetaDefinition fInfo fLvls e.getAppRevArgs (fun _ => pure none) (fun e => pure (some e))
           if smartUnfolding.get (← getOptions) then
             match ((← getEnv).find? (mkSmartUnfoldingNameFor fInfo.name)) with
             | some fAuxInfo@(.defnInfo _) =>
@@ -832,7 +829,6 @@ mutual
         return none
       else
         let some cinfo ← getUnfoldableConstNoEx? declName | pure none
-        unless cinfo.hasValue do return none
         deltaDefinition cinfo lvls
           (fun _ => pure none)
           (fun e => do recordUnfold declName; pure (some e))
