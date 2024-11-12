@@ -15,7 +15,7 @@ namespace Lean.Meta.MatcherApp
 /-- Auxiliary function for MatcherApp.addArg -/
 private partial def updateAlts (unrefinedArgType : Expr) (typeNew : Expr) (altNumParams : Array Nat) (alts : Array Expr) (refined : Bool) (i : Nat) : MetaM (Array Nat × Array Expr) := do
   if h : i < alts.size then
-    let alt       := alts.get ⟨i, h⟩
+    let alt       := alts[i]
     let numParams := altNumParams[i]!
     let typeNew ← whnfD typeNew
     match typeNew with
@@ -29,7 +29,7 @@ private partial def updateAlts (unrefinedArgType : Expr) (typeNew : Expr) (altNu
           else
             pure <| !(← isDefEq unrefinedArgType (← inferType x[0]!))
           return (← mkLambdaFVars xs alt, refined)
-      updateAlts unrefinedArgType (b.instantiate1 alt) (altNumParams.set! i (numParams+1)) (alts.set ⟨i, h⟩ alt) refined (i+1)
+      updateAlts unrefinedArgType (b.instantiate1 alt) (altNumParams.set! i (numParams+1)) (alts.set i alt) refined (i+1)
     | _ => throwError "unexpected type at MatcherApp.addArg"
   else
     if refined then
