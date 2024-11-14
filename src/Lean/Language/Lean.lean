@@ -673,14 +673,15 @@ def processCommands (inputCtx : Parser.InputContext) (parserState : Parser.Modul
   return prom.result
 
 /-- Waits for and returns final command state, if importing was successful. -/
-partial def waitForFinalCmdState? (snap : InitialSnapshot) : Option Command.State := do
-  let snap ← snap.result?
-  let snap ← snap.processedSnap.get.result?
-  goCmd snap.firstCmdSnap.get
+partial def getFinalCmdState? (snap : InitialSnapshot) : Task (Option Command.State) := Id.run do
+  let some snap := snap.result? | .pure none
+  snap.processedSnap.task.bind (sync := true) fun processedSnap => Id.run do
+  let some snap := processedSnap.result? | .pure none
+  snap.firstCmdSnap.task.bind (sync := true) goCmd
 where goCmd snap :=
   if let some next := snap.nextCmdSnap? then
-    goCmd next.get
+    next.task.bind (sync := true) goCmd
   else
-    snap.finishedSnap.get.cmdState
+    snap.finishedSnap.task.map (sync := true) (·.cmdState)
 
 end Lean

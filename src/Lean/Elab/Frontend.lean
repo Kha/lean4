@@ -150,7 +150,7 @@ def runFrontend
   let processor := Language.Lean.process
   let snap ← processor (fun _ => pure <| .ok { mainModuleName, opts, trustLevel }) none ctx
   let snaps := Language.toSnapshotTree snap
-  snaps.runAndReport opts jsonOutput
+  --snaps.runAndReport opts jsonOutput
 
   if let some ileanFileName := ileanFileName? then
     let trees := snaps.getAll.flatMap (match ·.infoTree? with | some t => #[t] | _ => #[])
@@ -160,7 +160,7 @@ def runFrontend
 
   -- TODO: remove default when reworking cmdline interface in Lean; currently the only case
   -- where we use the environment despite errors in the file is `--stats`
-  let some cmdState := Language.Lean.waitForFinalCmdState? snap
+  let some cmdState := Language.Lean.getFinalCmdState? snap |>.get
     | return (← mkEmptyEnvironment, false)
 
   if let some out := trace.profiler.output.get? opts then
