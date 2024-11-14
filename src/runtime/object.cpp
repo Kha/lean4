@@ -21,6 +21,7 @@ Author: Leonardo de Moura
 #include "runtime/buffer.h"
 #include "runtime/io.h"
 #include "runtime/hash.h"
+#include "util/timeit.h"
 
 #ifdef __GLIBC__
 #include <execinfo.h>
@@ -90,7 +91,7 @@ extern "C" LEAN_EXPORT void lean_set_panic_messages(bool flag) {
 }
 
 static void panic_eprintln(char const * line) {
-    if (g_exit_on_panic || should_abort_on_panic()) {
+    if (true || g_exit_on_panic || should_abort_on_panic()) {
         // If we are about to kill the process, we should skip the Lean stderr buffer
         std::cerr << line << "\n";
     } else {
@@ -1018,7 +1019,13 @@ extern "C" LEAN_EXPORT obj_res lean_task_map_core(obj_arg f, obj_arg t, unsigned
 extern "C" LEAN_EXPORT b_obj_res lean_task_get(b_obj_arg t) {
     if (object * v = lean_to_task(t)->m_value)
         return v;
-    g_task_manager->wait_for(lean_to_task(t));
+    {
+        xtimeit _(second_duration(0.000), [](second_duration duration) {
+            std::cerr << "Task.get took " << display_profiling_time{duration} << "\n";
+            print_backtrace();
+        });
+        g_task_manager->wait_for(lean_to_task(t));
+    }
     lean_assert(lean_to_task(t)->m_value != nullptr);
     object * r = lean_to_task(t)->m_value;
     return r;
