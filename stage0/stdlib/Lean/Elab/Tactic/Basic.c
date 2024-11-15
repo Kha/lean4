@@ -19391,7 +19391,7 @@ x_14 = lean_alloc_ctor(0, 3, 0);
 lean_ctor_set(x_14, 0, x_13);
 lean_ctor_set(x_14, 1, x_1);
 lean_ctor_set(x_14, 2, x_2);
-x_15 = lean_alloc_ctor(3, 1, 0);
+x_15 = lean_alloc_ctor(4, 1, 0);
 lean_ctor_set(x_15, 0, x_14);
 x_16 = lean_alloc_ctor(1, 2, 0);
 lean_ctor_set(x_16, 0, x_15);
