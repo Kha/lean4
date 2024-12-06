@@ -287,7 +287,7 @@ where
               stx := mkNullNode altStxs
               diagnostics := .empty
               inner? := none
-              finished := { range? := none, task := finished.result }
+              finished := { task := finished.result }
               next := altStxs.zipWith altPromises fun stx prom =>
                 { range? := stx.getRange?, task := prom.result }
             }
